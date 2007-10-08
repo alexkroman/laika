@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>projectlaika</artifactId>
+    <groupId>org.projectlaika</groupId>
+    <version>0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>cda</artifactId>
+  <name>Laika :: CDA</name>
+  <description>
+     This can consume a CDA Document (CCD/C32) and representing it as a set of Java objects.
+  </description>
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.xmlbeans</groupId>
+      <artifactId>xmlbeans</artifactId>
+      <version>2.3.0</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.4</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>
