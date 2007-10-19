@@ -9,13 +9,18 @@
   <artifactId>cda</artifactId>
   <name>Laika :: CDA</name>
   <description>
-     This can consume a CDA Document (CCD/C32) and representing it as a set of Java objects.
+     This package can be used to validate the clinical data in a CDA Document (CCD/C32).
   </description>
   <dependencies>
     <dependency>
-      <groupId>org.apache.xmlbeans</groupId>
-      <artifactId>xmlbeans</artifactId>
-      <version>2.3.0</version>
+      <groupId>jdom</groupId>
+      <artifactId>jdom</artifactId>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>jaxen</groupId>
+      <artifactId>jaxen</artifactId>
+      <version>1.1.1</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
