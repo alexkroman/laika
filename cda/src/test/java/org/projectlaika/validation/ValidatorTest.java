@@ -25,11 +25,14 @@ public class ValidatorTest
     @Test
     public void testValidate() throws JDOMException
     {
-        Validator validator = new Validator(
-                "Patient First Name",
-                "/cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:name/cda:given",
-                "Henry");
-        assertThat(validator.validate(document), is(true));
+        DocumentLocation dl = new DocumentLocation("Patient First Name",
+           "/cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:name/cda:given");
+
+        Rule rule = new Rule("Henry", dl);
+        assertThat(Validator.validate(rule, document), is(true));
+
+        rule.setExpectedValue("Steve");
+        assertThat(Validator.validate(rule, document), is(false));
     }
 
 }
