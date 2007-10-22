@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 
 import org.jdom.Document;
 import org.jdom.JDOMException;
+import org.jdom.Namespace;
 import org.jdom.input.SAXBuilder;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +28,7 @@ public class ValidatorTest
     {
         DocumentLocation dl = new DocumentLocation("Patient First Name",
            "/cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:name/cda:given");
-
+        dl.addNamespace(Namespace.getNamespace("cda", "urn:hl7-org:v3"));
         Rule rule = new Rule("Henry", dl);
         assertThat(Validator.validate(rule, document), is(true));
 

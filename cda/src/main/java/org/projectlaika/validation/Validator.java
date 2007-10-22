@@ -5,6 +5,7 @@ import java.util.List;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
+import org.jdom.Namespace;
 import org.jdom.xpath.XPath;
 
 /**
@@ -37,7 +38,10 @@ public class Validator
     public static boolean validate(Rule rule, Document document) throws JDOMException
     {
         XPath xpath = XPath.newInstance(rule.getDocumentLocation().getXpathExpression());
-        xpath.addNamespace("cda", "urn:hl7-org:v3");
+        for (Namespace namespace: rule.getDocumentLocation().getNamespaces())
+        {
+            xpath.addNamespace(namespace);
+        }
         List<Element> elements = xpath.selectNodes(document);
         if (elements.isEmpty())
         {
