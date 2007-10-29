@@ -51,7 +51,7 @@ public class DocumentLocation
     {
         namespaces.add(namespace);
     }
-    
+
     public String getName()
     {
         return name;
