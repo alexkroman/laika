@@ -34,6 +34,15 @@ public class ValidatorTest
 
         rule.setExpectedValue("Steve");
         assertThat(Validator.validate(rule, document), is(false));
+        
+        dl.setXpathExpression("/cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:name/cda:given/text()");
+        rule.setExpectedValue("Henry");
+        assertThat(Validator.validate(rule, document), is(true));
+        
+        dl = new DocumentLocation("CCD Template Id", "/cda:ClinicalDocument/cda:templateId/@root");
+        dl.addNamespace(Namespace.getNamespace("cda", "urn:hl7-org:v3"));
+        rule = new Rule("2.16.840.1.113883.10.20.1", dl);
+        assertThat(Validator.validate(rule, document), is(true));
     }
 
 }
