@@ -4,7 +4,6 @@ import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
-import org.jdom.Namespace;
 import org.jdom.Text;
 import org.jdom.xpath.XPath;
 
@@ -38,7 +37,7 @@ public class Validator
         XPath xpath = XPath.newInstance(rule.getDocumentLocation().getXpathExpression());
         for (Namespace namespace : rule.getDocumentLocation().getNamespaces())
         {
-            xpath.addNamespace(namespace);
+            xpath.addNamespace(namespace.toJDomNamespace());
         }
         Object target = xpath.selectSingleNode(document);
         if (target == null)

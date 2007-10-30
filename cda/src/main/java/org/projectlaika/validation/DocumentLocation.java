@@ -1,9 +1,16 @@
 package org.projectlaika.validation;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.jdom.Namespace;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 /**
  * Describes a specific location in a CDA/CCD/C32 document by an XPath expression. Allows the user
@@ -11,12 +18,22 @@ import org.jdom.Namespace;
  *
  * @author Andy Gregorowicz
  */
-public class DocumentLocation
+@Entity
+@Table(name="document_locations")
+public class DocumentLocation implements Serializable
 {
+    private static final long serialVersionUID = -4165136646036981675L;
+    
+    private int id;
     private String name;
     private String xpathExpression;
     private String description;
     private List<Namespace> namespaces;
+
+    public DocumentLocation()
+    {
+        this.namespaces = new LinkedList<Namespace>();
+    }
 
     public DocumentLocation(String name, String xpathExpression)
     {
@@ -52,6 +69,7 @@ public class DocumentLocation
         namespaces.add(namespace);
     }
 
+    @Column(length=100)
     public String getName()
     {
         return name;
@@ -62,6 +80,7 @@ public class DocumentLocation
         this.name = name;
     }
 
+    @Column(length=200)
     public String getXpathExpression()
     {
         return xpathExpression;
@@ -72,6 +91,7 @@ public class DocumentLocation
         this.xpathExpression = xpathExpression;
     }
 
+    @Basic
     public String getDescription()
     {
         return description;
@@ -82,6 +102,7 @@ public class DocumentLocation
         this.description = description;
     }
 
+    @ManyToMany
     public List<Namespace> getNamespaces()
     {
         return namespaces;
@@ -92,5 +113,15 @@ public class DocumentLocation
         this.namespaces = namespaces;
     }
 
+    @Id
+    @GeneratedValue
+    public int getId()
+    {
+        return id;
+    }
 
+    public void setId(int id)
+    {
+        this.id = id;
+    }
 }

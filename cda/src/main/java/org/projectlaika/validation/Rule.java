@@ -1,17 +1,37 @@
 package org.projectlaika.validation;
 
+import java.io.Serializable;
+
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 /**
  * Provides an expected value for a particular DocumentLocation. Also lets the user define error
  * messages for when the DocumentLocation does not exist, or is not the correct value.
  *
  * @author Andy Gregorowicz
  */
-public class Rule
+@Entity
+@Table(name="rules")
+public class Rule implements Serializable
 {
+    private static final long serialVersionUID = -4451635264898670376L;
+
+    private int id;
     private String expectedValue;
     private String differentValueErrorMessage;
     private String missingValueErrorMessage;
     private DocumentLocation documentLocation;
+
+    public Rule()
+    {
+        //do nothing
+    }
 
     public Rule(String expectedValue, DocumentLocation documentLocation)
     {
@@ -28,6 +48,7 @@ public class Rule
         this.documentLocation = documentLocation;
     }
 
+    @ManyToOne
     public DocumentLocation getDocumentLocation()
     {
         return documentLocation;
@@ -38,6 +59,7 @@ public class Rule
         this.documentLocation = documentLocation;
     }
 
+    @Column(length=200, nullable=false)
     public String getExpectedValue()
     {
         return expectedValue;
@@ -48,6 +70,7 @@ public class Rule
         this.expectedValue = expectedValue;
     }
 
+    @Basic
     public String getDifferentValueErrorMessage()
     {
         return differentValueErrorMessage;
@@ -58,6 +81,7 @@ public class Rule
         this.differentValueErrorMessage = differentValueErrorMessage;
     }
 
+    @Basic
     public String getMissingValueErrorMessage()
     {
         return missingValueErrorMessage;
@@ -67,4 +91,17 @@ public class Rule
     {
         this.missingValueErrorMessage = missingValueErrorMessage;
     }
+
+    @Id
+    @GeneratedValue
+    public int getId()
+    {
+        return id;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
+    }
+
 }
