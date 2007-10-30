@@ -11,6 +11,18 @@
   <description>
      This package can be used to validate the clinical data in a CDA Document (CCD/C32).
   </description>
+  <build>
+    <plugins>
+       <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <configuration>
+                <descriptorRefs>
+                    <descriptorRef>jar-with-dependencies</descriptorRef>
+                </descriptorRefs>
+            </configuration>
+        </plugin>
+    </plugins>
+  </build>
   <dependencies>
     <dependency>
       <groupId>jdom</groupId>
@@ -21,6 +33,17 @@
       <groupId>jaxen</groupId>
       <artifactId>jaxen</artifactId>
       <version>1.1.1</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.openjpa</groupId>
+        <artifactId>openjpa</artifactId>
+        <version>1.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.derby</groupId>
+      <artifactId>derby</artifactId>
+      <version>10.3.1.4</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
