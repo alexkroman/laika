@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <script src="./lib/prototype.js" type="text/javascript"></script>
+  <script src="./lib/scriptaculous.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="./css/laika.css" type="text/css" media="screen">
+  <title>Laika functional demonstration for script.aculo.us effects</title>  
+</head>
+
+<script language="JavaScript" type="text/JavaScript">
+<!--
+function switch_hitsp_module(id)
+{
+	Effect.toggle(id,'slide'); 
+}
+</script>
+<body>
+        <div id="page">
+            <div id="header">
+                <ul>
+                    <li><img src="./images/laika_logo.jpeg" alt="Laika Logo"></li>
+                    <li><a href="config.html">XDS Configuration</a> </li>
+                    <li class="dead_link">Interoperability Report</li>
+                    <li><a href="faq.html">FAQ</a> </li>
+                    <li><a href="mailto:talk@projectlaika.org">Feedback</a></li>
+                </ul>
+            </div>
+            <div id="content">
+              <div id="hitsp_32_person_info">
+                <table class="hitsp_c32_module">
+                  <tbody>
+                        <tr><td colspan="4" class="hitsp_c32_module_name">Person Information Module</td></tr>
+                        <tr><td class="hitsp_c32_attribute_name">Person ID:</td><td class="hitsp_c32_attribute_value">123456789</td><td class="hitsp_c32_attribute_name"></td><td class="hitsp_c32_attribute_value"></td>
+                        <tr><td class="hitsp_c32_attribute_name">First Name:</td><td class="hitsp_c32_attribute_value">Robert</td><td class="hitsp_c32_attribute_name">Prefix:</td><td class="hitsp_c32_attribute_value">Dr.</td></tr>
+						<tr><td class="hitsp_c32_attribute_name">Last Name:</td><td class="hitsp_c32_attribute_value">McCready</td><td class="hitsp_c32_attribute_name">Middle Name:</td><td class="hitsp_c32_attribute_value">Jeremiah</td></tr>
+                        <tr><td class="hitsp_c32_attribute_name">Street Address:</td><td class="hitsp_c32_attribute_value">83 Foster Court</td><td class="hitsp_c32_attribute_name">Street Address:</td><td class="hitsp_c32_attribute_value">2nd Floor</td></tr>
+						<tr><td class="hitsp_c32_attribute_name">City:</td><td class="hitsp_c32_attribute_value">Gardner</td><td class="hitsp_c32_attribute_name">State:</td><td class="hitsp_c32_attribute_value">MA</td></tr>
+						<tr><td class="hitsp_c32_attribute_name">Postal Code:</td><td class="hitsp_c32_attribute_value">01440</td><td class="hitsp_c32_attribute_name">Country:</td><td class="hitsp_c32_attribute_value">US</td></tr>
+                        <tr><td class="hitsp_c32_attribute_name">Home Phone:</td><td class="hitsp_c32_attribute_value">+1-978-632-7936</td><td class="hitsp_c32_attribute_name">Mobile Phone:</td><td class="hitsp_c32_attribute_value">+1-781-710-7120</td></tr>
+						<tr><td class="hitsp_c32_attribute_name">Work Phone:</td><td class="hitsp_c32_attribute_value">+1-781-271-7102</td><td class="hitsp_c32_attribute_name">Vacation Home Phone:</td><td class="hitsp_c32_attribute_value">+1-781-925-2062</td></tr>
+						<tr><td class="hitsp_c32_attribute_name">Email:</td><td class="hitsp_c32_attribute_value">rob@mccready.ws</td><td class="hitsp_c32_attribute_name">URL:</td><td class="hitsp_c32_attribute_value">www.mccready.ws</td></tr>
+                        <tr><td class="hitsp_c32_attribute_name">Gender:</td><td class="hitsp_c32_attribute_value">Male</td><td class="hitsp_c32_attribute_name">Marital Status:</td><td class="hitsp_c32_attribute_value">Married</td></tr>
+					    <tr><td class="hitsp_c32_attribute_name">Race:</td><td class="hitsp_c32_attribute_value">Caucasian</td><td class="hitsp_c32_attribute_name">Ethnicity:</td><td class="hitsp_c32_attribute_value">Scottish</td></tr>
+					</tbody>
+				</table>
+		      </div>
+		      <div id="hitsp_32_language_info">
+                <table class="hitsp_c32_module">
+                  <tbody>
+                        <tr><td colspan="2" class="hitsp_c32_module_name">Language Spoken Module</td></tr>
+                        <tr class="hitsp_c32_element_name"><td>Language</td><td>Mode</tr>
+						<tr class="hitsp_c32_attribute_value"><td>English</td><td>Spoken, Receive, Written</td></tr>
+						<tr class="hitsp_c32_attribute_value"><td>Spanish</td><td>Spoken</td></tr>
+						<tr class="hitsp_c32_attribute_value"><td>American Sign Language</td><td>N/A</td></tr>
+					</tbody>
+				</table>
+		      </div>
+            </div>
+            <div id="sidebar">
+                <table class="hitsp_module_list">
+                	<caption>CCD/C32 sections</caption>
+                	<!-- there is a known bug in IE 6 regarding sibling selectors
+                		 since we want the second column to look different than the first
+                		 we are going to work aroudn this bug by inserting a class on every other td-->
+                    <!--thead>
+                        <tr><th>Date</th><th>Event</th></tr>
+                    </thead-->
+                    <tbody>
+						<tr><td class="hitsp_mod"><a href="#" onclick="javascript:switch_hitsp_module('hitsp_32_person_info');">Person Information</a></td><td class="hitsp_op">Required</td></tr>
+						<tr><td class="hitsp_mod"><a href="#" onclick="javascript:switch_hitsp_module('hitsp_32_language_info');">Language Spoken</a></td><td class="hitsp_op">Required If Known</td></tr>
+						<tr><td class="hitsp_mod">Support</td><td class="hitsp_op">Required If Known</td></tr>
+						<tr><td class="hitsp_mod">HealthCare Provider</td><td class="hitsp_op">Required</td></tr>
+						<tr><td class="hitsp_mod">Insurance Provider</td><td class="hitsp_op">Required</td></tr>
+						<tr><td class="hitsp_mod">Allergies and Drug Sensitivity</td><td class="hitsp_op">Required</td></tr>
+						<tr><td class="hitsp_mod">Condition</td><td class="hitsp_op">Required</td></tr>
+						<tr><td class="hitsp_mod">Medications</td><td class="hitsp_op">Required</td></tr>
+						<tr><td class="hitsp_mod">Pregnancy</td><td class="hitsp_op">Required</td></tr>
+						<tr><td class="hitsp_mod">Information Source</td><td class="hitsp_op">Required</td></tr>
+						<tr><td class="hitsp_mod">Comments</td><td class="hitsp_op">Optional</td></tr>
+						<tr><td class="hitsp_mod">Advance Directive</td><td class="hitsp_op">Optional</td></tr>
+					</tbody>
+				</table>
+            </div>
+            <div id="footer">
+            </div>
+        </div>
+   </body>
+</html>
