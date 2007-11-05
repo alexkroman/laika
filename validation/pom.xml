@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>projectlaika</artifactId>
+    <groupId>org.projectlaika</groupId>
+    <version>0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>validation</artifactId>
+  <name>Laika :: Validation</name>
+  <description>
+      Contains the code to validate clinical documents
+  </description>
+
+
+</project>
