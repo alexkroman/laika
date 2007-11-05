@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>projectlaika</artifactId>
+    <groupId>org.projectlaika</groupId>
+    <version>0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>web</artifactId>
+  <name>Laika :: Web</name>
+  <description>
+      The Laika web application
+  </description>
+  <packaging>war</packaging> 
+  <dependencies>
+    <dependency>
+      <groupId>org.projectlaika</groupId>
+      <artifactId>cda</artifactId>
+      <version>0.1-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+</project>
