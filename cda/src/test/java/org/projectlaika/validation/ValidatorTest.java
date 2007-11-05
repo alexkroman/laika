@@ -28,13 +28,18 @@ public class ValidatorTest
         DocumentLocation dl = new DocumentLocation("Patient First Name",
            "/cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:name/cda:given");
         dl.addNamespace(new Namespace("cda", "urn:hl7-org:v3"));
+        dl.setDescription("The first name of the patient");
         Rule rule = new Rule("Henry", dl);
+        rule.setDifferentValueErrorMessage("Patient first name wasn't Henry");
+        rule.setMissingValueErrorMessage("Patient first name not found");
         assertThat(Validator.validate(rule, document), is(true));
 
         rule.setExpectedValue("Steve");
         assertThat(Validator.validate(rule, document), is(false));
         
-        dl.setXpathExpression("/cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:name/cda:given/text()");
+        dl = new DocumentLocation("Patient First Name", 
+                "/cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:name/cda:given/text()",
+                "The patient's first name");
         rule.setExpectedValue("Henry");
         assertThat(Validator.validate(rule, document), is(true));
         
