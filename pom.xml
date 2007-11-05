@@ -63,16 +63,6 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>cobertura-maven-plugin</artifactId>
         <version>2.0</version>
-        <configuration>
-          <check>
-            <branchRate>60</branchRate>
-            <lineRate>60</lineRate>
-            <totalBranchRate>60</totalBranchRate>
-            <totalLineRate>60</totalLineRate>
-            <packageLineRate>60</packageLineRate>
-            <packageBranchRate>60</packageBranchRate>
-          </check>
-        </configuration>
         <executions>
           <execution>
             <goals>
@@ -109,7 +99,5 @@
     <module>web</module>
     <module>transport</module>
     <module>validation</module>
-    <module>rules-engine</module>
-    <module>test-harness</module>
   </modules>
 </project>
