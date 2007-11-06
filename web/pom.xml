@@ -32,7 +32,7 @@
   <dependencies>
     <dependency>
       <groupId>org.projectlaika</groupId>
-      <artifactId>cda</artifactId>
+      <artifactId>models</artifactId>
       <version>0.1-SNAPSHOT</version>
     </dependency>
     <dependency>
