@@ -1,9 +1,9 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
 
     <persistence-unit name="laika" transaction-type="RESOURCE_LOCAL">
-        <class>org.projectlaika.validation.DocumentLocation</class>
-        <class>org.projectlaika.validation.Namespace</class>
-        <class>org.projectlaika.validation.Rule</class>
+        <class>org.projectlaika.models.DocumentLocation</class>
+        <class>org.projectlaika.models.Namespace</class>
+        <class>org.projectlaika.models.Rule</class>
     </persistence-unit>
 
 </persistence>
