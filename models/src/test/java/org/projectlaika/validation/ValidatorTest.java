@@ -10,6 +10,9 @@ import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.junit.Before;
 import org.junit.Test;
+import org.projectlaika.models.DocumentLocation;
+import org.projectlaika.models.Namespace;
+import org.projectlaika.models.Rule;
 
 public class ValidatorTest
 {

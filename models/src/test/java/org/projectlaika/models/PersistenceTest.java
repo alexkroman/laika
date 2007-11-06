@@ -1,4 +1,4 @@
-package org.projectlaika.validation;
+package org.projectlaika.models;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.core.Is.*;
@@ -13,6 +13,7 @@ import javax.persistence.Query;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.projectlaika.models.Namespace;
 
 public class PersistenceTest
 {

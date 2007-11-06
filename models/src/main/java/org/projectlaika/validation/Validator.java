@@ -6,6 +6,8 @@ import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.Text;
 import org.jdom.xpath.XPath;
+import org.projectlaika.models.Namespace;
+import org.projectlaika.models.Rule;
 
 /**
  * This class lets the user test a Rule against a document.

@@ -1,4 +1,4 @@
-package org.projectlaika.validation;
+package org.projectlaika.models;
 
 import java.io.Serializable;
 import java.util.LinkedList;
