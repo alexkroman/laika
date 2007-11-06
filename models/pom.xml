@@ -6,10 +6,12 @@
     <groupId>org.projectlaika</groupId>
     <version>0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>cda</artifactId>
-  <name>Laika :: CDA</name>
+  <artifactId>models</artifactId>
+  <name>Laika :: Models</name>
   <description>
-     This package can be used to validate the clinical data in a CDA Document (CCD/C32).
+      Package that contains the data models used by Project Laika. These models will be used
+      to store rules that can apply to a clinical document, and even instances of clinical 
+      documents.
   </description>
   <build>
     <plugins>
