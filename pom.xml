@@ -95,7 +95,7 @@
     </plugins>
   </reporting>
   <modules>
-    <module>cda</module>
+    <module>models</module>
     <module>web</module>
     <module>transport</module>
     <module>validation</module>
