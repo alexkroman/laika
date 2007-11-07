@@ -5,12 +5,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.Table;
 
 /**
  * Describes a specific location in a CDA/CCD/C32 document by an XPath expression. Allows the user
@@ -19,7 +17,6 @@ import javax.persistence.Table;
  * @author Andy Gregorowicz
  */
 @Entity
-@Table(name="document_locations")
 public class DocumentLocation implements Serializable
 {
     private static final long serialVersionUID = -4165136646036981675L;
@@ -69,7 +66,7 @@ public class DocumentLocation implements Serializable
         namespaces.add(namespace);
     }
 
-    @Column(length=100)
+    @Basic
     public String getName()
     {
         return name;
@@ -80,7 +77,7 @@ public class DocumentLocation implements Serializable
         this.name = name;
     }
 
-    @Column(length=200)
+    @Basic
     public String getXpathExpression()
     {
         return xpathExpression;

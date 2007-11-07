@@ -2,11 +2,10 @@ package org.projectlaika.models;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 /**
  * Class that represents an XML Namespace
@@ -14,7 +13,6 @@ import javax.persistence.Table;
  * @author Andy Gregorowicz
  */
 @Entity
-@Table(name="namespaces")
 public class Namespace implements Serializable
 {
     private static final long serialVersionUID = -7075048662657354692L;
@@ -55,7 +53,7 @@ public class Namespace implements Serializable
         this.id = id;
     }
 
-    @Column(name="prefix", length=100, nullable=false)
+    @Basic
     public String getPrefix()
     {
         return prefix;
@@ -66,7 +64,7 @@ public class Namespace implements Serializable
         this.prefix = prefix;
     }
 
-    @Column(name="uri", length=200, nullable=false)
+    @Basic
     public String getUri()
     {
         return uri;

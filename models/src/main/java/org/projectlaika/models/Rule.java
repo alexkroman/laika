@@ -3,12 +3,10 @@ package org.projectlaika.models;
 import java.io.Serializable;
 
 import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 /**
  * Provides an expected value for a particular DocumentLocation. Also lets the user define error
@@ -17,7 +15,6 @@ import javax.persistence.Table;
  * @author Andy Gregorowicz
  */
 @Entity
-@Table(name="rules")
 public class Rule implements Serializable
 {
     private static final long serialVersionUID = -4451635264898670376L;
@@ -59,7 +56,7 @@ public class Rule implements Serializable
         this.documentLocation = documentLocation;
     }
 
-    @Column(length=200, nullable=false)
+    @Basic
     public String getExpectedValue()
     {
         return expectedValue;
