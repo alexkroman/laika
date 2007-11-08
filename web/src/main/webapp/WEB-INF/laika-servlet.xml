@@ -14,7 +14,10 @@
     <property name="successView" value="upload/confirmation"/>
     <property name="emf" ref="entityManagerFactory"/>
   </bean>
-                           
+  
+  <bean id="clinicalDocumentListController" class="org.projectlaika.web.ClinicalDocumentListController">
+    <property name="emf" ref="entityManagerFactory"/>
+  </bean>
   <bean id="urlMapping"
     class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping" />
     
