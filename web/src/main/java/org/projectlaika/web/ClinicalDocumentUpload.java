@@ -10,6 +10,11 @@ import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.multipart.support.StringMultipartFileEditor;
 import org.springframework.web.servlet.mvc.SimpleFormController;
 
+/**
+ * Handles the upload of a ClinicalDocumet into the database
+ *
+ * @author Andy Gregorowicz
+ */
 public class ClinicalDocumentUpload extends SimpleFormController
 {
     private EntityManagerFactory emf;
@@ -26,6 +31,10 @@ public class ClinicalDocumentUpload extends SimpleFormController
         em.close();
     }
 
+    /**
+     * Lets Spring know how to handle translating the file upload into the clinical
+     * document bean.
+     */
     @Override
     protected void initBinder(HttpServletRequest request,
             ServletRequestDataBinder binder) throws Exception
