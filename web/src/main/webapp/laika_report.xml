@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: laika_report.xml,v 1.1.1.1 2007/09/26 18:29:43 rmccready Exp $ -->
+
+<laika>
+
+  <!-- ==================================================================== -->
+  <!-- CCD/C32 Interoperability Findings                                    -->
+  <!-- ==================================================================== -->
+
+  <report>
+    <!-- Standards Versioning  -->
+    <standard name="HITSP/C32" version="2.0.1"/>
+
+    <!-- Standards Versioning  -->
+    <score grade="93">
+
+       <!-- Tester Details -->
+       <tester>
+         <name>
+	   <given>Alisa</given>
+	   <family>Ray</family>
+         </name>
+	 <organization name="CCHIT" codeSystem="2.16.840.1.113883.5.1"/>
+       </tester>
+       
+       <!-- Notes during assessment -->
+       <note>"This EHR crashed two minutes into the test.  I had to restart the app server"</note>
+
+       <!-- Test Details -->
+       <testdetails>
+
+          <!-- Stand and End times -->
+          <starttime>2008:09:28:12:34:17</starttime>
+          <endtime>2008:09:28:12:39:42</endtime>
+
+          <!-- Violations -->
+          <violation laikacode="3503">
+            <note>"Spoken language English was dropped"</note>
+          </violation>
+
+          <!-- Warnings -->
+          <warning laikacode="543">
+            <note>"Medical history Polio was dropped"</note>
+          </warning>
+
+          <!-- Warnings -->
+          <warning laikacode="972">
+            <note>"Medical history Influenza was dropped"</note>
+          </warning>
+      </testdetails>
+    </score>
+  </report>
+
+</laika>
