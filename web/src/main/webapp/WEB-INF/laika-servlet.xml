@@ -14,7 +14,15 @@
     <property name="successView" value="upload/confirmation"/>
     <property name="emf" ref="entityManagerFactory"/>
   </bean>
-  
+
+  <bean id="documentLocationCreationController" class="org.projectlaika.web.DocumentLocationCreationController">
+    <property name="commandClass" value="org.projectlaika.models.DocumentLocation"/>
+    <property name="commandName" value="documentLocation"/>
+    <property name="formView" value="documentLocation/create"/>
+    <property name="successView" value="documentLocation/display"/>
+    <property name="emf" ref="entityManagerFactory"/>
+  </bean>
+
   <bean id="clinicalDocumentListController" class="org.projectlaika.web.ClinicalDocumentListController">
     <property name="emf" ref="entityManagerFactory"/>
   </bean>
