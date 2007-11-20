@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.projectlaika.models.DocumentLocation;
 import org.projectlaika.models.Namespace;
 import org.projectlaika.models.Rule;
+import org.projectlaika.models.TestScript;
 
 public class ValidatorTest
 {
@@ -50,6 +51,12 @@ public class ValidatorTest
         dl.addNamespace(new Namespace("cda", "urn:hl7-org:v3"));
         rule = new Rule("2.16.840.1.113883.10.20.1", dl);
         assertThat(Validator.validate(rule, document), is(true));
+        
+        TestScript testScript = new TestScript();
+        testScript.addRule(rule);
+        testScript.setName("A test");
+        
+        assertThat(testScript.getName(), is("A test"));
     }
 
 }
