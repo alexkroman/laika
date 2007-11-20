@@ -5,6 +5,7 @@
         <class>org.projectlaika.models.DocumentLocation</class>
         <class>org.projectlaika.models.Namespace</class>
         <class>org.projectlaika.models.Rule</class>
+        <class>org.projectlaika.models.TestScript</class>
     </persistence-unit>
 
 </persistence>
