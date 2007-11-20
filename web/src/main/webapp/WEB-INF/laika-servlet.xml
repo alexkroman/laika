@@ -7,7 +7,7 @@
                      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
                            ">
                            
-  <bean id="clinicalDocumentUploadController" class="org.projectlaika.web.ClinicalDocumentUpload">
+  <bean id="clinicalDocumentUploadController" class="org.projectlaika.web.ClinicalDocumentUploadController">
     <property name="commandClass" value="org.projectlaika.models.ClinicalDocument"/>
     <property name="commandName" value="clinicalDocument"/>
     <property name="formView" value="upload/cdUploadForm"/>

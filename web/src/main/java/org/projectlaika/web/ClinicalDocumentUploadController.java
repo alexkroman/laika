@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.SimpleFormController;
  *
  * @author Andy Gregorowicz
  */
-public class ClinicalDocumentUpload extends SimpleFormController
+public class ClinicalDocumentUploadController extends SimpleFormController
 {
     private EntityManagerFactory emf;
 
