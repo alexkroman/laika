@@ -3,6 +3,8 @@
  */
 package org.projectlaika.validation;
 
+import static org.junit.Assert.fail;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -16,47 +18,35 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
 /**
  * @author bobd
  * 
  */
-public class XSLTProcessorTest extends TestCase
+public class XSLTProcessorTest
 {
 
-    public XSLTProcessorTest()
-    {
-        super(XSLTProcessor.class.getName());
-    }
 
-    /**
-     * @throws java.lang.Exception
-     */
-    protected void setUp() throws Exception
-    {
-    }
 
-    /**
-     * @throws java.lang.Exception
-     */
-    protected void tearDown() throws Exception
-    {
-    }
 
+     
     /**
      * Test method for
      * {@link org.projectlaika.validation.XSLTProcessor#SchematronValidator()}.
      */
+     @Test
     public void testSchematronValidator()
     {
         new XSLTProcessor();
     }
 
+   
     /**
      * Test method for
      * {@link org.projectlaika.validation.XSLTProcessor#setStyleSheet(java.lang.String)}.
      */
+     @Test
     public void testSetStylesheet()
     {
 
@@ -85,10 +75,12 @@ public class XSLTProcessorTest extends TestCase
         }
     }
 
+     
     /**
      * Test method for
      * {@link org.projectlaika.validation.XSLTProcessor#setStyleSheet(java.io.File)}.
      */
+     @Test
     public void testSetStyleSheetFile()
     {
         try
@@ -115,10 +107,12 @@ public class XSLTProcessorTest extends TestCase
         }
     }
 
+     
     /**
      * Test method for
      * {@link org.projectlaika.validation.XSLTProcessor#setStyleSheet(java.io.InputStream)}.
      */
+     @Test
     public void testSetStyleSheetInputStream()
     {
         try
@@ -150,20 +144,24 @@ public class XSLTProcessorTest extends TestCase
         }
     }
 
+     
     /**
      * Test method for
      * {@link org.projectlaika.validation.XSLTProcessor#setStyleSheet(javax.xml.transform.Source)}.
      */
+     @Test
     public void testSetStyleSheetSource()
     {
         // this should already be tested by the other methods
     }
 
+     
     /**
      * Test method for
      * {@link org.projectlaika.validation.XSLTProcessor#transform(javax.xml.transform.Source,
      * javax.xml.transform.Result)}.
      */
+     @Test
     public void testTransform()
     {   StringWriter writer = new StringWriter();
         Result result = new StreamResult(writer);
