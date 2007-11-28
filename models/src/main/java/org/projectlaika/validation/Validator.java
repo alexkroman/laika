@@ -1,11 +1,9 @@
 package org.projectlaika.validation;
 
-import org.jdom.Attribute;
 import org.jdom.Document;
-import org.jdom.Element;
 import org.jdom.JDOMException;
-import org.jdom.Text;
 import org.jdom.xpath.XPath;
+import org.projectlaika.models.BoundVariable;
 import org.projectlaika.models.Namespace;
 import org.projectlaika.models.Rule;
 
@@ -41,46 +39,19 @@ public class Validator
         {
             xpath.addNamespace(namespace.toJDomNamespace());
         }
+        for (BoundVariable bv: rule.getBoundVariables())
+        {
+            xpath.setVariable(bv.getName(), bv.getExpectedValue());
+        }
         Object target = xpath.selectSingleNode(document);
-        if (target == null)
+        if (target != null && target instanceof Boolean)
+        {
+            Boolean bool = (Boolean) target;
+            return bool.booleanValue();
+        }
+        else
         {
             return false;
         }
-        else
-        {
-            return getTextFromNode(target).equals(rule.getExpectedValue());
-        }
-    }
-
-    /**
-     * Tries to find a text value for a single Node.
-     * @param target An Object that can be cast to an Element, Attribute or Text
-     * @return The text value for the node
-     */
-    private static String getTextFromNode(Object target)
-    {
-        String targetText;
-        if (target instanceof Element)
-        {
-            Element targetElement = (Element) target;
-            targetText = targetElement.getText();
-        }
-        else if (target instanceof Text)
-        {
-            Text targetJdomText = (Text) target;
-            targetText = targetJdomText.getText();
-        }
-        else if (target instanceof Attribute)
-        {
-            Attribute targetAttribute = (Attribute) target;
-            targetText = targetAttribute.getValue();
-        }
-        else
-        {
-            throw new IllegalArgumentException(
-                    String.format("Don't know how to get text from class %s",
-                            target.getClass().getName()));
-        }
-        return targetText;
     }
 }

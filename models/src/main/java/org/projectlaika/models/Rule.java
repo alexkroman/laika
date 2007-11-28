@@ -1,12 +1,15 @@
 package org.projectlaika.models;
 
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  * Provides an expected value for a particular DocumentLocation. Also lets the user define error
@@ -20,29 +23,29 @@ public class Rule implements Serializable
     private static final long serialVersionUID = -4451635264898670376L;
 
     private int id;
-    private String expectedValue;
     private String differentValueErrorMessage;
     private String missingValueErrorMessage;
     private DocumentLocation documentLocation;
+    private List<BoundVariable> boundVariables;
 
     public Rule()
     {
         //do nothing
     }
 
-    public Rule(String expectedValue, DocumentLocation documentLocation)
+    public Rule(DocumentLocation documentLocation,
+            List<BoundVariable> boundVariables)
     {
-        this.expectedValue = expectedValue;
         this.documentLocation = documentLocation;
+        this.boundVariables = boundVariables;
     }
 
-    public Rule(String expectedValue, String differentValueErrorMessage,
-            String missingValueErrorMessage, DocumentLocation documentLocation)
+    public Rule(DocumentLocation documentLocation,
+                BoundVariable boundVariable)
     {
-        this.expectedValue = expectedValue;
-        this.differentValueErrorMessage = differentValueErrorMessage;
-        this.missingValueErrorMessage = missingValueErrorMessage;
         this.documentLocation = documentLocation;
+        this.boundVariables = new LinkedList<BoundVariable>();
+        this.boundVariables.add(boundVariable);
     }
 
     @ManyToOne
@@ -54,17 +57,6 @@ public class Rule implements Serializable
     public void setDocumentLocation(DocumentLocation documentLocation)
     {
         this.documentLocation = documentLocation;
-    }
-
-    @Basic
-    public String getExpectedValue()
-    {
-        return expectedValue;
-    }
-
-    public void setExpectedValue(String expectedValue)
-    {
-        this.expectedValue = expectedValue;
     }
 
     @Basic
@@ -101,4 +93,14 @@ public class Rule implements Serializable
         this.id = id;
     }
 
+    public List<BoundVariable> getBoundVariables()
+    {
+        return boundVariables;
+    }
+
+    @OneToMany
+    public void setBoundVariables(List<BoundVariable> boundVariables)
+    {
+        this.boundVariables = boundVariables;
+    }
 }
