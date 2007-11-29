@@ -86,3 +86,15 @@ img {
 {
 	padding-bottom: 10px;
 }
+
+.docActions li
+{
+	display: inline;
+	list-style-type: none;
+	padding-right: 10px;
+}
+
+.doc
+{
+	border: 1px dotted #8e2800
+}

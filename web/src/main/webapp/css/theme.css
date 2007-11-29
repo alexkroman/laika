@@ -14,23 +14,23 @@ h1 a {
 /* Backgrounds */
 body{
 	background-image:none;
-	background-color:#990000;
+	background-color:#b64926;
 }
 h1{
 	background-image:none;
-	background-color:#cc0000;
+	background-color:#8e2800;
 }
 #container, body.embed{
-	background-color:#FFFFFF;
+	background-color:#fff0a5;
 }
 .wufoo input.text, .wufoo textarea.textarea{
-	background:#ffffff url(../images/fieldbg.gif) repeat-x top;
+	background:#FFFFFF url(../images/fieldbg.gif) repeat-x top;
 }
 .wufoo .focused{
-	background-color:#FFF7C0;
+	background-color:#ffb03b;
 }
 .wufoo .instruct{
-	background-color:#F5F5F5;
+	background-color:#468966;
 }
 
 /* Borders */
@@ -38,16 +38,16 @@ h1{
 	border:0 solid #cccccc;
 }
 .wufoo .info{
-	border-bottom:1px dotted #CCCCCC;
+	border-bottom:1px dotted #8e2800;
 }
 .wufoo .section{
-	border-top:1px dotted #CCCCCC;
+	border-top:1px dotted #8e2800;
 }
 .wufoo input.text, .wufoo textarea.textarea{
 	border:;
 }
 .wufoo .instruct{
-	border:1px solid #E6E6E6;
+	border:0 solid #e6e6e6;
 }
 
 /* Typography */
@@ -84,18 +84,18 @@ h1{
 	font-family:inherit;
 	font-weight:;
 	font-style:;
-	color:#444444;
+	color:#333333;
 }
 .wufoo li div, .wufoo li span, .wufoo li div label, .wufoo li span label{
 	font-family:inherit;
-	color:#444444;
+	color:#333333;
 }
 .wufoo label.choice{
 	font-size:100%;
 	font-family:inherit;
 	font-weight:;
 	font-style:;
-	color:#444444;
+	color:#333333;
 }
 .wufoo input.text, .wufoo textarea.textarea, .wufoo select.select{
 	font-size:100%;
@@ -109,10 +109,10 @@ h1{
 	font-family:inherit;
 	font-weight:;
 	font-style:;
-	color:#444444;
+	color:#ffffff;
 }
 .wufoo li.altInstruct .instruct, .wufoo li.leftHalf .instruct, .wufoo li.rightHalf .instruct{
-	color:#444444;
+	color:#333333;
 }
 .wufoo input.btTxt{
 	font-size:;

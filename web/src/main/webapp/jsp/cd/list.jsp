@@ -21,11 +21,19 @@
             <h2>Clinical documents stored in Laika</h2>
             <p>All of the documents uploaded into Laika</p>
         </div>
-        <ul>
+        
         <c:forEach var="doc" items="${docs}">
-            <li>Doc Name: <c:out value="${doc.name}"/></li>
+            <div class="doc">
+                <h3><c:out value="${doc.name}"/><h3>
+                <ul class="docActions">
+                    <li><a href="">View</a></li>
+                    <li><a href="">Validate</a></li>
+                    <li><a href="">Run Test</a></li>
+                    <li><a href="">Delete</a></li>
+                </ul>
+            </div>
         </c:forEach>
-        </ul>
+        
 </div>
     </div>
     </body>
