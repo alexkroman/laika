@@ -6,6 +6,7 @@
         <class>org.projectlaika.models.Namespace</class>
         <class>org.projectlaika.models.Rule</class>
         <class>org.projectlaika.models.TestScript</class>
+        <class>org.projectlaika.models.BoundVariable</class>
     </persistence-unit>
 
 </persistence>
