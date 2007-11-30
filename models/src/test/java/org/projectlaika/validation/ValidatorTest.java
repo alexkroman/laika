@@ -48,7 +48,8 @@ public class ValidatorTest
         rule.setBoundVariables(bvs);
         assertThat(Validator.validate(rule, document), is(false));
         
-        dl = new DocumentLocation("CCD Template Id", "/cda:ClinicalDocument/cda:templateId/@root=$templateId");
+        dl = new DocumentLocation("CCD Template Id", "/cda:ClinicalDocument/cda:templateId/@root=$templateId",
+                                  "The template Id of the CCD");
         dl.addNamespace(new Namespace("cda", "urn:hl7-org:v3"));
         rule = new Rule(dl, new BoundVariable("templateId", "2.16.840.1.113883.10.20.1"));
         assertThat(Validator.validate(rule, document), is(true));

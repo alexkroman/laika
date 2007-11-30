@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -99,7 +100,7 @@ public class DocumentLocation implements Serializable
         this.description = description;
     }
 
-    @ManyToMany
+    @ManyToMany(cascade=CascadeType.ALL)
     public List<Namespace> getNamespaces()
     {
         return namespaces;
