@@ -8,13 +8,15 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Clinical Document Upload</title>
 
-<script type="text/javascript" src="<c:url value="javascripts/wufoo.js"/>"></script>
+<script type="text/javascript" src="<c:url value="javascripts/wufoo.js"/>"/>
+<script type="text/javascript" src="<c:url value="javascripts/prototype.js"/>"/>
+<script type="text/javascript" src="<c:url value="javascripts/documentLocation.js"/>"/>
 <link rel="stylesheet" href="<c:url value="css/structure.css"/>" type="text/css" />
 <link rel="stylesheet" href="<c:url value="css/form.css"/>" type="text/css" />
 <link rel="stylesheet" href="<c:url value="css/theme.css"/>" type="text/css" />
 </head>
 <body>
-    <img id="top" src="<c:url value="/images/top.png"/>" alt="" />
+    <img id="top" src="<c:url value="/images/top.png"/>" alt=""/>
     <div id="container">
         <h1><a id="logo" href="">Laika</a></h1>
         <form:form commandName="documentLocation" cssClass="wufoo">
@@ -48,6 +50,26 @@
                     
                     <p class="instruct">Enter a description of this document location.</p>
                 </li>
+
+
+                <c:forEach items="${documentLocation.namespaces}" varStatus="nsIndex">
+                <li class="nsForm">
+                <label class="desc" for="">Namespace</label>
+                    <span>
+                        <form:input path="namespaces[${nsIndex}].prefix" cssClass="field text medium" maxlength="255"/>
+                        <label>Prefix</label>
+                    </span>
+                    <span>
+                        <form:input path="namespaces[${nsIndex}].uri" cssClass="field text medium" maxlength="255"/>
+                        <label>URI</label>
+                    </span>
+                </li>
+                </c:forEach>
+
+                <li id="nsInserter" class="buttons">
+                    <input id="nsInserter" class="btTxt" type="button" value="Add Namespace" onclick="insertNamespace()"/>
+                </li>
+
                 <li class="buttons">
                     <input id="saveForm" class="btTxt" type="submit" value="Create" />
                 </li>
@@ -55,5 +77,22 @@
         </form:form>
     </div>
     <img id="bottom" src="images/bottom.png" alt="" />
+    <textarea id="namespaceTemplate" style="display: none;">
+    <jsp:text>
+    <![CDATA[
+        <li class="nsForm">
+        <label class="desc" for="">Namespace</label>
+            <span>
+                <input id="namespaces[#{nsIndex}].prefix" name="namespaces[#{nsIndex}].prefix" class="field text medium" type="text" value="" maxlength="255"/>
+                <label>Prefix</label>
+            </span>
+            <span>
+                <input id="namespaces[#{nsIndex}].uri" name="namespaces[#{nsIndex}].uri" class="field text medium" type="text" value="" maxlength="255"/>
+                <label>URI</label>
+            </span>
+        </li>
+        ]]>
+    </jsp:text>
+    </textarea>
 </body>
 </html>
