@@ -1,6 +1,7 @@
 package org.projectlaika.web.util;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.collections.FactoryUtils;
@@ -38,6 +39,10 @@ public class LazyListHelper
     {
         BeanWrapper wrapper = new BeanWrapperImpl(bean);
         List list = (List) wrapper.getPropertyValue(property);
+        if (list == null)
+        {
+            list = new LinkedList();
+        }
         List decorated = LazyList.decorate(list, FactoryUtils.instantiateFactory(listType));
         wrapper.setPropertyValue(property, decorated);
     }
