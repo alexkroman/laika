@@ -20,12 +20,16 @@
     <div id="container">
         <h1><a id="logo" href="">Laika</a></h1>
         <form:form commandName="documentLocation" cssClass="wufoo">
+        <form:errors path="*" cssClass="errorBox" />
             <jsp:include page="../partials/header.jsp"/>
             <div class="info">
                 <h2>Create a document location</h2>
                 <p>Create a pointer to a location in a clinical document using XPath</p>
             </div>
             <ul>
+                <c:if test="${param['cd_id'] != null}">
+                    <form:hidden path="id"/>
+                </c:if>
                 <li>
                 <label class="desc">Name <span class="req">*</span></label>
                     <div>
@@ -55,12 +59,13 @@
                 <c:forEach items="${documentLocation.namespaces}" varStatus="nsIndex">
                 <li class="nsForm">
                 <label class="desc" for="">Namespace</label>
+                    <form:hidden path="namespaces[${nsIndex.index}].id"/>
                     <span>
-                        <form:input path="namespaces[${nsIndex}].prefix" cssClass="field text medium" maxlength="255"/>
+                        <form:input path="namespaces[${nsIndex.index}].prefix" cssClass="field text medium" maxlength="255"/>
                         <label>Prefix</label>
                     </span>
                     <span>
-                        <form:input path="namespaces[${nsIndex}].uri" cssClass="field text medium" maxlength="255"/>
+                        <form:input path="namespaces[${nsIndex.index}].uri" cssClass="field text medium" maxlength="255"/>
                         <label>URI</label>
                     </span>
                 </li>

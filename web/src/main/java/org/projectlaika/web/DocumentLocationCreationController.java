@@ -24,8 +24,21 @@ public class DocumentLocationCreationController extends SimpleFormController
     protected Object formBackingObject(HttpServletRequest request)
             throws Exception
     {
-        DocumentLocation dl = new DocumentLocation();
+        String id = request.getParameter("cd_id");
+        DocumentLocation dl = null;
+        if (id != null)
+        {
+            EntityManager em = emf.createEntityManager();
+            dl = em.find(DocumentLocation.class, id);
+            em.close();
+        }
+        else
+        {
+            dl = new DocumentLocation();
+        }
+        
         LazyListHelper.decorateList(dl, "namespaces", Namespace.class);
+        
         return dl;
     }
 
@@ -35,9 +48,12 @@ public class DocumentLocationCreationController extends SimpleFormController
         EntityManager em = emf.createEntityManager();
         DocumentLocation dl = (DocumentLocation) command;
         LazyListHelper.removeDecoration(dl, "namespaces");
-        
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
+        if (dl.getId() != 0)
+        {
+            dl = em.merge(dl);
+        }
         em.persist(dl);
         transaction.commit();
         em.close();
