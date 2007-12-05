@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.projectlaika.models.DocumentLocation;
 import org.projectlaika.models.Namespace;
 import org.projectlaika.web.util.LazyListHelper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.SimpleFormController;
 
 /**
@@ -16,15 +19,27 @@ import org.springframework.web.servlet.mvc.SimpleFormController;
  *
  * @author Andy Gregorowicz
  */
+@Controller
+@RequestMapping("/documentLocation/edit.lk")
 public class DocumentLocationCreationController extends SimpleFormController
 {
     private EntityManagerFactory emf;
+    
+    @Autowired
+    public DocumentLocationCreationController(EntityManagerFactory emf)
+    {
+        this.emf = emf;
+        setCommandClass(DocumentLocation.class);
+        setCommandName("documentLocation");
+        setFormView("documentLocation/create");
+        setSuccessView("documentLocation/display");
+    }
 
     @Override
     protected Object formBackingObject(HttpServletRequest request)
             throws Exception
     {
-        String id = request.getParameter("cd_id");
+        String id = request.getParameter("dl_id");
         DocumentLocation dl = null;
         if (id != null)
         {
@@ -57,10 +72,5 @@ public class DocumentLocationCreationController extends SimpleFormController
         em.persist(dl);
         transaction.commit();
         em.close();
-    }
-
-    public void setEmf(EntityManagerFactory emf)
-    {
-        this.emf = emf;
     }
 }

@@ -8,10 +8,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Clinical Document Upload</title>
 
-<script type="text/javascript" src="<c:url value="javascripts/wufoo.js"/>"></script>
-<link rel="stylesheet" href="<c:url value="css/structure.css"/>" type="text/css" />
-<link rel="stylesheet" href="<c:url value="css/form.css"/>" type="text/css" />
-<link rel="stylesheet" href="<c:url value="css/theme.css"/>" type="text/css" />
+<script type="text/javascript" src="<c:url value="/javascripts/wufoo.js"/>"></script>
+<link rel="stylesheet" href="<c:url value="/css/structure.css"/>" type="text/css" />
+<link rel="stylesheet" href="<c:url value="/css/form.css"/>" type="text/css" />
+<link rel="stylesheet" href="<c:url value="/css/theme.css"/>" type="text/css" />
 </head>
 <body>
     <img id="top" src="<c:url value="/images/top.png"/>" alt="" />

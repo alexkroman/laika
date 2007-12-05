@@ -6,9 +6,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Clinical documents</title>
-        <link rel="stylesheet" href="<c:url value="css/structure.css"/>" type="text/css" />
-        <link rel="stylesheet" href="<c:url value="css/form.css"/>" type="text/css" />
-        <link rel="stylesheet" href="<c:url value="css/theme.css"/>" type="text/css" />
+        <link rel="stylesheet" href="<c:url value="/css/structure.css"/>" type="text/css" />
+        <link rel="stylesheet" href="<c:url value="/css/form.css"/>" type="text/css" />
+        <link rel="stylesheet" href="<c:url value="/css/theme.css"/>" type="text/css" />
         
     </head>
     <body>
@@ -22,7 +22,7 @@
             <p>All of the documents uploaded into Laika</p>
         </div>
         
-        <c:forEach var="doc" items="${docs}">
+        <c:forEach var="doc" items="${pcsubclassList}">
             <div class="doc">
                 <h3><c:out value="${doc.name}"/><h3>
                 <ul class="docActions">

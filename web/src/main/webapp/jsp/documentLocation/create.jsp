@@ -8,12 +8,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Clinical Document Upload</title>
 
-<script type="text/javascript" src="<c:url value="javascripts/wufoo.js"/>"/>
-<script type="text/javascript" src="<c:url value="javascripts/prototype.js"/>"/>
-<script type="text/javascript" src="<c:url value="javascripts/documentLocation.js"/>"/>
-<link rel="stylesheet" href="<c:url value="css/structure.css"/>" type="text/css" />
-<link rel="stylesheet" href="<c:url value="css/form.css"/>" type="text/css" />
-<link rel="stylesheet" href="<c:url value="css/theme.css"/>" type="text/css" />
+<script type="text/javascript" src="<c:url value="/javascripts/wufoo.js"/>"/>
+<script type="text/javascript" src="<c:url value="/javascripts/prototype.js"/>"/>
+<script type="text/javascript" src="<c:url value="/javascripts/documentLocation.js"/>"/>
+<link rel="stylesheet" href="<c:url value="/css/structure.css"/>" type="text/css" />
+<link rel="stylesheet" href="<c:url value="/css/form.css"/>" type="text/css" />
+<link rel="stylesheet" href="<c:url value="/css/theme.css"/>" type="text/css" />
 </head>
 <body>
     <img id="top" src="<c:url value="/images/top.png"/>" alt=""/>
@@ -27,7 +27,7 @@
                 <p>Create a pointer to a location in a clinical document using XPath</p>
             </div>
             <ul>
-                <c:if test="${param['cd_id'] != null}">
+                <c:if test="${param['dl_id'] != null}">
                     <form:hidden path="id"/>
                 </c:if>
                 <li>
