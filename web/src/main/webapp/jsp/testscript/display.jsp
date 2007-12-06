@@ -1,3 +1,5 @@
+<%@ page contentType="text/html" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -15,79 +17,108 @@
   <link rel="stylesheet" href="./css/laika.css" type="text/css" media="screen">
   <link rel="stylesheet" href="./css/laika.css" type="text/css" media="print">
 
-  <title>Laika Functional Demonstration</title>  
-  
-</head>
+  <title><c:out value="${testscript.name}"/></title>  
 
-<script language="JavaScript" type="text/JavaScript">
-<!--
+  <script language="JavaScript" type="text/JavaScript">
+  <!--
 
-var hitsp_32_person_info_edited = false;
+  var hitsp_32_person_info_edited = false;
 
-function switch_hitsp_module(id, linkId)
-{
+  function switch_hitsp_module(id, linkId)
+  {
     Effect.toggle(id,'slide'); 
     var existingLink = document.getElementById(linkId).innerHTML;
     if (existingLink == 'Show')
     {
-        document.getElementById(linkId).innerHTML = 'Hide';
+      document.getElementById(linkId).innerHTML = 'Hide';
     }
     else
     {
-        document.getElementById(linkId).innerHTML = 'Show';
+      document.getElementById(linkId).innerHTML = 'Show';
     }
-}
+  }
 
-function scroll_to_module_and_highlight(id, time)
-{
+  function scroll_to_module_and_highlight(id, time)
+  {
     scroll_to_module(id,time);
     new Effect.Highlight(id,{duration:3.0});
-}
+  }
 
-function scroll_to_module(id, time)
-{
+  function scroll_to_module(id, time)
+  {
     new Effect.ScrollTo(id,{duration:time});
-}
+  }
 
-function toggle_editable(id)
-{                  
+  function toggle_editable(id)
+  {                  
     if (id == 'person')
     {
-        if (hitsp_32_person_info_edited == false) 
-        {
-            hitsp_32_person_info_edited = true;
-            
-            document.getElementById('last_name_read_only').style.display = 'none';
-            document.getElementById('last_name_editable').style.display = '';
-            document.getElementById('gender_read_only').style.display = 'none';
-            document.getElementById('gender_editable').style.display = '';
-            document.getElementById('state_read_only').style.display = 'none';
-            document.getElementById('state_editable').style.display = '';
-        }
-        else 
-        {
-            hitsp_32_person_info_edited = false;
-            
-            document.getElementById('last_name_editable').style.display = 'none';
-            document.getElementById('last_name_read_only').style.display = '';
-            document.getElementById('gender_editable').style.display = 'none';
-            document.getElementById('gender_read_only').style.display = '';
-            document.getElementById('state_editable').style.display = 'none';
-            document.getElementById('state_read_only').style.display = '';
-        }
+      if (hitsp_32_person_info_edited == false) 
+      {
+        hitsp_32_person_info_edited = true;          
+        document.getElementById('first_name_read_only').style.display = 'none';
+        document.getElementById('first_name_editable').style.display = '';
+        document.getElementById('middle_name_read_only').style.display = 'none';
+        document.getElementById('middle_name_editable').style.display = '';
+        document.getElementById('last_name_read_only').style.display = 'none';
+        document.getElementById('last_name_editable').style.display = '';
+        document.getElementById('gender_read_only').style.display = 'none';
+        document.getElementById('gender_editable').style.display = '';
+        document.getElementById('state_read_only').style.display = 'none';
+        document.getElementById('state_editable').style.display = '';
+        document.getElementById('dob_read_only').style.display = 'none';
+        document.getElementById('dob_editable').style.display = '';
+        document.getElementById('marital_status_read_only').style.display = 'none';
+        document.getElementById('marital_status_editable').style.display = '';
+        
+      }
+      else 
+      {
+        hitsp_32_person_info_edited = false;
+        document.getElementById('first_name_editable').style.display = 'none';
+        document.getElementById('first_name_read_only').style.display = '';
+        document.getElementById('middle_name_editable').style.display = 'none';
+        document.getElementById('middle_name_read_only').style.display = '';
+        document.getElementById('last_name_editable').style.display = 'none';
+        document.getElementById('last_name_read_only').style.display = '';
+        document.getElementById('gender_editable').style.display = 'none';
+        document.getElementById('gender_read_only').style.display = '';
+        document.getElementById('state_editable').style.display = 'none';
+        document.getElementById('state_read_only').style.display = '';
+        document.getElementById('dob_editable').style.display = 'none';
+        document.getElementById('dob_read_only').style.display = '';
+        document.getElementById('marital_status_editable').style.display = 'none';
+        document.getElementById('marital_status_read_only').style.display = '';
+      }
     }
     else
     {
         
     }
-}
+    new Effect.Highlight(id,{duration:3.0});
+  }
 
-</script>
+  </script>
 
-<script language="JavaScript" id="jscal1xx">
-var cal1xx = new CalendarPopup("testdiv1");
-cal1xx.showNavigationDropdowns();
-</script>
+  <script language="JavaScript" id="jscal1xx">
+    var cal1xx = new CalendarPopup("testdiv1");
+    cal1xx.showNavigationDropdowns();
+  </script>
+  
+  <style type="text/css">
+  
+    /* DYNAMIC NUMBERS: THIS IS WHERE WE NEED A SCRIPT TO CALCULATE THE CORRECT VALUE BASED UPON EHR VENDOR COMPLIANCE. */
+    /* DONE IS CURRENTLY 118px */    
+    .requiredAttributeCompliance div span.portion {
+        width:112px;
+    }  
+    .provisionalAttributeCompliance div span.portion {
+        width:71px;
+    }  
+   
+   </style>
+  
+</head>
 
 <body>
 
@@ -144,29 +175,58 @@ cal1xx.showNavigationDropdowns();
             </tr>
             </tr>
             <tr>
+              <c:set var="firstName" value=""/>
+              <c:forEach items="${testscript.rules}" var="rule">
+                <c:if test='${rule.documentLocation.id == 301}'>
+                  <c:set var="firstName" value="${rule.expectedValue}"/>
+                </c:if>
+              </c:forEach>
               <td class="hitsp_c32_attribute_name">First Name:</td>
-              <td class="hitsp_c32_attribute_value">Homer</td>
+              <td class="hitsp_c32_attribute_value">
+                <div class="person_read_only" id="first_name_read_only">
+                  <c:out value='${firstName}' />
+                </div>
+                <div class="person_editable" id="first_name_editable" style="display:none">
+                  <input type="text"name="first_name_field" value="<c:out value='${firstName}' />" maxlength="64" size="25" />
+                </div>
+              </td>
               <td class="hitsp_c32_attribute_name">Prefix:</td>
               <td class="hitsp_c32_attribute_value">Mr.</td>
             </tr>
             <tr>
+              <c:set var="lastName" value=""/>
+              <c:forEach items="${testscript.rules}" var="rule">
+                <c:if test='${rule.documentLocation.id == 302}'>
+                  <c:set var="lastName" value="${rule.expectedValue}"/>
+                </c:if>
+              </c:forEach>
               <td class="hitsp_c32_attribute_name">Last Name:</td>
               <td class="hitsp_c32_attribute_value">
-                <div id="last_name_read_only">
-                  Simpson
+                <div class="person_read_only" id="last_name_read_only">
+                  <c:out value='${lastName}' />
                 </div>
-                <div id="last_name_editable" style="display:none">
-                  <input type="text"name="last_name_field" value="Simpson" maxlength="64" size="25" />
+                <div class="person_editable" id="last_name_editable" style="display:none">
+                  <input type="text"name="last_name_field" value="<c:out value='${lastName}' />" maxlength="64" size="25" />
                 </div>
               </td>
               <td class="hitsp_c32_attribute_name">Middle Name:</td>
-              <td class="hitsp_c32_attribute_value">Jay</td>
+              <td class="hitsp_c32_attribute_value">
+                <div class="person_read_only" id="middle_name_read_only">
+                  Jay
+                </div>
+                <div class="person_editable" id="middle_name_editable" style="display:none">
+                  <input type="text"name="middle_name_field" value="Jay" maxlength="64" size="25" />
+                </div>
+              </td>
             </tr>
             <tr>
               <td class="hitsp_c32_attribute_name">Date of Birth:</td>
               <td class="hitsp_c32_attribute_value">
-                <div id="dob_editable">
-                  <input name="person_dob" value="" size="25" type="text">
+                <div class="person_read_only" id="dob_read_only">
+                  06/24/1970
+                </div>
+                <div class="person_editable" id="dob_editable" style="display:none">
+                  <input name="person_dob" value="06/24/1970" size="25" type="text">
                   <a href="#" onclick="cal1xx.select(document.forms[0].person_dob,'anchor1xx','MM/dd/yyyy'); return false;" name="anchor1xx" id="anchor1xx">select</a>
                   <div id="testdiv1" style="position: absolute; visibility: hidden; background-color: white;"></div>
                 </div>
@@ -177,10 +237,10 @@ cal1xx.showNavigationDropdowns();
             <tr>
               <td class="hitsp_c32_attribute_name">Gender:</td>
               <td class="hitsp_c32_attribute_value">
-                <div id="gender_read_only">
+                <div class="person_read_only" id="gender_read_only">
                   Male
                 </div>
-                <div id="gender_editable" style="display:none">
+                <div class="person2_editable" id="gender_editable" style="display:none">
                   <select>
                     <option>Select Gender</option>
                     <option selected="selected">Male</option>
@@ -192,7 +252,19 @@ cal1xx.showNavigationDropdowns();
               <td class="hitsp_c32_attribute_value"></td>
             <tr>
               <td class="hitsp_c32_attribute_name">Marital Status:</td>
-              <td class="hitsp_c32_attribute_value">Married</td>
+              <td class="hitsp_c32_attribute_value">
+                <div class="person_read_only" id="marital_status_read_only">
+                  Married
+                </div>
+                <div class="person2_editable" id="marital_status_editable" style="display:none">
+                  <select>
+                    <option>Select Marital Status</option>
+                    <option>Single</option>
+                    <option selected="selected">Married</option>
+                    <option>Divorced</option>
+                  </select>
+                </div>
+              </td>
               <td class="hitsp_c32_attribute_name"></td>
               <td class="hitsp_c32_attribute_value"></td>
             </tr>
@@ -212,10 +284,10 @@ cal1xx.showNavigationDropdowns();
               <td class="hitsp_c32_attribute_value">Springfield</td>
               <td class="hitsp_c32_attribute_name">State:</td>
               <td class="hitsp_c32_attribute_value">
-                <div id="state_read_only">
+                <div class="person_read_only"  id="state_read_only">
                   MA
                 </div>
-                <div id="state_editable" style="display:none">
+                <div class="person_editable" id="state_editable" style="display:none">
                   <select>
                     <option>Select State</option>
                     <option>AK</option><option>AL</option><option>AR</option><option>AS</option><option>AZ</option>
@@ -728,23 +800,38 @@ cal1xx.showNavigationDropdowns();
     <!-- End Content -->
      
     <!-- Start Sidebar and Menus -->
-    <div id="sidebar">
+    <div id="sidebar">    
     
-<div id="interop_report">
-  <b class="rtop">
-    <b class="r1"></b>
-    <b class="r2"></b>
-    <b class="r3"></b>
-    <b class="r4"></b>
-  </b>
-  <b class="rbottom">
-    <b class="r4"></b>
-    <b class="r3"></b>
-    <b class="r2"></b>
-    <b class="r1"></b>
-  </b>
-</div>
-    
+      <div class="hitsp_c32_module_name">Required Attributes</div>
+       
+      <!-- Compliance -->
+      <div class="progressBarComponent2">
+        <div class="progress"> 
+          <div class="requiredAttributeCompliance">
+            <div>
+              <span class="portion"></span>
+              <span class="metric">Compliant <em><span class="datapoint">95</span>%</em></span>
+              <span class="metric violation">Violations <em><span class="datapoint">3</span></em></span>
+            </div>
+          </div>
+        </div>
+      </div>
+        
+      <div class="hitsp_c32_module_name">Provisional Attributes</div>
+       
+      <!-- Compliance -->
+      <div class="progressBarComponent2">
+        <div class="progress"> 
+          <div class="provisionalAttributeCompliance">
+            <div>
+              <span class="portion"></span>
+              <span class="metric">Compliant <em><span class="datapoint">61</span>%</em></span>
+              <span class="metric violation">Violations <em><span class="datapoint">26</span></em></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
       <table class="hitsp_module_list">
         <caption>CCD/C32 Modules</caption>
         <!-- there is a known bug in IE 6 regarding sibling selectors
@@ -758,11 +845,11 @@ cal1xx.showNavigationDropdowns();
           </tr>
           <tr>
             <td class="hitsp_mod"><a href="#" onclick="javascript:scroll_to_module_and_highlight('language', 1.0);">Language Spoken</a></td>
-            <td class="hitsp_required">Required &#134;</td>
+            <td class="hitsp_required">Required&#134;</td>
           </tr>
           <tr>
             <td class="hitsp_mod"><a href="#" onclick="javascript:scroll_to_module_and_highlight('support', 1.0);">Support</a></td>
-            <td class="hitsp_required">Required &#134;</td>
+            <td class="hitsp_required">Required&#134;</td>
           </tr>
           <tr>
             <td class="hitsp_mod"><a href="#" onclick="javascript:scroll_to_module_and_highlight('healthcare_provider', 1.0);">Healthcare Provider</a></td>
