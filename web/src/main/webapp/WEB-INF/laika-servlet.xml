@@ -20,9 +20,4 @@
     <property name="prefix" value="/jsp/" />
     <property name="suffix" value=".jsp" />
   </bean>
-  
-  <bean id="testScriptController" class="org.projectlaika.web.TestScriptController">
-    <property name="emf" ref="entityManagerFactory"/>
-  </bean>
-  
 </beans>
