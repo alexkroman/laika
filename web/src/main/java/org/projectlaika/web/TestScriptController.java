@@ -10,6 +10,7 @@ import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.projectlaika.models.BoundVariable;
 import org.projectlaika.models.ClinicalDocument;
 import org.projectlaika.models.DocumentLocation;
 import org.projectlaika.models.Namespace;
@@ -26,60 +27,78 @@ public class TestScriptController extends AbstractController
     @Override
     protected ModelAndView handleRequestInternal(HttpServletRequest request,
             HttpServletResponse response) throws Exception
-    {
-    	String testScriptId = request.getParameter("id");    	
+    {   	
     	EntityManager em = emf.createEntityManager();
         
-    	/*EntityTransaction transaction = em.getTransaction();
+    	EntityTransaction transaction = em.getTransaction();
+        
         transaction.begin();
-    	DocumentLocation dl = new DocumentLocation(
+        Namespace namespace = new Namespace("cda", "urn:hl7-org:v3");
+        em.persist(namespace);
+        transaction.commit();
+        
+        transaction.begin();
+    	DocumentLocation dlFirstName = new DocumentLocation(
     		"Patient First Name",
-         	"/cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:name/cda:given");
-       	dl.setDescription("The first name of the patient");
-        em.persist(dl);
+         	"/cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:name/cda:given/text()=$name");
+    	dlFirstName.addNamespace(namespace);
+    	dlFirstName.setDescription("The first name of the patient");
+        em.persist(dlFirstName);
         transaction.commit();
         
         transaction.begin();
-    	DocumentLocation dl2 = new DocumentLocation(
+    	DocumentLocation dlLastName = new DocumentLocation(
     		"Patient Last Name",
-         	"/cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:name/cda:family");
-       	dl2.setDescription("The last name of the patient");
-        em.persist(dl2);
+         	"/cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:name/cda:family/text()=$name");
+    	dlLastName.addNamespace(namespace);
+    	dlLastName.setDescription("The last name of the patient");
+        em.persist(dlLastName);
         transaction.commit();
         
         transaction.begin();
-        Rule rule = new Rule("Robert", dl);
-        rule.setDifferentValueErrorMessage("Patient first name wasn't Robert");
-        rule.setMissingValueErrorMessage("Patient first name not found");
-        em.persist(rule);
+        Rule rFirstName = new Rule(dlFirstName, new BoundVariable("name", "Robert"));
+        rFirstName.setDifferentValueErrorMessage("Patient first name wasn't Robert");
+        rFirstName.setMissingValueErrorMessage("Patient first name not found");
+        em.persist(rFirstName);
         transaction.commit();
         
         transaction.begin();
-        Rule rule2 = new Rule("McCready", dl2);
-        rule2.setDifferentValueErrorMessage("Patient last name wasn't McCready");
-        rule2.setMissingValueErrorMessage("Patient last name not found");
-        em.persist(rule2);
+        Rule rLastName = new Rule(dlLastName, new BoundVariable("name", "McCready"));
+        rFirstName.setDifferentValueErrorMessage("Patient last name wasn't McCready");
+        rFirstName.setMissingValueErrorMessage("Patient last name not found");
+        em.persist(rFirstName);
         transaction.commit();
         
         transaction.begin();
         TestScript testScript = new TestScript();
-        testScript.addRule(rule);
-        testScript.addRule(rule2);
+        testScript.addRule(rFirstName);
+        testScript.addRule(rLastName);
         testScript.setName("Laika demo test v 0.0.1");
         em.persist(testScript);
-        transaction.commit();*/
+        transaction.commit();
         
+        /*         
+    	String testScriptId = request.getParameter("id"); 
         Query query = em.createQuery("select t from TestScript t where t.id = :id");
         query.setParameter("id", new Integer(testScriptId));
         TestScript testScript = (TestScript) query.getSingleResult();
-        
-        List testScriptRules = testScript.getRules();
+        List testScriptRules = testScriptOut.getRules();
         for (Iterator it = testScriptRules.iterator();it.hasNext(); )
         {
         	Rule rule = (Rule) it.next();
-        	System.out.println("Rule " + rule.getExpectedValue());
-        	System.out.println("DocumentLocation " + rule.getDocumentLocation().getId());
-        }
+        	DocumentLocation documentLocation = rule.getDocumentLocation();
+        	System.out.println("DocumentLocation id: " + documentLocation.getId());
+        	System.out.println("DocumentLocation name: " + documentLocation.getName());
+        	List boundVariables = rule.getBoundVariables();
+        	
+        	for (Iterator itBoundVariables = boundVariables.iterator(); itBoundVariables.hasNext();)
+        	{
+        		BoundVariable boundVariable = (BoundVariable) itBoundVariables.next();
+        		System.out.println("BoundVariable name: " + boundVariable.getName());
+        		System.out.println("BoundVariable expected value: " + boundVariable.getExpectedValue());
+        	}
+        	
+        }*/
         em.close();
         
         return new ModelAndView("testscript/display", "testscript", testScript);
