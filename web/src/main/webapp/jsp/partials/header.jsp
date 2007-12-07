@@ -4,7 +4,6 @@
 
     <ul id="navlist">
         <li><a href="<c:url value="/"/>">Home</a></li>
-        <li><a href="<c:url value="/clinicaldocumentlist.lk"/>">Manage Documents</a></li>
-        <li><a href="#">Manage Tests</a></li>
-        <li><a href="#">Manage Document Types</a></li>
+        <li><a href="<c:url value="/clinicalDocument/list.lk"/>">Clinical Documents</a></li>
+        <li><a href="#">Tests</a></li>
     </ul>

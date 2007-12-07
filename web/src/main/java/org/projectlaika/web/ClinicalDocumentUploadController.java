@@ -1,11 +1,9 @@
 package org.projectlaika.web;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.servlet.http.HttpServletRequest;
 
 import org.projectlaika.models.ClinicalDocument;
+import org.projectlaika.models.dao.ClinicalDocumentDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestDataBinder;
@@ -22,12 +20,12 @@ import org.springframework.web.servlet.mvc.SimpleFormController;
 @RequestMapping("/clinicalDocument/upload.lk")
 public class ClinicalDocumentUploadController extends SimpleFormController
 {
-    private EntityManagerFactory emf;
+    private ClinicalDocumentDAO clinicalDocumentDAO;
     
     @Autowired
-    public ClinicalDocumentUploadController(EntityManagerFactory emf)
+    public ClinicalDocumentUploadController(ClinicalDocumentDAO clinicalDocumentDAO)
     {
-        this.emf = emf;
+        this.clinicalDocumentDAO = clinicalDocumentDAO;
         setCommandClass(ClinicalDocument.class);
         setCommandName("clinicalDocument");
         setFormView("clinicalDocument/uploadForm");
@@ -37,13 +35,8 @@ public class ClinicalDocumentUploadController extends SimpleFormController
     @Override
     protected void doSubmitAction(Object command) throws Exception
     {
-        EntityManager em = emf.createEntityManager();
         ClinicalDocument cd = (ClinicalDocument) command;
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
-        em.persist(cd);
-        transaction.commit();
-        em.close();
+        clinicalDocumentDAO.save(cd);
     }
 
     /**
@@ -55,11 +48,6 @@ public class ClinicalDocumentUploadController extends SimpleFormController
             ServletRequestDataBinder binder) throws Exception
     {
         binder.registerCustomEditor(String.class, new StringMultipartFileEditor());
-    }
-
-    public void setEmf(EntityManagerFactory emf)
-    {
-        this.emf = emf;
     }
 
 }
