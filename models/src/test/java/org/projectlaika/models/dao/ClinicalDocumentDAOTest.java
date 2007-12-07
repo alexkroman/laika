@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
-@ContextConfiguration(locations={"spring.xml"})
+@ContextConfiguration(locations={"/spring.xml"})
 public class ClinicalDocumentDAOTest extends AbstractTransactionalJUnit4SpringContextTests
 {
     private ClinicalDocumentDAO clinicalDocumentDAO;
