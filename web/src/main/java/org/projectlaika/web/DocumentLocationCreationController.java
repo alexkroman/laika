@@ -1,12 +1,10 @@
 package org.projectlaika.web;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.servlet.http.HttpServletRequest;
 
 import org.projectlaika.models.DocumentLocation;
 import org.projectlaika.models.Namespace;
+import org.projectlaika.models.dao.DocumentLocationDAO;
 import org.projectlaika.web.util.LazyListHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,12 +21,12 @@ import org.springframework.web.servlet.mvc.SimpleFormController;
 @RequestMapping("/documentLocation/edit.lk")
 public class DocumentLocationCreationController extends SimpleFormController
 {
-    private EntityManagerFactory emf;
+    private DocumentLocationDAO documentLocationDAO;
     
     @Autowired
-    public DocumentLocationCreationController(EntityManagerFactory emf)
+    public DocumentLocationCreationController(DocumentLocationDAO documentLocationDAO)
     {
-        this.emf = emf;
+        this.documentLocationDAO = documentLocationDAO;
         setCommandClass(DocumentLocation.class);
         setCommandName("documentLocation");
         setFormView("documentLocation/create");
@@ -43,9 +41,7 @@ public class DocumentLocationCreationController extends SimpleFormController
         DocumentLocation dl = null;
         if (id != null)
         {
-            EntityManager em = emf.createEntityManager();
-            dl = em.find(DocumentLocation.class, id);
-            em.close();
+            dl = documentLocationDAO.find(Integer.parseInt(id));
         }
         else
         {
@@ -60,17 +56,15 @@ public class DocumentLocationCreationController extends SimpleFormController
     @Override
     protected void doSubmitAction(Object command) throws Exception
     {
-        EntityManager em = emf.createEntityManager();
         DocumentLocation dl = (DocumentLocation) command;
         LazyListHelper.removeDecoration(dl, "namespaces");
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
         if (dl.getId() != 0)
         {
-            dl = em.merge(dl);
+            documentLocationDAO.update(dl);
         }
-        em.persist(dl);
-        transaction.commit();
-        em.close();
+        else
+        {
+            documentLocationDAO.save(dl);
+        }
     }
 }

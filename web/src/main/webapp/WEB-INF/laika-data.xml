@@ -10,6 +10,8 @@
   <tx:annotation-driven/>
 
   <bean class="org.projectlaika.models.dao.ClinicalDocumentDAO"/>
+  <bean class="org.projectlaika.models.dao.DocumentLocationDAO"/>
+  
 
   <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
     <property name="driverClassName" value="org.apache.derby.jdbc.EmbeddedDriver" />
