@@ -60,6 +60,18 @@ public class ClinicalDocumentDAO
     {
         entityManager.persist(cd);
     }
+    
+    /**
+     * Updates the ClinicalDocument in the database
+     * @param cd
+     * @return
+     */
+    public ClinicalDocument update(ClinicalDocument cd)
+    {
+        ClinicalDocument mergedCd = entityManager.merge(cd);
+        entityManager.persist(cd);
+        return mergedCd;
+    }
 
     @PersistenceContext
     public void setEntityManager(EntityManager entityManager)

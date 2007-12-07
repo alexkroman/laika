@@ -80,5 +80,15 @@ public class ClinicalDocumentDAOTest extends AbstractTransactionalJUnit4SpringCo
         assertThat(savedCd.getXmlContent(), is(xmlDoc));
         assertThat(savedCd.getName(), is("Test Patient"));
     }
+    
+    @Test
+    public void testUpdate()
+    {
+        ClinicalDocument cd = clinicalDocumentDAO.find(5000);
+        cd.setName("A New Name");
+        clinicalDocumentDAO.save(cd);
+        ClinicalDocument renamedCd = clinicalDocumentDAO.find(5000);
+        assertThat(renamedCd.getName(), is("A New Name"));
+    }
 
 }
