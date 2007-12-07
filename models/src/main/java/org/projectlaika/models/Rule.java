@@ -5,7 +5,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -98,7 +100,7 @@ public class Rule implements Serializable
         return boundVariables;
     }
 
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     public void setBoundVariables(List<BoundVariable> boundVariables)
     {
         this.boundVariables = boundVariables;
