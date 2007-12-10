@@ -1,14 +1,14 @@
 package org.projectlaika.web;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Query;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
+import org.projectlaika.models.dao.TestScriptDAO;
 
 import org.projectlaika.models.BoundVariable;
 import org.projectlaika.models.ClinicalDocument;
@@ -16,20 +16,29 @@ import org.projectlaika.models.DocumentLocation;
 import org.projectlaika.models.Namespace;
 import org.projectlaika.models.Rule;
 import org.projectlaika.models.TestScript;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.AbstractController;
 
-public class TestScriptController extends AbstractController
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+public class TestScriptController 
 {
     private EntityManagerFactory emf;
+    private TestScriptDAO testScriptDAO;
     
-    @SuppressWarnings("unchecked")
-    @Override
-    protected ModelAndView handleRequestInternal(HttpServletRequest request,
-            HttpServletResponse response) throws Exception
-    {   	
-    	EntityManager em = emf.createEntityManager();
-        
+    @Autowired
+    public TestScriptController(EntityManagerFactory emf)
+    {
+        this.emf = emf;
+    }
+    
+    @RequestMapping("/testscript/view.lk")
+    public ModelMap view(@RequestParam(value="id") int id)
+    {
+    	/*EntityManager em = emf.createEntityManager();
     	EntityTransaction transaction = em.getTransaction();
         
         transaction.begin();
@@ -38,54 +47,49 @@ public class TestScriptController extends AbstractController
         transaction.commit();
         
         transaction.begin();
-    	DocumentLocation dlFirstName = new DocumentLocation(
-    		"Patient First Name",
-         	"/cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:name/cda:given/text()=$name");
-    	dlFirstName.addNamespace(namespace);
-    	dlFirstName.setDescription("The first name of the patient");
-        em.persist(dlFirstName);
+    	DocumentLocation dlPatientName = new DocumentLocation(
+    		"Patient Name",
+         	"/cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:name/cda:given/text()=$firstName&&/cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:name/cda:family/text()=$lastName");
+    	dlPatientName.addNamespace(namespace);
+    	dlPatientName.setDescription("The name of the patient");
+        em.persist(dlPatientName);
+        transaction.commit();
+       
+        transaction.begin();
+        BoundVariable bvFirstName = new BoundVariable("firstName", "Robert");
+        em.persist(bvFirstName);
         transaction.commit();
         
         transaction.begin();
-    	DocumentLocation dlLastName = new DocumentLocation(
-    		"Patient Last Name",
-         	"/cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:name/cda:family/text()=$name");
-    	dlLastName.addNamespace(namespace);
-    	dlLastName.setDescription("The last name of the patient");
-        em.persist(dlLastName);
+        BoundVariable bvLastName = new BoundVariable("lastName", "McCready");
+        em.persist(bvLastName);
         transaction.commit();
         
         transaction.begin();
-        Rule rFirstName = new Rule(dlFirstName, new BoundVariable("name", "Robert"));
-        rFirstName.setDifferentValueErrorMessage("Patient first name wasn't Robert");
-        rFirstName.setMissingValueErrorMessage("Patient first name not found");
-        em.persist(rFirstName);
+        List<BoundVariable> patientNameBoundVariables = new ArrayList<BoundVariable>();
+        patientNameBoundVariables.add(bvFirstName);
+        patientNameBoundVariables.add(bvLastName);
+        Rule rulePatientName = new Rule(dlPatientName, patientNameBoundVariables);
+        em.persist(rulePatientName);
         transaction.commit();
         
         transaction.begin();
-        Rule rLastName = new Rule(dlLastName, new BoundVariable("name", "McCready"));
-        rFirstName.setDifferentValueErrorMessage("Patient last name wasn't McCready");
-        rFirstName.setMissingValueErrorMessage("Patient last name not found");
-        em.persist(rFirstName);
+        TestScript testScriptTest = new TestScript();
+        testScriptTest.addRule(rulePatientName);
+        testScriptTest.setName("Laika demo test v 0.0.2");
+        em.persist(testScriptTest);
         transaction.commit();
         
-        transaction.begin();
-        TestScript testScript = new TestScript();
-        testScript.addRule(rFirstName);
-        testScript.addRule(rLastName);
-        testScript.setName("Laika demo test v 0.0.1");
-        em.persist(testScript);
-        transaction.commit();
-        
-        /*         
-    	String testScriptId = request.getParameter("id"); 
-        Query query = em.createQuery("select t from TestScript t where t.id = :id");
-        query.setParameter("id", new Integer(testScriptId));
-        TestScript testScript = (TestScript) query.getSingleResult();
-        List testScriptRules = testScriptOut.getRules();
+        em.close();*/
+
+    	TestScript testScript = testScriptDAO.find(id);
+    	
+    	/*System.out.println("Starting testing");
+    	List testScriptRules = testScript.getRules();
         for (Iterator it = testScriptRules.iterator();it.hasNext(); )
         {
         	Rule rule = (Rule) it.next();
+        	System.out.println("Got a rule");
         	DocumentLocation documentLocation = rule.getDocumentLocation();
         	System.out.println("DocumentLocation id: " + documentLocation.getId());
         	System.out.println("DocumentLocation name: " + documentLocation.getName());
@@ -97,11 +101,9 @@ public class TestScriptController extends AbstractController
         		System.out.println("BoundVariable name: " + boundVariable.getName());
         		System.out.println("BoundVariable expected value: " + boundVariable.getExpectedValue());
         	}
-        	
         }*/
-        em.close();
-        
-        return new ModelAndView("testscript/display", "testscript", testScript);
+    	
+    	return new ModelMap("testscript", testScript);
     }
 
     public void setEmf(EntityManagerFactory emf)
@@ -109,4 +111,10 @@ public class TestScriptController extends AbstractController
         this.emf = emf;
     }
 
+    @Autowired
+    public void setClinicalDocumentDAO(TestScriptDAO testScriptDAO)
+    {
+        this.testScriptDAO = testScriptDAO;
+    }
+    
 }
