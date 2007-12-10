@@ -18,7 +18,7 @@ import org.xml.sax.SAXException;
  * @author bobd
  *
  */
-public class XSDValidator implements org.projectlaika.validation.Validator
+public class XSDValidator  extends AbstractValidator
 {
 
     /**
@@ -27,7 +27,7 @@ public class XSDValidator implements org.projectlaika.validation.Validator
     private Schema schema;
 
     /**
-     * Set the schem 
+     * Set the schema
      * @param schemaFile  location of the schema file
      * @throws SAXException
      */
@@ -66,9 +66,9 @@ public class XSDValidator implements org.projectlaika.validation.Validator
      * (non-Javadoc)
      * @see org.projectlaika.validation.Validator#validate(org.projectlaika.validation.ValidationContext)
      */
-    public ValidationResult validate(ValidationContext context)
+    public void validate(ValidationContext context)
     {
-        ValidationResult res = new ValidationResult();
+        ValidationResult res = new ValidationResult(this.getId());
         try
         {
             Source source = new JDOMSource(context.getDocument());
@@ -79,14 +79,14 @@ public class XSDValidator implements org.projectlaika.validation.Validator
         catch (SAXException e)
         {
             res.setValid(false);
-            res.addError(e.getLocalizedMessage(),e);
+            res.addError("",e.getLocalizedMessage(),e);
         }
         catch (IOException e)
         {
-            res.addError(e.getLocalizedMessage(),e);
+            res.addError("",e.getLocalizedMessage(),e);
             res.setValid(false);
         }
-        return res;
+       context.add(res);
     }
 
 }

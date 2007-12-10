@@ -2,15 +2,28 @@ package org.projectlaika.validation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.jdom.Content;
+import org.jdom.Element;
+import org.jdom.Text;
+
 public class ValidationResult
 {
+    /**
+     * ID of the validator for the results
+     */
+    private String validatorId;
+    
+
+    
     /** 
      * Boolean used to tell if the validation is successful or not
+     * Set to true at first
      */
-    private boolean isValid;
+    private boolean isValid = true;
     
     /**
      * Validation properties that can be used by validators to convey additional information to the 
@@ -21,8 +34,29 @@ public class ValidationResult
     /**
      * List of errors that may have occurred during validation
      */
-    private List<Error> errors = new ArrayList<Error>();
+    private List<ValidationMsg> errors = new ArrayList<ValidationMsg>();
 
+    
+    private List<ValidationMsg> warnings = new ArrayList<ValidationMsg>();
+    /**
+     * Constructor
+     * @param id id of the validator the results are for
+     */
+    public ValidationResult(String id){
+        this.validatorId = id;
+       
+        
+    }
+    
+    /**
+     * Gett the id of the validator that the result is for
+     * @return
+     */
+    public String getValidatorId(){
+        return validatorId;
+    }
+    
+    
     /**
      * @return the isValid
      */
@@ -45,9 +79,9 @@ public class ValidationResult
      * @param msg the error msg
      * @param obj the error object
      */
-    public void addError(String msg, Object obj)
+    public void addError(String location, String msg, Object obj)
     {
-        Error e = new Error(msg,obj);
+        ValidationMsg e = new ValidationMsg(location,msg,obj);
         errors.add(e);
     }
     
@@ -55,33 +89,46 @@ public class ValidationResult
      * Add an error to the list
      * @param e the error
      */
-    public void addError(Error e)
+    public void addWarning(String location,String msg, Object obj)
     {
-        
-        errors.add(e);
+        ValidationMsg e = new ValidationMsg(location,msg,obj);
+        warnings.add(e);
     }    
 
     /**
-     * Set a validation property 
-     * @param prop property name
-     * @param value property value
+     * Get the list of Errors
+     * @return
      */
-    public void setProperty(String prop, Object value)
-    {
-        validationProperties.put(prop, value);
+    public List getErrors(){
+        return errors;
     }
+    
+    
+    /**
+     * Get the list of Errors
+     * @return
+     */
+    public List getWarnings(){
+        return warnings;
+    }
+    
+
+    
+    
+   
     
     /**
      * Simple wrapper class to store error information
      * @author bobd
      *
      */
-    public class Error{
+    public class ValidationMsg{
         String msg;
         Object errorObject;
-        public Error(String msg, Object errorObject)
+        String location;
+        public ValidationMsg(String location,String msg, Object errorObject)
         {
-            
+            this.location=location;
             this.msg = msg;
             this.errorObject = errorObject;
         }
@@ -107,12 +154,28 @@ public class ValidationResult
         {
             return errorObject;
         }
+        
         /**
          * @param errorObject the errorObject to set
          */
         public void setErrorObject(Object errorObject)
         {
             this.errorObject = errorObject;
+        }
+        
+        @Override
+        public String toString(){
+            return this.msg + ((errorObject == null)? "" :errorObject);
+        }
+
+        public String getLocation()
+        {
+            return location;
+        }
+
+        public void setLocation(String location)
+        {
+            this.location = location;
         }
        
     }

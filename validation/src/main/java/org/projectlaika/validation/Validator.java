@@ -7,11 +7,24 @@ package org.projectlaika.validation;
  */
 public interface Validator
 {
+    /**
+     * Get the assigned id of the validator
+     * @return
+     */
+    String getId();
 
+    
+    /**
+     * set the assigned id of the validator
+     * @param id
+     */
+    void setId(String id);
+    
+    
     /**
      * Validate the document in the given context
      * @param context  the document context to validate against
      * @return  the result of the validation
      */
-    ValidationResult validate(ValidationContext context);
+    void validate(ValidationContext context);
 }
