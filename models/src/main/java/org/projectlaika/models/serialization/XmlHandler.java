@@ -1,6 +1,6 @@
 package org.projectlaika.models.serialization;
 
-import java.io.InputStream;
+import java.io.Reader;
 import java.util.List;
 
 import org.projectlaika.models.DocumentLocation;
@@ -41,7 +41,7 @@ public class XmlHandler
      * @return
      */
     @SuppressWarnings("unchecked")
-    public static List<DocumentLocation> readDocumentLocations(InputStream xml)
+    public static List<DocumentLocation> readDocumentLocations(Reader xml)
     {
         return (List<DocumentLocation>) xstream.fromXML(xml);
     }

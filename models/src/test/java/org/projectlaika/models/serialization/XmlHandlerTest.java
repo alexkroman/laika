@@ -1,9 +1,9 @@
 package org.projectlaika.models.serialization;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.Reader;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +49,7 @@ public class XmlHandlerTest
     @Test
     public void testReadDocumentLocations() throws FileNotFoundException
     {
-        InputStream xmlStream = new FileInputStream("src/test/data/SampleDocumentLocationDump.xml");
+        Reader xmlStream = new FileReader("src/test/data/SampleDocumentLocationDump.xml");
         List<DocumentLocation> docs = XmlHandler.readDocumentLocations(xmlStream);
         assertThat(docs.get(0).getName(), is("Name"));
     }
