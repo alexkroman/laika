@@ -94,13 +94,14 @@ public class Rule implements Serializable
     {
         this.id = id;
     }
-
+    
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     public List<BoundVariable> getBoundVariables()
     {
         return boundVariables;
     }
 
-    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    
     public void setBoundVariables(List<BoundVariable> boundVariables)
     {
         this.boundVariables = boundVariables;
