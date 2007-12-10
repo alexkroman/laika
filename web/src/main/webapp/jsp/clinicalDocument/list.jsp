@@ -24,7 +24,7 @@
         
         <c:forEach var="doc" items="${clinicalDocumentList}">
             <div class="doc">
-                <h3><c:out value="${doc.name}"/><h3>
+                <h3><c:out value="${doc.name}"/></h3>
                 <ul class="docActions">
                     <li><a href="">View</a></li>
                     <li><a href="">Validate</a></li>
