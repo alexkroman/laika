@@ -11,6 +11,7 @@
 
   <bean class="org.projectlaika.models.dao.ClinicalDocumentDAO"/>
   <bean class="org.projectlaika.models.dao.DocumentLocationDAO"/>
+  <bean class="org.projectlaika.models.dao.TestScriptDAO"/>
   
 
   <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
