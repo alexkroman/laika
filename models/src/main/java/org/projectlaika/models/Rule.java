@@ -50,7 +50,7 @@ public class Rule implements Serializable
         this.boundVariables.add(boundVariable);
     }
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     public DocumentLocation getDocumentLocation()
     {
         return documentLocation;
