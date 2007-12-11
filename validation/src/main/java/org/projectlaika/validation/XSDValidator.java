@@ -15,10 +15,11 @@ import org.xml.sax.SAXException;
 
 /**
  * Validator which will validate a given document against an xml schema
+ * 
  * @author bobd
- *
+ * 
  */
-public class XSDValidator  extends AbstractValidator
+public class XSDValidator extends AbstractValidator
 {
 
     /**
@@ -28,7 +29,9 @@ public class XSDValidator  extends AbstractValidator
 
     /**
      * Set the schema
-     * @param schemaFile  location of the schema file
+     * 
+     * @param schemaFile
+     *            location of the schema file
      * @throws SAXException
      */
     public void setSchema(String schemaFile) throws SAXException
@@ -39,7 +42,9 @@ public class XSDValidator  extends AbstractValidator
 
     /**
      * Set the schema
-     * @param schema  the schema to set
+     * 
+     * @param schema
+     *            the schema to set
      */
     public void setSchema(Schema schema)
     {
@@ -47,8 +52,10 @@ public class XSDValidator  extends AbstractValidator
     }
 
     /**
-     * Set the schema 
-     * @param file  the schema file
+     * Set the schema
+     * 
+     * @param file
+     *            the schema file
      * @throws SAXException
      */
     public void setSchema(File file) throws SAXException
@@ -64,6 +71,7 @@ public class XSDValidator  extends AbstractValidator
 
     /*
      * (non-Javadoc)
+     * 
      * @see org.projectlaika.validation.Validator#validate(org.projectlaika.validation.ValidationContext)
      */
     public void validate(ValidationContext context)
@@ -79,14 +87,14 @@ public class XSDValidator  extends AbstractValidator
         catch (SAXException e)
         {
             res.setValid(false);
-            res.addError("",e.getLocalizedMessage(),e);
+            res.addError("", e.getLocalizedMessage(), e);
         }
         catch (IOException e)
         {
-            res.addError("",e.getLocalizedMessage(),e);
+            res.addError("", e.getLocalizedMessage(), e);
             res.setValid(false);
         }
-       context.add(res);
+        context.add(res);
     }
 
 }

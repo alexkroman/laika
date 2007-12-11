@@ -151,7 +151,7 @@ public class XSLTProcessor
      *             thrown if there is an error processing the stylesheet
      */
     public void setStyleSheet(InputStream in)
-            throws TransformerConfigurationException 
+            throws TransformerConfigurationException
     {
         Source source = new StreamSource(in);
         loadTemplates(source);
@@ -201,6 +201,5 @@ public class XSLTProcessor
     {
         styleSheet = transFact.newTemplates(source);
     }
-
 
 }
