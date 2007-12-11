@@ -11,23 +11,22 @@
 
   <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
     <property name="driverClassName" value="org.apache.derby.jdbc.EmbeddedDriver" />
-    <property name="url" value="jdbc:derby:target/db/laika-test-database;create=true" />
+    <property name="url" value="jdbc:derby:target/db/laika-test-database;create=true;traceFile=/Users/andrewg/trace.out;traceLevel=7" />
   </bean>
   
   <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
     <property name="dataSource" ref="dataSource"/>
     <property name="persistenceUnitName" value="laika"/>
     <property name="persistenceProvider">
-         <bean class="org.apache.openjpa.persistence.PersistenceProviderImpl"/>
+         <bean class="org.hibernate.ejb.HibernatePersistence"/>
     </property>
-    <property name="jpaDialect">
-          <bean class="org.springframework.orm.jpa.vendor.OpenJpaDialect"/>
-    </property>
-    <property name="jpaProperties">
-      <props>
-        <prop key="openjpa.jdbc.SynchronizeMappings">buildSchema</prop>
-        <prop key="openjpa.Log">DefaultLevel=INFO,SQL=TRACE</prop>
-      </props>
+    <property name="jpaVendorAdapter">
+        <bean
+        class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+           <property name="showSql" value="true" />
+           <property name="generateDdl" value="true" />
+           <property name="databasePlatform" value="org.hibernate.dialect.DerbyDialect" />
+        </bean>
     </property>
   </bean>
   

@@ -12,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import org.hibernate.annotations.IndexColumn;
+
 /**
  * Describes a specific location in a CDA/CCD/C32 document by an XPath expression. Allows the user
  * to provide a name for the location and a description as well.
@@ -102,6 +104,7 @@ public class DocumentLocation implements Serializable
     }
 
     @ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    @IndexColumn(name="prefix")
     public List<Namespace> getNamespaces()
     {
         return namespaces;

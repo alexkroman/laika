@@ -3,6 +3,7 @@ package org.projectlaika.models;
 import java.io.Serializable;
 
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -57,7 +58,7 @@ public class ClinicalDocument implements Serializable
     }
 
     @Lob
-    @Basic
+    @Column(columnDefinition="CLOB(1 M)")
     public String getXmlContent()
     {
         return xmlContent;

@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.IndexColumn;
+
 /**
  * Provides an expected value for a particular DocumentLocation. Also lets the user define error
  * messages for when the DocumentLocation does not exist, or is not the correct value.
@@ -96,6 +98,7 @@ public class Rule implements Serializable
     }
     
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    @IndexColumn(name="name")
     public List<BoundVariable> getBoundVariables()
     {
         return boundVariables;

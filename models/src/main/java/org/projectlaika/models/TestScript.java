@@ -12,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import org.hibernate.annotations.IndexColumn;
+
 /**
  * This class holds a list of Rules that are to be run against an
  * instance clinical document as part of a validation process.
@@ -72,6 +74,7 @@ public class TestScript implements Serializable
     }
 
     @ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    @IndexColumn(name="id")
     public List<Rule> getRules()
     {
         return rules;
