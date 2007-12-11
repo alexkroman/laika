@@ -3716,13 +3716,13 @@
       </xsl:choose>
       <xsl:apply-templates mode="M98"/>
    </xsl:template>
-   <xsl:template match="*[cda:templateId/@root=&#34;2.16.840.1.113883.10.20.1.31&#34;]/cda:value[*:type=&#34;PQ&#34;]"
+   <xsl:template match="*[cda:templateId/@root=&#34;2.16.840.1.113883.10.20.1.31&#34;]/cda:value[type=&#34;PQ&#34;]"
                  priority="3998"
                  mode="M98">
       <svrl:fired-rule xmlns:xs="http://www.w3.org/2001/XMLSchema"
                        xmlns:iso="http://purl.oclc.org/dsdl/schematron"
                        xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="*[cda:templateId/@root=&#34;2.16.840.1.113883.10.20.1.31&#34;]/cda:value[*:type=&#34;PQ&#34;]"/>
+                       context="*[cda:templateId/@root=&#34;2.16.840.1.113883.10.20.1.31&#34;]/cda:value[type=&#34;PQ&#34;]"/>
       <xsl:choose>
          <xsl:when test="@codeSystem='2.16.840.1.113883.6.8'"/>
          <xsl:otherwise>
