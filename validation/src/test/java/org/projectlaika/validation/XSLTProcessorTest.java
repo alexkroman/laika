@@ -27,26 +27,21 @@ import org.junit.Test;
 public class XSLTProcessorTest
 {
 
-
-
-
-     
     /**
      * Test method for
      * {@link org.projectlaika.validation.XSLTProcessor#SchematronValidator()}.
      */
-     @Test
+    @Test
     public void testSchematronValidator()
     {
         new XSLTProcessor();
     }
 
-   
     /**
      * Test method for
      * {@link org.projectlaika.validation.XSLTProcessor#setStyleSheet(java.lang.String)}.
      */
-     @Test
+    @Test
     public void testSetStylesheet()
     {
 
@@ -75,12 +70,11 @@ public class XSLTProcessorTest
         }
     }
 
-     
     /**
      * Test method for
      * {@link org.projectlaika.validation.XSLTProcessor#setStyleSheet(java.io.File)}.
      */
-     @Test
+    @Test
     public void testSetStyleSheetFile()
     {
         try
@@ -107,12 +101,11 @@ public class XSLTProcessorTest
         }
     }
 
-     
     /**
      * Test method for
      * {@link org.projectlaika.validation.XSLTProcessor#setStyleSheet(java.io.InputStream)}.
      */
-     @Test
+    @Test
     public void testSetStyleSheetInputStream()
     {
         try
@@ -144,26 +137,25 @@ public class XSLTProcessorTest
         }
     }
 
-     
     /**
      * Test method for
      * {@link org.projectlaika.validation.XSLTProcessor#setStyleSheet(javax.xml.transform.Source)}.
      */
-     @Test
+    @Test
     public void testSetStyleSheetSource()
     {
         // this should already be tested by the other methods
     }
 
-     
     /**
      * Test method for
      * {@link org.projectlaika.validation.XSLTProcessor#transform(javax.xml.transform.Source,
      * javax.xml.transform.Result)}.
      */
-     @Test
+    @Test
     public void testTransform()
-    {   StringWriter writer = new StringWriter();
+    {
+        StringWriter writer = new StringWriter();
         Result result = new StreamResult(writer);
         try
         {
@@ -187,7 +179,7 @@ public class XSLTProcessorTest
         }
         catch (TransformerException e)
         {
-            fail("transformer exception "+e);
+            fail("transformer exception " + e);
             e.printStackTrace();
         }
 
