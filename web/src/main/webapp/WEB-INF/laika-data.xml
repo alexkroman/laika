@@ -12,32 +12,30 @@
   <bean class="org.projectlaika.models.dao.ClinicalDocumentDAO"/>
   <bean class="org.projectlaika.models.dao.DocumentLocationDAO"/>
   <bean class="org.projectlaika.models.dao.TestScriptDAO"/>
-  
 
   <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
     <property name="driverClassName" value="org.apache.derby.jdbc.EmbeddedDriver" />
-    <property name="url" value="jdbc:derby:laika-db;create=true" />
+    <property name="url" value="jdbc:derby:laika-db;create=true"/>
   </bean>
 
   <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
     <property name="dataSource" ref="dataSource"/>
     <property name="persistenceUnitName" value="laika"/>
     <property name="persistenceProvider">
-         <bean class="org.apache.openjpa.persistence.PersistenceProviderImpl"/>
+         <bean class="org.hibernate.ejb.HibernatePersistence"/>
     </property>
-    <property name="jpaDialect">
-          <bean class="org.springframework.orm.jpa.vendor.OpenJpaDialect"/>
-    </property>
-    <property name="jpaProperties">
-      <props>
-        <prop key="openjpa.jdbc.SynchronizeMappings">buildSchema</prop>
-        <prop key="openjpa.Log">DefaultLevel=INFO,SQL=TRACE</prop>
-      </props>
+    <property name="jpaVendorAdapter">
+        <bean
+        class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+           <property name="showSql" value="true" />
+           <property name="generateDdl" value="true"/>
+           <property name="databasePlatform" value="org.hibernate.dialect.DerbyDialect"/>
+        </bean>
     </property>
   </bean>
 
   <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
-  <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+  <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
 
   <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
     <property name="entityManagerFactory" ref="entityManagerFactory"/>
