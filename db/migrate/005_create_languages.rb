@@ -4,8 +4,7 @@ class CreateLanguages < ActiveRecord::Migration
       t.string :language
       t.string :mode
       t.boolean :preference
-
-      t.timestamps
+      t.belongs_to :patient_data, :null => false
     end
   end
 
