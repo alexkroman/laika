@@ -1,1 +1,0 @@
-mvn -U jetty:run
