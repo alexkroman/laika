@@ -1,0 +1,2 @@
+module VendorTestPlansHelper
+end

@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  language: MyString
+  mode: MyString
+  preference: false
+
+two:
+  language: MyString
+  mode: MyString
+  preference: false

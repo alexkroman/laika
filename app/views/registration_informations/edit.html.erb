@@ -1,0 +1,127 @@
+<h1>Editing registration_information</h1>
+
+<%= error_messages_for :registration_information %>
+
+<% form_for(@registration_information) do |f| %>
+  <p>
+    <b>Person identifier</b><br />
+    <%= f.text_field :person_identifier %>
+  </p>
+
+  <p>
+    <b>Name prefix</b><br />
+    <%= f.text_field :name_prefix %>
+  </p>
+
+  <p>
+    <b>First name</b><br />
+    <%= f.text_field :first_name %>
+  </p>
+
+  <p>
+    <b>Last name</b><br />
+    <%= f.text_field :last_name %>
+  </p>
+
+  <p>
+    <b>Name suffix</b><br />
+    <%= f.text_field :name_suffix %>
+  </p>
+
+  <p>
+    <b>Birth date</b><br />
+    <%= f.date_select :birth_date %>
+  </p>
+
+  <p>
+    <b>Gender</b><br />
+    <%= f.text_field :gender %>
+  </p>
+
+  <p>
+    <b>Marital status</b><br />
+    <%= f.text_field :marital_status %>
+  </p>
+
+  <p>
+    <b>Religious affiliation</b><br />
+    <%= f.text_field :religious_affiliation %>
+  </p>
+
+  <p>
+    <b>Race</b><br />
+    <%= f.text_field :race %>
+  </p>
+
+  <p>
+    <b>Ethnicity</b><br />
+    <%= f.text_field :ethnicity %>
+  </p>
+
+  <p>
+    <b>Street address line one</b><br />
+    <%= f.text_field :street_address_line_one %>
+  </p>
+
+  <p>
+    <b>Street address line two</b><br />
+    <%= f.text_field :street_address_line_two %>
+  </p>
+
+  <p>
+    <b>City</b><br />
+    <%= f.text_field :city %>
+  </p>
+
+  <p>
+    <b>State</b><br />
+    <%= f.text_field :state %>
+  </p>
+
+  <p>
+    <b>Postal code</b><br />
+    <%= f.text_field :postal_code %>
+  </p>
+
+  <p>
+    <b>Country</b><br />
+    <%= f.text_field :country %>
+  </p>
+
+  <p>
+    <b>Home phone</b><br />
+    <%= f.text_field :home_phone %>
+  </p>
+
+  <p>
+    <b>Work phone</b><br />
+    <%= f.text_field :work_phone %>
+  </p>
+
+  <p>
+    <b>Mobile phone</b><br />
+    <%= f.text_field :mobile_phone %>
+  </p>
+
+  <p>
+    <b>Vacation home phone</b><br />
+    <%= f.text_field :vacation_home_phone %>
+  </p>
+
+  <p>
+    <b>Email</b><br />
+    <%= f.text_field :email %>
+  </p>
+
+  <p>
+    <b>Url</b><br />
+    <%= f.text_field :url %>
+  </p>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @registration_information %> |
+<%= link_to 'Back', registration_informations_path %>

@@ -1,0 +1,79 @@
+# This file is auto-generated from the current state of the database. Instead of editing this file, 
+# please use the migrations feature of ActiveRecord to incrementally modify your database, and
+# then regenerate this schema definition.
+#
+# Note that this schema.rb definition is the authoritative source for your database schema. If you need
+# to create the application database on another system, you should be using db:schema:load, not running
+# all the migrations from scratch. The latter is a flawed and unsustainable approach (the more migrations
+# you'll amass, the slower it'll run and the greater likelihood for issues).
+#
+# It's strongly recommended to check this file into your version control system.
+
+ActiveRecord::Schema.define(:version => 7) do
+
+  create_table "document_locations", :force => true do |t|
+    t.string "name",             :limit => 100
+    t.string "xpath_expression", :limit => 400
+    t.text   "description"
+    t.string "doc_type",         :limit => 10
+    t.string "section",          :limit => 30
+  end
+
+  create_table "languages", :force => true do |t|
+    t.string   "language"
+    t.string   "mode"
+    t.boolean  "preference"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "namespaces", :force => true do |t|
+    t.string  "prefix"
+    t.string  "uri"
+    t.integer "document_location_id", :null => false
+  end
+
+  create_table "patient_datas", :force => true do |t|
+    t.string  "name"
+    t.integer "vendor_test_plan_id"
+  end
+
+  create_table "registration_informations", :force => true do |t|
+    t.string  "person_identifier"
+    t.string  "name_prefix"
+    t.string  "first_name"
+    t.string  "last_name"
+    t.string  "name_suffix"
+    t.date    "birth_date"
+    t.string  "gender"
+    t.string  "marital_status"
+    t.string  "religious_affiliation"
+    t.string  "race"
+    t.string  "ethnicity"
+    t.string  "street_address_line_one"
+    t.string  "street_address_line_two"
+    t.string  "city"
+    t.string  "state"
+    t.string  "postal_code"
+    t.string  "country"
+    t.string  "home_phone"
+    t.string  "work_phone"
+    t.string  "mobile_phone"
+    t.string  "vacation_home_phone"
+    t.string  "email"
+    t.string  "url"
+    t.integer "patient_data_id",         :null => false
+  end
+
+  create_table "vendor_test_plans", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "vendors", :force => true do |t|
+    t.string   "display_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+end

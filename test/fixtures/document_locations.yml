@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  xpath_expression: MyString
+  description: MyText
+  doc_type: MyString
+
+two:
+  name: MyString
+  xpath_expression: MyString
+  description: MyText
+  doc_type: MyString

@@ -1,0 +1,64 @@
+<h1>Listing registration_informations</h1>
+
+<table>
+  <tr>
+    <th>Person identifier</th>
+    <th>Name prefix</th>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>Name suffix</th>
+    <th>Birth date</th>
+    <th>Gender</th>
+    <th>Marital status</th>
+    <th>Religious affiliation</th>
+    <th>Race</th>
+    <th>Ethnicity</th>
+    <th>Street address line one</th>
+    <th>Street address line two</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Postal code</th>
+    <th>Country</th>
+    <th>Home phone</th>
+    <th>Work phone</th>
+    <th>Mobile phone</th>
+    <th>Vacation home phone</th>
+    <th>Email</th>
+    <th>Url</th>
+  </tr>
+
+<% for registration_information in @registration_informations %>
+  <tr>
+    <td><%=h registration_information.person_identifier %></td>
+    <td><%=h registration_information.name_prefix %></td>
+    <td><%=h registration_information.first_name %></td>
+    <td><%=h registration_information.last_name %></td>
+    <td><%=h registration_information.name_suffix %></td>
+    <td><%=h registration_information.birth_date %></td>
+    <td><%=h registration_information.gender %></td>
+    <td><%=h registration_information.marital_status %></td>
+    <td><%=h registration_information.religious_affiliation %></td>
+    <td><%=h registration_information.race %></td>
+    <td><%=h registration_information.ethnicity %></td>
+    <td><%=h registration_information.street_address_line_one %></td>
+    <td><%=h registration_information.street_address_line_two %></td>
+    <td><%=h registration_information.city %></td>
+    <td><%=h registration_information.state %></td>
+    <td><%=h registration_information.postal_code %></td>
+    <td><%=h registration_information.country %></td>
+    <td><%=h registration_information.home_phone %></td>
+    <td><%=h registration_information.work_phone %></td>
+    <td><%=h registration_information.mobile_phone %></td>
+    <td><%=h registration_information.vacation_home_phone %></td>
+    <td><%=h registration_information.email %></td>
+    <td><%=h registration_information.url %></td>
+    <td><%= link_to 'Show', registration_information %></td>
+    <td><%= link_to 'Edit', edit_registration_information_path(registration_information) %></td>
+    <td><%= link_to 'Destroy', registration_information, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New registration_information', new_registration_information_path %>

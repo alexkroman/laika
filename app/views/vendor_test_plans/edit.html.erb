@@ -1,0 +1,12 @@
+<h1>Editing vendor_test_plan</h1>
+
+<%= error_messages_for :vendor_test_plan %>
+
+<% form_for(@vendor_test_plan) do |f| %>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @vendor_test_plan %> |
+<%= link_to 'Back', vendor_test_plans_path %>
