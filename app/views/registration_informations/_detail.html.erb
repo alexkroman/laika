@@ -1,5 +1,5 @@
 
-<% if person_information %>
+<% if registration_information %>
     <!-- Start Personal Information Module -->
     <div id="person">
     <table class="hitsp_c32_module_header">
@@ -199,6 +199,6 @@
   <% else -%>
       <p> There is no registration data for this test case...
           <%= link_to_remote 'Create some', :update => 'personInformationContainer', 
-                                     :url => {:controller => 'registration_infos', :action => 'new', :params => {:pd_id => patient_data.id}} %>
+                                     :url => {:controller => 'registration_informations', :action => 'new', :params => {:pd_id => patient_data.id}} %>
       </p>
   <% end -%>

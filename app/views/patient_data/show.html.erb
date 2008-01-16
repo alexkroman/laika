@@ -2,8 +2,8 @@
  <div id="content">
    <div class="column first span-16">
      <div id="personInformationContainer">
-         <%= render :partial => 'registration_infos/detail', :locals => {:registration_info  => @patient_data.registration_info
-                                                                         :patient_data => @patient_data} %>
+         <%= render :partial => 'registration_informations/detail', :locals => {:registration_information  => @patient_data.registration_information,
+                                                                                :patient_data => @patient_data} %>
      </div>
      
      <div id="language">
@@ -43,7 +43,7 @@
          </table>
          <c:forEach var="language" items="${patientData.languages}">
            <div id="language${language.id}">
-             <%-- Need this to ensure that the language gets passed to the included JSP --%>
+
              <c:set var="language" value="${language}" scope="request"/>
              <jsp:include page="languageView.jsp"/>
            </div>
