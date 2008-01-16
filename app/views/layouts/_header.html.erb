@@ -1,0 +1,36 @@
+    <!-- Start Menu -->
+    <div id="header">
+      
+      <ul>
+        <li><%= image_tag "/images/laika_logo.jpeg", :alt => "Laika Logo" %>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+        </li>
+        
+        <li><%= link_to_unless(current_page?(:controller => 'vendor_test_plans'), 'Tests', {:controller => 'vendor_test_plans'}) do |name|
+                  "<b>#{name}</b>"
+                end
+            %>
+        </li>
+        <li><%= link_to_unless(current_page?(:controller => 'patient_data'), 'C32 Templates', {:controller => 'patient_data'}) do |name|
+                  "<b>#{name}</b>"
+                end
+            %>
+        </li>                    <li><%= link_to_unless(current_page?(:controller => 'vendors'), 'Vendors', {:controller => 'vendors'}) do |name|
+                  "<b>#{name}</b>"
+                end
+            %>
+        </li>
+        <li><a href="#">Users</a></li>
+        <li>XDS Config</li>
+        <li><a href="#">FAQ</a> </li>
+        <li><a href="mailto:talk@projectlaika.org">Feedback</a></li>
+        <li><%= link_to 'Logout', :controller => 'home', :action => 'index' %></li>
+      </ul>
+    </div>
+    <!-- End Menu -->
