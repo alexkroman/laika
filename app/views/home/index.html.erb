@@ -1,0 +1,44 @@
+    <form name="Form1" method="post" action="Index.aspx" id="Form1">
+    <div id="login">
+        <div id="cap-top"></div>
+        <div id="cap-body">
+            <div id="branding">
+                <img id="imgLogo" src="images/welcome.png" style="" alt="Laika welcomes you!">  
+                Hey friend, please log in.
+                <hr class="login">
+            </div>
+            <div id="panelLogin">
+                <div style="padding-bottom:18px">
+                    <label>Email Address</label>
+                    <input name="txtLogin" id="txtLogin" class="textbox340" type="text">
+                </div>
+                <div style="padding-bottom:18px">
+                    <label>Password</label>
+                    <input name="txtPassword" id="txtPassword" class="textbox340" type="password">
+                </div>
+                
+                <p class="rememberme"><input type="checkbox" class="checkbox"><span style="color:#888888;">Remember me.</span></p>
+                
+                <div style="margin-left:295px;width:auto;">
+                    <a class="whitebutton" href="/web"><span>Cancel</span></a>
+                    
+                    <a class="bluebutton" href="<%= vendor_test_plans_path %>"><span>Login</span></a>
+                </div>
+                <div class="doggyhelp">
+                <div class="" style="text-align:right;font-size:11px;float:right;height:0px;position:relative;top:145px;left:37px;">
+                    Laika v0.1.2<br>
+                    <a href="http://projectlaika.org" target="_blank">Project Laika</a> | 
+                    <a href="http://www.cchit.org" target="_blank">CCHIT</a> | 
+                    <a href="http://www.mitre.org" target="_blank">MITRE</a>
+                </div>
+                    <img src="images/login_doggy.png" style="position:relative;top:11px;">
+                    <div style="float:left;width:160px; position:relative; top:-138px; left:58px; line-height:1.2em; font-size:11px;">Don't have an account?<br> No worries, <%= link_to 'create one now!', :action => 'new_account' %><a href="/web/newaccount.jsp"></div>
+                    <div style="float:left;position:relative; top:-95px; left:25px; font-size:11px;"><%= link_to 'Lost your password?', :action => 'forgot_password' %></div>
+                </div>
+            </div>
+                        
+        </div>
+        <div id="cap-bottom"></div>
+    </div><!-- END #login -->
+    </form>
+

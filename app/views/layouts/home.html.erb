@@ -1,0 +1,27 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <title>Welcome to Laika</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="Cache-Control" content="no-cache"><!-- no java_main.js so we don't check for idle state -->
+    <%= stylesheet_link_tag 'master' %>
+    <link rel="stylesheet" href="css/master.css" type="text/css" media="screen">    
+</head>
+
+<body class="login">
+
+<%= yield  %>
+
+    <script language="javascript" type="text/javascript">
+			document.getElementById('txtLogin').focus();
+			
+			if (screen.width < 1024)
+				alert("This application is best run in a screen resolution of 1024x768 or greater. You are running a smaller screen resolution.");
+				
+			var detect = navigator.userAgent.toLowerCase();
+			if ((detect.indexOf('mac') > 0) && (detect.indexOf('msie') > 0))
+				alert("This application on Macintosh is optimized for OS X and Safari/Firefox browsers only. Internet Explorer browser is not supported.");
+    </script>
+
+</body>
+</html>
