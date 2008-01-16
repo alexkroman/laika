@@ -1,2 +1,78 @@
-<h1>Home#new_account</h1>
-<p>Find me in app/views/home/new_account.html.erb</p>
+    <form name="Form1" method="post" action="Index.aspx" id="Form1">
+      
+	<div id="login">
+		<div id="cap-top"></div>
+		<div id="cap-body">
+			<div id="branding">
+				<img id="imgLogo" src="/images/laika.png" style="" alt="Laika">	
+	            <h1>Account Creation.</h1>
+				Let's start with the fundamentals.
+	            <hr class="login">
+	        </div>
+            <div id="panelLogin">
+				<div>
+					<ul class="register">
+<li>
+<label class="desc" for="email"><b>1.</b> Enter Your Email Address</label>
+<div>
+<input id="email" name="email" class="textbox340" value="" type="text">
+</div>
+
+<p>We will never sell or disclose your email address to third parties.</p>
+<span class="error"></span>
+</li>
+
+<li>
+<div class="left" style="float:left; width:233px;display:inline;">
+<label class="desc" for="password"><b>2.</b> Choose a Password</label>
+<input id="password" name="password" class="textbox340" style="width:207px" value="" type="password">
+<p>Must be at least 6 characters long.</p>
+</div>
+<div class="right" style="width:200px;display:inline;">
+<label class="desc" for="password1">Verify Password</label>
+<input id="password1" name="password1" class="textbox340" style="width:207px" value="" type="password">
+<div style="padding-bottom:28px;"></div>
+</div>
+<span class="error"></span>
+</li>
+
+<li>
+<label class="desc" for="wufooName"><b>3.</b> What company do you represent?</label>
+<div>
+<input id="wufooName" name="wufooName" class="textbox340" value="" type="text"> 
+</div>
+<span class="error"></span>
+</li>
+
+<li>
+<div style="padding-top:18px">
+<input id="newsletter" name="newsletter" class="field checkbox" value="1" type="checkbox">
+<label style="display:inline">Keep me updated about the Laika project.</label>
+</div>
+<div style="padding-bottom:18px">
+<input id="tos" name="tos" class="field checkbox" value="1" type="checkbox">
+<label style="display:inline">I agree to Laika's <a href="#">Terms of Service</a>.</label>
+</div>
+<span class="error"></span>
+</li>
+
+</ul>
+
+				</div>
+				
+	            <div style="margin:20px 0 0 225px;width:auto;">
+					<a class="whitebutton" href="/web/"><span>Cancel</span></a>
+					<a class="bluebutton" href="/web/vendorTestPlan/list.lk"><span>Create Account</span></a>
+				</div>
+				
+				<div class="doggyhelp">
+					<img src="/images/register_doggy.png">
+					<div style="float:left;position:relative; top:-99px; left:28px; font-size:11px;"><a>Why do I need to register?</a></div>
+				</div>
+				
+			</div>
+            			
+		</div>
+		<div id="cap-bottom"></div>
+	</div><!-- END #login -->
+    </form>
