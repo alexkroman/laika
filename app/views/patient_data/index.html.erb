@@ -1,2 +1,47 @@
-<h1>PatientData#index</h1>
-<p>Find me in app/views/patient_data/index.html.erb</p>
+<!-- Start Content -->
+<div id="patientDataList">
+
+  <div class="hitsp_c32_module_name">Create C32 Patient Template</div>
+  <form action="<%= url_for :action => 'create' %>">
+      <label for="name">Name</label>
+      <input name="name"/>  <input type="submit" value="Create"/>
+  </form>  
+  <br/>
+  
+  <table class="hitsp_module_list">
+    <caption>C32 Patient Templates</caption>
+    <!-- there is a known bug in IE 6 regarding sibling selectors
+         since we want the second column to look different than the first
+         we are going to work aroudn this bug by inserting a class on every other td
+    -->
+    <tbody>
+        <% for patient_data in @patient_data_list -%>
+        <tr>
+          <td width="200"><%= link_to patient_data.name, patient_data_url(:action => 'show', :id => patient_data.id)%></td>
+          <td width="120"><a href="#">Amit Travidi</a></td>
+          <td width="140">15.Dec.2007</td>
+          <td width="380">
+            <form action="<%= url_for :action => 'create_vendor_test_plan' %>">
+                    <input type="hidden" name="pd_id" value="<%= patient_data.id %>"/>
+                    <select name="vendor_id">
+                        <% for vendor in @vendors -%>
+                            <option value="<%= vendor.id %>"><%= vendor.display_name %></option>
+                        <% end -%>
+                    </select>
+                    <input type="submit" value="Assign"/>
+            </form>
+          </td>
+          <td width="40"><%= link_to 'Prose', patient_data_url(:action => 'patient_story', :id => patient_data.id)%></td>
+          <td width="40"><%= link_to 'XML', patient_data_url(:action => 'patient_xml', :id => patient_data.id)%></td>
+        </tr>
+        <% end -%>
+    </tbody>
+  </table>
+  
+</div>
+<!-- End Content -->
+
+<!-- Start Footer -->
+<div id="footer">
+</div>
+<!-- End Footer -->

@@ -1,0 +1,204 @@
+
+<% if person_information %>
+    <!-- Start Personal Information Module -->
+    <div id="person">
+    <table class="hitsp_c32_module_header">
+      <tbody>
+        <tr>
+          <td class="hitsp_c32_module_name">Person Information</td>
+          </td>
+          <td align="right">
+            <div id="personMenuBusy" style="display:none">
+              <%= image_tag 'progressBar.gif' %>
+            </div>
+            <div id="personMenu">
+              <span id="person_hide_span" >
+                <a href="javascript:hide_module('person');">Hide</a>
+              </span>
+              <span id="person_show_span" style="display:none" >
+                <a href="javascript:show_module('person');">Show</a>
+              </span>
+              <span id="person_edit_span" >
+                <%= link_to_remote 'Edit', :update => 'personInformationContainer', 
+                                           :url => edit_registration_information_path(registration_information) %>
+              </span>
+            </div> 
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div id="hitsp_32_person_info">
+      <table class="hitsp_c32_module">
+        <tbody>
+          <tr>
+            <td class="hitsp_c32_attribute_name">Person ID:</td>
+            <td colspan="3" class="hitsp_c32_attribute_value">
+              <div class="person_read_only">
+                <%=h registration_information.person_identifier %>
+              </div>
+            </td>
+          </tr>
+          </tr>
+          <tr>
+            <td class="hitsp_c32_attribute_name">First Name:</td>
+            <td class="hitsp_c32_attribute_value">
+              <div class="person_read_only">
+                <%=h registration_information.first_name %>
+              </div>
+            </td>
+            <td class="hitsp_c32_attribute_name">Prefix:</td>
+            <td class="hitsp_c32_attribute_value">
+              <div class="person_read_only">
+                <%=h registration_information.name_prefix %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="hitsp_c32_attribute_name">Last Name:</td>
+            <td class="hitsp_c32_attribute_value">
+              <div class="person_read_only">
+                <%=h registration_information.last_name %>
+              </div>
+            </td>
+            <td class="hitsp_c32_attribute_name">Suffix:</td>
+            <td class="hitsp_c32_attribute_value">
+              <div class="person_read_only">
+                <%=h registration_information.name_suffix %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="hitsp_c32_attribute_name">Date of Birth:</td>
+            <td class="hitsp_c32_attribute_value">
+              <div class="person_read_only">
+                <%=h registration_information.birth_date %>
+              </div>
+            </td>
+            <td class="hitsp_c32_attribute_name">Gender:</td>
+            <td class="hitsp_c32_attribute_value">
+              <div class="person_read_only">
+                <%=h registration_information.gender %>
+              </div>
+            </td>
+          <tr>
+            <td class="hitsp_c32_attribute_name">Marital Status:</td>
+            <td class="hitsp_c32_attribute_value">
+              <div class="person_read_only">
+                <%=h registration_information.marital_status %>
+              </div>
+            </td>
+            <td class="hitsp_c32_attribute_name">Religious Affiliation:</td>
+            <td class="hitsp_c32_attribute_value">
+              <div class="person_read_only">
+                <%=h registration_information.religious_affiliation %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="hitsp_c32_attribute_name">Race:</td>
+            <td class="hitsp_c32_attribute_value">
+              <div class="person_read_only">
+                <%=h registration_information.race %>
+              </div>
+            </td>
+            <td class="hitsp_c32_attribute_name">Ethnicity:</td>
+            <td class="hitsp_c32_attribute_value">
+              <div class="person_read_only">
+                <%=h registration_information.ethnicity %>
+              </div>
+            </td>
+          </tr><tr>
+            <td class="hitsp_c32_attribute_name">Street Address 1:</td>
+            <td class="hitsp_c32_attribute_value">
+              <div class="person_read_only">
+                <%=h registration_information.street_address_line_one %>
+              </div>
+            </td>
+            <td class="hitsp_c32_attribute_name">City:</td>
+            <td class="hitsp_c32_attribute_value">
+              <div class="person_read_only">
+                <%=h registration_information.city %>
+              </div>  
+            </td>
+          </tr>
+          <tr>
+            <td class="hitsp_c32_attribute_name">Street Address 2:</td>
+            <td class="hitsp_c32_attribute_value">
+              <div class="person_read_only">
+                <%=h registration_information.street_address_line_two %>
+              </div>
+            </td>
+            <td class="hitsp_c32_attribute_name">State:</td>
+            <td class="hitsp_c32_attribute_value">
+              <div class="person_read_only">
+                <%=h registration_information.state %>
+              </div>
+            </td>
+           </tr>
+          <tr>
+            <td class="hitsp_c32_attribute_name">Postal Code:</td>
+            <td class="hitsp_c32_attribute_value">
+              <div class="person_read_only">
+                <%=h registration_information.postal_code %>
+              </div>
+            </td>
+            <td class="hitsp_c32_attribute_name">Country:</td>
+            <td class="hitsp_c32_attribute_value">
+              <div class="person_read_only">
+                <%=h registration_information.country %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="hitsp_c32_attribute_name">Home Phone:</td>
+            <td class="hitsp_c32_attribute_value">
+              <div class="person_read_only">
+                <%=h registration_information.home_phone %>
+              </div>
+            </td>
+            <td class="hitsp_c32_attribute_name">Mobile Phone:</td>
+            <td class="hitsp_c32_attribute_value">
+              <div class="person_read_only">
+                <%=h registration_information.mobile_phone %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="hitsp_c32_attribute_name">Work Phone:</td>
+            <td class="hitsp_c32_attribute_value">
+              <div class="person_read_only">
+                <%=h registration_information.work_phone %>
+              </div>
+            </td>
+            <td class="hitsp_c32_attribute_name">Vacation Home Phone:</td>
+            <td class="hitsp_c32_attribute_value">
+              <div class="person_read_only">
+                <%=h registration_information.vacation_home_phone %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="hitsp_c32_attribute_name">Email:</td>
+            <td class="hitsp_c32_attribute_value">
+              <div class="person_read_only">
+                <%=h registration_information.email %>
+              </div>
+            </td>
+            <td class="hitsp_c32_attribute_name">URL:</td>
+            <td class="hitsp_c32_attribute_value">
+              <div class="person_read_only">
+                <%=h registration_information.url %>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+    <!-- End Personal Information Module -->
+  <% else -%>
+      <p> There is no registration data for this test case...
+          <%= link_to_remote 'Create some', :update => 'personInformationContainer', 
+                                     :url => {:controller => 'registration_infos', :action => 'new', :params => {:pd_id => patient_data.id}} %>
+      </p>
+  <% end -%>
