@@ -1,18 +1,65 @@
-<h1>Listing vendor_test_plans</h1>
+<!-- Start Content -->
+<div id="patientDataList">
+  <br/>
+  <table class="hitsp_module_list">
+    <caption>C32 Tests</caption>
+    <!-- there is a known bug in IE 6 regarding sibling selectors
+         since we want the second column to look different than the first
+         we are going to work aroudn this bug by inserting a class on every other td
+    -->
+    <tbody>
+      <tr valign="top">
+          <td width="40"><b>Status</b></td>  
+          <td width="120"><b>Vendor</b></td>
+          <td width="140"><b>C32 Template</b></td>
+          <td width="80"><b>Test Date</b></td>  
+          <td width="130"><b>Manual Test</b></td>
+          <td width="400"><b>Auomated Test</b></td>
+        </tr>
+        <% for vendor_test_plan in @vendor_test_plans %>
+        <tr valign="top">
+          <td>
+            <c:choose>
+              <c:when test="${vtp.clinicalDocument == null}"><img src="../images/gray_circle.jpg" alt="No test results yet"></c:when>
+              <c:otherwise><img src="../images/red_circle.jpg" alt="Failed"></c:otherwise>
+            </c:choose>
+          </td>  
+          <td><%= vendor_test_plan.vendor.display_name %></td>
+          <td><%= link_to vendor_test_plan.patient_data.name, patient_data_url(:action => 'show', :id => vendor_test_plan.patient_data.id)%></td>
+          <td>15.Dec.2007</td>  
+          <td>
+            <%= link_to 'Export Prose', patient_data_url(:action => 'patient_story', :id => vendor_test_plan.patient_data.id)%>
+            <br/>
+            <a href="#">Visual Verification</a><br/>
+          </td>
+          <td>
+            <%= link_to 'Export XML', patient_data_url(:action => 'patient_xml', :id => vendor_test_plan.patient_data.id) %>
+            <% if vendor_test_plan.clinical_document -%>
+                <%= link_to 'Automated XML Verification', :action => 'verify_clinical_document', :id => vendor_test_plan.id %>
+            <% else -%>
+                <br/>
+                <% form_for(ClinicalDocument.new, :url => {:actoin => 'attach_clinical_document'}, :html => { :multipart => true }) do |f| -%>
+                    <input type="hidden" id="clinical_document_vendor_test_plan_id" name="clinical_document[vendor_test_plan_id]" 
+                                value="<%= vendor_test_plan.id %>" />
+                    <label>Document Type &nbsp;&nbsp;&nbsp;&nbsp;
+                    <%= f.select :doc_type, ['CDA', 'CCD', 'C32'] %>
+                    </label>                                
+                    <label>Clinical Document            
+                    <%= f.file_field :uploaded_data %>
+                    </label>
+                    <%= submit_tag 'Attach' %>
+                <% end -%>
+            <% end -%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table> 
+</div>
+<!-- End Content -->
 
-<table>
-  <tr>
-  </tr>
+<!-- Start Footer -->
+<div id="footer">
+</div>
+<!-- End Footer -->
 
-<% for vendor_test_plan in @vendor_test_plans %>
-  <tr>
-    <td><%= link_to 'Show', vendor_test_plan %></td>
-    <td><%= link_to 'Edit', edit_vendor_test_plan_path(vendor_test_plan) %></td>
-    <td><%= link_to 'Destroy', vendor_test_plan, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New vendor_test_plan', new_vendor_test_plan_path %>

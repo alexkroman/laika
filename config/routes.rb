@@ -6,7 +6,11 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :registration_informations
 
   map.resources :document_locations
+  
+  map.patient_data "patient_data/:action/:id",
+                   :controller => 'patient_data'
 
+  map.root :controller => "home"
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
