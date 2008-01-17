@@ -2,10 +2,16 @@
 <div id="patientDataList">
 
   <div class="hitsp_c32_module_name">Create C32 Patient Template</div>
-  <form action="<%= url_for :action => 'create' %>">
+  <% form_for(PatientData.new) do |f| %>
+    <p>
       <label for="name">Name</label>
-      <input name="name"/>  <input type="submit" value="Create"/>
-  </form>  
+      <%= f.text_field :name %>
+    </p>
+
+    <p>
+      <%= f.submit "Create" %>
+    </p>
+  <% end %>
   <br/>
   
   <table class="hitsp_module_list">

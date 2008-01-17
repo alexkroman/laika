@@ -20,7 +20,8 @@
               </span>
               <span id="person_edit_span" >
                 <%= link_to_remote 'Edit', :update => 'personInformationContainer', 
-                                           :url => edit_registration_information_path(registration_information) %>
+                                           :url => edit_patient_data_registration_information_path(patient_data),
+                                           :method => 'get' %>
               </span>
             </div> 
           </td>
@@ -198,7 +199,7 @@
     <!-- End Personal Information Module -->
   <% else -%>
       <p> There is no registration data for this test case...
-          <%= link_to_remote 'Create some', :update => 'personInformationContainer', 
-                                     :url => {:controller => 'registration_informations', :action => 'new', :params => {:pd_id => patient_data.id}} %>
+          <%= link_to_remote 'Create some', :update => 'personInformationContainer',
+                                            :url => new_patient_data_registration_information_path(patient_data), :method => 'get' %>
       </p>
   <% end -%>

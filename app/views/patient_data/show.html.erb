@@ -2,7 +2,7 @@
  <div id="content">
    <div class="column first span-16">
      <div id="personInformationContainer">
-         <%= render :partial => 'registration_informations/detail', :locals => {:registration_information  => @patient_data.registration_information,
+         <%= render :partial => '/registration_information/show', :locals => {:registration_information  => @patient_data.registration_information,
                                                                                 :patient_data => @patient_data} %>
      </div>
      

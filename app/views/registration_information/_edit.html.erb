@@ -1,8 +1,8 @@
-<h1>New registration_information</h1>
+<h1>Editing registration_information</h1>
 
 <%= error_messages_for :registration_information %>
 
-<% form_for(@registration_information) do |f| %>
+<% remote_form_for([:patient_data, registration_information], :update => 'personInformationContainer') do |f| %>
   <p>
     <b>Person identifier</b><br />
     <%= f.text_field :person_identifier %>
@@ -119,8 +119,7 @@
   </p>
 
   <p>
-    <%= f.submit "Create" %>
+    <%= f.submit "Update" %>
   </p>
 <% end %>
 
-<%= link_to 'Back', registration_informations_path %>
