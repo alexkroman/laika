@@ -3,7 +3,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :vendors
 
-  map.resources :registration_informations
+  map.resources :patient_data, :has_one => :registration_information
 
   map.resources :document_locations
   
