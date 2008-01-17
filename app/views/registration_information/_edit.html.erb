@@ -1,125 +1,346 @@
-<h1>Editing registration_information</h1>
-
-<%= error_messages_for :registration_information %>
-
+<!-- Start Personal Information Module -->
 <% remote_form_for([:patient_data, registration_information], :update => 'personInformationContainer') do |f| %>
-  <p>
-    <b>Person identifier</b><br />
-    <%= f.text_field :person_identifier %>
-  </p>
-
-  <p>
-    <b>Name prefix</b><br />
-    <%= f.text_field :name_prefix %>
-  </p>
-
-  <p>
-    <b>First name</b><br />
-    <%= f.text_field :first_name %>
-  </p>
-
-  <p>
-    <b>Last name</b><br />
-    <%= f.text_field :last_name %>
-  </p>
-
-  <p>
-    <b>Name suffix</b><br />
-    <%= f.text_field :name_suffix %>
-  </p>
-
-  <p>
-    <b>Birth date</b><br />
-    <%= f.date_select :birth_date %>
-  </p>
-
-  <p>
-    <b>Gender</b><br />
-    <%= f.text_field :gender %>
-  </p>
-
-  <p>
-    <b>Marital status</b><br />
-    <%= f.text_field :marital_status %>
-  </p>
-
-  <p>
-    <b>Religious affiliation</b><br />
-    <%= f.text_field :religious_affiliation %>
-  </p>
-
-  <p>
-    <b>Race</b><br />
-    <%= f.text_field :race %>
-  </p>
-
-  <p>
-    <b>Ethnicity</b><br />
-    <%= f.text_field :ethnicity %>
-  </p>
-
-  <p>
-    <b>Street address line one</b><br />
-    <%= f.text_field :street_address_line_one %>
-  </p>
-
-  <p>
-    <b>Street address line two</b><br />
+<div id="person">
+<table class="hitsp_c32_module_header">
+  <tbody>
+    <tr>
+      <td class="hitsp_c32_module_name">Person Information</td>
+      <td align="right">
+        <%= f.submit "Save" %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div id="hitsp_32_person_info">
+  <table class="hitsp_c32_module">
+    <tbody>
+      <tr>
+        <td class="hitsp_c32_attribute_name">Person ID:</td>
+        <td colspan="3" class="hitsp_c32_attribute_value">
+          <div class="person_editable">
+            <%= f.text_field :person_identifier %>           
+          </div>
+        </td>
+      </tr>
+      </tr>
+      <tr>
+        <td class="hitsp_c32_attribute_name">First Name:</td>
+        <td class="hitsp_c32_attribute_value">
+          <div class="person_editable">
+            <%= f.text_field :first_name %>        
+          </div>
+        </td>
+        <td class="hitsp_c32_attribute_name">Prefix:</td>
+        <td class="hitsp_c32_attribute_value">
+          <div class="person_editable">
+            <%= f.text_field :name_prefix %> 
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="hitsp_c32_attribute_name">Last Name:</td>
+        <td class="hitsp_c32_attribute_value">
+          <div class="person_editable">
+            <%= f.text_field :last_name %>          
+          </div>
+        </td>
+        <td class="hitsp_c32_attribute_name">Suffix:</td>
+        <td class="hitsp_c32_attribute_value">
+          <div class="person_editable">
+            <%= f.text_field :name_suffix %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="hitsp_c32_attribute_name">Date of Birth:</td>
+        <td class="hitsp_c32_attribute_value">
+            <%= f.date_select :birth_date %>
+        </td>
+        <td class="hitsp_c32_attribute_name">Gender:</td>
+        <td class="hitsp_c32_attribute_value">
+          <div class="person_editable">
+            <%= f.select :gender, ['Male', 'Female'] %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="hitsp_c32_attribute_name">Marital Status:</td>
+        <td class="hitsp_c32_attribute_value">
+          <div class="person_editable">
+            <%= f.select :marital_status,
+              ["Single",
+              "Married",
+              "Divorced ",
+              "Never married",
+              "Divorced/annulled",
+              "Divorced/separated",
+              "Annulled",
+              "Widowed",
+              "Separated, NOS",
+              "Separated, legal",
+              "Separated, nonlegal",
+              "Temporary separation",
+              "Permanent separation",
+              "Consensual union",
+              "Unknown",
+              "Common Law",
+              "Domestic Partner",
+              "Registered Domestic Partner",
+              "Living together",
+              "Interlocutory",
+              "Other",
+              "Unreported"]
+            %> 
+          </div>
+        </td>
+        <td class="hitsp_c32_attribute_name">Religious Affiliation:</td>
+        <td class="hitsp_c32_attribute_value">
+          <div class="person_editable">
+            <%= f.select :religious_affiliation,
+             ["Advent Christian Church",
+             "Agnostic",
+             "Atheist",
+             "Bahai",
+             "Baptist",
+             "Bible Protestant",
+             "Buddhist",
+             "Catholic",
+             "Christian Science",
+             "Christian, Other",
+             "Church of God",
+             "Church of the Nazarene",
+             "Churches of Christ",
+             "Elim Fellowship",
+             "Episcopal",
+             "Friends",
+             "Hindu",
+             "Jain",
+             "Jehovah's Witness",
+             "Judaism",
+             "Lutheran",
+             "Mennonite",
+             "Methoodist",
+             "Missionary",
+             "Muslim",
+             "Native American",
+             "Greek Orthodox",
+             "Pentecostal",
+             "Presbyterian",
+             "Protestant",
+             "Salvation Army",
+             "Shintoist",
+             "Sikh",
+             "Spiritist",
+             "Unitarian",
+             "Unknown"] %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="hitsp_c32_attribute_name">Race:</td>
+        <td class="hitsp_c32_attribute_value">
+          <div class="person_editable">
+          <%= f.select :race,
+              ["American Indian/Alaska",
+              "Asian",
+              "Black",
+              "Hawaiian/Pacific Islander",
+              "White",
+              "Other"] %>
+          </div>
+        </td>
+        <td class="hitsp_c32_attribute_name">Ethnicity:</td>
+        <td class="hitsp_c32_attribute_value">
+          <div class="person_editable">
+            <%= f.select :ethnicity, 
+              ["Hispanic/Latino",
+              "Spaniard",
+              "Andalusian",
+              "Asturian",
+              "Castillian",
+              "Catalonian",
+              "Belearic Islander",
+              "Gallego",
+              "Valencian",
+              "Canarian",
+              "Spanish Basque",
+              "Mexican",
+              "Mexican American",
+              "Mexicano",
+              "Chicano",
+              "La Raza",
+              "Mexican American Indiand",
+              "Central American",
+              "Costa Rican",
+              "Guatemalan",
+              "Honduran",
+              "Nicaraguan",
+              "Panamanian",
+              "Salvadoran",
+              "Central American Indian",
+              "South American",
+              "Argentinean",
+              "Bolivian",
+              "Chilean",
+              "Colombian",
+              "Ecuadorian",
+              "Paraguayan",
+              "Peruvian",
+              "Uruguayan",
+              "Venezuelan",
+              "South American Indian",
+              "Criollo",
+              "Latin American",
+              "Puerto Rican",
+              "Cuban",
+              "Dominican"] %>
+          </div>
+        </td>
+      </tr><tr>
+        <td class="hitsp_c32_attribute_name">Street Address 1:</td>
+        <td class="hitsp_c32_attribute_value">
+          <div class="person_editable">
+            <%= f.text_field :street_address_line_one %>
+          </div>
+        </td>
+        <td class="hitsp_c32_attribute_name">City:</td>
+        <td class="hitsp_c32_attribute_value">
+          <div class="person_editable">
+              <%= f.text_field :city %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="hitsp_c32_attribute_name">Street Address 2:</td>
+        <td class="hitsp_c32_attribute_value">
+          <div class="person_editable">
     <%= f.text_field :street_address_line_two %>
-  </p>
-
-  <p>
-    <b>City</b><br />
-    <%= f.text_field :city %>
-  </p>
-
-  <p>
-    <b>State</b><br />
-    <%= f.text_field :state %>
-  </p>
-
-  <p>
-    <b>Postal code</b><br />
-    <%= f.text_field :postal_code %>
-  </p>
-
-  <p>
-    <b>Country</b><br />
-    <%= f.text_field :country %>
-  </p>
-
-  <p>
-    <b>Home phone</b><br />
-    <%= f.text_field :home_phone %>
-  </p>
-
-  <p>
-    <b>Work phone</b><br />
-    <%= f.text_field :work_phone %>
-  </p>
-
-  <p>
-    <b>Mobile phone</b><br />
-    <%= f.text_field :mobile_phone %>
-  </p>
-
-  <p>
-    <b>Vacation home phone</b><br />
-    <%= f.text_field :vacation_home_phone %>
-  </p>
-
-  <p>
-    <b>Email</b><br />
-    <%= f.text_field :email %>
-  </p>
-
-  <p>
-    <b>Url</b><br />
-    <%= f.text_field :url %>
-  </p>
-
-  <p>
-    <%= f.submit "Update" %>
-  </p>
+          </div>
+        </td>
+        <td class="hitsp_c32_attribute_name">State:</td>
+        <td class="hitsp_c32_attribute_value">
+          <div class="person_editable">
+    <%= f.select :state, 
+              ["AK",
+              "AL",
+              "AR",
+              "AS",
+              "AZ",
+              "CA",
+              "CO",
+              "CT",
+              "DC",
+              "DE",
+              "FL",
+              "FM",
+              "GA",
+              "GU",
+              "HI",
+              "IA",
+              "ID",
+              "IL",
+              "IN",
+              "KS",
+              "KY",
+              "LA",
+              "MA",
+              "MD",
+              "ME",
+              "MH",
+              "MI",
+              "MN",
+              "MO",
+              "MS",
+              "MT",
+              "NC",
+              "NE",
+              "NJ",
+              "NH",
+              "NM",
+              "NV",
+              "NY",
+              "ND",
+              "OH",
+              "OK",
+              "OR",
+              "PA",
+              "PW",
+              "PR",
+              "RI",
+              "SC",
+              "SD",
+              "TN",
+              "TX",
+              "UT",
+              "VI",
+              "VT",
+              "VA",
+              "WA",
+              "WI",
+              "WV",
+              "WY"] %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="hitsp_c32_attribute_name">Postal Code:</td>
+        <td class="hitsp_c32_attribute_value">
+          <div class="person_editable">
+            <%= f.text_field :postal_code %>
+          </div>
+        </td>
+        <td class="hitsp_c32_attribute_name">Country:</td>
+        <td class="hitsp_c32_attribute_value">
+          <div class="person_editable">
+            <%= f.text_field :country %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="hitsp_c32_attribute_name">Home Phone:</td>
+        <td class="hitsp_c32_attribute_value">
+          <div class="person_editable">
+            <%= f.text_field :home_phone %>
+          </div>
+        </td>
+        <td class="hitsp_c32_attribute_name">Mobile Phone:</td>
+        <td class="hitsp_c32_attribute_value">
+          <div class="person_editable">
+            <%= f.text_field :mobile_phone %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="hitsp_c32_attribute_name">Work Phone:</td>
+        <td class="hitsp_c32_attribute_value">
+          <div class="person_editable">
+            <%= f.text_field :work_phone %>
+          </div>
+        </td>
+        <td class="hitsp_c32_attribute_name">Vacation Home Phone:</td>
+        <td class="hitsp_c32_attribute_value">
+          <div class="person_editable">
+            <%= f.text_field :vacation_home_phone %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="hitsp_c32_attribute_name">Email:</td>
+        <td class="hitsp_c32_attribute_value">
+          <div class="person_editable">
+            <%= f.text_field :email %>
+          </div>
+        </td>
+        <td class="hitsp_c32_attribute_name">URL:</td>
+        <td class="hitsp_c32_attribute_value">
+          <div class="person_editable">
+            <%= f.text_field :url %>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+<!-- End Personal Information Module -->
 <% end %>
-
