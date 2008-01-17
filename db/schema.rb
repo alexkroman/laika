@@ -9,7 +9,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 7) do
+ActiveRecord::Schema.define(:version => 8) do
+
+  create_table "clinical_documents", :force => true do |t|
+    t.integer "size"
+    t.string  "content_type"
+    t.string  "filename"
+    t.string  "doc_type"
+    t.integer "vendor_test_plan_id"
+  end
 
   create_table "document_locations", :force => true do |t|
     t.string "name",             :limit => 100
@@ -20,11 +28,10 @@ ActiveRecord::Schema.define(:version => 7) do
   end
 
   create_table "languages", :force => true do |t|
-    t.string   "language"
-    t.string   "mode"
-    t.boolean  "preference"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string  "language"
+    t.string  "mode"
+    t.boolean "preference"
+    t.integer "patient_data_id", :null => false
   end
 
   create_table "namespaces", :force => true do |t|
@@ -33,12 +40,12 @@ ActiveRecord::Schema.define(:version => 7) do
     t.integer "document_location_id", :null => false
   end
 
-  create_table "patient_datas", :force => true do |t|
+  create_table "patient_data", :force => true do |t|
     t.string  "name"
     t.integer "vendor_test_plan_id"
   end
 
-  create_table "registration_informations", :force => true do |t|
+  create_table "registration_information", :force => true do |t|
     t.string  "person_identifier"
     t.string  "name_prefix"
     t.string  "first_name"
@@ -66,14 +73,13 @@ ActiveRecord::Schema.define(:version => 7) do
   end
 
   create_table "vendor_test_plans", :force => true do |t|
+    t.integer  "vendor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "vendors", :force => true do |t|
-    t.string   "display_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string "display_name"
   end
 
 end
