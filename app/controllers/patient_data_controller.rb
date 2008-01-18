@@ -6,10 +6,9 @@ class PatientDataController < ApplicationController
   end
 
   def create
-    patient_data = PatientData.new
-    patient_data.name = params[:name]
-    patient_data.save!
-    redirect_to :action => 'show', :id => patient_data.id
+    @patient_data = PatientData.new(params[:patient_data])
+    @patient_data.save!
+    redirect_to :controller => 'patient_data', :action => 'show', :id => @patient_data.id
   end
   
   def create_vendor_test_plan
