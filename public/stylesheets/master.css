@@ -209,5 +209,33 @@ hr.login {
 	margin: 0 0 1.4em;
 }
 
+input.create-account-btn {
+    float:right;
+    clear:both;
+    width:155px;
+    height:30px;
+    padding: 0px 0 0;
+    margin: 0;
+    border: 0;
+    background: transparent url(/images/create_account.png) no-repeat center top;
+    overflow: hidden;
+    cursor: pointer; /* hand-shaped cursor */
+    cursor: hand; /* for IE 5.x */
+}
+
+input.login-account-btn {
+    float:right;
+    clear:both;
+    width:85px;
+    height:31px;
+    padding: 0px 0 0;
+    margin: 0;
+    border: 0;
+    background: transparent url(/images/login_landing.png) no-repeat center top;
+    overflow: hidden;
+    cursor: pointer; /* hand-shaped cursor */
+    cursor: hand; /* for IE 5.x */
+}
+
 /* @end */
 

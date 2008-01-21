@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 8) do
+ActiveRecord::Schema.define(:version => 999) do
 
   create_table "clinical_documents", :force => true do |t|
     t.integer "size"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(:version => 8) do
     t.integer "vendor_test_plan_id"
   end
 
-  create_table "registration_information", :force => true do |t|
+  create_table "registration_informations", :force => true do |t|
     t.string  "person_identifier"
     t.string  "name_prefix"
     t.string  "first_name"
@@ -70,6 +70,25 @@ ActiveRecord::Schema.define(:version => 8) do
     t.string  "email"
     t.string  "url"
     t.integer "patient_data_id",         :null => false
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string "name"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "email"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "crypted_password",          :limit => 40
+    t.string   "salt",                      :limit => 40
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "remember_token"
+    t.datetime "remember_token_expires_at"
+    t.boolean  "terms_of_service"
+    t.boolean  "send_updates"
+    t.integer  "role_id"
   end
 
   create_table "vendor_test_plans", :force => true do |t|

@@ -1,0 +1,83 @@
+<%= error_messages_for :user %>
+
+<% form_for :user do |f| -%>
+      
+    <div id="login">
+        <div id="cap-top"></div>
+        <div id="cap-body">
+            <div id="branding">
+                <img id="imgLogo" src="/images/laika.png" style="" alt="Laika"> 
+                <h1>Account Creation.</h1>
+                Let's start with the fundamentals.
+                <hr class="login">
+            </div>
+            <div id="panelLogin">
+                <div>
+                    <ul class="register">
+<li>
+<label class="desc" for="email"><b>1.</b>What's Your Email Address*</label>
+<div>
+<%= f.text_field :email %>
+</div>
+<p>*We will never ever sell or disclose your email address to third parties.</p>
+</li>
+
+
+<li>
+<label class="desc" for="email"><b>2.</b>Your First Name?</label>
+<div>
+<%= f.text_field :first_name %>
+</div>
+<br/>
+</li>
+
+<li>
+<label class="desc" for="email"><b>3.</b>Your Last Name?</label>
+<div>
+<%= f.text_field :last_name %>
+</div>
+<br/>
+</li>
+
+<li>
+<div class="left" style="float:left; width:233px;display:inline;">
+<label class="desc" for="password"><b>4.</b> Choose a Password</label>
+<%= f.password_field :password %>
+<p>Must be at least 6 characters long.</p>
+</div>
+<div class="right" style="width:200px;display:inline;">
+<label class="desc" for="password1">Verify Password</label>
+<%= f.password_field :password_confirmation %>
+<div style="padding-bottom:28px;"></div>
+</div>
+</li>
+
+<li>
+<div style="padding-top:18px">
+<%= f.check_box :send_updates %>
+<label style="display:inline">Keep me updated about the Laika project.</label>
+</div>
+<div style="padding-bottom:18px">
+<%= f.check_box :terms_of_service %>
+<label style="display:inline">I agree to Laika's <a href="#">Terms of Service</a>.</label>
+</div>
+<span class="error"></span>
+</li>
+
+</ul>
+
+                </div>
+                
+                <div style="margin:20px 0 0 20px;"><img src="/images/register_doggy.png">
+                    <div style="float:left;position:relative; top:-159px; left:28px; font-size:11px;"><a>Why do I need to register?</a></div>
+                    <a href="/vendor_test_plans/"><img src="/images/cancel_account.png"></a>
+                    <input type="image" value="Create Laika Account"  src="/images/create_account.png" />
+                    <input class="create-account-btn" name="commit" type="submit" value="Create Laika Account" style="display:none" />
+                </div>
+            </div>
+                        
+        </div>
+        <div id="cap-bottom"></div>
+    </div><!-- END #login -->
+    
+<% end -%>

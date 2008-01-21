@@ -7,9 +7,6 @@
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
         </li>
         
         <li><%= link_to_unless(current_page?(:controller => 'vendor_test_plans'), 'Tests', {:controller => 'vendor_test_plans'}) do |name|
@@ -27,10 +24,10 @@
             %>
         </li>
         <li><a href="#">Users</a></li>
-        <li>XDS Config</li>
         <li><a href="#">FAQ</a> </li>
         <li><a href="mailto:talk@projectlaika.org">Feedback</a></li>
-        <li><%= link_to 'Logout', :controller => 'home', :action => 'index' %></li>
+        <li><%= link_to 'Logout', :controller => 'account', :action => 'logout' %></li>
+        <li>Welcome, <%= self.current_user.first_name %></li>
       </ul>
     </div>
     <!-- End Menu -->

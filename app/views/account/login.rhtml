@@ -1,0 +1,51 @@
+    <% form_tag do -%>
+    <div id="login">
+        <div id="cap-top"></div>
+        <div id="cap-body">
+            <div id="branding">
+                <img id="imgLogo" src="/images/welcome.png" style="" alt="Laika welcomes you!">  
+                Hey friend, please log in.
+                <hr class="login">
+            </div>
+            <div id="panelLogin">
+                <div style="padding-bottom:18px">
+                    <label>Email Address</label>
+                    <%= text_field_tag 'email' %>
+                </div>
+                <div style="padding-bottom:18px">
+                    <label>Password</label>
+                    <%= password_field_tag 'password'  %>
+                </div>
+                
+                <p class="rememberme"><%= check_box_tag 'remember_me' %><span style="color:#888888;">Remember me.</span></p>
+                
+                <div style="margin-left:295px;width:auto;">
+                    <a href="/vendor_test_plans/"><img src="/images/cancel_account.png"></a>
+                    <input type="image" value="Login to Laika"  src="/images/login_landing.png" />
+                    <input class="login-account-btn" name="commit" type="submit" value="Create Laika Account" style="display:none" />
+                </div>
+                
+                <div class="doggyhelp">
+                <div class="" style="text-align:right;font-size:11px;float:right;height:0px;position:relative;top:145px;left:37px;">
+                    Laika v<%= ApplicationController::VERSION_NUMBER %><br>
+                    <a href="http://projectlaika.org" target="_blank">Project Laika</a> | 
+                    <a href="http://www.cchit.org" target="_blank">CCHIT</a> | 
+                    <a href="http://www.mitre.org" target="_blank">MITRE</a>
+                </div>
+                    <% if flash[:notice] != nil && flash[:notice].length >= 0 %>
+                      <img src="/images/login_doggy_two.png" style="position:relative;top:11px;">
+                      <div style="float:left;width:160px; position:relative; top:-144px; left:58px; line-height:1.2em; font-size:11px;">
+                      <%= flash[:notice] %>
+                      </div>
+                      <div style="float:left;position:relative; top:-108px; left:25px; font-size:11px;"><%= link_to 'Lost your password?', :action => 'forgot_password' %></div>
+                    <% else %>
+                      <img src="/images/login_doggy.png" style="position:relative;top:11px;">
+                      <div style="float:left;width:160px; position:relative; top:-138px; left:58px; line-height:1.2em; font-size:11px;">Don't have an account?<br> No worries, <%= link_to 'create one now!', :action => 'signup' %></div>
+                    <% end %>
+                </div>
+            </div>
+                        
+        </div>
+        <div id="cap-bottom"></div>
+    </div><!-- END #login -->
+    <% end -%>
