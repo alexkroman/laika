@@ -29,6 +29,6 @@ class CreateRegistrationInformations < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :registration_information
+    drop_table :registration_informations
   end
 end
