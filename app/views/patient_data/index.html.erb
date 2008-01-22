@@ -23,7 +23,7 @@
     <tbody>
         <% for patient_data in @patient_data_list -%>
         <tr>
-          <td width="200"><%= link_to patient_data.name, :controller => 'patient_data', :action => 'show', :id => patient_data.id %></td>
+          <td width="200"><%= link_to patient_data.name, patient_data_instance_url(patient_data) %></td>
           <td width="120"><a href="#">Amit Travidi</a></td>
           <td width="140">15.Dec.2007</td>
           <td width="380">
@@ -37,8 +37,8 @@
                     <input type="submit" value="Assign"/>
             </form>
           </td>
-          <td width="40"><%= link_to 'Prose', patient_data_url(:action => 'patient_story', :id => patient_data.id)%></td>
-          <td width="40"><%= link_to 'XML', patient_data_url(:action => 'patient_xml', :id => patient_data.id)%></td>
+          <td width="40"><%= link_to 'Prose', patient_data_instance_url(patient_data)%></td>
+          <td width="40"><%= link_to 'XML', patient_data_instance_url(patient_data)%></td>
         </tr>
         <% end -%>
     </tbody>

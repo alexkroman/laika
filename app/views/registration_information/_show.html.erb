@@ -20,7 +20,7 @@
               </span>
               <span id="person_edit_span" >
                 <%= link_to_remote 'Edit', :update => 'personInformationContainer', 
-                                           :url => edit_patient_data_registration_information_path(patient_data),
+                                           :url => edit_patient_data_instance_registration_information_path(patient_data),
                                            :method => 'get' %>
               </span>
             </div> 
@@ -200,6 +200,6 @@
   <% else -%>
       <p> There is no registration data for this test case...
           <%= link_to_remote 'Create some', :update => 'personInformationContainer',
-                                            :url => new_patient_data_registration_information_path(patient_data), :method => 'get' %>
+                                            :url => new_patient_data_instance_registration_information_path(patient_data), :method => 'get' %>
       </p>
   <% end -%>

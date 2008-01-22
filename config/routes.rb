@@ -3,12 +3,9 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :vendors
 
-  map.resources :patient_data, :has_one => :registration_information
+  map.resources :patient_data, :has_one => :registration_information, :singular => :patient_data_instance
 
   map.resources :document_locations
-  
-  map.patient_data "patient_data/:action/:id",
-                   :controller => 'patient_data'
 
   map.root :controller => "home"
   # The priority is based upon order of creation: first created -> highest priority.
