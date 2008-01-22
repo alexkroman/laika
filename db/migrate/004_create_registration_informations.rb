@@ -1,6 +1,6 @@
 class CreateRegistrationInformations < ActiveRecord::Migration
   def self.up
-    create_table :registration_informations do |t|
+    create_table :registration_information do |t|
       t.string :person_identifier
       t.string :name_prefix
       t.string :first_name
@@ -29,6 +29,6 @@ class CreateRegistrationInformations < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :registration_informations
+    drop_table :registration_information
   end
 end
