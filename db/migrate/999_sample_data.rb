@@ -25,10 +25,10 @@ class SampleData < ActiveRecord::Migration
     administratorRole.save!
     
     # Test users for Laika
-    laikaUser = User.new(
-      :email => 'laika@mitre.org',
-      :first_name => 'Laika',
-      :last_name => 'DaDog',
+    laikaUserMcCready = User.new(
+      :email => 'rmccready@mitre.org',
+      :first_name => 'Rob',
+      :last_name => 'McCready',
       :password => 'laika',
       :password_confirmation => 'laika',
       :created_at => Time.now,
@@ -36,7 +36,13 @@ class SampleData < ActiveRecord::Migration
       :terms_of_service => true,
       :send_updates => true
     )
-    laikaUser.save!
+    laikaUserMcCready.save!
+    
+    laikaUserMcCready.roles << administratorRole
+    laikaUserMcCready.roles << jurorRole
+    laikaUserMcCready.roles << proctorRole
+    laikaUserMcCready.roles << administratorRole
+    
   end  
    
   def self.down

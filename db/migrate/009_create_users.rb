@@ -13,6 +13,7 @@ class CreateUsers < ActiveRecord::Migration
       t.column :terms_of_service,          :boolean
       t.column :send_updates,              :boolean
       t.column :role_id,                   :integer
+      t.column :password_reset_code,       :string, :limit => 40
     end
   end
 

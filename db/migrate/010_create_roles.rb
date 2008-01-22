@@ -6,6 +6,6 @@ class CreateRoles < ActiveRecord::Migration
   end
 
   def self.down
-    #drop_table "roles"
+    drop_table "roles"
   end
 end

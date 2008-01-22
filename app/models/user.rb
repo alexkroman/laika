@@ -1,8 +1,6 @@
 require 'digest/sha1'
 class User < ActiveRecord::Base
   
-  has_one :role
-  
   # Virtual attribute for the unencrypted password
   attr_accessor :password
 
@@ -16,8 +14,12 @@ class User < ActiveRecord::Base
   validates_length_of       :password, :within => 5..40, :if => :password_required?
   validates_confirmation_of :password,                   :if => :password_required?
   validates_uniqueness_of   :email, :case_sensitive => false
+  validates_format_of       :email, :with => /(^([^@\s]+)@((?:[-_a-z0-9]+\.)+[a-z]{2,})$)|(^$)/i
   validates_presence_of     :terms_of_service
   before_save :encrypt_password
+
+  has_many :roles, :through => :user_roles
+  has_many :user_roles, :dependent => :destroy
 
   # Authenticates a user by their email name and unencrypted password.  Returns the user or nil.
   def self.authenticate(email, password)
@@ -55,7 +57,27 @@ class User < ActiveRecord::Base
     self.remember_token            = nil
     save(false)
   end
+  
+  def forgot_password
+    @forgotten_password = true
+    self.make_password_reset_code
+  end
+  
+  def reset_password
+    # First update the password_reset_code before setting the 
+    # reset_password flag to avoid duplicate email notifications.
+    update_attributes(:password_reset_code => nil)
+    @reset_password = true
+  end
 
+  def recently_reset_password?
+    @reset_password
+  end
+
+  def recently_forgot_password?
+    @forgotten_password
+  end  
+  
   protected
     # before filter 
     def encrypt_password
@@ -67,4 +89,8 @@ class User < ActiveRecord::Base
     def password_required?
       crypted_password.blank? || !password.blank?
     end
+  
+    def make_password_reset_code
+      self.password_reset_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
+    end    
 end
