@@ -8,17 +8,14 @@ class SampleData < ActiveRecord::Migration
       :name => 'Vendor'  
     )
     vendorRole.save!
-    
     jurorRole = Role.new(
       :name => 'Juror'  
     )
     jurorRole.save!
-    
     proctorRole = Role.new(
       :name => 'Proctor'  
     )
     proctorRole.save!
-    
     administratorRole = Role.new(
       :name => 'Administrator'  
     )
@@ -38,7 +35,7 @@ class SampleData < ActiveRecord::Migration
     )
     laikaUserMcCready.save!
     
-    laikaUserMcCready.roles << administratorRole
+    laikaUserMcCready.roles << vendorRole
     laikaUserMcCready.roles << jurorRole
     laikaUserMcCready.roles << proctorRole
     laikaUserMcCready.roles << administratorRole

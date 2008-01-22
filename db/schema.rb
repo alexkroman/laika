@@ -76,6 +76,11 @@ ActiveRecord::Schema.define(:version => 999) do
     t.string "name"
   end
 
+  create_table "user_roles", :force => true do |t|
+    t.integer "user_id"
+    t.integer "role_id"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email"
     t.string   "first_name"
@@ -89,6 +94,7 @@ ActiveRecord::Schema.define(:version => 999) do
     t.boolean  "terms_of_service"
     t.boolean  "send_updates"
     t.integer  "role_id"
+    t.string   "password_reset_code",       :limit => 40
   end
 
   create_table "vendor_test_plans", :force => true do |t|
