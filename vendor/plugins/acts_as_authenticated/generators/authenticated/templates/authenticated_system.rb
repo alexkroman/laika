@@ -1,33 +1,33 @@
 module AuthenticatedSystem
   protected
     # Returns true or false if the user is logged in.
-    # Preloads @current_<%= file_name %> with the user model if they're logged in.
+    # Preloads @current_user with the user model if they're logged in.
     def logged_in?
-      current_<%= file_name %> != :false
+      current_user != :false
     end
     
-    # Accesses the current <%= file_name %> from the session.
-    def current_<%= file_name %>
-      @current_<%= file_name %> ||= (session[:<%= file_name %>] && <%= class_name %>.find_by_id(session[:<%= file_name %>])) || :false
+    # Accesses the current user from the session.
+    def current_user
+      @current_user ||= (session[:user] && User.find_by_id(session[:user])) || :false
     end
     
-    # Store the given <%= file_name %> in the session.
-    def current_<%= file_name %>=(new_<%= file_name %>)
-      session[:<%= file_name %>] = (new_<%= file_name %>.nil? || new_<%= file_name %>.is_a?(Symbol)) ? nil : new_<%= file_name %>.id
-      @current_<%= file_name %> = new_<%= file_name %>
+    # Store the given user in the session.
+    def current_user=(new_user)
+      session[:user] = (new_user.nil? || new_user.is_a?(Symbol)) ? nil : new_user.id
+      @current_user = new_user
     end
     
-    # Check if the <%= file_name %> is authorized.
+    # Check if the user is authorized.
     #
     # Override this method in your controllers if you want to restrict access
-    # to only a few actions or if you want to check if the <%= file_name %>
+    # to only a few actions or if you want to check if the user
     # has the correct rights.
     #
     # Example:
     #
     #  # only allow nonbobs
     #  def authorize?
-    #    current_<%= file_name %>.login != "bob"
+    #    current_user.login != "bob"
     #  end
     def authorized?
       true
@@ -49,7 +49,7 @@ module AuthenticatedSystem
     #
     def login_required
       username, passwd = get_auth_data
-      self.current_<%= file_name %> ||= <%= class_name %>.authenticate(username, passwd) || :false if username && passwd
+      self.current_user ||= User.authenticate(username, passwd) || :false if username && passwd
       logged_in? && authorized? ? true : access_denied
     end
     
@@ -58,7 +58,7 @@ module AuthenticatedSystem
     # The default action is to redirect to the login screen.
     #
     # Override this method in your controllers if you want to have special
-    # behavior in case the <%= file_name %> is not authorized
+    # behavior in case the user is not authorized
     # to access the requested action.  For example, a popup window might
     # simply close itself.
     def access_denied
@@ -90,21 +90,19 @@ module AuthenticatedSystem
       session[:return_to] = nil
     end
     
-    # Inclusion hook to make #current_<%= file_name %> and #logged_in?
+    # Inclusion hook to make #current_user and #logged_in?
     # available as ActionView helper methods.
     def self.included(base)
-      base.send :helper_method, :current_<%= file_name %>, :logged_in?
+      base.send :helper_method, :current_user, :logged_in?
     end
 
-    # When called with before_filter :login_from_cookie will check for an :auth_token
-    # cookie and log the user back in if apropriate
     def login_from_cookie
       return unless cookies[:auth_token] && !logged_in?
-      user = <%= class_name %>.find_by_remember_token(cookies[:auth_token])
+      user = User.find_by_remember_token(cookies[:auth_token])
       if user && user.remember_token?
         user.remember_me
-        self.current_<%= file_name %> = user
-        cookies[:auth_token] = { :value => self.current_<%= file_name %>.remember_token , :expires => self.current_<%= file_name %>.remember_token_expires_at }
+        self.current_user = user
+        cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
         flash[:notice] = "Logged in successfully"
       end
     end
