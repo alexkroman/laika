@@ -11,17 +11,6 @@ class PatientDataController < ApplicationController
     redirect_to :controller => 'patient_data', :action => 'show', :id => @patient_data.id
   end
   
-  def create_vendor_test_plan
-    copied_patient_data = PatientData.find(params[:pd_id]).copy
-    vendor = Vendor.find(params[:vendor_id])
-    vtp = VendorTestPlan.new(:vendor => vendor)
-    vtp.save!
-    copied_patient_data.vendor_test_plan = vtp
-    copied_patient_data.save!
-    
-    redirect_to :controller => 'vendor_test_plans', :action => 'list'
-  end
-  
   def show
     @patient_data = PatientData.find(params[:id])
   end

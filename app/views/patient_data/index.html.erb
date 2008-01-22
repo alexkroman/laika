@@ -27,7 +27,7 @@
           <td width="120"><a href="#">Amit Travidi</a></td>
           <td width="140">15.Dec.2007</td>
           <td width="380">
-            <form action="<%= url_for :action => 'create_vendor_test_plan' %>">
+            <form action="<%= url_for :controller => 'test_plan_manager', :action => 'assign_patient_data' %>">
                     <input type="hidden" name="pd_id" value="<%= patient_data.id %>"/>
                     <select name="vendor_id">
                         <% for vendor in @vendors -%>

@@ -83,9 +83,4 @@ class VendorTestPlansController < ApplicationController
     end
   end
   
-  def attach_clinical_document
-    clinical_document = ClinicalDocument.new(params[:clinical_document])
-    clinical_document.save!
-    redirect_to :action => "index"
-  end
 end

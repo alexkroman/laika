@@ -25,20 +25,20 @@
             </c:choose>
           </td>  
           <td><%= vendor_test_plan.vendor.display_name %></td>
-          <td><%= link_to vendor_test_plan.patient_data.name, patient_data_url(:action => 'show', :id => vendor_test_plan.patient_data.id)%></td>
+          <td><%= link_to vendor_test_plan.patient_data.name, patient_data_instance_url(vendor_test_plan.patient_data)%></td>
           <td>15.Dec.2007</td>  
           <td>
-            <%= link_to 'Export Prose', patient_data_url(:action => 'patient_story', :id => vendor_test_plan.patient_data.id)%>
+            <%= link_to 'Export Prose', patient_data_instance_url(vendor_test_plan.patient_data)%>
             <br/>
             <a href="#">Visual Verification</a><br/>
           </td>
           <td>
-            <%= link_to 'Export XML', patient_data_url(:action => 'patient_xml', :id => vendor_test_plan.patient_data.id) %>
+            <%= link_to 'Export XML', patient_data_instance_url(vendor_test_plan.patient_data) %>
             <% if vendor_test_plan.clinical_document -%>
                 <%= link_to 'Automated XML Verification', :action => 'verify_clinical_document', :id => vendor_test_plan.id %>
             <% else -%>
                 <br/>
-                <% form_for(ClinicalDocument.new, :url => {:actoin => 'attach_clinical_document'}, :html => { :multipart => true }) do |f| -%>
+                <% form_for(:clinical_document, :url => vendor_test_plan_clinical_document_url(vendor_test_plan), :html => { :multipart => true }) do |f| -%>
                     <input type="hidden" id="clinical_document_vendor_test_plan_id" name="clinical_document[vendor_test_plan_id]" 
                                 value="<%= vendor_test_plan.id %>" />
                     <label>Document Type &nbsp;&nbsp;&nbsp;&nbsp;
