@@ -35,7 +35,7 @@
           <td>
             <%= link_to 'Export XML', patient_data_instance_url(vendor_test_plan.patient_data) %>
             <% if vendor_test_plan.clinical_document -%>
-                <%= link_to 'Automated XML Verification', :action => 'verify_clinical_document', :id => vendor_test_plan.id %>
+                <%= link_to 'Automated XML Verification', inspect_content_vendor_test_plan_url(vendor_test_plan) %>
             <% else -%>
                 <br/>
                 <% form_for(:clinical_document, :url => vendor_test_plan_clinical_document_url(vendor_test_plan), :html => { :multipart => true }) do |f| -%>

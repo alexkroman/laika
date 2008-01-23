@@ -1,0 +1,28 @@
+<!-- Start Content -->
+<div id="patientDataList">
+  <br/>
+  <table class="hitsp_module_list">
+    <caption>C32 Tests</caption>
+    <!-- there is a known bug in IE 6 regarding sibling selectors
+         since we want the second column to look different than the first
+         we are going to work aroudn this bug by inserting a class on every other td
+    -->
+    <tbody>
+      <tr valign="top">
+          <td>Test</td>
+          <td>Result</td>
+      </tr>
+      <% @results.each_pair do |doc_location, result| %>
+        <td><%= doc_location.name %></td>
+        <td><%= result %></td>
+      </tr>
+    <% end -%>
+  </tbody>
+</table> 
+</div>
+<!-- End Content -->
+
+<!-- Start Footer -->
+<div id="footer">
+</div>
+<!-- End Footer -->

@@ -83,4 +83,9 @@ class VendorTestPlansController < ApplicationController
     end
   end
   
+  def inspect_content
+    @vendor_test_plan = VendorTestPlan.find(params[:id])
+    @results = @vendor_test_plan.validate_clinical_document_content
+  end
+  
 end
