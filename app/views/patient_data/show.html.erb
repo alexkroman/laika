@@ -23,7 +23,8 @@
                    <a href="javascript:show_module('language');">Show</a>
                  </span>
                  <span id="language_add_span" >
-                   <a href="#" onclick="new Ajax.Updater('addLanguage', '<c:url value="/patientData/language.lk"><c:param name="pdId" value="${patientData.id}"/></c:url>', {method: 'get', insertion: Insertion.Before})">Add</a>
+                     <%= link_to_remote 'Add', :url => new_patient_data_instance_language_path(@patient_data), 
+                                               :method => 'get', :update => 'addLanguage', :position => :before %>
                  </span>
                </div> 
              </td>
@@ -41,13 +42,11 @@
              </tr>
            </tbody>
          </table>
-         <c:forEach var="language" items="${patientData.languages}">
-           <div id="language${language.id}">
-
-             <c:set var="language" value="${language}" scope="request"/>
-             <jsp:include page="languageView.jsp"/>
-           </div>
-         </c:forEach>
+         <% for language in @patient_data.languages -%>
+         <div id="language<%= language.id %>">
+           <%= render :partial => '/languages/show', :locals => {:language  => language, :patient_data => @patient_data} %>
+         </div>
+         <% end -%>
          <p id="addLanguage"></p>
        </div>
      </div>
