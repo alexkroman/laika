@@ -1,7 +1,15 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-# one:
-#   column: value
-#
-# two:
-#   column: value
+first_name:
+  name: Patient First Name
+  xpath_expression: /ClinicalDocument/recordTarget/patientRole/patient/name/given/text()=$first_name
+  description: The first name of the patient
+  doc_type: CCD
+  section: registration_information
+
+last_name:
+  name: Patient Last Name
+  xpath_expression: /ClinicalDocument/recordTarget/patientRole/patient/name/family/text()=$last_name
+  description: The last name of the patient
+  doc_type: CCD
+  section: registration_information
