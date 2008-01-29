@@ -6,6 +6,7 @@ first_name:
   description: The first name of the patient
   doc_type: CCD
   section: registration_information
+  subsection: person_name
 
 last_name:
   name: Patient Last Name
@@ -13,3 +14,4 @@ last_name:
   description: The last name of the patient
   doc_type: CCD
   section: registration_information
+  subsection: person_name

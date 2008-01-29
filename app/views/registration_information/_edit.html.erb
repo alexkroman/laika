@@ -25,17 +25,18 @@
         </td>
       </tr>
       </tr>
+      <% fields_for registration_information.person_name do |person_name| -%>
       <tr>
         <td class="hitsp_c32_attribute_name">First Name:</td>
         <td class="hitsp_c32_attribute_value">
           <div class="person_editable">
-            <%= f.text_field :first_name %>        
+            <%= person_name.text_field :first_name %>        
           </div>
         </td>
         <td class="hitsp_c32_attribute_name">Prefix:</td>
         <td class="hitsp_c32_attribute_value">
           <div class="person_editable">
-            <%= f.text_field :name_prefix %> 
+            <%= person_name.text_field :name_prefix %> 
           </div>
         </td>
       </tr>
@@ -43,16 +44,17 @@
         <td class="hitsp_c32_attribute_name">Last Name:</td>
         <td class="hitsp_c32_attribute_value">
           <div class="person_editable">
-            <%= f.text_field :last_name %>          
+            <%= person_name.text_field :last_name %>          
           </div>
         </td>
         <td class="hitsp_c32_attribute_name">Suffix:</td>
         <td class="hitsp_c32_attribute_value">
           <div class="person_editable">
-            <%= f.text_field :name_suffix %>
+            <%= person_name.text_field :name_suffix %>
           </div>
         </td>
       </tr>
+      <% end -%>
       <tr>
         <td class="hitsp_c32_attribute_name">Date of Birth:</td>
         <td class="hitsp_c32_attribute_value">

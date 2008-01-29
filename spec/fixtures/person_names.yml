@@ -1,0 +1,6 @@
+steve:
+    name_prefix: Mr.
+    first_name: Steve
+    last_name: Stevenson
+    name_suffix: Jr.
+    nameable: steve (RegistrationInformation)

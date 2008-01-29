@@ -26,11 +26,12 @@ end
 
 describe DocumentLocation, "binds variables" do
   before(:each) do
-    @document_location = DocumentLocation.new(:section => 'registration_information')
+    @document_location = DocumentLocation.new(:section => 'registration_information', :subsection => 'person_name')
+    @person_name = PersonName.new(:first_name => 'Andy', :last_name => 'Gregorowicz')
     @patient_data = PatientData.new
-    @registration_information = RegistrationInformation.new(:first_name => 'Andy',
-                                                            :last_name => 'Gregorowicz')
-    @patient_data.registration_information = @registration_information
+    @registration_information = RegistrationInformation.new
+    @patient_data.registration_information = @registration_information    
+    @patient_data.registration_information.person_name = @person_name
   end
   
   it "should bind a single variable properly" do
@@ -49,6 +50,7 @@ describe DocumentLocation, "binds variables" do
   end
   
   it "should return nil when it can't bind a variable" do
+    @document_location.subsection = nil
     @document_location.xpath_expression = '/foo/bar/text()=$city'
     vars = @document_location.bind_variables(@patient_data)
     vars.should be_nil

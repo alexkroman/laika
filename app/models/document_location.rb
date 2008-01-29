@@ -20,8 +20,13 @@ class DocumentLocation < ActiveRecord::Base
   def bind_variables(patient_data)
     bound_vars = {}
     section_object = patient_data.send(section.to_sym)
+    if subsection
+      target = section_object.send(subsection.to_sym)
+    else
+      target = section_object
+    end
     variable_names.each do |variable_name|
-      variable_value = section_object.send(variable_name.to_sym)
+      variable_value = target.send(variable_name.to_sym)
       if variable_value
         bound_vars[variable_name] = variable_value
       else

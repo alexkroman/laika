@@ -6,7 +6,7 @@ class PatientData < ActiveRecord::Base
   def copy
     copied_patient_data = self.clone
     copied_patient_data.save!
-    copied_registration_information = self.registration_information.clone
+    copied_registration_information = self.registration_information.copy
     copied_registration_information.patient_data = copied_patient_data
     copied_registration_information.save!
     self.languages.each do |language|

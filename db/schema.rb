@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(:version => 999) do
     t.text   "description"
     t.string "doc_type",         :limit => 10
     t.string "section",          :limit => 30
+    t.string "subsection",       :limit => 30
   end
 
   create_table "languages", :force => true do |t|
@@ -45,12 +46,17 @@ ActiveRecord::Schema.define(:version => 999) do
     t.integer "vendor_test_plan_id"
   end
 
-  create_table "registration_informations", :force => true do |t|
-    t.string  "person_identifier"
+  create_table "person_names", :force => true do |t|
     t.string  "name_prefix"
     t.string  "first_name"
     t.string  "last_name"
     t.string  "name_suffix"
+    t.integer "nameable_id"
+    t.string  "nameable_type"
+  end
+
+  create_table "registration_information", :force => true do |t|
+    t.string  "person_identifier"
     t.date    "birth_date"
     t.string  "gender"
     t.string  "marital_status"

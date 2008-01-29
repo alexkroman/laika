@@ -2,10 +2,6 @@ class CreateRegistrationInformations < ActiveRecord::Migration
   def self.up
     create_table :registration_information do |t|
       t.string :person_identifier
-      t.string :name_prefix
-      t.string :first_name
-      t.string :last_name
-      t.string :name_suffix
       t.date :birth_date
       t.string :gender
       t.string :marital_status

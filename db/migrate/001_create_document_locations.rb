@@ -6,6 +6,7 @@ class CreateDocumentLocations < ActiveRecord::Migration
       t.text :description
       t.string :doc_type, :limit => 10
       t.string :section, :limit => 30
+      t.string :subsection, :limit => 30
     end
   end
 
