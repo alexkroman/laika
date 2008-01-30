@@ -83,48 +83,7 @@
             </td>
           </tr>
           <%= render :partial => '/addresses/show', :locals => {:address => registration_information.address}%>
-          <tr>
-            <td class="hitsp_c32_attribute_name">Home Phone:</td>
-            <td class="hitsp_c32_attribute_value">
-              <div class="person_read_only">
-                <%=h registration_information.telecom.home_phone %>
-              </div>
-            </td>
-            <td class="hitsp_c32_attribute_name">Mobile Phone:</td>
-            <td class="hitsp_c32_attribute_value">
-              <div class="person_read_only">
-                <%=h registration_information.telecom.mobile_phone %>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td class="hitsp_c32_attribute_name">Work Phone:</td>
-            <td class="hitsp_c32_attribute_value">
-              <div class="person_read_only">
-                <%=h registration_information.telecom.work_phone %>
-              </div>
-            </td>
-            <td class="hitsp_c32_attribute_name">Vacation Home Phone:</td>
-            <td class="hitsp_c32_attribute_value">
-              <div class="person_read_only">
-                <%=h registration_information.telecom.vacation_home_phone %>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td class="hitsp_c32_attribute_name">Email:</td>
-            <td class="hitsp_c32_attribute_value">
-              <div class="person_read_only">
-                <%=h registration_information.telecom.email %>
-              </div>
-            </td>
-            <td class="hitsp_c32_attribute_name">URL:</td>
-            <td class="hitsp_c32_attribute_value">
-              <div class="person_read_only">
-                <%=h registration_information.telecom.url %>
-              </div>
-            </td>
-          </tr>
+          <%= render :partial => '/telecoms/show', :locals => {:telecom => registration_information.telecom}%>
         </tbody>
       </table>
     </div>
