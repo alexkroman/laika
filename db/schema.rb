@@ -11,6 +11,17 @@
 
 ActiveRecord::Schema.define(:version => 999) do
 
+  create_table "addresses", :force => true do |t|
+    t.string  "street_address_line_one"
+    t.string  "street_address_line_two"
+    t.string  "city"
+    t.string  "state"
+    t.string  "postal_code"
+    t.string  "country"
+    t.integer "addressable_id"
+    t.string  "addressable_type"
+  end
+
   create_table "clinical_documents", :force => true do |t|
     t.integer "size"
     t.string  "content_type"
@@ -63,19 +74,13 @@ ActiveRecord::Schema.define(:version => 999) do
     t.string  "religious_affiliation"
     t.string  "race"
     t.string  "ethnicity"
-    t.string  "street_address_line_one"
-    t.string  "street_address_line_two"
-    t.string  "city"
-    t.string  "state"
-    t.string  "postal_code"
-    t.string  "country"
     t.string  "home_phone"
     t.string  "work_phone"
     t.string  "mobile_phone"
     t.string  "vacation_home_phone"
     t.string  "email"
     t.string  "url"
-    t.integer "patient_data_id",         :null => false
+    t.integer "patient_data_id",       :null => false
   end
 
   create_table "roles", :force => true do |t|

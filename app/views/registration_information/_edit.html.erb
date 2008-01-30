@@ -200,17 +200,19 @@
               "Dominican"] %>
           </div>
         </td>
-      </tr><tr>
+      </tr>
+      <% fields_for registration_information.address do |address| -%>
+      <tr>
         <td class="hitsp_c32_attribute_name">Street Address 1:</td>
         <td class="hitsp_c32_attribute_value">
           <div class="person_editable">
-            <%= f.text_field :street_address_line_one %>
+            <%= address.text_field :street_address_line_one %>
           </div>
         </td>
         <td class="hitsp_c32_attribute_name">City:</td>
         <td class="hitsp_c32_attribute_value">
           <div class="person_editable">
-              <%= f.text_field :city %>
+            <%= address.text_field :city %>
           </div>
         </td>
       </tr>
@@ -218,13 +220,13 @@
         <td class="hitsp_c32_attribute_name">Street Address 2:</td>
         <td class="hitsp_c32_attribute_value">
           <div class="person_editable">
-    <%= f.text_field :street_address_line_two %>
+              <%= address.text_field :street_address_line_two %>
           </div>
         </td>
         <td class="hitsp_c32_attribute_name">State:</td>
         <td class="hitsp_c32_attribute_value">
           <div class="person_editable">
-    <%= f.select :state, 
+    <%= address.select :state, 
               ["AK",
               "AL",
               "AR",
@@ -290,16 +292,17 @@
         <td class="hitsp_c32_attribute_name">Postal Code:</td>
         <td class="hitsp_c32_attribute_value">
           <div class="person_editable">
-            <%= f.text_field :postal_code %>
+            <%= address.text_field :postal_code %>
           </div>
         </td>
         <td class="hitsp_c32_attribute_name">Country:</td>
         <td class="hitsp_c32_attribute_value">
           <div class="person_editable">
-            <%= f.text_field :country %>
+            <%= address.text_field :country %>
           </div>
         </td>
       </tr>
+      <% end -%>
       <tr>
         <td class="hitsp_c32_attribute_name">Home Phone:</td>
         <td class="hitsp_c32_attribute_value">

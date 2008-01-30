@@ -51,7 +51,7 @@ describe DocumentLocation, "binds variables" do
   
   it "should return nil when it can't bind a variable" do
     @document_location.subsection = nil
-    @document_location.xpath_expression = '/foo/bar/text()=$city'
+    @document_location.xpath_expression = '/foo/bar/text()=$marital_status'
     vars = @document_location.bind_variables(@patient_data)
     vars.should be_nil
   end

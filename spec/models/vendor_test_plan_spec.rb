@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe VendorTestPlan do
   fixtures :vendor_test_plans, :patient_data, :registration_information,
-           :document_locations, :vendors, :person_names
+           :document_locations, :vendors, :person_names, :addresses
   
   before(:each) do
     @vendor_test_plan = vendor_test_plans(:test_plan)

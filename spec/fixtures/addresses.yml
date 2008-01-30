@@ -1,0 +1,7 @@
+steves_address:
+    street_address_line_one: 1600 Penn Ave.
+    city: Washington
+    state: DC
+    postal_code: 12345
+    country: USA
+    addressable: steve (RegistrationInformation)
