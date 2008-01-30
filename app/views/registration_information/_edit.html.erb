@@ -172,7 +172,7 @@
           </div>
         </td>
       </tr>
-      <%= render :partial => '/addresses/edit', :locals => {:person_name => registration_information.person_name}%>
+      <%= render :partial => '/addresses/edit', :locals => {:address => registration_information.address}%>
       <% fields_for registration_information.telecom do |telecom| -%>
       <tr>
         <td class="hitsp_c32_attribute_name">Home Phone:</td>
