@@ -303,17 +303,18 @@
         </td>
       </tr>
       <% end -%>
+      <% fields_for registration_information.telecom do |telecom| -%>
       <tr>
         <td class="hitsp_c32_attribute_name">Home Phone:</td>
         <td class="hitsp_c32_attribute_value">
           <div class="person_editable">
-            <%= f.text_field :home_phone %>
+            <%= telecom.text_field :home_phone %>
           </div>
         </td>
         <td class="hitsp_c32_attribute_name">Mobile Phone:</td>
         <td class="hitsp_c32_attribute_value">
           <div class="person_editable">
-            <%= f.text_field :mobile_phone %>
+            <%= telecom.text_field :mobile_phone %>
           </div>
         </td>
       </tr>
@@ -321,13 +322,13 @@
         <td class="hitsp_c32_attribute_name">Work Phone:</td>
         <td class="hitsp_c32_attribute_value">
           <div class="person_editable">
-            <%= f.text_field :work_phone %>
+            <%= telecom.text_field :work_phone %>
           </div>
         </td>
         <td class="hitsp_c32_attribute_name">Vacation Home Phone:</td>
         <td class="hitsp_c32_attribute_value">
           <div class="person_editable">
-            <%= f.text_field :vacation_home_phone %>
+            <%= telecom.text_field :vacation_home_phone %>
           </div>
         </td>
       </tr>
@@ -335,16 +336,17 @@
         <td class="hitsp_c32_attribute_name">Email:</td>
         <td class="hitsp_c32_attribute_value">
           <div class="person_editable">
-            <%= f.text_field :email %>
+            <%= telecom.text_field :email %>
           </div>
         </td>
         <td class="hitsp_c32_attribute_name">URL:</td>
         <td class="hitsp_c32_attribute_value">
           <div class="person_editable">
-            <%= f.text_field :url %>
+            <%= telecom.text_field :url %>
           </div>
         </td>
       </tr>
+      <% end -%>
     </tbody>
   </table>
 </div>

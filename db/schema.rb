@@ -74,17 +74,22 @@ ActiveRecord::Schema.define(:version => 999) do
     t.string  "religious_affiliation"
     t.string  "race"
     t.string  "ethnicity"
+    t.integer "patient_data_id",       :null => false
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string "name"
+  end
+
+  create_table "telecoms", :force => true do |t|
     t.string  "home_phone"
     t.string  "work_phone"
     t.string  "mobile_phone"
     t.string  "vacation_home_phone"
     t.string  "email"
     t.string  "url"
-    t.integer "patient_data_id",       :null => false
-  end
-
-  create_table "roles", :force => true do |t|
-    t.string "name"
+    t.integer "reachable_id"
+    t.string  "reachable_type"
   end
 
   create_table "user_roles", :force => true do |t|

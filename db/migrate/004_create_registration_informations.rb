@@ -8,12 +8,6 @@ class CreateRegistrationInformations < ActiveRecord::Migration
       t.string :religious_affiliation
       t.string :race
       t.string :ethnicity
-      t.string :home_phone
-      t.string :work_phone
-      t.string :mobile_phone
-      t.string :vacation_home_phone
-      t.string :email
-      t.string :url
       t.belongs_to :patient_data, :null => false
     end
   end
