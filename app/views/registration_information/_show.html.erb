@@ -40,34 +40,7 @@
             </td>
           </tr>
           </tr>
-          <tr>
-            <td class="hitsp_c32_attribute_name">First Name:</td>
-            <td class="hitsp_c32_attribute_value">
-              <div class="person_read_only">
-                <%=h registration_information.person_name.first_name %>
-              </div>
-            </td>
-            <td class="hitsp_c32_attribute_name">Prefix:</td>
-            <td class="hitsp_c32_attribute_value">
-              <div class="person_read_only">
-                <%=h registration_information.person_name.name_prefix %>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td class="hitsp_c32_attribute_name">Last Name:</td>
-            <td class="hitsp_c32_attribute_value">
-              <div class="person_read_only">
-                <%=h registration_information.person_name.last_name %>
-              </div>
-            </td>
-            <td class="hitsp_c32_attribute_name">Suffix:</td>
-            <td class="hitsp_c32_attribute_value">
-              <div class="person_read_only">
-                <%=h registration_information.person_name.name_suffix %>
-              </div>
-            </td>
-          </tr>
+          <%= render :partial => '/person_name/show', :locals => {:person_name => registration_information.person_name}%>
           <tr>
             <td class="hitsp_c32_attribute_name">Date of Birth:</td>
             <td class="hitsp_c32_attribute_value">

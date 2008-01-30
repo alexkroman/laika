@@ -1,0 +1,30 @@
+<% fields_for person_name do |person_name_form| -%>
+  <tr>
+    <td class="hitsp_c32_attribute_name">First Name:</td>
+    <td class="hitsp_c32_attribute_value">
+      <div class="person_editable">
+        <%= person_name_form.text_field :first_name %>        
+      </div>
+    </td>
+    <td class="hitsp_c32_attribute_name">Prefix:</td>
+    <td class="hitsp_c32_attribute_value">
+      <div class="person_editable">
+        <%= person_name_form.text_field :name_prefix %> 
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td class="hitsp_c32_attribute_name">Last Name:</td>
+    <td class="hitsp_c32_attribute_value">
+      <div class="person_editable">
+        <%= person_name_form.text_field :last_name %>          
+      </div>
+    </td>
+    <td class="hitsp_c32_attribute_name">Suffix:</td>
+    <td class="hitsp_c32_attribute_value">
+      <div class="person_editable">
+        <%= person_name_form.text_field :name_suffix %>
+      </div>
+    </td>
+  </tr>
+  <% end -%>

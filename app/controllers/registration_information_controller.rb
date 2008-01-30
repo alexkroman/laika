@@ -19,9 +19,7 @@ class RegistrationInformationController < PatientDataChildController
   def create
     @registration_information = RegistrationInformation.new(params[:registration_information])
     @patient_data.registration_information = @registration_information
-    @registration_information.person_name = PersonName.new(params[:person_name])
-    @registration_information.address = Address.new(params[:address])
-    @registration_information.telecom = Telecom.new(params[:telecom])
+    @registration_information.create_person_attributes(params)
     render :partial  => 'show', :locals => {:registration_information =>  @registration_information,
                                             :patient_data => @patient_data}
   end
@@ -29,9 +27,7 @@ class RegistrationInformationController < PatientDataChildController
   def update
     @registration_information = @patient_data.registration_information
     @registration_information.update_attributes(params[:registration_information])
-    @registration_information.person_name.update_attributes(params[:person_name])
-    @registration_information.address.update_attributes(params[:address])
-    @registration_information.telecom.update_attributes(params[:telecom])
+    @registration_information.update_person_attributes(params)
     render :partial  => 'show', :locals => {:registration_information =>  @registration_information,
                                             :patient_data => @patient_data}
   end

@@ -81,6 +81,14 @@ ActiveRecord::Schema.define(:version => 999) do
     t.string "name"
   end
 
+  create_table "supports", :force => true do |t|
+    t.date    "start_support"
+    t.date    "end_support"
+    t.string  "contact_relationship"
+    t.string  "contact_type"
+    t.integer "patient_data_id",      :null => false
+  end
+
   create_table "telecoms", :force => true do |t|
     t.string  "home_phone"
     t.string  "work_phone"
