@@ -40,7 +40,7 @@
             </td>
           </tr>
           </tr>
-          <%= render :partial => '/person_name/show', :locals => {:person_name => registration_information.person_name}%>
+          <%= render :partial => '/person_names/show', :locals => {:person_name => registration_information.person_name}%>
           <tr>
             <td class="hitsp_c32_attribute_name">Date of Birth:</td>
             <td class="hitsp_c32_attribute_value">
@@ -81,48 +81,8 @@
                 <%=h registration_information.ethnicity %>
               </div>
             </td>
-          </tr><tr>
-            <td class="hitsp_c32_attribute_name">Street Address 1:</td>
-            <td class="hitsp_c32_attribute_value">
-              <div class="person_read_only">
-                <%=h registration_information.address.street_address_line_one %>
-              </div>
-            </td>
-            <td class="hitsp_c32_attribute_name">City:</td>
-            <td class="hitsp_c32_attribute_value">
-              <div class="person_read_only">
-                <%=h registration_information.address.city %>
-              </div>  
-            </td>
           </tr>
-          <tr>
-            <td class="hitsp_c32_attribute_name">Street Address 2:</td>
-            <td class="hitsp_c32_attribute_value">
-              <div class="person_read_only">
-                <%=h registration_information.address.street_address_line_two %>
-              </div>
-            </td>
-            <td class="hitsp_c32_attribute_name">State:</td>
-            <td class="hitsp_c32_attribute_value">
-              <div class="person_read_only">
-                <%=h registration_information.address.state %>
-              </div>
-            </td>
-           </tr>
-          <tr>
-            <td class="hitsp_c32_attribute_name">Postal Code:</td>
-            <td class="hitsp_c32_attribute_value">
-              <div class="person_read_only">
-                <%=h registration_information.address.postal_code %>
-              </div>
-            </td>
-            <td class="hitsp_c32_attribute_name">Country:</td>
-            <td class="hitsp_c32_attribute_value">
-              <div class="person_read_only">
-                <%=h registration_information.address.country %>
-              </div>
-            </td>
-          </tr>
+          <%= render :partial => '/addresses/show', :locals => {:address => registration_information.address}%>
           <tr>
             <td class="hitsp_c32_attribute_name">Home Phone:</td>
             <td class="hitsp_c32_attribute_value">
