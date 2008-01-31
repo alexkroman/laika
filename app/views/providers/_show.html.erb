@@ -1,0 +1,33 @@
+<p>
+  <b>Start service:</b>
+  <%=h @provider.start_service %>
+</p>
+
+<p>
+  <b>End service:</b>
+  <%=h @provider.end_service %>
+</p>
+
+<p>
+  <b>Role code:</b>
+  <%=h @provider.role_code %>
+</p>
+
+<p>
+  <b>Role description:</b>
+  <%=h @provider.role_description %>
+</p>
+
+<p>
+  <b>Organization:</b>
+  <%=h @provider.organization %>
+</p>
+
+<p>
+  <b>Patient identifier:</b>
+  <%=h @provider.patient_identifier %>
+</p>
+
+
+<%= link_to 'Edit', edit_provider_path(@provider) %> |
+<%= link_to 'Back', providers_path %>

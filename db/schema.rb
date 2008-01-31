@@ -66,6 +66,16 @@ ActiveRecord::Schema.define(:version => 999) do
     t.string  "nameable_type"
   end
 
+  create_table "providers", :force => true do |t|
+    t.date    "start_service"
+    t.date    "end_service"
+    t.string  "role_code"
+    t.string  "role_description"
+    t.string  "organization"
+    t.string  "patient_identifier"
+    t.integer "patient_data_id",    :null => false
+  end
+
   create_table "registration_information", :force => true do |t|
     t.string  "person_identifier"
     t.date    "birth_date"

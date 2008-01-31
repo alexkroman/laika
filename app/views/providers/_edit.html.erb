@@ -1,0 +1,42 @@
+<h1>Editing provider</h1>
+
+<%= error_messages_for :provider %>
+
+<% form_for(@provider) do |f| %>
+  <p>
+    <b>Start service</b><br />
+    <%= f.date_select :start_service %>
+  </p>
+
+  <p>
+    <b>End service</b><br />
+    <%= f.date_select :end_service %>
+  </p>
+
+  <p>
+    <b>Role code</b><br />
+    <%= f.text_field :role_code %>
+  </p>
+
+  <p>
+    <b>Role description</b><br />
+    <%= f.text_field :role_description %>
+  </p>
+
+  <p>
+    <b>Organization</b><br />
+    <%= f.text_field :organization %>
+  </p>
+
+  <p>
+    <b>Patient identifier</b><br />
+    <%= f.text_field :patient_identifier %>
+  </p>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @provider %> |
+<%= link_to 'Back', providers_path %>
