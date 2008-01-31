@@ -1,6 +1,7 @@
 class PatientData < ActiveRecord::Base
   has_one :registration_information
   has_many :languages
+  has_one :support
   belongs_to :vendor_test_plan
   
   def copy

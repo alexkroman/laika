@@ -57,7 +57,7 @@
    
    <!-- Start Support Module -->
    <div id="support">
-
+    <%= render :partial => '/supports/show', :locals => {:support  => @patient_data.support, :patient_data => @patient_data} %>
    </div>
    <!-- End Support Module -->
    

@@ -1,3 +1,4 @@
+
 <table class="hitsp_c32_module_header">
   <tbody>  
     <tr>
@@ -10,93 +11,32 @@
     </tr>
   </tbody>
 </table>
+<% if support -%>
 <div id="hitsp_32_support_info">
   <table class="hitsp_c32_module">
     <tbody>
       <tr>
         <td class="hitsp_c32_attribute_name">Start Support:</td>
-        <td class="hitsp_c32_attribute_value"><%=h @support.start_support %></td>
+        <td class="hitsp_c32_attribute_value"><%=h support.start_support %></td>
         <td class="hitsp_c32_attribute_name">End Support:</td>
-        <td class="hitsp_c32_attribute_value"><%=h @support.end_support %></td>
+        <td class="hitsp_c32_attribute_value"><%=h support.end_support %></td>
       </tr>
-      <tr>
-        <td class="hitsp_c32_attribute_name">First Name:</td>
-        <td class="hitsp_c32_attribute_value"><%=h @support.end_support %></td>
-        <td class="hitsp_c32_attribute_name">Prefix:</td>
-        <td class="hitsp_c32_attribute_value"><%=h @support.person_name.name_prefix %></td>
-      </tr>
-      <tr>
-        <td class="hitsp_c32_attribute_name">Last Name:</td>
-        <td class="hitsp_c32_attribute_value"><%=h @support.person_name.last_name %></td>
-        <td class="hitsp_c32_attribute_name">Suffix:</td>
-        <td class="hitsp_c32_attribute_value"><%=h @support.person_name.name_suffix %></td>
-      </tr>
+      <%= render :partial => '/person_names/show', :locals => {:person_name => support.person_name}%>
       <tr>
         <td class="hitsp_c32_attribute_name">Contact:</td>
-        <td class="hitsp_c32_attribute_value"><%=h @support.contact_relationship %></td>
+        <td class="hitsp_c32_attribute_value"><%=h support.contact_relationship %></td>
         <td class="hitsp_c32_attribute_name">Type:</td>
-        <td class="hitsp_c32_attribute_value"><%=h @support.contact_type %></td>
+        <td class="hitsp_c32_attribute_value"><%=h support.contact_type %></td>
       </tr>
-      <tr>
-        <td class="hitsp_c32_attribute_name">Street Address:</td>
-        <td class="hitsp_c32_attribute_value">83 Foster Court</td>
-        <td class="hitsp_c32_attribute_name">Street Address:</td>
-        <td class="hitsp_c32_attribute_value">2nd Floor</td>
-      </tr>
-      <tr>
-        <td class="hitsp_c32_attribute_name">City:</td>
-        <td class="hitsp_c32_attribute_value">Winchester</td>
-        <td class="hitsp_c32_attribute_name">State:</td>
-        <td class="hitsp_c32_attribute_value">MA</td>
-      </tr>
-      <tr>
-        <td class="hitsp_c32_attribute_name">Postal Code:</td>
-        <td class="hitsp_c32_attribute_value">01440</td>
-        <td class="hitsp_c32_attribute_name">Country:</td>
-        <td class="hitsp_c32_attribute_value">US</td>
-      </tr>
-      <tr>
-        <td class="hitsp_c32_attribute_name">Home Phone:</td>
-        <td class="hitsp_c32_attribute_value">+1-483-578-7936</td>
-        <td class="hitsp_c32_attribute_name">Mobile Phone:</td>
-        <td class="hitsp_c32_attribute_value">+1-989-266-7904</td>
-      </tr>
-      <tr>
-        <td class="hitsp_c32_attribute_name">Work Phone:</td>
-        <td class="hitsp_c32_attribute_value">+1-762-729-2130</td>
-        <td class="hitsp_c32_attribute_name">Vacation Home Phone:</td>
-        <td class="hitsp_c32_attribute_value">+1-781-675-2062</td>
-      </tr>
-      <tr>
-        <td class="hitsp_c32_attribute_name">Email:</td>
-        <td class="hitsp_c32_attribute_value">marge@simpson.com</td>
-        <td class="hitsp_c32_attribute_name">URL:</td>
-        <td class="hitsp_c32_attribute_value">www.simpson.com</td>
-      </tr>
+      <%= render :partial => '/addresses/show', :locals => {:address => support.address}%>
+      <%= render :partial => '/telecoms/show', :locals => {:telecom => support.telecom}%>
     </tbody>
   </table>
 </div>
+<% else -%>
+    <p> There is no support data for this test case...
+        <%= link_to_remote 'Create some', :update => 'support',
+                                          :url => new_patient_data_instance_support_path(patient_data), :method => 'get' %>
+    </p>
+<% end -%>
 
-<p>
-  <b>Start support:</b>
-  <%=h @support.start_support %>
-</p>
-
-<p>
-  <b>End support:</b>
-  <%=h @support.end_support %>
-</p>
-
-<p>
-  <b>Contact relationship:</b>
-  <%=h @support.contact_relationship %>
-</p>
-
-<p>
-  <b>Contact type:</b>
-  <%=h @support.contact_type %>
-</p>
-
-
-<%= link_to 'Edit', edit_support_path(@support) %> |
-<%= link_to 'Back', supports_path %>
