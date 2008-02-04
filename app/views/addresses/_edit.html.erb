@@ -1,102 +1,84 @@
   <% fields_for address do |address_form| -%>
-  <tr>
-    <td class="hitsp_c32_attribute_name">Street Address 1:</td>
-    <td class="hitsp_c32_attribute_value">
-      <div class="person_editable">
-        <%= address_form.text_field :street_address_line_one %>
-      </div>
-    </td>
-    <td class="hitsp_c32_attribute_name">City:</td>
-    <td class="hitsp_c32_attribute_value">
-      <div class="person_editable">
-        <%= address_form.text_field :city %>
-      </div>
-    </td>
+  <tr class="lightzebra">
+    <td class="lighttext">Street Address</td>
+    <td><%= address_form.text_field :street_address_line_one %></td>
   </tr>
-  <tr>
-    <td class="hitsp_c32_attribute_name">Street Address 2:</td>
-    <td class="hitsp_c32_attribute_value">
-      <div class="person_editable">
-          <%= address_form.text_field :street_address_line_two %>
-      </div>
-    </td>
-    <td class="hitsp_c32_attribute_name">State:</td>
-    <td class="hitsp_c32_attribute_value">
-      <div class="person_editable">
-<%= address_form.select :state, 
-          ["AK",
-          "AL",
-          "AR",
-          "AS",
-          "AZ",
-          "CA",
-          "CO",
-          "CT",
-          "DC",
-          "DE",
-          "FL",
-          "FM",
-          "GA",
-          "GU",
-          "HI",
-          "IA",
-          "ID",
-          "IL",
-          "IN",
-          "KS",
-          "KY",
-          "LA",
-          "MA",
-          "MD",
-          "ME",
-          "MH",
-          "MI",
-          "MN",
-          "MO",
-          "MS",
-          "MT",
-          "NC",
-          "NE",
-          "NJ",
-          "NH",
-          "NM",
-          "NV",
-          "NY",
-          "ND",
-          "OH",
-          "OK",
-          "OR",
-          "PA",
-          "PW",
-          "PR",
-          "RI",
-          "SC",
-          "SD",
-          "TN",
-          "TX",
-          "UT",
-          "VI",
-          "VT",
-          "VA",
-          "WA",
-          "WI",
-          "WV",
-          "WY"] %>
-      </div>
-    </td>
+  <tr class="darkzebra">
+    <td class="lighttext"></td>
+    <td><%= address_form.text_field :street_address_line_two %></td>
   </tr>
-  <tr>
-    <td class="hitsp_c32_attribute_name">Postal Code:</td>
-    <td class="hitsp_c32_attribute_value">
-      <div class="person_editable">
-        <%= address_form.text_field :postal_code %>
-      </div>
-    </td>
-    <td class="hitsp_c32_attribute_name">Country:</td>
-    <td class="hitsp_c32_attribute_value">
-      <div class="person_editable">
-        <%= address_form.text_field :country %>
-      </div>
-    </td>
+  <tr class="lightzebra">
+    <td class="lighttext">City</td>
+    <td><%= address_form.text_field :city %></td>
+  </tr>
+  <tr class="darkzebra">
+    <td class="lighttext">State</td>
+    <td><%= address_form.select :state, 
+              ["AK",
+              "AL",
+              "AR",
+              "AS",
+              "AZ",
+              "CA",
+              "CO",
+              "CT",
+              "DC",
+              "DE",
+              "FL",
+              "FM",
+              "GA",
+              "GU",
+              "HI",
+              "IA",
+              "ID",
+              "IL",
+              "IN",
+              "KS",
+              "KY",
+              "LA",
+              "MA",
+              "MD",
+              "ME",
+              "MH",
+              "MI",
+              "MN",
+              "MO",
+              "MS",
+              "MT",
+              "NC",
+              "NE",
+              "NJ",
+              "NH",
+              "NM",
+              "NV",
+              "NY",
+              "ND",
+              "OH",
+              "OK",
+              "OR",
+              "PA",
+              "PW",
+              "PR",
+              "RI",
+              "SC",
+              "SD",
+              "TN",
+              "TX",
+              "UT",
+              "VI",
+              "VT",
+              "VA",
+              "WA",
+              "WI",
+              "WV",
+              "WY"] %></td>
+  </tr>
+  <tr class="lightzebra">
+    <td class="lighttext">Postal Code</td>
+    <td><%= address_form.text_field :postal_code %></td>
+  </tr>
+  <tr class="darkzebra">
+    <td class="lighttext">Country</td>
+    <td><%= address_form.text_field :country %></td>
   </tr>
   <% end -%>

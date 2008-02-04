@@ -7,23 +7,43 @@
   
   <%= javascript_include_tag 'prototype' %>
   <%= javascript_include_tag 'common' %>  
-  <%= stylesheet_link_tag 'laika' %>
+  <%= stylesheet_link_tag 'blueprint/screen', :media => "screen, projection" %>
+  <%= stylesheet_link_tag 'blueprint/screen', :media => "print" %>
+  <%= stylesheet_link_tag 'style' %>
 
   <title>C32 Templates</title>  
 
 </head>
-
 <body>
+	<div class="level1">
+	<div class="level2">
+	<div class="level3">
+		<div class="header">
+		<div class="right top"><p>Welcome, <a href="#">Andy</a> | <a href="#">Logout</a></p></div>
+			<div class="doggy"><img src="images/laika.png"></div>
+			<div class="right">
+				<ul id="smallnav">
+					<li><a href="#">People & Permissions</a></li>
+					<li><a href="#">About</a></li>
+					<li><a href="#">Feedback</a></li>
+					<li><a href="#">Help</a></li>
+				</ul>
+			</div>
+			<div class="right">
+				<ul id="bignav">
+					<li><a href="dashboard.html">Dashboard</a></li>
+					<li id="active"><a href="library.html">Library</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="content">
 
-  <div id="page">
-  
-    <!-- Start Global Header -->
-    <%= render :partial => 'layouts/header' %>
-    <!-- End Global Header -->
 
 <%= yield  %>
-
-    </div>
-
+	</div>
+	<div class="footer"></div>
+</div>
+</div>
+</div>
 </body>
 </html>

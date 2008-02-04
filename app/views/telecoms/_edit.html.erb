@@ -1,44 +1,26 @@
 <% fields_for telecom do |telecom_form| -%>
-<tr>
-  <td class="hitsp_c32_attribute_name">Home Phone:</td>
-  <td class="hitsp_c32_attribute_value">
-    <div class="person_editable">
-      <%= telecom_form.text_field :home_phone %>
-    </div>
-  </td>
-  <td class="hitsp_c32_attribute_name">Mobile Phone:</td>
-  <td class="hitsp_c32_attribute_value">
-    <div class="person_editable">
-      <%= telecom_form.text_field :mobile_phone %>
-    </div>
-  </td>
+<tr class="lightzebra">
+  <td class="lighttext">Home Phone</td>
+  <td><%= telecom_form.text_field :home_phone %></td>
 </tr>
-<tr>
-  <td class="hitsp_c32_attribute_name">Work Phone:</td>
-  <td class="hitsp_c32_attribute_value">
-    <div class="person_editable">
-      <%= telecom_form.text_field :work_phone %>
-    </div>
-  </td>
-  <td class="hitsp_c32_attribute_name">Vacation Home Phone:</td>
-  <td class="hitsp_c32_attribute_value">
-    <div class="person_editable">
-      <%= telecom_form.text_field :vacation_home_phone %>
-    </div>
-  </td>
+<tr class="darkzebra">
+  <td class="lighttext">Work Phone</td>
+  <td><%= telecom_form.text_field :work_phone %></td>
 </tr>
-<tr>
-  <td class="hitsp_c32_attribute_name">Email:</td>
-  <td class="hitsp_c32_attribute_value">
-    <div class="person_editable">
-      <%= telecom_form.text_field :email %>
-    </div>
-  </td>
-  <td class="hitsp_c32_attribute_name">URL:</td>
-  <td class="hitsp_c32_attribute_value">
-    <div class="person_editable">
-      <%= telecom_form.text_field :url %>
-    </div>
-  </td>
+<tr class="lightzebra">
+  <td class="lighttext">Mobile Phone</td>
+  <td><%= telecom_form.text_field :mobile_phone %></td>
+</tr>
+<tr class="darkzebra">
+  <td class="lighttext">Vacation Home Phone</td>
+  <td><%= telecom_form.text_field :vacation_home_phone %></td>
+</tr>
+<tr class="lightzebra">
+  <td class="lighttext">Email</td>
+  <td><%= telecom_form.text_field :email %></td>
+</tr>
+<tr class="darkzebra">
+  <td class="lighttext">URL</td>
+  <td><%= telecom_form.text_field :url %></td>
 </tr>
 <% end -%>

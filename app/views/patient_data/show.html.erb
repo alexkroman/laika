@@ -1,6 +1,57 @@
 <!-- Start Content -->
  <div id="content">
-   <div class="column first span-16">
+    <div class="container" >
+      <div class="column span-6 append-1">
+        <h3><%= @patient_data.name %></h3>
+        <h4>Display and File Compliance</h4>
+        
+        <div id="modules">
+          <table>
+            <tr>
+              <th><h5>CCD/C32 Modules</h5></th>
+            </tr>
+            <tr>
+              <td class="lighttext">Person Information</td>
+            </tr>
+            <tr>
+              <td class="lighttext">Language Spoken</td>
+            </tr>
+            <tr>
+              <td class="lighttext">Support</td>
+            </tr>
+            <tr>
+              <td class="lighttext">Healthcare Provider</td>
+            </tr>
+            <tr>
+              <td class="lighttext">Insurance Provider</td>
+            </tr>
+            <tr>
+              <td class="lighttext">Allergies and Drugs</td>
+            </tr>
+            <tr>
+              <td class="lighttext">Condition</td>
+            </tr>
+            <tr>
+              <td class="lighttext">Medications</td>
+            </tr>
+            <tr>
+              <td class="lighttext">Pregnancy</td>
+            </tr>
+            <tr>
+              <td class="lighttext">Information Source</td>
+            </tr>
+            <tr>
+              <td class="lighttext">Comments</td>
+            </tr>
+            <tr>
+              <td class="lighttext">Advance Directive</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+   
+   <div class="column span-13 last">
+     <div id="template">
      <div id="personInformationContainer">
          <%= render :partial => '/registration_information/show', :locals => {:registration_information  => @patient_data.registration_information,
                                                                                 :patient_data => @patient_data} %>

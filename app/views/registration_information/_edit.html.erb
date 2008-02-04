@@ -2,181 +2,107 @@
 <% remote_form_for(:registration_information, 
                    :url => patient_data_instance_registration_information_path(patient_data),
                    :update => 'personInformationContainer') do |f| %>
-<div id="person">
-<table class="hitsp_c32_module_header">
-  <tbody>
-    <tr>
-      <td class="hitsp_c32_module_name">Person Information</td>
-      <td align="right">
-        <%= f.submit "Save" %>
-      </td>
-    </tr>
-  </tbody>
+<h5>Person Information</h5>
+<table>
+	<tr class="darkzebra">
+		<td class="lighttext">Person ID</td>
+		<td><%= f.text_field :person_identifier %></td>
+	</tr>
+  <%= render :partial => '/person_names/edit', :locals => {:person_name => registration_information.person_name}%>
+	<tr class="spacer"><td></td><td></td></tr>
+	<tr class="lightzebra">
+		<td class="lighttext">Gender</td>
+		<td><%= f.select :gender, ['Male', 'Female'] %></td>
+	</tr>
+	<tr class="darkzebra">
+		<td class="lighttext">Marital Status</td>
+		<td><%= f.select :marital_status,
+      ["Single",
+      "Married",
+      "Divorced ",
+      "Never married",
+      "Divorced/annulled",
+      "Divorced/separated",
+      "Annulled",
+      "Widowed",
+      "Separated, NOS",
+      "Separated, legal",
+      "Separated, nonlegal",
+      "Temporary separation",
+      "Permanent separation",
+      "Consensual union",
+      "Unknown",
+      "Common Law",
+      "Domestic Partner",
+      "Registered Domestic Partner",
+      "Living together",
+      "Interlocutory",
+      "Other",
+      "Unreported"]
+    %></td>
+	</tr>
+	<tr class="lightzebra">
+		<td class="lighttext">Race</td>
+		<td><%= f.select :race,
+        ["American Indian/Alaska",
+        "Asian",
+        "Black",
+        "Hawaiian/Pacific Islander",
+        "White",
+        "Other"] %></td>
+	</tr>
+	<tr class="darkzebra">
+		<td class="lighttext">Ethnicity</td>
+		<td><%= f.select :ethnicity, 
+      ["Hispanic/Latino",
+      "Spaniard",
+      "Andalusian",
+      "Asturian",
+      "Castillian",
+      "Catalonian",
+      "Belearic Islander",
+      "Gallego",
+      "Valencian",
+      "Canarian",
+      "Spanish Basque",
+      "Mexican",
+      "Mexican American",
+      "Mexicano",
+      "Chicano",
+      "La Raza",
+      "Mexican American Indiand",
+      "Central American",
+      "Costa Rican",
+      "Guatemalan",
+      "Honduran",
+      "Nicaraguan",
+      "Panamanian",
+      "Salvadoran",
+      "Central American Indian",
+      "South American",
+      "Argentinean",
+      "Bolivian",
+      "Chilean",
+      "Colombian",
+      "Ecuadorian",
+      "Paraguayan",
+      "Peruvian",
+      "Uruguayan",
+      "Venezuelan",
+      "South American Indian",
+      "Criollo",
+      "Latin American",
+      "Puerto Rican",
+      "Cuban",
+      "Dominican"] %></td>
+	</tr>
+	<tr class="spacer"><td></td><td></td></tr>
+  <%= render :partial => '/addresses/edit', :locals => {:address => registration_information.address}%>
+  <%= render :partial => '/telecoms/edit', :locals => {:telecom => registration_information.telecom}%>
+  <tr class="lightzebra">
+    <td></td>
+    <td><%= f.submit "Save" %></td>
+  </tr>
 </table>
-<div id="hitsp_32_person_info">
-  <table class="hitsp_c32_module">
-    <tbody>
-      <tr>
-        <td class="hitsp_c32_attribute_name">Person ID:</td>
-        <td colspan="3" class="hitsp_c32_attribute_value">
-          <div class="person_editable">
-            <%= f.text_field :person_identifier %>           
-          </div>
-        </td>
-      </tr>
-      </tr>
-      <%= render :partial => '/person_names/edit', :locals => {:person_name => registration_information.person_name}%>
-      <tr>
-        <td class="hitsp_c32_attribute_name">Date of Birth:</td>
-        <td class="hitsp_c32_attribute_value">
-            <%= f.date_select :birth_date %>
-        </td>
-        <td class="hitsp_c32_attribute_name">Gender:</td>
-        <td class="hitsp_c32_attribute_value">
-          <div class="person_editable">
-            <%= f.select :gender, ['Male', 'Female'] %>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td class="hitsp_c32_attribute_name">Marital Status:</td>
-        <td class="hitsp_c32_attribute_value">
-          <div class="person_editable">
-            <%= f.select :marital_status,
-              ["Single",
-              "Married",
-              "Divorced ",
-              "Never married",
-              "Divorced/annulled",
-              "Divorced/separated",
-              "Annulled",
-              "Widowed",
-              "Separated, NOS",
-              "Separated, legal",
-              "Separated, nonlegal",
-              "Temporary separation",
-              "Permanent separation",
-              "Consensual union",
-              "Unknown",
-              "Common Law",
-              "Domestic Partner",
-              "Registered Domestic Partner",
-              "Living together",
-              "Interlocutory",
-              "Other",
-              "Unreported"]
-            %> 
-          </div>
-        </td>
-        <td class="hitsp_c32_attribute_name">Religious Affiliation:</td>
-        <td class="hitsp_c32_attribute_value">
-          <div class="person_editable">
-            <%= f.select :religious_affiliation,
-             ["Advent Christian Church",
-             "Agnostic",
-             "Atheist",
-             "Bahai",
-             "Baptist",
-             "Bible Protestant",
-             "Buddhist",
-             "Catholic",
-             "Christian Science",
-             "Christian, Other",
-             "Church of God",
-             "Church of the Nazarene",
-             "Churches of Christ",
-             "Elim Fellowship",
-             "Episcopal",
-             "Friends",
-             "Hindu",
-             "Jain",
-             "Jehovah's Witness",
-             "Judaism",
-             "Lutheran",
-             "Mennonite",
-             "Methoodist",
-             "Missionary",
-             "Muslim",
-             "Native American",
-             "Greek Orthodox",
-             "Pentecostal",
-             "Presbyterian",
-             "Protestant",
-             "Salvation Army",
-             "Shintoist",
-             "Sikh",
-             "Spiritist",
-             "Unitarian",
-             "Unknown"] %>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td class="hitsp_c32_attribute_name">Race:</td>
-        <td class="hitsp_c32_attribute_value">
-          <div class="person_editable">
-          <%= f.select :race,
-              ["American Indian/Alaska",
-              "Asian",
-              "Black",
-              "Hawaiian/Pacific Islander",
-              "White",
-              "Other"] %>
-          </div>
-        </td>
-        <td class="hitsp_c32_attribute_name">Ethnicity:</td>
-        <td class="hitsp_c32_attribute_value">
-          <div class="person_editable">
-            <%= f.select :ethnicity, 
-              ["Hispanic/Latino",
-              "Spaniard",
-              "Andalusian",
-              "Asturian",
-              "Castillian",
-              "Catalonian",
-              "Belearic Islander",
-              "Gallego",
-              "Valencian",
-              "Canarian",
-              "Spanish Basque",
-              "Mexican",
-              "Mexican American",
-              "Mexicano",
-              "Chicano",
-              "La Raza",
-              "Mexican American Indiand",
-              "Central American",
-              "Costa Rican",
-              "Guatemalan",
-              "Honduran",
-              "Nicaraguan",
-              "Panamanian",
-              "Salvadoran",
-              "Central American Indian",
-              "South American",
-              "Argentinean",
-              "Bolivian",
-              "Chilean",
-              "Colombian",
-              "Ecuadorian",
-              "Paraguayan",
-              "Peruvian",
-              "Uruguayan",
-              "Venezuelan",
-              "South American Indian",
-              "Criollo",
-              "Latin American",
-              "Puerto Rican",
-              "Cuban",
-              "Dominican"] %>
-          </div>
-        </td>
-      </tr>
-      <%= render :partial => '/addresses/edit', :locals => {:address => registration_information.address}%>
-      <%= render :partial => '/telecoms/edit', :locals => {:telecom => registration_information.telecom}%>
-    </tbody>
-  </table>
-</div>
-</div>
 <!-- End Personal Information Module -->
 <% end %>
