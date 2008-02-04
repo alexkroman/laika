@@ -4,8 +4,7 @@
           <div class="doggy"><img src="images/laika.png"></div>
           <div class="right">
             <ul id="smallnav">
-              <li><%= link_to_unless(current_page?(:controller => 'vendors'), 'Vendors', {:controller => 'vendors'}) do |name|
-                  "<b>#{name}</b>" end %></li>
+              <li><%= link_to 'People &amp; Inspections', :controller => 'users' %></li>
               <li><a href="#">About</a></li>
               <li><a href="mailto:talk@projectlaika.org">Feedback</a></li>
               <li><a href="#">Help</a></li>
@@ -13,9 +12,16 @@
           </div>
           <div class="right">
             <ul id="bignav">
-              <li id="active"><%= link_to_unless(current_page?(:controller => 'vendor_test_plans'), 'Tests', {:controller => 'vendor_test_plans'}) do |name| "<b>#{name}</b>" end %></li>
-              <li><%= link_to_unless(current_page?(:controller => 'patient_data'), 'C32 Templates', {:controller => 'patient_data'}) do |name|
-                  "<b>#{name}</b>" end %></li>
+              <% if current_page?(:controller => 'users') %>
+                <li><%= link_to('Dashboard', :controller => 'vendor_test_plans') %></li>
+                <li><%= link_to('Library', :controller => 'patient_data') %></li>
+              <% elsif current_page?(:controller => 'patient_data') %>
+                <li><%= link_to('Dashboard', :controller => 'vendor_test_plans') %></li>
+                <li id="active"><%= link_to('Library', :controller => 'patient_data') %></li>
+              <% else %>
+                <li id="active"><%= link_to('Dashboard', :controller => 'vendor_test_plans') %></li>
+                <li><%= link_to('Library', :controller => 'patient_data') %></li>
+              <% end %>
             </ul>
           </div>
         </div>

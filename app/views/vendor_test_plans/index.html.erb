@@ -1,65 +1,48 @@
-<!-- Start Content -->
-<div id="patientDataList">
-  <br/>
-  <table class="hitsp_module_list">
-    <caption>C32 Tests</caption>
-    <!-- there is a known bug in IE 6 regarding sibling selectors
-         since we want the second column to look different than the first
-         we are going to work aroudn this bug by inserting a class on every other td
-    -->
-    <tbody>
-      <tr valign="top">
-          <td width="40"><b>Status</b></td>  
-          <td width="120"><b>Vendor</b></td>
-          <td width="140"><b>C32 Template</b></td>
-          <td width="80"><b>Test Date</b></td>  
-          <td width="130"><b>Manual Test</b></td>
-          <td width="400"><b>Automated Test</b></td>
-        </tr>
-        <% for vendor_test_plan in @vendor_test_plans %>
-        <tr valign="top">
-          <td>
-            <c:choose>
-              <c:when test="${vtp.clinicalDocument == null}"><img src="../images/gray_circle.jpg" alt="No test results yet"></c:when>
-              <c:otherwise><img src="../images/red_circle.jpg" alt="Failed"></c:otherwise>
-            </c:choose>
-          </td>  
-          <td><%= vendor_test_plan.vendor.display_name %></td>
-          <td><%= link_to vendor_test_plan.patient_data.name, patient_data_instance_url(vendor_test_plan.patient_data)%></td>
-          <td>15.Dec.2007</td>  
-          <td>
-            <%= link_to 'Export Prose', patient_data_instance_url(vendor_test_plan.patient_data)%>
-            <br/>
-            <a href="#">Visual Verification</a><br/>
-          </td>
-          <td>
-            <%= link_to 'Export XML', patient_data_instance_url(vendor_test_plan.patient_data) %>
-            <% if vendor_test_plan.clinical_document -%>
-                <%= link_to 'Automated XML Verification', inspect_content_vendor_test_plan_url(vendor_test_plan) %>
-            <% else -%>
-                <br/>
-                <% form_for(:clinical_document, :url => vendor_test_plan_clinical_document_url(vendor_test_plan), :html => { :multipart => true }) do |f| -%>
-                    <input type="hidden" id="clinical_document_vendor_test_plan_id" name="clinical_document[vendor_test_plan_id]" 
-                                value="<%= vendor_test_plan.id %>" />
-                    <label>Document Type &nbsp;&nbsp;&nbsp;&nbsp;
-                    <%= f.select :doc_type, ['CDA', 'CCD', 'C32'] %>
-                    </label>                                
-                    <label>Clinical Document            
-                    <%= f.file_field :uploaded_data %>
-                    </label>
-                    <%= submit_tag 'Attach' %>
-                <% end -%>
-            <% end -%>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table> 
-</div>
-<!-- End Content -->
-
-<!-- Start Footer -->
-<div id="footer">
-</div>
-<!-- End Footer -->
-
+        <!-- Start Content -->
+        <div class="content">
+        
+          <div class="container">
+        
+            <h3>Inspection ID: 28472</h3>
+            
+            <p class="toplinks">
+              <a href="#">assign template</a>
+              <a href="#">create report</a>
+            </p>
+            
+            <!-- Start Dashboard Table -->
+            <table id="dashboard">
+              <tr>
+                <th><a href="#"><div>Status</div></a></th>
+                <th class="selected"><a href="#"><div>Test Case</div></a></th>
+                <th><a href="#"><div>Last Tested</div></a></th>
+                <th><a href="#"><div>Kind</div></a></th>
+                <th><a href="#"><div>Required</div></a></th>
+                <th><a href="#"><div>Provisional</div></a></th>
+                <th class="noarrow"><div>Actions</div></th>
+              </tr>
+              
+              <!-- Start Vendor Test Plan Loop -->
+              <% for vendor_test_plan in @vendor_test_plans %>
+              <tr>
+                <td><img src="images/inprogress.png">in progress</td>
+                <td><%= link_to vendor_test_plan.patient_data.name, patient_data_instance_url(vendor_test_plan.patient_data)%></td>
+                <td>17.Dec.07</td>
+                <td>Display and File</td>
+                <td><a href="template_passed.html">100%</a></td>
+                <td><a href="template_passed.html">80% <span class="small">(32 violations)</span></a></td>
+                <td class="actions">
+                  <%= link_to 'edit', patient_data_instance_url(vendor_test_plan.patient_data)%>
+                  <a href="#">delete</a>
+                  <%= link_to 'prose', patient_data_instance_url(vendor_test_plan.patient_data)%>
+                  <%= link_to 'execute', patient_data_instance_url(vendor_test_plan.patient_data) %>
+                </td>
+              </tr>
+              <% end %>
+              <!-- End Vendor Test Plan Loop -->
+            
+            </table>
+            <!-- End Dashboard Table -->
+            
+          </div>
+        </div>
