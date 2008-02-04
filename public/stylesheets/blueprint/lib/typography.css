@@ -28,13 +28,14 @@ body { font-size: 75%; }
    font: 1em Georgia, "lucida bright", "times new roman", serif; */
    
 body { 
-  color: #787878; 
-  font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+  color: #424242; 
+  font-family: "Trebuchet MS", "Lucida Grande", Helvetica, Arial, Verdana, sans-serif; 
 }
+/*
 h1,h2,h3,h4,h5,h6 { 
   color: #111; 
-  font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif; 
-}
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; 
+}*/
 
 
 /* Headings
@@ -44,9 +45,11 @@ h1,h2,h3,h4,h5,h6 { font-weight: normal; }
 
 h1 { font-size: 3em; line-height: 1; margin-bottom: 0.5em; }
 h2 { font-size: 2em; margin-bottom: 0.75em; }
-h3 { font-size: 1.5em; line-height: 1; margin-bottom: 1em; }
-h4 { font-size: 1.2em; line-height: 1.25; margin-bottom: 1.25em; }
-h5 { font-size: 1em; font-weight: bold; margin-bottom: 1.5em; }
+/*h3 { font-size: 1.5em; line-height: 1; margin-bottom: 1em; }*/
+h3 { font-size: 1.5em; line-height: 1; font-weight:bold; margin-bottom:3px;}
+/*h4 { font-size: 1.2em; line-height: 1.25; margin-bottom: 1.25em;}*/
+h4 { font-size: 1.2em; line-height: 1.25; margin-bottom: 1.25em; color:#1f3b44;}
+h5 { font-size: 1.15em; font-weight: bold; margin-bottom: 1.5em; }
 h6 { font-size: 1em; font-weight: bold; }
 
 
@@ -72,8 +75,8 @@ address     { margin-top: 1.5em; font-style: italic; }
 del         { color:#666; }
 
 a:focus, 
-a:hover     { color:#666; }
-a           { color: #40affe; text-decoration: none; }
+a:hover     { color: #424242; }
+a           { color: #424242; text-decoration: none; }
 
 blockquote  { margin: 1.5em; color: #666; font-style: italic; }
 strong      { font-weight: bold; }
@@ -101,7 +104,7 @@ table .last { padding-right: 0; }
 /* Some default classes
 -------------------------------------------------------------- */
 
-.small      { font-size: .8em; margin-bottom: 1.875em; line-height: 1.875em; }
+.small      { font-size: .95em; margin-bottom: 1.875em; line-height: 1.875em; }
 .large      { font-size: 1.2em; line-height: 2.5em; margin-bottom: 1.25em; }
 .quiet      { color: #666; }
 
@@ -113,4 +116,4 @@ table .last { padding-right: 0; }
 .top        { margin-top:0; padding-top:0; }
 .bottom     { margin-bottom:0; padding-bottom:0; }
 
-
+.right 		{ text-align:right; }
