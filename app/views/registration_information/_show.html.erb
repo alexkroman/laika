@@ -1,97 +1,47 @@
-
+<!-- Start Personal Information Module -->
+<h5>Person Information</h5>
+<table>
 <% if registration_information %>
-    <!-- Start Personal Information Module -->
-    <div id="person">
-    <table class="hitsp_c32_module_header">
-      <tbody>
-        <tr>
-          <td class="hitsp_c32_module_name">Person Information</td>
-          </td>
-          <td align="right">
-            <div id="personMenuBusy" style="display:none">
-              <%= image_tag 'progressBar.gif' %>
-            </div>
-            <div id="personMenu">
-              <span id="person_hide_span" >
-                <a href="javascript:hide_module('person');">Hide</a>
-              </span>
-              <span id="person_show_span" style="display:none" >
-                <a href="javascript:show_module('person');">Show</a>
-              </span>
-              <span id="person_edit_span" >
-                <%= link_to_remote 'Edit', :update => 'personInformationContainer', 
-                                           :url => edit_patient_data_instance_registration_information_path(patient_data),
-                                           :method => 'get' %>
-              </span>
-            </div> 
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div id="hitsp_32_person_info">
-      <table class="hitsp_c32_module">
-        <tbody>
-          <tr>
-            <td class="hitsp_c32_attribute_name">Person ID:</td>
-            <td colspan="3" class="hitsp_c32_attribute_value">
-              <div class="person_read_only">
-                <%=h registration_information.person_identifier %>
-              </div>
-            </td>
-          </tr>
-          </tr>
-          <%= render :partial => '/person_names/show', :locals => {:person_name => registration_information.person_name}%>
-          <tr>
-            <td class="hitsp_c32_attribute_name">Date of Birth:</td>
-            <td class="hitsp_c32_attribute_value">
-              <div class="person_read_only">
-                <%=h registration_information.birth_date %>
-              </div>
-            </td>
-            <td class="hitsp_c32_attribute_name">Gender:</td>
-            <td class="hitsp_c32_attribute_value">
-              <div class="person_read_only">
-                <%=h registration_information.gender %>
-              </div>
-            </td>
-          <tr>
-            <td class="hitsp_c32_attribute_name">Marital Status:</td>
-            <td class="hitsp_c32_attribute_value">
-              <div class="person_read_only">
-                <%=h registration_information.marital_status %>
-              </div>
-            </td>
-            <td class="hitsp_c32_attribute_name">Religious Affiliation:</td>
-            <td class="hitsp_c32_attribute_value">
-              <div class="person_read_only">
-                <%=h registration_information.religious_affiliation %>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td class="hitsp_c32_attribute_name">Race:</td>
-            <td class="hitsp_c32_attribute_value">
-              <div class="person_read_only">
-                <%=h registration_information.race %>
-              </div>
-            </td>
-            <td class="hitsp_c32_attribute_name">Ethnicity:</td>
-            <td class="hitsp_c32_attribute_value">
-              <div class="person_read_only">
-                <%=h registration_information.ethnicity %>
-              </div>
-            </td>
-          </tr>
-          <%= render :partial => '/addresses/show', :locals => {:address => registration_information.address}%>
-          <%= render :partial => '/telecoms/show', :locals => {:telecom => registration_information.telecom}%>
-        </tbody>
-      </table>
-    </div>
-    </div>
-    <!-- End Personal Information Module -->
+<tr class="darkzebra">
+  <td class="lighttext">Person ID</td>
+  <td><%=h registration_information.person_identifier %></td>
+</tr>
+<%= render :partial => '/person_names/show', :locals => {:person_name => registration_information.person_name}%>
+<tr class="spacer"><td></td><td></td></tr>
+<tr class="lightzebra">
+  <td class="lighttext">Gender</td>
+  <td><%=h registration_information.gender %></td>
+</tr>
+<tr class="darkzebra">
+  <td class="lighttext">Marital Status</td>
+  <td><%=h registration_information.marital_status %></td>
+</tr>
+<tr class="lightzebra">
+  <td class="lighttext">Race</td>
+  <td><%=h registration_information.race %></td>
+</tr>
+<tr class="darkzebra">
+  <td class="lighttext">Ethnicity</td>
+  <td><%=h registration_information.ethnicity %></td>
+</tr>
+<%= render :partial => '/addresses/show', :locals => {:address => registration_information.address}%>
+<%= render :partial => '/telecoms/show', :locals => {:telecom => registration_information.telecom}%>
+
+<tr class="lightzebra">
+  <td></td>
+  <td>
+    <%= link_to_remote 'Edit', :update => 'personInformationContainer', 
+                               :url => edit_patient_data_instance_registration_information_path(patient_data),
+                               :method => 'get' %>
+  </td>
+</tr>
   <% else -%>
-      <p> There is no registration data for this test case...
-          <%= link_to_remote 'Create some', :update => 'personInformationContainer',
-                                            :url => new_patient_data_instance_registration_information_path(patient_data), :method => 'get' %>
-      </p>
+  <tr class="darkzebra">
+    <td class="lighttext">There is no registration data for this test case</td>
+    <td><%= link_to_remote 'Create some', :update => 'personInformationContainer',
+                                      :url => new_patient_data_instance_registration_information_path(patient_data), :method => 'get' %>
+    </td>
+  </tr>
   <% end -%>
+</table>  
+<!-- End Personal Information Module -->
