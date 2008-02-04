@@ -1,42 +1,39 @@
-
-<table class="hitsp_c32_module_header">
-  <tbody>  
-    <tr>
-      <td class="hitsp_c32_module_name">Support</td>
-      <td class="hitsp_c32_attribute_collapse">
-        <a href="javascript:switch_hitsp_module('hitsp_32_support_info', 'support_info_hide_show_link');" id="support_info_hide_show_link">Hide</a>
-        &nbsp;&nbsp;&nbsp;<a href="#">Edit</a>
-        &nbsp;&nbsp;&nbsp;<a href="javascript:scroll_to_module('page', 1.5);">Top</a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<h5>Person Information</h5>
+<table>
 <% if support -%>
-<div id="hitsp_32_support_info">
-  <table class="hitsp_c32_module">
-    <tbody>
-      <tr>
-        <td class="hitsp_c32_attribute_name">Start Support:</td>
-        <td class="hitsp_c32_attribute_value"><%=h support.start_support %></td>
-        <td class="hitsp_c32_attribute_name">End Support:</td>
-        <td class="hitsp_c32_attribute_value"><%=h support.end_support %></td>
-      </tr>
-      <%= render :partial => '/person_names/show', :locals => {:person_name => support.person_name}%>
-      <tr>
-        <td class="hitsp_c32_attribute_name">Contact:</td>
-        <td class="hitsp_c32_attribute_value"><%=h support.contact_relationship %></td>
-        <td class="hitsp_c32_attribute_name">Type:</td>
-        <td class="hitsp_c32_attribute_value"><%=h support.contact_type %></td>
-      </tr>
-      <%= render :partial => '/addresses/show', :locals => {:address => support.address}%>
-      <%= render :partial => '/telecoms/show', :locals => {:telecom => support.telecom}%>
-    </tbody>
-  </table>
-</div>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Start Support</td>
+    <td><%=h support.start_support %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">End Support</td>
+    <td><%=h support.end_support %></td>
+  </tr>
+  <%= render :partial => '/person_names/show', :locals => {:person_name => support.person_name}%>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Contact</td>
+    <td><%=h support.contact_relationship %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Type</td>
+    <td><%=h support.contact_type %></td>
+  </tr>
+  <%= render :partial => '/addresses/show', :locals => {:address => support.address}%>
+  <%= render :partial => '/telecoms/show', :locals => {:telecom => support.telecom}%>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td></td>
+    <td>
+      <%= link_to_remote 'Edit', :update => 'support', 
+                                 :url => edit_patient_data_instance_support_path(patient_data),
+                                 :method => 'get' %>
+    </td>
+  </tr>
 <% else -%>
-    <p> There is no support data for this test case...
-        <%= link_to_remote 'Create some', :update => 'support',
-                                          :url => new_patient_data_instance_support_path(patient_data), :method => 'get' %>
-    </p>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">There is no support data for this test case</td>
+    <td><%= link_to_remote 'Create some', :update => 'support',
+                                      :url => new_patient_data_instance_support_path(patient_data), :method => 'get' %>
+    </td>
+  </tr>
 <% end -%>
-
+</table>

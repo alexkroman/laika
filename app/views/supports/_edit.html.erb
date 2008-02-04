@@ -2,37 +2,32 @@
 <% remote_form_for(:support, 
                    :url => patient_data_instance_support_path(patient_data),
                    :update => 'support') do |f| %>
-                   <table class="hitsp_c32_module_header">
-                     <tbody>  
-                       <tr>
-                         <td class="hitsp_c32_module_name">Support</td>
-                         <td align="right">
-                            <%= f.submit "Save" %>
-                         </td>
-                       </tr>
-                     </tbody>
-                   </table>
-                   <div id="hitsp_32_support_info">
-                     <table class="hitsp_c32_module">
-                       <tbody>
-                         <tr>
-                           <td class="hitsp_c32_attribute_name">Start Support:</td>
-                           <td class="hitsp_c32_attribute_value"><%= f.date_select :start_support %></td>
-                           <td class="hitsp_c32_attribute_name">End Support:</td>
-                           <td class="hitsp_c32_attribute_value"><%= f.date_select :end_support %></td>
-                         </tr>
-                         <%= render :partial => '/person_names/edit', :locals => {:person_name => support.person_name}%>
-                         <tr>
-                           <td class="hitsp_c32_attribute_name">Contact:</td>
-                           <td class="hitsp_c32_attribute_value"><%= f.text_field :contact_relationship %></td>
-                           <td class="hitsp_c32_attribute_name">Type:</td>
-                           <td class="hitsp_c32_attribute_value"><%= f.text_field :contact_type %></td>
-                         </tr>
-                         <%= render :partial => '/addresses/edit', :locals => {:address => support.address}%>
-                         <%= render :partial => '/telecoms/edit', :locals => {:telecom => support.telecom}%>
-                       </tbody>
-                     </table>
-                   </div>
+<h5>Support</h5>
+<table>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Start Support</td>
+    <td><%= f.date_select :start_support %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">End Support</td>
+    <td><%= f.date_select :end_support %></td>
+  </tr>
+  <%= render :partial => '/person_names/edit', :locals => {:person_name => support.person_name}%>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Contact</td>
+    <td><%= f.text_field :contact_relationship %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Type</td>
+    <td><%= f.text_field :contact_type %></td>
+  </tr>
+  <%= render :partial => '/addresses/edit', :locals => {:address => support.address}%>
+  <%= render :partial => '/telecoms/edit', :locals => {:telecom => support.telecom}%>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td></td>
+    <td><%= f.submit "Save" %></td>
+  </tr>
+</table>
 <% end %>
 
 
