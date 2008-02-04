@@ -1,33 +1,50 @@
-<p>
-  <b>Start service:</b>
-  <%=h @provider.start_service %>
-</p>
+<table>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Start Service</td>
+    <td>
+      <%=h provider.start_service %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">End Service</td>
+    <td>
+      <%=h provider.end_service %>
+    </td>
+  </tr>
+  <%= render :partial => '/person_names/show', :locals => {:person_name => provider.person_name}%>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Role Code</td>
+    <td>
+        <%=h provider.role_code %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Role Description</td>
+    <td>
+      <%=h provider.role_description %>
+    </td>
+  </tr>
+  <%= render :partial => '/addresses/show', :locals => {:address => provider.address}%>
+  <%= render :partial => '/telecoms/show', :locals => {:telecom => provider.telecom}%>
 
-<p>
-  <b>End service:</b>
-  <%=h @provider.end_service %>
-</p>
-
-<p>
-  <b>Role code:</b>
-  <%=h @provider.role_code %>
-</p>
-
-<p>
-  <b>Role description:</b>
-  <%=h @provider.role_description %>
-</p>
-
-<p>
-  <b>Organization:</b>
-  <%=h @provider.organization %>
-</p>
-
-<p>
-  <b>Patient identifier:</b>
-  <%=h @provider.patient_identifier %>
-</p>
-
-
-<%= link_to 'Edit', edit_provider_path(@provider) %> |
-<%= link_to 'Back', providers_path %>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Organization</td>
+    <td>
+        <%=h provider.organization %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Patient Identifier</td>
+    <td>
+       <%=h provider.patient_identifier %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td></td>
+    <td>
+      <%= link_to_remote 'Edit', :update => "provider#{provider.id}",
+                                 :url => edit_patient_data_instance_provider_path(patient_data, provider),
+                                 :method => 'get' %>
+    </td>
+  </tr>
+</table>

@@ -86,7 +86,7 @@
    <!-- Start Healthcare Provider Module -->
    <h5>Healthcare Provider</h5>
    <% for provider in @patient_data.providers -%>
-   <div id="provider#{provider.id}">
+   <div id="provider<%= provider.id %>">
      <%= render :partial => '/providers/show', :locals => {:provider  => provider, :patient_data => @patient_data} %>
    </div>
    <% end -%>
