@@ -1,33 +1,22 @@
-    <!-- Start Menu -->
-    <div id="header">
-      
-      <ul>
-        <li><%= image_tag "/images/laika_logo.jpeg", :alt => "Laika Logo" %>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        </li>
-        
-        <li><%= link_to_unless(current_page?(:controller => 'vendor_test_plans'), 'Tests', {:controller => 'vendor_test_plans'}) do |name|
-                  "<b>#{name}</b>"
-                end
-            %>
-        </li>
-        <li><%= link_to_unless(current_page?(:controller => 'patient_data'), 'C32 Templates', {:controller => 'patient_data'}) do |name|
-                  "<b>#{name}</b>"
-                end
-            %>
-        </li>                    <li><%= link_to_unless(current_page?(:controller => 'vendors'), 'Vendors', {:controller => 'vendors'}) do |name|
-                  "<b>#{name}</b>"
-                end
-            %>
-        </li>
-        <li><a href="#">Users</a></li>
-        <li><a href="#">FAQ</a> </li>
-        <li><a href="mailto:talk@projectlaika.org">Feedback</a></li>
-        <li><%= link_to 'Logout', :controller => 'account', :action => 'logout' %></li>
-        <li>Welcome, <%= self.current_user.first_name %></li>
-      </ul>
-    </div>
-    <!-- End Menu -->
+        <!-- Start Header -->
+        <div class="header">
+          <div class="right top"><p>Welcome, <a href="#"><%= self.current_user.first_name %></a> | <%= link_to 'Logout', :controller => 'account', :action => 'logout' %></p></div>
+          <div class="doggy"><img src="images/laika.png"></div>
+          <div class="right">
+            <ul id="smallnav">
+              <li><%= link_to_unless(current_page?(:controller => 'vendors'), 'Vendors', {:controller => 'vendors'}) do |name|
+                  "<b>#{name}</b>" end %></li>
+              <li><a href="#">About</a></li>
+              <li><a href="mailto:talk@projectlaika.org">Feedback</a></li>
+              <li><a href="#">Help</a></li>
+            </ul>
+          </div>
+          <div class="right">
+            <ul id="bignav">
+              <li id="active"><%= link_to_unless(current_page?(:controller => 'vendor_test_plans'), 'Tests', {:controller => 'vendor_test_plans'}) do |name| "<b>#{name}</b>" end %></li>
+              <li><%= link_to_unless(current_page?(:controller => 'patient_data'), 'C32 Templates', {:controller => 'patient_data'}) do |name|
+                  "<b>#{name}</b>" end %></li>
+            </ul>
+          </div>
+        </div>
+        <!-- End Header -->
