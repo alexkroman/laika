@@ -1,42 +1,64 @@
-<h1>Editing provider</h1>
+<% if provider.new_record?
+     provider_div = 'providerNew' -%>
+<div id="providerNew">
+<% else
+     provider_div = "provider#{provider.id}"
+   end %>
+<%   remote_form_for([:patient_data_instance, provider], 
+                    :update => provider_div) do |f| -%>
+<table>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Start Service</td>
+    <td>
+      <%= f.date_select :start_service %>
+    </td>
+  </tr>
 
-<%= error_messages_for :provider %>
-
-<% form_for(@provider) do |f| %>
-  <p>
-    <b>Start service</b><br />
-    <%= f.date_select :start_service %>
-  </p>
-
-  <p>
-    <b>End service</b><br />
-    <%= f.date_select :end_service %>
-  </p>
-
-  <p>
-    <b>Role code</b><br />
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">End Service</td>
+    <td>
+      <%= f.date_select :end_service %>
+    </td>
+  </tr>
+  <%= render :partial => '/person_names/edit', :locals => {:person_name => provider.person_name}%>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Role Code</td>
+    <td>
     <%= f.text_field :role_code %>
-  </p>
-
-  <p>
-    <b>Role description</b><br />
+    </td>
+  </tr>
+  
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Role Description</td>
+    <td>
     <%= f.text_field :role_description %>
-  </p>
+    </td>
+  </tr>
+  <%= render :partial => '/addresses/edit', :locals => {:address => provider.address}%>
+  <%= render :partial => '/telecoms/edit', :locals => {:telecom => provider.telecom}%>
 
-  <p>
-    <b>Organization</b><br />
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Organization</td>
+    <td>
     <%= f.text_field :organization %>
-  </p>
+    </td>
+  </tr>
 
-  <p>
-    <b>Patient identifier</b><br />
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Patient Identifier</td>
+    <td>
     <%= f.text_field :patient_identifier %>
-  </p>
+    </td>
+  </tr>
 
-  <p>
-    <%= f.submit "Update" %>
-  </p>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td></td>
+    <td>
+      <%= f.submit "Save" %>
+    </td>
+  </tr>
+</table>
 <% end %>
-
-<%= link_to 'Show', @provider %> |
-<%= link_to 'Back', providers_path %>
+<% if provider.new_record? -%>
+</div>
+<% end -%>
