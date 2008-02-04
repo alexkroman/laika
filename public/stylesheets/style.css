@@ -4,11 +4,11 @@ body {
 }
 
 .level1 {
-	background:url(../images/back_top.png) repeat-x;
+	background:url(/images/back_top.png) repeat-x;
 }
 
 .level2 {
-	background: url(../images/header_back.png) no-repeat 50% 0px;
+	background: url(/images/header_back.png) no-repeat 50% 0px;
 }
 
 .level3 {
@@ -73,7 +73,7 @@ body {
 
 .header ul#bignav #active a {
 	color:#ff2800;
-	background: url(../images/header_selected.png) repeat-x;
+	background: url(/images/header_selected.png) repeat-x;
 }
 
 .header ul#bignav a {
@@ -83,7 +83,7 @@ body {
 
 .header ul#bignav a:hover {
 	color:#27282b;
-	background: url(../images/header_hover.png) repeat-x;
+	background: url(/images/header_hover.png) repeat-x;
 }
 
 .header ul#smallnav {
@@ -111,13 +111,13 @@ body {
 }
 
 .content {
-	background: url(../images/content.png);
+	background: url(/images/content.png);
 	padding:45px 5px; 
 	min-height:400px;
 }
 
 .footer {
-	background: url(../images/footer.png);
+	background: url(/images/footer.png);
 	height:40px;
 }
 
@@ -157,12 +157,12 @@ table#dashboard a {
 }
 
 #dashboard th div {
-	background:url(../images/lightarrow.png) no-repeat right;
+	background:url(/images/lightarrow.png) no-repeat right;
 	padding-right:15px;
 }
 
 #dashboard th.selected div {
-	background:url(../images/darkarrow.png) no-repeat right;
+	background:url(/images/darkarrow.png) no-repeat right;
 }
 
 #dashboard th.noarrow div {
@@ -251,7 +251,7 @@ table#dashboard a {
 }
 
 #template .provviol {
-	background: url(../images/violation_back.png);
+	background: url(/images/violation_back.png);
 }
 
 #template .provviol .label {
@@ -279,7 +279,7 @@ table#dashboard a {
 }
 
 #template .provexp {
-	background: url(../images/expected_back.png);
+	background: url(/images/expected_back.png);
 }
 
 #template .provexp .label {
@@ -307,11 +307,11 @@ table#dashboard a {
 }
 
 #results .fail {
-	background:url(../images/fail_back.png) repeat-x;
+	background:url(/images/fail_back.png) repeat-x;
 }
 
 #results .pass {
-	background:url(../images/pass_back.png) repeat-x;
+	background:url(/images/pass_back.png) repeat-x;
 }
 
 #results .info {
@@ -331,12 +331,12 @@ table#dashboard a {
 }
 
 #results .on {
-	background:url(../images/results_on_back.png) repeat-x;
+	background:url(/images/results_on_back.png) repeat-x;
 	border:1px solid #d5a9a1;
 }
 
 #results .off {
-	background:url(../images/results_off_back.png) repeat-x;
+	background:url(/images/results_off_back.png) repeat-x;
 	border:1px solid #d3d3d3;
 }
 
@@ -349,12 +349,12 @@ table#dashboard a {
 }
 
 #results a .on {
-	background:url(../images/results_on.png) repeat-x;
+	background:url(/images/results_on.png) repeat-x;
 	border:1px solid #f0836f;
 }
 
 #results a .off {
-	background:url(../images/results_off.png) repeat-x;
+	background:url(/images/results_off.png) repeat-x;
 	border:1px solid #cdcece;
 }
 
