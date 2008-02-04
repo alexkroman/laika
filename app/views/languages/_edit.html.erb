@@ -3,30 +3,35 @@
 <div id="languageNew">
 <% else
      language_div = "language#{language.id}"
-   end 
-
-
-   remote_form_for([:patient_data_instance, language], 
+   end %>
+<%   remote_form_for([:patient_data_instance, language], 
                     :update => language_div) do |f| -%>
-
-                   <table class="hitsp_c32_language_module">
-                     <tbody>
-                       <tr>
-                         <td width="160" class="hitsp_c32_attribute_value">
-                           <%= f.select :language, ['English', 'Canadian French', 'l33t'] %>
-                         </td>
-                         <td width="160" class="hitsp_c32_attribute_value">
-                           <%= f.text_field :mode %>
-                         </td>
-                         <td width="160" class="hitsp_c32_attribute_value">
-                           <label><%= f.check_box :preference %></label> 
-                         </td>
-                         <td width="160" class="hitsp_c32_attribute_value">
-                             <%= f.submit "Save" %>
-                         </td>
-                       </tr>
-                     </tbody>
-                   </table>                       
+<table>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Language</td>
+     <td>
+       <%= f.select :language, ['English', 'Canadian French', 'l33t'] %>
+     </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Mode</td>
+    <td>
+      <%= f.text_field :mode %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Preference</td>
+    <td>
+      <%= f.check_box :preference %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td></td>
+    <td>
+      <%= f.submit "Save" %>
+    </td>
+  </tr>
+</table>                         
 <% end -%>
 <% if language.new_record? -%>
 </div>

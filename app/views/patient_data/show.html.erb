@@ -57,54 +57,25 @@
                                                                                 :patient_data => @patient_data} %>
      </div>
      
-     <div id="language">
-       <table class="hitsp_c32_module_header">
-         <tbody>
-           <tr>
-             <td class="hitsp_c32_module_name">Languages</td>
-             <td align="right">
-               <div id="languageMenuBusy" style="display:none">
-                 <img src="../images/progressBar.gif" />
-               </div>
-               <div id="languageMenu">
-                 <span id="language_hide_span" >
-                   <a href="javascript:hide_module('language');">Hide</a>
-                 </span>
-                 <span id="language_show_span" style="display:none" >
-                   <a href="javascript:show_module('language');">Show</a>
-                 </span>
-                 <span id="language_add_span" >
+
+       <h5>Languages</h5>
+
+       <% for language in @patient_data.languages -%>
+       <div id="language#{language.id}">
+         <%= render :partial => '/languages/show', :locals => {:language  => language, :patient_data => @patient_data} %>
+       </div>
+       <% end -%>
+       <table id="addLanguage">
+       <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+         <td></td>
+         <td>
                      <%= link_to_remote 'Add', :url => new_patient_data_instance_language_path(@patient_data), 
                                                :method => 'get', :update => 'addLanguage', :position => :before %>
-                 </span>
-               </div> 
-             </td>
-           </tr>
-         </tbody>
+         </td>                                       
+       </tr>                                               
        </table>
-       <div id="hitsp_32_language_info">
-         <table class="hitsp_c32_language_module">
-           <tbody>
-             <tr>
-               <td width="150" class="hitsp_c32_attribute_name">Language</td>
-               <td width="150" class="hitsp_c32_attribute_name">Modes</td>
-               <td width="150" class="hitsp_c32_attribute_name">Preferred</td>
-               <td width="150" class="hitsp_c32_attribute_name"></td>
-             </tr>
-           </tbody>
-         </table>
-         <% for language in @patient_data.languages -%>
-         <div id="language<%= language.id %>">
-           <%= render :partial => '/languages/show', :locals => {:language  => language, :patient_data => @patient_data} %>
-         </div>
-         <% end -%>
-         <p id="addLanguage"></p>
-       </div>
-     </div>
-     <br/>
-     <!-- End Language Spoken Module -->
+
      
-   </div>
    
    <!-- Start Support Module -->
    <div id="support">

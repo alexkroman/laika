@@ -1,15 +1,22 @@
-            <table class="hitsp_c32_language_module">
-              <tbody>
-                <tr>
-                  <td width="160" class="hitsp_c32_attribute_value"><%= h language.language %></td>
-                  <td width="160" class="hitsp_c32_attribute_value"><%= h language.mode %></td>
-                  <td width="160" class="hitsp_c32_attribute_value"><%= h language.preference %></td>
-                  <td width="160" class="hitsp_c32_attribute_value">
-                      <%= link_to_remote 'Edit', :update => "language#{language.id}",
-                                                 :url => edit_patient_data_instance_language_path(patient_data, language),
-                                                 :method => 'get' %>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-        
+<table>
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td class="lighttext">Language</td>
+  <td><%= h language.language %></td>
+</tr>
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td class="lighttext">Mode</td>
+  <td><%= h language.mode %></td>
+</tr>
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td class="lighttext">Preferred</td>
+  <td><%= h language.preference %></td>
+</tr>
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td></td>
+  <td>
+    <%= link_to_remote 'Edit', :update => "language#{language.id}",
+                               :url => edit_patient_data_instance_language_path(patient_data, language),
+                               :method => 'get' %>
+  </td>
+</tr>
+</table>
