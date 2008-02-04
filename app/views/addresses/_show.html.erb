@@ -1,24 +1,24 @@
-<tr class="lightzebra">
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
   <td class="lighttext">Street Address</td>
   <td><%=h address.street_address_line_one %></td>
 </tr>
-<tr class="darkzebra">
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
   <td class="lighttext"></td>
   <td><%=h address.street_address_line_two %></td>
 </tr>
-<tr class="lightzebra">
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
   <td class="lighttext">City</td>
   <td><%=h address.city %></td>
 </tr>
-<tr class="darkzebra">
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
   <td class="lighttext">State</td>
   <td><%=h address.state %></td>
 </tr>
-<tr class="lightzebra">
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
   <td class="lighttext">Postal Code</td>
   <td><%=h address.postal_code %></td>
 </tr>
-<tr class="darkzebra">
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
   <td class="lighttext">Country</td>
   <td><%=h address.country %></td>
 </tr>
