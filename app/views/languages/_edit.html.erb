@@ -1,10 +1,12 @@
 <% if language.new_record?
-     language_div = 'languageNew' -%>
+     language_div = 'languageNew' 
+     html_options = {}-%>
 <div id="languageNew">
 <% else
      language_div = "language#{language.id}"
+      html_options = {:method => 'put'}
    end %>
-<%   remote_form_for([:patient_data_instance, language], 
+<% remote_form_for(:language, language, :url => patient_data_instance_language_path(patient_data, language), :html => html_options,
                     :update => language_div) do |f| -%>
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
