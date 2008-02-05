@@ -61,7 +61,7 @@
        <h5>Languages</h5>
 
        <% for language in @patient_data.languages -%>
-       <div id="language#{language.id}">
+       <div id="language<%= language.id %>">
          <%= render :partial => '/languages/show', :locals => {:language  => language, :patient_data => @patient_data} %>
        </div>
        <% end -%>
