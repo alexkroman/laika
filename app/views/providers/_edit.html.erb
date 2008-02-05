@@ -1,11 +1,13 @@
 <% if provider.new_record?
-     provider_div = 'providerNew' -%>
+     provider_div = 'providerNew' 
+     html_options = {} -%>
 <div id="providerNew">
 <% else
      provider_div = "provider#{provider.id}"
+     html_options = {:method => 'put'}
    end %>
-<%   remote_form_for([:patient_data_instance, provider], 
-                    :update => provider_div) do |f| -%>
+<% remote_form_for(:provider, provider,  :url => patient_data_instance_provider_path(patient_data, provider), :html => html_options,
+                   :update => provider_div) do |f| -%>
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Start Service</td>

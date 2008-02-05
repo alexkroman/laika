@@ -26,9 +26,9 @@ class ProvidersController < PatientDataChildController
   def update
     @provider = @patient_data.providers.find(params[:id])
 
-    @providers.update_attributes(params[:support])
-    @providers.update_person_attributes(params)
-    render :partial  => 'show', :locals => {:support =>  @support,
+    @provider.update_attributes(params[:provider])
+    @provider.update_person_attributes(params)
+    render :partial  => 'show', :locals => {:provider =>  @provider,
                                             :patient_data => @patient_data}
   end
 
