@@ -22,4 +22,11 @@ class PatientDataController < ApplicationController
   def patient_xml
     @patient_data = PatientData.find(params[:id])
   end
+  
+  def destroy
+    @patient_data = PatientData.find(params[:id])
+    @patient_data.destroy
+    redirect_to :controller => 'patient_data', :action => 'index'
+  end
+
 end

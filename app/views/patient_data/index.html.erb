@@ -1,53 +1,55 @@
-<!-- Start Content -->
-<div id="patientDataList">
-
-  <div class="hitsp_c32_module_name">Create C32 Patient Template</div>
-  <% form_for(PatientData.new) do |f| %>
-    <p>
-      <label for="name">Name</label>
-      <%= f.text_field :name %>
-    </p>
-
-    <p>
-      <%= f.submit "Create" %>
-    </p>
-  <% end %>
-  <br/>
-  
-  <table class="hitsp_module_list">
-    <caption>C32 Patient Templates</caption>
-    <!-- there is a known bug in IE 6 regarding sibling selectors
-         since we want the second column to look different than the first
-         we are going to work aroudn this bug by inserting a class on every other td
-    -->
-    <tbody>
-        <% for patient_data in @patient_data_list -%>
-        <tr>
-          <td width="200"><%= link_to patient_data.name, patient_data_instance_url(patient_data) %></td>
-          <td width="120"><a href="#">Amit Travidi</a></td>
-          <td width="140">15.Dec.2007</td>
-          <td width="380">
-            <form action="<%= url_for :controller => 'test_plan_manager', :action => 'assign_patient_data' %>">
-                    <input type="hidden" name="pd_id" value="<%= patient_data.id %>"/>
-                    <select name="vendor_id">
+        <!-- Start Content -->
+        <div class="content">
+          
+          
+      
+          <div class="container">
+            <h3>Create New C32 Patient Template</h3>
+            <div>
+              <% form_for(PatientData.new) do |f| %>
+              <p>
+                <label for="name">Name:</label>
+                <%= f.text_field :name %>
+                <%= f.submit "Create" %>
+              </p>
+              <% end %>
+            </div>
+            <table id="dashboard">
+            
+              <tr>
+                <th class="selected"><a href="#"><div>Template</div></a></th>
+                <th><a href="#"><div>Kind</div></a></th>
+                <th><a href="#"><div>Created by</div></a></th>
+                <th><a href="#"><div>Created on</div></a></th>
+                <th><a href="#"><div>Last modified</div></a></th>
+                <th class="noarrow"><a href="#"><div>Actions</div></a></th>
+              </tr>
+              
+              <% for patient_data in @patient_data_list -%>
+              <tr>
+                <td><%= link_to patient_data.name, patient_data_instance_url(patient_data) %></td>
+                <td>C32</td>
+                <td>Amit Travidi</td>
+                <td>17.Dec.07</td>
+                <td>1.Jan.08</td>
+                <td class="actions" width=270px>
+                  <%= link_to 'edit', patient_data_instance_url(patient_data)%> 
+                  <%= link_to 'destroy', patient_data_instance_url(patient_data), :confirm => 'Are you sure you want to delete this Laika template?', :method => :delete %> 
+                  <a href="javascript:toggle_div('assignment_div_<%=patient_data.id%>');">assign</a>
+                  <div id="assignment_div_<%=patient_data.id%>" style="display:none">
+                    <form action="<%= url_for :controller => 'test_plan_manager', :action => 'assign_patient_data' %>">
+                      <input type="hidden" name="pd_id" value="<%= patient_data.id %>"/>
+                      <select name="vendor_id">
                         <% for vendor in @vendors -%>
                             <option value="<%= vendor.id %>"><%= vendor.display_name %></option>
                         <% end -%>
-                    </select>
-                    <input type="submit" value="Assign"/>
-            </form>
-          </td>
-          <td width="40"><%= link_to 'Prose', patient_data_instance_url(patient_data)%></td>
-          <td width="40"><%= link_to 'XML', patient_data_instance_url(patient_data)%></td>
-        </tr>
-        <% end -%>
-    </tbody>
-  </table>
-  
-</div>
-<!-- End Content -->
-
-<!-- Start Footer -->
-<div id="footer">
-</div>
-<!-- End Footer -->
+                      </select>
+                      <input type="submit" value="Assign"/>
+                    </form>
+                  </div>
+                </td>
+              </tr>
+              <% end -%>
+            </table>
+          </div>
+        </div>

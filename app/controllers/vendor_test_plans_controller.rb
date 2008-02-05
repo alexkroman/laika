@@ -1,4 +1,5 @@
 class VendorTestPlansController < ApplicationController
+  
   # GET /vendor_test_plans
   # GET /vendor_test_plans.xml
   def index
@@ -74,8 +75,15 @@ class VendorTestPlansController < ApplicationController
   # DELETE /vendor_test_plans/1
   # DELETE /vendor_test_plans/1.xml
   def destroy
+    puts "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+    puts "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+    puts "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+    
+    puts "id " + params[:id]
     @vendor_test_plan = VendorTestPlan.find(params[:id])
+    puts "Yoyo"
     @vendor_test_plan.destroy
+    puts "poo"
 
     respond_to do |format|
       format.html { redirect_to(vendor_test_plans_url) }

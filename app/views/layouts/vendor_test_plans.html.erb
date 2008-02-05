@@ -3,11 +3,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
+
+  <title>Laika Dashboard</title>  
+
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <meta http-equiv="Cache-Control" content="no-cache"><!-- no java_main.js so we don't check for idle state -->
   
   <%= javascript_include_tag 'prototype' %>
   <%= javascript_include_tag 'common' %>  
+  <%= javascript_include_tag 'scriptaculous' %>
   
   <%= stylesheet_link_tag 'blueprint/screen', :media => "screen, projection" %>
   <%= stylesheet_link_tag 'blueprint/screen', :media => "print" %>
@@ -21,8 +25,6 @@
         /*.container {background: url(/css/blueprint/lib/grid.png) repeat;}*/
     /*]]>*/
   </style>
-
-  <title>Laika Dashboard</title>  
 
 </head>
 
@@ -43,4 +45,5 @@
       </div>
     </div>
   </div>
+  
 </body>

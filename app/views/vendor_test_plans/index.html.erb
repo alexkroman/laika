@@ -16,7 +16,7 @@
                 <th><a href="#"><div>Status</div></a></th>
                 <th class="selected"><a href="#"><div>Test Case</div></a></th>
                 <th><a href="#"><div>Last Tested</div></a></th>
-                <th><a href="#"><div>Kind</div></a></th>
+                <th><a href="#"><div>Test Type</div></a></th>
                 <th><a href="#"><div>Required</div></a></th>
                 <th><a href="#"><div>Provisional</div></a></th>
                 <th class="noarrow"><div>Actions</div></th>
@@ -33,8 +33,7 @@
                 <td><a href="template_passed.html">80% <span class="small">(32 violations)</span></a></td>
                 <td class="actions">
                   <%= link_to 'edit', patient_data_instance_url(vendor_test_plan.patient_data)%>
-                  <a href="#">delete</a>
-                  <%= link_to 'prose', patient_data_instance_url(vendor_test_plan.patient_data)%>
+                  <%= link_to 'destroy', vendor_test_plan, :confirm => 'Are you sure you want to delete this Laika test?', :method => :delete %>
                   <%= link_to 'execute', patient_data_instance_url(vendor_test_plan.patient_data) %>
                 </td>
               </tr>
