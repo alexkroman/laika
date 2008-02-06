@@ -1,6 +1,12 @@
-steve:
+`steve:
   person_identifier: 24601
   birth_date: 1978-01-15
-  gender: male
+  gender: M
   marital_status: married
   patient_data: steve
+
+joe_smith:
+  person_identifier: 24602
+  birth_date: 1967-03-23
+  gender: M
+  patient_data: joe_smith
