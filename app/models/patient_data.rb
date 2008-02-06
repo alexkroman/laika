@@ -2,6 +2,7 @@ class PatientData < ActiveRecord::Base
   has_one :registration_information
   has_many :languages
   has_many :providers
+  has_many :medications
   has_one :support
   belongs_to :vendor_test_plan
   
@@ -20,6 +21,10 @@ class PatientData < ActiveRecord::Base
     
     self.providers.each do |provider|
       copied_patient_data.providers << provider.copy
+    end
+    
+    self.medications.each do |medication|
+      copied_patient_data.medications << medication.clone
     end
     
     copied_patient_data

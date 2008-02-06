@@ -5,7 +5,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :patient_data, 
                 :has_one  => [:registration_information, :support],
-                :has_many => [:languages, :providers],
+                :has_many => [:languages, :providers, :medications],
                 :singular => :patient_data_instance
 
   map.resources :document_locations

@@ -1,0 +1,68 @@
+<% if medication.new_record?
+     medication_div = 'medicationNew' 
+     html_options = {} -%>
+<div id="medicationNew">
+<% else
+     medication_div = "medication#{medication.id}"
+     html_options = {:method => 'put'}
+   end %>
+<% remote_form_for(:medication, medication, :url => patient_data_instance_medication_path(patient_data, medication), :html => html_options,
+                   :update => medication_div) do |f| -%>
+<table>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Product Coded Display Name</td>
+    <td><%= f.text_field :product_coded_display_name %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Product Code</td>
+    <td><%= f.text_field :product_code %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Code System Name</td>
+    <td><%= f.text_field :code_system_name %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Code System Code</td>
+    <td><%= f.text_field :code_system_code %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Free Text Brand Name</td>
+    <td><%= f.text_field :free_text_brand_name %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Medication Type</td>
+    <td><%= f.text_field :medication_type %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Status</td>
+    <td><%= f.text_field :status %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Quantity Ordered Value</td>
+    <td><%= f.text_field :quantity_ordered_value %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Quantity Ordered Unit</td>
+    <td><%= f.text_field :quantity_ordered_unit %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Prescription Number</td>
+    <td><%=f.text_field :prescription_number %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Quantity Dispensed Value</td>
+    <td><%=f.text_field :quantity_dispensed_value %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Quantity Dispensed Unit</td>
+    <td><%=f.text_field :quantity_dispensed_unit %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td></td>
+    <td><%= f.submit "Save" %></td>
+  </tr>
+</table>
+<% end -%>
+<% if medication.new_record? -%>
+</div>
+<% end -%>

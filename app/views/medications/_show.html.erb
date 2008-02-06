@@ -1,0 +1,58 @@
+<table>
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td class="lighttext">Product Coded Display Name</td>
+  <td><%= h medication.product_coded_display_name %></td>
+</tr>
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td class="lighttext">Product Code</td>
+  <td><%= h medication.product_code %></td>
+</tr>
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td class="lighttext">Code System Name</td>
+  <td><%= h medication.code_system_name %></td>
+</tr>
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td class="lighttext">Code System Code</td>
+  <td><%= h medication.code_system_code %></td>
+</tr>
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td class="lighttext">Free Text Brand Name</td>
+  <td><%=h medication.free_text_brand_name %></td>
+</tr>
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td class="lighttext">Medication Type</td>
+  <td><%=h medication.medication_type %></td>
+</tr>
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td class="lighttext">Status</td>
+  <td><%=h medication.status %></td>
+</tr>
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td class="lighttext">Quantity Ordered Value</td>
+  <td><%=h medication.quantity_ordered_value %></td>
+</tr>
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td class="lighttext">Quantity Ordered Unit</td>
+  <td><%=h medication.quantity_ordered_unit %></td>
+</tr>
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td class="lighttext">Prescription Number</td>
+  <td><%=h medication.prescription_number %></td>
+</tr>
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td class="lighttext">Quantity Dispensed Value</td>
+  <td><%=h medication.quantity_dispensed_value %></td>
+</tr>
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td class="lighttext">Quantity Dispensed Unit</td>
+  <td><%=h medication.quantity_dispensed_unit %></td>
+</tr>
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td></td>
+  <td>
+    <%= link_to_remote 'Edit', :update => "medication#{medication.id}",
+                               :url => edit_patient_data_instance_medication_path(patient_data, medication),
+                               :method => 'get' %>
+  </td>
+</tr>
+</table>
