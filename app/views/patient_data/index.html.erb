@@ -29,7 +29,7 @@
               <tr>
                 <td><%= link_to patient_data.name, patient_data_instance_url(patient_data) %></td>
                 <td>C32</td>
-                <td>Amit Travidi</td>
+                <td><%= patient_data.user.first_name %> <%= patient_data.user.last_name %></td>
                 <td>17.Dec.07</td>
                 <td>1.Jan.08</td>
                 <td class="actions" width=270px>
