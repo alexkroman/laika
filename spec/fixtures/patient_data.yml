@@ -1,34 +1,24 @@
-steve:
-  name: steve
-  vendor_test_plan: test_plan
-  user: rob_mccready
-
 joe_smith:
   name: Joe Smith
-  vendor_test_plan: joe_smith
+  vendor_test_plan: all_scripts_test_plan
   user: rob_mccready
 
 emily_jones:
   name: Emily Jones
-  vendor_test_plan: emily_jones
   user: rob_mccready
 
 will_haynes:
   name: Will Haynes
-  vendor_test_plan: will_haynes
   user: rob_mccready
 
 jennifer_thompson:
   name: Jennifer Thompson
-  vendor_test_plan: jennifer_thompson
   user: rob_mccready
 
 theodore_smith:
   name: Theodore Smith
-  vendor_test_plan: theodore_smith
   user: rob_mccready
 
 david_carter:
   name: David Carter
-  vendor_test_plan: david_carter
   user: rob_mccready

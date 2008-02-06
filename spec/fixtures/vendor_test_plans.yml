@@ -1,13 +1,4 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-test_plan:
-    vendor: avendor
-    
 all_scripts_test_plan:
-    vendor: allScripts
-
-med_appz_test_plan:
-    vendor: medAppz
-    
-practice_one_test_plan:
-    vendor: practiceOne
+  vendor: allScripts

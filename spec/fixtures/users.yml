@@ -1,6 +1,32 @@
 rob_mccready:
   first_name: Rob
   last_name: McCready
+  email: rmccready@mitre.org
+  company: MITRE Corporation
+  salt: salt
+  crypted_password: <%= Digest::SHA1.hexdigest("--salt--laika--") %>
+  created: 2008-02-01
+  updated: 2008-02-05
+  terms_of_service: true
+  send_updates: true
+
+dennis_wilson:
+  first_name: Dennis
+  last_name: Wilson
+  email: dwilson@cchit.org
+  company: CCHIT
+  salt: salt
+  crypted_password: <%= Digest::SHA1.hexdigest("--salt--laika--") %>
+  created: 2008-02-01
+  updated: 2008-02-05
+  terms_of_service: true
+  send_updates: true
+  
+rob_dingwell:
+  first_name: Rob
+  last_name: Dingwell
+  email: bobd@mitre.org
+  company: MITRE Corporation
   salt: salt
   crypted_password: <%= Digest::SHA1.hexdigest("--salt--laika--") %>
   created: 2008-02-01
