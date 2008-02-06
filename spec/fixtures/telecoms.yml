@@ -14,3 +14,11 @@ jennifer_thompsons_telecom:
   home_phone: +1-617-555-1212
   mobile_phone: +1-617-555-1234
   reachable: jennifer_thompson (RegistrationInformation)
+
+theodore_smiths_telecom:
+  home_phone: +1-240-555-1212
+  reachable: theodore_smith (RegistrationInformation)
+
+david_carters_telecom:
+  home_phone: +1-301-555-0144
+  reachable: david_carter (RegistrationInformation)
