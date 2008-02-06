@@ -10,3 +10,34 @@ joe_smith:
   birth_date: 1967-03-23
   gender: M
   patient_data: joe_smith
+
+emily_jones:
+  person_identifier: 24603
+  birth_date: 2006-11-01
+  gender: F
+  patient_data: emily_jones
+
+will_haynes:
+  person_identifier: 24604
+  birth_date: 2006-11-04
+  gender: M
+  patient_data: will_haynes
+
+jennifer_thompson:
+  person_identifier: 24605
+  birth_date: 1975-04-10
+  gender: F
+  marital_status: married
+  patient_data: jennifer_thompson
+
+theodore_smith:
+  person_identifier: 24606
+  birth_date: 1929-11-08
+  gender: M
+  patient_data: theodore_smith
+
+david_carter:
+  person_identifier: 24607
+  birth_date: 2000-03-02
+  gender: M
+  patient_data: david_carter
