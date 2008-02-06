@@ -1,0 +1,9 @@
+rob_mccready:
+  first_name: Rob
+  last_name: McCready
+  salt: salt
+  crypted_password: <%= Digest::SHA1.hexdigest("--salt--laika--") %>
+  created: 2008-02-01
+  updated: 2008-02-05
+  terms_of_service: true
+  send_updates: true

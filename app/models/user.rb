@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   validates_presence_of     :terms_of_service
   before_save :encrypt_password
 
-  has_many :roles, :through => :user_roles
+  has_many :roles, :through => :user_roles, :as => :trustable
   has_many :user_roles, :dependent => :destroy
 
   # Authenticates a user by their email name and unencrypted password.  Returns the user or nil.

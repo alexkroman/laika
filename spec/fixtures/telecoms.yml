@@ -1,0 +1,16 @@
+joe_smiths_telecom:
+  home_phone: +1-312-555-1234
+  reachable: joe_smith (RegistrationInformation)
+
+emily_jones_telecom:
+  home_phone: +1-301-555-0199
+  reachable: emily_jones (RegistrationInformation)
+
+will_haynes_telecom:
+  home_phone: +1-703-555-0111
+  reachable: will_haynes (RegistrationInformation)
+
+jennifer_thompsons_telecom:
+  home_phone: +1-617-555-1212
+  mobile_phone: +1-617-555-1234
+  reachable: jennifer_thompson (RegistrationInformation)

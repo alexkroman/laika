@@ -1,7 +1,55 @@
 steves_address:
-    street_address_line_one: 1600 Penn Ave.
-    city: Washington
-    state: DC
-    postal_code: 12345
-    country: USA
-    addressable: steve (RegistrationInformation)
+  street_address_line_one: 1600 Penn Ave.
+  city: Washington
+  state: DC
+  postal_code: 12345
+  country: USA
+  addressable: steve (RegistrationInformation)
+
+joe_smiths_address:
+  street_address_line_one: 1600 Rockville Pike
+  city: Rockville
+  state: MD
+  postal_code: 20847 
+  country: US
+  addressable: joe_smith (RegistrationInformation)
+
+emily_jones_address:
+  street_address_line_one: 2501 Merrvale Road
+  city: Rockville
+  state: MD
+  postal_code: 20847
+  country: US
+  addressable: emily_jones (RegistrationInformation)
+
+will_haynes_address:
+  street_address_line_one: 16167 King Street
+  city: Alexandria
+  state: VA
+  postal_code: 22301
+  country: US
+  addressable: will_haynes (RegistrationInformation)
+
+jennifer_thompsons_address:
+  street_address_line_one: 2300 Commonwealth Avenue
+  city: Brighton
+  state: MA
+  postal_code: 02135
+  country: US
+  addressable: jennifer_thompson (RegistrationInformation)
+
+theodore_smiths_address:
+  street_address_line_one: 2300 Commonwealth Avenue
+  city: Brighton
+  state: MA
+  postal_code: 02135
+  country: US
+  addressable: theodore_smith (RegistrationInformation)
+
+david_carters_address:
+  street_address_line_one: 1234 Willow Way
+  city: Silver Spring
+  state: MD
+  postal_code: 20902
+  country: US
+  addressable: david_carter (RegistrationInformation)

@@ -5,6 +5,7 @@ class PatientData < ActiveRecord::Base
   has_many :medications
   has_one :support
   belongs_to :vendor_test_plan
+  belongs_to :user
   
   def copy
     copied_patient_data = self.clone

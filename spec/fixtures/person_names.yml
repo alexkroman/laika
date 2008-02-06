@@ -1,6 +1,24 @@
 steve:
-    name_prefix: Mr.
-    first_name: Steve
-    last_name: Stevenson
-    name_suffix: Jr.
-    nameable: steve (RegistrationInformation)
+  name_prefix: Mr.
+  first_name: Steve
+  last_name: Stevenson
+  name_suffix: Jr.
+  nameable: steve (RegistrationInformation)
+
+joe_smith:
+  name_prefix: Mr.
+  first_name: Joe
+  last_name: Smith
+  nameable: joe_smith (RegistrationInformation)
+
+emily_jones:
+  name_prefix: Ms.
+  first_name: Emily
+  last_name: Jones
+  nameable: emily_jones (RegistrationInformation)
+
+will_haynes:
+  name_prefix: Mr.
+  first_name: Will
+  last_name: Haynes
+  nameable: will_haynes (RegistrationInformation)

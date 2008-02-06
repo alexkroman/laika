@@ -14,7 +14,7 @@ describe PatientData, "can copy itself" do
   
   it "should copy its registration information" do
     @patient_data_copy.registration_information.should_not be_nil
-    @patient_data_copy.registration_information.gender.should == 'male'
+    @patient_data_copy.registration_information.gender.should == 'M'
     @patient_data_copy.registration_information.person_name.first_name.should == 'Steve'
     @patient_data_copy.registration_information.person_name.last_name.should == 'Stevenson'
   end

@@ -3,9 +3,8 @@
 REM *******************************************
 REM *** Filename   : start_laika.bat
 REM *** Created by : Rob McCready 
-REM ***            : Automates the startup of
-REM ***            : the healthstories WeBrick
-REM ***            : server on MS Windows
+REM ***            : primes the Laika database 
+REM ***	           : with test data
 REM *******************************************
 
 REM ******************************************* 
@@ -16,7 +15,8 @@ pushd ..
 REM *******************************************
 REM Start up the Healthstories server
 REM *******************************************
-ruby script/server
+rake db:migrate
+rake db:fixtures:load env="development" --verbose
 
 REM *******************************************
 REM Once the server terminates, return to the 
@@ -24,3 +24,4 @@ REM orginating 'bin' directory from where this
 REM script was called
 REM *******************************************
 popd
+

@@ -7,9 +7,12 @@ class ApplicationController < ActionController::Base
 
   helper :all # include all helpers, all the time
  
-  include AuthenticatedSystem 
-  
+  # AuthenticationSystem supports the acts_as_authenticated
+  include AuthenticatedSystem
+
+  # Call for "remember me" functionality
   before_filter :login_from_cookie
+  
   before_filter :login_required, :except => [:login, :signup, :forgot_password, :reset_password]
 
   # See ActionController::RequestForgeryProtection for details

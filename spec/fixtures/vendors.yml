@@ -1,2 +1,14 @@
 avendor:
     display_name: random_id
+    
+allScripts:
+    display_name: All Scripts
+    public_id: 342342-AMB-2007
+     
+medAppz:
+    display_name: MedAppz
+    public_id: 342343-AMB-2007
+    
+practiceOne:
+    display_name: PracticeOne
+    public_id: 342344-AMB-2007

@@ -1,0 +1,11 @@
+vendor:
+  name: Vendor
+
+juror:
+  name: Juror
+
+proctor:
+  name: Proctor
+
+administrator:
+  name: Administrator

@@ -6,14 +6,15 @@ class CreateUsers < ActiveRecord::Migration
       t.column :last_name,                 :string
       t.column :crypted_password,          :string, :limit => 40
       t.column :salt,                      :string, :limit => 40
-      t.column :created_at,                :datetime
-      t.column :updated_at,                :datetime
+      t.column :created,                :datetime
+      t.column :updated,                :datetime
       t.column :remember_token,            :string
       t.column :remember_token_expires_at, :datetime
       t.column :terms_of_service,          :boolean
       t.column :send_updates,              :boolean
       t.column :role_id,                   :integer
       t.column :password_reset_code,       :string, :limit => 40
+      t.timestamps
     end
   end
 

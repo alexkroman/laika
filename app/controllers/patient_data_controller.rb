@@ -7,6 +7,7 @@ class PatientDataController < ApplicationController
 
   def create
     @patient_data = PatientData.new(params[:patient_data])
+    @patient_data.user = current_user
     @patient_data.save!
     redirect_to :controller => 'patient_data', :action => 'show', :id => @patient_data.id
   end
