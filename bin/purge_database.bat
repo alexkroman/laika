@@ -13,7 +13,7 @@ pushd ..
 REM *******************************************
 REM Start up the Healthstories server
 REM *******************************************
-rake db:fixtures:load env="development" FIXTURE_DIR="spec/fixtures" --verbose
+rake db:drop db:create db:migrate
 
 REM *******************************************
 REM Once the server terminates, return to the 
