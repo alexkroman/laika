@@ -456,4 +456,29 @@ table#dashboard a {
 .personinfo a {
 	font-size:.95em;
 	font-weight:normal;
+	color: #0080FF; 
+	text-decoration: underline
 }
+
+.vendorinfo {
+    line-height:1em;
+    padding:5px;
+}
+
+.vendorinfo img {
+    float:left;
+    border:1px solid #ccc;
+    margin-top:3px;
+}
+
+.vendorinfo div {
+    float:left;
+}
+
+.vendorinfo a {
+    font-size:.95em;
+    font-weight:normal;
+    color: #0080FF; 
+    text-decoration: underline
+}
+
