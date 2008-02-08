@@ -5,108 +5,55 @@
           
             <!-- Start User Block -->
             <h3>People</h3>
-            <div class="column span-5">
-              <div class="personinfo">
-                <strong>Dino Flamata</strong> <span class="small">(Vendor)</span>
-                <a href="#">www.health-i-ehr.com</a>
-                <a href="#" class="email">Dino.Flamata@health-i-ehr.com</a>
+            <% num_users = @users.size 
+               user_counter = 0
+               while user_counter < num_users 
+                 user = @users[user_counter] 
+                 user_counter += 1 %>
+              <div class="column span-6">
+                <div class="personinfo">
+                  <strong><%= user.first_name %> <%= user.last_name %></strong> <span class="small">(Administrator)</span>
+                  <br/><a href="http://<%= user.company_url %>"><%= user.company %></a>
+                  <br/><a href="mailto:<%= user.email %>" ><%= user.email %></a>
+                  <br/><small>Created <%= distance_of_time_in_words(Time.now, user.created_at) %> ago</small>
+                  <br/><small>Edited <%= distance_of_time_in_words(Time.now, user.created_at) %> ago</small>
+                </div>
               </div>
-              <div class="personinfo">
-                <strong>David Wilkins</strong> <span class="small">(Proctor)</span>
-                <a href="#">www.health-i-ehr.com</a>
-                <a href="#" class="email">Dino.Flamata@health-i-ehr.com</a>
-              </div>
-            </div>
-            <div class="column span-5">
-              <div class="personinfo">
-                <strong>Patricia McCormack</strong> <span class="small">(Juror)</span>
-                <a href="#">www.health-i-ehr.com</a>
-                <a href="#" class="email">Dino.Flamata@health-i-ehr.com</a>
-              </div>
-              <div class="personinfo">
-                <strong>Jennifer Su</strong> <span class="small">(Proctor)</span>
-                <a href="#">www.health-i-ehr.com</a>
-                <a href="#" class="email">Dino.Flamata@health-i-ehr.com</a>
-              </div>
-            </div>
-            <div class="column span-5">
-              <div class="personinfo">
-                <strong>Chris Lefteri</strong> <span class="small">(Juror)</span>
-                <a href="#">www.health-i-ehr.com</a>
-                <a href="#" class="email">Dino.Flamata@health-i-ehr.com</a>
-              </div>
-              <div class="personinfo">
-                <strong>Gabi Karike</strong> <span class="small">(Vendor)</span>
-                <a href="#">www.health-i-ehr.com</a>
-                <a href="#" class="email">Dino.Flamata@health-i-ehr.com</a>
-              </div>
-            </div>
-            <div class="column span-5 last">
-              <div class="personinfo">
-                <strong>Robert Becker</strong> <span class="small">(Vendor)</span>
-                <a href="#">www.health-i-ehr.com</a>
-                <a href="#" class="email">Dino.Flamata@health-i-ehr.com</a>
-              </div>
-              <div class="personinfo">
-                <strong>Jake Litkins</strong> <span class="small">(Proctor)</span>
-                <a href="#">www.health-i-ehr.com</a>
-                <a href="#" class="email">Dino.Flamata@health-i-ehr.com</a>
-              </div>
-            </div>
+            <% end %>  
             <!-- End User Block -->
-            
-            <p/><p/><p/>
-            
+          </div>
+
+          <br/><br/>
+
+          <div class="container">
+          
             <!-- Start Inspection Block -->
-            <h3>Inspections</h3>
-            <div class="column span-5">
-              <div class="personinfo">
-                <strong>Dino Flamata</strong> <span class="small">(Vendor)</span>
-                <a href="#">www.health-i-ehr.com</a>
-                <a href="#" class="email">Dino.Flamata@health-i-ehr.com</a>
-              </div>
-              <div class="personinfo">
-                <strong>David Wilkins</strong> <span class="small">(Proctor)</span>
-                <a href="#">www.health-i-ehr.com</a>
-                <a href="#" class="email">Dino.Flamata@health-i-ehr.com</a>
-              </div>
+            <h3>Vendor Inspections</h3>
+            
+            <h3></h3>
+            <div>
+              <% form_for(Vendor.new) do |f| %>
+              <p>
+                <label for="public_id">New Vendor Inspection ID:</label>
+                <%= f.text_field :public_id %>
+                <%= f.submit "Create" %>
+              </p>
+              <% end %>
             </div>
-            <div class="column span-5">
-              <div class="personinfo">
-                <strong>Patricia McCormack</strong> <span class="small">(Juror)</span>
-                <a href="#">www.health-i-ehr.com</a>
-                <a href="#" class="email">Dino.Flamata@health-i-ehr.com</a>
+            
+            <% num_vendors = @vendors.size 
+               vendor_counter = 0
+               while vendor_counter < num_vendors
+                 vendor = @vendors[vendor_counter] 
+                 vendor_counter += 1 %>
+              <div class="column span-6">
+                <div class="vendorinfo">
+                  <div>Vendor Inspection ID: <%= vendor.public_id %></div>
+                  <br/><small>Created <%= distance_of_time_in_words(Time.now, vendor.created_at) %> ago</small>
+                  <br/><small>Edited <%= distance_of_time_in_words(Time.now, vendor.created_at) %> ago</small>
+                </div>
               </div>
-              <div class="personinfo">
-                <strong>Jennifer Su</strong> <span class="small">(Proctor)</span>
-                <a href="#">www.health-i-ehr.com</a>
-                <a href="#" class="email">Dino.Flamata@health-i-ehr.com</a>
-              </div>
-            </div>
-            <div class="column span-5">
-              <div class="personinfo">
-                <strong>Chris Lefteri</strong> <span class="small">(Juror)</span>
-                <a href="#">www.health-i-ehr.com</a>
-                <a href="#" class="email">Dino.Flamata@health-i-ehr.com</a>
-              </div>
-              <div class="personinfo">
-                <strong>Gabi Karike</strong> <span class="small">(Vendor)</span>
-                <a href="#">www.health-i-ehr.com</a>
-                <a href="#" class="email">Dino.Flamata@health-i-ehr.com</a>
-              </div>
-            </div>
-            <div class="column span-5 last">
-              <div class="personinfo">
-                <strong>Robert Becker</strong> <span class="small">(Vendor)</span>
-                <a href="#">www.health-i-ehr.com</a>
-                <a href="#" class="email">Dino.Flamata@health-i-ehr.com</a>
-              </div>
-              <div class="personinfo">
-                <strong>Jake Litkins</strong> <span class="small">(Proctor)</span>
-                <a href="#">www.health-i-ehr.com</a>
-                <a href="#" class="email">Dino.Flamata@health-i-ehr.com</a>
-              </div>
-            </div>
+            <% end %>  
             <!-- End Inspection Block -->
             
           </div>

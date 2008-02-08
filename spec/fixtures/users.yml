@@ -1,35 +1,90 @@
-rob_mccready:
-  first_name: Rob
-  last_name: McCready
-  email: rmccready@mitre.org
-  company: MITRE Corporation
-  salt: salt
-  crypted_password: <%= Digest::SHA1.hexdigest("--salt--laika--") %>
-  created: 2008-02-01
-  updated: 2008-02-05
-  terms_of_service: true
-  send_updates: true
-
 dennis_wilson:
   first_name: Dennis
   last_name: Wilson
   email: dwilson@cchit.org
   company: CCHIT
+  company_url: www.cchit.org
   salt: salt
   crypted_password: <%= Digest::SHA1.hexdigest("--salt--laika--") %>
-  created: 2008-02-01
-  updated: 2008-02-05
+  created_at: 2007-02-01
+  updated_at: 2008-02-05
   terms_of_service: true
   send_updates: true
   
+amit_trivedi:
+  first_name: Amit
+  last_name: Trivedi
+  email: atrivedi@cchit.org
+  company: CCHIT
+  company_url: www.cchit.org
+  salt: salt
+  crypted_password: <%= Digest::SHA1.hexdigest("--salt--laika--") %>
+  created_at: 2006-02-01
+  updated_at: 2008-02-05
+  terms_of_service: true
+  send_updates: true
+
+rob_mccready:
+  first_name: Rob
+  last_name: McCready
+  email: rmccready@mitre.org
+  company: MITRE Corporation
+  company_url: www.mitre.org
+  salt: salt
+  crypted_password: <%= Digest::SHA1.hexdigest("--salt--laika--") %>
+  created_at: 2008-01-01
+  updated_at: 2008-02-05
+  terms_of_service: true
+  send_updates: true
+
 rob_dingwell:
   first_name: Rob
   last_name: Dingwell
   email: bobd@mitre.org
   company: MITRE Corporation
+  company_url: www.mitre.org
   salt: salt
   crypted_password: <%= Digest::SHA1.hexdigest("--salt--laika--") %>
-  created: 2008-02-01
-  updated: 2008-02-05
+  created_at: 2007-12-01
+  updated_at: 2008-02-05
+  terms_of_service: true
+  send_updates: true
+    
+andy_gregorowicz:
+  first_name: Andy
+  last_name: Gregorowicz
+  email: andrewg@mitre.org
+  company: MITRE Corporation
+  company_url: www.mitre.org
+  salt: salt
+  crypted_password: <%= Digest::SHA1.hexdigest("--salt--laika--") %>
+  created_at: 2007-11-01
+  updated_at: 2008-02-05
+  terms_of_service: true
+  send_updates: true
+  
+harry_sleeper:
+  first_name: Harry
+  last_name: Sleeper
+  email: sleeper@mitre.org
+  company: MITRE Corporation
+  company_url: www.mitre.org
+  salt: salt
+  crypted_password: <%= Digest::SHA1.hexdigest("--salt--laika--") %>
+  created_at: 2007-10-01
+  updated_at: 2008-02-05
+  terms_of_service: true
+  send_updates: true
+  
+juhan_sonin:
+  first_name: Juhan
+  last_name: Sonin
+  email: juhan@mitre.org
+  company: MITRE Corporation
+  company_url: www.mitre.org
+  salt: salt
+  crypted_password: <%= Digest::SHA1.hexdigest("--salt--laika--") %>
+  created_at: 2006-04-01
+  updated_at: 2008-02-05
   terms_of_service: true
   send_updates: true

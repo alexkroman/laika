@@ -4,7 +4,7 @@
           <div class="doggy"><img src="images/laika.png"></div>
           <div class="right">
             <ul id="smallnav">
-              <li><%= link_to 'People &amp; Inspections', :controller => 'users' %></li>
+              <li <% if current_page?(:controller => 'users') %>id="active"<% end %>><%= link_to 'People &amp; Inspections', :controller => 'users' %></li>
               <li><a href="#">About</a></li>
               <li><a href="mailto:talk@projectlaika.org">Feedback</a></li>
               <li><a href="#">Help</a></li>

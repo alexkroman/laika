@@ -41,17 +41,8 @@ class VendorsController < ApplicationController
   # POST /vendors.xml
   def create
     @vendor = Vendor.new(params[:vendor])
-
-    respond_to do |format|
-      if @vendor.save
-        flash[:notice] = 'Vendor was successfully created.'
-        format.html { redirect_to(@vendor) }
-        format.xml  { render :xml => @vendor, :status => :created, :location => @vendor }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @vendor.errors, :status => :unprocessable_entity }
-      end
-    end
+    @vendor.save
+    redirect_to :controller => 'users'
   end
 
   # PUT /vendors/1

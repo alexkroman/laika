@@ -5,10 +5,9 @@ class CreateUsers < ActiveRecord::Migration
       t.column :first_name,                :string
       t.column :last_name,                 :string
       t.column :company,                   :string
+      t.column :company_url,               :string
       t.column :crypted_password,          :string, :limit => 40
       t.column :salt,                      :string, :limit => 40
-      t.column :created,                   :datetime
-      t.column :updated,                   :datetime
       t.column :remember_token,            :string
       t.column :remember_token_expires_at, :datetime
       t.column :terms_of_service,          :boolean

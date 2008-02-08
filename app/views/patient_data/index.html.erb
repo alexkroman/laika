@@ -1,7 +1,5 @@
         <!-- Start Content -->
         <div class="content">
-          
-          
       
           <div class="container">
             <h3>Create New C32 Patient Template</h3>
@@ -41,7 +39,7 @@
                       <input type="hidden" name="pd_id" value="<%= patient_data.id %>"/>
                       <select name="vendor_id">
                         <% for vendor in @vendors -%>
-                            <option value="<%= vendor.id %>"><%= vendor.display_name %></option>
+                            <option value="<%= vendor.id %>"><%= vendor.public_id %></option>
                         <% end -%>
                       </select>
                       <input type="submit" value="Assign"/>
