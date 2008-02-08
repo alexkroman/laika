@@ -1,13 +1,11 @@
 class CreateNamespaces < ActiveRecord::Migration
   def self.up
-    create_table :namespaces do |t|
-      t.string :prefix
-      t.string :uri
-      t.belongs_to :document_location, :null => false
-    end
+    # Namespaces have been removed from the application.
+    # I'm keeping this file here so that people don't wonder where
+    # The second migration went
   end
 
   def self.down
-    drop_table :namespaces
+    # do nothing
   end
 end

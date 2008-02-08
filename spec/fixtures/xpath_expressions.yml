@@ -1,0 +1,24 @@
+registration_information_context:
+  name: $LABEL
+  expression: /cda:ClinicalDocument/cda:recordTarget/cda:patientRole
+  doc_type: C32
+
+person_identifier:
+  name: $LABEL
+  expression: cda:id/@extension
+  doc_type: C32
+
+first_name:
+  name: $LABEL
+  expression: cda:patient/cda:name/cda:given/text()
+  doc_type: C32
+
+last_name:
+  name: $LABEL
+  expression: cda:patient/cda:name/cda:family/text()
+  doc_type: C32
+  
+broken_test_expression:
+  name: $LABEL
+  expression: /foo/bar
+  doc_type: C32

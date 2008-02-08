@@ -17,7 +17,7 @@ CDA Header
 	<languageCode code="en-US"/>
 	<recordTarget>
 		<patientRole>
-			<id extension="996-756-495" root="2.16.840.1.113883.19.5"/>
+			<id extension="24602" root="2.16.840.1.113883.19.5"/>
 			<patient>
 				<name>
 					<given>Steve</given>
