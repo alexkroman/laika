@@ -8,16 +8,41 @@ person_identifier:
   expression: cda:id/@extension
   doc_type: C32
 
+name_prefix:
+  name: $LABEL
+  expression: cda:patient/cda:name/cda:prefix
+  doc_type: C32
+
 first_name:
   name: $LABEL
-  expression: cda:patient/cda:name/cda:given/text()
+  expression: cda:patient/cda:name/cda:given
   doc_type: C32
 
 last_name:
   name: $LABEL
-  expression: cda:patient/cda:name/cda:family/text()
+  expression: cda:patient/cda:name/cda:family
   doc_type: C32
   
+name_suffix:
+  name: $LABEL
+  expression: cda:patient/cda:name/cda:suffix
+  doc_type: C32
+  
+patient_gender:
+  name: $LABEL
+  expression: cda:patient/cda:administrativeGenderCode/@code
+  doc_type: C32
+
+patient_birth_date:
+  name: $LABEL
+  expression: cda:patient/cda:birthTime/@value
+  doc_type: C32
+  
+patient_marital_status:
+  name: $LABEL
+  expression: cda:patient/cda:maritalStatusCode/@code
+  doc_type: C32
+
 broken_test_expression:
   name: $LABEL
   expression: /foo/bar

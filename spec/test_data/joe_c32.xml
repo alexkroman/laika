@@ -22,10 +22,10 @@
 					<given>Joe</given>
 					<family>Smith</family>
 				</name>
-				<administrativeGenderCode code="F" displayName="Female" codeSystemName="HL7 AdministrativeGenderCodes" codeSystem="2.16.840.1.113883.5.1">
+				<administrativeGenderCode code="M" displayName="Male" codeSystemName="HL7 AdministrativeGenderCodes" codeSystem="2.16.840.1.113883.5.1">
 					<originalText>AdministrativeGender codes are: M (Male), F (Female) or UN (Undifferentiated).</originalText>
 				</administrativeGenderCode>
-				<birthTime value="19630704"/>
+				<birthTime value="19670323"/>
 				<languageCommunication>
 					<languageCode code="en-US"/>
 				</languageCommunication>
