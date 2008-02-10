@@ -1,75 +1,743 @@
 Afar:
-  code: aa  
+  code: aa
   name: Afar
- 
+
 Abkhazian:
   code: ab
   name: Abkhazian
 
-Avestan: 
+Avestan:
   code: ae
   name: Avestan
-  
-Afrikaans: 
-  code: af  
+
+Afrikaans:
+  code: af
   name: Afrikaans
 
 Akan:
-  code: ak  
+  code: ak
   name: Akan
 
 Amharic:
-  code: am  
+  code: am
   name: Amharic
 
 Aragonese:
-  code: an  
+  code: an
   name: Aragonese
 
 Arabic:
-  code: ar  
+  code: ar
   name: Arabic
-  
+
 Assamese:
-  code: as  
+  code: as
   name: Assamese
 
 Avaric:
-  code: av  
+  code: av
   name: Avaric
 
 Aymara:
-  code: ay  
+  code: ay
   name: Aymara
 
 Azerbaijani:
-  code: az  
+  code: az
   name: Azerbaijani
 
 Bashkir:
-  code: ba  
+  code: ba
   name: Bashkir
 
 Belarusian:
-  code: be  
+  code: be
   name: Belarusian
 
 Bulgarian:
-  code: bg  
+  code: bg
   name: Bulgarian
 
 Bihari:
-  code: bh  
+  code: bh
   name: Bihari
 
 Bislama:
-  code: bi  
+  code: bi
   name: Bislama
 
 Bambara:
-  code: bm  
+  code: bm
   name: Bambara
 
 Bengali:
-  code: bn  
+  code: bn
   name: Bengali
+
+Tibetan:
+  code: bo
+  name: Tibetan
+
+Breton:
+  code: br
+  name: Breton
+
+Bosnian:
+  code: bs
+  name: Bosnian
+
+Catalan:
+  code: ca
+  name: Catalan
+
+Chechen :
+  code: ce
+  name: Chechen 
+
+Chamorro    :
+  code: ch
+  name: Chamorro    
+
+Corsican    :
+  code: co
+  name: Corsican    
+
+Cree    :
+  code: cr
+  name: Cree    
+
+Czech:
+  code: cs
+  name: Czech
+
+Church Slavic:
+  code: cu
+  name: Church Slavic
+
+Chuvash :
+  code: cv
+  name: Chuvash 
+
+Welsh   :
+  code: cy
+  name: Welsh   
+
+Danish:
+  code: da
+  name: Danish
+
+German  :
+  code: de
+  name: German  
+
+Divehi:
+  code: dv
+  name: Divehi
+
+Dzongkha:
+  code: dz
+  name: Dzongkha
+
+Ewe:
+  code: ee
+  name: Ewe
+
+Greek:
+  code: el
+  name: Greek
+
+English :
+  code: en
+  name: English 
+
+Esperanto:
+  code: eo
+  name: Esperanto
+
+Spanish:
+  code: es
+  name: Spanish
+
+Estonian:
+  code: et
+  name: Estonian
+
+Basque:
+  code: eu
+  name: Basque
+
+Persian:
+  code: fa
+  name: Persian
+
+Fulah:
+  code: ff
+  name: Fulah
+
+Finnish:
+  code: fi
+  name: Finnish
+
+Fijian:
+  code: fj
+  name: Fijian
+
+Faroese:
+  code: fo
+  name: Faroese
+
+French:
+  code: fr
+  name: French
+
+Western Frisian:
+  code: fy
+  name: Western Frisian
+
+Irish:
+  code: ga
+  name: Irish
+
+Scottish Gaelic:
+  code: gd
+  name: Scottish Gaelic
+
+Galician:
+  code: gl
+  name: Galician
+
+Guarani :
+  code: gn
+  name: Guarani 
+
+Gujarati:
+  code: gu
+  name: Gujarati
+
+Manx:
+  code: gv
+  name: Manx
+
+Hausa:
+  code: ha
+  name: Hausa
+
+Hebrew:
+  code: he
+  name: Hebrew
+
+Hindi:
+  code: hi
+  name: Hindi
+
+Hiri Motu:
+  code: ho
+  name: Hiri Motu
+
+Croatian:
+  code: hr
+  name: Croatian
+
+Haitian:
+  code: ht
+  name: Haitian
+
+Hungarian:
+  code: hu
+  name: Hungarian
+
+Armenian:
+  code: hy
+  name: Armenian
+
+Herero:
+  code: hz
+  name: Herero
+
+Interlingua:
+  code: ia
+  name: Interlingua
+
+Indonesian:
+  code: id
+  name: Indonesian
+
+Interlingue:
+  code: ie
+  name: Interlingue
+
+Igbo:
+  code: ig
+  name: Igbo
+
+Sichuan Yi:
+  code: ii
+  name: Sichuan Yi
+
+Inupiaq:
+  code: ik
+  name: Inupiaq
+
+Ido:
+  code: io
+  name: Ido
+
+Icelandic:
+  code: is
+  name: Icelandic
+
+Italian:
+  code: it
+  name: Italian
+
+Inuktitut:
+  code: iu
+  name: Inuktitut
+
+Japanese:
+  code: ja
+  name: Japanese
+
+Javanese:
+  code: jv
+  name: Javanese
+
+Georgian:
+  code: ka
+  name: Georgian
+
+Kongo:
+  code: kg
+  name: Kongo
+
+Kikuyu:
+  code: ki
+  name: Kikuyu
+
+Kwanyama:
+  code: kj
+  name: Kwanyama
+
+Kazakh:
+  code: kk
+  name: Kazakh
+
+Kalaallisut:
+  code: kl
+  name: Kalaallisut
+
+Khmer:
+  code: km
+  name: Khmer
+
+Kannada:
+  code: kn
+  name: Kannada
+
+Korean:
+  code: ko
+  name: Korean
+
+Kanuri:
+  code: kr
+  name: Kanuri
+
+Kashmiri:
+  code: ks
+  name: Kashmiri
+
+Kurdish:
+  code: ku
+  name: Kurdish
+
+Komi:
+  code: kv
+  name: Komi
+
+Cornish:
+  code: kw
+  name: Cornish
+
+Kirghiz:
+  code: ky
+  name: Kirghiz
+
+Latin:
+  code: la
+  name: Latin
+
+Luxembourgish:
+  code: lb
+  name: Luxembourgish
+
+Ganda:
+  code: lg
+  name: Ganda
+
+Limburgish:
+  code: li
+  name: Limburgish
+
+Lingala:
+  code: ln
+  name: Lingala
+
+Lao:
+  code: lo
+  name: Lao
+
+Lithuanian:
+  code: lt
+  name: Lithuanian
+
+Luba-Katanga:
+  code: lu
+  name: Luba-Katanga
+
+Latvian:
+  code: lv
+  name: Latvian
+
+Malagasy:
+  code: mg
+  name: Malagasy
+
+Marshallese:
+  code: mh
+  name: Marshallese
+
+Maori:
+  code: mi
+  name: Maori
+
+Macedonian:
+  code: mk
+  name: Macedonian
+
+Malayalam:
+  code: ml
+  name: Malayalam
+
+Mongolian:
+  code: mn
+  name: Mongolian
+
+Moldavian:
+  code: mo
+  name: Moldavian
+
+Marathi:
+  code: mr
+  name: Marathi
+
+Malay:
+  code: ms
+  name: Malay
+
+Maltese:
+  code: mt
+  name: Maltese
+
+Burmese:
+  code: my
+  name: Burmese
+
+Nauru:
+  code: na
+  name: Nauru
+
+Norwegian Bokmal:
+  code: nb
+  name: Norwegian Bokmal
+
+North Ndebele:
+  code: nd
+  name: North Ndebele
+
+Nepali:
+  code: ne
+  name: Nepali
+
+Ndonga:
+  code: ng
+  name: Ndonga
+
+Dutch:
+  code: nl
+  name: Dutch
+
+Norwegian:
+  code: nn
+  name: Norwegian
+
+Norwegian:
+  code: no
+  name: Norwegian
+
+South Ndebele:
+  code: nr
+  name: South Ndebele
+
+Navajo:
+  code: nv
+  name: Navajo
+
+Chichewa:
+  code: ny
+  name: Chichewa
+
+Occitan:
+  code: oc
+  name: Occitan
+
+Ojibwa:
+  code: oj
+  name: Ojibwa
+
+Oromo:
+  code: om
+  name: Oromo
+
+Oriya:
+  code: or
+  name: Oriya
+
+Ossetian:
+  code: os
+  name: Ossetian
+
+Panjabi:
+  code: pa
+  name: Panjabi
+
+Pali:
+  code: pi
+  name: Pali
+
+Polish:
+  code: pl
+  name: Polish
+
+Pashto:
+  code: ps
+  name: Pashto
+
+Portuguese:
+  code: pt
+  name: Portuguese
+
+Quechua:
+  code: qu
+  name: Quechua
+
+Raeto-Romance:
+  code: rm
+  name: Raeto-Romance
+
+Kirundi :
+  code: rn
+  name: Kirundi 
+
+Romanian:
+  code: ro
+  name: Romanian
+
+Russian:
+  code: ru
+  name: Russian
+
+Kinyarwanda:
+  code: rw
+  name: Kinyarwanda
+
+Sanskrit:
+  code: sa
+  name: Sanskrit
+
+Sardinian:
+  code: sc
+  name: Sardinian
+
+Sindhi:
+  code: sd
+  name: Sindhi
+
+Northern Sami:
+  code: se
+  name: Northern Sami
+
+Sango:
+  code: sg
+  name: Sango
+
+Serbo-Croatian:
+  code: sh
+  name: Serbo-Croatian
+
+Sinhalese:
+  code: si
+  name: Sinhalese
+
+Slovak:
+  code: sk
+  name: Slovak
+
+Slovenian:
+  code: sl
+  name: Slovenian
+
+Samoan:
+  code: sm
+  name: Samoan
+
+Shona:
+  code: sn
+  name: Shona
+
+Somali:
+  code: so
+  name: Somali
+
+Albanian:
+  code: sq
+  name: Albanian
+
+Serbian:
+  code: sr
+  name: Serbian
+
+Swati:
+  code: ss
+  name: Swati
+
+Sotho:
+  code: st
+  name: Sotho
+
+Sundanese:
+  code: su
+  name: Sundanese
+
+Swedish:
+  code: sv
+  name: Swedish
+
+Swahili:
+  code: sw
+  name: Swahili
+
+Tamil:
+  code: ta
+  name: Tamil
+
+Telugu:
+  code: te
+  name: Telugu
+
+Tajik:
+  code: tg
+  name: Tajik
+
+Thai:
+  code: th
+  name: Thai
+
+Tigrinya:
+  code: ti
+  name: Tigrinya
+
+Turkmen:
+  code: tk
+  name: Turkmen
+
+Tagalog:
+  code: tl
+  name: Tagalog
+
+Tswana:
+  code: tn
+  name: Tswana
+
+Tonga:
+  code: to
+  name: Tonga
+
+Turkish:
+  code: tr
+  name: Turkish
+
+Tsonga:
+  code: ts
+  name: Tsonga
+
+Tatar:
+  code: tt
+  name: Tatar
+
+Twi:
+  code: tw
+  name: Twi
+
+Tahitian:
+  code: ty
+  name: Tahitian
+
+Uighur:
+  code: ug
+  name: Uighur
+
+Ukrainian:
+  code: uk
+  name: Ukrainian
+
+Urdu:
+  code: ur
+  name: Urdu
+
+Uzbek:
+  code: uz
+  name: Uzbek
+
+Venda:
+  code: ve
+  name: Venda
+
+Vietnamese:
+  code: vi
+  name: Vietnamese
+
+Volapuk:
+  code: vo
+  name: Volapuk
+
+Walloon:
+  code: wa
+  name: Walloon
+
+Wolof:
+  code: wo
+  name: Wolof
+
+Xhosa:
+  code: xh
+  name: Xhosa
+
+Yiddish :
+  code: yi
+  name: Yiddish 
+
+Yoruba:
+  code: yo
+  name: Yoruba
+
+Zhuang:
+  code: za
+  name: Zhuang
+
+Chinese:
+  code: zh
+  name: Chinese
+
+Zulu:
+  code: zu
+  name: Zulu
