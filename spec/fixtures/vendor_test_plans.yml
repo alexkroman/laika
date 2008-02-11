@@ -2,3 +2,4 @@
 
 all_scripts_test_plan:
   vendor: allScripts
+  kind: Generate and Format

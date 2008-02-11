@@ -1,0 +1,41 @@
+joe_smith_language:
+  iso_language: English
+  iso_country: United States of America
+  mode: Expressed Written
+  preference: true
+  patient_data: joe_smith
+
+emily_jones_language:
+  iso_language: English
+  iso_country: United States of America
+  mode: Expressed Written
+  preference: true
+  patient_data: emily_jones
+
+will_haynes_language:
+  iso_language: English
+  iso_country: United States of America
+  mode: Expressed Written
+  preference: true
+  patient_data: will_haynes
+
+jennifer_thompson_language:
+  iso_language: English
+  iso_country: United States of America
+  mode: Expressed Written
+  preference: true
+  patient_data: jennifer_thompson
+
+theodore_smith_language:
+  iso_language: English
+  iso_country: United States of America
+  mode: Expressed Written
+  preference: true
+  patient_data: theodore_smith
+
+david_carter_language:
+  iso_language: English
+  iso_country: United States of America
+  mode: Expressed Written
+  preference: true
+  patient_data: david_carter

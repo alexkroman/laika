@@ -16,7 +16,7 @@
             
               <tr>
                 <th class="selected"><a href="#"><div>Template</div></a></th>
-                <th><a href="#"><div>Kind</div></a></th>
+                <th><a href="#"><div>Type</div></a></th>
                 <th><a href="#"><div>Created by</div></a></th>
                 <th><a href="#"><div>Created on</div></a></th>
                 <th><a href="#"><div>Last modified</div></a></th>
@@ -28,8 +28,8 @@
                 <td><%= link_to patient_data.name, patient_data_instance_url(patient_data) %></td>
                 <td>C32</td>
                 <td><%= patient_data.user.first_name %> <%= patient_data.user.last_name %></td>
-                <td>17.Dec.07</td>
-                <td>1.Jan.08</td>
+                <td><%= patient_data.created_at.strftime("%d.%b.%Y") %></td>
+                <td><%= patient_data.updated_at.strftime("%d.%b.%Y") %></td>
                 <td class="actions" width=270px>
                   <%= link_to 'edit', patient_data_instance_url(patient_data)%> 
                   <%= link_to 'destroy', patient_data_instance_url(patient_data), :confirm => 'Are you sure you want to delete this Laika template?', :method => :delete %> 
@@ -41,6 +41,10 @@
                         <% for vendor in @vendors -%>
                             <option value="<%= vendor.id %>"><%= vendor.public_id %></option>
                         <% end -%>
+                      </select>
+                      <select name="kind">
+                        <option>Display and File</option>
+                        <option>Generate and Format</option>
                       </select>
                       <input type="submit" value="Assign"/>
                     </form>

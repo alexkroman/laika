@@ -1,7 +1,11 @@
 <table>
 <tr class="<%= cycle("darkzebra", "lightzebra")%>">
   <td class="lighttext">Language</td>
-  <td><%= h language.language %></td>
+  <td><%= h language.iso_language %></td>
+</tr>
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td class="lighttext">Country</td>
+  <td><%= h language.iso_country %></td>
 </tr>
 <tr class="<%= cycle("darkzebra", "lightzebra")%>">
   <td class="lighttext">Mode</td>

@@ -11,14 +11,32 @@
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Language</td>
-     <td>
-       <%= f.select :language, ['English', 'Canadian French', 'l33t'] %>
-     </td>
+    <td>
+      <select id="language_iso_language" name="language[iso_language]">
+         <% for isoLanguage in @isoLanguages -%>
+           <option value="<%= isoLanguage.name %>"><%= isoLanguage.name %></option>
+         <% end -%>
+       </select>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Country</td>
+    <td>
+      <select id="language_iso_country" name="language[iso_country]">
+         <% for isoCountry in @isoCountries -%>
+           <option value="<%= isoCountry.name %>"><%= isoCountry.name %></option>
+         <% end -%>
+       </select>
+    </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Mode</td>
     <td>
-      <%= f.text_field :mode %>
+      <select id="language_mode" name="language[mode]">
+         <% for languageAbilityMode in @languageAbilityModes -%>
+           <option value="<%= languageAbilityMode.name %>"><%= languageAbilityMode.name %></option>
+         <% end -%>
+       </select>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">

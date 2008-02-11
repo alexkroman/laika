@@ -5,6 +5,7 @@ class RegistrationInformationController < PatientDataChildController
     @registration_information.person_name = PersonName.new
     @registration_information.address = Address.new
     @registration_information.telecom = Telecom.new
+    @isoCountries = IsoCountry.find(:all, :order => "name ASC")
 
     render :partial  => 'edit', :locals => {:registration_information =>  @registration_information,
                                             :patient_data => @patient_data}
@@ -12,6 +13,7 @@ class RegistrationInformationController < PatientDataChildController
 
   def edit
     @registration_information = @patient_data.registration_information
+    @isoCountries = IsoCountry.find(:all, :order => "name ASC")
     render :partial  => 'edit', :locals => {:registration_information =>  @registration_information,
                                             :patient_data => @patient_data}
   end
@@ -20,6 +22,7 @@ class RegistrationInformationController < PatientDataChildController
     @registration_information = RegistrationInformation.new(params[:registration_information])
     @patient_data.registration_information = @registration_information
     @registration_information.create_person_attributes(params)
+    @registration_information.patient_data_id = @patient_data.id
     render :partial  => 'show', :locals => {:registration_information =>  @registration_information,
                                             :patient_data => @patient_data}
   end

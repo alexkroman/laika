@@ -18,17 +18,6 @@
               </div>
               <a href="#"><div class="right on">ON</div></a>
             </div>
-            <p>Provisional Compliance</p>
-            <div class="widget">
-              <div class="left on">
-                <div class="visualIndication2">
-                  <div><span class="portion" style="width:53px"><p>75%</p></span></div>
-                </div>
-                <span class="number">42</span> violations
-              </div>
-              <a href="#"><div class="right on">ON</div></a>
-            </div>
-            <p class="detailstext"><a href="#" onclick="javascript:Effect.toggle('', 'blind');">hide details</a></p>
             <table id="details">
               <tr>
                 <td class="lighttext">Test Date</td>
@@ -45,80 +34,96 @@
           <table>
             <tr>
               <th><h5>CCD/C32 Modules</h5></th>
-              <th colspan="2" class="violations">violations</th>
+              <th colspan="2" class="violations">Violations</th>
             </tr>
             <tr>
               <td></td>
-              <td><img src="images/req_block.png"></td>
-              <td><img src="images/prov_block.png"></td>
+              <td><img src="/images/req_block.png"></td>
+              <td><img src="/images/prov_block.png"></td>
             </tr>
             <tr class="darkzebra">
-              <td class="lighttext">Person Information</td>
-              <td>2</td>
-              <td>3</td>
-            </tr>
-            <tr class="lightzebra">
-              <td class="lighttext">Language Spoken</td>
-              <td></td>
-              <td>10</td>
-            </tr>
-            <tr class="darkzebra">
-              <td class="lighttext">Support</td>
-              <td>3</td>
-              <td>5</td>
-            </tr>
-            <tr class="lightzebra">
-              <td class="lighttext">Healthcare Provider</td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr class="darkzebra">
-              <td class="lighttext">Insurance Provider</td>
-              <td></td>
-              <td>1</td>
-            </tr>
-            <tr class="lightzebra">
-              <td class="lighttext">Allergies and Drugs</td>
-              <td>1</td>
-              <td></td>
-            </tr>
-            <tr class="darkzebra">
-              <td class="lighttext">Condition</td>
-              <td>1</td>
-              <td></td>
-            </tr>
-            <tr class="lightzebra">
-              <td class="lighttext">Medications</td>
-              <td></td>
-              <td>2</td>
-            </tr>
-            <tr class="darkzebra">
-              <td class="lighttext">Pregnancy</td>
+              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('personInformationContainer', 1.0);">Person Information</a></td>
               <td></td>
               <td></td>
             </tr>
             <tr class="lightzebra">
-              <td class="lighttext">Information Source</td>
+              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('languageContainer', 1.0);">Language Spoken</a></td>
               <td></td>
               <td></td>
             </tr>
             <tr class="darkzebra">
-              <td class="lighttext">Comments</td>
-              <td>1</td>
-              <td>4</td>
+              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('supportContainer', 1.0);">Support</a></td>
+              <td></td>
+              <td></td>
             </tr>
             <tr class="lightzebra">
-              <td class="lighttext">Advance Directive</td>
-              <td>1</td>
+              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('healthCareProviderContainer', 1.0);">HealthCare Provider</a></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="darkzebra">
+              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('insuranceProviderContainer', 1.0);">Insurance Provider</a></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="lightzebra">
+              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('allergiesAndDrugsContainer', 1.0);">Allergies and Drugs</a></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="darkzebra">
+              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('conditionContainer', 1.0);">Conditions</a></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="lightzebra">
+              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('medicationsContainer', 1.0);">Medications</a></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="darkzebra">
+              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('pregnancyContainer', 1.0);">Pregnancy</a></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="lightzebra">
+              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('informationSourceContainer', 1.0);">Information Source</a></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="darkzebra">
+              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('commentsContainer', 1.0);">Comments</a></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="lightzebra">
+              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('advanceDirectiveContainer', 1.0);">Advance Directive</a></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="darkzebra">
+              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('immunizationsContainer', 1.0);">Immunizations</a></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="lightzebra">
+              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('vitalSignsContainer', 1.0);">Vital Signs</a></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="darkzebra">
+              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('resultsContainer', 1.0);">Results</a></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="lightzebra">
+              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('encountersContainer', 1.0);">Encounters</a></td>
+              <td></td>
               <td></td>
             </tr>
           </table>
         </div>
       </div>
-      
-      
-      
-      
       <div class="column span-13 last">
         <div id="template">
         
@@ -129,7 +134,7 @@
           <!-- End Registration Module -->
 
           <!-- Start Languages Module -->
-          <h5>Languages</h5>
+          <div id="languageContainer"><h5>Languages</h5>
           <% for language in @patient_data.languages -%>
             <div id="language<%= language.id %>">
               <%= render :partial => '/languages/show', :locals => {:language  => language, :patient_data => @patient_data} %>
@@ -144,15 +149,17 @@
               </td>                                       
             </tr>                                               
           </table>
+          </div> 
           <!-- End Languages Module -->
                     
           <!-- Start Support Module -->
-          <div id="support">
+          <div id="supportContainer">
             <%= render :partial => '/supports/show', :locals => {:support  => @patient_data.support, :patient_data => @patient_data} %>
           </div>
           <!-- End Support Module -->
                     
           <!-- Start Healthcare Provider Module -->
+          <div id="healthCareProviderContainer">
           <h5>Healthcare Provider</h5>
           <% for provider in @patient_data.providers -%>
             <div id="provider<%= provider.id %>">
@@ -168,9 +175,47 @@
               </td>                                       
             </tr>                                               
           </table>
+          </div>
           <!-- End Healthcare Provider Module -->          
                  
-          <!-- Start Medications Module -->    
+          <!-- Start Insurance Provider Module -->
+          <div id="insuranceProviderContainer">
+          <h5>Insurance Provider</h5>
+          <table id="addInsuranceProvider">
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td></td>
+              <td></td>                                       
+            </tr>                                               
+          </table>
+          </div>
+          <!-- End Insurance Provider Module -->   
+          
+          <!-- Start Allergies and Drugs Module -->
+          <div id="allergiesAndDrugsContainer">
+          <h5>Allergies and Drugs</h5>
+          <table id="addAllergiesAndDrug">
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td></td>
+              <td></td>                                       
+            </tr>                                               
+          </table>
+          </div>
+          <!-- End Allergies and Drugs Module -->    
+          
+          <!-- Start Conditions Module -->
+          <div id="conditionsContainer">
+          <h5>Allergies and Drugs</h5>
+          <table id="addCondition">
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td></td>
+              <td></td>                                       
+            </tr>                                               
+          </table>
+          </div>
+          <!-- End Conditions Module -->  
+          
+          <!-- Start Medications Module -->   
+          <div id="medicationsContainer"> 
           <h5>Medications</h5>
           <% for medication in @patient_data.medications -%>
             <div id="medication<%= medication.id %>">
@@ -185,7 +230,104 @@
               </td>                                       
             </tr>                                               
           </table>  
-          <!-- End Medications Module -->     
+          </div>
+          <!-- End Medications Module -->        
+                 
+          <!-- Start Pregnancy Module -->
+          <div id="pregnancyContainer"> 
+          <h5>Pregnancy</h5>
+          <table id="addPregnancy">
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td></td>
+              <td></td>                                       
+            </tr>                                               
+          </table>
+          </div> 
+          <!-- End Pregnancy Module -->  
+          
+          <!-- Start Information Source Module -->
+          <div id="informationSourceContainer"> 
+          <h5>Information Source</h5>
+          <table id="addInformationSource">
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td></td>
+              <td></td>                                       
+            </tr>                                               
+          </table>
+          </div> 
+          <!-- End Information Source Module -->  
+          
+          <!-- Start Comments Module -->
+          <div id="commentsContainer"> 
+          <h5>Comments</h5>
+          <table id="addComment">
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td></td>
+              <td></td>                                       
+            </tr>                                               
+          </table>
+          </div> 
+          <!-- End Comments Module -->  
+          
+          <!-- Start Advance Directive Module -->
+          <div id="advanceDirectiveContainer"> 
+          <h5>Advance Directive</h5>
+          <table id="addAdvanceDirective">
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td></td>
+              <td></td>                                       
+            </tr>                                               
+          </table>
+          </div> 
+          <!-- End Advance Directive Module -->       
+          
+          <!-- Start Immunizations Module -->
+          <div id="immunizationsContainer"> 
+          <h5>Immunizations</h5>
+          <table id="addImmunization">
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td></td>
+              <td></td>                                       
+            </tr>                                               
+          </table>
+          </div> 
+          <!-- End Immunizations Module -->     
+          
+          <!-- Start Vital Signs Module -->
+          <div id="vitalSignsContainer"> 
+          <h5>Vital Signs</h5>
+          <table id="addVitalSign">
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td></td>
+              <td></td>                                       
+            </tr>                                               
+          </table>
+          </div> 
+          <!-- End Vital Signs Module --> 
+          
+          <!-- Start Results Module -->
+          <div id="resultsContainer"> 
+          <h5>Results</h5>
+          <table id="addResult">
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td></td>
+              <td></td>                                       
+            </tr>                                               
+          </table>
+          </div> 
+          <!-- End Results Module --> 
+          
+          <!-- Start Encounters Module -->
+          <div id="encountersContainer"> 
+          <h5>Encounters</h5>
+          <table id="addEncounter">
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td></td>
+              <td></td>                                       
+            </tr>                                               
+          </table>
+          </div> 
+          <!-- End Encounters Module --> 
                  
         </div>
       </div>
