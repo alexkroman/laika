@@ -3,11 +3,11 @@
 <% if support -%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Start Support</td>
-    <td><%=h support.start_support %></td>
+    <td><% if support.start_support != nil %><%=h support.start_support.strftime("%m/%d/%y") %><% end %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">End Support</td>
-    <td><%=h support.end_support %></td>
+    <td><% if support.end_support != nil %><%=h support.end_support.strftime("%m/%d/%y") %><% end %></td>
   </tr>
   <%= render :partial => '/person_names/show', :locals => {:person_name => support.person_name}%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
@@ -23,7 +23,7 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td></td>
     <td>
-      <%= link_to_remote 'Edit', :update => 'support', 
+      <%= link_to_remote 'Edit', :update => 'supportContainer', 
                                  :url => edit_patient_data_instance_support_path(patient_data),
                                  :method => 'get' %>
     </td>
@@ -31,7 +31,7 @@
 <% else -%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">There is no support data for this test case</td>
-    <td><%= link_to_remote 'Create some', :update => 'support',
+    <td><%= link_to_remote 'Create some', :update => 'supportContainer',
                                       :url => new_patient_data_instance_support_path(patient_data), :method => 'get' %>
     </td>
   </tr>

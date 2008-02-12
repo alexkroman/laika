@@ -13,6 +13,10 @@
   <td><%=h registration_information.gender %></td>
 </tr>
 <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td class="lighttext">Date of Birth</td>
+  <td><% if registration_information.date_of_birth != nil %><%=h registration_information.date_of_birth.strftime("%m/%d/%y") %><% end %></td>
+</tr>
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
   <td class="lighttext">Marital Status</td>
   <td><%=h registration_information.marital_status %></td>
 </tr>
