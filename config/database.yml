@@ -28,15 +28,15 @@ development:
 test:
   adapter: mysql
   encoding: utf8
-  database: laika_test
-  username: root
-  password:
-  host: localhost
+  database: laika
+  username: laika
+  password: laika
+  host: 127.0.0.1
 
 production:
   adapter: mysql
   encoding: utf8
-  database: laika_production
-  username: root
-  password: 
-  host: localhost
+  database: laika
+  username: laika
+  password: laika
+  host: 127.0.0.1
