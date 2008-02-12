@@ -14,6 +14,7 @@ will_haynes:
   name_prefix: Mr.
   first_name: Will
   last_name: Haynes
+  name_suffix: Jr.
   nameable: will_haynes (RegistrationInformation)
 
 jennifer_thompson:
