@@ -11,12 +11,12 @@
   </tr>
   <%= render :partial => '/person_names/show', :locals => {:person_name => support.person_name}%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Contact</td>
-    <td><%=h support.contact_relationship %></td>
+    <td class="lighttext">Contact Type</td>
+    <td><% if support.contact_type != nil %><%=h support.contact_type.name %><% end %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Type</td>
-    <td><%=h support.contact_type %></td>
+    <td class="lighttext">Relationship</td>
+    <td><% if support.relationship != nil %><%=h support.relationship.name %><% end %></td>
   </tr>
   <%= render :partial => '/addresses/show', :locals => {:address => support.address}%>
   <%= render :partial => '/telecoms/show', :locals => {:telecom => support.telecom}%>

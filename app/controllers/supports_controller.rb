@@ -6,6 +6,8 @@ class SupportsController < PatientDataChildController
     @support.address = Address.new
     @support.telecom = Telecom.new
     @isoCountries = IsoCountry.find(:all, :order => "name ASC")
+    @contactTypes = ContactType.find(:all, :order => "name ASC")
+    @relationships = Relationship.find(:all, :order => "name ASC")
 
     render :partial  => 'edit', :locals => {:support =>  @support,
                                             :patient_data => @patient_data}  
@@ -14,6 +16,8 @@ class SupportsController < PatientDataChildController
   def edit
     @support = @patient_data.support
     @isoCountries = IsoCountry.find(:all, :order => "name ASC")
+    @contactTypes = ContactType.find(:all, :order => "name ASC")
+    @relationships = Relationship.find(:all, :order => "name ASC")
     render :partial  => 'edit', :locals => {:support =>  @support,
                                             :patient_data => @patient_data}
   end
@@ -31,6 +35,7 @@ class SupportsController < PatientDataChildController
 
     @support.update_attributes(params[:support])
     @support.update_person_attributes(params)
+
     render :partial  => 'show', :locals => {:support =>  @support,
                                             :patient_data => @patient_data}
   end

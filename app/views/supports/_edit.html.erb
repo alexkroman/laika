@@ -15,11 +15,23 @@
   <%= render :partial => '/person_names/edit', :locals => {:person_name => support.person_name}%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Contact</td>
-    <td><%= f.text_field :contact_relationship %></td>
+    <td>
+      <select name="contact_type_id">
+         <% for contactType in @contactTypes -%>
+           <option value="<%= contactType.id %>"><%= contactType.name %></option>
+         <% end -%>
+       </select>
+    </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Type</td>
-    <td><%= f.text_field :contact_type %></td>
+    <td class="lighttext">Relationship</td>
+    <td>
+      <select name="relationship_id">
+         <% for relationship in @relationships -%>
+           <option value="<%= relationship.id %>"><%= relationship.name %></option>
+         <% end -%>
+       </select>
+    </td>
   </tr>
   <%= render :partial => '/addresses/edit', :locals => {:address => support.address}%>
   <%= render :partial => '/telecoms/edit', :locals => {:telecom => support.telecom}%>

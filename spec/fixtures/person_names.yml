@@ -4,6 +4,12 @@ joe_smith:
   last_name: Smith
   nameable: joe_smith (RegistrationInformation)
 
+joe_smiths_mom:
+  name_prefix: Ms.
+  first_name: Sue
+  last_name: Smith
+  nameable: joe_smiths_mom (Support)
+
 emily_jones:
   name_prefix: Ms.
   first_name: Emily

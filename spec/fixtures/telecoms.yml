@@ -2,6 +2,10 @@ joe_smiths_telecom:
   home_phone: +1-312-555-1234
   reachable: joe_smith (RegistrationInformation)
 
+joe_smiths_moms_telecom:
+  mobile_phone: +1-202-555-1212
+  reachable: joe_smiths_mom (Support)
+
 emily_jones_telecom:
   home_phone: +1-301-555-0199
   reachable: emily_jones (RegistrationInformation)
