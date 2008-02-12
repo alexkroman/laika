@@ -3,7 +3,7 @@
 
 class ApplicationController < ActionController::Base
   
-  VERSION_NUMBER = "0.3.1"
+  VERSION_NUMBER = "0.4.0"
 
   helper :all # include all helpers, all the time
  

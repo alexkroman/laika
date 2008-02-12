@@ -21,3 +21,6 @@ received_spoken:
 received_written:
   code: RWR
   name: Received Written
+
+not_applicable:
+  name: N/A

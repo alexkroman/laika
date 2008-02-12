@@ -80,9 +80,9 @@
   <tr class="darkzebra">
     <td class="lighttext">Country</td>
     <td>
-      <select id="address_iso_country" name="address[iso_country]">
+      <select name="iso_country_id">
          <% for isoCountry in @isoCountries -%>
-           <option value="<%= isoCountry.name %>" <% if isoCountry.code == address.iso_country %>selected<% end %>><%= isoCountry.code %></option>
+           <option value="<%= isoCountry.id %>"><%= isoCountry.name %></option>
          <% end -%>
        </select>
     </td>

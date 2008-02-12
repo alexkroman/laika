@@ -18,12 +18,17 @@ module PersonLike
       def update_person_attributes(params)
         self.person_name.update_attributes(params[:person_name])
         self.address.update_attributes(params[:address])
+        self.address = Address.new(params[:address])
+        self.address.iso_country = IsoCountry.find(params[:iso_country_id])
+        self.address.save!
         self.telecom.update_attributes(params[:telecom])
       end
       
       def create_person_attributes(params)
         self.person_name = PersonName.new(params[:person_name])
         self.address = Address.new(params[:address])
+        self.address.iso_country = IsoCountry.find(params[:iso_country_id])
+        self.address.save!
         self.telecom = Telecom.new(params[:telecom])
       end
     end

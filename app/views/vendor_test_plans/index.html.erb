@@ -27,7 +27,7 @@
                 <td><img src="/images/inprogress.png">in progress</td>
                 <td><%= link_to vendor_test_plan.patient_data.name, patient_data_instance_url(vendor_test_plan.patient_data)%></td>
                 <td><%= vendor_test_plan.updated_at.strftime("%d.%b.%Y")  %></td>
-                <td><%= vendor_test_plan.kind %></td>
+                <td><%= vendor_test_plan.kind.name %></td>
                 <td><a href="template_passed.html">100%</a></td>
                 <td class="actions">
                   <%= link_to 'edit', patient_data_instance_url(vendor_test_plan.patient_data)%>

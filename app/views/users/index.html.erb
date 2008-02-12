@@ -12,7 +12,7 @@
                  user_counter += 1 %>
               <div class="column span-6">
                 <div class="personinfo">
-                  <strong><%= user.first_name %> <%= user.last_name %></strong> <span class="small">(Administrator)</span>
+                  <strong><%= user.display_name %></strong> <span class="small">(Administrator)</span>
                   <br/><a href="http://<%= user.company_url %>"><%= user.company %></a>
                   <br/><a href="mailto:<%= user.email %>" ><%= user.email %></a>
                   <br/><small>Created <%= distance_of_time_in_words(Time.now, user.created_at) %> ago</small>
@@ -31,15 +31,18 @@
             <h3>Vendor Inspections</h3>
             
             <h3></h3>
-            <div>
-              <% form_for(Vendor.new) do |f| %>
-              <p>
-                <label for="public_id">New Vendor Inspection ID:</label>
-                <%= f.text_field :public_id %>
-                <%= f.submit "Create" %>
-              </p>
-              <% end %>
-            </div>
+            <% form_for(Vendor.new) do |f| %>
+              <br/>
+              <div class="column span-4"><label for="public_id">Vendor Inspection ID:</label></div>
+              <div class="column span-4"><%= f.text_field :public_id %></div>
+              <br/><br/>
+              <div class="column span-4"><label for="public_id">Short Name:</label></div>
+              <div class="column span-4"><%= f.text_field :name %></div>
+              <br/><br/>
+              <div class="column span-4">&nbsp;</div>
+              <div class="column span-4"><%= f.submit "Create" %></div>
+              <br/><br/>
+            <% end %>
             
             <% num_vendors = @vendors.size 
                vendor_counter = 0
@@ -48,7 +51,8 @@
                  vendor_counter += 1 %>
               <div class="column span-6">
                 <div class="vendorinfo">
-                  <div>Vendor Inspection ID: <%= vendor.public_id %></div>
+                  <div>Short Name: <strong><%= vendor.name %></strong></div>
+                  <br/><div>Vendor Inspection ID: <%= vendor.public_id %></div>
                   <br/><small>Created <%= distance_of_time_in_words(Time.now, vendor.created_at) %> ago</small>
                   <br/><small>Edited <%= distance_of_time_in_words(Time.now, vendor.created_at) %> ago</small>
                 </div>

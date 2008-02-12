@@ -1,6 +1,8 @@
 class VendorTestPlan < ActiveRecord::Base
   has_one :patient_data
   belongs_to :vendor
+  belongs_to :kind
+  belongs_to :user
   has_one :clinical_document
   
   def validate_clinical_document_content

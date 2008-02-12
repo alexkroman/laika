@@ -23,6 +23,7 @@ class RegistrationInformationController < PatientDataChildController
     @patient_data.registration_information = @registration_information
     @registration_information.create_person_attributes(params)
     @registration_information.patient_data_id = @patient_data.id
+
     render :partial  => 'show', :locals => {:registration_information =>  @registration_information,
                                             :patient_data => @patient_data}
   end

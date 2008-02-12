@@ -6,7 +6,7 @@ class CreateAddresses < ActiveRecord::Migration
       t.string :city
       t.string :state
       t.string :postal_code
-      t.string :iso_country
+      t.belongs_to :iso_country
       t.references :addressable, :polymorphic => true
     end
   end

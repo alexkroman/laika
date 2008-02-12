@@ -78,6 +78,11 @@ class User < ActiveRecord::Base
     @forgotten_password
   end  
   
+  # method called by usernamestamp plugin
+  def display_name
+    return self.first_name + " " + self.last_name
+  end
+  
   protected
     # before filter 
     def encrypt_password

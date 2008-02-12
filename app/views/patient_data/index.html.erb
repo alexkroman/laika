@@ -39,13 +39,20 @@
                       <input type="hidden" name="pd_id" value="<%= patient_data.id %>"/>
                       <select name="vendor_id">
                         <% for vendor in @vendors -%>
-                            <option value="<%= vendor.id %>"><%= vendor.public_id %></option>
+                          <option value="<%= vendor.id %>"><%= vendor.name %></option>
                         <% end -%>
                       </select>
-                      <select name="kind">
-                        <option>Display and File</option>
-                        <option>Generate and Format</option>
+                      <select name="kind_id">
+                        <% for kind in @kinds -%>
+                          <option value="<%= kind.id %>"><%= kind.name %></option>
+                        <% end -%>
                       </select>
+                      <select name="user_id">
+                        <% for user in @users -%>
+                          <option value="<%= user.id %>"><%= user.display_name %></option>
+                        <% end -%>
+                      </select>
+                      <p/>
                       <input type="submit" value="Assign"/>
                     </form>
                   </div>

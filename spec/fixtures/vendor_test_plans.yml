@@ -2,4 +2,5 @@
 
 all_scripts_test_plan:
   vendor: allScripts
-  kind: Generate and Format
+  kind: generateAndFormat
+  user: rob_mccready

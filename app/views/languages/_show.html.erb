@@ -1,15 +1,15 @@
 <table>
 <tr class="<%= cycle("darkzebra", "lightzebra")%>">
   <td class="lighttext">Language</td>
-  <td><%= h language.iso_language %></td>
+  <td><%= h language.iso_language.name %></td>
 </tr>
 <tr class="<%= cycle("darkzebra", "lightzebra")%>">
   <td class="lighttext">Country</td>
-  <td><%= h language.iso_country %></td>
+  <td><%= h language.iso_country.name %></td>
 </tr>
 <tr class="<%= cycle("darkzebra", "lightzebra")%>">
   <td class="lighttext">Mode</td>
-  <td><%= h language.mode %></td>
+  <td><%= h language.language_ability_mode.name %></td>
 </tr>
 <tr class="<%= cycle("darkzebra", "lightzebra")%>">
   <td class="lighttext">Preferred</td>

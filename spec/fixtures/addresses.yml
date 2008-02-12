@@ -3,7 +3,7 @@ joe_smiths_address:
   city: Rockville
   state: MD
   postal_code: 20847 
-  iso_country: US
+  iso_country: usa
   addressable: joe_smith (RegistrationInformation)
 
 emily_jones_address:
@@ -11,7 +11,7 @@ emily_jones_address:
   city: Rockville
   state: MD
   postal_code: 20847
-  iso_country: US
+  iso_country: usa
   addressable: emily_jones (RegistrationInformation)
 
 will_haynes_address:
@@ -19,7 +19,7 @@ will_haynes_address:
   city: Alexandria
   state: VA
   postal_code: 22301
-  iso_country: US
+  iso_country: usa
   addressable: will_haynes (RegistrationInformation)
 
 jennifer_thompsons_address:
@@ -27,7 +27,7 @@ jennifer_thompsons_address:
   city: Brighton
   state: MA
   postal_code: 02135
-  iso_country: US
+  iso_country: usa
   addressable: jennifer_thompson (RegistrationInformation)
 
 theodore_smiths_address:
@@ -35,7 +35,7 @@ theodore_smiths_address:
   city: Brighton
   state: MA
   postal_code: 02135
-  iso_country: US
+  iso_country: usa
   addressable: theodore_smith (RegistrationInformation)
 
 david_carters_address:
@@ -43,5 +43,5 @@ david_carters_address:
   city: Silver Spring
   state: MD
   postal_code: 20902
-  iso_country: US
+  iso_country: usa
   addressable: david_carter (RegistrationInformation)

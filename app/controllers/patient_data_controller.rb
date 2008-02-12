@@ -3,6 +3,8 @@ class PatientDataController < ApplicationController
   def index
     @patient_data_list = PatientData.find(:all, :conditions => {:vendor_test_plan_id => nil})
     @vendors = Vendor.find(:all)
+    @kinds = Kind.find(:all)
+    @users = User.find(:all)
   end
 
   def create

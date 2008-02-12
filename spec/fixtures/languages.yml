@@ -1,41 +1,62 @@
-joe_smith_language:
-  iso_language: English
-  iso_country: United States of America
-  mode: Expressed Written
+joe_smith_english_language:
+  iso_language: english
+  iso_country: usa
+  language_ability_mode: not_applicable
   preference: true
   patient_data: joe_smith
 
-emily_jones_language:
-  iso_language: English
-  iso_country: United States of America
-  mode: Expressed Written
+emily_jones_english_language:
+  iso_language: english
+  iso_country: usa
+  language_ability_mode: not_applicable
   preference: true
   patient_data: emily_jones
 
-will_haynes_language:
-  iso_language: English
-  iso_country: United States of America
-  mode: Expressed Written
+emily_jones_german_language:
+  iso_language: german
+  iso_country: germany
+  language_ability_mode: received_spoken
+  preference: false
+  patient_data: emily_jones
+
+will_haynes_english_language:
+  iso_language: english
+  iso_country: usa
+  language_ability_mode: not_applicable
   preference: true
   patient_data: will_haynes
+  
+will_haynes_chinese_language:
+  iso_language: chinese
+  iso_country: china
+  language_ability_mode: received_written
+  preference: false
+  patient_data: will_haynes
 
-jennifer_thompson_language:
-  iso_language: English
-  iso_country: United States of America
-  mode: Expressed Written
+jennifer_thompson_english_language:
+  iso_language: english
+  iso_country: usa
+  language_ability_mode: not_applicable
   preference: true
   patient_data: jennifer_thompson
+  
+jennifer_thompson_estonian_language:
+  iso_language: estonian
+  iso_country: estonia
+  language_ability_mode: not_applicable
+  preference: false
+  patient_data: jennifer_thompson
 
-theodore_smith_language:
-  iso_language: English
-  iso_country: United States of America
-  mode: Expressed Written
+theodore_smith_english_language:
+  iso_language: english
+  iso_country: usa
+  language_ability_mode: not_applicable
   preference: true
   patient_data: theodore_smith
 
-david_carter_language:
-  iso_language: English
-  iso_country: United States of America
-  mode: Expressed Written
+david_carter_english_language:
+  iso_language: english
+  iso_country: usa
+  language_ability_mode: not_applicable
   preference: true
   patient_data: david_carter
