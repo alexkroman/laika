@@ -2,7 +2,7 @@ class CreateRegistrationInformations < ActiveRecord::Migration
   def self.up
     create_table :registration_information do |t|
       t.string :person_identifier
-      t.date :birth_date
+      t.date :date_of_birth
       t.string :gender
       t.string :marital_status
       t.string :religious_affiliation
