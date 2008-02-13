@@ -16,6 +16,13 @@
 	<recordTarget>
 		<patientRole>
 			<id extension="24602" root="SomeClinicalOrganizationOID" assigningAuthorityName="Some Clinical Organization Name"/>
+			<addr>
+				<streetAddressLine>1600 Rockville Pike</streetAddressLine>
+				<city>Rockville</city>
+				<state>MD</state>
+				<postalCode>20847</postalCode>
+				<country>US</country>
+			</addr>
 			<patient>
 				<name>
 				  <prefix>Mr.</prefix>

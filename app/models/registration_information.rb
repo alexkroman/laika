@@ -14,6 +14,13 @@ class RegistrationInformation < ActiveRecord::Base
                                         "cda:patient/cda:name[cda:given='#{self.person_name.first_name}' and cda:family='#{self.person_name.last_name}']",
                                         {'cda' => 'urn:hl7-org:v3'})
       errors.concat(self.person_name.validate_c32(name_element))
+      
+      if self.address.street_address_line_one
+        address_element = REXML::XPath.first(patient_element, 
+                                             "cda:addr[cda:streetAddressLine[1]='#{self.address.street_address_line_one}']",
+                                             {'cda' => 'urn:hl7-org:v3'})
+        errors.concat(self.address.validate_c32(address_element))
+      end
       errors << XmlHelper.match_value(patient_element, 'cda:patient/cda:administrativeGenderCode/@code', self.gender)
       # TODO: Need to verfiy birth date somehow... unclear how to do this from the CDA/CCD/C32 specs
       errors << XmlHelper.match_value(patient_element, 'cda:patient/cda:maritalStatusCode/@code', self.marital_status)
