@@ -2,6 +2,9 @@ class RegistrationInformation < ActiveRecord::Base
   belongs_to :patient_data
   include PersonLike
   
+  # Checks the contents of the REXML::Document passed in to make sure that they match the
+  # information in this object. Will return an empty array if everything passes. Otherwise,
+  # it will return an array of ContentErrors with a description of what's wrong.
   def validate_c32(document)
     errors = []
     patient_element = REXML::XPath.first(document, '/cda:ClinicalDocument/cda:recordTarget/cda:patientRole', {'cda' => 'urn:hl7-org:v3'})
@@ -14,9 +17,9 @@ class RegistrationInformation < ActiveRecord::Base
       errors << XmlHelper.match_value(name_element, 'cda:given', self.person_name.first_name)
       errors << XmlHelper.match_value(name_element, 'cda:family', self.person_name.last_name)
       errors << XmlHelper.match_value(name_element, 'cda:suffix', self.person_name.name_suffix)
-      #errors << XpathExpression.match_value(patient_element, 'patient_gender', doc_type, self.gender)
-      # # TODO: Need to verfiy birth date somehow... unclear how to do this from the CDA/CCD/C32 specs
-      # errors << XpathExpression.match_value(patient_element, 'patient_marital_status', doc_type, self.marital_status)
+      errors << XmlHelper.match_value(patient_element, 'cda:patient/cda:administrativeGenderCode/@code', self.gender)
+      # TODO: Need to verfiy birth date somehow... unclear how to do this from the CDA/CCD/C32 specs
+      errors << XmlHelper.match_value(patient_element, 'cda:patient/cda:maritalStatusCode/@code', self.marital_status)
     else
       errors << ContentError.new(:section => 'registration_information', :error_message => 'No patientRole element found')
     end
