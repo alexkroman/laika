@@ -12,13 +12,14 @@ class Medication < ActiveRecord::Base
      substanceAdministration = REXML::XPath.first(context,"./cda:entry/cda:substanceAdministration[ ./cda:consumable/cda:manufacturedProduct/cda:manufacturedMaterial/cda:code/cda:originalText/text() = $original]",@@default_namespaces,{"original"=>product_coded_display_name} )
      
      if substanceAdministration then    
-         #consumable product
+         #consumable product and assorted sub elements
          consumable = REXML::XPath.first(substanceAdministration,"./cda:consumable",@@default_namespaces)
          manufactured = REXML::XPath.first(consumable,"./cda:manufacturedProduct",@@default_namespaces)
          code = REXML::XPath.first(manufactured,"./cda:manufacturedMaterial/cda:code",@@default_namespaces)
          translation = REXML::XPath.first(code,"cda:translation",@@default_namespaces)
         
-         brand_error =  XmlHelper.match_value(manufactured,"cda:manufacturedMaterial/cda:name/text()",free_text_brand_name,@@default_namespaces)
+         # look for the Brand information if it exists
+         brand_error =  XmlHelper.match_value(manufactured,"cda:manufacturedMaterial/cda:name/text()",free_text_brand_name,@@default_namespaces,{},:long)
          
          unless brand_error.nil?
 	         ce = ContentError.new(:section=>"Medication", 
@@ -30,10 +31,10 @@ class Medication < ActiveRecord::Base
 	            
         end 
          
-         
+         # validate the medication type Perscription or over the counter 
          med_type_error = XmlHelper.match_value(substanceAdministration,
                      "cda:entryRelationship[@typeCode='SUBJ']/cda:observation[cda:templateId/@root='2.16.840.1.113883.3.88.11.32.10']/cda:code/@displayName",medication_type,
-                     @@default_namespaces)
+                     @@default_namespaces,{},:long)
                      
         unless med_type_error.nil?
            ce = ContentError.new(:section=>"Medication", 
@@ -44,10 +45,11 @@ class Medication < ActiveRecord::Base
                  ce.save                 
                                      
             end                      
-                     
+            
+         # validate the status            
          med_status_error = XmlHelper.match_value(substanceAdministration,
              "cda:entryRelationship[@typeCode='REFR']/cda:observation[cda:templateId/@root='2.16.840.1.113883.10.20.1.47']/cda:value/@code",status,
-             @@default_namespaces)
+             @@default_namespaces,{},:long)
              
              unless med_status_error.nil?
                 ce = ContentError.new(:section=>"Medication", 
@@ -58,7 +60,7 @@ class Medication < ActiveRecord::Base
                       ce.save                 
                                           
                  end 
-             
+         # validate the order quantity
          order = REXML::XPath.first(substanceAdministration,
              "cda:entryRelationship[@typeCode='REFR']/cda:supply[moodCode='INT']",
              @@default_namespaces)
@@ -66,7 +68,7 @@ class Medication < ActiveRecord::Base
 	         order_error XmlHelper.match_value(order,
 	                 "cda:supply/cda:quantity/@value",
 	                  quantity_ordered_value,
-	                  @@default_namespaces)       
+	                  @@default_namespaces,{},:long)       
 	                         
 	                  unless order_error.nil?
 	                     ce = ContentError.new(:section=>"Medication", 
