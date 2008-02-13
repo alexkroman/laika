@@ -10,6 +10,8 @@ class CreateMedications < ActiveRecord::Migration
       t.string :status
       t.float  :quantity_ordered_value
       t.string :quantity_ordered_unit
+      t.string :prescription_number
+      t.string :effectivetime
       
       t.belongs_to :patient_data, :null => false
     end
