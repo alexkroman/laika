@@ -9,27 +9,27 @@ module XmlHelper
   # Nil will be returned if the values match.
   # If the values do not match, or if the node cannot be found, and error
   # string will be returned.
-  def self.match_value(element, expression, expected_value)
+  def self.match_value(element, expression, expected_value, namespaces={'cda' => 'urn:hl7-org:v3'},bind_variables = {})
     error = nil
-    if expected_value
-      desired_node = REXML::XPath.first(element, expression, {'cda' => 'urn:hl7-org:v3'})
-      if desired_node
+    
+      desired_node = REXML::XPath.first(element, expression, namespaces,bind_variables)
+     
         actual_value = nil
-        if desired_node.respond_to?(:text)
+        
+        if desired_node.kind_of?(String) ||
+           desired_node.kind_of?(TrueClass)||
+           desired_node.kind_of?(FalseClass) ||
+           desired_node.kind_of?(NilClass)
+           actual_value = desired_node           
+        elsif desired_node.respond_to?(:text)
           actual_value = desired_node.text
         else
           actual_value = desired_node.value
         end
         
         unless expected_value.eql?(actual_value)
-          error = "Expected #{expected_value} got #{actual_value}"
-        end
-        
-      else
-        error = "Couldn't find xml"
-      end
-    end
-    
+          error = "Expected #{(expected_value)? expected_value.to_s : 'nil'} got #{(actual_value) ? actual_value : 'nil'}"
+        end    
     error
   end
 end
