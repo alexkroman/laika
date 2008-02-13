@@ -85,134 +85,295 @@
 	</documentationOf>
 	<component>
 		<structuredBody>
-			<component>
-				<!-- Medications Section -->
-				<section>
-					<templateId root="2.16.840.1.113883.10.20.1.8" assigningAuthorityName="CCD"/>
-					<code code="10160-0" displayName="History of medication use" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
-					<title>Medications - Prescription and Non-Prescription</title>
+		 <component>
+							<section>
+					<templateId root="2.16.840.1.113883.10.20.1.8"/>
+					<!-- Medications section template -->
+					<code code="10160-0" codeSystem="2.16.840.1.113883.6.1"/>
+					<title>Medications</title>
 					<text>
 						<table border="1" width="100%">
 							<thead>
 								<tr>
 									<th>Medication</th>
-									<th>Rx/OC</th>
-									<th>Dosage</th>
-									<th>Route</th>
-									<th>Timing</th>
 									<th>Instructions</th>
 									<th>Start Date</th>
-									<th>StopDate/Status</th>
+									<th>Status</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
-									<td>Product Name (Brand Name)</td>
-									<td>Rx or OC or UNK</td>
-									<td>Dosage Units </td>
-									<td>Route e.g. Capsule, Tablet, Inhaler</td>
-									<td>Frequency (e.g. 3 times/day) or Interval (every 8 hours)</td>
-									<td ID="MedPatInstr_ddd">Patient Instructions</td>
-									<td>Start Date</td>
-									<td>StopDate or Still Active or Inactive</td>
+									<td>Albuterol inhalant</td>
+									<td>2 puffs QID PRN wheezing</td>
+									<td>&#160;</td>
+									<td>Active</td>
+								</tr>
+								<tr>
+									<td>Clopidogrel (Plavix)</td>
+									<td>75mg PO daily</td>
+									<td>&#160;</td>
+									<td>Active</td>
+								</tr>
+								<tr>
+									<td>Metoprolol</td>
+									<td>25mg PO BID</td>
+									<td>&#160;</td>
+									<td>Active</td>
+								</tr>
+								<tr>
+									<td>Prednisone</td>
+									<td>20mg PO daily</td>
+									<td>Mar 28, 2000</td>
+									<td>Active</td>
+								</tr>
+								<tr>
+									<td>Cephalexin (Keflex)</td>
+									<td>500mg PO QID x 7 days (for bronchitis)</td>
+									<td>Mar 28, 2000</td>
+									<td>No longer active</td>
 								</tr>
 							</tbody>
 						</table>
 					</text>
-					<entry>
-						<!--Administration Information -->
+					<informant>
+						<assignedEntity>
+							<id extension="996-756-495" root="2.16.840.1.113883.19.5"/>
+							<representedOrganization>
+								<id root="2.16.840.1.113883.19.5"/>
+								<name>Good Health Clinic</name>
+							</representedOrganization>
+						</assignedEntity>
+					</informant>
+					<entry typeCode="DRIV">
 						<substanceAdministration classCode="SBADM" moodCode="EVN">
-							<templateId root="2.16.840.1.113883.10.20.1.24" assigningAuthorityName="CCD"/>
-							<templateId root="2.16.840.1.113883.3.88.11.32.8" assigningAuthorityName="HITSP/C32"/>
-							<id root="2.16.840.1.113883.3.72.5.1" extension="Generate UUID" assigningAuthorityName="NIST Healthcare Project"/>
-							<!-- Time Interval for Medication -->
-							<statusCode nullFlavor="NA"/>
-							<!--Timespan of Medication Usage-->
+							<templateId root="2.16.840.1.113883.10.20.1.24"/>
+							<!-- Medication activity template -->
+							<id root="cdbd33f0-6cde-11db-9fe1-0800200c9a66"/>
+							<statusCode code="active"/>
 							<effectiveTime xsi:type="IVL_TS">
-								<low value="200705"/>
-								<high nullFlavor="UNK" value="2007"/>
+								<low value="2005"/>
+								<high nullFlavor="UNK"/>
 							</effectiveTime>
-							<!-- Frequency or Interval or Duration of Administration -->
-							<effectiveTime xsi:type="PIVL_TS" operator="A" institutionSpecified="false">
-								<period value="1" unit="d"/>
+							<effectiveTime xsi:type="PIVL_TS">
+								<period value="6" unit="h"/>
 							</effectiveTime>
-							<routeCode code="C38288(e.g.)" displayName="Oral (e.g.)" codeSystem="2.16.840.1.113883.3.26.1.1" codeSystemName="FDA Route of Administration"/>
-							<approachSiteCode code="91723000" displayName="Anatomical Structure hierarchy" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
-							<doseQuantity value="2" unit="{tablets}"/>
-							<!-- Medication Information - R-->
+							<routeCode code="IPINHL" codeSystem="2.16.840.1.113883.5.112" codeSystemName="RouteOfAdministration" displayName="Inhalation, oral"/>
+							<doseQuantity value="2"/>
+							<administrationUnitCode code="415215001" codeSystem="2.16.840.1.113883.6.96" displayName="Puff"/>
 							<consumable>
-								<manufacturedProduct classCode="MANU">
-									<templateId root="2.16.840.1.113883.10.20.1.53" assigningAuthorityName="CCD"/>
-									<templateId root="2.16.840.1.113883.3.88.11.32.9" assigningAuthorityName="HITSP/C32"/>
+								<manufacturedProduct>
+									<templateId root="2.16.840.1.113883.10.20.1.53"/>
+									<!-- Product template -->
 									<manufacturedMaterial>
-										<code code="GenericCode" displayName="GenericName" codeSystemName="RxNorm" codeSystem="2.16.840.1.113883.6.88">
-											<originalText>Generic Product Name</originalText>
-											<translation code="BrandAndLabelCode" displayName="BrandName and Label" codeSystemName="RxNorm" codeSystem="2.16.840.1.113883.6.88"/>
+										<code code="307782" codeSystem="2.16.840.1.113883.6.88" displayName="Albuterol 0.09 MG/ACTUAT inhalant solution">
+											<originalText>Albuterol inhalant</originalText>
 										</code>
-										<name>Brand Name</name>
 									</manufacturedMaterial>
 								</manufacturedProduct>
 							</consumable>
-							<!-- Type of Medication - R2 -->
-							<entryRelationship typeCode="SUBJ">
-								<observation classCode="OBS" moodCode="EVN">
-									<templateId root="2.16.840.1.113883.3.88.11.32.10" assigningAuthorityName="HITSP/C32"/>
-									<code code="73639000" codeSystem="2.16.840.1.113883.6.96" displayName="Prescription Drug" codeSystemName="SNOMED CT">
-										<originalText>The codes for the two alternatives are: 73639000 (Prescription Drug - Rx) and  329505003 (Over the counter product - OC).</originalText>
-									</code>
-								</observation>
-							</entryRelationship>
-							<!-- Status of Medication - R2 -->
 							<entryRelationship typeCode="REFR">
 								<observation classCode="OBS" moodCode="EVN">
-									<templateId root="2.16.840.1.113883.10.20.1.57" assigningAuthorityName="CCD"/>
-									<templateId root="2.16.840.1.113883.10.20.1.47" assigningAuthorityName="CCD"/>
+									<templateId root="2.16.840.1.113883.10.20.1.47"/>
 									<code code="33999-4" displayName="Status" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
-									<statusCode code="completed"/>
-									<value xsi:type="CD" code="55561003" displayName="Active" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT">
-										<originalText>One of 4 values specified by CCD Value Set (2.16.840.1.113883.1.11.20.7): Active (55561003), On Hold (421139008), Prior History (392521001) or No Longer Active (73425007)</originalText>
-									</value>
+									<value xsi:type="CE" code="55561003" displayName="Active" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
 								</observation>
 							</entryRelationship>
-							<!-- Reason (Indication) for Medication - Optional -->
-							<entryRelationship typeCode="RSON">
+							<precondition typeCode="PRCN">
+								<criterion>
+									<code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
+									<value xsi:type="CE" code="56018004" codeSystem="2.16.840.1.113883.6.96" displayName="Wheezing"/>
+								</criterion>
+							</precondition>
+						</substanceAdministration>
+					</entry>
+					<entry typeCode="DRIV">
+						<substanceAdministration classCode="SBADM" moodCode="EVN">
+							<templateId root="2.16.840.1.113883.10.20.1.24" assigningAuthorityName="CCD"/>
+							<!-- Medication activity template -->
+							<id root="cdbd5b05-6cde-11db-9fe1-0800200c9a66"/>
+							<statusCode code="active"/>
+							<effectiveTime nullFlavor="UNK"/>
+							<effectiveTime xsi:type="PIVL_TS" operator="A">
+								<period value="24" unit="h"/>
+							</effectiveTime>
+							<routeCode code="C38288" displayName="Oral" codeSystem="2.16.840.1.113883.3.26.1.1" codeSystemName="FDA RouteOfAdministration"/>
+							<doseQuantity value="1"/>
+							<consumable>
+								<manufacturedProduct>
+									<templateId root="2.16.840.1.113883.3.88.11.32.9" assigningAuthorityName="HITSP C32"/>
+									<templateId root="2.16.840.1.113883.10.20.1.53"/>
+									<!-- Product template -->
+									<manufacturedMaterial>
+										<code code="309362" codeSystem="2.16.840.1.113883.6.88" displayName="Clopidogrel 75 MG oral tablet">
+											<originalText>Clopidogrel</originalText>
+										</code>
+										<name>Plavix</name>
+									</manufacturedMaterial>
+								</manufacturedProduct>
+							</consumable>
+							<entryRelationship typeCode="REFR">
 								<observation classCode="OBS" moodCode="EVN">
-									<templateId root="2.16.840.1.113883.10.20.1.28" assigningAuthorityName="CCD"/>
-									<code nullFlavor="NA"/>
-									<text>Reason for taking this medication.</text>
-									<statusCode code="completed"/>
-									<effectiveTime value="2006"/>
+									<templateId root="2.16.840.1.113883.10.20.1.47"/>
+									<code code="33999-4" displayName="Status" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+									<value xsi:type="CE" code="55561003" displayName="Active" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
 								</observation>
 							</entryRelationship>
-							<!-- Patient Instructions - Optional -->
-							<entryRelationship typeCode="SUBJ">
-								<act classCode="ACT" moodCode="INT">
-									<templateId root="2.16.840.1.113883.10.20.1.49" assigningAuthorityName="CCD"/>
-									<code nullFlavor="NA"/>
-									<text>Additional Physicians Instructions to Patient for taking this Medication.<reference value="#MedPatInstr_ddd"/>
-									</text>
-								</act>
-							</entryRelationship>
-							<!-- Order Information - R2 -->
+						</substanceAdministration>
+					</entry>
+					<entry typeCode="DRIV">
+						<substanceAdministration classCode="SBADM" moodCode="EVN">
+							<templateId root="2.16.840.1.113883.3.88.11.32.8" assigningAuthorityName="HITSP C32"/>
+							<templateId root="2.16.840.1.113883.10.20.1.24" assigningAuthorityName="CCD"/>
+							<!-- Medication activity template -->
+							<id root="cdbd5b01-6cde-11db-9fe1-0800200c9a66"/>
+							<statusCode code="active"/>
+							<effectiveTime xsi:type="IVL_TS" value="20071121"/>
+							<effectiveTime xsi:type="PIVL_TS" operator="A" institutionSpecified="false">
+								<period value="12" unit="h"/>
+							</effectiveTime>
+							<routeCode code="C38288" displayName="Oral" codeSystem="2.16.840.1.113883.3.26.1.1" codeSystemName="FDA RouteOfAdministration"/>
+							<doseQuantity value="1"/>
+							<consumable>
+								<manufacturedProduct>
+									<templateId root="2.16.840.1.113883.3.88.11.32.9" assigningAuthorityName="HITSP C32"/>
+									<templateId root="2.16.840.1.113883.10.20.1.53"/>
+									<!-- Product template -->
+									<manufacturedMaterial>
+										<code code="430618" codeSystem="2.16.840.1.113883.6.88" displayName="Metoprolol 25 MG oral tablet">
+											<originalText>Metoprolol</originalText>
+										</code>
+										<name>Generic Brand</name>
+									</manufacturedMaterial>
+								</manufacturedProduct>
+							</consumable>
 							<entryRelationship typeCode="REFR">
 								<supply classCode="SPLY" moodCode="INT">
 									<templateId root="2.16.840.1.113883.10.20.1.34" assigningAuthorityName="CCD"/>
 									<templateId root="2.16.840.1.113883.3.88.11.32.11" assigningAuthorityName="HITSP/C32"/>
 									<id/>
-									<code nullFlavor="NA"/>
-									<statusCode/>
-									<effectiveTime/>
 								</supply>
 							</entryRelationship>
-							<!-- Fulfillment Instructions - Optional -->
 							<entryRelationship typeCode="SUBJ">
-								<act classCode="ACT" moodCode="INT">
-									<templateId root="2.16.840.1.113883.10.20.1.43" assigningAuthorityName="CCD"/>
-									<code nullFlavor="NA"/>
-									<text>
-										<reference value="PointerToTextInSection"/>
-									</text>
-								</act>
+								<observation classCode="OBS" moodCode="EVN">
+									<templateId root="2.16.840.1.113883.3.88.11.32.10" assigningAuthorityName="HITSP C32"/>
+									<code code="73639000" codeSystem="2.16.840.1.113883.6.96" displayName="Prescription Drug"/>
+								</observation>
+							</entryRelationship>
+						</substanceAdministration>
+					</entry>
+					<entry typeCode="DRIV">
+						<substanceAdministration classCode="SBADM" moodCode="EVN">
+							<templateId root="2.16.840.1.113883.3.88.11.32.8" assigningAuthorityName="HITSP C32"/>
+							<templateId root="2.16.840.1.113883.10.20.1.24"/>
+							<!-- Medication activity template -->
+							<id root="cdbd5b03-6cde-11db-9fe1-0800200c9a66"/>
+							<statusCode code="active"/>
+							<effectiveTime xsi:type="IVL_TS">
+								<low value="20000328"/>
+							</effectiveTime>
+							<effectiveTime xsi:type="PIVL_TS" operator="A" institutionSpecified="false">
+								<period value="24" unit="h"/>
+							</effectiveTime>
+							<routeCode code="C38288" displayName="Oral" codeSystem="2.16.840.1.113883.3.26.1.1" codeSystemName="FDA RouteOfAdministration"/>
+							<doseQuantity value="1"/>
+							<consumable>
+								<manufacturedProduct>
+									<templateId root="2.16.840.1.113883.3.88.11.32.9" assigningAuthorityName="HITSP C32"/>
+									<templateId root="2.16.840.1.113883.10.20.1.53"/>
+									<!-- Product template -->
+									<manufacturedMaterial>
+										<code code="312615" codeSystem="2.16.840.1.113883.6.88" displayName="Prednisone 20 MG oral tablet">
+											<originalText>Prednisone</originalText>
+										</code>
+									</manufacturedMaterial>
+								</manufacturedProduct>
+							</consumable>
+							<entryRelationship typeCode="REFR">
+								<observation classCode="OBS" moodCode="EVN">
+									<templateId root="2.16.840.1.113883.10.20.1.47"/>
+									<code code="33999-4" displayName="Status" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+									<value xsi:type="CE" code="55561003" displayName="Active" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
+								</observation>
+							</entryRelationship>
+							<entryRelationship typeCode="REFR">
+								<supply classCode="SPLY" moodCode="INT">
+									<templateId root="2.16.840.1.113883.10.20.1.34" assigningAuthorityName="CCD"/>
+									<templateId root="2.16.840.1.113883.3.88.11.32.11" assigningAuthorityName="HITSP/C32"/>
+									<id/>
+									<quantity value="1"/>
+									
+								</supply>
+							</entryRelationship>
+							<entryRelationship typeCode="SUBJ">
+								<observation classCode="OBS" moodCode="EVN">
+									<templateId root="2.16.840.1.113883.3.88.11.32.10" assigningAuthorityName="HITSP C32"/>
+									<code code="329505003" codeSystem="2.16.840.1.113883.6.96" displayName="Over the counter product"/>
+								</observation>
+							</entryRelationship>
+						</substanceAdministration>
+					</entry>
+					<entry typeCode="DRIV">
+						<substanceAdministration classCode="SBADM" moodCode="EVN">
+							<templateId root="2.16.840.1.113883.3.88.11.32.8" assigningAuthorityName="HITSP C32"/>
+							<templateId root="2.16.840.1.113883.10.20.1.24"/>
+							<!-- Medication activity template -->
+							<id root="cdbd5b07-6cde-11db-9fe1-0800200c9a66"/>
+							<statusCode code="completed"/>
+							<effectiveTime xsi:type="IVL_TS">
+								<low value="20000328"/>
+								<high value="20000404"/>
+							</effectiveTime>
+							<effectiveTime xsi:type="PIVL_TS" operator="A" institutionSpecified="false">
+								<period value="6" unit="h"/>
+							</effectiveTime>
+							<routeCode code="C38288" displayName="Oral" codeSystem="2.16.840.1.113883.3.26.1.1" codeSystemName="FDA RouteOfAdministration"/>
+							<doseQuantity value="1"/>
+							<consumable>
+								<manufacturedProduct>
+									<templateId root="2.16.840.1.113883.3.88.11.32.9" assigningAuthorityName="HITSP C32"/>
+									<templateId root="2.16.840.1.113883.10.20.1.53"/>
+									<!-- Product template -->
+									<manufacturedMaterial>
+										<code code="197454" codeSystem="2.16.840.1.113883.6.88" displayName="Cephalexin 500 MG oral tablet">
+											<originalText>Cephalexin</originalText>
+										</code>
+										<name>Keflex</name>
+									</manufacturedMaterial>
+								</manufacturedProduct>
+							</consumable>
+							<entryRelationship typeCode="REFR">
+								<observation classCode="OBS" moodCode="EVN">
+									<templateId root="2.16.840.1.113883.10.20.1.47"/>
+									<code code="33999-4" displayName="Status" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+									<value xsi:type="CE" code="55561003" displayName="Active" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
+								</observation>
+							</entryRelationship>
+							<entryRelationship typeCode="REFR">
+								<supply classCode="SPLY" moodCode="INT">
+									<templateId root="2.16.840.1.113883.10.20.1.34" assigningAuthorityName="CCD"/>
+									<templateId root="2.16.840.1.113883.3.88.11.32.11" assigningAuthorityName="HITSP/C32"/>
+									<id/>
+									<quantity value="1"/>
+								</supply>
+							</entryRelationship>
+							<entryRelationship typeCode="SUBJ">
+								<observation classCode="OBS" moodCode="EVN">
+									<templateId root="2.16.840.1.113883.3.88.11.32.10" assigningAuthorityName="HITSP C32"/>
+									<code code="73639000" codeSystem="2.16.840.1.113883.6.96" displayName="Prescription Drug"/>
+								</observation>
+							</entryRelationship>
+							<entryRelationship typeCode="RSON">
+								<observation classCode="COND" moodCode="EVN">
+									<templateId root="2.16.840.1.113883.10.20.1.28"/>
+									<!-- Problem observation template -->
+									<id root="cdbd5b08-6cde-11db-9fe1-0800200c9a66"/>
+									<code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
+									<statusCode code="completed"/>
+									<effectiveTime>
+										<low value="20000328"/>
+									</effectiveTime>
+									<value xsi:type="CE" code="32398004" codeSystem="2.16.840.1.113883.6.96" displayName="Bronchitis"/>
+								</observation>
 							</entryRelationship>
 						</substanceAdministration>
 					</entry>
