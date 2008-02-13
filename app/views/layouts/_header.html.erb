@@ -6,7 +6,7 @@
             <ul id="smallnav">
               <li <% if current_page?(:controller => 'users') %>id="active"<% end %>><%= link_to 'People &amp; Inspections', :controller => 'users' %></li>
               <li><a href="#">About</a></li>
-              <li><a href="mailto:talk@projectlaika.org">Feedback</a></li>
+              <li><a href="mailto:<%= FEEDBACK_EMAIL %>">Feedback</a></li>
               <li><a href="#">Help</a></li>
             </ul>
           </div>
