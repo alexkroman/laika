@@ -1,5 +1,10 @@
 class RegistrationInformation < ActiveRecord::Base
   belongs_to :patient_data
+  belongs_to :race
+  belongs_to :ethnicity
+  belongs_to :marital_status
+  belongs_to :gender
+  belongs_to :religion
   include PersonLike
   
   # Checks the contents of the REXML::Document passed in to make sure that they match the
