@@ -68,7 +68,7 @@ module PersonLike
         end
         
         if (params[:contact_type_id] != nil)
-          self.contact = ContactType.find(params[:contact_type_id])
+          self.contact_type = ContactType.find(params[:contact_type_id])
         end
        
         if (params[:relationship_id] != nil)
