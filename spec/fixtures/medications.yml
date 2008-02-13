@@ -1,0 +1,60 @@
+joe_smith_medication_1:
+  patient_data: joe_smith_vendor_test
+  product_coded_display_name: Albuterol inhalant
+  product_code:
+  code_system_name:
+  code_system_code:
+  free_text_brand_name:
+  medication_type:
+  status:
+  quantity_ordered_value:
+  quantity_ordered_unit:
+  
+joe_smith_medication_2:
+  patient_data: joe_smith_vendor_test
+  product_coded_display_name: Clopidogrel
+  product_code:
+  code_system_name:
+  code_system_code:
+  free_text_brand_name: Plavix
+  medication_type:
+  status:
+  quantity_ordered_value:
+  quantity_ordered_unit:
+  
+joe_smith_medication_3:
+  patient_data: joe_smith_vendor_test
+  product_coded_display_name: Metoprolol
+  product_code:
+  code_system_name:
+  code_system_code:
+  free_text_brand_name: "Generic Brand"
+  medication_type: Prescription Drug
+  status:
+  quantity_ordered_value:
+  quantity_ordered_unit:
+  
+joe_smith_medication_4:
+  patient_data: joe_smith_vendor_test
+  product_coded_display_name: Prednisone
+  product_code:
+  code_system_name:
+  code_system_code:
+  free_text_brand_name:
+  medication_type: Over the counter product
+  status:
+  quantity_ordered_value:
+  quantity_ordered_unit:  
+  
+joe_smith_medication_5:
+  patient_data: joe_smith_vendor_test
+  product_coded_display_name: Cephalexin
+  product_code:
+  code_system_name:
+  code_system_code:
+  free_text_brand_name: Keflex
+  medication_type: Prescription Drug
+  status: 
+  quantity_ordered_value: 1
+  quantity_ordered_unit: 
+ 
