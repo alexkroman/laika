@@ -2,9 +2,7 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
-  
-  VERSION_NUMBER = "0.4.1"
-
+ 
   helper :all # include all helpers, all the time
  
   # AuthenticationSystem supports the acts_as_authenticated
