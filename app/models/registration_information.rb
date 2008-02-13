@@ -14,7 +14,7 @@ class RegistrationInformation < ActiveRecord::Base
                                         "cda:patient/cda:name[cda:given='#{self.person_name.first_name}' and cda:family='#{self.person_name.last_name}']",
                                         {'cda' => 'urn:hl7-org:v3'})
       errors.concat(self.person_name.validate_c32(name_element))
-      
+      errors.concat(self.telecom.validate_c32(patient_element))
       if self.address.street_address_line_one
         address_element = REXML::XPath.first(patient_element, 
                                              "cda:addr[cda:streetAddressLine[1]='#{self.address.street_address_line_one}']",

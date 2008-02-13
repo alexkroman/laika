@@ -16,6 +16,7 @@
 	<recordTarget>
 		<patientRole>
 			<id extension="24602" root="SomeClinicalOrganizationOID" assigningAuthorityName="Some Clinical Organization Name"/>
+			<telecom use="HP" value="tel:+1(312)555-1234"/>
 			<addr>
 				<streetAddressLine>1600 Rockville Pike</streetAddressLine>
 				<city>Rockville</city>
