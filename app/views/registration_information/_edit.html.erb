@@ -1,7 +1,8 @@
 <!-- Start Personal Information Module -->
-<% remote_form_for(:registration_information, 
+<% 
+   remote_form_for(:registration_information, 
                    :url => patient_data_instance_registration_information_path(patient_data),
-                   :update => 'personInformationContainer') do |f| %>
+                   :update => 'personInformationContainer', :method => http_method(registration_information)) do |f| %>
 <h5>Person Information</h5>
 <table>
 	<tr class="darkzebra">
