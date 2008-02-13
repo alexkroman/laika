@@ -11,94 +11,58 @@
   <%= render :partial => '/person_names/edit', :locals => {:person_name => registration_information.person_name}%>
 	<tr class="spacer"><td></td><td></td></tr>
 	<tr class="lightzebra">
-		<td class="lighttext">Gender</td>
-		<td><%= f.select :gender, ['Male', 'Female'] %></td>
-	</tr>
+      <td class="lighttext">Gender</td>
+      <td>
+        <select name="gender_id">
+        <% for gender in @genders -%>
+          <option value="<%= gender.id %>"><%= gender.name %></option>
+        <% end -%>
+        </select>
+      </td>
+    </tr>
 	<tr class="darkzebra">
         <td class="lighttext">Date of Birth</td>
         <td><input id="registration_information_date_of_birth" name="registration_information[date_of_birth]" size="30" type="text" <% if registration_information.date_of_birth != nil %>value="<%= registration_information.date_of_birth.strftime("%m/%d/%y") %>"<% end %> onClick="GetDate(this);" /></td>
     </tr>
-	<tr class="lightzebra">
-		<td class="lighttext">Marital Status</td>
-		<td><%= f.select :marital_status,
-      ["Single",
-      "Married",
-      "Divorced ",
-      "Never married",
-      "Divorced/annulled",
-      "Divorced/separated",
-      "Annulled",
-      "Widowed",
-      "Separated, NOS",
-      "Separated, legal",
-      "Separated, nonlegal",
-      "Temporary separation",
-      "Permanent separation",
-      "Consensual union",
-      "Unknown",
-      "Common Law",
-      "Domestic Partner",
-      "Registered Domestic Partner",
-      "Living together",
-      "Interlocutory",
-      "Other",
-      "Unreported"]
-    %></td>
-	</tr>
+    <tr class="lightzebra">
+      <td class="lighttext">Marital Status</td>
+      <td>
+        <select name="marital_status_id">
+        <% for maritalStatus in @maritalStatuses -%>
+          <option value="<%= maritalStatus.id %>"><%= maritalStatus.name %></option>
+        <% end -%>
+        </select>
+      </td>
+    </tr>
+    <tr class="lightzebra">
+      <td class="lighttext">Religion</td>
+      <td>
+        <select name="religion_id">
+        <% for religion in @religions -%>
+          <option value="<%= religion.id %>"><%= religion.name %></option>
+        <% end -%>
+        </select>
+      </td>
+    </tr>
 	<tr class="darkzebra">
 		<td class="lighttext">Race</td>
-		<td><%= f.select :race,
-        ["American Indian/Alaska",
-        "Asian",
-        "Black",
-        "Hawaiian/Pacific Islander",
-        "White",
-        "Other"] %></td>
+        <td>
+          <select name="race_id">
+          <% for race in @races -%>
+            <option value="<%= race.id %>"><%= race.name %></option>
+          <% end -%>
+          </select>
+        </td>
 	</tr>
 	<tr class="lightzebra">
 		<td class="lighttext">Ethnicity</td>
-		<td><%= f.select :ethnicity, 
-      ["Hispanic/Latino",
-      "Spaniard",
-      "Andalusian",
-      "Asturian",
-      "Castillian",
-      "Catalonian",
-      "Belearic Islander",
-      "Gallego",
-      "Valencian",
-      "Canarian",
-      "Spanish Basque",
-      "Mexican",
-      "Mexican American",
-      "Mexicano",
-      "Chicano",
-      "La Raza",
-      "Mexican American Indiand",
-      "Central American",
-      "Costa Rican",
-      "Guatemalan",
-      "Honduran",
-      "Nicaraguan",
-      "Panamanian",
-      "Salvadoran",
-      "Central American Indian",
-      "South American",
-      "Argentinean",
-      "Bolivian",
-      "Chilean",
-      "Colombian",
-      "Ecuadorian",
-      "Paraguayan",
-      "Peruvian",
-      "Uruguayan",
-      "Venezuelan",
-      "South American Indian",
-      "Criollo",
-      "Latin American",
-      "Puerto Rican",
-      "Cuban",
-      "Dominican"] %></td>
+		<td>
+		  <select name="ethnicity_id">
+          <% for ethnicity in @ethnicities -%>
+            <option value="<%= ethnicity.id %>"><%= ethnicity.name %></option>
+          <% end -%>
+          </select>
+		</td>
 	</tr>
 	<tr class="spacer"><td></td><td></td></tr>
   <%= render :partial => '/addresses/edit', :locals => {:address => registration_information.address}%>

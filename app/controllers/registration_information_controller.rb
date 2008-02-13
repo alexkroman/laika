@@ -6,6 +6,11 @@ class RegistrationInformationController < PatientDataChildController
     @registration_information.address = Address.new
     @registration_information.telecom = Telecom.new
     @isoCountries = IsoCountry.find(:all, :order => "name ASC")
+    @races = Race.find(:all, :order => "name ASC")
+    @ethnicities = Ethnicity.find(:all, :order => "name ASC")
+    @religions = Religion.find(:all, :order => "name ASC")
+    @maritalStatuses = MaritalStatus.find(:all, :order => "name ASC")
+    @genders = Gender.find(:all, :order => "name ASC")
 
     render :partial  => 'edit', :locals => {:registration_information =>  @registration_information,
                                             :patient_data => @patient_data}
@@ -14,6 +19,11 @@ class RegistrationInformationController < PatientDataChildController
   def edit
     @registration_information = @patient_data.registration_information
     @isoCountries = IsoCountry.find(:all, :order => "name ASC")
+    @races = Race.find(:all, :order => "name ASC")
+    @ethnicities = Ethnicity.find(:all, :order => "name ASC")
+    @religions = Religion.find(:all, :order => "name ASC")
+    @maritalStatuses = MaritalStatus.find(:all, :order => "name ASC")
+    @genders = Gender.find(:all, :order => "name ASC")
     render :partial  => 'edit', :locals => {:registration_information =>  @registration_information,
                                             :patient_data => @patient_data}
   end
