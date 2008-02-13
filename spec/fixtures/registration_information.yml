@@ -1,36 +1,59 @@
 joe_smith:
   person_identifier: 24602
   date_of_birth: 1967-03-23
-  gender: M
+  gender: male
+  religion: christian
+  race: european
+  ethnicity: spaniard
+  marital_status: never_married
   patient_data: joe_smith
 
 emily_jones:
   person_identifier: 24603
   date_of_birth: 2006-11-01
-  gender: F
+  gender: female
+  religion: hinduism
+  race: polish
+  ethnicity: not_hispanic_or_latino
+  marital_status: married
   patient_data: emily_jones
 
 will_haynes:
   person_identifier: 24604
   date_of_birth: 2006-11-04
-  gender: M
+  gender: male
+  religion: islam
+  race: scottish
+  ethnicity: not_hispanic_or_latino
+  marital_status: divorced
   patient_data: will_haynes
 
 jennifer_thompson:
   person_identifier: 24605
   date_of_birth: 1975-04-10
-  gender: F
-  marital_status: Married
+  gender: female
+  religion: judaism
+  race: mexican_american_indian
+  ethnicity: mexican
+  marital_status: polygamous
   patient_data: jennifer_thompson
 
 theodore_smith:
   person_identifier: 24606
   date_of_birth: 1929-11-08
-  gender: M
+  gender: male
+  religion: orthodox
+  race: israeili
+  ethnicity: not_hispanic_or_latino
+  marital_status: domestic_partner
   patient_data: theodore_smith
 
 david_carter:
   person_identifier: 24607
   date_of_birth: 2000-03-02
-  gender: M
+  gender: male
+  religion: paganism
+  race: irish
+  ethnicity: not_hispanic_or_latino
+  marital_status: annulled
   patient_data: david_carter
