@@ -8,11 +8,8 @@ class CreateMedications < ActiveRecord::Migration
       t.string :free_text_brand_name
       t.string :medication_type
       t.string :status
-      t.float :quantity_ordered_value
+      t.float  :quantity_ordered_value
       t.string :quantity_ordered_unit
-      t.string :prescription_number
-      t.float :quantity_dispensed_value
-      t.string :quantity_dispensed_unit
       
       t.belongs_to :patient_data, :null => false
     end
