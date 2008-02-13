@@ -4,7 +4,7 @@
     <td><%= address_form.text_field :street_address_line_one %></td>
   </tr>
   <tr class="darkzebra">
-    <td class="lighttext"></td>
+    <td class="darkzebra"></td>
     <td><%= address_form.text_field :street_address_line_two %></td>
   </tr>
   <tr class="lightzebra">
@@ -12,7 +12,7 @@
     <td><%= address_form.text_field :city %></td>
   </tr>
   <tr class="darkzebra">
-    <td class="lighttext">State</td>
+    <td class="darkzebra">State</td>
     <td><%= address_form.select :state, 
               ["AK",
               "AL",
@@ -78,13 +78,9 @@
     <td><%= address_form.text_field :postal_code %></td>
   </tr>
   <tr class="darkzebra">
-    <td class="lighttext">Country</td>
+    <td class="darkzebra">Country</td>
     <td>
-      <select name="iso_country_id">
-         <% for isoCountry in @isoCountries -%>
-           <option value="<%= isoCountry.id %>"><%= isoCountry.name %></option>
-         <% end -%>
-       </select>
+      <%= address_form.select :iso_country_id, @isoCountries.collect{|iso_country| [iso_country.name, iso_country.id]} %>       
     </td>
   </tr>
   <% end -%>

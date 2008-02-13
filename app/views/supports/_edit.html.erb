@@ -16,21 +16,13 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Contact</td>
     <td>
-      <select name="contact_type_id">
-         <% for contactType in @contactTypes -%>
-           <option value="<%= contactType.id %>"><%= contactType.name %></option>
-         <% end -%>
-       </select>
+      <%= f.select :contact_type_id, @contactTypes.collect{|contact| [contact.name, contact.id]} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Relationship</td>
     <td>
-      <select name="relationship_id">
-         <% for relationship in @relationships -%>
-           <option value="<%= relationship.id %>"><%= relationship.name %></option>
-         <% end -%>
-       </select>
+      <%= f.select :relationship_id, @relationships.collect{|relationship| [relationship.name, relationship.id]} %>
     </td>
   </tr>
   <%= render :partial => '/addresses/edit', :locals => {:address => support.address}%>

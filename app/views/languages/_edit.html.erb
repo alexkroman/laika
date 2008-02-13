@@ -12,31 +12,19 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Language</td>
     <td>
-      <select name="iso_language_id">
-         <% for isoLanguage in @isoLanguages -%>
-           <option value="<%= isoLanguage.id %>"><%= isoLanguage.name %></option>
-         <% end -%>
-       </select>
+      <%= f.select :iso_language_id, @isoLanguages.collect{|iso_language| [iso_language.name, iso_language.id]} %>       
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Country</td>
     <td>
-      <select name="iso_country_id">
-         <% for isoCountry in @isoCountries -%>
-           <option value="<%= isoCountry.id %>"><%= isoCountry.name %></option>
-         <% end -%>
-       </select>       
+      <%= f.select :iso_country_id, @isoCountries.collect{|iso_country| [iso_country.name, iso_country.id]} %>       
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Mode</td>
     <td>
-      <select name="language_ability_mode_id">
-         <% for languageAbilityMode in @languageAbilityModes -%>
-           <option value="<%= languageAbilityMode.id %>"><%= languageAbilityMode.name %></option>
-         <% end -%>
-       </select>
+      <%= f.select :language_ability_mode_id, @languageAbilityModes.collect{|language_ability_mode| [language_ability_mode.name, language_ability_mode.id]} %>       
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">

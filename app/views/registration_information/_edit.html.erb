@@ -14,11 +14,7 @@
 	<tr class="lightzebra">
       <td class="lighttext">Gender</td>
       <td>
-        <select name="gender_id">
-        <% for gender in @genders -%>
-          <option value="<%= gender.id %>"><%= gender.name %></option>
-        <% end -%>
-        </select>
+        <%= f.select :gender_id, @genders.collect{|gender| [gender.name, gender.id]} %>
       </td>
     </tr>
 	<tr class="darkzebra">
@@ -28,41 +24,25 @@
     <tr class="lightzebra">
       <td class="lighttext">Marital Status</td>
       <td>
-        <select name="marital_status_id">
-        <% for maritalStatus in @maritalStatuses -%>
-          <option value="<%= maritalStatus.id %>"><%= maritalStatus.name %></option>
-        <% end -%>
-        </select>
+        <%= f.select :marital_status_id, @maritalStatuses.collect{|marital_status| [marital_status.name, marital_status.id]} %>
       </td>
     </tr>
     <tr class="lightzebra">
       <td class="lighttext">Religion</td>
       <td>
-        <select name="religion_id">
-        <% for religion in @religions -%>
-          <option value="<%= religion.id %>"><%= religion.name %></option>
-        <% end -%>
-        </select>
+        <%= f.select :religion_id, @religions.collect{|religion| [religion.name, religion.id]} %>
       </td>
     </tr>
 	<tr class="darkzebra">
 		<td class="lighttext">Race</td>
         <td>
-          <select name="race_id">
-          <% for race in @races -%>
-            <option value="<%= race.id %>"><%= race.name %></option>
-          <% end -%>
-          </select>
+          <%= f.select :race_id, @races.collect{|race| [race.name, race.id]} %>
         </td>
 	</tr>
 	<tr class="lightzebra">
 		<td class="lighttext">Ethnicity</td>
-		<td>
-		  <select name="ethnicity_id">
-          <% for ethnicity in @ethnicities -%>
-            <option value="<%= ethnicity.id %>"><%= ethnicity.name %></option>
-          <% end -%>
-          </select>
+		<td>                         
+		  <%= f.select :ethnicity_id, @ethnicities.collect{|ethnicity| [ethnicity.name, ethnicity.id]} %>
 		</td>
 	</tr>
 	<tr class="spacer"><td></td><td></td></tr>
