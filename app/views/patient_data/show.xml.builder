@@ -286,6 +286,7 @@ xml.ClinicalDocument("xsi:schemaLocation" => "urn:hl7-org:v3 http://xreg2.nist.g
               end 
             }
             # End patient GUARD name 
+            
           }
         end 
         # End patient GUARD support 
@@ -389,11 +390,13 @@ xml.ClinicalDocument("xsi:schemaLocation" => "urn:hl7-org:v3 http://xreg2.nist.g
                 }
               end
             }
-            # End non-GUARD support assigned person     
+            # End non-GUARD support assigned person    
+             
           }
         }
       end
       # End non-GUARD support types
+      
     end
   }
 }
