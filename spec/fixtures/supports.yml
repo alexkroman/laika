@@ -3,3 +3,9 @@ joe_smiths_mom:
   contact_type: next_of_kin
   relationship: mother
   patient_data: joe_smith
+
+joe_smiths_vendor_mom:
+  start_support: 1967-03-23
+  contact_type: next_of_kin
+  relationship: mother
+  patient_data: joe_smith_vendor_test
