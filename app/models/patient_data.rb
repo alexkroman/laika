@@ -7,10 +7,23 @@ class PatientData < ActiveRecord::Base
   belongs_to :vendor_test_plan
   belongs_to :user
   
+  def validate_c32(clinical_document)
+    self.registration_information.validate_c32(clinical_document)
+  end
+  
   def copy
     copied_patient_data = self.clone
     copied_patient_data.save!
-    copied_patient_data.registration_information = self.registration_information.copy if self.registration_information
+    
+    if self.registration_information
+      copied_patient_data.registration_information = self.registration_information.copy
+      copied_patient_data.registration_information.race = self.registration_information.race
+      copied_patient_data.registration_information.ethnicity = self.registration_information.ethnicity
+      copied_patient_data.registration_information.marital_status = self.registration_information.marital_status
+      copied_patient_data.registration_information.gender = self.registration_information.gender
+      copied_patient_data.registration_information.religion = self.registration_information.religion
+    end
+    
 
     self.languages.each do |language|
       copied_language = language.clone
