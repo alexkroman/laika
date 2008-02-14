@@ -26,74 +26,74 @@ xml.ClinicalDocument("xsi:schemaLocation" => "urn:hl7-org:v3 http://xreg2.nist.g
     xml.id("extension" => "24602", 
            "root" => "SomeClinicalOrganizationOID", 
            "assignmentAuthorityName" => "Some Clinical Organization Name") 
-    if @patient_data.registration_information != nil
-      if @patient_data.registration_information.telecom != nil 
-        if @patient_data.registration_information.telecom.home_phone != nil && 
+    if @patient_data.registration_information
+      if @patient_data.registration_information.telecom 
+        if @patient_data.registration_information.telecom.home_phone && 
            @patient_data.registration_information.telecom.home_phone.size > 0
           xml.telecom("use" => "HP", "value" => @patient_data.registration_information.telecom.home_phone)
         end
-        if @patient_data.registration_information.telecom.work_phone != nil && 
+        if @patient_data.registration_information.telecom.work_phone && 
           @patient_data.registration_information.telecom.work_phone.size > 0
          xml.telecom("use" => "WP", "value" => @patient_data.registration_information.telecom.work_phone)
         end
-        if @patient_data.registration_information.telecom.mobile_phone != nil && 
+        if @patient_data.registration_information.telecom.mobile_phone && 
            @patient_data.registration_information.telecom.mobile_phone.size > 0
           xml.telecom("use" => "MC", "value" => @patient_data.registration_information.telecom.mobile_phone)
         end
-        if @patient_data.registration_information.telecom.vacation_home_phone != nil && 
+        if @patient_data.registration_information.telecom.vacation_home_phone && 
            @patient_data.registration_information.telecom.vacation_home_phone.size > 0
           xml.telecom("use" => "HV", "value" => @patient_data.registration_information.telecom.vacation_home_phone)
         end
       end
-      if @patient_data.registration_information.address != nil
+      if @patient_data.registration_information.address
         xml.addr {
-          if @patient_data.registration_information.address.street_address_line_one != nil &&
+          if @patient_data.registration_information.address.street_address_line_one &&
              @patient_data.registration_information.address.street_address_line_one.size > 0
             xml.streetAddressLine @patient_data.registration_information.address.street_address_line_one
           end
-          if @patient_data.registration_information.address.street_address_line_two != nil &&
+          if @patient_data.registration_information.address.street_address_line_two &&
              @patient_data.registration_information.address.street_address_line_two.size > 0
             xml.streetAddressLine @patient_data.registration_information.address.street_address_line_two
           end
-          if @patient_data.registration_information.address.city != nil &&
+          if @patient_data.registration_information.address.city &&
              @patient_data.registration_information.address.city.size > 0
             xml.city @patient_data.registration_information.address.city
           end
-          if @patient_data.registration_information.address.state != nil &&
+          if @patient_data.registration_information.address.state &&
              @patient_data.registration_information.address.state.size > 0
             xml.state @patient_data.registration_information.address.state
           end
-          if @patient_data.registration_information.address.postal_code != nil &&
+          if @patient_data.registration_information.address.postal_code &&
              @patient_data.registration_information.address.postal_code.size > 0
             xml.postalCode @patient_data.registration_information.address.postal_code
           end
-          if @patient_data.registration_information.address.iso_country != nil
+          if @patient_data.registration_information.address.iso_country 
             xml.country @patient_data.registration_information.address.iso_country.code
           end
         }
       end
       xml.patient {
-        if @patient_data.registration_information.person_name != nil
+        if @patient_data.registration_information.person_name 
           xml.name {
-            if @patient_data.registration_information.person_name.name_prefix != nil &&
+            if @patient_data.registration_information.person_name.name_prefix &&
                @patient_data.registration_information.person_name.name_prefix.size > 0
               xml.prefix @patient_data.registration_information.person_name.name_prefix
             end
-            if @patient_data.registration_information.person_name.first_name != nil &&
+            if @patient_data.registration_information.person_name.first_name &&
                @patient_data.registration_information.person_name.first_name.size > 0
               xml.given(@patient_data.registration_information.person_name.first_name, "qualifier" => "CL")
             end
-            if @patient_data.registration_information.person_name.last_name != nil &&
+            if @patient_data.registration_information.person_name.last_name &&
                @patient_data.registration_information.person_name.last_name.size > 0
               xml.family (@patient_data.registration_information.person_name.last_name, "qualifier" => "BR")
             end
-            if @patient_data.registration_information.person_name.name_suffix != nil &&
+            if @patient_data.registration_information.person_name.name_suffix &&
                @patient_data.registration_information.person_name.name_suffix.size > 0
               xml.prefix @patient_data.registration_information.person_name.name_suffix
             end
           }
         end 
-        if @patient_data.registration_information.gender != nil
+        if @patient_data.registration_information.gender
           xml.administrativeGenderCode("code" => @patient_data.registration_information.gender.code, 
                                        "displayName" => @patient_data.registration_information.gender.name, 
                                        "codeSystemName" => "HL7 AdministrativeGenderCodes", 
@@ -101,6 +101,18 @@ xml.ClinicalDocument("xsi:schemaLocation" => "urn:hl7-org:v3 http://xreg2.nist.g
             xml.originalText "AdministrativeGender codes are: M (Male), F (Female) or UN (Undifferentiated)."  
           } 
         end
+        if @patient_data.registration_information.date_of_birth
+          xml.birthTime("value" => @patient_data.registration_information.date_of_birth.strftime("%Y%m%d"))  
+        end
+        if @patient_data.languages
+          @patient_data.languages.each { |language|
+            xml.languageCommunication {
+              xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.2")
+              xml.languageCode("code" => language.iso_language.code + "-" +language.iso_country.code,
+                               "displayName" => language.iso_language.name) 
+            }
+          }
+        end  
       }
     end
   }
