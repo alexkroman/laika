@@ -14,6 +14,14 @@ joe_smiths_moms_address:
   iso_country: usa
   addressable: joe_smiths_mom (Support)
 
+joe_smiths_vendor_moms_address:
+  street_address_line_one: 1600 Rockville Pike
+  city: Rockville
+  state: MD
+  postal_code: 20847 
+  iso_country: usa
+  addressable: joe_smiths_vendor_mom (Support)
+  
 emily_jones_address:
   street_address_line_one: 2501 Merrvale Road
   city: Rockville

@@ -1,5 +1,6 @@
 joe_smiths_mom:
   start_support: 1967-03-23
+  name: Sue Smith
   contact_type: next_of_kin
   relationship: mother
   patient_data: joe_smith
@@ -9,3 +10,4 @@ joe_smiths_vendor_mom:
   contact_type: next_of_kin
   relationship: mother
   patient_data: joe_smith_vendor_test
+  name: Sue Smith

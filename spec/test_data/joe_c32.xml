@@ -69,6 +69,17 @@
 			</representedOrganization>
 		</assignedEntity>
 	</legalAuthenticator>
+    <participant typeCode="IND">
+        <time/>
+        <associatedEntity classCode="NOK">
+            <code code="MTH" displayName="Mother" codeSystemName="HL7 RoleCode" codeSystem="2.16.840.1.113883.5.111">
+                <originalText>http://www.hl7.org/v3ballot/html/infrastructure/vocabulary/RoleCode.htm</originalText>
+            </code>
+            <associatedPerson>
+                <name>Sue Smith</name>
+            </associatedPerson>
+        </associatedEntity>
+    </participant>	
 	<documentationOf>
 		<serviceEvent classCode="PCPR">
 			<effectiveTime>

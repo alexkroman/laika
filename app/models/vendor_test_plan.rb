@@ -4,6 +4,7 @@ class VendorTestPlan < ActiveRecord::Base
   belongs_to :kind
   belongs_to :user
   has_one :clinical_document
+  has_many :content_errors
   
   def validate_clinical_document_content
     document = REXML::Document.new(File.new(clinical_document.full_filename))
