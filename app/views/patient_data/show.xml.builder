@@ -189,7 +189,8 @@ xml.ClinicalDocument("xsi:schemaLocation" => "urn:hl7-org:v3 http://xreg2.nist.g
         # End patient languages
         
         # Start patient GUARD support
-        if @patient_data.support.contact_type &&
+        if @patient_data.support &&
+           @patient_data.support.contact_type &&
            @patient_data.support.contact_type.code == "GUARD"
           xml.guardian("classCode" => @patient_data.support.contact_type.code) {
             xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.3")
@@ -295,7 +296,8 @@ xml.ClinicalDocument("xsi:schemaLocation" => "urn:hl7-org:v3 http://xreg2.nist.g
       # End patient
       
       # Start non-GUARD support type
-      if @patient_data.support.contact_type &&
+      if @patient_data.support &&
+         @patient_data.support.contact_type &&
          @patient_data.support.contact_type.code != "GUARD"
         xml.participant("typeCode" => "IND") {
           xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.3")
