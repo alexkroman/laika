@@ -9,12 +9,17 @@
     -->
     <tbody>
       <tr valign="top">
-          <td>Test</td>
-          <td>Result</td>
+          <td>Section</td>
+          <td>Subsection</td>
+          <td>Field</td>
+          <td>Message</td>
       </tr>
-      <% @results.each_pair do |doc_location, result| %>
-        <td><%= doc_location.name %></td>
-        <td><%= result %></td>
+      <% @results.each do |error| %>
+      <tr>
+        <td><%= error.section %></td>
+        <td><%= error.subsection %></td>
+        <td><%= error.field_name %></td>
+        <td><%= error.error_message %></td>
       </tr>
     <% end -%>
   </tbody>
