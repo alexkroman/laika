@@ -1,4 +1,6 @@
 class RegistrationInformation < ActiveRecord::Base
+  strip_attributes!
+
   belongs_to :patient_data
   belongs_to :race
   belongs_to :ethnicity

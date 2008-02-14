@@ -1,4 +1,6 @@
 class Support < ActiveRecord::Base
+  strip_attributes!
+
   belongs_to :patient_data
   belongs_to :contact_type
   belongs_to :relationship

@@ -1,4 +1,6 @@
 class Address < ActiveRecord::Base
+  strip_attributes!
+
   belongs_to :iso_country
   belongs_to :addressable, :polymorphic => true
   

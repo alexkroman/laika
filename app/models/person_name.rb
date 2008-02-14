@@ -1,4 +1,6 @@
 class PersonName < ActiveRecord::Base
+  strip_attributes!
+
   belongs_to :nameable, :polymorphic => true
   
   # Checks the contents of the REXML::Element passed in to make sure that they match the

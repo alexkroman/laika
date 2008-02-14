@@ -4,6 +4,8 @@
 # make validation easier when dealing with phone numbers
 # vs. email addresses
 class Telecom < ActiveRecord::Base
+  strip_attributes!
+
   # did you expect telecomable? ;-)
   belongs_to :reachable, :polymorphic => true
   
