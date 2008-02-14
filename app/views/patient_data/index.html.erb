@@ -33,6 +33,7 @@
                 <td class="actions" width=270px>
                   <%= link_to 'edit', patient_data_instance_url(patient_data)%> 
                   <%= link_to 'destroy', patient_data_instance_url(patient_data), :confirm => 'Are you sure you want to delete this Laika template?', :method => :delete %> 
+                  <%= link_to 'xml', patient_data_instance_url(patient_data, :format => 'xml')%> 
                   <a href="javascript:toggle_div('assignment_div_<%=patient_data.id%>');">assign</a>
                   <div id="assignment_div_<%=patient_data.id%>" style="display:none">
                     <form action="<%= url_for :controller => 'test_plan_manager', :action => 'assign_patient_data' %>">

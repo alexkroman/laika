@@ -16,13 +16,15 @@ class PatientDataController < ApplicationController
   
   def show
     @patient_data = PatientData.find(params[:id])
+    
+    respond_to do |format|
+      format.html 
+      format.xml  
+    end
+    
   end
 
   def patient_story
-    @patient_data = PatientData.find(params[:id])
-  end
-  
-  def patient_xml
     @patient_data = PatientData.find(params[:id])
   end
   
