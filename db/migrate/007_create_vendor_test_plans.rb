@@ -5,7 +5,7 @@ class CreateVendorTestPlans < ActiveRecord::Migration
       t.belongs_to :kind
       t.belongs_to :user
       t.column :errors, :int
-      t.column :compliance, :double
+      t.column :compliance, :float
       t.timestamps
     end
   end
