@@ -14,7 +14,7 @@ class RegistrationInformation < ActiveRecord::Base
     errors = []
     patient_element = REXML::XPath.first(document, '/cda:ClinicalDocument/cda:recordTarget/cda:patientRole', {'cda' => 'urn:hl7-org:v3'})
     if patient_element
-      errors << XmlHelper.match_value(patient_element, 'cda:id/@extension', self.person_identifier)
+      errors << match_value(patient_element, 'cda:id/@extension', 'person_identifier', self.person_identifier)
       name_element = REXML::XPath.first(patient_element, 
                                         "cda:patient/cda:name[cda:given='#{self.person_name.first_name}' and cda:family='#{self.person_name.last_name}']",
                                         {'cda' => 'urn:hl7-org:v3'})
@@ -26,13 +26,32 @@ class RegistrationInformation < ActiveRecord::Base
                                              {'cda' => 'urn:hl7-org:v3'})
         errors.concat(self.address.validate_c32(address_element))
       end
-      errors << XmlHelper.match_value(patient_element, 'cda:patient/cda:administrativeGenderCode/@code', self.gender)
+      
+      if self.gender
+        errors << match_value(patient_element, 'cda:patient/cda:administrativeGenderCode/@code', 'gender', self.gender.code)
+      end
+      
       # TODO: Need to verfiy birth date somehow... unclear how to do this from the CDA/CCD/C32 specs
-      errors << XmlHelper.match_value(patient_element, 'cda:patient/cda:maritalStatusCode/@code', self.marital_status)
+      if self.marital_status
+        errors << match_value(patient_element, 'cda:patient/cda:maritalStatusCode/@code', 'marital_status', self.marital_status.code)
+      end
     else
       errors << ContentError.new(:section => 'registration_information', :error_message => 'No patientRole element found')
     end
     
     errors.compact
   end
+  
+  private
+  
+  def match_value(name_element, xpath, field, value)
+    error = XmlHelper.match_value(name_element, xpath, value)
+    if error
+      return ContentError.new(:section => 'registration_information', :field_name => field,
+                              :error_message => error)
+    else
+      return nil
+    end
+  end
+  
 end
