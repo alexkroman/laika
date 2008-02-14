@@ -32,24 +32,41 @@
                 <td class="actions">
                   <%= link_to 'edit', patient_data_instance_url(vendor_test_plan.patient_data)%>
                   <%= link_to 'destroy', vendor_test_plan, :confirm => 'Are you sure you want to delete this Laika test?', :method => :delete %>
-                  <% if vendor_test_plan.clinical_document -%>
+                  <% if vendor_test_plan.kind.name == "Generate and Format" %>
+                    <a href="javascript:toggle_div('execution_div_<%=vendor_test_plan.id%>');">execute</a>
+                  <% else %>
+                    <%= link_to 'execute', patient_data_instance_url(vendor_test_plan.patient_data, :format => 'xml') %> 
+                  <% end %>
+                </td>
+              </tr>
+              <% if vendor_test_plan.kind.name == "Generate and Format" %>
+              <tr>
+                <td colspan="6" align="right">
+                  <div id="execution_div_<%=vendor_test_plan.id%>" style="display:none">
+                    <% if vendor_test_plan.clinical_document -%>
                       <%= link_to 'Automated XML Verification', inspect_content_vendor_test_plan_url(vendor_test_plan) %>
-                  <% else -%>
+                    <% else -%>
                       <br/>
-                      <% form_for(:clinical_document, :url => vendor_test_plan_clinical_document_url(vendor_test_plan),
-                                                      :html => { :multipart => true }) do |f| -%>
+                      <% form_for(:clinical_document, 
+                                  :url => vendor_test_plan_clinical_document_url(vendor_test_plan),
+                                  :html => { :multipart => true }) do |f| -%>
                           <label>Document Type &nbsp;&nbsp;&nbsp;&nbsp;
-                          <%= f.select :doc_type, ['CDA', 'CCD', 'C32'] %>
-                          </label>                                
-                          <label>Clinical Document            
-                          <%= f.file_field :uploaded_data %>
+                            <%= f.select :doc_type, ['CDA', 'CCD', 'C32'] %>
                           </label>
+                          <br/>                              
+                          <label>Clinical Document            
+                            <%= f.file_field :uploaded_data %>
+                          </label>
+                          <br/>
                           <%= submit_tag 'Attach' %>
                       <% end -%>
-                  <% end -%>
+                    <% end -%>
+                  </div>
                 </td>
               </tr>
               <% end %>
+              <% end %>
+              
               <!-- End Vendor Test Plan Loop -->
             
             </table>
