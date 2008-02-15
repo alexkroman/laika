@@ -1,7 +1,8 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe PatientData, "can copy itself" do
-  fixtures :patient_data, :registration_information, :person_names, :addresses
+  fixtures :patient_data, :registration_information, :person_names, :addresses,
+           :genders
   
   before(:each) do
     @patient_data = patient_data(:joe_smith)
