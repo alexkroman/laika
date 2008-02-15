@@ -20,7 +20,12 @@ class RegistrationInformation < ActiveRecord::Base
       name_element = REXML::XPath.first(patient_element, 
                                         "cda:patient/cda:name[cda:given='#{self.person_name.first_name}' and cda:family='#{self.person_name.last_name}']",
                                         {'cda' => 'urn:hl7-org:v3'})
-      errors.concat(self.person_name.validate_c32(name_element))
+      if name_element
+        errors.concat(self.person_name.validate_c32(name_element))
+      else
+        errors << ContentError.new(:section => 'registration_information', :subsection => 'person_name',
+                                   :error_message => "Couldn't find the patient's name")
+      end
       errors.concat(self.telecom.validate_c32(patient_element))
       if self.address.street_address_line_one
         address_element = REXML::XPath.first(patient_element, 
