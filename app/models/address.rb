@@ -24,7 +24,8 @@ class Address < ActiveRecord::Base
       errors << match_value(address_element, 'cda:country', 'country', self.iso_country.code)
     end
     else
-       errors << "Address Element is nil" 
+       errors << ContentError.new(:section => self.addressable_type.underscore, :subsection => 'address',
+                                  :error_message => 'Address element is nil')
     end
     errors.compact
   end
