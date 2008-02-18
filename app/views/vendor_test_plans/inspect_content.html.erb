@@ -1,26 +1,55 @@
 <!-- Start Content -->
-<div class="content">
-
-  <div class="container">
-    
-  <h3>Verification Results</h3>
-  <table id="dashboard">
-      <tr valign="top">
-          <th>Section</th>
-          <th>Subsection</th>
-          <th>Field</th>
-          <th>Message</th>
-      </tr>
-      <% @results.each do |error| %>
-      <tr>
-        <td><%= error.section %></td>
-        <td><%= error.subsection %></td>
-        <td><%= error.field_name %></td>
-        <td><%= error.error_message %></td>
-      </tr>
-    <% end -%>
-</table> 
-
-
+  <div class="content">
+    <div class="container" >
+      <div class="column span-6 append-1">
+        <h4>Display and File Compliance</h4>
+        <div id="results">
+          <div class="fail">FAIL</div>
+          <div class="info">
+            <h5>Inspection ID: 28472</h5>
+            <p>Required Compliance</p>
+            <div class="widget">
+              <div class="left on">
+                <div class="visualIndication1">
+                  <div><span class="portion" style="width:23px"></span></div>
+                </div>
+                <span class="number"><%= @results.size %></span> violations
+              </div>
+              <a href="#"><div class="right on">ON</div></a>
+            </div>
+            <table id="details">
+              <tr>
+                <td class="lighttext">Test Date</td>
+                <td>12.Nov.07</td>
+              </tr>
+              <tr>
+                <td class="lighttext">Proctor</td>
+                <td>David Wilkins</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="column span-13 last">
+        <div id="template">
+          <h3>Verification Results</h3>
+          <table id="dashboard">
+            <tr valign="top">
+              <th>Section</th>
+              <th>Subsection</th>
+              <th>Field</th>
+              <th>Message</th>
+            </tr>
+            <% @results.each do |error| %>
+            <tr>
+              <td><%= error.section %></td>
+              <td><%= error.subsection %></td>
+              <td><%= error.field_name %></td>
+              <td><%= error.error_message %></td>
+            </tr>
+            <% end -%>
+          </table> 
+        </div>
+      </div>
+    </div>
   </div>
-</div>

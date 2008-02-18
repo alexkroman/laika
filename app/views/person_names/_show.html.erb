@@ -1,16 +1,16 @@
 <tr class="<%= cycle("darkzebra", "lightzebra")%>">
   <td class="lighttext">Prefix</td>
-  <td><%=h person_name.name_prefix %></td>
+  <td><% if person_name.name_prefix != nil %><%=h person_name.name_prefix %><% end %></td>
 </tr>
 <tr class="<%= cycle("darkzebra", "lightzebra")%>">
   <td class="lighttext">First Name</td>
-  <td><%=h person_name.first_name %></td>
+  <td><% if person_name.first_name != nil %><%=h person_name.first_name %><% end %></td>
 </tr>
 <tr class="<%= cycle("darkzebra", "lightzebra")%>">
   <td class="lighttext">Last Name</td>
-  <td><%=h person_name.last_name %></td>
+  <td><% if person_name.last_name != nil %><%=h person_name.last_name %><% end %></td>
 </tr>
 <tr class="<%= cycle("darkzebra", "lightzebra")%>">
   <td class="lighttext">Suffix</td>
-  <td><%=h person_name.name_suffix %></td>
+  <td><% if person_name.name_suffix != nil %><%=h person_name.name_suffix %><% end %></td>
 </tr>
