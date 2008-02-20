@@ -4,7 +4,11 @@
       <div class="column span-6 append-1">
         <h4>Display and File Compliance</h4>
         <div id="results">
-          <div class="fail">FAIL</div>
+          <% if @results.size == 0 -%>
+            <div class="pass">PASS</div>
+          <% else -%>
+            <div class="fail">FAIL</div>
+          <% end -%>
           <div class="info">
             <h5>Inspection ID: 28472</h5>
             <p>Required Compliance</p>
