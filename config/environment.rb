@@ -60,11 +60,11 @@ Rails::Initializer.run do |config|
   
 end
 
-ENV['HOST_URL'] = 'http://localhost:3000'
+ENV['HOST_URL'] = 'http://talk.cchit.org'
 ENV['HELP_LIST'] = 'talk@projectlaika.org'
 
 ActionMailer::Base.smtp_settings = {
-  :address => "mail.mitre.org",
+  :address => "talk.cchit.org",
   :port => 25,
-  :domain => "mitre.org",
+  :domain => "cchit.org",
 }
