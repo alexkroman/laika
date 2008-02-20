@@ -1,0 +1,63 @@
+behavioral_health_and_social_service:
+  name: Behavioral Health and Social Service Providers
+  code: 100000000X
+
+chiropractic_providers:
+  name: Chiropractic Providers
+  code: 110000000X
+
+dental_providers:
+  name: Dental Providers
+  code: 120000000X
+
+dietary_and_nutritional_service_providers:
+  name: Dietary and Nutritional Service Providers
+  code: 130000000X
+
+emergency_medical_service_providers:
+  name: Emergency Medical Service Providers
+  code: 140000000X
+
+eye_and_vision_service_providers:
+  name: Eye and Vision Service Providers
+  code: 150000000X
+
+nursing_service_providers:
+  name: Nursing Service Providers
+  code: 160000000X
+
+pharmacy_service_providers_individuals:
+  name: Pharmacy Service Providers (Individuals)
+  code: 180000000X
+
+allopathic_and_osteopathic_physicians:
+  name: Allopathic & Osteopathic Physicians
+  code: 200000000X
+
+podiatric_medicine_and_surgery_providers:
+  name: Podiatric Medicine and Surgery Providers
+  code: 210000000X
+
+respiratory_rehabilitative_and_restorative_service_providers:
+  name: Respiratory, Rehabilitative and Restorative Service Providers
+  code: 220000000X
+
+speech_language_and_hearing_providers:
+  name: Speech, Language and Hearing Providers
+  code: 230000000X
+
+agencies:
+  name: Agencies
+  code: 250000000X
+
+ambulatory_health_care_facilities:
+  name: Ambulatory Health Care Facilities
+  code: 260000000X
+
+hospitals:
+  name: Hospitals
+  code: 280000000X
+
+laboratories:
+  name: Laboratories
+  code: 290000000X
