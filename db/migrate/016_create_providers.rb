@@ -3,8 +3,9 @@ class CreateProviders < ActiveRecord::Migration
     create_table :providers do |t|
       t.date :start_service
       t.date :end_service
-      t.string :role_code
-      t.string :role_description
+      t.belongs_to :provider_type
+      t.belongs_to :provider_role
+      t.string :provider_role_free_text
       t.string :organization
       t.string :patient_identifier
       t.belongs_to :patient_data, :null => false

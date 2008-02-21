@@ -4,6 +4,30 @@ joe_smith:
   last_name: Smith
   nameable: joe_smith (RegistrationInformation)
 
+dr_ava_heart:
+  name_prefix: Dr.
+  first_name: Ava
+  last_name: Heart
+  nameable: dr_ava_heart (Provider)
+
+dr_dem_bones:
+  name_prefix: Dr.
+  first_name: Dem
+  last_name: Bones
+  nameable: dr_dem_bones (Provider)
+
+dr_ivana_facey:
+  name_prefix: Dr.
+  first_name: Ivana
+  last_name: Facey
+  nameable: dr_ivana_facey (Provider)
+
+rn_mary_smith:
+  name_prefix: RN.
+  first_name: Mary
+  last_name: Smith
+  nameable: rn_mary_smith (Provider)
+
 joe_smiths_mom:
   name_prefix: Ms.
   first_name: Sue

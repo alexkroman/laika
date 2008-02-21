@@ -2,26 +2,40 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Start Service</td>
     <td>
-      <%=h provider.start_service %>
+      <% if provider.start_service != nil %>
+        <%=h provider.start_service %>
+      <% end %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">End Service</td>
     <td>
-      <%=h provider.end_service %>
+      <% if provider.end_service != nil %>
+        <%=h provider.end_service %>
+      <% end %>
     </td>
   </tr>
   <%= render :partial => '/person_names/show', :locals => {:person_name => provider.person_name}%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Role Code</td>
+    <td class="lighttext">Provider Role</td>
     <td>
-        <%=h provider.role_code %>
+      <% if provider.provider_role != nil %>
+        <%=h provider.provider_role.name %>
+      <% end %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Role Description</td>
     <td>
-      <%=h provider.role_description %>
+      <%=h provider.provider_role_free_text %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Provider Type</td>
+    <td>
+      <% if provider.provider_type != nil %>
+        <%=h provider.provider_type.name %>
+      <% end %>
     </td>
   </tr>
   <%= render :partial => '/addresses/show', :locals => {:address => provider.address}%>

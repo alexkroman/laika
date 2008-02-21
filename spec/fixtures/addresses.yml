@@ -61,3 +61,35 @@ david_carters_address:
   postal_code: 20902
   iso_country: usa
   addressable: david_carter (RegistrationInformation)
+
+dr_dem_bones_address:
+  street_address_line_one: 456 Anytime Lane
+  city: Annapolis
+  state: MD
+  postal_code: 21405
+  iso_country: usa
+  addressable: dr_dem_bones (Provider)
+
+dr_ava_heart_address:
+  street_address_line_one: 344 Artery Drive,
+  city: Piney Point
+  state: MD
+  postal_code: 20674
+  iso_country: usa
+  addressable: dr_ava_heart (Provider)
+
+dr_ivana_facey_address:
+  street_address_line_one: 912 Skincare Way
+  city: Hollywood
+  state: MD
+  postal_code: 20636
+  iso_country: usa
+  addressable: dr_ivana_facey (Provider)
+
+rn_mary_smith_address:
+  street_address_line_one: 1234 Elm Street
+  city: Anytown
+  state: NY
+  postal_code: 12345
+  iso_country: usa
+  addressable: rn_mary_smith (Provider)

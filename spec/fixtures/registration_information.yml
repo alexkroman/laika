@@ -8,6 +8,16 @@ joe_smith:
   marital_status: never_married
   patient_data: joe_smith
 
+joe_smith_test:
+  person_identifier: 24611
+  date_of_birth: 1982-03-23
+  gender: male
+  religion: christian
+  race: european
+  ethnicity: spaniard
+  marital_status: never_married
+  patient_data: joe_smith_vendor_test
+
 emily_jones:
   person_identifier: 24603
   date_of_birth: 2006-11-01

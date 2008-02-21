@@ -30,3 +30,19 @@ theodore_smiths_telecom:
 david_carters_telecom:
   home_phone: +1-301-555-0144
   reachable: david_carter (RegistrationInformation)
+
+dr_dem_bones_telecom:
+  work_phone: +1-410-555-0151
+  reachable: dr_dem_bones (Provider)
+
+dr_ava_heart_telecom:
+  work_phone: +1-301-555-0133
+  reachable: dr_ava_heart (Provider)
+
+dr_ivana_facey_telecom:
+  work_phone: +1-301-555-0178
+  reachable: dr_ivana_facey (Provider)
+
+rn_mary_smith_telecom:
+  work_phone: +1-555-555-1212
+  reachable: rn_mary_smith (Provider)

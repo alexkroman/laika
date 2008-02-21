@@ -135,28 +135,28 @@ xml.ClinicalDocument("xsi:schemaLocation" => "urn:hl7-org:v3 http://xreg2.nist.g
         
         # Start patient race
         if @patient_data.registration_information.race
-          xml.maritalStatusCode("code" => @patient_data.registration_information.race.code, 
-                                "displayName" => @patient_data.registration_information.race.name, 
-                                "codeSystemName" => "CDC Race and Ethnicity", 
-                                "codeSystem" => "2.16.840.1.113883.6.238")
+          xml.raceCode("code" => @patient_data.registration_information.race.code, 
+                       "displayName" => @patient_data.registration_information.race.name, 
+                       "codeSystemName" => "CDC Race and Ethnicity", 
+                       "codeSystem" => "2.16.840.1.113883.6.238")
         end
         # End patient race
         
         # End patient ethnicity
         if @patient_data.registration_information.ethnicity
-          xml.maritalStatusCode("code" => @patient_data.registration_information.ethnicity.code, 
-                                "displayName" => @patient_data.registration_information.ethnicity.name, 
-                                "codeSystemName" => "CDC Race and Ethnicity", 
-                                "codeSystem" => "2.16.840.1.113883.6.238")
+          xml.ethnicityCode("code" => @patient_data.registration_information.ethnicity.code, 
+                            "displayName" => @patient_data.registration_information.ethnicity.name, 
+                            "codeSystemName" => "CDC Race and Ethnicity", 
+                            "codeSystem" => "2.16.840.1.113883.6.238")
         end
         # End patient ethnicity
         
         # Start patient religion
         if @patient_data.registration_information.religion
-          xml.maritalStatusCode("code" => @patient_data.registration_information.religion.code, 
-                                "displayName" => @patient_data.registration_information.religion.name, 
-                                "codeSystemName" => "Religious Affiliation", 
-                                "codeSystem" => "2.16.840.1.113883.5.1076")
+          xml.religiousAffilliationCode("code" => @patient_data.registration_information.religion.code, 
+                                        "displayName" => @patient_data.registration_information.religion.name, 
+                                        "codeSystemName" => "Religious Affiliation", 
+                                        "codeSystem" => "2.16.840.1.113883.5.1076")
         end
         # End patient religion
         
@@ -398,6 +398,28 @@ xml.ClinicalDocument("xsi:schemaLocation" => "urn:hl7-org:v3 http://xreg2.nist.g
         }
       end
       # End non-GUARD support types
+      
+      # Start providers
+      if @patient_data.providers
+        @patient_data.providers.each { |provider|
+          xml.documentationOf {
+            xml.serviceEvent("classCode" => "PCPR") {
+              xml.effectiveTime {
+                if provider.start_service != nil
+                  xml.lowValue provider.start_service.strftime("%Y%m%d")
+                end
+                if provider.end_service != nil
+                  xml.highValue provider.end_service.strftime("%Y%m%d")
+                end
+              }
+              xml.performer ("typeCode" => "PRF") {
+             
+              } 
+            }
+          }
+        }
+      end 
+      # End providers
       
     end
   }

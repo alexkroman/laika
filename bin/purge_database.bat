@@ -11,7 +11,7 @@ REM *******************************************
 pushd ..
 
 REM *******************************************
-REM Start up the Healthstories server
+REM Destroy, create and migrate the Laika database
 REM *******************************************
 rake db:drop db:create db:migrate
 

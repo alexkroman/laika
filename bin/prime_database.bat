@@ -11,7 +11,7 @@ REM *******************************************
 pushd ..
 
 REM *******************************************
-REM Start up the Healthstories server
+REM Populate the Laika database with the test data in fixtures
 REM *******************************************
 rake db:fixtures:load_from_dir env="development" FIXTURE_DIR="spec/fixtures" --trace
 

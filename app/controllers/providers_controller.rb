@@ -5,6 +5,8 @@ class ProvidersController < PatientDataChildController
     @provider.address = Address.new
     @provider.telecom = Telecom.new
     
+    @providerRoles = ProviderRole.find(:all, :order => "name ASC")
+    @providerTypes = ProviderType.find(:all, :order => "name ASC") 
     @isoCountries = IsoCountry.find(:all, :order => "name ASC")
 
     render :partial  => 'edit', :locals => {:provider =>  @provider,
@@ -14,6 +16,8 @@ class ProvidersController < PatientDataChildController
   def edit
     @provider = @patient_data.providers.find(params[:id])
     
+    @providerRoles = ProviderRole.find(:all, :order => "name ASC")
+    @providerTypes = ProviderType.find(:all, :order => "name ASC") 
     @isoCountries = IsoCountry.find(:all, :order => "name ASC")
     render :partial  => 'edit', :locals => {:provider =>  @provider,
                                             :patient_data => @patient_data}
