@@ -3,6 +3,7 @@ class PatientData < ActiveRecord::Base
   has_many :languages
   has_many :providers
   has_many :medications
+  has_many :allergies
   has_one :support
   belongs_to :vendor_test_plan
   belongs_to :user
@@ -40,6 +41,10 @@ class PatientData < ActiveRecord::Base
     
     self.medications.each do |medication|
       copied_patient_data.medications << medication.clone
+    end
+    
+    self.allergies.each do |allergy|
+      copied_patient_data.allergies << allergy.clone
     end
     
     copied_patient_data
