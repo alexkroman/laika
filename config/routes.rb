@@ -1,12 +1,11 @@
 ActionController::Routing::Routes.draw do |map|
-
   map.resources :vendor_test_plans, :has_one => :clinical_document, :member => {:inspect_content => :get}
 
   map.resources :vendors
 
   map.resources :patient_data, 
                 :has_one  => [:registration_information, :support],
-                :has_many => [:languages, :providers, :medications, :allergies],
+                :has_many => [:languages, :providers, :medications],
                 :singular => :patient_data_instance
 
   map.resources :document_locations
