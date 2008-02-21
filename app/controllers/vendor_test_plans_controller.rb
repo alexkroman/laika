@@ -3,7 +3,9 @@ class VendorTestPlansController < ApplicationController
   # GET /vendor_test_plans
   # GET /vendor_test_plans.xml
   def index
-    @vendor_test_plans = VendorTestPlan.find(:all)
+    @vendor_test_plans = VendorTestPlan.find(:all,
+                                             :conditions => "user_id = " + self.current_user.id.to_s,
+                                             :order      => "vendor_id")
 
     respond_to do |format|
       format.html # index.html.erb

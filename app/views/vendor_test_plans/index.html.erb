@@ -1,27 +1,28 @@
         <!-- Start Content -->
         <div class="content">
-        
+          
+          <!-- Start Container -->
           <div class="container">
-        
-            <h3>Inspection ID: 28472</h3>
             
-            <p class="toplinks">
-              <a href="#">create report</a>
-            </p>
+            <% currentVendorTestId = nil %>
+            <% for vendor_test_plan in @vendor_test_plans %>
             
-            <!-- Start Dashboard Table -->
-            <table id="dashboard">
-              <tr>
-                <th><a href="#"><div>Status</div></a></th>
-                <th class="selected"><a href="#"><div>Test Case</div></a></th>
-                <th><a href="#"><div>Last Tested</div></a></th>
-                <th><a href="#"><div>Test Type</div></a></th>
-                <th><a href="#"><div>Compliance</div></a></th>
-                <th class="noarrow"><div>Actions</div></th>
-              </tr>
+              <% if currentVendorTestId == nil || currentVendorTestId != vendor_test_plan.vendor.id %>
+                </table>
+                <h3>Inspection ID: <%= vendor_test_plan.vendor.public_id %></h3>
+                <h3>Vendor Name: <%= vendor_test_plan.vendor.name %></h3>
+                <p class="toplinks"><a href="#">create report</a></p>
+                <table id="dashboard">
+                  <tr>
+                    <th><a href="#"><div>Status</div></a></th>
+                    <th class="selected"><a href="#"><div>Test Case</div></a></th>
+                    <th><a href="#"><div>Last Tested</div></a></th>
+                    <th><a href="#"><div>Test Type</div></a></th>
+                    <th><a href="#"><div>Compliance</div></a></th>
+                    <th class="noarrow"><div>Actions</div></th>
+                  </tr>
+              <% end %>
               
-              <!-- Start Vendor Test Plan Loop -->
-              <% for vendor_test_plan in @vendor_test_plans %>
               <tr>
                 <td>
                   <% if vendor_test_plan.clinical_document != nil %>
@@ -75,12 +76,15 @@
                 </td>
               </tr>
               <% end %>
-              <% end %>
               
-              <!-- End Vendor Test Plan Loop -->
+              <% currentVendorTestId = vendor_test_plan.vendor.id %>
             
+            <% end %>
+            <!-- End Vendor Test Plan Loop -->
             </table>
-            <!-- End Dashboard Table -->
             
           </div>
+          <!-- End Container -->
+          
         </div>
+        <!-- End Content -->
