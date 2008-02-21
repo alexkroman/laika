@@ -1,0 +1,22 @@
+<h1>Editing allergy</h1>
+
+<%= error_messages_for :allergy %>
+
+<% form_for(@allergy) do |f| %>
+  <p>
+    <b>Start event</b><br />
+    <%= f.date_select :start_event %>
+  </p>
+
+  <p>
+    <b>End event</b><br />
+    <%= f.date_select :end_event %>
+  </p>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @allergy %> |
+<%= link_to 'Back', allergies_path %>

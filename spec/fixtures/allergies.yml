@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  start_event: 2008-02-21
+  end_event: 2008-02-21
+
+two:
+  start_event: 2008-02-21
+  end_event: 2008-02-21
