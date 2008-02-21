@@ -17,6 +17,7 @@ class PatientData < ActiveRecord::Base
     
     if self.registration_information
       copied_patient_data.registration_information = self.registration_information.copy
+      # TODO: Copying the children on registartion info should be moved into the RegistrationInformation class
       copied_patient_data.registration_information.race = self.registration_information.race
       copied_patient_data.registration_information.ethnicity = self.registration_information.ethnicity
       copied_patient_data.registration_information.marital_status = self.registration_information.marital_status
