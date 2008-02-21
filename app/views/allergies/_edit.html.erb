@@ -1,22 +1,52 @@
-<h1>Editing allergy</h1>
+<% if allergy.new_record?
+     allergy_div = 'allergyNew' 
+     html_options = {} -%>
+<div id="allergyNew">
+<% else
+     allergy_div = "allergy#{allergy.id}"
+     html_options = {:method => 'put'}
+   end %>
+<% remote_form_for(:allergy, allergy, :url => patient_data_instance_allergy_path(patient_data, allergy), :html => html_options,
+                   :update => allergy_div) do |f| -%>
+<table>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Start Event</td>
+    <td>
+      <%= f.date_select :start_event %>
+    </td>
+  </tr>
 
-<%= error_messages_for :allergy %>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">End Event</td>
+    <td>
+      <%= f.date_select :end_event %>
+    </td>
+  </tr>
 
-<% form_for(@allergy) do |f| %>
-  <p>
-    <b>Start event</b><br />
-    <%= f.date_select :start_event %>
-  </p>
-
-  <p>
-    <b>End event</b><br />
-    <%= f.date_select :end_event %>
-  </p>
-
-  <p>
-    <%= f.submit "Update" %>
-  </p>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Adverse Event Type</td>
+    <td>
+      <%= f.select :adverse_event_type_id, @adverse_event_types.collect{|aet| [aet.name, aet.id]} %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Free Text Product Name</td>
+    <td><%= f.text_field :free_text_product %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Product Code</td>
+    <td><%= f.text_field :product_code %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Severity</td>
+    <td>
+      <%= f.select :severity_term_id, @severity_terms.collect{|st| [st.name, st.id]} %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td></td>
+    <td><%= f.submit "Save" %></td>
+  </tr>
+</table>
 <% end %>
 
-<%= link_to 'Show', @allergy %> |
-<%= link_to 'Back', allergies_path %>

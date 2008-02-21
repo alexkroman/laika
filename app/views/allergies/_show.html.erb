@@ -1,13 +1,42 @@
-<p>
-  <b>Start event:</b>
-  <%=h @allergy.start_event %>
-</p>
-
-<p>
-  <b>End event:</b>
-  <%=h @allergy.end_event %>
-</p>
-
-
-<%= link_to 'Edit', edit_allergy_path(@allergy) %> |
-<%= link_to 'Back', allergies_path %>
+<table>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Start Event</td>
+    <td>
+      <%=h allergy.start_event %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">End Event</td>
+    <td>
+      <%=h allergy.end_event %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Adverse Event Type</td>
+    <td>
+      <%=h allergy.adverse_event_type.name %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Free Text Product Name</td>
+    <td><%=h allergy.free_text_product %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Product Code</td>
+    <td><%=h allergy.product_code %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Severity</td>
+    <td>
+      <%=h allergy.severity_term.name %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td></td>
+    <td>
+      <%= link_to_remote 'Edit', :update => "allergy#{allergy.id}",
+                                 :url => edit_patient_data_instance_allergy_path(patient_data, allergy),
+                                 :method => 'get' %>
+    </td>
+  </tr>
+</table>

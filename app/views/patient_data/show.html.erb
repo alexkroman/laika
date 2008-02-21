@@ -161,10 +161,18 @@
           <!-- Start Allergies and Drugs Module -->
           <div id="allergiesAndDrugsContainer">
           <h5>Allergies and Drugs</h5>
-          <table id="addAllergiesAndDrug">
+          <% for allergy in @patient_data.allergies -%>
+            <div id="allergy<%= allergy.id %>">
+              <%= render :partial => '/allergies/show', :locals => {:allergy  => allergy, :patient_data => @patient_data} %>
+            </div>
+          <% end -%>
+          <table id="addAllergy">
             <tr class="<%= cycle("darkzebra", "lightzebra")%>">
               <td></td>
-              <td></td>                                       
+              <td>
+                <%= link_to_remote 'Add', :url => new_patient_data_instance_allergy_path(@patient_data), 
+                                          :method => 'get', :update => 'addAllergy', :position => :before %>
+              </td>                                       
             </tr>                                               
           </table>
           </div>
