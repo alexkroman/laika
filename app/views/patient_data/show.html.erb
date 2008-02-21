@@ -161,11 +161,32 @@
           <!-- Start Allergies and Drugs Module -->
           <div id="allergiesAndDrugsContainer">
           <h5>Allergies and Drugs</h5>
-          <% for allergy in @patient_data.allergies -%>
+          <% if @patient_data.no_known_allergies -%>
+          <table>
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td></td>
+              <td>
+                No known allergies
+              </td>
+            </tr>
+          </table>
+          <% else
+               unless @patient_data.allergies.empty?
+                 for allergy in @patient_data.allergies -%>
             <div id="allergy<%= allergy.id %>">
               <%= render :partial => '/allergies/show', :locals => {:allergy  => allergy, :patient_data => @patient_data} %>
             </div>
-          <% end -%>
+          <%     end 
+               else -%>
+               <table>
+                 <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+                   <td></td>
+                   <td>
+                     Set no known allergies
+                   </td>
+                 </tr>
+               </table>
+          <%   end -%>
           <table id="addAllergy">
             <tr class="<%= cycle("darkzebra", "lightzebra")%>">
               <td></td>
@@ -175,6 +196,7 @@
               </td>                                       
             </tr>                                               
           </table>
+          <% end -%>
           </div>
           <!-- End Allergies and Drugs Module -->    
           

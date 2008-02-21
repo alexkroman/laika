@@ -26,6 +26,7 @@ will_haynes:
 jennifer_thompson:
   name: Jennifer Thompson
   user: dennis_wilson
+  no_known_allergies: true
   created_at: 2004-03-26
   updated_at: 2005-06-24
 

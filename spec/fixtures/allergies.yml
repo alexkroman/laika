@@ -1,9 +1,24 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  start_event: 2008-02-21
-  end_event: 2008-02-21
+joes_allergy:
+  start_event: 2006-02-21
+  free_text_product: Penicillin
+  adverse_event_type: drug_allergy
+  severity_term: moderate
+  patient_data: joe_smith
 
-two:
-  start_event: 2008-02-21
+teds_first_allergy:
+  start_event: 2005-02-21
   end_event: 2008-02-21
+  free_text_product: Penicillin
+  adverse_event_type: drug_allergy
+  severity_term: severe
+  patient_data: theodore_smith
+
+teds_second_allergy:
+  start_event: 2005-02-21
+  end_event: 2008-02-21
+  free_text_product: sulfa drugs
+  adverse_event_type: drug_allergy
+  severity_term: fatal
+  patient_data: theodore_smith
