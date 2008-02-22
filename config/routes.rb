@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :vendor_test_plans, :has_one => :clinical_document, :member => {:inspect_content => :get}
+  map.resources :vendor_test_plans, :has_one => :clinical_document, :member => {:inspect_content => :get,:validate => :get}
 
   map.resources :vendors
 

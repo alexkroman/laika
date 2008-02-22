@@ -91,4 +91,50 @@ class VendorTestPlansController < ApplicationController
     @results = @vendor_test_plan.validate_clinical_document_content
   end
   
+  
+  # perform the external validation and display the results
+  def validate 
+       vtp = VendorTestPlan.find(params[:id])
+       clinical_document = vtp.clinical_document  
+       xml = ""
+       xmlc = ""
+      File.open(clinical_document.full_filename) do |f|
+          xmlc =  f.read()
+      end 
+
+      @doc = REXML::Document.new xmlc
+      @report = ValidationUtil.validate('C32',xmlc)
+      @error_mapping = match_errors(@report,@doc)
+   end
+   
+   
+   private 
+   # method used to mark the elements in the document that have errors so they 
+   # can be linked to
+   def match_errors(errors, doc)
+       error_map = {}
+       error_id = 0
+       errors.elements.to_a('//error[@location]').each do |err|
+        location = err.attributes['location']
+        node = REXML::XPath.first(doc ,location)
+          if(node)
+             elem = node
+              if node.class == REXML::Attribute
+              elem = node.element
+             # if element
+              end
+              
+              if elem 
+              unless elem.attributes['error_id']
+                 elem.add_attribute('error_id',"#{error_id}") 
+                 error_id += 1
+              end
+              error_map[location] = elem.attributes['error_id']
+              end
+          end 
+           
+       end
+       error_map
+   end  
+  
 end

@@ -1,0 +1,29 @@
+<% error_id = (element.attributes['error_id']) %>
+
+<div <%=  error_id ? "id='error_#{error_id}' " : '' %> class="indent "><div <%=  error_id ? "class='error'" : '' %> ><span class="markup">&lt;</span><span class="start-tag "><%= element.name %></span><%
+ element.attributes.to_a.each do |attribute| 
+ # if attribute.name != 'error_id' 
+ %><span class="attribute-name"><%= attribute.name %></span><span class="markup">=</span><span class="attribute-value">"<%=attribute.value %>"</span><% # end 
+ end
+ if element.children.length > 0 %><span class="markup">&gt;</span></div><% 
+ element.children.each do |child| %>
+<%
+       case child.node_type
+         when :attribute
+           #should not happen but just in case
+         when :text
+          %><span class="text"><%= child.value %></span><%
+         when :element
+          %><%= render :partial=>"node", :locals=>{'element'=>child} %><%
+         when :cdata
+           %><%=  render :partial=>"cdata", :locals=>{'cdata'=>child}%><%
+         when :comment
+          %><div class="comment indent">&lt;!--<%= child.to_s %>--&gt;</div><%
+         when :instruction
+           %><div class="indent pi">&lt;?<%= child.target %>  <%= child.content %>?&gt;</div><%
+       end
+     end
+     %><span class="markup">&lt;/</span><span class="end-tag"><%= element.name %></span><span class="markup">&gt;</span><% 
+else 
+%><span class="markup">/&gt;</span></div><% end %>
+</div>

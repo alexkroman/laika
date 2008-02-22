@@ -57,14 +57,16 @@ Rails::Initializer.run do |config|
 
   # Make Active Record use UTC-base instead of local time
   # config.active_record.default_timezone = :utc
+
   
 end
 
-ENV['HOST_URL'] = 'http://talk.cchit.org'
+ENV['HOST_URL'] = 'http://localhost:3000'
 ENV['HELP_LIST'] = 'talk@projectlaika.org'
 
 ActionMailer::Base.smtp_settings = {
-  :address => "talk.cchit.org",
+  :address => "mail.mitre.org",
   :port => 25,
-  :domain => "cchit.org",
+  :domain => "mitre.org",
 }
+

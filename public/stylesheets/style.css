@@ -482,3 +482,10 @@ table#dashboard a {
     text-decoration: underline
 }
 
+.indent {
+  margin-left: 1em;
+}
+.comment {
+  font-family: monospace;
+  white-space: pre;
+} 
