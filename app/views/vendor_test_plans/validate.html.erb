@@ -1,23 +1,27 @@
   <div class="content">
     <div class="container" >
-<% @report.elements.to_a("//Result").each do |res| %>
-    <div class="report"><span><%= res.attributes['validator'] %></span>|<span>Valid: <%= res.attributes['isValid'] %></span>
-     <% res.elements.to_a("./error").each do |err| %> 
-       <% 
-       error_id = nil
-        if err.attributes['location'] 
-           error_id = @error_mapping[err.attributes['location']]
-         end
-         %>
-        <div class="indent report_error" >
-        <% if error_id %>
-          <a class="error" href="#error_<%=error_id%>" ><span><%= err.to_s %> </span></a></div>
-        <% else %>
-        <span><%= err.to_s %> </span></div>
+    <% @report.elements.to_a("//Result").each do |res| %>
+      <div class="report">
+        <h3><span><%= res.attributes['validator'] %></span>
+            <br/>
+            <span>Passed Validation: <%= res.attributes['isValid'] %></span></h3>
+        <% errorCounter = 0 %>
+        <% res.elements.to_a("./error").each do |err| %> 
+          <% errorCounter += 1 %>
+          <% error_id = nil
+             if err.attributes['location'] 
+               error_id = @error_mapping[err.attributes['location']]
+             end %>
+          <div class="indent report_error">
+          <% if error_id %>
+            <a style="color:#cc3300" href="#error_<%=error_id%>" ><b><%= errorCounter %>.</b> <span><%= err.to_s %></span></a>
+          <% else %>
+          <span><%= err.to_s %></span>
         <% end %>
+        </div>
+      <% end %> 
+      </div>
     <% end %>
-    </div> 
-<% end %>
 <%= render :partial=>"node" , :locals=>{"element"=>@doc} %>
-
-</div></div>
+    </div>
+  </div>

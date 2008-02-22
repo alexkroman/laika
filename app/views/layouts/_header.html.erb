@@ -15,12 +15,12 @@
               <% if current_page?(:controller => 'users') %>
                 <li><%= link_to('Dashboard', :controller => 'vendor_test_plans') %></li>
                 <li><%= link_to('Library', :controller => 'patient_data') %></li>
-              <% elsif current_page?(:controller => 'patient_data') %>
-                <li><%= link_to('Dashboard', :controller => 'vendor_test_plans') %></li>
-                <li id="active"><%= link_to('Library', :controller => 'patient_data') %></li>
-              <% else %>
+              <% elsif current_page?(:controller => 'vendor_test_plans') %>
                 <li id="active"><%= link_to('Dashboard', :controller => 'vendor_test_plans') %></li>
                 <li><%= link_to('Library', :controller => 'patient_data') %></li>
+              <% else %>
+                <li><%= link_to('Dashboard', :controller => 'vendor_test_plans') %></li>
+                <li id="active"><%= link_to('Library', :controller => 'patient_data') %></li>
               <% end %>
             </ul>
           </div>

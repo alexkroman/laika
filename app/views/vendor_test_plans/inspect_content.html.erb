@@ -2,7 +2,7 @@
   <div class="content">
     <div class="container" >
       <div class="column span-6 append-1">
-        <h4>Display and File Compliance</h4>
+        <h3>Inspection Results</h3>
         <div id="results">
           <% if @results.size == 0 -%>
             <div class="pass">PASS</div>
@@ -10,7 +10,7 @@
             <div class="fail">FAIL</div>
           <% end -%>
           <div class="info">
-            <h5>Inspection ID: 28472</h5>
+            <h5>Inspection ID: <%= @vendor_test_plan.vendor.public_id %></h5>
             <p>Required Compliance</p>
             <div class="widget">
               <div class="left on">
@@ -24,11 +24,14 @@
             <table id="details">
               <tr>
                 <td class="lighttext">Test Date</td>
-                <td>12.Nov.07</td>
+                <td><%= @vendor_test_plan.updated_at %></td>
               </tr>
               <tr>
-                <td class="lighttext">Proctor</td>
-                <td>David Wilkins</td>
+                <td class="lighttext">Test Proctor</td>
+                <td><a href="mailto:<%= @vendor_test_plan.user.email %>">
+                      <%= @vendor_test_plan.user.first_name %> 
+                      <%= @vendor_test_plan.user.last_name %></a>
+                </td>
               </tr>
             </table>
           </div>
