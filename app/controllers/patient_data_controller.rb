@@ -24,8 +24,10 @@ class PatientDataController < ApplicationController
     
   end
 
-  def patient_story
+  def set_no_known_allergies
     @patient_data = PatientData.find(params[:id])
+    @patient_data.update_attribute(:no_known_allergies, true)
+    render :partial => '/allergies/no_known_allergies'
   end
   
   def destroy
