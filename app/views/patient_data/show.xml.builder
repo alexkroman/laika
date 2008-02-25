@@ -412,9 +412,34 @@ xml.ClinicalDocument("xsi:schemaLocation" => "urn:hl7-org:v3 http://xreg2.nist.g
                   xml.highValue provider.end_service.strftime("%Y%m%d")
                 end
               }
-              xml.performer ("typeCode" => "PRF") {
-             
-              } 
+              xml.performer("typeCode" => "PRF") {
+                xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.4", 
+                               "assigningAuthorityName" => "HITSP/C32")
+                if !provider.provider_role.blank?
+                  xml.functionCode("code" => provider.provider_role.code,
+                                   "displayName" => provider.provider_role.name,
+                                   "codeSystem" => "2.16.840.1.113883.12.443", 
+                                   "codeSystemName" => "Provider Role") {
+                    if !provider.provider_role_free_text.blank?
+                      xml.originalText provider.provider_role_free_text
+                    end
+                  }
+                end
+                if !provider.organization.blank?
+                  xml.representedOrganization {
+                    xml.id("root" => "2.16.840.1.113883.3.72.5", 
+                           "assigningAuthorityName" => provider.organization) {
+                      xml.name provider.organization
+                    }
+                  }
+                end
+                if !provider.patient_identifier.blank?
+                  xml.patient {
+                    xml.id ("root" => provider.patient_identifier,
+                            "extension" => "MedicalRecordNumber")
+                  }
+                end
+              }
             }
           }
         }
