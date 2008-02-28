@@ -46,6 +46,7 @@
               <th>Subsection</th>
               <th>Field</th>
               <th>Message</th>
+              <th>Location</th>
             </tr>
             <% @results.each do |error| %>
             <tr>
@@ -53,6 +54,7 @@
               <td><%= error.subsection %></td>
               <td><%= error.field_name %></td>
               <td><%= error.error_message %></td>
+               <td><%= error.location %></td>
             </tr>
             <% end -%>
           </table> 

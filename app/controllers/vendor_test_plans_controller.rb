@@ -94,8 +94,9 @@ class VendorTestPlansController < ApplicationController
   
   # perform the external validation and display the results
   def validate 
-       vtp = VendorTestPlan.find(params[:id])
-       clinical_document = vtp.clinical_document  
+       inspect_content
+       
+       clinical_document = @vendor_test_plan.clinical_document  
        xml = ""
        xmlc = ""
       File.open(clinical_document.full_filename) do |f|
@@ -105,6 +106,7 @@ class VendorTestPlansController < ApplicationController
       @doc = REXML::Document.new xmlc
       @report = ValidationUtil.validate('C32',xmlc)
       @error_mapping = match_errors(@report,@doc)
+      add_inspection_results_to_validation_errors(@report,@results)
    end
    
    
@@ -114,12 +116,18 @@ class VendorTestPlansController < ApplicationController
    def match_errors(errors, doc)
        error_map = {}
        error_id = 0
-       errors.elements.to_a('//error[@location]').each do |err|
-        location = err.attributes['location']
+       @error_attributes = []
+       locs = @results.collect{|res| res.location}
+       locs.compact!
+       REXML::XPath.each(errors,'//@location') do |e| locs << e.value end
+       
+       locs.each do |location|
         node = REXML::XPath.first(doc ,location)
+        puts "#{node.inspect} #{location}"
           if(node)
              elem = node
               if node.class == REXML::Attribute
+                  @error_attributes << node
               elem = node.element
              # if element
               end
@@ -137,4 +145,21 @@ class VendorTestPlansController < ApplicationController
        error_map
    end  
   
+   
+   def add_inspection_results_to_validation_errors(val_errors, inspection_results)
+      el = val_errors.root.add_element "Result",{"isValid"=>inspection_results.length == 0,
+          'validator'=>'Content Inspection'}
+      
+      inspection_results.each do |err|
+         err_el = el.add_element "error" 
+         err_el.text = %{ Section: #{err.section} 
+                          Subsection: #{err.subsection}
+                          Field Name: #{err.field_name}
+                          Error Message: #{err. error_message}
+         }
+         if err.location
+             err_el.add_attribute "location", err.location
+         end
+      end
+   end
 end

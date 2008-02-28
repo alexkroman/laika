@@ -51,7 +51,8 @@ class Telecom < ActiveRecord::Base
             else
               # Mismatch in the use attribute
               return ContentError.new(:section => self.reachable_type.underscore, :subsection => 'telecom',
-                                      :error_message => "Expected use #{possible_use_attribute} got #{telecom_element.attributes['use']}")
+                                      :error_message => "Expected use #{possible_use_attribute} got #{telecom_element.attributes['use']}",
+                                      :location=>telcom_element.xpath)
             end
           else
             # no use atttribute... assume we have a match... the C32 isn't real clear on

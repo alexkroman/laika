@@ -8,18 +8,19 @@ class Support < ActiveRecord::Base
   
   
   def validate_c32(xml)
+      errors = []
       support = REXML::XPath.first(xml, "/cda:ClinicalDocument/cda:participant/cda:associatedEntity[cda:associatedPerson/cda:name/text() = $name ] | /cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:guardian[cda:guardianPerson/cda:name/text() = $name]",
           {'cda' => 'urn:hl7-org:v3'},{"name"=>name})
       if support
           if self.address
              add =  REXML::XPath.first(support,"cda:addr",{'cda' => 'urn:hl7-org:v3'})
              if add.nil?
-                 ce = ContentError.new(:section=>"Support", 
+                 errors <<  ContentError.new(:section=>"Support", 
                                      :subsection=>"address",
                                      :field_name=>"",
                                      :error_message=>"Address not found in the support section #{support.xpath}",
-                                     :vendor_test_plan=>patient_data.vendor_test_plan)          
-                    ce.save                            
+                                     :location=>support.xpath)          
+                                          
              else
                  self.address.validate_c32(add)
              end
@@ -29,36 +30,36 @@ class Support < ActiveRecord::Base
      # classcode
       error = XmlHelper.match_value(support,"@classCode",(contact_type) ? contact_type.code : nil)
       if error
-          ce = ContentError.new(:section=>"Support", 
+          errors << ContentError.new(:section=>"Support", 
                                         :subsection=>"#{support.name}",
                                         :field_name=>"contacttype",
                                         :error_message=>error,
-                                        :vendor_test_plan=>patient_data.vendor_test_plan)          
-          ce.save                              
+                                        :location=>support.xpath)      
+                                      
       end
       
       
       error = XmlHelper.match_value(support,"cda:code[@codeSystem='2.16.840.1.113883.5.111']/@code",(relationship) ? relationship.code : nil)
       
       if error
-          ce = ContentError.new(:section=>"Support", 
+          errors <<  ContentError.new(:section=>"Support", 
                     :subsection=>"#{support.name}",
                     :field_name=>"relationship",
                     :error_message=>error,
-                    :vendor_test_plan=>patient_data.vendor_test_plan)          
-                    ce.save           
+                    :location=>support.xpath)                                  
+                              
       end
     
       
       else
          # add the error for no support object being there 
-          ce = ContentError.new(:section=>"Support", 
+          errors <<  ContentError.new(:section=>"Support", 
                                         :subsection=>"",
                                         :field_name=>"",
-                                        :error_message=>"Support element does not exist",
-                                        :vendor_test_plan=>patient_data.vendor_test_plan)          
+                                        :error_message=>"Support element does not exist")          
       end
       
+      errors
   end
   
   

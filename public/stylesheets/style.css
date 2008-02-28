@@ -486,6 +486,34 @@ table#dashboard a {
   margin-left: 1em;
 }
 .comment {
+  font-size:.95em;
+  font-weight:normal;
   font-family: monospace;
   white-space: pre;
-} 
+}
+.markup {
+	
+	}
+.start-tag {
+	
+}	
+.end-tag {
+}
+
+.attribute-name {
+
+ }
+ 
+.attribute-value {
+ 
+ } 
+    
+.error-list{
+	   padding:10px;
+}
+
+	
+.xml-content{
+	   border:1px solid #ccc;
+       padding:10px;
+    }

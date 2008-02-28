@@ -25,7 +25,7 @@ class Address < ActiveRecord::Base
     end
     else
        errors << ContentError.new(:section => self.addressable_type.underscore, :subsection => 'address',
-                                  :error_message => 'Address element is nil')
+           :error_message => 'Address element is nil')
     end
     errors.compact
   end
@@ -36,7 +36,7 @@ class Address < ActiveRecord::Base
     error = XmlHelper.match_value(name_element, xpath, value)
     if error
       return ContentError.new(:section => self.addressable_type.underscore, :subsection => 'address', :field_name => field,
-                              :error_message => error)
+          :error_message => error,:location=>name_element.xpath)
     else
       return nil
     end

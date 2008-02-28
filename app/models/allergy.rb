@@ -30,18 +30,19 @@ XPATH
     if adverse_event
       errors << match_value(adverse_event, "cda:participant[@typeCode='CSM']/cda:participantRole[@classCode='MANU']/cda:playingEntity[@classCode='MMAT']/cda:name", 
                             'free_text_product', self.free_text_product)
-      if self.severity_term
+     
+       if self.severity_term
       
         severity_element = REXML::XPath.first(adverse_event, "cda:entryRelationship[@typeCode='SUBJ']/cda:observation[templateId/@root='2.16.840.1.113883.10.20.1.55']",
                                               @@default_namespaces)
         if severity_element
           errors << self.severity_term.validate_c32(severity_element)
         else
-          errors << ContentError.new(:section => 'allergies', :subsection => 'severity_term', :error_message => "Unable to find severity")
+          errors << ContentError.new(:section => 'allergies', :subsection => 'severity_term', :error_message => "Unable to find severity",:location=>adverse_event)
         end
       end
     else
-      errors << ContentError.new(:section => 'allergies', :error_message => "Unable to find product #{free_text_product}")
+      errors << ContentError.new(:section => 'allergies', :error_message => "Unable to find product #{free_text_product}",:location=>section ? section.xpath : nil)
     end
     
     errors.compact
@@ -53,7 +54,7 @@ XPATH
     error = XmlHelper.match_value(name_element, xpath, value)
     if error
       return ContentError.new(:section => 'allergies', :field_name => field,
-                              :error_message => error)
+                              :error_message => error,:type=>'error',:location=>(name_element)? name_element.xpath : nil)
     else
       return nil
     end

@@ -24,7 +24,7 @@ class RegistrationInformation < ActiveRecord::Base
         errors.concat(self.person_name.validate_c32(name_element))
       else
         errors << ContentError.new(:section => 'registration_information', :subsection => 'person_name',
-                                   :error_message => "Couldn't find the patient's name")
+            :error_message => "Couldn't find the patient's name",:type=>'error',:location=>patient_element)
       end
       errors.concat(self.telecom.validate_c32(patient_element))
       if self.address.street_address_line_one
@@ -43,7 +43,8 @@ class RegistrationInformation < ActiveRecord::Base
         errors << match_value(patient_element, 'cda:patient/cda:maritalStatusCode/@code', 'marital_status', self.marital_status.code)
       end
     else
-      errors << ContentError.new(:section => 'registration_information', :error_message => 'No patientRole element found')
+      errors << ContentError.new(:section => 'registration_information', :error_message => 'No patientRole element found',
+          :location=>document.xpath)
     end
     
     errors.compact
@@ -55,7 +56,7 @@ class RegistrationInformation < ActiveRecord::Base
     error = XmlHelper.match_value(name_element, xpath, value)
     if error
       return ContentError.new(:section => 'registration_information', :field_name => field,
-                              :error_message => error)
+          :error_message => error,:location=> name_element ? name_element.xpath : nil)
     else
       return nil
     end

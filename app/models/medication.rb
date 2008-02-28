@@ -6,6 +6,7 @@ class Medication < ActiveRecord::Base
   
   
   def validate_c32(xml)
+      errors=[]
      context = REXML::XPath.first(xml,"//cda:section[./cda:templateId[@root eq '2.16.840.1.113883.10.20.1.8']]",@@default_namespaces )
      # IF there is an entry for this medication then there will be a substanceAdministration element
      # that contains a consumable that contains a manufacturedProduct that has a code with the original text 
@@ -24,12 +25,12 @@ class Medication < ActiveRecord::Base
          error =  XmlHelper.match_value(manufactured,"cda:manufacturedMaterial/cda:name/text()",free_text_brand_name,@@default_namespaces,{},:long)
          
          if error
-	         ce = ContentError.new(:section=>"Medication", 
+	         errors << ContentError.new(:section=>"Medication", 
 	                               :subsection=>"manufacturedContent",
 	                               :field_name=>"name",
 	                               :error_message=>error,
-	                               :vendor_test_plan=>patient_data.vendor_test_plan)
-	          ce.save                 
+	                               :location=>substanceAdministration.xpath)
+	                          
 	            
         end 
          
@@ -39,27 +40,26 @@ class Medication < ActiveRecord::Base
                      @@default_namespaces,{},:long)
                      
         if error
-           ce = ContentError.new(:section=>"Medication", 
+           errors << ContentError.new(:section=>"Medication", 
                                  :subsection=>"medication_type",
                                  :field_name=>"display_name",
                                  :error_message=>error,
-                                 :vendor_test_plan=>patient_data.vendor_test_plan)
-                 ce.save                 
+                                 :location=>substanceAdministration.xpath)
                                      
             end                      
             
          # validate the status            
-         med_status_error = XmlHelper.match_value(substanceAdministration,
+           error = XmlHelper.match_value(substanceAdministration,
              "cda:entryRelationship[@typeCode='REFR']/cda:observation[cda:templateId/@root='2.16.840.1.113883.10.20.1.47']/cda:value/@code",status,
              @@default_namespaces,{},:long)
              
            if error
-                ce = ContentError.new(:section=>"Medication", 
+               errors << ContentError.new(:section=>"Medication", 
                                       :subsection=>"medication_status",
                                       :field_name=>"code",
                                       :error_message=>error,
-                                      :vendor_test_plan=>patient_data.vendor_test_plan)
-                      ce.save                 
+                                      :location=>substanceAdministration.xpath)
+                                       
                                           
             end 
          # validate the order quantity
@@ -73,31 +73,28 @@ class Medication < ActiveRecord::Base
 	                  @@default_namespaces,{},:long)       
 	                         
 	                  if error
-	                     ce = ContentError.new(:section=>"Medication", 
+	                     errors << ContentError.new(:section=>"Medication", 
 	                                           :subsection=>"Order",
 	                                           :field_name=>"quantity",
 	                                           :error_message=>error,
-	                                           :vendor_test_plan=>patient_data.vendor_test_plan)
-	                           ce.save                 
+                                               :location=>order.xpath)
+	                                        
 	                                               
 	                      end 
          end                 
      
      else
-         ce = ContentError.new(:section=>"Medication", 
+         errors << ContentError.new(:section=>"Medication", 
                                :subsection=>"substanceAdministration",
                                :field_name=>"",
-                               :error_message=>"A substanceAdministration section does not exist for the medication",
-                               :vendor_test_plan=>patient_data.vendor_test_plan)
-         ce.save
+                               :error_message=>"A substanceAdministration section does not exist for the medication")
+         
                                
          
         # could not find the entry so lets report the error 
      end   
      
-     
-
-   
+return errors.compact
 
   end
   

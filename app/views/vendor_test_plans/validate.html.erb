@@ -5,6 +5,7 @@
         <h3><span><%= res.attributes['validator'] %></span>
             <br/>
             <span>Passed Validation: <%= res.attributes['isValid'] %></span></h3>
+            <div class="error-list">
         <% errorCounter = 0 %>
         <% res.elements.to_a("./error").each do |err| %> 
           <% errorCounter += 1 %>
@@ -13,15 +14,20 @@
                error_id = @error_mapping[err.attributes['location']]
              end %>
           <div class="indent report_error">
-          <% if error_id %>
-            <a style="color:#cc3300" href="#error_<%=error_id%>" ><b><%= errorCounter %>.</b> <span><%= err.to_s %></span></a>
-          <% else %>
-          <span><%= err.to_s %></span>
-        <% end %>
-        </div>
+               <% if error_id %>
+                 <a style="color:#cc3300" href="#error_<%=error_id%>" ><b><%= errorCounter %>.</b> <span><%= err.to_s %></span></a>
+               <% else %>
+                 <span><%= err.to_s %></span>
+               <% end %>
+          </div>
       <% end %> 
       </div>
+      </div>
+
     <% end %>
-<%= render :partial=>"node" , :locals=>{"element"=>@doc} %>
+    <div class='xml-content'>
+    <span><h3>XML Content</h3></span>
+   <%= render :partial=>"node" , :locals=>{"element"=>@doc} %>
+   </div>
     </div>
   </div>

@@ -5,6 +5,8 @@ class CreateContentErrors < ActiveRecord::Migration
       t.string :subsection
       t.string :field_name
       t.string :error_message
+      t.string :location
+      t.string :msg_type, :default=>'error'
       t.belongs_to :vendor_test_plan
     end
   end
