@@ -30,6 +30,16 @@ class PatientDataController < ApplicationController
     render :partial => '/allergies/no_known_allergies'
   end
   
+  def set_pregnant
+    @patient_data = PatientData.find(params[:id])
+    @patient_data.update_attribute(:pregnant, true)
+  end
+  
+  def set_not_pregnant
+    @patient_data = PatientData.find(params[:id])
+    @patient_data.update_attribute(:pregnant, false)
+  end
+  
   def destroy
     @patient_data = PatientData.find(params[:id])
     @patient_data.destroy
