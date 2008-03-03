@@ -24,7 +24,7 @@ class RegistrationInformation < ActiveRecord::Base
         errors.concat(self.person_name.validate_c32(name_element))
       else
         errors << ContentError.new(:section => 'registration_information', :subsection => 'person_name',
-            :error_message => "Couldn't find the patient's name",:type=>'error',:location=>patient_element)
+            :error_message => "Couldn't find the patient's name",:type=>'error',:location=>patient_element.xpath)
       end
       errors.concat(self.telecom.validate_c32(patient_element))
       if self.address.street_address_line_one

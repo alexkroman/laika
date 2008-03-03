@@ -94,19 +94,17 @@ class VendorTestPlansController < ApplicationController
   
   # perform the external validation and display the results
   def validate 
-       inspect_content
-       
-       clinical_document = @vendor_test_plan.clinical_document  
-       xml = ""
-       xmlc = ""
+      clinical_document = @vendor_test_plan.clinical_document  
+      xml = ""
+      xmlc = ""
       File.open(clinical_document.full_filename) do |f|
           xmlc =  f.read()
       end 
 
       @doc = REXML::Document.new xmlc
-      @report = ValidationUtil.validate('C32',xmlc)
+      @report =@vendor_test_plan.clinical_document.validation_report(:xml)
       @error_mapping = match_errors(@report,@doc)
-      add_inspection_results_to_validation_errors(@report,@results)
+      # add_inspection_results_to_validation_errors(@report,@results)
    end
    
    
@@ -120,10 +118,11 @@ class VendorTestPlansController < ApplicationController
        locs = @results.collect{|res| res.location}
        locs.compact!
        REXML::XPath.each(errors,'//@location') do |e| locs << e.value end
-       
+       puts locs
        locs.each do |location|
+           puts location
         node = REXML::XPath.first(doc ,location)
-        puts "#{node.inspect} #{location}"
+       # puts "#{node.inspect} #{location}"
           if(node)
              elem = node
               if node.class == REXML::Attribute

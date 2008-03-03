@@ -6,7 +6,12 @@
             
             <% currentVendorTestId = nil %>
             <% for vendor_test_plan in @vendor_test_plans %>
-            
+             <% 
+                error_count = 0
+                if vendor_test_plan.clinical_document != nil
+                  error_count = REXML::XPath.first(vendor_test_plan.clinical_document.validation_report(:xml),"count(//error)")
+                 end
+                 %> 
               <% if currentVendorTestId == nil || currentVendorTestId != vendor_test_plan.vendor.id %>
                 </table>
                 <h3>Inspection ID: <%= vendor_test_plan.vendor.public_id %></h3>
@@ -26,7 +31,11 @@
               <tr>
                 <td>
                   <% if vendor_test_plan.clinical_document != nil %>
+                     <% if error_count > 0 %>
                     <img src="/images/fail.png">failed</td>
+                     <% else %>
+                      <img src="/images/pass.png">pass</td>
+                     <% end %> 
                   <% else %>
                     <img src="/images/inprogress.png">in progress</td>
                   <% end %>
@@ -35,7 +44,7 @@
                 <td><%= vendor_test_plan.kind.name %></td>
                 <td>
                   <% if vendor_test_plan.clinical_document != nil %>
-                    <a href="template_passed.html">98%</a>
+                    <a href="template_passed.html"><%= error_count %> Errors</a>
                   <% else %>
                     <a href="template_passed.html">100%</a>
                   <% end %>
