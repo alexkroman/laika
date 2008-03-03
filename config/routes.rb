@@ -7,7 +7,9 @@ ActionController::Routing::Routes.draw do |map|
                 :has_one  => [:registration_information, :support],
                 :has_many => [:languages, :providers, :medications, :allergies],
                 :singular => :patient_data_instance,
-                :member   => {:set_no_known_allergies => :post}
+                :member   => {:set_no_known_allergies => :post},
+                :member   => {:set_pregnant => :post},
+                :member   => {:set_not_pregnant => :post}
 
   map.resources :document_locations
 
