@@ -235,12 +235,9 @@
           <!-- Start Pregnancy Module -->
           <div id="pregnancyContainer"> 
           <h5>Pregnancy</h5>
-          <table id="addPregnancy">
-            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-              <td></td>
-              <td></td>                                       
-            </tr>                                               
-          </table>
+            <div id="pregnancy">
+              <%= render :partial => '/pregnancy/show', :locals => {:patient_data => @patient_data} %>
+            </div>
           </div> 
           <!-- End Pregnancy Module -->  
           

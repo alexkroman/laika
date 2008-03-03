@@ -1,0 +1,20 @@
+<% remote_form_for(:patient_data, 
+                   :url =>  {:controller => "pregnancy", :action => "update", :patient_data_instance_id => @patient_data.id},
+                   :update => 'pregnancyContainer') do |f| %>
+<table>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Pregnant</td>
+    <td>
+      <input id="pregnant" name="pregnant" type="checkbox" 
+        <% if @patient_data.pregnant != nil && @patient_data.pregnant == true %> checked=true <% end %> />
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td></td>
+    <td>
+      <%= f.submit "Save" %>
+    </td>
+  </tr>
+</table>
+
+<% end %>                 

@@ -1,0 +1,16 @@
+<table>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Pregnant</td>
+    <td><%= h @patient_data.pregnant %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td></td>
+    <td>
+      <%= link_to_remote 'Edit', :update => 'pregnancyContainer', 
+                                 :url =>  {:controller => "pregnancy", 
+                                           :action => "edit", 
+                                           :patient_data_instance_id => @patient_data.id},
+                                 :method => 'get' %>
+    </td>
+  </tr>
+</table>
