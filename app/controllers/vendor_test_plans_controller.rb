@@ -94,6 +94,7 @@ class VendorTestPlansController < ApplicationController
   
   # perform the external validation and display the results
   def validate 
+      inspect_content
       clinical_document = @vendor_test_plan.clinical_document  
       xml = ""
       xmlc = ""
