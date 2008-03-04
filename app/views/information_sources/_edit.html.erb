@@ -1,0 +1,28 @@
+<!-- Start Information Source Module -->
+<% remote_form_for(:information_source, 
+                   :url => patient_data_instance_information_source_path(patient_data),
+                   :update => 'informationSourceContainer', :method => http_method(information_source)) do |f| %>
+<h5>Information Source</h5>
+<table>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Time</td>
+    <td><input id="information_source_time" name="information_source[time]" size="30" type="text" <% if information_source.time != nil %>value="<%= information_source.time.strftime("%m/%d/%y") %>"<% end %> onClick="GetDate(this);" /></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Author Name</td>
+    <td>
+      <%= f.text_field :author_name %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Document ID</td>
+    <td>
+      <%= f.text_field :document_id %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td></td>
+    <td><%= f.submit "Save" %></td>
+  </tr>
+</table>
+<% end %>

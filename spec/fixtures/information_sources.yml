@@ -1,0 +1,35 @@
+joe_smith_information_source:
+  time: 2008-01-21
+  author_name: Paul Hewson
+  document_id: ABC-1234567-GG
+  patient_data: joe_smith
+
+emily_jones_information_source:
+  time: 2007-04-30
+  author_name: David Evans
+  document_id: ABC-1234567-HH
+  patient_data: emily_jones
+
+will_haynes_information_source:
+  time: 2008-02-15
+  author_name: Larry Mullens
+  document_id: ABC-1234567-II
+  patient_data: will_haynes
+
+jennifer_thompson_information_source:
+  time: 2006-03-26
+  author_name: Adam Clayton
+  document_id: ABC-1234567-JJ
+  patient_data: jennifer_thompson
+
+theodore_smith__information_source:
+  time: 2007-06-24
+  author_name: John Lennon
+  document_id: ABC-1234567-KK
+  patient_data: jennifer_thompson
+
+david_carter_information_source:
+  time: 2003-10-10
+  author_name: Ringo Starr
+  document_id: ABC-1234567-LL
+  patient_data: david_carter

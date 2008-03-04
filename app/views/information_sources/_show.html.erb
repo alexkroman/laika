@@ -1,0 +1,33 @@
+<h5>Information Source</h5>
+<table>
+<% if information_source -%>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Time</td>
+    <td><% if information_source.time != nil %><%=h information_source.time.strftime("%m/%d/%y") %><% end %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Author Name</td>
+    <td><% if information_source.author_name != nil %><%=h information_source.author_name %><% end %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Document ID</td>
+    <td><% if information_source.document_id != nil %><%=h information_source.document_id %><% end %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td></td>
+    <td>
+      <%= link_to_remote 'Edit', :update => 'informationSourceContainer', 
+                                 :url => edit_patient_data_instance_information_source_path(patient_data),
+                                 :method => 'get' %>
+    </td>
+  </tr>
+<% else -%>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">There is no information source data for this test case</td>
+    <td><%= link_to_remote 'Create some', :update => 'informationSourceContainer',
+                                          :url => new_patient_data_instance_information_source_path(patient_data), 
+                                          :method => 'get' %>
+    </td>
+  </tr>
+<% end -%>
+</table>

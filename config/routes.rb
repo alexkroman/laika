@@ -4,7 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :vendors
 
   map.resources :patient_data, 
-                :has_one  => [:registration_information, :support],
+                :has_one  => [:registration_information, :support, :information_source],
                 :has_many => [:languages, :providers, :medications, :allergies],
                 :singular => :patient_data_instance,
                 :member   => {:set_no_known_allergies => :post},

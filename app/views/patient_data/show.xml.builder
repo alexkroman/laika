@@ -451,6 +451,19 @@ xml.ClinicalDocument("xsi:schemaLocation" => "urn:hl7-org:v3 http://xreg2.nist.g
   }
   # End xml.recordTarget
   
+  # Start Information Source
+  xml.author {
+    xml.time @patient_data.information_source.time.strftime("%Y%m%d")
+    xml.assignedAuthor {
+      xml.id @patient_data.information_source.document_id
+      xml.assignedPerson {
+        xml.name @patient_data.information_source.author_name
+      }
+    }
+  }
+  
+  # End Information Source
+  
   # Start xml.component
   xml.component {
     

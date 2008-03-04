@@ -242,16 +242,10 @@
           <!-- End Pregnancy Module -->  
           
           <!-- Start Information Source Module -->
-          <div id="informationSourceContainer"> 
-          <h5>Information Source</h5>
-          <table id="addInformationSource">
-            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-              <td></td>
-              <td></td>                                       
-            </tr>                                               
-          </table>
-          </div> 
-          <!-- End Information Source Module -->  
+          <div id="informationSourceContainer">
+            <%= render :partial => '/information_sources/show', :locals => {:information_source => @patient_data.information_source, :patient_data => @patient_data} %>
+          </div>
+          <!-- End Information Source Module -->
           
           <!-- Start Comments Module -->
           <div id="commentsContainer"> 

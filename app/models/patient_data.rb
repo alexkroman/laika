@@ -1,10 +1,11 @@
 class PatientData < ActiveRecord::Base
-  has_one :registration_information
-  has_many :languages
-  has_many :providers
-  has_many :medications
-  has_one :support
-  has_many :allergies
+  has_one    :registration_information
+  has_many   :languages
+  has_many   :providers
+  has_many   :medications
+  has_one    :support
+  has_many   :allergies
+  has_one    :information_source
   belongs_to :vendor_test_plan
   belongs_to :user
   
@@ -46,6 +47,8 @@ class PatientData < ActiveRecord::Base
     self.allergies.each do |allergy|
       copied_patient_data.allergies << allergy.clone
     end
+    
+    copied_patient_data.information_source = self.information_source.clone if self.information_source
     
     copied_patient_data
   end
