@@ -6,6 +6,7 @@ class PatientData < ActiveRecord::Base
   has_one    :support
   has_many   :allergies
   has_one    :information_source
+  has_one    :advance_directive
   belongs_to :vendor_test_plan
   belongs_to :user
   
