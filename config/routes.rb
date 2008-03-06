@@ -4,12 +4,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :vendors
 
   map.resources :patient_data, 
-                :has_one  => [:registration_information, :support, :information_source],
+                :has_one  => [:registration_information, :support, :information_source, :advance_directive],
                 :has_many => [:languages, :providers, :medications, :allergies],
                 :singular => :patient_data_instance,
-                :member   => {:set_no_known_allergies => :post},
-                :member   => {:set_pregnant => :post},
-                :member   => {:set_not_pregnant => :post}
+                :member   => {:set_no_known_allergies => :post}
 
   map.resources :document_locations
 
