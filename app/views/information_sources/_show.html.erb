@@ -1,42 +1,32 @@
-<h5>Advance Directive</h5>
+<h5>Information Source</h5>
 <table>
-<% if advance_directive -%>
+<% if information_source -%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Advance Directive Type</td>
-    <td><% if advance_directive.advance_directive_type != nil %><%=h advance_directive.advance_directive_type.name %><% end %></td>
+    <td class="lighttext">Time</td>
+    <td><% if information_source.time != nil %><%=h information_source.time.strftime("%m/%d/%y") %><% end %></td>
+  </tr>
+   <%= render :partial => '/person_names/show', :locals => {:person_name => information_source.person_name}%>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Document ID</td>
+    <td><% if information_source.document_id != nil %><%=h information_source.document_id %><% end %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Free Text Description</td>
-    <td><% if advance_directive.free_text != nil %><%=h advance_directive.free_text %><% end %></td>
+    <td class="lighttext">Represented Organization Name</td>
+    <td><% if information_source.organization_name != nil %><%=h information_source.organization_name %><% end %></td>
   </tr>
-  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Start Effective Time</td>
-    <td><% if advance_directive.start_effective_time != nil %><%=h advance_directive.start_effective_time.strftime("%m/%d/%y") %><% end %></td>
-  </tr>
-  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">End Effective Time</td>
-    <td><% if advance_directive.end_effective_time != nil %><%=h advance_directive.end_effective_time.strftime("%m/%d/%y") %><% end %></td>
-  </tr>
-  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Patient's Agent Information</td>
-    <td></td>
-  </tr>
-  <%= render :partial => '/person_names/show', :locals => {:person_name => advance_directive.person_name}%>
-  <%= render :partial => '/addresses/show', :locals => {:address => advance_directive.address}%>
-  <%= render :partial => '/telecoms/show', :locals => {:telecom => advance_directive.telecom}%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td></td>
     <td>
-      <%= link_to_remote 'Edit', :update => 'advanceDirectiveContainer', 
-                                 :url => edit_patient_data_instance_advance_directive_path(patient_data),
+      <%= link_to_remote 'Edit', :update => 'informationSourceContainer', 
+                                 :url => edit_patient_data_instance_information_source_path(patient_data),
                                  :method => 'get' %>
     </td>
   </tr>
 <% else -%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">There is no advance directive data for this test case</td>
-    <td><%= link_to_remote 'Create some', :update => 'advanceDirectiveContainer',
-                                          :url => new_patient_data_instance_advance_directive_path(patient_data), 
+    <td class="lighttext">There is no information source data for this test case</td>
+    <td><%= link_to_remote 'Create some', :update => 'informationSourceContainer',
+                                          :url => new_patient_data_instance_information_source_path(patient_data), 
                                           :method => 'get' %>
     </td>
   </tr>
