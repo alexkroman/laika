@@ -64,3 +64,75 @@ david_carter:
   first_name: David
   last_name: Carter
   nameable: david_carter (RegistrationInformation)
+
+paul_hewson:
+  name_prefix: Mr.
+  first_name: Paul
+  last_name: Hewson
+  nameable: joe_smith_information_source (InformationSource)
+
+david_evans:
+  name_prefix: Mr.
+  first_name: David
+  last_name: Evans
+  nameable: emily_jones_information_source (InformationSource)
+
+larry_mullen:
+  name_prefix: Mr.
+  first_name: Larry
+  last_name: Mullen
+  nameable: will_haynes_information_source (InformationSource)
+
+adam_clayton:
+  name_prefix: Mr.
+  first_name: Adam
+  last_name: Clayton
+  nameable: jennifer_thompson_information_source (InformationSource)
+
+john_lennon:
+  name_prefix: Mr.
+  first_name: John
+  last_name: Lennon
+  nameable: theodore_smith_information_source (InformationSource)
+
+ringo_starr:
+  name_prefix: Mr.
+  first_name: Ringo
+  last_name: Starr
+  nameable: david_carter_information_source (InformationSource)
+
+bo_jangles:
+  name_prefix: Mr.
+  first_name: Bo
+  last_name: Jangles
+  nameable: joe_smith_advance_directive (AdvanceDirective)
+
+george_washington:
+  name_prefix: Mr.
+  first_name: George
+  last_name: Washington
+  nameable: emily_jones_advance_directive (AdvanceDirective)
+
+john_kennedy:
+  name_prefix: Mr.
+  first_name: John
+  last_name: Kennedy
+  nameable: will_haynes_advance_directive (AdvanceDirective)
+
+franklin_roosevelt:
+  name_prefix: Mr.
+  first_name: Franklin
+  last_name: Roosevelt
+  nameable: jennifer_thompson_advance_directive (AdvanceDirective)
+
+dwight_eisenhower:
+  name_prefix: Mr.
+  first_name: Dwight
+  last_name: Eisenhower
+  nameable: theodore_smith_advance_directive (AdvanceDirective)
+
+william_taft:
+  name_prefix: Mr.
+  first_name: William
+  last_name: Taft
+  nameable: david_carter_advance_directive (AdvanceDirective)
