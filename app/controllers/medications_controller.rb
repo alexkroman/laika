@@ -2,6 +2,8 @@ class MedicationsController < PatientDataChildController
 
   def new
     @medication = Medication.new
+    @medicationTypes = MedicationType.find(:all, :order => "name ASC")
+    @codeSystems = CodeSystem.find(:all, :order => "name DESC")
 
     render :partial  => 'edit', :locals => {:medication => @medication,
                                             :patient_data => @patient_data}
@@ -9,6 +11,9 @@ class MedicationsController < PatientDataChildController
 
   def edit
     @medication = @patient_data.medications.find(params[:id])
+    @medicationTypes = MedicationType.find(:all, :order => "name ASC")
+    @codeSystems = CodeSystem.find(:all, :order => "name DESC")
+    
     render :partial  => 'edit', :locals => {:medication => @medication,
                                             :patient_data => @patient_data}
   end

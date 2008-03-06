@@ -2,6 +2,8 @@ class Medication < ActiveRecord::Base
   strip_attributes!
 
   belongs_to :patient_data
+  belongs_to :medication_type
+  belongs_to :code_system
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
   
   

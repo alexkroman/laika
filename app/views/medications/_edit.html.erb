@@ -18,12 +18,10 @@
     <td><%= f.text_field :product_code %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Code System Name</td>
-    <td><%= f.text_field :code_system_name %></td>
-  </tr>
-  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Code System Code</td>
-    <td><%= f.text_field :code_system_code %></td>
+    <td class="lighttext">Code System</td>
+    <td>
+      <%= f.select :code_system_id, @codeSystems.collect{|codeSystem| [codeSystem.name, codeSystem.id]} %>
+    </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Free Text Brand Name</td>
@@ -31,7 +29,9 @@
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Medication Type</td>
-    <td><%= f.text_field :medication_type %></td>
+    <td>
+      <%= f.select :medication_type_id, @medicationTypes.collect{|medicationType| [medicationType.name, medicationType.id]} %>
+    </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Status</td>

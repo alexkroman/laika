@@ -1,11 +1,10 @@
 joe_smith_medication:
   patient_data: joe_smith
   product_coded_display_name: Albuterol inhalant
-  product_code:
-  code_system_name:
-  code_system_code:
-  free_text_brand_name:
-  medication_type:
+  product_code: 307782
+  code_system: rxnorm
+  free_text_brand_name: ACTUAT inhalant
+  medication_type: prescription_drug
   status:
   quantity_ordered_value:
   quantity_ordered_unit:
@@ -14,11 +13,10 @@ joe_smith_medication:
 emily_jones_medication:
   patient_data: emily_jones
   product_coded_display_name: Clopidogrel
-  product_code:
-  code_system_name:
-  code_system_code:
+  product_code: 309362
+  code_system: rxnorm
   free_text_brand_name: Plavix
-  medication_type:
+  medication_type: prescription_drug
   status:
   quantity_ordered_value:
   quantity_ordered_unit:
@@ -27,11 +25,10 @@ emily_jones_medication:
 will_haynes_medication:
   patient_data: will_haynes
   product_coded_display_name: Metoprolol
-  product_code:
-  code_system_name:
-  code_system_code:
-  free_text_brand_name: "Generic Brand"
-  medication_type: Prescription Drug
+  product_code: 430618
+  code_system: rxnorm
+  free_text_brand_name: Generic Brand
+  medication_type: prescription_drug
   status:
   quantity_ordered_value:
   quantity_ordered_unit:
@@ -40,11 +37,10 @@ will_haynes_medication:
 jennifer_thompson_medication:
   patient_data: jennifer_thompson
   product_coded_display_name: Prednisone
-  product_code:
-  code_system_name:
-  code_system_code:
+  product_code: 312615
+  code_system: rxnorm
   free_text_brand_name:
-  medication_type: Over the counter product
+  medication_type: over_the_counter_product
   status:
   quantity_ordered_value:
   quantity_ordered_unit:
@@ -53,11 +49,10 @@ jennifer_thompson_medication:
 theodore_smith_medication:
   patient_data: theodore_smith
   product_coded_display_name: Cephalexin
-  product_code:
-  code_system_name:
-  code_system_code:
+  product_code: 197454
+  code_system: rxnorm
   free_text_brand_name: Keflex
-  medication_type: Prescription Drug
+  medication_type: prescription_drug
   status: 
   quantity_ordered_value: 1
   quantity_ordered_unit: 

@@ -1,0 +1,7 @@
+over_the_counter_product:
+  name: Over The Counter Product
+  code: 329505003
+
+prescription_drug:
+  name: Prescription Drug
+  code: 73639000
