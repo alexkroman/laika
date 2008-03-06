@@ -494,6 +494,8 @@ xml.ClinicalDocument("xsi:schemaLocation" => "urn:hl7-org:v3 http://xreg2.nist.g
       if (@patient_data.pregnant != nil && @patient_data.pregnant == true) 
         xml.component {
           xml.section {
+            xml.title "Results"
+            xml.text "Patient is currently pregnant"
             xml.entry {
               xml.observation ("classCode" => "OBS", "moodCode" => "EVN") {
                 xml.value ("xsi:type" => "CD", "code" => "77386006", "displayName" => "Patient currently pregnant", "codeSystem" => "2.16.840.1.113883.6.96", "codeSystemName" => "SNOMED CT") {} 
