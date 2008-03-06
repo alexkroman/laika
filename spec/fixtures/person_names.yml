@@ -34,6 +34,12 @@ joe_smiths_mom:
   last_name: Smith
   nameable: joe_smiths_mom (Support)
 
+emily_jones_mom:
+  name_prefix: Ms.
+  first_name: Stacey
+  last_name: Jones
+  nameable: emily_jones_mom (Support)
+
 emily_jones:
   name_prefix: Ms.
   first_name: Emily
@@ -47,11 +53,23 @@ will_haynes:
   name_suffix: Jr.
   nameable: will_haynes (RegistrationInformation)
 
+will_haynes_dad:
+  name_prefix: Mr.
+  first_name: Joseph
+  last_name: Haynes
+  nameable: will_haynes_dad (Support)
+
 jennifer_thompson:
   name_prefix: Ms.
   first_name: Jennifer
   last_name: Thompson
   nameable: jennifer_thompson (RegistrationInformation)
+
+jennifer_thompson_husband:
+  name_prefix: Mr.
+  first_name: Nathan
+  last_name: Thompson
+  nameable: jennifer_thompson_husband (Support)
 
 theodore_smith:
   name_prefix: Mr.

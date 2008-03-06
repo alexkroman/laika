@@ -14,14 +14,26 @@ emily_jones_telecom:
   home_phone: +1-301-555-0199
   reachable: emily_jones (RegistrationInformation)
 
+emily_jones_mom_telecom:
+  mobile_phone: +1-202-555-0199
+  reachable: emily_jones_mom (Support)
+
 will_haynes_telecom:
   home_phone: +1-703-555-0111
   reachable: will_haynes (RegistrationInformation)
+
+will_haynes_dad_telecom:
+  mobile_phone: +1-202-555-0199
+  reachable: will_haynes_dad (Support)
 
 jennifer_thompsons_telecom:
   home_phone: +1-617-555-1212
   mobile_phone: +1-617-555-1234
   reachable: jennifer_thompson (RegistrationInformation)
+
+jennifer_thompsons_husbands_telecom:
+  mobile_phone: +1-617-555-2121
+  reachable: jennifer_thompson_husband (Support)
 
 theodore_smiths_telecom:
   home_phone: +1-240-555-1212

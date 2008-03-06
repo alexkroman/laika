@@ -41,7 +41,7 @@
 </tr>
 <tr class="<%= cycle("darkzebra", "lightzebra")%>">
   <td class="lighttext">Expiration Date</td>
-  <td><%=h medication.effectivetime %></td>
+  <td><% if medication.expiration_time != nil %><%=h medication.expiration_time.strftime("%m/%d/%y") %><% end %></td>
 </tr>
 <tr class="<%= cycle("darkzebra", "lightzebra")%>">
   <td></td>

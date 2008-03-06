@@ -1,6 +1,7 @@
 <% remote_form_for(:patient_data, 
                    :url =>  {:controller => "pregnancy", :action => "update", :patient_data_instance_id => @patient_data.id},
                    :update => 'pregnancyContainer') do |f| %>
+<h5>Pregnancy</h5>
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Pregnant</td>

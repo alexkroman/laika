@@ -69,26 +69,6 @@
               <td></td>
               <td></td>
             </tr>
-            <tr class="darkzebra">
-              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('immunizationsContainer', 1.0);">Immunizations</a></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr class="lightzebra">
-              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('vitalSignsContainer', 1.0);">Vital Signs</a></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr class="darkzebra">
-              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('resultsContainer', 1.0);">Results</a></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr class="lightzebra">
-              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('encountersContainer', 1.0);">Encounters</a></td>
-              <td></td>
-              <td></td>
-            </tr>
           </table>
         </div>
       </div>
@@ -234,7 +214,6 @@
                  
           <!-- Start Pregnancy Module -->
           <div id="pregnancyContainer"> 
-          <h5>Pregnancy</h5>
             <div id="pregnancy">
               <%= render :partial => '/pregnancy/show', :locals => {:patient_data => @patient_data} %>
             </div>
@@ -264,54 +243,6 @@
             <%= render :partial => '/advance_directives/show', :locals => {:advance_directive => @patient_data.advance_directive, :patient_data => @patient_data} %>
           </div>
           <!-- End Information Source Module -->   
-          
-          <!-- Start Immunizations Module -->
-          <div id="immunizationsContainer"> 
-          <h5>Immunizations</h5>
-          <table id="addImmunization">
-            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-              <td></td>
-              <td></td>                                       
-            </tr>                                               
-          </table>
-          </div> 
-          <!-- End Immunizations Module -->     
-          
-          <!-- Start Vital Signs Module -->
-          <div id="vitalSignsContainer"> 
-          <h5>Vital Signs</h5>
-          <table id="addVitalSign">
-            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-              <td></td>
-              <td></td>                                       
-            </tr>                                               
-          </table>
-          </div> 
-          <!-- End Vital Signs Module --> 
-          
-          <!-- Start Results Module -->
-          <div id="resultsContainer"> 
-          <h5>Results</h5>
-          <table id="addResult">
-            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-              <td></td>
-              <td></td>                                       
-            </tr>                                               
-          </table>
-          </div> 
-          <!-- End Results Module --> 
-          
-          <!-- Start Encounters Module -->
-          <div id="encountersContainer"> 
-          <h5>Encounters</h5>
-          <table id="addEncounter">
-            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-              <td></td>
-              <td></td>                                       
-            </tr>                                               
-          </table>
-          </div> 
-          <!-- End Encounters Module --> 
                  
         </div>
       </div>

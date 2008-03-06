@@ -49,7 +49,9 @@ class PatientData < ActiveRecord::Base
       copied_patient_data.allergies << allergy.clone
     end
     
-    copied_patient_data.information_source = self.information_source.clone if self.information_source
+    copied_patient_data.information_source = self.information_source.copy if self.information_source
+    
+    copied_patient_data.advance_directive = self.advance_directive.copy if self.advance_directive
     
     copied_patient_data
   end

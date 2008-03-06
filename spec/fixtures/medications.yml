@@ -1,5 +1,5 @@
-joe_smith_medication_1:
-  patient_data: joe_smith_vendor_test
+joe_smith_medication:
+  patient_data: joe_smith
   product_coded_display_name: Albuterol inhalant
   product_code:
   code_system_name:
@@ -9,9 +9,10 @@ joe_smith_medication_1:
   status:
   quantity_ordered_value:
   quantity_ordered_unit:
+  expiration_time: 2007-09-27
   
-joe_smith_medication_2:
-  patient_data: joe_smith_vendor_test
+emily_jones_medication:
+  patient_data: emily_jones
   product_coded_display_name: Clopidogrel
   product_code:
   code_system_name:
@@ -21,9 +22,10 @@ joe_smith_medication_2:
   status:
   quantity_ordered_value:
   quantity_ordered_unit:
+  expiration_time: 2008-11-17
   
-joe_smith_medication_3:
-  patient_data: joe_smith_vendor_test
+will_haynes_medication:
+  patient_data: will_haynes
   product_coded_display_name: Metoprolol
   product_code:
   code_system_name:
@@ -33,9 +35,10 @@ joe_smith_medication_3:
   status:
   quantity_ordered_value:
   quantity_ordered_unit:
+  expiration_time: 2010-03-27
   
-joe_smith_medication_4:
-  patient_data: joe_smith_vendor_test
+jennifer_thompson_medication:
+  patient_data: jennifer_thompson
   product_coded_display_name: Prednisone
   product_code:
   code_system_name:
@@ -44,10 +47,11 @@ joe_smith_medication_4:
   medication_type: Over the counter product
   status:
   quantity_ordered_value:
-  quantity_ordered_unit:  
+  quantity_ordered_unit:
+  expiration_time: 2015-10-02
   
-joe_smith_medication_5:
-  patient_data: joe_smith_vendor_test
+theodore_smith_medication:
+  patient_data: theodore_smith
   product_coded_display_name: Cephalexin
   product_code:
   code_system_name:
@@ -57,4 +61,4 @@ joe_smith_medication_5:
   status: 
   quantity_ordered_value: 1
   quantity_ordered_unit: 
- 
+  expiration_time: 2050-12-31
