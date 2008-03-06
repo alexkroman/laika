@@ -457,11 +457,31 @@ xml.ClinicalDocument("xsi:schemaLocation" => "urn:hl7-org:v3 http://xreg2.nist.g
     xml.assignedAuthor {
       xml.id @patient_data.information_source.document_id
       xml.assignedPerson {
-        xml.name @patient_data.information_source.author_name
+        xml.name {
+          if @patient_data.information_source.person_name.name_prefix &&
+             @patient_data.information_source.person_name.name_prefix.size > 0
+            xml.prefix @patient_data.information_source.person_name.name_prefix
+          end
+          if @patient_data.information_source.person_name.first_name &&
+             @patient_data.information_source.person_name.first_name.size > 0
+            xml.given(@patient_data.information_source.person_name.first_name, "qualifier" => "CL")
+          end
+          if @patient_data.information_source.person_name.last_name &&
+             @patient_data.information_source.person_name.last_name.size > 0
+            xml.family (@patient_data.information_source.person_name.last_name, "qualifier" => "BR")
+          end
+          if @patient_data.information_source.person_name.name_suffix &&
+             @patient_data.information_source.person_name.name_suffix.size > 0
+            xml.prefix @patient_data.information_source.person_name.name_suffix
+          end
+        }
+      }
+      xml.representedOrganization {
+        xml.id ("root" => "2.16.840.1.113883.19.5") 
+        xml.name @patient_data.information_source.organization_name
       }
     }
   }
-  
   # End Information Source
   
   # Start xml.component

@@ -259,17 +259,11 @@
           </div> 
           <!-- End Comments Module -->  
           
-          <!-- Start Advance Directive Module -->
-          <div id="advanceDirectiveContainer"> 
-          <h5>Advance Directive</h5>
-          <table id="addAdvanceDirective">
-            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-              <td></td>
-              <td></td>                                       
-            </tr>                                               
-          </table>
-          </div> 
-          <!-- End Advance Directive Module -->       
+          <!-- Start Advance Directives Module -->
+          <div id="advanceDirectiveContainer">
+            <%= render :partial => '/advance_directives/show', :locals => {:advance_directive => @patient_data.advance_directive, :patient_data => @patient_data} %>
+          </div>
+          <!-- End Information Source Module -->   
           
           <!-- Start Immunizations Module -->
           <div id="immunizationsContainer"> 
