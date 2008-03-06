@@ -30,6 +30,9 @@ emily_jones_address:
   iso_country: usa
   addressable: emily_jones (RegistrationInformation)
 
+emily_jones_moms_address:
+  addressable: emily_jones_mom (Support)
+
 will_haynes_address:
   street_address_line_one: 16167 King Street
   city: Alexandria
@@ -38,6 +41,9 @@ will_haynes_address:
   iso_country: usa
   addressable: will_haynes (RegistrationInformation)
 
+will_haynes_dads_address:
+  addressable: will_haynes_dad (Support)
+
 jennifer_thompsons_address:
   street_address_line_one: 2300 Commonwealth Avenue
   city: Brighton
@@ -45,6 +51,14 @@ jennifer_thompsons_address:
   postal_code: 02135
   iso_country: usa
   addressable: jennifer_thompson (RegistrationInformation)
+
+jennifer_thompsons_husbands_address:
+  street_address_line_one: 2300 Commonwealth Avenue
+  city: Brighton
+  state: MA
+  postal_code: 02135
+  iso_country: usa
+  addressable: jennifer_thompson_husband (Support)
 
 theodore_smiths_address:
   street_address_line_one: 2300 Commonwealth Avenue
