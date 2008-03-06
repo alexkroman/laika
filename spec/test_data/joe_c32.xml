@@ -427,7 +427,8 @@
                     <text><reference value='#reaction-1'/></text> 
                     <value xsi:type='CD' code='247472004' displayName='Weal' 
                       codeSystem='2.16.840.1.113883.6.96' 
-                      codeSystemName='SNOMED CT' /> 
+                      codeSystemName='SNOMED CT' />
+                  </entryRelationship> 
                     <entryRelationship  typeCode='SUBJ' inversionInd='true'> 
                       <observation classCode='OBS' moodCode='EVN'> 
                       <templateId root='2.16.840.1.113883.10.20.1.55'/> 
@@ -440,7 +441,7 @@
                          codeSystem='2.16.840.1.113883.6.96' 
                          codeSystemName='SNOMED CT' /> 
                       </observation> 
-                    </entryRelationship> 
+ 
                    </entryRelationship>
 								</observation>
 							</entryRelationship>
