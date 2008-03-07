@@ -4,6 +4,8 @@ class Address < ActiveRecord::Base
   belongs_to :iso_country
   belongs_to :addressable, :polymorphic => true
   
+  include MatchHelper
+  
   # Checks the contents of the REXML::Element passed in to make sure that they match the
   # information in this object. This method expects the the element passed in to be the
   # address element that it will evaluate.
@@ -30,15 +32,13 @@ class Address < ActiveRecord::Base
     errors.compact
   end
   
-  private
-  
-  def match_value(name_element, xpath, field, value)
-    error = XmlHelper.match_value(name_element, xpath, value)
-    if error
-      return ContentError.new(:section => self.addressable_type.underscore, :subsection => 'address', :field_name => field,
-          :error_message => error,:location=>name_element.xpath)
-    else
-      return nil
-    end
+  #Reimplementing from MatchHelper
+  def section_name
+    self.addressable_type.underscore
+  end
+
+  #Reimplementing from MatchHelper  
+  def subsection_name
+    'address'
   end
 end
