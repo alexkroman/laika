@@ -7,6 +7,7 @@ class PatientData < ActiveRecord::Base
   has_many   :allergies
   has_one    :information_source
   has_one    :advance_directive
+  has_many   :comments
   belongs_to :vendor_test_plan
   belongs_to :user
   
@@ -50,6 +51,10 @@ class PatientData < ActiveRecord::Base
     end
     
     copied_patient_data.information_source = self.information_source.copy if self.information_source
+    
+    self.comments.each do |comment|
+      copied_patient_data.comments << comment.clone
+    end
     
     copied_patient_data.advance_directive = self.advance_directive.copy if self.advance_directive
     

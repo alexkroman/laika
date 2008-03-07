@@ -155,3 +155,21 @@ william_taft_address:
   postal_code: 20500
   iso_country: usa
   addressable: david_carter_advance_directive (AdvanceDirective)
+
+joe_smith_comment_address:
+  addressable: joe_smith_comment (Comment)
+
+emily_jones_comment_address:
+  addressable: emily_jones_comment (Comment)
+
+will_haynes_comment_address:
+  addressable: will_haynes_comment (Comment)
+
+jennifer_thompson_comment_address:
+  addressable: jennifer_thompson_comment (Comment)
+
+theodore_smith_comment_address:
+  addressable: theodore_smith_comment (Comment)
+
+david_carter_comment_address:
+  addressable: david_carter_comment (Comment)

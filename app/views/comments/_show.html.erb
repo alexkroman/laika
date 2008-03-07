@@ -1,0 +1,15 @@
+<table>
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td class="lighttext">Comment</td>
+  <td><%= h comment.text %></td>
+</tr>
+<%= render :partial => '/person_names/show', :locals => {:person_name => comment.person_name}%>
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td></td>
+  <td>
+    <%= link_to_remote 'Edit', :update => "comment#{comment.id}",
+                               :url => edit_patient_data_instance_comment_path(patient_data, comment),
+                               :method => 'get' %>
+  </td>
+</tr>
+</table>

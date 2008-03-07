@@ -1,0 +1,29 @@
+<% if comment.new_record?
+     comment_div = 'commentNew' 
+     html_options = {} -%>
+<div id="commentNew">
+<% else
+     comment_div = "comment#{comment.id}"
+     html_options = {:method => 'put'}
+   end %>
+<% remote_form_for(:comment, comment, :url => patient_data_instance_comment_path(patient_data, comment), :html => html_options,
+                    :update => comment_div) do |f| -%>
+<table>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Comment Text</td>
+    <td>
+      <%= f.text_field :text %>
+    </td>
+  </tr>
+  <%= render :partial => '/person_names/edit', :locals => {:person_name => comment.person_name}%>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td></td>
+    <td>
+      <%= f.submit "Save" %>
+    </td>
+  </tr>
+</table>                         
+<% end -%>
+<% if comment.new_record? -%>
+</div>
+<% end -%>

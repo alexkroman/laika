@@ -102,3 +102,21 @@ william_taft_telecom:
   email: wtaft@whitehouse.gov
   url: www.whitehouse.gov
   reachable: david_carter_advance_directive (AdvanceDirective)
+
+joe_smith_comment_comment:
+  reachable: joe_smith_comment (Comment)
+
+emily_jones_comment_comment:
+  reachable: emily_jones_comment (Comment)
+
+will_haynes_comment_comment:
+  reachable: will_haynes_comment (Comment)
+
+jennifer_thompson_comment_comment:
+  reachable: jennifer_thompson_comment (Comment)
+
+theodore_smith_comment_comment:
+  reachable: theodore_smith_comment (Comment)
+
+david_carter_comment_comment:
+  reachable: david_carter_comment (Comment)

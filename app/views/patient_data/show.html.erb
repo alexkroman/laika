@@ -227,16 +227,23 @@
           <!-- End Information Source Module -->
           
           <!-- Start Comments Module -->
-          <div id="commentsContainer"> 
-          <h5>Comments</h5>
+          <div id="commentsContainer"><h5>Comments</h5>
+          <% for comment in @patient_data.comments -%>
+            <div id="comment<%= comment.id %>">
+              <%= render :partial => '/comments/show', :locals => {:comment  => comment, :patient_data => @patient_data} %>
+            </div>
+          <% end -%>
           <table id="addComment">
             <tr class="<%= cycle("darkzebra", "lightzebra")%>">
               <td></td>
-              <td></td>                                       
+              <td>
+                <%= link_to_remote 'Add', :url => new_patient_data_instance_comment_path(@patient_data), 
+                                          :method => 'get', :update => 'addComment', :position => :before %>
+              </td>                                       
             </tr>                                               
           </table>
           </div> 
-          <!-- End Comments Module -->  
+          <!-- End Comments Module -->
           
           <!-- Start Advance Directives Module -->
           <div id="advanceDirectiveContainer">

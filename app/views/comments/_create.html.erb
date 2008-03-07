@@ -1,0 +1,11 @@
+<%= render :partial => '/comments/show', :locals => {:comment  => comment, :patient_data => @patient_data} %>
+
+<script type="text/javascript">
+//<![CDATA[
+var newCommentDiv = $('commentNew');
+if (newCommentDiv != null)
+{
+    newCommentDiv.id = 'comment<%= comment.id %>';
+}
+//]]>
+</script>
