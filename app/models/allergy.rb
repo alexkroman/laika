@@ -5,6 +5,8 @@ class Allergy < ActiveRecord::Base
   belongs_to :adverse_event_type
   belongs_to :severity_term
   
+  include MatchHelper
+  
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
   
   def validate_c32(document)
@@ -45,17 +47,5 @@ XPATH
     end
     
     errors.compact
-  end
-  
-  private 
-  
-  def match_value(name_element, xpath, field, value)
-    error = XmlHelper.match_value(name_element, xpath, value)
-    if error
-      return ContentError.new(:section => 'allergies', :field_name => field,
-                              :error_message => error,:type=>'error',:location=>(name_element)? name_element.xpath : nil)
-    else
-      return nil
-    end
   end
 end
