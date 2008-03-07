@@ -1,7 +1,7 @@
 joe_smith_english_language:
   iso_language: english
   iso_country: usa
-  language_ability_mode: not_applicable
+  language_ability_mode: received_written
   preference: true
   patient_data: joe_smith
 
