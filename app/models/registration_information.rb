@@ -7,7 +7,9 @@ class RegistrationInformation < ActiveRecord::Base
   belongs_to :marital_status
   belongs_to :gender
   belongs_to :religion
+
   include PersonLike
+  include MatchHelper
   
   # Checks the contents of the REXML::Document passed in to make sure that they match the
   # information in this object. Will return an empty array if everything passes. Otherwise,
@@ -48,18 +50,6 @@ class RegistrationInformation < ActiveRecord::Base
     end
     
     errors.compact
-  end
-  
-  private
-  
-  def match_value(name_element, xpath, field, value)
-    error = XmlHelper.match_value(name_element, xpath, value)
-    if error
-      return ContentError.new(:section => 'registration_information', :field_name => field,
-          :error_message => error,:location=> name_element ? name_element.xpath : nil)
-    else
-      return nil
-    end
   end
   
 end
