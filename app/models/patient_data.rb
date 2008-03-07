@@ -56,7 +56,7 @@ class PatientData < ActiveRecord::Base
       #copied_patient_data.comments << comment.clone
     #end
     
-    #copied_patient_data.advance_directive = self.advance_directive.copy if self.advance_directive
+    copied_patient_data.advance_directive = self.advance_directive.copy if self.advance_directive
     
     copied_patient_data
   end
