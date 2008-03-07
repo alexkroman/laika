@@ -52,9 +52,9 @@ class PatientData < ActiveRecord::Base
     
     copied_patient_data.information_source = self.information_source.copy if self.information_source
     
-    #self.comments.each do |comment|
-      #copied_patient_data.comments << comment.clone
-    #end
+    self.comments.each do |comment|
+      copied_patient_data.comments << comment.copy
+    end
     
     copied_patient_data.advance_directive = self.advance_directive.copy if self.advance_directive
     
