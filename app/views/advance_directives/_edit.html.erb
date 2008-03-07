@@ -1,0 +1,35 @@
+<!-- Start Advance Directive Module -->
+<% remote_form_for(:advance_directive, 
+                   :url => patient_data_instance_advance_directive_path(patient_data),
+                   :update => 'advanceDirectiveContainer', :method => http_method(advance_directive)) do |f| %>
+<h5>Advance Directive</h5>
+<table>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Advance Directive Type</td>
+    <td>
+      <%= f.select :advance_directive_type_id, @advance_directive_types.collect{|advance_directive_type| [advance_directive_type.name, advance_directive_type.id]} %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Free Text Description</td>
+    <td>
+      <%= f.text_field :free_text %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Start Effective Time</td>
+    <td><input id="advance_directive_start_effective_time" name="advance_directive[start_effective_time]" size="30" type="text" <% if support.start_support != nil %>value="<%= advance_directive.start_effective_time.strftime("%m/%d/%y") %>"<% end %> onClick="GetDate(this);" /></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">End Effective Time</td>
+    <td><input id="advance_directive_end_effective_time" name="advance_directive[end_effective_time]" size="30" type="text" <% if support.end_support != nil %>value="<%= advance_directive.end_effective_time.strftime("%m/%d/%y") %>"<% end %> onClick="GetDate(this);" /></td>
+  </tr>
+  <%= render :partial => '/person_names/edit', :locals => {:person_name => advance_directive.person_name}%>
+  <%= render :partial => '/addresses/edit', :locals => {:address => advance_directive.address}%>
+  <%= render :partial => '/telecoms/edit', :locals => {:telecom => advance_directive.telecom}%>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td></td>
+    <td><%= f.submit "Save" %></td>
+  </tr>
+</table>
+<% end %>
