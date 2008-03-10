@@ -9,7 +9,8 @@ class ProviderType < ActiveRecord::Base
         end
         
         errors = []
-        
+        errors << match_value(type,'@code','code',code)
+        errors << match_value(type,'@displayName','displayName',name)
         return errors.compact
     end 
 end

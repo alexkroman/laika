@@ -20,8 +20,8 @@
             <assignedEntity>
                <id root='78A150ED-B890-49dc-B716-5EC0027B3982'
                   extension="ProviderID" />
-               <code code='200000000X '
-                  displayName='Allopathic and Osteopathic Physicians'
+               <code code='370000000X'
+                  displayName='Nursing Service Related Providers'
                   codeSystem='2.16.840.1.113883.6.101'
                   codeSystemName='ProviderCodes' />
                <addr>
@@ -40,7 +40,7 @@
                   </name>
                </assignedPerson>
                <sdtc:patient>
-                  <sdtc:id root='78A150ED-B890-49dc-B716-5EC0027B3983'
+                  <sdtc:id root='78A150ED-B890-49dc-B716-5EC0027B3985'
                      extension='MedicalRecordNumber' />
                </sdtc:patient>
             </assignedEntity>

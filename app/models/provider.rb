@@ -7,7 +7,7 @@ class Provider < ActiveRecord::Base
   
   include PersonLike
   
-  
+  include MatchHelper
  def validate_c32(document)
      namespaces = {'cda'=>"urn:hl7-org:v3",'sdct'=>"urn:hl7-org:sdct"}
      errors = []
@@ -41,7 +41,12 @@ class Provider < ActiveRecord::Base
 	     end
          
          if patient_identifier
-           id = REXML::XPath.first(assigned,'sdtc:patient/sdtc:id/@root',namespaces)
+           id = REXML::XPath.first(assigned,'sdtc:patient/sdtc:id',namespaces)
+           if id
+               errors << match_value(id,'@root','id',patient_identifier)
+           else
+               errors << ContentError.new(:section=>section,:error_message=>"Expected to find a patient identifier with the value of #{patient_identifier}",:location=>assigned.xpath)
+           end
           end         
          
     else

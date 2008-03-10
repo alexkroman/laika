@@ -8,7 +8,8 @@ class ProviderRole < ActiveRecord::Base
        end
        
        errors = []
-         
+       errors << match_value(role,'@code','code',code)
+       errors << match_value(role,'@displayName','displayName',name)
        return errors.compact
    end
    
