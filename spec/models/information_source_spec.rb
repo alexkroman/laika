@@ -17,7 +17,6 @@ describe InformationSource, "Must be present" do
   
   it "should fail if an author element is not present" do
       document = REXML::Document.new(File.new(RAILS_ROOT + '/spec/test_data/jenny_thompson_no_info_source.xml'))
-      puts document.to_s
       errors = @information_source.validate_c32(document.root)
       errors.should_not be_empty      
   end  

@@ -28,7 +28,7 @@ class PersonName < ActiveRecord::Base
   def match_value(name_element, xpath, value)
     error = XmlHelper.match_value(name_element, xpath, value)
     if error
-      return ContentError.new(:section => self.nameable_type.underscore, :subsection => 'telecom',
+      return ContentError.new(:section => self.nameable_type.underscore, :subsection => '',
           :error_message => error,:location=>name_element ? name_element.xpath : nil)
     else
       return nil
