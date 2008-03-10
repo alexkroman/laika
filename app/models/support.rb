@@ -5,7 +5,7 @@ class Support < ActiveRecord::Base
   belongs_to :contact_type
   belongs_to :relationship
   include PersonLike
-  
+  include MatchHelper
   
   def validate_c32(xml)
       errors = []
@@ -14,19 +14,23 @@ class Support < ActiveRecord::Base
       if support
           if self.address
              add =  REXML::XPath.first(support,"cda:addr",{'cda' => 'urn:hl7-org:v3'})
-             if add.nil?
+             if add
+                 errors.concat   self.address.validate_c32(add)  
+             else
+                                               
                  errors <<  ContentError.new(:section=>"Support", 
                                      :subsection=>"address",
                                      :field_name=>"",
                                      :error_message=>"Address not found in the support section #{support.xpath}",
                                      :location=>support.xpath)          
                                           
-             else
-                 self.address.validate_c32(add)
+             
              end
           end
       
-      self.telecom.validate_c32(support)
+          if self.telecom
+              errors.concat self.telecom.validate_c32(support)
+          end
      # classcode
       error = XmlHelper.match_value(support,"@classCode",(contact_type) ? contact_type.code : nil)
       if error
@@ -62,5 +66,9 @@ class Support < ActiveRecord::Base
       errors
   end
   
+  
+  def section
+      "Support"
+  end
   
 end

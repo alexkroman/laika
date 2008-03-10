@@ -9,11 +9,17 @@ class PersonName < ActiveRecord::Base
   # Will return an empty array if everything passes. Otherwise,
   # it will return an array of ContentErrors with a description of what's wrong.
   def validate_c32(name_element)
+    
     errors = []
+    if name_element
     errors << match_value(name_element, 'cda:prefix', self.name_prefix)
     errors << match_value(name_element, 'cda:given', self.first_name)
     errors << match_value(name_element, 'cda:family', self.last_name)
     errors << match_value(name_element, 'cda:suffix', self.name_suffix)
+    else
+        errors << ContentError.new(:section => self.nameable_type.underscore, 
+        :error_message => "name element was null",:location=>name_element ? name_element.xpath : nil)
+    end
     errors.compact
   end
   
