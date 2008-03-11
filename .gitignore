@@ -3,3 +3,5 @@
 db/schema.rb
 public/clinical_documents
 config/database.yml
+coverage
+public/laika
