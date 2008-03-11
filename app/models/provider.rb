@@ -9,7 +9,7 @@ class Provider < ActiveRecord::Base
   
   include MatchHelper
  def validate_c32(document)
-     namespaces = {'cda'=>"urn:hl7-org:v3",'sdct'=>"urn:hl7-org:sdct"}
+     namespaces = {'cda'=>"urn:hl7-org:v3",'sdtc'=>"urn:hl7-org:sdtc"}
      errors = []
      provider = REXML::XPath.first(document,'/cda:ClinicalDocument/cda:documentationOf/cda:serviceEvent/cda:performer',namespaces)
      

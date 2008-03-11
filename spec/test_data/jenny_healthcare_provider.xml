@@ -1,5 +1,5 @@
 <ClinicalDocument xmlns="urn:hl7-org:v3"
-   xmlns:sdct="urn:hl7-org:sdct">
+   xmlns:sdtc="urn:hl7-org:sdtc">
    <!-- These examples assume the default namespace is 'urn:hl7-org:v3' -->
    <documentationOf>
       <serviceEvent classCode="PCPR">
