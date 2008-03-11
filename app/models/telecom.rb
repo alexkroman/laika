@@ -38,11 +38,12 @@ class Telecom < ActiveRecord::Base
       if possible_use_attribute
         stripped_desired_value = 'tel:' + stripped_desired_value
       else
-        stripped_desired_value = 'mobile:' + stripped_desired_value
+        stripped_desired_value = 'mailto:' + stripped_desired_value
       end
 
       telecom_elements.each do |telecom_element|
         stripped_telecom_value = telecom_element.attributes['value'].gsub(/[-\(\)s]/, '')
+        
         if stripped_desired_value.eql? stripped_telecom_value
           if telecom_element.attributes['use']
             if telecom_element.attributes['use'].eql? possible_use_attribute
