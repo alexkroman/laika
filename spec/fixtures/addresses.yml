@@ -48,7 +48,7 @@ jennifer_thompsons_address:
   street_address_line_one: 2300 Commonwealth Avenue
   city: Brighton
   state: MA
-  postal_code: 02135
+  postal_code: '02135'
   iso_country: usa
   addressable: jennifer_thompson (RegistrationInformation)
 
@@ -56,7 +56,7 @@ jennifer_thompsons_husbands_address:
   street_address_line_one: 2300 Commonwealth Avenue
   city: Brighton
   state: MA
-  postal_code: 02135
+  postal_code: '02135'
   iso_country: usa
   addressable: jennifer_thompson_husband (Support)
 
@@ -64,7 +64,7 @@ theodore_smiths_address:
   street_address_line_one: 2300 Commonwealth Avenue
   city: Brighton
   state: MA
-  postal_code: 02135
+  postal_code: '02135'
   iso_country: usa
   addressable: theodore_smith (RegistrationInformation)
 
@@ -112,7 +112,7 @@ bo_jangles_address:
   street_address_line_one: 5674 East Street
   city: Hull
   state: MA
-  postal_code: 02045
+  postal_code: '02045'
   iso_country: usa
   addressable: joe_smith_advance_directive (AdvanceDirective)
 
