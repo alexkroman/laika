@@ -19,7 +19,7 @@ module MatchHelper
       end
       
       def section_name
-        
+        self.class.name
       end
       
       def subsection_name
