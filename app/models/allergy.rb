@@ -8,7 +8,8 @@ class Allergy < ActiveRecord::Base
   include MatchHelper
   
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
-  
+
+  # TODO: Need to test for no known allergies
   def validate_c32(document)
     errors = []
     section = REXML::XPath.first(document,"//cda:section[cda:templateId[@root = '2.16.840.1.113883.10.20.1.2']]", @@default_namespaces)
