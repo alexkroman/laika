@@ -1,7 +1,10 @@
 <ClinicalDocument xmlns="urn:hl7-org:v3"
    xmlns:sdct="urn:hl7-org:sdct">
    <participant typeCode="IND">
-    <time/>
+    <time>
+      <low value="19750827"/>
+      <high value="20301209"/>
+    </time>
     <associatedEntity classCode="AGNT">
       <code code="HUSB" displayName="Husband" codeSystemName="HL7 RoleCode" codeSystem="2.16.840.1.113883.5.111"/>
       <telecom use="MC" value="tel:+1-617-555-2121"/>
