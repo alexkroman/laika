@@ -37,4 +37,17 @@ module XmlHelper
         end    
     error
   end
+  
+  def self.dereference(doc)
+    REXML::XPath.each(doc,'//cda:reference[@value]',{'cda' => 'urn:hl7-org:v3'}) do |ref|
+      parent = ref.parent
+      index = parent.elements.index(ref)
+      # find the content that this is pointing to
+      content = REXML::XPath.first(doc,"//[@ID=$id]",{'cda' => 'urn:hl7-org:v3'},{"id"=>ref.attributes['value'].gsub('#','')})
+     if content
+        text = content.get_text().clone()
+        parent.elements[index]=text
+      end
+  end
+end
 end
