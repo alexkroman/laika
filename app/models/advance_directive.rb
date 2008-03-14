@@ -50,11 +50,9 @@ class AdvanceDirective < ActiveRecord::Base
      if code
         ref = REXML::XPath.first(code,"cda:reference",@@default_namespaces)
         if ref
-           val = REXML::XPath.first(code.document,"//cda:content[@ID=$id]/text()",@@default_namespaces,{"id"=>ref.attributes['value'].gsub("#",'')}) 
-           puts val
-           val
+           REXML::XPath.first(code.document,"//cda:content[@ID=$id]/text()",@@default_namespaces,{"id"=>ref.attributes['value'].gsub("#",'')}) 
         else
-            
+           nil
         end
      end 
   end
