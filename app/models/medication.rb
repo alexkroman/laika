@@ -4,100 +4,57 @@ class Medication < ActiveRecord::Base
   belongs_to :patient_data
   belongs_to :medication_type
   belongs_to :code_system
+  
+  include MatchHelper
+  
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
   
-  # TODO: expiration time isn't being checked yet
   def validate_c32(xml)
-      errors=[]
-     context = REXML::XPath.first(xml,"//cda:section[./cda:templateId[@root eq '2.16.840.1.113883.10.20.1.8']]",@@default_namespaces )
-     # IF there is an entry for this medication then there will be a substanceAdministration element
-     # that contains a consumable that contains a manufacturedProduct that has a code with the original text 
-     # equal to the name of the generic medication
-     # the consumeable/manfucaturedProduct/code/originalText is a required field if the substanceAdministration entry is there
-     substanceAdministration = REXML::XPath.first(context,"./cda:entry/cda:substanceAdministration[ ./cda:consumable/cda:manufacturedProduct/cda:manufacturedMaterial/cda:code/cda:originalText/text() = $original]",@@default_namespaces,{"original"=>product_coded_display_name} )
-     
-     if substanceAdministration then    
-         #consumable product and assorted sub elements
-         consumable = REXML::XPath.first(substanceAdministration,"./cda:consumable",@@default_namespaces)
-         manufactured = REXML::XPath.first(consumable,"./cda:manufacturedProduct",@@default_namespaces)
-         code = REXML::XPath.first(manufactured,"./cda:manufacturedMaterial/cda:code",@@default_namespaces)
-         translation = REXML::XPath.first(code,"cda:translation",@@default_namespaces)
-        
-         # look for the Brand information if it exists
-         error =  XmlHelper.match_value(manufactured,"cda:manufacturedMaterial/cda:name/text()",free_text_brand_name,@@default_namespaces,{},:long)
-         
-         if error
-           errors << ContentError.new(:section=>"Medication", 
-                                 :subsection=>"manufacturedContent",
-                                 :field_name=>"name",
-                                 :error_message=>error,
-                                 :location=>substanceAdministration.xpath)
-        end 
-         
-         # validate the medication type Perscription or over the counter 
-         error = XmlHelper.match_value(substanceAdministration,
-                     "cda:entryRelationship[@typeCode='SUBJ']/cda:observation[cda:templateId/@root='2.16.840.1.113883.3.88.11.32.10']/cda:code/@displayName",
-                     medication_type.name, @@default_namespaces, {}, :long)
-                     
-        if error
-           errors << ContentError.new(:section=>"Medication", 
-                                 :subsection=>"medication_type",
-                                 :field_name=>"display_name",
-                                 :error_message=>error,
-                                 :location=>substanceAdministration.xpath)
-                                     
-            end                      
-            
-         # validate the status            
-           error = XmlHelper.match_value(substanceAdministration,
-             "cda:entryRelationship[@typeCode='REFR']/cda:observation[cda:templateId/@root='2.16.840.1.113883.10.20.1.47']/cda:value/@code",status,
-             @@default_namespaces,{},:long)
-             
-           if error
-               errors << ContentError.new(:section=>"Medication", 
-                                      :subsection=>"medication_status",
-                                      :field_name=>"code",
-                                      :error_message=>error,
-                                      :location=>substanceAdministration.xpath)
-                                       
-                                          
-            end 
-         # validate the order quantity
-         order = REXML::XPath.first(substanceAdministration,
-             "cda:entryRelationship[@typeCode='REFR']/cda:supply[moodCode='INT']",
-             @@default_namespaces)
-         if order
-	         error = XmlHelper.match_value(order,
-	                 "cda:supply/cda:quantity/@value",
-	                  quantity_ordered_value,
-	                  @@default_namespaces,{},:long)       
-	                         
-	                  if error
-	                     errors << ContentError.new(:section=>"Medication", 
-	                                           :subsection=>"Order",
-	                                           :field_name=>"quantity",
-	                                           :error_message=>error,
-                                               :location=>order.xpath)
-	                                        
-	                                               
-	                      end 
-         end                 
-     
-     else
-         errors << ContentError.new(:section=>"Medication", 
-                               :subsection=>"substanceAdministration",
-                               :field_name=>"",
-                               :error_message=>"A substanceAdministration section does not exist for the medication")
-         
-                               
-         
+    errors=[]
+    context = REXML::XPath.first(xml,"//cda:section[./cda:templateId[@root eq '2.16.840.1.113883.10.20.1.8']]",@@default_namespaces )
+    # IF there is an entry for this medication then there will be a substanceAdministration element
+    # that contains a consumable that contains a manufacturedProduct that has a code with the original text 
+    # equal to the name of the generic medication
+    # the consumeable/manfucaturedProduct/code/originalText is a required field if the substanceAdministration entry is there
+    substance_administration = REXML::XPath.first(context,"./cda:entry/cda:substanceAdministration[ ./cda:consumable/cda:manufacturedProduct/cda:manufacturedMaterial/cda:code/cda:originalText/text() = $original]",@@default_namespaces,{"original"=>product_coded_display_name} )
+
+    if substance_administration then    
+      #consumable product and assorted sub elements
+      consumable = REXML::XPath.first(substance_administration,"./cda:consumable",@@default_namespaces)
+      manufactured = REXML::XPath.first(consumable,"./cda:manufacturedProduct",@@default_namespaces)
+      code = REXML::XPath.first(manufactured,"./cda:manufacturedMaterial/cda:code",@@default_namespaces)
+      translation = REXML::XPath.first(code,"cda:translation",@@default_namespaces)
+
+      # look for the Brand information if it exists
+      errors << match_value(manufactured, "cda:manufacturedMaterial/cda:name/text()", 'free_text_brand_name', free_text_brand_name)
+
+      # validate the medication type Perscription or over the counter
+      errors << match_value(substance_administration, 
+                           "cda:entryRelationship[@typeCode='SUBJ']/cda:observation[cda:templateId/@root='2.16.840.1.113883.3.88.11.32.10']/cda:code/@displayName",
+                           'medication_type', medication_type.name)
+
+      # validate the status
+      errors << match_value(substance_administration,
+         "cda:entryRelationship[@typeCode='REFR']/cda:observation[cda:templateId/@root='2.16.840.1.113883.10.20.1.47']/cda:value/@code", 'status', status)
+
+      # validate the order quantity
+      order = REXML::XPath.first(substance_administration,
+         "cda:entryRelationship[@typeCode='REFR']/cda:supply[@moodCode='INT']", @@default_namespaces)
+      if order
+        errors << match_value(order, "cda:quantity/@value", "quantity_ordered_value", quantity_ordered_value)
+        errors << match_value(order, "cda:effectiveTime/cda:high/@value", "expiration_time", expiration_time.andand.to_formatted_s(:hl7_ts))
+      end
+
+    else
+      errors << ContentError.new(:section => "Medication", 
+                                 :subsection => "substanceAdministration",
+                                 :error_message =>"A substanceAdministration section does not exist for the medication")
+
         # could not find the entry so lets report the error 
-     end   
-     
-return errors.compact
+    end
+
+    errors.compact
 
   end
   
 end
-
-
