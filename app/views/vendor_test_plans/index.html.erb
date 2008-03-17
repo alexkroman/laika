@@ -15,7 +15,6 @@
               <% if currentVendorTestId == nil || currentVendorTestId != vendor_test_plan.vendor.id %>
                 </table>
                 <h3>Inspection ID: <%= vendor_test_plan.vendor.public_id %></h3>
-                <h3>Vendor Name: <%= vendor_test_plan.vendor.name %></h3>
                 <p class="toplinks"><a href="#">create report</a></p>
                 <table id="dashboard">
                   <tr>
@@ -50,17 +49,16 @@
                   <% end %>
                 </td>
                 <td class="actions">
-                  <%= link_to 'edit', patient_data_instance_url(vendor_test_plan.patient_data)%>
-                  <%= link_to 'destroy', vendor_test_plan, :confirm => 'Are you sure you want to delete this Laika test?', :method => :delete %>
-                  <% if vendor_test_plan.kind.name == "Generate and Format" %>
-                    <% if vendor_test_plan.clinical_document != nil %>
-                      <%= link_to 'validate', validate_vendor_test_plan_url(vendor_test_plan) %>
-                      <%= link_to 'inspect', inspect_content_vendor_test_plan_url(vendor_test_plan) %>
-                    <% else %>
-                      <a href="javascript:toggle_div('execution_div_<%=vendor_test_plan.id%>');">execute</a>
-                    <% end %>
+                  <% if vendor_test_plan.clinical_document != nil %>
+                    <%= link_to 'view report', validate_vendor_test_plan_url(vendor_test_plan) %>
                   <% else %>
-                    <%= link_to 'execute', patient_data_instance_url(vendor_test_plan.patient_data, :format => 'xml') %> 
+                    <%= link_to 'edit', patient_data_instance_url(vendor_test_plan.patient_data)%>
+                    <%= link_to 'destroy', vendor_test_plan, :confirm => 'Are you sure you want to delete this Laika test?', :method => :delete %>
+                    <% if vendor_test_plan.kind.name == "Generate and Format" %>
+                      <a href="javascript:toggle_div('execution_div_<%=vendor_test_plan.id%>');">execute</a>
+                    <% else %>
+                      <%= link_to 'execute', patient_data_instance_url(vendor_test_plan.patient_data, :format => 'xml') %> 
+                    <% end %>
                   <% end %>
                 </td>
               </tr>

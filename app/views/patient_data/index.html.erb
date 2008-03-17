@@ -16,7 +16,7 @@
             
               <tr>
                 <th class="selected"><a href="#"><div>Template</div></a></th>
-                <th><a href="#"><div>Type</div></a></th>
+                <th><a href="#"><div>Test Type</div></a></th>
                 <th><a href="#"><div>Created by</div></a></th>
                 <th><a href="#"><div>Created on</div></a></th>
                 <th><a href="#"><div>Last modified</div></a></th>
@@ -26,7 +26,7 @@
               <% for patient_data in @patient_data_list -%>
               <tr>
                 <td><%= link_to patient_data.name, patient_data_instance_url(patient_data) %></td>
-                <td>C32</td>
+                <td>CCD/C32</td>
                 <td><%= patient_data.user.first_name %> <%= patient_data.user.last_name %></td>
                 <td><%= patient_data.created_at.strftime("%d.%b.%Y") %></td>
                 <td><%= patient_data.updated_at.strftime("%d.%b.%Y") %></td>
@@ -39,7 +39,7 @@
                       <input type="hidden" name="pd_id" value="<%= patient_data.id %>"/>
                       <select name="vendor_id">
                         <% for vendor in @vendors -%>
-                          <option value="<%= vendor.id %>"><%= vendor.name %></option>
+                          <option value="<%= vendor.id %>"><%= vendor.public_id %></option>
                         <% end -%>
                       </select>
                       <select name="kind_id">
