@@ -1,7 +1,7 @@
 require 'mongrel_cluster/recipes'
 
 set :application, "laika"
-set :repository,  "https://laika.svn.sourceforge.net/svnroot/laika/trunk"
+set :repository,  "https://laika.svn.sourceforge.net/svnroot/laika/webapp/trunk"
 set :deploy_to, "/var/www/apps/#{application}"
 #set :runner, "mongrel_user"
 
@@ -19,7 +19,7 @@ role :web, domain
 role :db,  domain, :primary => true
 set :rails_env, "development"
 
-set :user, # SET TO THE APP USER
+set :user, 'bobd'# SET TO THE APP USER
 set :group, 'deploy'
 
 # Setup Mongrel

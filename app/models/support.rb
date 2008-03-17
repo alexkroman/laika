@@ -61,4 +61,56 @@ class Support < ActiveRecord::Base
     self.person_name.first_name + ' ' + self.person_name.last_name
   end
   
+  
+  def to_c32(xml)
+      
+
+      # Start patient GUARD support
+      if contact_type &&
+         contact_type.code == "GUARD"
+         xml.guardian("classCode" => contact_type.code) {
+          xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.3")
+          
+          # Start patient GUARD relationship 
+          if relationship
+            xml.code("code" => relationship.code, 
+                     "displayName" => relationship.name,
+                     "codeSystem" => "2.16.840.1.113883.5.111",
+                     "codeSystemName" => "RoleCode")
+          end
+
+          address.andand.to_c32(xml)
+          telecom.andand.to_c32(xml)
+          
+          xml.guardianPerson {
+            person_name.to_c32(xml)
+          }
+        
+        }
+      else
+          # Start non-GUARD support type
+          xml.participant("typeCode" => "IND") {
+          xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.3")
+          xml.associatedEntity("classCode" => contact_type.code) {
+                     
+                     # Start patient non-GUARD relationship 
+          xml.code("code" => relationship.code, 
+                              "displayName" => relationship.name,
+                              "codeSystem" => "2.16.840.1.113883.5.111",
+                              "codeSystemName" => "RoleCode")
+                     # End patient non-GUARD relationship 
+                              
+                     # Start non-GUARD support address         
+                   address.andand.to_c32(xml)
+                   telecom.andand.to_c32(xml) 
+
+                     xml.assignedPerson {
+                           person_name.andand.to_c32(xml)
+                     }
+            }
+         }
+      end            
+  end
+  
+  
 end

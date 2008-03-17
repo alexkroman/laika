@@ -23,6 +23,25 @@ class PersonName < ActiveRecord::Base
     errors.compact
   end
   
+  
+  def to_c32(xml)
+    xml.name {
+      if name_prefix &&  name_prefix.size > 0
+        xml.prefix(name_prefix)
+      end
+      if first_name &&  first_name.size > 0
+        xml.given(first_name, "qualifier" => "CL")
+      end
+      if last_name && last_name.size > 0
+        xml.family(last_name, "qualifier" => "BR")
+      end
+      if name_suffix && name_suffix.size > 0
+        xml.prefix(name_suffix)
+      end
+    }    
+  end
+  
+  
   private
   
   def match_value(name_element, xpath, value)

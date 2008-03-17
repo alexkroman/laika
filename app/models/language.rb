@@ -33,4 +33,22 @@ class Language < ActiveRecord::Base
       self.iso_language.code      
     end
   end
+  
+  def to_c32(xml)
+      xml.languageCommunication {
+         xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.2")
+         xml.languageCode("code" => iso_language.code + "-" +iso_country.code,
+                                     "displayName" => iso_language.name) 
+         if language_ability_mode &&  language_ability_mode.code
+            
+            xml.modeCode("code" => language_ability_mode.code, 
+                         "displayName" =>  language_ability_mode.name,
+                         "codeSystem" => "2.16.840.1.113883.5.60",
+                         "codeSystemName" => "LanguageAbilityMode")
+         end
+         if preference != nil
+         xml.preferenceInd("value" => preference)
+      end
+     }  
+  end
 end

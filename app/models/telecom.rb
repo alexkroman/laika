@@ -70,4 +70,26 @@ class Telecom < ActiveRecord::Base
       return nil
     end
   end
+  
+  def to_c32(xml= XML::Builder.new)
+    if home_phone && home_phone.size > 0
+      xml.telecom("use" => "HP", "value" => home_phone)
+    end
+    if work_phone && work_phone.size > 0
+     xml.telecom("use" => "WP", "value" => work_phone)
+    end
+    if mobile_phone && mobile_phone.size > 0
+      xml.telecom("use" => "MC", "value" => mobile_phone)
+    end
+    if vacation_home_phone && vacation_home_phone.size > 0
+      xml.telecom("use" => "HV", "value" => vacation_home_phone)
+    end
+    if email && email.size > 0
+      xml.telecom("value" => "mailto:" + email)
+    end
+    if url && url.size > 0
+      xml.telecom("value" => url)
+   end
+  end
+
 end

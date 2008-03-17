@@ -20,7 +20,7 @@ class Provider < ActiveRecord::Base
      date_range =REXML::XPath.first(provider, 'cda:time',namespaces)
      assigned = REXML::XPath.first(provider,'cda:assignedEntity',namespaces)
      
-     if assigned
+       if assigned
 	      if provider_role
 	       errors.concat  provider_role.validate_c32(REXML::XPath.first(provider,'cda:functionCode',namespaces))
 	     end
@@ -58,4 +58,44 @@ class Provider < ActiveRecord::Base
  def section
      "Provider" 
  end
+ 
+ 
+ def to_c32(xml)
+     xml.documentationOf {
+     xml.serviceEvent("classCode" => "PCPR") {
+       xml.effectiveTime {
+        if start_service 
+          xml.lowValue start_service.strftime("%Y%m%d")
+        end
+        if end_service 
+          xml.highValue end_service.strftime("%Y%m%d")
+        end
+      }
+     
+      
+        xml.performer("typeCode" => "PRF") {
+        xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.4", 
+                       "assigningAuthorityName" => "HITSP/C32")
+        if !provider_role.blank?
+           provider_role.to_c32(xml,provider_role_free_text)
+        end
+        if !organization.blank?
+          xml.representedOrganization {
+            xml.id("root" => "2.16.840.1.113883.3.72.5", 
+                   "assigningAuthorityName" => organization) {
+              xml.name organization
+            }
+          }
+        end
+        if !patient_identifier.blank?
+          xml.patient {
+            xml.id ("root" => patient_identifier,
+                    "extension" => "MedicalRecordNumber")
+          }
+        end
+      }
+    }
+   }
+ end
+ 
 end

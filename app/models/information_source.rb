@@ -26,8 +26,38 @@ class InformationSource < ActiveRecord::Base
       "InformationSource"
   end
   
-  
-  
+  def to_c32(xml)
+      xml.author {
+          xml.time time.strftime("%Y%m%d")
+          xml.assignedAuthor {
+            xml.id document_id
+            xml.assignedPerson {
+              xml.name {
+                if person_name.name_prefix &&
+                   person_name.name_prefix.size > 0
+                  xml.prefix person_name.name_prefix
+                end
+                if person_name.first_name &&
+                   person_name.first_name.size > 0
+                  xml.given(person_name.first_name, "qualifier" => "CL")
+                end
+                if person_name.last_name &&
+                   person_name.last_name.size > 0
+                  xml.family (person_name.last_name, "qualifier" => "BR")
+                end
+                if person_name.name_suffix &&
+                   person_name.name_suffix.size > 0
+                  xml.prefix person_name.name_suffix
+                end
+              }
+            }
+            xml.representedOrganization {
+              xml.id ("root" => "2.16.840.1.113883.19.5") 
+              xml.name organization_name
+            }
+          }
+        }      
+  end
 end
 
 
