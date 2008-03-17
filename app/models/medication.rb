@@ -6,7 +6,7 @@ class Medication < ActiveRecord::Base
   belongs_to :code_system
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
   
-  
+  # TODO: expiration time isn't being checked yet
   def validate_c32(xml)
       errors=[]
      context = REXML::XPath.first(xml,"//cda:section[./cda:templateId[@root eq '2.16.840.1.113883.10.20.1.8']]",@@default_namespaces )
@@ -27,19 +27,17 @@ class Medication < ActiveRecord::Base
          error =  XmlHelper.match_value(manufactured,"cda:manufacturedMaterial/cda:name/text()",free_text_brand_name,@@default_namespaces,{},:long)
          
          if error
-	         errors << ContentError.new(:section=>"Medication", 
-	                               :subsection=>"manufacturedContent",
-	                               :field_name=>"name",
-	                               :error_message=>error,
-	                               :location=>substanceAdministration.xpath)
-	                          
-	            
+           errors << ContentError.new(:section=>"Medication", 
+                                 :subsection=>"manufacturedContent",
+                                 :field_name=>"name",
+                                 :error_message=>error,
+                                 :location=>substanceAdministration.xpath)
         end 
          
          # validate the medication type Perscription or over the counter 
          error = XmlHelper.match_value(substanceAdministration,
-                     "cda:entryRelationship[@typeCode='SUBJ']/cda:observation[cda:templateId/@root='2.16.840.1.113883.3.88.11.32.10']/cda:code/@displayName",medication_type,
-                     @@default_namespaces,{},:long)
+                     "cda:entryRelationship[@typeCode='SUBJ']/cda:observation[cda:templateId/@root='2.16.840.1.113883.3.88.11.32.10']/cda:code/@displayName",
+                     medication_type.name, @@default_namespaces, {}, :long)
                      
         if error
            errors << ContentError.new(:section=>"Medication", 
