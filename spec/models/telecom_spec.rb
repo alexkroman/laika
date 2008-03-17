@@ -8,19 +8,19 @@ describe Telecom, "can validate it's content" do
   end
   
   it "should properly verify telecoms with a use attribute" do
-    document = REXML::Document.new(File.new(RAILS_ROOT + '/spec/test_data/jenny_telecom_with_uses.xml'))
+    document = REXML::Document.new(File.new(RAILS_ROOT + '/spec/test_data/telecom/jenny_telecom_with_uses.xml'))
     errors = @telecom.validate_c32(document.root)
     errors.should be_empty
   end
   
   it "should properly verify telecoms with out a use attribute" do
-    document = REXML::Document.new(File.new(RAILS_ROOT + '/spec/test_data/jenny_telecom_no_uses.xml'))
+    document = REXML::Document.new(File.new(RAILS_ROOT + '/spec/test_data/telecom/jenny_telecom_no_uses.xml'))
     errors = @telecom.validate_c32(document.root)
     errors.should be_empty
   end
   
   it "should find errors when the use attribute is wrong" do
-    document = REXML::Document.new(File.new(RAILS_ROOT + '/spec/test_data/jenny_telecom_wrong_uses.xml'))
+    document = REXML::Document.new(File.new(RAILS_ROOT + '/spec/test_data/telecom/jenny_telecom_wrong_uses.xml'))
     errors = @telecom.validate_c32(document.root)
     errors.should_not be_empty
     errors.should have(2).errors
@@ -28,7 +28,7 @@ describe Telecom, "can validate it's content" do
   end
   
   it "should find errors when a telecom is missing" do
-    document = REXML::Document.new(File.new(RAILS_ROOT + '/spec/test_data/jenny_telecom_missing_mobile.xml'))
+    document = REXML::Document.new(File.new(RAILS_ROOT + '/spec/test_data/telecom/jenny_telecom_missing_mobile.xml'))
     errors = @telecom.validate_c32(document.root)
     errors.should_not be_empty
     errors.should have(1).error
