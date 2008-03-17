@@ -36,9 +36,6 @@
               <div class="column span-4"><label for="public_id">Vendor Inspection ID:</label></div>
               <div class="column span-4"><%= f.text_field :public_id %></div>
               <br/><br/>
-              <div class="column span-4"><label for="public_id">Short Name:</label></div>
-              <div class="column span-4"><%= f.text_field :name %></div>
-              <br/><br/>
               <div class="column span-4">&nbsp;</div>
               <div class="column span-4"><%= f.submit "Create" %></div>
               <br/><br/>
@@ -51,8 +48,7 @@
                  vendor_counter += 1 %>
               <div class="column span-6">
                 <div class="vendorinfo">
-                  <div>Short Name: <strong><%= vendor.name %></strong></div>
-                  <br/><div>Vendor Inspection ID: <%= vendor.public_id %></div>
+                  <div>Inspection ID: <strong><%= vendor.public_id %></strong></div>
                   <br/><small>Created <%= distance_of_time_in_words(Time.now, vendor.created_at) %> ago</small>
                   <br/><small>Edited <%= distance_of_time_in_words(Time.now, vendor.created_at) %> ago</small>
                 </div>
