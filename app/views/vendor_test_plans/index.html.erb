@@ -32,12 +32,12 @@
                 <td>
                   <% if vendor_test_plan.clinical_document != nil %>
                      <% if error_count > 0 %>
-                    <img src="/images/fail.png">failed</td>
+                       <%= image_tag "fail.png", :alt => 'Test Failed' %>failed</td>
                      <% else %>
-                      <img src="/images/pass.png">pass</td>
+                       <%= image_tag "pass.png", :alt => 'Test Passed' %>passed</td>
                      <% end %> 
                   <% else %>
-                    <img src="/images/inprogress.png">in progress</td>
+                    <%= image_tag "inprogress.png", :alt => 'Test In Progress' %>in progress</td>
                   <% end %>
                 <td><%= link_to vendor_test_plan.patient_data.name, patient_data_instance_url(vendor_test_plan.patient_data)%></td>
                 <td><%= vendor_test_plan.updated_at.strftime("%d.%b.%Y")  %></td>

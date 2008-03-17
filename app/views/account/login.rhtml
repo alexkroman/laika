@@ -3,7 +3,7 @@
         <div id="cap-top"></div>
         <div id="cap-body">
             <div id="branding">
-                <img id="imgLogo" src="/images/welcome.png" style="" alt="Laika welcomes you!">  
+                <%= image_tag "welcome.png", :id => 'imgLogo', :alt => 'Laika welcomes you!' %>
                 Hey friend, please log in.
                 <hr class="login">
             </div>
@@ -20,7 +20,7 @@
                 <p class="rememberme"><%= check_box_tag 'remember_me' %><span style="color:#888888;">Remember me.</span></p>
                 
                 <div style="margin-left:295px;width:auto;">
-                    <a href="/vendor_test_plans/"><img src="/images/cancel_account.png"></a>
+                    <a href="/vendor_test_plans/"><%= image_tag "cancel_account.png" %></a>
                     <input type="image" value="Login to Laika"  src="/images/login_landing.png" />
                     <input class="login-account-btn" name="commit" type="submit" value="Create Laika Account" style="display:none" />
                 </div>
@@ -32,7 +32,7 @@
                     <a href="http://www.cchit.org" target="_blank">CCHIT</a> | 
                     <a href="http://www.mitre.org" target="_blank">MITRE</a>
                 </div>
-                    <img src="/images/login_doggy_two.png" style="position:relative;top:11px;">
+                    <%= image_tag "login_doggy_two.png", :style => 'position:relative;top:11px;' %>
                     <% if flash[:notice] != nil && flash[:notice].length >= 0 %>
                       <div style="float:left;width:160px; position:relative; top:-144px; left:58px; line-height:1.2em; font-size:11px;">
                       <%= flash[:notice] %>

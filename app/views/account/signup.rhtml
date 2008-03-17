@@ -6,7 +6,7 @@
         <div id="cap-top"></div>
         <div id="cap-body">
             <div id="branding">
-                <img id="imgLogo" src="/images/laika.png" style="" alt="Laika"> 
+                <%= image_tag "laika.png", :id => 'imgLogo', :alt => 'Laika' %>
                 <h1>Account Creation.</h1>
                 Let's start with the fundamentals.
                 <hr class="login">
@@ -84,9 +84,9 @@
 
                 </div>
                 
-                <div style="margin:20px 0 0 20px;"><img src="/images/register_doggy.png">
+                <div style="margin:20px 0 0 20px;"><%= image_tag "register_doggy.png" %>
                     <div style="float:left;position:relative; top:-159px; left:28px; font-size:11px;"><a>Why do I need to register?</a></div>
-                    <a href="/vendor_test_plans/"><img src="/images/cancel_account.png"></a>
+                    <a href="/vendor_test_plans/"><%= image_tag "cancel_account.png" %></a>
                     <input type="image" value="Create Laika Account"  src="/images/create_account.png" />
                     <input class="create-account-btn" name="commit" type="submit" value="Create Laika Account" style="display:none" />
                 </div>
