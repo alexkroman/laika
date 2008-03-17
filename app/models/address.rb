@@ -16,15 +16,15 @@ class Address < ActiveRecord::Base
 
     if address_element
 
-    errors << match_value(address_element, 'cda:streetAddressLine[1]', 'street_address_line_one', self.street_address_line_one)
-    errors << match_value(address_element, 'cda:streetAddressLine[2]', 'street_address_line_two', self.street_address_line_two)
-    errors << match_value(address_element, 'cda:city', 'city', self.city)
-    errors << match_value(address_element, 'cda:state', 'state', self.state)
-    errors << match_value(address_element, 'cda:postalCode', 'postal_code', self.postal_code)
+      errors << match_value(address_element, 'cda:streetAddressLine[1]', 'street_address_line_one', self.street_address_line_one)
+      errors << match_value(address_element, 'cda:streetAddressLine[2]', 'street_address_line_two', self.street_address_line_two)
+      errors << match_value(address_element, 'cda:city', 'city', self.city)
+      errors << match_value(address_element, 'cda:state', 'state', self.state)
+      errors << match_value(address_element, 'cda:postalCode', 'postal_code', self.postal_code)
 
-    if self.iso_country
-      errors << match_value(address_element, 'cda:country', 'country', self.iso_country.code)
-    end
+      if self.iso_country
+        errors << match_value(address_element, 'cda:country', 'country', self.iso_country.code)
+      end
     else
        errors << ContentError.new(:section => self.addressable_type.underscore, :subsection => 'address',
            :error_message => 'Address element is nil')
