@@ -36,14 +36,9 @@ class RegistrationInformation < ActiveRecord::Base
         errors.concat(self.address.validate_c32(address_element))
       end
       
-      if self.gender
-        errors << match_value(patient_element, 'cda:patient/cda:administrativeGenderCode/@code', 'gender', self.gender.code)
-      end
-      
-      # TODO: Need to verfiy birth date somehow... unclear how to do this from the CDA/CCD/C32 specs
-      if self.marital_status
-        errors << match_value(patient_element, 'cda:patient/cda:maritalStatusCode/@code', 'marital_status', self.marital_status.code)
-      end
+      errors << match_value(patient_element, 'cda:patient/cda:administrativeGenderCode/@code', 'gender', self.gender.andand.code)
+      errors << match_value(patient_element, 'cda:patient/cda:maritalStatusCode/@code', 'marital_status', self.marital_status.andand.code)
+      errors << match_value(patient_element, 'cda:patient/cda:birthTime/@value', 'date_of_birth', self.date_of_birth.andand.to_formatted_s(:hl7_ts))
     else
       errors << ContentError.new(:section => 'registration_information', :error_message => 'No patientRole element found',
           :location=>document.xpath)
