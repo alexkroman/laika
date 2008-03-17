@@ -7,7 +7,13 @@ describe Allergy, "it can validate allergy entries in a C32" do
     document = REXML::Document.new(File.new(RAILS_ROOT + '/spec/test_data/joe_c32.xml'))
     joe_allergy = allergies(:joes_allergy)
     errors = joe_allergy.validate_c32(document)
-    puts errors.map { |e| e.error_message }.join(' ')
+    errors.should be_empty
+  end
+  
+  it "should verify when there are no known allergies" do
+    document = REXML::Document.new(File.new(RAILS_ROOT + '/spec/test_data/allergies/no_known_allergies.xml'))
+    allergy = Allergy.new
+    errors = allergy.check_no_known_allergies_c32(document)
     errors.should be_empty
   end
 end

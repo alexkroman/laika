@@ -11,8 +11,11 @@ class PatientData < ActiveRecord::Base
   belongs_to :vendor_test_plan
   belongs_to :user
   
+  @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
+  
   def validate_c32(clinical_document)
-    self.registration_information.validate_c32(clinical_document)
+    errors = self.registration_information.validate_c32(clinical_document)
+    errors
   end
   
   def copy
