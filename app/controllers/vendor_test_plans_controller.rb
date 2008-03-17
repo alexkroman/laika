@@ -3,10 +3,7 @@ class VendorTestPlansController < ApplicationController
   # GET /vendor_test_plans
   # GET /vendor_test_plans.xml
   def index
-    # FIXME: This is subject to request tampering and SQL injection
-    @vendor_test_plans = VendorTestPlan.find(:all,
-                                             :conditions => "user_id = " + self.current_user.id.to_s,
-                                             :order      => "vendor_id")
+    @vendor_test_plans = self.current_user.vendor_test_plans
 
     respond_to do |format|
       format.html # index.html.erb
