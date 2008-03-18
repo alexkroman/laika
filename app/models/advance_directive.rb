@@ -21,7 +21,7 @@ class AdvanceDirective < ActiveRecord::Base
     deref_text = deref(text)
     
     if advance_directive_type
-        errors.concat dvance_directive_type.validate_c32(code)
+        errors.concat advance_directive_type.validate_c32(code)
     end
     
     if(deref_text != free_text)
