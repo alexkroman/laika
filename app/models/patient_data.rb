@@ -115,6 +115,7 @@ class PatientData < ActiveRecord::Base
         
       xml.component {
         xml.structuredBody {
+        
           # Start Pregnancy
           if (pregnant != nil && pregnant == true)   
             xml.component {
@@ -136,15 +137,41 @@ class PatientData < ActiveRecord::Base
           # End Pregnancy
           
           # Start Conditions
-
+          if conditions.size > 0
+            xml.component {
+              xml.section {
+                xml.templateId("root" => "2.16.840.1.113883.10.20.1.11", 
+                               "assigningAuthorityName" => "CCD")
+                xml.code("code" => "11450-4", 
+                         "displayName" => "Problems", 
+                         "codeSystem" => "2.16.840.1.113883.6.1", 
+                         "codeSystemName" => "LOINC")
+                xml.title "Conditions or Problems"
+                xml.text {
+                  conditions.andand.each do |condition|
+                  xml.paragraph ("ID" => "problem-"+condition.id.to_s) {
+                    condition.free_text_name
+                  }
+                  end
+                }
+                # Start structured XML
+                conditions.andand.each do |structuredCondition|
+                  structuredCondition.to_c32(xml)
+                end
+                # End structured XML
+              }
+            }
+          end
           # End Conditions
           
           # Start Allergies
           if allergies.size > 0
             xml.component {
               xml.section {
-                xml.templateId("root" => "2.16.840.1.113883.10.20.1.2")
-                xml.code("code" => "48765-2", "codeSystem" => "2.16.840.1.113883.6.1")
+                xml.templateId("root" => "2.16.840.1.113883.10.20.1.2", 
+                               "assigningAuthorityName" => "CCD")
+                xml.code("code" => "48765-2", 
+                         "codeSystem" => "2.16.840.1.113883.6.1")
                 xml.title "Allergies, Adverse Reactions, Alerts"
                 xml.text {
                   xml.table("border" => "1", "width" => "100%") {
@@ -215,6 +242,7 @@ class PatientData < ActiveRecord::Base
             }
           end
           # End Advanced Directive
+          
         }                   
       }
     }      

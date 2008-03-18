@@ -15,7 +15,6 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password,                   :if => :password_required?
   validates_uniqueness_of   :email, :case_sensitive => false
   validates_format_of       :email, :with => /(^([^@\s]+)@((?:[-_a-z0-9]+\.)+[a-z]{2,})$)|(^$)/i
-  validates_presence_of     :terms_of_service
   before_save               :encrypt_password
 
   has_many :roles, :through => :user_roles, :as => :trustable

@@ -57,4 +57,29 @@ class Medication < ActiveRecord::Base
 
   end
   
+  def to_c32(xml)
+    
+    xml.entry {
+      xml.substanceAdministration("classCode" => "SBADM", "moodCode" => "EVN") {
+        xml.templateId("root" => "2.16.840.1.113883.10.20.1.24", "assigningAuthorityName" => "CCD")
+        xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.8", "assigningAuthorityName" => "HITSP/C32")
+        xml.id
+        xml.consumable {        
+          xml.manufacturedProduct ("classCode" => "MANU") {
+            xml.templateId("root" => "2.16.840.1.113883.10.20.1.53", "assigningAuthorityName" => "CCD") 
+            xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.9", "assigningAuthorityName" => "HITSP/C32") 
+            xml.manufacturedMaterial("classCode" => "MMAT", "determinerCode" => "KIND") {
+              xml.code("code" => "161", "displayName" => "Acetaminophen", "codeSystem" => "2.16.840.1.113883.6.88", "codeSystemName" => "RxNorm") {
+                xml.originalText "Acetaminophen"
+                xml.translation("code" => "202433", "displayName" => "Tylenol", "codeSystem" => "2.16.840.1.113883.6.88", "codeSystemName" => "RxNorm")
+              }
+              xml.name "Tylenol"
+            }
+          }
+        }
+      }
+    }
+
+  end
+  
 end
