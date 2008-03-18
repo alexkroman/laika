@@ -15,8 +15,68 @@ class PatientData < ActiveRecord::Base
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
   
   def validate_c32(clinical_document)
-    errors = self.registration_information.validate_c32(clinical_document)
+ 
+    errors = []
+ 
+    # Registration information
+    if self.registration_information != nil
+      errors.concat(self.registration_information.validate_c32(clinical_document))
+    end
+    
+    # Languages
+    if self.languages 
+      self.languages.each do |language|
+        errors.concat(language.validate_c32(clinical_document))
+      end
+    end
+ 
+    # Healthcare Providers
+    if self.providers 
+      self.providers.each do |provider|
+        errors.concat(provider.validate_c32(clinical_document))
+      end
+    end
+    
+    # Medications
+    if self.medications 
+      self.medications.each do |medication|
+        errors.concat(medication.validate_c32(clinical_document))
+      end
+    end
+    
+    # Supports
+    if self.support
+      errors.concat(self.registration_information.validate_c32(clinical_document))
+    end
+    
+    # Allergies
+    if self.allergies
+      self.allergies.each do |allergy|
+        errors.concat(allergy.validate_c32(clinical_document))
+      end
+    end 
+    
+    # Conditions
+    if self.conditions
+      self.conditions.each do |condition|
+        errors.concat(condition.validate_c2)
+      end  
+    end
+    
+    # Information Source
+    if self.information_source
+      errors.concat(self.information_source.validate_c32(clinical_document))
+    end
+    
+    # Advance Directive
+    if self.advance_directive
+      errors.concat(self.advance_directive.validate_c32(clinical_document))
+    end
+    
+    # Removes all the nils... just in case...
+    errors.compact!
     errors
+    
   end
   
   def copy
@@ -118,10 +178,9 @@ class PatientData < ActiveRecord::Base
       end          
         
       providers.andand.each do |provider|
-                    provider.to_c32(xml)
+        provider.to_c32(xml)
       end      
          
-        
       xml.component {
         xml.structuredBody {
         
@@ -158,7 +217,8 @@ class PatientData < ActiveRecord::Base
                 xml.title "Conditions or Problems"
                 xml.text {
                   conditions.andand.each do |condition|
-                  xml.paragraph (condition.free_text_name,"ID" => "problem-"+condition.id.to_s) 
+                  xml.paragraph (condition.free_text_name, 
+                                 "ID" => "problem-"+condition.id.to_s) 
                   end
                 }
                 
@@ -205,9 +265,8 @@ class PatientData < ActiveRecord::Base
                           end  
                           if allergy.severity_term != nil
                             xml.td {
-                              xml.content("ID" => "severity-" + allergy.id.to_s) {
-                                allergy.severity_term.name
-                              }
+                              xml.content(allergy.severity_term.name, 
+                                          "ID" => "severity-" + allergy.id.to_s)
                             }
                           else
                             xml.td
@@ -241,9 +300,8 @@ class PatientData < ActiveRecord::Base
                 xml.title "Medications"
                 xml.text {
                   medications.andand.each do |medication|
-                    xml.content("ID" => "medication-"+medication.id.to_s) {
-                      medication.product_coded_display_name
-                    }
+                    xml.content(medication.product_coded_display_name, 
+                                "ID" => "medication-"+medication.id.to_s)
                   end
                 }
                 
@@ -267,9 +325,8 @@ class PatientData < ActiveRecord::Base
                          "codeSystemName" => "LOINC")
                 xml.title "Advance Directive"
                 xml.text {
-                  xml.content("ID" => "advance-directive-" + advance_directive.id.to_s) {
-                    advance_directive.free_text
-                  }
+                  xml.content(advance_directive.free_text, 
+                              "ID" => "advance-directive-" + advance_directive.id.to_s) 
                 }
                 
                 # Start structured XML
