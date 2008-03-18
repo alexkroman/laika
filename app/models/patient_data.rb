@@ -57,11 +57,11 @@ class PatientData < ActiveRecord::Base
     end 
     
     # Conditions
-    if self.conditions
-      self.conditions.each do |condition|
-        errors.concat(condition.validate_c2)
-      end  
-    end
+    #if self.conditions
+    #  self.conditions.each do |condition|
+    #    errors.concat(condition.validate_c2)
+    #  end  
+    #end
     
     # Information Source
     if self.information_source
