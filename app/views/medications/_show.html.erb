@@ -32,10 +32,6 @@
   <td><%=h medication.quantity_ordered_unit %></td>
 </tr>
 <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-  <td class="lighttext">Prescription Number</td>
-  <td><%=h medication.prescription_number %></td>
-</tr>
-<tr class="<%= cycle("darkzebra", "lightzebra")%>">
   <td class="lighttext">Expiration Date</td>
   <td><% if medication.expiration_time != nil %><%=h medication.expiration_time.strftime("%m/%d/%Y") %><% end %></td>
 </tr>

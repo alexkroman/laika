@@ -25,7 +25,7 @@ class PatientData < ActiveRecord::Base
     
     if self.registration_information
       copied_patient_data.registration_information = self.registration_information.copy
-      # TODO: Copying the children on registartion info should be moved into the RegistrationInformation class
+      # TODO: Copying the children on registration info should be moved into the RegistrationInformation class
       copied_patient_data.registration_information.race = self.registration_information.race
       copied_patient_data.registration_information.ethnicity = self.registration_information.ethnicity
       copied_patient_data.registration_information.marital_status = self.registration_information.marital_status
@@ -154,6 +154,7 @@ class PatientData < ActiveRecord::Base
                   }
                   end
                 }
+                
                 # Start structured XML
                 conditions.andand.each do |structuredCondition|
                   structuredCondition.to_c32(xml)
@@ -209,6 +210,7 @@ class PatientData < ActiveRecord::Base
                     }
                   }
                 }
+                
                 # Start structured XML
                 allergies.andand.each do |structuredAllergy|
                   structuredAllergy.to_c32(xml)
@@ -220,7 +222,32 @@ class PatientData < ActiveRecord::Base
           # End Allergies
           
           # Start Medications
-           
+          if medications.size > 0
+            xml.component {
+              xml.section {
+                xml.templateId("root" => "2.16.840.1.113883.10.20.1.8", 
+                               "assigningAuthorityName" => "CCD")
+                xml.code("code" => "10160-0", 
+                         "displayName" => "History of medication use", 
+                         "codeSystem" => "2.16.840.1.113883.6.1", 
+                         "codeSystemName" => "LOINC")
+                xml.title "Medications"
+                xml.text {
+                  medications.andand.each do |medication|
+                    xml.content("ID" => "medication-"+medication.id.to_s) {
+                      medication.product_coded_display_name
+                    }
+                  end
+                }
+                
+                # Start structured XML
+                medications.andand.each do |structuredMedication|
+                  structuredMedication.to_c32(xml)
+                end
+                # End structured XML
+              }
+            }
+          end
           # End Medications 
           
           # Start Advanced Directive
@@ -237,7 +264,10 @@ class PatientData < ActiveRecord::Base
                     advance_directive.free_text
                   }
                 }
+                
+                # Start structured XML
                 advance_directive.to_c32(xml)
+                # End structured XML
               }
             }
           end

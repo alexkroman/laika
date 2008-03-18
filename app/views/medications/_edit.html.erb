@@ -46,10 +46,6 @@
     <td><%= f.text_field :quantity_ordered_unit %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Prescription Number</td>
-    <td><%=f.text_field :prescription_number %></td>
-  </tr>
-  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Expiration Date</td>
     <td><input id="medication_expiration_time" name="medication[expiration_time]" size="30" type="text" <% if medication.expiration_time != nil %>value="<%= medication.expiration_time.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" /></td>
   </tr>
