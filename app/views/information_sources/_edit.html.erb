@@ -1,32 +1,26 @@
-<!-- Start Advance Directive Module -->
-<% remote_form_for(:advance_directive, 
-                   :url => patient_data_instance_advance_directive_path(patient_data),
-                   :update => 'advanceDirectiveContainer', :method => http_method(advance_directive)) do |f| %>
-<h5>Advance Directive</h5>
+<!-- Start Information Source Module -->
+<% remote_form_for(:information_source, 
+                   :url => patient_data_instance_information_source_path(patient_data),
+                   :update => 'informationSourceContainer', :method => http_method(information_source)) do |f| %>
+<h5>Information Source</h5>
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Advance Directive Type</td>
+    <td class="lighttext">Time</td>
+    <td><input id="information_source_time" name="information_source[time]" size="30" type="text" <% if information_source.time != nil %>value="<%= information_source.time.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" /></td>
+  </tr>
+  <%= render :partial => '/person_names/edit', :locals => {:person_name => information_source.person_name}%>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Document ID</td>
     <td>
-      <%= f.select :advance_directive_type_id, @advance_directive_types.collect{|advance_directive_type| [advance_directive_type.name, advance_directive_type.id]} %>
+      <%= f.text_field :document_id %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Free Text Description</td>
+    <td class="lighttext">Represented Organization Name</td>
     <td>
-      <%= f.text_field :free_text %>
+      <%= f.text_field :organization_name %>
     </td>
   </tr>
-  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Start Effective Time</td>
-    <td><input id="advance_directive_start_effective_time" name="advance_directive[start_effective_time]" size="30" type="text" <% if advance_directive.start_effective_time != nil %>value="<%= advance_directive.start_effective_time.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" /></td>
-  </tr>
-  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">End Effective Time</td>
-    <td><input id="advance_directive_end_effective_time" name="advance_directive[end_effective_time]" size="30" type="text" <% if advance_directive.end_effective_time != nil %>value="<%= advance_directive.end_effective_time.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" /></td>
-  </tr>
-  <%= render :partial => '/person_names/edit', :locals => {:person_name => advance_directive.person_name}%>
-  <%= render :partial => '/addresses/edit', :locals => {:address => advance_directive.address}%>
-  <%= render :partial => '/telecoms/edit', :locals => {:telecom => advance_directive.telecom}%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td></td>
     <td><%= f.submit "Save" %></td>

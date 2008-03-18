@@ -18,11 +18,11 @@
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Start Effective Time</td>
-    <td><input id="advance_directive_start_effective_time" name="advance_directive[start_effective_time]" size="30" type="text" <% if support.start_support != nil %>value="<%= advance_directive.start_effective_time.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" /></td>
+    <td><input id="advance_directive_start_effective_time" name="advance_directive[start_effective_time]" size="30" type="text" <% if advance_directive.start_effective_time != nil %>value="<%= advance_directive.start_effective_time.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" /></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">End Effective Time</td>
-    <td><input id="advance_directive_end_effective_time" name="advance_directive[end_effective_time]" size="30" type="text" <% if support.end_support != nil %>value="<%= advance_directive.end_effective_time.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" /></td>
+    <td><input id="advance_directive_end_effective_time" name="advance_directive[end_effective_time]" size="30" type="text" <% if advance_directive.end_effective_time != nil %>value="<%= advance_directive.end_effective_time.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" /></td>
   </tr>
   <%= render :partial => '/person_names/edit', :locals => {:person_name => advance_directive.person_name}%>
   <%= render :partial => '/addresses/edit', :locals => {:address => advance_directive.address}%>
