@@ -5,6 +5,7 @@ class PatientData < ActiveRecord::Base
   has_many   :medications
   has_one    :support
   has_many   :allergies
+  has_many   :conditions
   has_one    :information_source
   has_one    :advance_directive
   has_many   :comments
@@ -51,6 +52,10 @@ class PatientData < ActiveRecord::Base
     
     self.allergies.each do |allergy|
       copied_patient_data.allergies << allergy.clone
+    end
+    
+    self.conditions.each do |condition|
+      copied_patient_data.conditions << condition.clone
     end
     
     copied_patient_data.information_source = self.information_source.copy if self.information_source

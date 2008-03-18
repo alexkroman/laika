@@ -1,0 +1,40 @@
+<% if condition.new_record?
+     condition_div = 'conditionNew' 
+     html_options = {} -%>
+<div id="conditionNew">
+<% else
+     condition_div = "condition#{condition.id}"
+     html_options = {:method => 'put'}
+   end %>
+<% remote_form_for(:condition, condition, :url => patient_data_instance_condition_path(patient_data, condition), :html => html_options,
+                   :update => condition_div) do |f| -%>
+<table>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Start Event</td>
+    <td>
+      <input id="condition_start_event" name="condition[start_event]" size="30" type="text" <% if condition.start_event != nil %>value="<%= condition.start_event.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" />
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">End Event</td>
+    <td>
+      <input id="condition_end_event" name="condition[end_event]" size="30" type="text" <% if condition.end_event != nil %>value="<%= condition.end_event.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" />
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Problem Type</td>
+    <td>
+      <%= f.select :problem_type_id, @problem_types.collect{|problem| [problem.name, problem.id]} %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Free Text Problem Name</td>
+    <td><%= f.text_field :free_text_name %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td></td>
+    <td><%= f.submit "Save" %></td>
+  </tr>
+</table>
+<% end %>
+

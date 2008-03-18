@@ -1,0 +1,32 @@
+<table>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Start Event</td>
+    <td>
+      <%=h condition.start_event %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">End Event</td>
+    <td>
+      <%=h condition.end_event %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Problem Type</td>
+    <td>
+      <%=h condition.problem_type.name %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Free Text Condition Name</td>
+    <td><%=h condition.free_text_name %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td></td>
+    <td>
+      <%= link_to_remote 'Edit', :update => "condition#{condition.id}",
+                                 :url => edit_patient_data_instance_condition_path(patient_data, condition),
+                                 :method => 'get' %>
+    </td>
+  </tr>
+</table>

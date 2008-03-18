@@ -1,0 +1,42 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+joes_condition:
+  start_event: 2006-02-21
+  free_text_name: Abdominal mass
+  problem_type: finding
+  patient_data: joe_smith
+
+emilys_condition:
+  start_event: 2006-02-21
+  end_event: 2028-03-26
+  free_text_name: Penicillin
+  problem_type: symptom
+  patient_data: emily_jones
+
+teds_condition:
+  start_event: 2005-02-21
+  end_event: 2008-02-21
+  free_text_name: Retinal detachment
+  problem_type: problem
+  patient_data: theodore_smith
+
+wills_condition:
+  start_event: 2005-02-21
+  end_event: 2048-12-21
+  free_text_name: Acute low back pain
+  problem_type: complaint
+  patient_data: will_haynes
+
+jennifers_condition:
+  start_event: 2005-02-21
+  end_event: 2038-12-21
+  free_text_name: Pulmonary arteritis
+  problem_type: condition
+  patient_data: jennifer_thompson
+
+davids_condition:
+  start_event: 1974-06-30
+  end_event: 2021-12-21
+  free_text_name: Chronic mixed headache syndrome
+  problem_type: functional_limitation
+  patient_data: david_carter
