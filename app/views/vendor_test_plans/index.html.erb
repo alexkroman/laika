@@ -71,7 +71,7 @@
                                   :url => vendor_test_plan_clinical_document_url(vendor_test_plan),
                                   :html => { :multipart => true }) do |f| -%>
                           <label>Document Type &nbsp;&nbsp;&nbsp;&nbsp;
-                            <%= f.select :doc_type, ['CDA', 'CCD', 'C32'] %>
+                            <%= f.select :doc_type, ['C32', 'CDA', 'CCD'] %>
                           </label>
                           <br/>                              
                           <label>Clinical Document            
