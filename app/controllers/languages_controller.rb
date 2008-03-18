@@ -36,6 +36,6 @@ class LanguagesController < PatientDataChildController
   def destroy
     @language = @patient_data.languages.find(params[:id])
     @language.destroy
-    redirect_to patient_data_url
+    render :partial  => 'delete.rjs'
   end
 end

@@ -48,8 +48,8 @@ class RegistrationInformationController < PatientDataChildController
   def destroy
     @registration_information = @patient_data.registration_information
     @registration_information.destroy
-
-    redirect_to patient_data_url
+    render :partial  => 'show', :locals => {:registration_information =>  nil,
+                                               :patient_data => @patient_data}
   end
   
 end

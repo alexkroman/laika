@@ -45,6 +45,7 @@ class InformationSourcesController < PatientDataChildController
   def destroy
     @information_source = @patient_data.information_source
     @information_source.destroy
-    redirect_to patient_data_url
+    render :partial  => 'show', :locals => {:information_source => nil,
+                                 :patient_data => @patient_data}
   end
 end

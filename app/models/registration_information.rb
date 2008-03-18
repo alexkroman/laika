@@ -49,28 +49,29 @@ class RegistrationInformation < ActiveRecord::Base
   
   
   def to_c32(xml = Builder::XmlMarkup.new)
-   telecom.andand.to_c32(xml)
    address.andand.to_c32(xml)
-  
+   telecom.andand.to_c32(xml)
     xml.patient{
       person_name.andand.to_c32(xml)
       gender.andand.to_c32(xml)
+      if date_of_birth
+              xml.birthTime("value" => date_of_birth.strftime("%Y%m%d"))  
+       end      
       marital_status.andand.to_c32(xml)
+      religion.andand.to_c32(xml)
       race.andand.to_c32(xml)
       ethnicity.andand.to_c32(xml)
-      religion.andand.to_c32(xml)
-      if date_of_birth
-         xml.birthTime("value" => date_of_birth.strftime("%Y%m%d"))  
-      end
+      
+      if patient_data.support &&
+                patient_data.support.contact_type &&
+                patient_data.support.contact_type.code == "GUARD"
+               # do the gaurdian stuff here  non gaurdian is placed elsewhere
+      end     
       patient_data.languages.andand.each do |language|
       language.to_c32(xml)
       end
       
-      if patient_data.support &&
-          patient_data.support.contact_type &&
-          patient_data.support.contact_type.code == "GUARD"
-         # do the gaurdian stuff here  non gaurdian is placed elsewhere
-      end   
+         
    }
      
   end

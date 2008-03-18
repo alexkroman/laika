@@ -35,6 +35,10 @@ class AllergiesController < PatientDataChildController
   def destroy
     @allergy = @patient_data.allergies.find(params[:id])
     @allergy.destroy
-    redirect_to patient_data_url
+    if @patient_data.allergies.empty?
+        render :partial=>"no_known_allergies_link", :locals=>{:patient_data=>@patient_data}
+    else    
+         render :partial  => 'delete.rjs'
+    end
   end
 end

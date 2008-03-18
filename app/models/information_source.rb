@@ -28,9 +28,9 @@ class InformationSource < ActiveRecord::Base
   
   def to_c32(xml)
       xml.author {
-          xml.time time.strftime("%Y%m%d")
+          xml.time("value"=>time.strftime("%Y%m%d"))
           xml.assignedAuthor {
-            xml.id document_id
+            xml.id("root"=>document_id)
             xml.assignedPerson {
               xml.name {
                 if person_name.name_prefix &&

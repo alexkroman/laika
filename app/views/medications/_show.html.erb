@@ -38,9 +38,17 @@
 <tr class="<%= cycle("darkzebra", "lightzebra")%>">
   <td></td>
   <td>
+    <span>
     <%= link_to_remote 'Edit', :update => "medication#{medication.id}",
                                :url => edit_patient_data_instance_medication_path(patient_data, medication),
                                :method => 'get' %>
+    </span>
+    <span>
+     <%= link_to_remote 'Remove', :update => "medication#{medication.id}",
+                               :url => patient_data_instance_medication_path(patient_data, medication),
+                               :confirm=>"Are you sure you wish to remove this medication?",
+                               :method => 'delete' %>
+    </span>                           
   </td>
 </tr>
 </table>

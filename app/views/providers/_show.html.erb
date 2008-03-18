@@ -1,3 +1,4 @@
+<div id="provider<%= provider.id %>">
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Start Service</td>
@@ -56,9 +57,18 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td></td>
     <td>
+    <span>
       <%= link_to_remote 'Edit', :update => "provider#{provider.id}",
                                  :url => edit_patient_data_instance_provider_path(patient_data, provider),
                                  :method => 'get' %>
+    </span>
+    
+    <span>
+      <%= link_to_remote 'Remove', :update => "provider#{provider.id}",
+                                 :url => patient_data_instance_provider_path(patient_data, provider),
+                                 :method => 'delete' %>
+    </span>    
     </td>
   </tr>
 </table>
+</div>

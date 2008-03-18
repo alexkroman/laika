@@ -43,7 +43,9 @@ class SupportsController < PatientDataChildController
   def destroy
     @support = @patient_data.support
     @support.destroy
-
-    redirect_to patient_data_url
+    render :partial  => 'show', :locals => {:support =>  nil,
+                                                :patient_data => @patient_data}
+                                                
   end
+  
 end

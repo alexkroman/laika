@@ -23,9 +23,16 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td></td>
     <td>
+    <span>
       <%= link_to_remote 'Edit', :update => 'advanceDirectiveContainer', 
                                  :url => edit_patient_data_instance_advance_directive_path(patient_data),
                                  :method => 'get' %>
+    </span> 
+   <span>
+      <%= link_to_remote 'Remove', :update => 'advanceDirectiveContainer', 
+                                 :url => patient_data_instance_advance_directive_path(patient_data),
+                                 :method => 'delete' %>
+    </span>
     </td>
   </tr>
 <% else -%>

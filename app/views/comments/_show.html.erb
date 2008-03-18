@@ -7,9 +7,16 @@
 <tr class="<%= cycle("darkzebra", "lightzebra")%>">
   <td></td>
   <td>
+  <span>
     <%= link_to_remote 'Edit', :update => "comment#{comment.id}",
                                :url => edit_patient_data_instance_comment_path(patient_data, comment),
                                :method => 'get' %>
+   </span>  
+   <span>
+    <%= link_to_remote 'Remove', :update => "comment#{comment.id}",
+                               :url => patient_data_instance_comment_path(patient_data, comment),
+                               :method => 'delete' %>
+   </span>
   </td>
 </tr>
 </table>

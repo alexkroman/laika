@@ -38,7 +38,6 @@ class MedicationsController < PatientDataChildController
   def destroy
     @medication = @patient_data.medications.find(params[:id])
     @medication.destroy
-
-    redirect_to patient_data_url
+    render :partial  => 'delete.rjs'
   end
 end

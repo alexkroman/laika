@@ -33,6 +33,6 @@ class ConditionsController < PatientDataChildController
   def destroy
     @condition = @patient_data.conditions.find(params[:id])
     @condition.destroy
-    redirect_to patient_data_url
+    render :partial  => 'delete.rjs'
   end
 end

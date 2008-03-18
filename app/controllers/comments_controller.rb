@@ -34,6 +34,6 @@ class CommentsController < PatientDataChildController
   def destroy
     @comment = @patient_data.comments.find(params[:id])
     @comment.destroy
-    redirect_to patient_data_url
+    render :partial  => 'delete.rjs'
   end
 end

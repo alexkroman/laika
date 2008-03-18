@@ -89,7 +89,7 @@ class Support < ActiveRecord::Base
                "codeSystemName" => "RoleCode")
           address.andand.to_c32(xml)
           telecom.andand.to_c32(xml) 
-          xml.assignedPerson {
+          xml.associatedPerson {
             person_name.andand.to_c32(xml)
           }
         }

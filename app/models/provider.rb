@@ -65,10 +65,10 @@ class Provider < ActiveRecord::Base
      xml.serviceEvent("classCode" => "PCPR") {
        xml.effectiveTime {
         if start_service 
-          xml.lowValue start_service.strftime("%Y%m%d")
+          xml.low('value'=> start_service.strftime("%Y%m%d"))
         end
         if end_service 
-          xml.highValue end_service.strftime("%Y%m%d")
+          xml.high('value'=> end_service.strftime("%Y%m%d"))
         end
       }
      
@@ -79,20 +79,25 @@ class Provider < ActiveRecord::Base
         if !provider_role.blank?
            provider_role.to_c32(xml,provider_role_free_text)
         end
-        if !organization.blank?
-          xml.representedOrganization {
-            xml.id("root" => "2.16.840.1.113883.3.72.5", 
-                   "assigningAuthorityName" => organization) {
-              xml.name organization
-            }
-          }
-        end
-        if !patient_identifier.blank?
-          xml.patient {
-            xml.id ("root" => patient_identifier,
-                    "extension" => "MedicalRecordNumber")
-          }
-        end
+        xml.assignedEntity{
+            xml.id
+            if !organization.blank?
+                 xml.representedOrganization {
+                   xml.id("root" => "2.16.840.1.113883.3.72.5", 
+                          "assigningAuthorityName" => organization) 
+                          xml.name organization       
+                 }
+          end  
+          
+          if !patient_identifier.blank?
+             xml.patient("xmlns"=>"urn:hl7-org:sdtc") {
+               xml.id ("xmlns"=>"urn:hl7-org:sdtc","root" => patient_identifier,
+                       "extension" => "MedicalRecordNumber")
+             }
+           end                    
+        }
+        
+        
       }
     }
    }

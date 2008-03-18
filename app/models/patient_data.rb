@@ -99,19 +99,28 @@ class PatientData < ActiveRecord::Base
         xml.patientRole {
           xml.id("extension" => "24602", 
                  "root" => "SomeClinicalOrganizationOID", 
-                 "assignmentAuthorityName" => "Some Clinical Organization Name") 
+                 "assigningAuthorityName" => "Some Clinical Organization Name") 
             registration_information.andand.to_c32(xml)
-            providers.andand.each do |provider|
-              provider.to_c32(xml)
-            end
+            
         }   
       }
-      
+      information_source.andand.to_c32(xml)
+      xml.custodian{
+         xml.assignedCustodian{
+                 xml.representedCustodianOrganization{
+                     xml.id
+                 }
+         }
+          
+      }
       if support && support.contact_type && support.contact_type.code != "GUARD" 
         support.to_c32(xml)
       end          
         
-      information_source.andand.to_c32(xml)    
+      providers.andand.each do |provider|
+                    provider.to_c32(xml)
+      end      
+         
         
       xml.component {
         xml.structuredBody {
@@ -149,9 +158,7 @@ class PatientData < ActiveRecord::Base
                 xml.title "Conditions or Problems"
                 xml.text {
                   conditions.andand.each do |condition|
-                  xml.paragraph ("ID" => "problem-"+condition.id.to_s) {
-                    condition.free_text_name
-                  }
+                  xml.paragraph (condition.free_text_name,"ID" => "problem-"+condition.id.to_s) 
                   end
                 }
                 
@@ -251,7 +258,7 @@ class PatientData < ActiveRecord::Base
           # End Medications 
           
           # Start Advanced Directive
-          if advance_directive != nil
+          if advance_directive
             xml.component {
               xml.section {
                 xml.templateId("root" => "2.16.840.1.113883.10.20.1.1")

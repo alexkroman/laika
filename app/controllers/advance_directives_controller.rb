@@ -53,6 +53,7 @@ class AdvanceDirectivesController < PatientDataChildController
   def destroy
     @advance_directive = @patient_data.advance_directive
     @advance_directive.destroy
-    redirect_to patient_data_url
+    render :partial  => 'show', :locals => {:advance_directive => nil,
+                                                :patient_data => @patient_data}
   end
 end
