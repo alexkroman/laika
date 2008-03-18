@@ -11,11 +11,11 @@
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Start Effective Time</td>
-    <td><% if advance_directive.start_effective_time != nil %><%=h advance_directive.start_effective_time.strftime("%m/%d/%y") %><% end %></td>
+    <td><% if advance_directive.start_effective_time != nil %><%=h advance_directive.start_effective_time.strftime("%m/%d/%Y") %><% end %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">End Effective Time</td>
-    <td><% if advance_directive.end_effective_time != nil %><%=h advance_directive.end_effective_time.strftime("%m/%d/%y") %><% end %></td>
+    <td><% if advance_directive.end_effective_time != nil %><%=h advance_directive.end_effective_time.strftime("%m/%d/%Y") %><% end %></td>
   </tr>
   <%= render :partial => '/person_names/show', :locals => {:person_name => advance_directive.person_name}%>
   <%= render :partial => '/addresses/show', :locals => {:address => advance_directive.address}%>

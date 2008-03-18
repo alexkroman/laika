@@ -40,7 +40,7 @@
               <td></td>
             </tr>
             <tr class="darkzebra">
-              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('conditionContainer', 1.0);">Conditions</a></td>
+              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('conditionsContainer', 1.0);">Conditions</a></td>
               <td></td>
               <td></td>
             </tr>
@@ -183,13 +183,21 @@
           
           <!-- Start Conditions Module -->
           <div id="conditionsContainer">
-          <h5>Conditions</h5>
+          <h5>Conditions and Problems</h5>
+          <% for condition in @patient_data.conditions %>
+            <div id="condition<%= condition.id %>">
+              <%= render :partial => '/conditions/show', 
+                         :locals => {:condition  => condition, :patient_data => @patient_data} %>
+            </div>
+          <% end %>
           <table id="addCondition">
             <tr class="<%= cycle("darkzebra", "lightzebra")%>">
               <td></td>
-              <td></td>                                       
+              <td><%= link_to_remote 'Add', :url => new_patient_data_instance_condition_path(@patient_data), 
+                                            :method => 'get', :update => 'addCondition', :position => :before %>
+              </td>                                       
             </tr>                                               
-          </table>
+          </table>           
           </div>
           <!-- End Conditions Module -->  
           

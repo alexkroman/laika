@@ -12,17 +12,15 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Start Event</td>
     <td>
-      <%= f.date_select :start_event %>
+      <input id="allergy_start_event" name="allergy[start_event]" size="30" type="text" <% if allergy.start_event != nil %>value="<%= allergy.start_event.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" />
     </td>
   </tr>
-
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">End Event</td>
     <td>
-      <%= f.date_select :end_event %>
+      <input id="allergy_end_event" name="allergy[end_event]" size="30" type="text" <% if allergy.end_event != nil %>value="<%= allergy.end_event.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" />
     </td>
   </tr>
-
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Adverse Event Type</td>
     <td>
