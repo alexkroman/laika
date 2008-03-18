@@ -44,15 +44,6 @@ wills_allergy:
   severity_term: mild
   patient_data: will_haynes
 
-jennifers_allergy:
-  start_event: 2005-02-21
-  end_event: 2038-12-21
-  free_text_product: Aspirin
-  product_code: 1191
-  adverse_event_type: drug_allergy
-  severity_term: mild_to_moderate
-  patient_data: jennifer_thompson
-
 davids_allergy:
   start_event: 1974-06-30
   end_event: 2021-12-21
