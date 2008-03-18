@@ -140,51 +140,83 @@ class PatientData < ActiveRecord::Base
           # End Conditions
           
           # Start Allergies
-          xml.component {
-            xml.section {
-              xml.templateId("root" => "2.16.840.1.113883.10.20.1.2")
-              xml.code("code" => "48765-2", "codeSystem" => "2.16.840.1.113883.6.1")
-              xml.title "Allergies, Adverse Reactions, Alerts"
-              xml.text {
-                xml.table("border" => "1", "width" => "100%") {
-                  xml.thead {
-                    xml.tr {
-                      xml.th "Substance"
-                      xml.th "Event Type"
-                      xml.th "Severity"
+          if allergies.size > 0
+            xml.component {
+              xml.section {
+                xml.templateId("root" => "2.16.840.1.113883.10.20.1.2")
+                xml.code("code" => "48765-2", "codeSystem" => "2.16.840.1.113883.6.1")
+                xml.title "Allergies, Adverse Reactions, Alerts"
+                xml.text {
+                  xml.table("border" => "1", "width" => "100%") {
+                    xml.thead {
+                      xml.tr {
+                        xml.th "Substance"
+                        xml.th "Event Type"
+                        xml.th "Severity"
+                      }
+                    }
+                    xml.tbody {
+                      allergies.andand.each do |allergy|
+                        xml.tr {
+                          if allergy.free_text_product != nil
+                            xml.td allergy.free_text_product
+                          else
+                            xml.td
+                          end 
+                          if allergy.adverse_event_type != nil
+                            xml.td allergy.adverse_event_type.name
+                          else
+                            xml.td
+                          end  
+                          if allergy.severity_term != nil
+                            xml.td {
+                              xml.content("ID" => "severity-" + allergy.id.to_s) {
+                                allergy.severity_term.name
+                              }
+                            }
+                          else
+                            xml.td
+                          end  
+                        }
+                      end
                     }
                   }
-                  xml.tbody {
-                    allergies.andand.each do |allergy|
-                      xml.tr {
-                        xml.td allergy.free_text_product
-                        xml.td allergy.adverse_event_type.name
-                        xml.td {
-                          xml.content("ID" => "severity-" + allergy.id.to_s) {
-                            allergy.severity_term.name
-                          }
-                        }
-                      }
-                    end
-                  }
                 }
+                # Start structured XML
+                allergies.andand.each do |structuredAllergy|
+                  structuredAllergy.to_c32(xml)
+                end
+                # End structured XML
               }
-              # Start structured XML
-              allergies.andand.each do |structuredAllergy|
-                structuredAllergy.to_c32(xml)
-              end
-              # End structured XML
             }
-          }
+          end
           # End Allergies
           
           # Start Medications
            
           # End Medications 
+          
+          # Start Advanced Directive
+          if advance_directive != nil
+            xml.component {
+              xml.section {
+                xml.templateId("root" => "2.16.840.1.113883.10.20.1.1")
+                xml.code("code" => "42348-3", 
+                         "codeSystem" => "2.16.840.1.113883.6.1", 
+                         "codeSystemName" => "LOINC")
+                xml.title "Advance Directive"
+                xml.text {
+                  xml.content("ID" => "advance-directive-" + advance_directive.id.to_s) {
+                    advance_directive.free_text
+                  }
+                }
+                advance_directive.to_c32(xml)
+              }
+            }
+          end
+          # End Advanced Directive
         }                   
       }
-      
-      
     }      
   end  
   

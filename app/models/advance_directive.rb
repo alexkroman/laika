@@ -55,5 +55,50 @@ class AdvanceDirective < ActiveRecord::Base
            nil
         end
      end 
+ end
+ 
+  def to_c32(xml)
+    
+    xml.entry {
+      xml.observation("classCode" => "OBS", "moodCode" => "EVN") {
+        xml.templateId("root" => "2.16.840.1.113883.10.20.1.17", "assigningAuthorityName" => "CCD")
+        xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.13", "assigningAuthorityName" => "HITSP/C32")
+        xml.id
+        xml.code ("code" => advance_directive_type.code, 
+                  "displayName" => advance_directive_type.name, 
+                  "codeSystem" => "2.16.840.1.113883.6.96",
+                  "codeSystemName" => "SNOMED CT") {
+          xml.originalText {
+            xml.reference("value" => "advance-directive-" + id.to_s)
+          }
+        }
+        xml.statusCode("code" => "completed")
+        
+        if start_effective_time != nil || start_effective_time != nil
+          xml.effectiveTime {
+            if start_effective_time != nil 
+              xml.low("value" => start_effective_time.strftime("%Y%m%d"))
+            end
+            if end_effective_time != nil
+              xml.high("value" => end_effective_time.strftime("%Y%m%d"))
+            else
+              xml.high("nullFlavor" => "UNK")
+            end
+          }
+        end
+        
+        xml.participant("typeCode" => "CST") {
+          xml.participantRole("classCode" => "AGNT") {
+            address.andand.to_c32(xml)
+            telecom.andand.to_c32(xml) 
+            xml.playingEntity {
+              person_name.andand.to_c32(xml)
+            }
+          }
+        }
+      }
+    }
+    
   end
+ 
 end
