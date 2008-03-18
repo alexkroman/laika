@@ -3,22 +3,61 @@
 joes_allergy:
   start_event: 2006-02-21
   free_text_product: Penicillin
-  adverse_event_type: drug_allergy
+  product_code: 70618
+  adverse_event_type: propensity_to_adverse_reactions
   severity_term: moderate
   patient_data: joe_smith
+
+emilys_allergy:
+  start_event: 2006-02-21
+  end_event: 2028-03-26
+  free_text_product: Penicillin
+  product_code: 70618
+  adverse_event_type: drug_allergy
+  severity_term: moderate_to_severe
+  patient_data: emily_jones
 
 teds_first_allergy:
   start_event: 2005-02-21
   end_event: 2008-02-21
-  free_text_product: Penicillin
-  adverse_event_type: drug_allergy
+  free_text_product: Aspirin
+  product_code: 1191
+  adverse_event_type: propensity_to_adverse_reactions_to_drug
   severity_term: severe
   patient_data: theodore_smith
 
 teds_second_allergy:
   start_event: 2005-02-21
   end_event: 2008-02-21
-  free_text_product: Sulfa Drugs
-  adverse_event_type: drug_allergy
+  free_text_product: Codeine
+  product_code: 2670
+  adverse_event_type: allergy_to_substance
   severity_term: fatal
   patient_data: theodore_smith
+
+wills_allergy:
+  start_event: 2005-02-21
+  end_event: 2048-12-21
+  free_text_product: Aspirin
+  product_code: 1191
+  adverse_event_type: drug_intolerance
+  severity_term: mild
+  patient_data: will_haynes
+
+jennifers_allergy:
+  start_event: 2005-02-21
+  end_event: 2038-12-21
+  free_text_product: Aspirin
+  product_code: 1191
+  adverse_event_type: drug_allergy
+  severity_term: mild_to_moderate
+  patient_data: jennifer_thompson
+
+davids_allergy:
+  start_event: 1974-06-30
+  end_event: 2021-12-21
+  free_text_product: Codeine
+  product_code: 2670
+  adverse_event_type: drug_allergy
+  severity_term: mild_to_moderate
+  patient_data: david_carter

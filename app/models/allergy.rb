@@ -74,4 +74,73 @@ XPATH
     end
     errors.compact
   end
+  
+  def to_c32(xml)
+    
+    xml.entry {
+      xml.act("classCode" => "ACT", "moodCode" => "EVN") {
+        xml.templateId("root" => "2.16.840.1.113883.10.20.1.27")
+        xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.6")
+        xml.id("root" => "2C748172-7CC2-4902-8AF0-23A105C4401B")
+        xml.entryRelationship ("typeCode" => "SUBJ") {
+          xml.observation("classCode" => "OBS", "moodCode" => "EVN") {
+            xml.templateId("root" => "2.16.840.1.113883.10.20.1.18")
+            if adverse_event_type != nil
+              xml.code("code" => adverse_event_type.code, 
+                       "displayName" => adverse_event_type.name, 
+                       "codeSystem" => "2.16.840.1.113883.6.96", 
+                       "codeSystemName" => "SNOMED CT")
+            end 
+            if start_event != nil || end_event != nil
+              xml.effectiveTime {
+                if start_event != nil 
+                  xml.low("value" => start_event.strftime("%Y%m%d"))
+                end
+                if end_event != nil
+                  xml.high("value" => end_event.strftime("%Y%m%d"))
+                else
+                  xml.high("nullFlavor" => "UNK")
+                end
+              }
+            end
+            xml.participant("typeCode" => "CSM") {
+              xml.participantRole("classCode" => "MANU") {
+                xml.playingEntity("classCode" => "MMAT") {
+                  if product_code != nil
+                    xml.code("code" => product_code, 
+                           "displayName" => free_text_product, 
+                           "codeSystem" => "2.16.840.1.113883.6.88", 
+                           "codeSystemName" => "RxNorm")
+                  end
+                  xml.name free_text_product
+                }
+              }
+            }
+            if severity_term != nil
+              xml.entryRelationship("typeCode" => "SUBJ", "inversionInd" => "true") {
+                xml.observation("classCode" => "OBS", "moodCode" => "EVN") {
+                  xml.templateId("root" => "2.16.840.1.113883.10.20.1.55")
+                  xml.code("code" => "SEV", 
+                           "displayName" => "Severity",
+                           "codeSystem" => "2.16.840.1.113883.5.4", 
+                           "codeSystemName" => "ActCode")
+                  xml.text {
+                    xml.reference("value" => "#severity-" + id.to_s)
+                  }
+                  xml.statusCode("code" => "completed")
+                  xml.value("xsi:type" => "CD", 
+                            "code" => severity_term.code,
+                            "displayName" => severity_term.name,
+                            "codeSystem" => "2.16.840.1.113883.6.96", 
+                            "codeSystemName" => "SNOMED CT")
+                }
+              }
+            end
+          }
+        }
+      }
+    }
+    
+  end
+  
 end

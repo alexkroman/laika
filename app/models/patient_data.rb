@@ -110,7 +110,8 @@ class PatientData < ActiveRecord::Base
         
       xml.component {
         xml.structuredBody {
-          if (pregnant != nil && pregnant == true) 
+          # Start Pregnancy
+          if (pregnant != nil && pregnant == true)   
             xml.component {
               xml.section {
                 xml.title "Results"
@@ -126,9 +127,59 @@ class PatientData < ActiveRecord::Base
                 }
               }               
             }
-          end                           
+          end
+          # End Pregnancy
+          
+          # Start Conditions
+
+          # End Conditions
+          
+          # Start Allergies
+          xml.component {
+            xml.section {
+              xml.templateId("root" => "2.16.840.1.113883.10.20.1.2")
+              xml.code("code" => "48765-2", "codeSystem" => "2.16.840.1.113883.6.1")
+              xml.title "Allergies, Adverse Reactions, Alerts"
+              xml.text {
+                xml.table("border" => "1", "width" => "100%") {
+                  xml.thead {
+                    xml.tr {
+                      xml.th "Substance"
+                      xml.th "Event Type"
+                      xml.th "Severity"
+                    }
+                  }
+                  xml.tbody {
+                    allergies.andand.each do |allergy|
+                      xml.tr {
+                        xml.td allergy.free_text_product
+                        xml.td allergy.adverse_event_type.name
+                        xml.td {
+                          xml.content("ID" => "severity-" + allergy.id.to_s) {
+                            allergy.severity_term.name
+                          }
+                        }
+                      }
+                    end
+                  }
+                }
+              }
+              # Start structured XML
+              allergies.andand.each do |structuredAllergy|
+                structuredAllergy.to_c32(xml)
+              end
+              # End structured XML
+            }
+          }
+          # End Allergies
+          
+          # Start Medications
+           
+          # End Medications 
         }                   
-      }                         
+      }
+      
+      
     }      
   end  
   
