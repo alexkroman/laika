@@ -44,9 +44,9 @@
                <templateId root="2.16.840.1.113883.10.20.1.17" />
                <!-- Advance directive observation template -->
                <id root="9b54c3c9-1673-49c7-aef9-b037ed72ed27" />
-               <code code="304251008"
+               <code code="78823007"
                   codeSystem="2.16.840.1.113883.6.96"
-                  displayName="Resuscitation">
+                  displayName="Life Support">
                   <originalText>
                      <reference value="#AD1" />
                   </originalText>

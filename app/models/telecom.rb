@@ -73,16 +73,16 @@ class Telecom < ActiveRecord::Base
   
   def to_c32(xml= XML::Builder.new)
     if home_phone && home_phone.size > 0
-      xml.telecom("use" => "HP", "value" => home_phone)
+      xml.telecom("use" => "HP", "value" => 'tel:' + home_phone)
     end
     if work_phone && work_phone.size > 0
-     xml.telecom("use" => "WP", "value" => work_phone)
+     xml.telecom("use" => "WP", "value" => 'tel:' + work_phone)
     end
     if mobile_phone && mobile_phone.size > 0
-      xml.telecom("use" => "MC", "value" => mobile_phone)
+      xml.telecom("use" => "MC", "value" => 'tel:' + mobile_phone)
     end
     if vacation_home_phone && vacation_home_phone.size > 0
-      xml.telecom("use" => "HV", "value" => vacation_home_phone)
+      xml.telecom("use" => "HV", "value" => 'tel:' + vacation_home_phone)
     end
     if email && email.size > 0
       xml.telecom("value" => "mailto:" + email)

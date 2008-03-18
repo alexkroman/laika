@@ -11,9 +11,9 @@ class AdvanceDirective < ActiveRecord::Base
   
   def validate_c32(doc)
     
-     errors = []
-     section = REXML::XPath.first(doc,"//cda:section[cda:templateId/@root='2.16.840.1.113883.10.20.1.1']",@@default_namespaces)
-     observation = REXML::XPath.first(section,"cda:entry/cda:observation[cda:templateId/@root='2.16.840.1.113883.10.20.1.17']",@@default_namespaces)
+    errors = []
+    section = REXML::XPath.first(doc,"//cda:section[cda:templateId/@root='2.16.840.1.113883.10.20.1.1']",@@default_namespaces)
+    observation = REXML::XPath.first(section,"cda:entry/cda:observation[cda:templateId/@root='2.16.840.1.113883.10.20.1.17']",@@default_namespaces)
       # match person type info
     entity = REXML::XPath.first(observation,"cda:participant[@typeCode='CST']/cda:participantRole[@classCode='AGNT']",@@default_namespaces)
     code = REXML::XPath.first(observation,"cda:code",@@default_namespaces)
@@ -45,18 +45,7 @@ class AdvanceDirective < ActiveRecord::Base
     return errors.compact
   end
   
-  private 
-  def deref(code)
-     if code
-        ref = REXML::XPath.first(code,"cda:reference",@@default_namespaces)
-        if ref
-           REXML::XPath.first(code.document,"//cda:content[@ID=$id]/text()",@@default_namespaces,{"id"=>ref.attributes['value'].gsub("#",'')}) 
-        else
-           nil
-        end
-     end 
- end
- 
+  #FIXME: Need to put in the directive text
   def to_c32(xml)
     
     xml.entry {
@@ -99,6 +88,18 @@ class AdvanceDirective < ActiveRecord::Base
       }
     }
     
+  end
+  
+  private 
+  def deref(code)
+      if code
+         ref = REXML::XPath.first(code,"cda:reference",@@default_namespaces)
+         if ref
+            REXML::XPath.first(code.document,"//cda:content[@ID=$id]/text()",@@default_namespaces,{"id"=>ref.attributes['value'].gsub("#",'')}) 
+         else
+            nil
+         end
+      end 
   end
  
 end
