@@ -42,9 +42,9 @@
                 <td><%= vendor_test_plan.kind.name %></td>
                 <td>
                   <% if vendor_test_plan.clinical_document != nil %>
-                    <a href="template_passed.html"><%= error_count %> Errors</a>
+                    <%= error_count %> Errors
                   <% else %>
-                    <a href="template_passed.html">--</a>
+                    --
                   <% end %>
                 </td>
                 <td class="actions">

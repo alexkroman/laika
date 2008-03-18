@@ -8,6 +8,48 @@ class Condition < ActiveRecord::Base
   
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
   
+  def validate_c32(document)
+    
+    errors = []
+    section = REXML::XPath.first(document,"//cda:section[cda:templateId/@root='2.16.840.1.113883.10.20.1.1']",@@default_namespaces)
+    act = REXML::XPath.first(section,"cda:entry/cda:act[cda:templateId/@root='2.16.840.1.113883.10.20.1.27']",@@default_namespaces)
+    entryRelationship = REXML::XPath.first(act,"cda:entryRelationship[@typeCode='SUBJ']",@@default_namespaces)
+    observation = REXML::XPath.first(entryRelationship,"cda:observation[classCode='OBS']",@@default_namespaces)
+    code = REXML::XPath.first(observation,"cda:code/@codeSystem='2.16.840.1.113883.6.96'",@@default_namespaces)
+    
+    if problem_type
+      errors.concat problem_type.validate_c32(code)
+    end
+    
+    errors << match_value(act, "cda:effectiveTime/cda:low/@value", "start_event", start_event.andand.to_formatted_s(:hl7_ts))
+    errors << match_value(act, "cda:effectiveTime/cda:high/@value", "end_event", end_event.andand.to_formatted_s(:hl7_ts))
+    
+    if free_text_name
+      text =  REXML::XPath.first(observation,"cda:text",@@default_namespaces)
+      deref_text = deref(text)
+      if(deref_text != free_text)
+        errors << ContentError.new(:section=>"Condition",
+                :error_message=>"Free text name #{free_text_name} does not match #{deref_text}",
+                :location=>(text)? text.xpath : (code)? code.xpath : section.xpath )
+      end
+    end 
+    
+    errors.compact
+    
+  end
+  
+  private 
+  def deref(code)
+     if code
+        ref = REXML::XPath.first(code,"cda:reference",@@default_namespaces)
+        if ref
+           REXML::XPath.first(code.document,"//cda:content[@ID=$id]/text()",@@default_namespaces,{"id"=>ref.attributes['value'].gsub("#",'')}) 
+        else
+           nil
+        end
+     end 
+ end
+  
   def to_c32(xml)
     
     xml.entry {
@@ -15,7 +57,6 @@ class Condition < ActiveRecord::Base
         xml.templateId("root" => "2.16.840.1.113883.10.20.1.27", "assigningAuthorityName" => "CCD")
         xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.7", "assigningAuthorityName" => "HITSP/C32")
         xml.id
-        xml.code("nullFlavor" => "NA")
         if start_event != nil || end_event != nil
           xml.effectiveTime {
             if start_event != nil 
