@@ -323,25 +323,7 @@ class PatientData < ActiveRecord::Base
           # End Medications 
           
           # Start Advanced Directive
-          if advance_directive
-            xml.component {
-              xml.section {
-                xml.templateId("root" => "2.16.840.1.113883.10.20.1.1")
-                xml.code("code" => "42348-3", 
-                         "codeSystem" => "2.16.840.1.113883.6.1", 
-                         "codeSystemName" => "LOINC")
-                xml.title "Advance Directive"
-                xml.text {
-                  xml.content(advance_directive.free_text, 
-                              "ID" => "advance-directive-" + advance_directive.id.to_s) 
-                }
-                
-                # Start structured XML
-                advance_directive.to_c32(xml)
-                # End structured XML
-              }
-            }
-          end
+          advance_directive.andand.to_c32(xml)
           # End Advanced Directive
           
         }                   

@@ -26,31 +26,11 @@ describe AdvanceDirective, "can create a C32 representation of itself" do
                          "xmlns" => "urn:hl7-org:v3", 
                          "xmlns:sdct" => "urn:hl7-org:sdct", 
                          "xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance") do
-                           
-      xml.component do
-        xml.structuredBody do
-          xml.component do
-            xml.section do
-              xml.templateId("root" => "2.16.840.1.113883.10.20.1.1")
-              xml.code("code" => "42348-3", 
-                       "codeSystem" => "2.16.840.1.113883.6.1", 
-                       "codeSystemName" => "LOINC")
-              xml.title "Advance Directive"
-              xml.text do
-                xml.content("ID" => "advance-directive-" + ad.id.to_s) do
-                  ad.free_text
-                end
-              end
-              ad.to_c32(xml)
-            end
-          end
-        end
-      end
+
+      ad.to_c32(xml)
     end
-    puts buffer
     document = REXML::Document.new(StringIO.new(buffer))
     errors = ad.validate_c32(document.root)
-    puts errors.map { |e| e.error_message }.join(' ')
     errors.should be_empty
   end
 end
