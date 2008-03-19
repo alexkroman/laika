@@ -16,8 +16,16 @@ class AccountController < ApplicationController
         self.current_user.remember_me
         cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
       end
-      redirect_back_or_default(:controller => '/vendor_test_plans', :action => 'index')
-      flash[:notice] = "Logged in successfully"
+      
+      # Either direct to the Dashboard or the Library, depending on if the user has vendor test plans
+      @vendor_test_plans = self.current_user.vendor_test_plans
+      numVendorTestPlans = @vendor_test_plans.size
+      if numVendorTestPlans == 0
+        redirect_to(:controller => '/patient_data', :action => 'index')
+      else
+        redirect_to(:controller => '/vendor_test_plans', :action => 'index')
+      end
+      
     end
     flash[:notice] = "Sorry mate, your email and password <b>don't match</b>.  Would you like to <a href='/account/signup'>create an account?</a>"
   end
@@ -27,7 +35,16 @@ class AccountController < ApplicationController
     return unless request.post?
     @user.save!
     self.current_user = @user
-    redirect_back_or_default(:controller => '/vendor_test_plans', :action => 'index')
+    
+    # Either direct to the Dashboard or the Library, depending on if the user has vendor test plans
+      @vendor_test_plans = self.current_user.vendor_test_plans
+      numVendorTestPlans = @vendor_test_plans.size
+      if numVendorTestPlans == 0
+        redirect_to(:controller => '/patient_data', :action => 'index')
+      else
+        redirect_to(:controller => '/vendor_test_plans', :action => 'index')
+    end
+    
   rescue ActiveRecord::RecordInvalid
     render :action => 'signup'
   end
@@ -37,7 +54,7 @@ class AccountController < ApplicationController
     cookies.delete :auth_token
     reset_session
     flash[:notice] = "You have been logged out."
-    redirect_back_or_default(:controller => '/vendor_test_plans', :action => 'index')
+    redirect_back_or_default(:controller => '/patient_data', :action => 'index')
   end
   
   def forgot_password
