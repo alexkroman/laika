@@ -3,3 +3,5 @@
     <td class="lighttext">Patient Birth Date</td>
     <td><% if insurance_provider_patient.date_of_birth != nil %><%=h insurance_provider_patient.date_of_birth.strftime("%m/%d/%Y") %><% end %></td>
   </tr>
+  <%= render :partial => '/addresses/show', :locals => {:address => insurance_provider_patient.address}%>
+  <%= render :partial => '/telecoms/show', :locals => {:telecom => insurance_provider_patient.telecom}%>

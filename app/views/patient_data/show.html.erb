@@ -59,13 +59,13 @@
               <td></td>
               <td></td>
             </tr>
-            <tr class="darkzebra">
-              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('commentsContainer', 1.0);">Comments</a></td>
+            <tr class="lightzebra">
+              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('advanceDirectiveContainer', 1.0);">Advance Directive</a></td>
               <td></td>
               <td></td>
             </tr>
-            <tr class="lightzebra">
-              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('advanceDirectiveContainer', 1.0);">Advance Directive</a></td>
+            <tr class="darkzebra">
+              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('commentsContainer', 1.0);">Comments</a></td>
               <td></td>
               <td></td>
             </tr>
@@ -134,15 +134,7 @@
               <%= render :partial => '/insurance_providers/show', 
                          :locals => {:insurance_provider  => insurance_provider, :patient_data => @patient_data} %>
             </div>
-          <% end %>
-          <table id="addInsuranceProvider">
-            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-              <td></td>
-              <td><%= link_to_remote 'Add', :url => new_patient_data_instance_insurance_provider_path(@patient_data), 
-                                            :method => 'get', :update => 'addInsuranceProvider', :position => :before %>
-              </td>                                       
-            </tr>                                               
-          </table>           
+          <% end %>  
           </div>
           <!-- End Insurance Provider Module -->   
           
@@ -234,6 +226,12 @@
           </div>
           <!-- End Information Source Module -->
           
+          <!-- Start Advance Directives Module -->
+          <div id="advanceDirectiveContainer">
+            <%= render :partial => '/advance_directives/show', :locals => {:advance_directive => @patient_data.advance_directive, :patient_data => @patient_data} %>
+          </div>
+          <!-- End Information Source Module -->   
+                 
           <!-- Start Comments Module -->
           <div id="commentsContainer"><h5>Comments</h5>
           <% for comment in @patient_data.comments -%>
@@ -252,12 +250,6 @@
           </table>
           </div> 
           <!-- End Comments Module -->
-          
-          <!-- Start Advance Directives Module -->
-          <div id="advanceDirectiveContainer">
-            <%= render :partial => '/advance_directives/show', :locals => {:advance_directive => @patient_data.advance_directive, :patient_data => @patient_data} %>
-          </div>
-          <!-- End Information Source Module -->   
                  
         </div>
       </div>

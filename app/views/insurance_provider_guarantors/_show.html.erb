@@ -3,3 +3,5 @@
     <td class="lighttext">Guarantor Effective Date</td>
     <td><% if insurance_provider_guarantor.effective_date != nil %><%=h insurance_provider_guarantor.effective_date.strftime("%m/%d/%Y") %><% end %></td>
   </tr>
+    <%= render :partial => '/addresses/show', :locals => {:address => insurance_provider_guarantor.address}%>
+  <%= render :partial => '/telecoms/show', :locals => {:telecom => insurance_provider_guarantor.telecom}%>
