@@ -1,0 +1,5 @@
+  <%= render :partial => '/person_names/show', :locals => {:person_name => insurance_provider_subscriber.person_name}%>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Patient Birth Date</td>
+    <td><% if insurance_provider_subscriber.date_of_birth != nil %><%=h insurance_provider_subscriber.date_of_birth.strftime("%m/%d/%Y") %><% end %></td>
+  </tr>

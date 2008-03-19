@@ -10,6 +10,18 @@
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td colspan="2" class="lighttext">Insurance Provider Patient</td>
+  </tr>
+  <%= render :partial => '/insurance_provider_patients/show', :locals => {:insurance_provider_patient => insurance_provider.insurance_provider_patient}%> 
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td colspan="2" class="lighttext">Insurance Provider Subscriber</td>
+  </tr>
+  <%= render :partial => '/insurance_provider_subscribers/show', :locals => {:insurance_provider_subscriber => insurance_provider.insurance_provider_subscriber}%>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td colspan="2" class="lighttext">Insurance Provider Guarantor</td>
+  </tr>
+  <%= render :partial => '/insurance_provider_guarantors/show', :locals => {:insurance_provider_guarantor => insurance_provider.insurance_provider_guarantor}%>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td></td>
     <td>
     <span>
