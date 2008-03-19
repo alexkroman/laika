@@ -14,7 +14,7 @@ class Condition < ActiveRecord::Base
     section = REXML::XPath.first(document,"//cda:section[cda:templateId/@root='2.16.840.1.113883.10.20.1.1']",@@default_namespaces)
     act = REXML::XPath.first(section,"cda:entry/cda:act[cda:templateId/@root='2.16.840.1.113883.10.20.1.27']",@@default_namespaces)
     entryRelationship = REXML::XPath.first(act,"cda:entryRelationship[@typeCode='SUBJ']",@@default_namespaces)
-    observation = REXML::XPath.first(entryRelationship,"cda:observation[classCode='OBS']",@@default_namespaces)
+    observation = REXML::XPath.first(entryRelationship,"cda:observation[@classCode='OBS']",@@default_namespaces)
     code = REXML::XPath.first(observation,"cda:code/@codeSystem='2.16.840.1.113883.6.96'",@@default_namespaces)
     
     if problem_type
