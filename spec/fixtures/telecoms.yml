@@ -120,3 +120,15 @@ theodore_smith_comment_comment:
 
 david_carter_comment_comment:
   reachable: david_carter_comment (Comment)
+
+joe_smiths_insurance_provider_patient_telecom:
+  home_phone: +1-312-555-1234
+  reachable: joe_smith (InsuranceProviderPatient)
+
+joe_smiths_insurance_provider_subscriber_telecom:
+  home_phone: +1-312-555-1235
+  reachable: joe_smith (InsuranceProviderSubscriber)
+
+joe_smiths_insurance_provider_telecom:
+  home_phone: +1-312-555-1236
+  reachable: joe_smith (InsuranceProviderGuarantor)

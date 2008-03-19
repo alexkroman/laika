@@ -190,3 +190,21 @@ david_carter_comment:
   first_name: Nick
   last_name: Simpson
   nameable: david_carter_comment (Comment)
+
+joe_smiths_insurance_provider_patient:
+  name_prefix: Mr.
+  first_name: Joe
+  last_name: Smith
+  nameable: joe_smiths_insurance_provider_patient (InsuranceProviderPatient)
+
+joe_smiths_insurance_provider_subscriber:
+  name_prefix: Mr.
+  first_name: Joe
+  last_name: Smith
+  nameable: joe_smiths_insurance_provider_subscriber (InsuranceProviderSubscriber)
+
+joe_smiths_insurance_provider_guarantor:
+  name_prefix: Mr.
+  first_name: Joe
+  last_name: Smith
+  nameable: joe_smiths_insurance_provider_guarantor (InsuranceProviderGuarantor)
