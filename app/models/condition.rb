@@ -38,18 +38,6 @@ class Condition < ActiveRecord::Base
     
   end
   
-  private 
-  def deref(code)
-     if code
-        ref = REXML::XPath.first(code,"cda:reference",@@default_namespaces)
-        if ref
-           REXML::XPath.first(code.document,"//cda:content[@ID=$id]/text()",@@default_namespaces,{"id"=>ref.attributes['value'].gsub("#",'')}) 
-        else
-           nil
-        end
-     end 
- end
-  
   def to_c32(xml)
     
     xml.entry {
@@ -86,5 +74,17 @@ class Condition < ActiveRecord::Base
     }
 
   end
+   
+  private 
+  def deref(code)
+   if code
+    ref = REXML::XPath.first(code,"cda:reference",@@default_namespaces)
+    if ref
+       REXML::XPath.first(code.document,"//cda:content[@ID=$id]/text()",@@default_namespaces,{"id"=>ref.attributes['value'].gsub("#",'')}) 
+    else
+       nil
+     end
+   end 
+ end
   
 end
