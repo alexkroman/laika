@@ -175,25 +175,25 @@ david_carter_comment_address:
   addressable: david_carter_comment (Comment)
 
 joe_smiths_insurance_provider_patient_address:
-  street_address_line_one: 1600 Rockville Pike
+  street_address_line_one: 1601 Rockville Pike
   city: Rockville
   state: MD
   postal_code: 20847 
   iso_country: usa
-  addressable: joe_smith (InsuranceProviderPatient)
+  addressable: joe_smiths_insurance_provider_patient (InsuranceProviderPatient)
 
 joe_smiths_insurance_provider_subscriber_address:
-  street_address_line_one: 1600 Rockville Pike
+  street_address_line_one: 1602 Rockville Pike
   city: Rockville
   state: MD
   postal_code: 20847 
   iso_country: usa
-  addressable: joe_smith (InsuranceProviderSubscriber)
+  addressable: joe_smiths_insurance_provider_subscriber (InsuranceProviderSubscriber)
 
 joe_smiths_insurance_provider_guarantor_address:
-  street_address_line_one: 1600 Rockville Pike
+  street_address_line_one: 1603 Rockville Pike
   city: Rockville
   state: MD
   postal_code: 20847 
   iso_country: usa
-  addressable: joe_smith (InsuranceProviderGuarantor)
+  addressable: joe_smiths_insurance_provider_guarantor (InsuranceProviderGuarantor)

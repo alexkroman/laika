@@ -123,12 +123,12 @@ david_carter_comment_comment:
 
 joe_smiths_insurance_provider_patient_telecom:
   home_phone: +1-312-555-1234
-  reachable: joe_smith (InsuranceProviderPatient)
+  reachable: joe_smiths_insurance_provider_patient (InsuranceProviderPatient)
 
 joe_smiths_insurance_provider_subscriber_telecom:
   home_phone: +1-312-555-1235
-  reachable: joe_smith (InsuranceProviderSubscriber)
+  reachable: joe_smiths_insurance_provider_subscriber (InsuranceProviderSubscriber)
 
 joe_smiths_insurance_provider_telecom:
   home_phone: +1-312-555-1236
-  reachable: joe_smith (InsuranceProviderGuarantor)
+  reachable: joe_smiths_insurance_provider_guarantor (InsuranceProviderGuarantor)
