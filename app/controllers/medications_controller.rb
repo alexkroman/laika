@@ -1,18 +1,30 @@
 class MedicationsController < PatientDataChildController
 
   def new
+    
+    if !@medicationTypes
+      @medicationTypes = MedicationType.find(:all, :order => "name ASC")
+    end
+    if !@codeSystems
+      @codeSystems = CodeSystem.find(:all, :order => "name DESC")
+    end 
+    
     @medication = Medication.new
-    @medicationTypes = MedicationType.find(:all, :order => "name ASC")
-    @codeSystems = CodeSystem.find(:all, :order => "name DESC")
-
+    
     render :partial  => 'edit', :locals => {:medication => @medication,
                                             :patient_data => @patient_data}
   end
 
   def edit
+    
+    if !@medicationTypes
+      @medicationTypes = MedicationType.find(:all, :order => "name ASC")
+    end
+    if !@codeSystems
+      @codeSystems = CodeSystem.find(:all, :order => "name DESC")
+    end 
+    
     @medication = @patient_data.medications.find(params[:id])
-    @medicationTypes = MedicationType.find(:all, :order => "name ASC")
-    @codeSystems = CodeSystem.find(:all, :order => "name DESC")
     
     render :partial  => 'edit', :locals => {:medication => @medication,
                                             :patient_data => @patient_data}
