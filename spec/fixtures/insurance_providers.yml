@@ -7,3 +7,8 @@ emily_jones_insurance_provider:
   represented_organization: Harvard Pilgrim
   insurance_type: supplimental_policy
   patient_data: emily_jones
+
+jennifer_thompsons_insurance_provider:
+  represented_organization: Cheap Insurance
+  insurance_type: commercial
+  patient_data: jennifer_thompson

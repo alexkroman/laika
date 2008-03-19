@@ -144,3 +144,12 @@ emily_jones_insurance_provider_subscriber_telecom:
 emily_jones_insurance_provider_telecom:
   home_phone: +1-312-555-1236
   reachable: emily_jones_insurance_provider_guarantor (InsuranceProviderGuarantor)
+
+jennifer_thompsons_insurance_provider_patient_telecom:
+  reachable: jennifer_thompsons_insurance_provider_patient (InsuranceProviderPatient)
+
+jennifer_thompsons_insurance_provider_subscriber_telecom:
+  reachable: jennifer_thompsons_insurance_provider_subscriber (InsuranceProviderSubscriber)
+
+jennifer_thompsons_insurance_provider_telecom:
+  reachable: jennifer_thompsons_insurance_provider_guarantor (InsuranceProviderGuarantor)

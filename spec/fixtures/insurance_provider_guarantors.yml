@@ -5,3 +5,7 @@ joe_smiths_insurance_provider_guarantor:
 emily_jones_insurance_provider_guarantor:
   effective_date: 1995-11-17
   insurance_provider: emily_jones_insurance_provider
+
+jennifer_thompsons_insurance_provider_guarantor:
+  effective_date: 1985-07-07
+  insurance_provider: jennifer_thompsons_insurance_provider

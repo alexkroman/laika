@@ -5,3 +5,7 @@ joe_smiths_insurance_provider_patient:
 emily_jones_insurance_provider_patient:
   date_of_birth: 1937-03-23
   insurance_provider: emily_jones_insurance_provider
+
+jennifer_thompsons_insurance_provider_patient:
+  date_of_birth: 1957-04-18
+  insurance_provider: jennifer_thompsons_insurance_provider

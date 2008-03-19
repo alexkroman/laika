@@ -216,3 +216,12 @@ emily_jones_insurance_provider_guarantor_address:
   postal_code: 20847 
   iso_country: usa
   addressable: emily_jones_insurance_provider_guarantor (InsuranceProviderGuarantor)
+
+jennifer_thompsons_insurance_provider_patient_address:
+  addressable: jennifer_thompsons_insurance_provider_patient (InsuranceProviderPatient)
+
+jennifer_thompsons_insurance_provider_subscriber_address:
+  addressable: jennifer_thompsons_insurance_provider_subscriber (InsuranceProviderSubscriber)
+
+jennifer_thompsons_insurance_provider_guarantor_address:
+  addressable: jennifer_thompsons_insurance_provider_guarantor (InsuranceProviderGuarantor)

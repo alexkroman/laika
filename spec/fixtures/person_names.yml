@@ -226,3 +226,12 @@ emily_jones_insurance_provider_guarantor:
   first_name: Emily
   last_name: Jones
   nameable: emily_jones_insurance_provider_guarantor (InsuranceProviderGuarantor)
+
+jennifer_thompsons_insurance_provider_patient:
+  nameable: jennifer_thompsons_insurance_provider_patient (InsuranceProviderPatient)
+
+jennifer_thompsons_insurance_provider_subscriber:
+  nameable: jennifer_thompsons_insurance_provider_subscriber (InsuranceProviderSubscriber)
+
+jennifer_thompsons_insurance_provider_guarantor:
+  nameable: jennifer_thompsons_insurance_provider_guarantor (InsuranceProviderGuarantor)
