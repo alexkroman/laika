@@ -1,20 +1,33 @@
 class AdvanceDirectivesController < PatientDataChildController
 
   def new
+    
+    if !@isoCountries
+      @isoCountries = IsoCountry.find(:all, :order => "name ASC")
+    end
+    if !@advance_directive_types
+      @advance_directive_types = AdvanceDirectiveType.find(:all, :order => "name ASC")
+    end
+    
     @advance_directive = AdvanceDirective.new
     
     @advance_directive.person_name = PersonName.new
     @advance_directive.address = Address.new
     @advance_directive.telecom = Telecom.new
     
-    @isoCountries = IsoCountry.find(:all, :order => "name ASC")
-    @advance_directive_types = AdvanceDirectiveType.find(:all, :order => "name ASC")
-    
     render :partial  => 'edit', :locals => {:advance_directive => @advance_directive,
                                             :patient_data => @patient_data}  
   end
 
   def edit
+    
+    if !@isoCountries
+      @isoCountries = IsoCountry.find(:all, :order => "name ASC")
+    end
+    if !@advance_directive_types
+      @advance_directive_types = AdvanceDirectiveType.find(:all, :order => "name ASC")
+    end
+    
     @advance_directive = @patient_data.advance_directive
     
     unless @advance_directive.person_name
@@ -26,9 +39,6 @@ class AdvanceDirectivesController < PatientDataChildController
     unless @advance_directive.telecom
       @advance_directive.telecom = Telecom.new
     end
-    
-    @isoCountries = IsoCountry.find(:all, :order => "name ASC")
-    @advance_directive_types = AdvanceDirectiveType.find(:all, :order => "name ASC")
     
     render :partial  => 'edit', :locals => {:advance_directive => @advance_directive,
                                             :patient_data => @patient_data}

@@ -1,24 +1,40 @@
 class ProvidersController < PatientDataChildController
+  
   def new
+    
+    if !@isoCountries
+      @isoCountries = IsoCountry.find(:all, :order => "name ASC")
+    end
+    if !@providerRoles
+      @providerRoles = ProviderRole.find(:all, :order => "name ASC")
+    end
+    if !@providerTypes 
+      @providerTypes = ProviderType.find(:all, :order => "name ASC") 
+    end
+    
     @provider = Provider.new
     @provider.person_name = PersonName.new
     @provider.address = Address.new
     @provider.telecom = Telecom.new
     
-    @providerRoles = ProviderRole.find(:all, :order => "name ASC")
-    @providerTypes = ProviderType.find(:all, :order => "name ASC") 
-    @isoCountries = IsoCountry.find(:all, :order => "name ASC")
-
     render :partial  => 'edit', :locals => {:provider =>  @provider,
                                             :patient_data => @patient_data}  
   end
 
   def edit
+    
+    if !@isoCountries
+      @isoCountries = IsoCountry.find(:all, :order => "name ASC")
+    end
+    if !@providerRoles
+      @providerRoles = ProviderRole.find(:all, :order => "name ASC")
+    end
+    if !@providerTypes 
+      @providerTypes = ProviderType.find(:all, :order => "name ASC") 
+    end
+    
     @provider = @patient_data.providers.find(params[:id])
     
-    @providerRoles = ProviderRole.find(:all, :order => "name ASC")
-    @providerTypes = ProviderType.find(:all, :order => "name ASC") 
-    @isoCountries = IsoCountry.find(:all, :order => "name ASC")
     render :partial  => 'edit', :locals => {:provider =>  @provider,
                                             :patient_data => @patient_data}
   end

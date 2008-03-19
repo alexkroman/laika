@@ -2,16 +2,29 @@ class AllergiesController < PatientDataChildController
   # TODO: Need a way to nil out the end_event through the web ui
 
   def new
+    
+    if !@severity_terms
+      @severity_terms = SeverityTerm.find(:all)
+    end
+    if !@adverse_event_types
+      @adverse_event_types = AdverseEventType.find(:all)
+    end
+    
     @allergy = Allergy.new
-    @severity_terms = SeverityTerm.find(:all)
-    @adverse_event_types = AdverseEventType.find(:all)
+    
     render :partial  => 'edit', :locals => {:allergy => @allergy,
                                             :patient_data => @patient_data}
   end
 
   def edit
-    @severity_terms = SeverityTerm.find(:all)
-    @adverse_event_types = AdverseEventType.find(:all)
+    
+    if !@severity_terms
+      @severity_terms = SeverityTerm.find(:all)
+    end
+    if !@adverse_event_types
+      @adverse_event_types = AdverseEventType.find(:all)
+    end
+    
     @allergy = @patient_data.allergies.find(params[:id])
     render :partial  => 'edit', :locals => {:allergy => @allergy,
                                             :patient_data => @patient_data}
