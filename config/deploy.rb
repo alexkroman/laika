@@ -19,7 +19,7 @@ role :web, domain
 role :db,  domain, :primary => true
 set :rails_env, "development"
 
-set :user, 'bobd'# SET TO THE APP USER
+set :user, # SET TO THE APP USER
 set :group, 'deploy'
 
 # Setup Mongrel
