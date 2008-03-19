@@ -118,6 +118,28 @@ class PatientData < ActiveRecord::Base
       copied_patient_data.medications << medication.clone
     end
     
+    self.insurance_providers.each do |insurance_provider|
+      
+      cloned_insurance_provider = insurance_provider.clone
+      
+      cloned_insurance_provider.insurance_provider_patient = insurance_provider.insurance_provider_patient.clone
+      cloned_insurance_provider.insurance_provider_patient.person_name = insurance_provider.insurance_provider_patient.person_name.clone
+      cloned_insurance_provider.insurance_provider_patient.address = insurance_provider.insurance_provider_patient.address.clone
+      cloned_insurance_provider.insurance_provider_patient.telecom = insurance_provider.insurance_provider_patient.telecom.clone
+      
+      cloned_insurance_provider.insurance_provider_subscriber = insurance_provider.insurance_provider_subscriber.clone
+      cloned_insurance_provider.insurance_provider_subscriber.person_name  = insurance_provider.insurance_provider_subscriber.person_name.clone
+      cloned_insurance_provider.insurance_provider_subscriber.address = insurance_provider.insurance_provider_subscriber.address.clone
+      cloned_insurance_provider.insurance_provider_subscriber.telecom = insurance_provider.insurance_provider_subscriber.telecom.clone
+      
+      cloned_insurance_provider.insurance_provider_guarantor = insurance_provider.insurance_provider_guarantor.clone
+      cloned_insurance_provider.insurance_provider_guarantor.person_name = insurance_provider.insurance_provider_guarantor.person_name.clone
+      cloned_insurance_provider.insurance_provider_guarantor.address = insurance_provider.insurance_provider_guarantor.address.clone
+      cloned_insurance_provider.insurance_provider_guarantor.telecom = insurance_provider.insurance_provider_guarantor.telecom.clone
+      
+      copied_patient_data.insurance_providers << cloned_insurance_provider
+    end
+    
     self.allergies.each do |allergy|
       copied_patient_data.allergies << allergy.clone
     end
@@ -301,7 +323,33 @@ class PatientData < ActiveRecord::Base
             }
           end
           # End Allergies
-          
+
+          # Start Insurance Providers
+          if insurance_providers.size > 0
+            xml.component {
+              xml.section {
+                xml.templateId("root" => "2.16.840.1.113883.10.20.1.9", 
+                               "assigningAuthorityName" => "CCD")         
+                xml.code("code" => "48768-6", 
+                         "codeSystem" => "2.16.840.1.113883.6.1",
+                         "codeSystemName" => "LOINC")
+                xml.title "Insurance Providers"
+                xml.text {
+                  insurance_providers.andand.each do |insurance_provider|
+                    xml.paragraph insurance_provider.represented_organization
+                  end
+                }
+                
+                # Start structured XML
+                #insurance_providers.andand.each do |structuredInsuranceProvider|
+                #  structuredInsuranceProvider.to_c32(xml)
+                #end
+                # End structured XML
+              }
+            }
+          end
+          # End Insurance Providers
+
           # Start Medications
           if medications.size > 0
             xml.component {
