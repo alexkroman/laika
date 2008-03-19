@@ -197,3 +197,22 @@ joe_smiths_insurance_provider_guarantor_address:
   postal_code: 20847 
   iso_country: usa
   addressable: joe_smiths_insurance_provider_guarantor (InsuranceProviderGuarantor)
+
+emily_jones_insurance_provider_patient_address:
+  street_address_line_one: 1601 Rockville Pike
+  city: Rockville
+  state: MD
+  postal_code: 20847 
+  iso_country: usa
+  addressable: emily_jones_insurance_provider_patient (InsuranceProviderPatient)
+
+emily_jones_insurance_provider_subscriber_address:
+  addressable: emily_jones_insurance_provider_subscriber (InsuranceProviderSubscriber)
+
+emily_jones_insurance_provider_guarantor_address:
+  street_address_line_one: 1603 Rockville Pike
+  city: Rockville
+  state: MD
+  postal_code: 20847 
+  iso_country: usa
+  addressable: emily_jones_insurance_provider_guarantor (InsuranceProviderGuarantor)

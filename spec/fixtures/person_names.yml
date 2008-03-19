@@ -208,3 +208,21 @@ joe_smiths_insurance_provider_guarantor:
   first_name: Joe
   last_name: Smith
   nameable: joe_smiths_insurance_provider_guarantor (InsuranceProviderGuarantor)
+
+emily_jones_insurance_provider_patient:
+  name_prefix: Ms.
+  first_name: Emily
+  last_name: Jones
+  nameable: emily_jones_insurance_provider_patient (InsuranceProviderPatient)
+
+emily_jones_insurance_provider_subscriber:
+  name_prefix: Ms.
+  first_name: Stacey
+  last_name: Jones
+  nameable: emily_jones_insurance_provider_subscriber (InsuranceProviderSubscriber)
+
+emily_jones_insurance_provider_guarantor:
+  name_prefix: Ms.
+  first_name: Emily
+  last_name: Jones
+  nameable: emily_jones_insurance_provider_guarantor (InsuranceProviderGuarantor)

@@ -2,3 +2,8 @@ joe_smiths_insurance_provider:
   represented_organization: Blue Cross Blue Shield
   insurance_type: hmo
   patient_data: joe_smith
+
+emily_jones_insurance_provider:
+  represented_organization: Harvard Pilgrim
+  insurance_type: supplimental_policy
+  patient_data: emily_jones

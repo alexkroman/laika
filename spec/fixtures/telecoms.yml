@@ -132,3 +132,15 @@ joe_smiths_insurance_provider_subscriber_telecom:
 joe_smiths_insurance_provider_telecom:
   home_phone: +1-312-555-1236
   reachable: joe_smiths_insurance_provider_guarantor (InsuranceProviderGuarantor)
+
+emily_jones_insurance_provider_patient_telecom:
+  home_phone: +1-312-555-1234
+  reachable: emily_jones_insurance_provider_patient (InsuranceProviderPatient)
+
+emily_jones_insurance_provider_subscriber_telecom:
+  mobile_phone: +1-202-555-0199
+  reachable: emily_jones_insurance_provider_subscriber (InsuranceProviderSubscriber)
+
+emily_jones_insurance_provider_telecom:
+  home_phone: +1-312-555-1236
+  reachable: emily_jones_insurance_provider_guarantor (InsuranceProviderGuarantor)
