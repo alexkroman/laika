@@ -46,8 +46,7 @@ class AdvanceDirective < ActiveRecord::Base
   end
   
   def to_c32(xml)
-    xml.component do
-      xml.structuredBody do
+ 
         xml.component do
           xml.section do
             xml.templateId("root" => "2.16.840.1.113883.10.20.1.1")
@@ -99,8 +98,6 @@ class AdvanceDirective < ActiveRecord::Base
             end
           end
         end
-      end
-    end
   end
   
   private 

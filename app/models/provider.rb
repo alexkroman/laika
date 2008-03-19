@@ -83,8 +83,8 @@ class Provider < ActiveRecord::Base
         xml.time{
             if start_service 
                       xml.low('value'=> start_service.strftime("%Y%m%d"))
-                    end
-                    if end_service 
+            end
+            if end_service 
                       xml.high('value'=> end_service.strftime("%Y%m%d"))
           end
         }        
