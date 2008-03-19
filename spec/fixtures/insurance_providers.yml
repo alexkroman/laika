@@ -1,0 +1,4 @@
+joe_smiths_insurance_provider:
+  represented_organization: Blue Cross Blue Shield
+  insurance_type: hmo
+  patient_data: joe_smith
