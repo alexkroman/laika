@@ -122,16 +122,15 @@ class Medication < ActiveRecord::Base
             xml.entryRelationship("typeCode" => "REFR") {
               xml.supply("classCode" => "SPLY", "moodCode" => "INT") {
                 xml.templateId("root" => "2.16.840.1.113883.3.88.1.11.32.11")
-                if quantity_ordered_unit != nil
+                if quantity_ordered_unit 
                   xml.id("root" => quantity_ordered_unit, "extension" => "SCRIP#")
                 end 
-                if quantity_ordered_value != nil
+                if quantity_ordered_value 
                   xml.quantity("value" => quantity_ordered_value)
                 end
-                if expiration_time != nil 
-                  xml.effectiveTime {
-                    xml.high("value" => expiration_time.strftime("%Y%m%d"))
-                  }
+                if expiration_time 
+                  xml.effectiveTime("value" => expiration_time.strftime("%Y%m%d"))
+                  
                 end
               }
             }

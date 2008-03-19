@@ -67,18 +67,6 @@ class Support < ActiveRecord::Base
        contact_type.code == "GUARD"
       xml.guardian("classCode" => contact_type.code) {
         xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.3")
-        if start_event != nil || end_support != nil
-          xml.effectiveTime {
-            if start_support != nil 
-              xml.low("value" => start_support.strftime("%Y%m%d"))
-            end
-            if end_support != nil
-              xml.high("value" => end_support.strftime("%Y%m%d"))
-            else
-              xml.high("nullFlavor" => "UNK")
-            end
-          }
-        end
         if relationship
           xml.code("code" => relationship.code, 
                    "displayName" => relationship.name,
