@@ -1,23 +1,40 @@
 class SupportsController < PatientDataChildController
 
   def new
+    
+    if !@isoCountries
+      @isoCountries = IsoCountry.find(:all, :order => "name ASC")
+    end
+    if !@contractTypes
+      @contactTypes = ContactType.find(:all, :order => "name ASC")
+    end
+    if !@relationships
+      @relationships = Relationship.find(:all, :order => "name ASC")
+    end
+    
     @support = Support.new
     @support.person_name = PersonName.new
     @support.address = Address.new
     @support.telecom = Telecom.new
-    @isoCountries = IsoCountry.find(:all, :order => "name ASC")
-    @contactTypes = ContactType.find(:all, :order => "name ASC")
-    @relationships = Relationship.find(:all, :order => "name ASC")
 
     render :partial  => 'edit', :locals => {:support =>  @support,
                                             :patient_data => @patient_data}  
   end
 
   def edit
+    
+    if !@isoCountries
+      @isoCountries = IsoCountry.find(:all, :order => "name ASC")
+    end
+    if !@contractTypes
+      @contactTypes = ContactType.find(:all, :order => "name ASC")
+    end
+    if !@relationships
+      @relationships = Relationship.find(:all, :order => "name ASC")
+    end
+    
     @support = @patient_data.support
-    @isoCountries = IsoCountry.find(:all, :order => "name ASC")
-    @contactTypes = ContactType.find(:all, :order => "name ASC")
-    @relationships = Relationship.find(:all, :order => "name ASC")
+    
     render :partial  => 'edit', :locals => {:support =>  @support,
                                             :patient_data => @patient_data}
   end
