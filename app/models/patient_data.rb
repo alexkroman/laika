@@ -38,6 +38,13 @@ class PatientData < ActiveRecord::Base
       end
     end
     
+    # Insurance Providers
+    #if self.insurance_providers 
+    #  self.insurance_providers.each do |insurance_providers|
+    #    errors.concat(insurance_providers.validate_c32(clinical_document))
+    #  end
+    #end
+    
     # Medications
     if self.medications 
       self.medications.each do |medication|
@@ -60,7 +67,7 @@ class PatientData < ActiveRecord::Base
     # Conditions
     #if self.conditions
     #  self.conditions.each do |condition|
-    #    errors.concat(condition.validate_c2)
+    #    errors.concat(condition.validate_c32(clinical_document))
     #  end  
     #end
     
