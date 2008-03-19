@@ -21,8 +21,6 @@ class InsuranceProvidersController < PatientDataChildController
 
   def edit
     
-    @insurance_provider = @patient_data.insurance_provider
-    
     if !@isoCountries
       @isoCountries = IsoCountry.find(:all, :order => "name ASC")
     end
@@ -30,6 +28,8 @@ class InsuranceProvidersController < PatientDataChildController
       @insuranceTypes = InsuranceType.find(:all, :order => "code ASC")
     end
     
+    @insurance_provider = @patient_data.insurance_providers.find(params[:id])
+
     render :partial  => 'edit', :locals => {:insurance_provider =>  @insurance_provider,
                                             :patient_data => @patient_data}
   end
@@ -37,24 +37,25 @@ class InsuranceProvidersController < PatientDataChildController
   def create
     
     @insurance_provider = InsuranceProvider.new(params[:insurance_provider])
-    @patient_data.insurance_provider = @insurance_provider
     
     @insurance_provider.create_insurance_provider_patient_attributes(params)
     @insurance_provider.create_insurance_provider_subscriber_attributes(params)
     @insurance_provider.create_insurance_provider_guarantorattributes(params)
     
+    @patient_data.insurance_providers << @insurance_provider
+   
     render :partial  => 'show', :locals => {:insurance_provider =>  @insurance_provider,
                                             :patient_data => @patient_data}
   end
 
   def update
     
-    @insurance_provider = @patient_data.insurance_provider
+    @insurance_provider = @patient_data.insurance_providers.find(params[:id])
     @insurance_provider.update_attributes(params[:insurance_provider])
     
-    @insurance_provider.update_insurance_provider_patient_attributes(params)
-    @insurance_provider.update_insurance_provider_subscriber_attributes(params)
-    @insurance_provider.update_insurance_provider_guarantorattributes(params)
+    #@insurance_provider.update_insurance_provider_patient_attributes(params)
+    #@insurance_provider.update_insurance_provider_subscriber_attributes(params)
+    #@insurance_provider.update_insurance_provider_guarantorattributes(params)
 
     render :partial  => 'show', :locals => {:insurance_provider =>  @insurance_provider,
                                             :patient_data => @patient_data}

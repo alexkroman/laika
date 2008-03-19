@@ -128,13 +128,21 @@
                  
           <!-- Start Insurance Provider Module -->
           <div id="insuranceProviderContainer">
-          <h5>Insurance Provider</h5>
+          <h5>Insurance Providers</h5>
+          <% for insurance_provider in @patient_data.insurance_providers %>
+            <div id="insurance_provider<%= insurance_provider.id %>">
+              <%= render :partial => '/insurance_providers/show', 
+                         :locals => {:insurance_provider  => insurance_provider, :patient_data => @patient_data} %>
+            </div>
+          <% end %>
           <table id="addInsuranceProvider">
             <tr class="<%= cycle("darkzebra", "lightzebra")%>">
               <td></td>
-              <td></td>                                       
+              <td><%= link_to_remote 'Add', :url => new_patient_data_instance_insurance_provider_path(@patient_data), 
+                                            :method => 'get', :update => 'addInsuranceProvider', :position => :before %>
+              </td>                                       
             </tr>                                               
-          </table>
+          </table>           
           </div>
           <!-- End Insurance Provider Module -->   
           

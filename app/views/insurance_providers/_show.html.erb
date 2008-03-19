@@ -1,0 +1,27 @@
+<table>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Insurance Provider Organization</td>
+    <td><%=h insurance_provider.represented_organization %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Insurance Type</td>
+    <td>
+      <%=h insurance_provider.insurance_type.name %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td></td>
+    <td>
+    <span>
+      <%= link_to_remote 'Edit', :update => "insurance_provider#{insurance_provider.id}",
+                                 :url => edit_patient_data_instance_insurance_provider_path(patient_data, insurance_provider),
+                                 :method => 'get' %>
+    </span>
+    <span>
+      <%= link_to_remote 'Remove', :update => "insurance_provider#{insurance_provider.id}",
+                                 :url => patient_data_instance_insurance_provider_path(patient_data, insurance_provider),
+                                 :method => 'delete' %>
+    </span>    
+    </td>
+  </tr>
+</table>

@@ -5,6 +5,7 @@ class PatientData < ActiveRecord::Base
   has_many   :medications
   has_one    :support
   has_many   :allergies
+  has_many   :insurance_providers
   has_many   :conditions
   has_one    :information_source
   has_one    :advance_directive
