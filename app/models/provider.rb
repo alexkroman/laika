@@ -76,9 +76,18 @@ class Provider < ActiveRecord::Base
         xml.performer("typeCode" => "PRF") {
         xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.4", 
                        "assigningAuthorityName" => "HITSP/C32")
+
         if !provider_role.blank?
            provider_role.to_c32(xml,provider_role_free_text)
         end
+        xml.time{
+            if start_service 
+                      xml.low('value'=> start_service.strftime("%Y%m%d"))
+                    end
+                    if end_service 
+                      xml.high('value'=> end_service.strftime("%Y%m%d"))
+          end
+        }        
         xml.assignedEntity{
             xml.id
             if !organization.blank?

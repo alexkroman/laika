@@ -66,6 +66,7 @@ class RegistrationInformation < ActiveRecord::Base
                 patient_data.support.contact_type &&
                 patient_data.support.contact_type.code == "GUARD"
                # do the gaurdian stuff here  non gaurdian is placed elsewhere
+                patient_data.support.to_c32(xml)
       end     
       patient_data.languages.andand.each do |language|
       language.to_c32(xml)

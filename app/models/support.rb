@@ -94,18 +94,16 @@ class Support < ActiveRecord::Base
     else
       xml.participant("typeCode" => "IND") {
         xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.3")
-        if start_support != nil || end_support != nil
-          xml.effectiveTime {
-            if start_support != nil 
-              xml.low("value" => start_support.strftime("%Y%m%d"))
-            end
-            if end_support != nil
-              xml.high("value" => end_support.strftime("%Y%m%d"))
-            else
-              xml.high("nullFlavor" => "UNK")
-            end
-          }
-        end
+
+        xml.time{
+                    if start_support 
+                              xml.low('value'=> start_support.strftime("%Y%m%d"))
+                            end
+                            if end_support
+                              xml.high('value'=> end_support.strftime("%Y%m%d"))
+                  end
+                }      
+
         xml.associatedEntity("classCode" => contact_type.code) {
           xml.code("code" => relationship.code, 
                "displayName" => relationship.name,

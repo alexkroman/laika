@@ -94,6 +94,7 @@ XPATH
              else
                 xml.code("nullFlavor"=>"N/A")
             end
+               xml.statusCode("code"=>"completed")
             if start_event != nil || end_event != nil
               xml.effectiveTime {
                 if start_event != nil 
@@ -109,17 +110,19 @@ XPATH
             xml.participant("typeCode" => "CSM") {
               xml.participantRole("classCode" => "MANU") {
                 xml.playingEntity("classCode" => "MMAT") {
-                  if product_code != nil
+                 
                     xml.code("code" => product_code, 
                            "displayName" => free_text_product, 
                            "codeSystem" => "2.16.840.1.113883.6.88", 
                            "codeSystemName" => "RxNorm")
-                  end
+                  
                   xml.name free_text_product
                 }
               }
             }
-            if severity_term != nil
+            }
+            }
+            if severity_term
               xml.entryRelationship("typeCode" => "SUBJ", "inversionInd" => "true") {
                 xml.observation("classCode" => "OBS", "moodCode" => "EVN") {
                   xml.templateId("root" => "2.16.840.1.113883.10.20.1.55")
@@ -141,8 +144,8 @@ XPATH
             end
           }
         }
-      }
-    }
+      
+    
     
   end
   

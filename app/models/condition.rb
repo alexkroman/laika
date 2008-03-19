@@ -44,6 +44,7 @@ class Condition < ActiveRecord::Base
         xml.templateId("root" => "2.16.840.1.113883.10.20.1.27", "assigningAuthorityName" => "CCD")
         xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.7", "assigningAuthorityName" => "HITSP/C32")
         xml.id
+        xml.code("nullFlavor"=>"NA")
         if start_event != nil || end_event != nil
           xml.effectiveTime {
             if start_event != nil 
