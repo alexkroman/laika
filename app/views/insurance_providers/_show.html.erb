@@ -10,6 +10,12 @@
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Financial Responsibility Type</td>
+    <td>
+      <%=h insurance_provider.role_class_relationship_formal_type.name %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td colspan="2" class="lighttext">Insurance Provider Patient</td>
   </tr>
   <%= render :partial => '/insurance_provider_patients/show', :locals => {:insurance_provider_patient => insurance_provider.insurance_provider_patient}%> 

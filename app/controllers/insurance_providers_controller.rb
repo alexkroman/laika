@@ -14,6 +14,9 @@ class InsuranceProvidersController < PatientDataChildController
     if !@insuranceTypes
       @insuranceTypes = InsuranceType.find(:all, :order => "code ASC")
     end
+    if !@roleClassRelationshipFormalTypes
+      @roleClassRelationshipFormalTypes = RoleClassRelationshipFormalType.find(:all, :order => "code ASC")
+    end
     
     render :partial  => 'edit', :locals => {:insurance_provider =>  @insurance_provider,
                                             :patient_data => @patient_data}  
@@ -26,6 +29,9 @@ class InsuranceProvidersController < PatientDataChildController
     end
     if !@insuranceTypes
       @insuranceTypes = InsuranceType.find(:all, :order => "code ASC")
+    end
+    if !@roleClassRelationshipFormalTypes
+      @roleClassRelationshipFormalTypes = RoleClassRelationshipFormalType.find(:all, :order => "code ASC")
     end
     
     @insurance_provider = @patient_data.insurance_providers.find(params[:id])

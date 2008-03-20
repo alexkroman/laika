@@ -22,6 +22,12 @@
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Financial Responsibility Type</td>
+    <td>
+      <%= f.select :role_class_relationship_formal_type_id, @roleClassRelationshipFormalTypes.collect{|role_class_relationship_formal_type| [role_class_relationship_formal_type.name, role_class_relationship_formal_type.id]} %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td colspan="2" class="lighttext">Insurance Provider Patient</td>
   </tr>
   <%= render :partial => '/insurance_provider_patients/edit', :locals => {:insurance_provider_patient => insurance_provider.insurance_provider_patient}%> 

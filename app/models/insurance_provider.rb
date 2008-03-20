@@ -4,6 +4,7 @@ class InsuranceProvider < ActiveRecord::Base
 
   belongs_to :patient_data
   belongs_to :insurance_type
+  belongs_to :role_class_relationship_formal_type
   
   has_one    :insurance_provider_patient
   has_one    :insurance_provider_subscriber
