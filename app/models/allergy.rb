@@ -34,16 +34,16 @@ XPATH
       errors << match_value(adverse_event, "cda:participant[@typeCode='CSM']/cda:participantRole[@classCode='MANU']/cda:playingEntity[@classCode='MMAT']/cda:name", 
                             'free_text_product', self.free_text_product)
      
-       if self.severity_term
-      
-        severity_element = REXML::XPath.first(adverse_event, "cda:entryRelationship[@typeCode='SUBJ']/cda:observation[cda:templateId/@root='2.16.840.1.113883.10.20.1.55']",
-                                              @@default_namespaces)
-        if severity_element
-          errors.concat(self.severity_term.validate_c32(severity_element))
-        else
-          errors << ContentError.new(:section => 'allergies', :subsection => 'severity_term', :error_message => "Unable to find severity", :location => adverse_event.andand.xpath)
-        end
-      end
+       # if self.severity_term
+       #       
+       #  severity_element = REXML::XPath.first(adverse_event, "cda:entryRelationship[@typeCode='SUBJ']/cda:observation[cda:templateId/@root='2.16.840.1.113883.10.20.1.55']",
+       #                                        @@default_namespaces)
+       #  if severity_element
+       #    errors.concat(self.severity_term.validate_c32(severity_element))
+       #  else
+       #    errors << ContentError.new(:section => 'allergies', :subsection => 'severity_term', :error_message => "Unable to find severity", :location => adverse_event.andand.xpath)
+       #  end
+       # end
     else
       errors << ContentError.new(:section => 'allergies', :error_message => "Unable to find product #{free_text_product}", :location => section.andand.xpath)
     end
