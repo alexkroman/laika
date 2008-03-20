@@ -341,9 +341,9 @@ class PatientData < ActiveRecord::Base
                 }
                 
                 # Start structured XML
-                #insurance_providers.andand.each do |structuredInsuranceProvider|
-                #  structuredInsuranceProvider.to_c32(xml)
-                #end
+                insurance_providers.andand.each do |structuredInsuranceProvider|
+                  structuredInsuranceProvider.to_c32(xml)
+                end
                 # End structured XML
               }
             }
