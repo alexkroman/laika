@@ -9,8 +9,8 @@ class Support < ActiveRecord::Base
   
   def validate_c32(xml)
     errors = []
-    support = REXML::XPath.first(xml, "/cda:ClinicalDocument/cda:participant/cda:associatedEntity[cda:associatedPerson/cda:name/text() = $name ] | /cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:guardian[cda:guardianPerson/cda:name/text() = $name]",
-        {'cda' => 'urn:hl7-org:v3'}, {"name" => name})
+    support = REXML::XPath.first(xml, "/cda:ClinicalDocument/cda:participant/cda:associatedEntity[cda:associatedPerson/cda:name/cda:given/text() = $first_name ] | /cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:guardian[cda:guardianPerson/cda:name/cda:given/text() = $first_name]",
+        {'cda' => 'urn:hl7-org:v3'}, {"first_name" => person_name.first_name})
     if support
       time_element = REXML::XPath.first(support, "../cda:time", {'cda' => 'urn:hl7-org:v3'})
       if time_element
@@ -56,10 +56,6 @@ class Support < ActiveRecord::Base
     
     errors.compact
     
-  end
-  
-  def name
-    self.person_name.first_name + ' ' + self.person_name.last_name
   end
   
   def to_c32(xml)

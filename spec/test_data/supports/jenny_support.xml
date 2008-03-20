@@ -16,7 +16,11 @@
         <country>US</country>
       </addr>
       <associatedPerson>
-        <name>Nathan Thompson</name>
+        <name>
+          <prefix>Mr.</prefix>
+          <given>Nathan</given>
+          <family>Thompson</family>
+        </name>
       </associatedPerson>
     </associatedEntity>
   </participant>
