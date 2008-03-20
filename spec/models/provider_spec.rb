@@ -28,8 +28,15 @@ describe Provider, "can create a C32 representation of itself" do
                          "xmlns" => "urn:hl7-org:v3", 
                          "xmlns:sdct" => "urn:hl7-org:sdct", 
                          "xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance") do
-                           
-      provider.to_c32(xml)
+        xml.documentationOf do 
+            xml.serviceEvent("classCode" => "PCPR") do 
+              xml.effectiveTime  do
+                 xml.low('value'=> "0")
+                 xml.high('value'=> "2010")
+              end     
+                provider.to_c32(xml)
+         end 
+      end
     end
 
     document = REXML::Document.new(StringIO.new(buffer))
