@@ -58,6 +58,8 @@ class AdvanceDirective < ActiveRecord::Base
               xml.content(free_text, "ID" => "advance-directive-" + id.to_s)
             end
             xml.entry do
+                
+     
               xml.observation("classCode" => "OBS", "moodCode" => "EVN") do
                 xml.templateId("root" => "2.16.840.1.113883.10.20.1.17", "assigningAuthorityName" => "CCD")
                 xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.13", "assigningAuthorityName" => "HITSP/C32")
@@ -94,6 +96,15 @@ class AdvanceDirective < ActiveRecord::Base
                     end
                   end
                 end
+                
+                xml.entryRelationship('typeCode'=>"REFR") do
+                    xml.observation('classCode'=>"OBS" ,'moodCode'=>"EVN") do
+                       xml.templateId('root'=>'2.16.840.1.113883.10.20.1.37')
+                       xml.code('code'=>"33999-4", 'codeSystem'=>"2.16.840.1.113883.6.1", 'displayName'=>"Status")
+                       xml.statusCode('code'=>"completed")
+                       xml.value('xsi:type'=>"CE", 'code'=>"15240007", 'codeSystem'=>"2.16.840.1.113883.6.96", 'displayName'=>"Current and verified")
+                     end
+                   end
               end
             end
           end

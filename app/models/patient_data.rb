@@ -210,7 +210,6 @@ class PatientData < ActiveRecord::Base
                xml.low('value'=> "0")
                xml.high('value'=> "2010")
               }
-      
            providers.andand.each do |provider|
              provider.to_c32(xml)
            end      
