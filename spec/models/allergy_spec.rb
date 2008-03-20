@@ -24,12 +24,7 @@ describe Allergy, "can create a C32 representation of itself" do
   it "should create valid C32 content" do
     joe_allergy = allergies(:joes_allergy)
     
-    buffer = ""
-    xml = Builder::XmlMarkup.new(:target => buffer, :indent => 2)
-    xml.ClinicalDocument("xsi:schemaLocation" => "urn:hl7-org:v3 http://xreg2.nist.gov:8080/hitspValidation/schema/cdar2c32/infrastructure/cda/C32_CDA.xsd", 
-                         "xmlns" => "urn:hl7-org:v3", 
-                         "xmlns:sdct" => "urn:hl7-org:sdct", 
-                         "xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance") do
+    document = LaikaSpecHelper.build_c32 do |xml|
        xml.component do
          xml.structuredBody do
              xml.component do
@@ -83,7 +78,6 @@ describe Allergy, "can create a C32 representation of itself" do
            
        end
     end
-    document = REXML::Document.new(StringIO.new(buffer))
     errors = joe_allergy.validate_c32(document.root)
     errors.should be_empty
   end
