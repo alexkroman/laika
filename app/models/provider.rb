@@ -57,16 +57,6 @@ class Provider < ActiveRecord::Base
  
  
  def to_c32(xml)
-     xml.documentationOf {
-     xml.serviceEvent("classCode" => "PCPR") {
-       xml.effectiveTime {
-        if start_service 
-          xml.low('value'=> start_service.strftime("%Y%m%d"))
-        end
-        if end_service 
-          xml.high('value'=> end_service.strftime("%Y%m%d"))
-        end
-      }
 
         xml.performer("typeCode" => "PRF") {
         xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.4", 
@@ -107,8 +97,7 @@ class Provider < ActiveRecord::Base
           end
         end
       }
-    }
-   }
+
  end
  
 end

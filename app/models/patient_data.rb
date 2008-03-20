@@ -207,10 +207,19 @@ class PatientData < ActiveRecord::Base
         support.to_c32(xml)
       end          
         
-      providers.andand.each do |provider|
-        provider.to_c32(xml)
-      end      
-         
+      
+      xml.documentationOf {
+          xml.serviceEvent("classCode" => "PCPR") {
+            xml.effectiveTime {
+               xml.low('value'=> "0")
+               xml.high('value'=> "2010")
+           }
+      
+           providers.andand.each do |provider|
+             provider.to_c32(xml)
+           end      
+            }
+           }         
       xml.component {
         xml.structuredBody {
         
