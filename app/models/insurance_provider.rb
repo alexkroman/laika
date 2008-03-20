@@ -22,16 +22,22 @@ class InsuranceProvider < ActiveRecord::Base
   def to_c32(xml)
     xml.entry {
       xml.act("classCode" => "ACT", "moodCode" => "EVN") {
-        xml.templateId("root" => "2.16.840.1.113883.10.20.1.20'", "assigningAuthorityName" => "CCD")
+        xml.templateId("root" => "2.16.840.1.113883.10.20.1.20", "assigningAuthorityName" => "CCD")
+        xml.code('code'=>'48768-6', 'displayName'=>'Payment Sources',
+            'codeSystem'=>'2.16.840.1.113883.6.1' ,'codeSystemName'=>'LOINC')
+        xml.statusCode('code'=>'completed')
+               
         xml.entryRelationship("typeCode" => "COMP") {
           xml.act("classCode" => "ACT", "moodCode" => "EVN") {
             xml.templateId("root" => "2.16.840.1.113883.10.20.1.26")
             xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.5")
-            if insurance_type != nil
+            if insurance_type 
               xml.code("code" => insurance_type.code, 
                        "displayName" => insurance_type.name, 
                        "codeSystem" => "2.16.840.1.113883.6.255.1336", 
                        "codeSystemName" => "X12N-1336")
+            else
+                xml.code("nullFlavour"=>"NA")
             end
             
             # represented organization
