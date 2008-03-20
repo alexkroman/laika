@@ -187,11 +187,7 @@ class PatientData < ActiveRecord::Base
       xml.languageCode("code" => "en-US")
       xml.recordTarget {
         xml.patientRole {
-          xml.id("extension" => "24602", 
-                 "root" => "SomeClinicalOrganizationOID", 
-                 "assigningAuthorityName" => "Some Clinical Organization Name") 
-            registration_information.andand.to_c32(xml)
-            
+          registration_information.andand.to_c32(xml)
         }   
       }
       information_source.andand.to_c32(xml)

@@ -49,6 +49,7 @@ class RegistrationInformation < ActiveRecord::Base
   
   
   def to_c32(xml = Builder::XmlMarkup.new)
+   xml.id("extension" => person_identifier)
    address.andand.to_c32(xml)
    telecom.andand.to_c32(xml)
     xml.patient{
