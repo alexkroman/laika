@@ -259,8 +259,8 @@ class PatientData < ActiveRecord::Base
                 xml.title "Conditions or Problems"
                 xml.text {
                   conditions.andand.each do |condition|
-                  xml.paragraph (condition.free_text_name, 
-                                 "ID" => "problem-"+condition.id.to_s) 
+                  xml.content (condition.free_text_name, 
+                               "ID" => "problem-"+condition.id.to_s) 
                   end
                 }
                 

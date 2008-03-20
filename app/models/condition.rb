@@ -11,10 +11,10 @@ class Condition < ActiveRecord::Base
   def validate_c32(document)
     
     errors = []
-    section = REXML::XPath.first(document,"//cda:section[cda:templateId/@root='2.16.840.1.113883.10.20.1.1']",@@default_namespaces)
+    section = REXML::XPath.first(document,"//cda:section[cda:templateId/@root='2.16.840.1.113883.10.20.1.11']",@@default_namespaces)
     act = REXML::XPath.first(section,"cda:entry/cda:act[cda:templateId/@root='2.16.840.1.113883.10.20.1.27']",@@default_namespaces)
-    observation = REXML::XPath.first(act,"cda:entryRelationship[@typeCode='SUBJ']/cda:observation/@root='2.16.840.1.113883.10.20.1.28']",@@default_namespaces)
-    code = REXML::XPath.first(observation,"cda:code/@codeSystem='2.16.840.1.113883.6.96'",@@default_namespaces)
+    observation = REXML::XPath.first(act,"cda:entryRelationship[@typeCode='SUBJ']/cda:observation[cda:templateId/@root='2.16.840.1.113883.10.20.1.28']",@@default_namespaces)
+    code = REXML::XPath.first(observation,"cda:code[@codeSystem='2.16.840.1.113883.6.96']",@@default_namespaces)
     
     if problem_type
       errors.concat problem_type.validate_c32(code)
@@ -26,7 +26,7 @@ class Condition < ActiveRecord::Base
     if free_text_name
       text =  REXML::XPath.first(observation,"cda:text",@@default_namespaces)
       deref_text = deref(text)
-      if(deref_text != free_text)
+      if(deref_text != free_text_name)
         errors << ContentError.new(:section=>"Condition",
                 :error_message=>"Free text name #{free_text_name} does not match #{deref_text}",
                 :location=>(text)? text.xpath : (code)? code.xpath : section.xpath )
