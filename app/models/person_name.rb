@@ -3,6 +3,8 @@ class PersonName < ActiveRecord::Base
 
   belongs_to :nameable, :polymorphic => true
   
+  include MatchHelper
+  
   # Checks the contents of the REXML::Element passed in to make sure that they match the
   # information in this object. This method expects the the element passed in to be the
   # name element that it will evaluate.
@@ -12,17 +14,27 @@ class PersonName < ActiveRecord::Base
     
     errors = []
     if name_element
-    errors << match_value(name_element, 'cda:prefix', self.name_prefix)
-    errors << match_value(name_element, 'cda:given', self.first_name)
-    errors << match_value(name_element, 'cda:family', self.last_name)
-    errors << match_value(name_element, 'cda:suffix', self.name_suffix)
+    errors << match_value(name_element, 'cda:prefix', 'name_prefix', self.name_prefix)
+    errors << match_value(name_element, 'cda:given', 'first_name', self.first_name)
+    errors << match_value(name_element, 'cda:family', 'last_name', self.last_name)
+    errors << match_value(name_element, 'cda:suffix', 'name_suffix', self.name_suffix)
     else
-        errors << ContentError.new(:section => self.nameable_type.underscore, 
-        :error_message => "name element was null",:location=>name_element ? name_element.xpath : nil)
+        errors << ContentError.new(:section => self.nameable_type.underscore,
+                                   :error_message => "name element was null",
+                                   :location => name_element.andand.xpath)
     end
     errors.compact
   end
   
+  #Reimplementing from MatchHelper
+  def section_name
+    self.nameable_type.underscore
+  end
+
+  #Reimplementing from MatchHelper  
+  def subsection_name
+    'person_name'
+  end
   
   def to_c32(xml)
     xml.name {
@@ -41,16 +53,4 @@ class PersonName < ActiveRecord::Base
     }    
   end
   
-  
-  private
-  
-  def match_value(name_element, xpath, value)
-    error = XmlHelper.match_value(name_element, xpath, value)
-    if error
-      return ContentError.new(:section => self.nameable_type.underscore, :subsection => '',
-          :error_message => error,:location=>name_element ? name_element.xpath : nil)
-    else
-      return nil
-    end
-  end
 end
