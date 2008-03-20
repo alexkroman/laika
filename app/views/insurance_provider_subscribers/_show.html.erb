@@ -1,3 +1,7 @@
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Subscriber ID</td>
+    <td><% if insurance_provider_subscriber.subscriber_id != nil %><%=h insurance_provider_subscriber.subscriber_id %><% end %></td>
+  </tr>
   <%= render :partial => '/person_names/show', :locals => {:person_name => insurance_provider_subscriber.person_name}%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Subscriber Birth Date</td>

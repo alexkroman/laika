@@ -26,6 +26,36 @@ module PersonLike
         self.address = Address.new(params[:address])
         self.telecom = Telecom.new(params[:telecom])
       end
+      
+      def has_any_data
+        
+        unless self.person_name
+          self.person_name.attributes.values{|value|
+            unless pair.blank?
+              return true  
+            end
+          }
+        end
+        
+        unless self.address
+          self.address.attributes.values{|value|
+            unless pair.blank?
+              return true  
+            end
+          }
+        end
+        
+        unless self.telecom
+          self.telecom.attributes.values{|value|
+            unless pair.blank?
+              return true  
+            end
+          }
+        end
+        
+        return false
+        
+      end
     end
   end
 end

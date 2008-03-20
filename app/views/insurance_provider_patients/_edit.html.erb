@@ -1,3 +1,21 @@
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Member ID</td>
+    <td>
+      <input id="insurance_provider_patient_member_id" name="insurance_provider_patient[member_id]" size="30" type="text" <% if insurance_provider_patient.member_id != nil %>value="<%= insurance_provider_patient.member_id %>"<% end %> />
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Start Coverage Date</td>
+    <td>
+      <input id="insurance_provider_patient_start_coverage_date" name="insurance_provider_patient[start_coverage_date]" size="30" type="text" <% if insurance_provider_patient.start_coverage_date != nil %>value="<%= insurance_provider_patient.start_coverage_date.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" />
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">End Coverage Date</td>
+    <td>
+      <input id="insurance_provider_patient_end_coverage_date" name="insurance_provider_patient[end_coverage_date]" size="30" type="text" <% if insurance_provider_patient.end_coverage_date != nil %>value="<%= insurance_provider_patient.end_coverage_date.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" />
+    </td>
+  </tr>
   <%= render :partial => '/person_names/edit', :locals => {:person_name => insurance_provider_patient.person_name}%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Patient Birth Date</td>
