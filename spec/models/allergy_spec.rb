@@ -84,9 +84,7 @@ describe Allergy, "can create a C32 representation of itself" do
        end
     end
     document = REXML::Document.new(StringIO.new(buffer))
-    puts buffer
     errors = joe_allergy.validate_c32(document.root)
-    puts errors.map { |e| e.error_message }.join(' ')
     errors.should be_empty
   end
 end

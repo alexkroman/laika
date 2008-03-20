@@ -37,9 +37,7 @@ describe InformationSource, "can create a C32 representation of itself" do
       information_source.to_c32(xml)
     end
     document = REXML::Document.new(StringIO.new(buffer))
-    puts buffer
     errors = information_source.validate_c32(document.root)
-    puts errors.map { |e| e.error_message }.join(' ')
     errors.should be_empty
   end
 end
