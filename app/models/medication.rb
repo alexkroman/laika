@@ -11,7 +11,7 @@ class Medication < ActiveRecord::Base
   
   def validate_c32(xml)
     errors=[]
-    context = REXML::XPath.first(xml,"//cda:section[./cda:templateId[@root eq '2.16.840.1.113883.10.20.1.8']]",@@default_namespaces )
+    context = REXML::XPath.first(xml,"//cda:section[./cda:templateId[@root = '2.16.840.1.113883.10.20.1.8']]",@@default_namespaces )
     # IF there is an entry for this medication then there will be a substanceAdministration element
     # that contains a consumable that contains a manufacturedProduct that has a code with the original text 
     # equal to the name of the generic medication

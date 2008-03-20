@@ -20,3 +20,19 @@ describe PatientData, "can copy itself" do
     @patient_data_copy.registration_information.person_name.last_name.should == 'Smith'
   end
 end
+
+describe PatientData, "can create a C32 representation of itself" do
+  fixtures :patient_data, :registration_information, :person_names, :addresses,
+           :telecoms, :genders, :medications
+  
+  it "should create valid C32 content" do
+    patient_data = patient_data(:joe_smith)
+    
+    buffer = ""
+    xml = Builder::XmlMarkup.new(:target => buffer, :indent => 2)
+    patient_data.to_c32(xml)
+    document = REXML::Document.new(StringIO.new(buffer))
+    errors = patient_data.validate_c32(document.root)
+    errors.should be_empty
+  end
+end
