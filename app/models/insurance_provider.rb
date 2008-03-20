@@ -49,8 +49,8 @@ class InsuranceProvider < ActiveRecord::Base
             if insurance_provider_patient != nil && insurance_provider_patient.has_any_data
               xml.participant("typeCode" => "COV") {
                 xml.participantRole("classCode" => "PAT") {
-                  xml.code("code" => "SUBSCR", 
-                           "displayName" => "subscriber", 
+                  xml.code("code" => insurance_provider_patient.coverage_role_type.code, 
+                           "displayName" => insurance_provider_patient.coverage_role_type.name, 
                            "codeSystem" => "2.16.840.1.113883.5.111", 
                            "codeSystemName" => "RoleCode") {
                     xml.playingEntity {
