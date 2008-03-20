@@ -42,7 +42,10 @@ class Medication < ActiveRecord::Base
          "cda:entryRelationship[@typeCode='REFR']/cda:supply[@moodCode='INT']", @@default_namespaces)
       if order
         errors << match_value(order, "cda:quantity/@value", "quantity_ordered_value", quantity_ordered_value)
-        errors << match_value(order, "cda:effectiveTime/cda:high/@value", "expiration_time", expiration_time.andand.to_formatted_s(:hl7_ts))
+
+        # This differs from the XPath expression given in the C32 spec which claims that the value should be under cda:high
+        # however, the CCD schema claims that it should be an effectiveTime with no children
+        errors << match_value(order, "cda:effectiveTime/@value", "expiration_time", expiration_time.andand.to_formatted_s(:hl7_ts))
       end
 
     else
@@ -75,7 +78,7 @@ class Medication < ActiveRecord::Base
                        "displayName" => product_coded_display_name, 
                        "codeSystem" => code_system.code, 
                        "codeSystemName" => code_system.name){
-                           xml.originalText(free_text_brand_name )
+                           xml.originalText(product_coded_display_name)
                        } 
                end         
               if free_text_brand_name 
@@ -89,7 +92,8 @@ class Medication < ActiveRecord::Base
          
             xml.entryRelationship("typeCode" => "SUBJ"){
             xml.observation("classCode" => "OBS", "moodCode" => "EVN") {
-              xml.templateId("root" => "2.16.840.1.113883.3.88.1.11.32.10") 
+                                       
+              xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.10") 
                 xml.code("code" => medication_type.code, 
                          "displayName" => medication_type.name, 
                          "codeSystem" => "2.16.840.1.113883.6.96", 

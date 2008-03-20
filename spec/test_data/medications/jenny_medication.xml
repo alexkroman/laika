@@ -80,9 +80,7 @@
                   <id/>
                   <code nullFlavor="NA"/>
                   <statusCode/>
-                  <effectiveTime>
-                    <high value="20151002"/>
-                  </effectiveTime>
+                  <effectiveTime value="20151002"/>
                 </supply>
               </entryRelationship>
             </substanceAdministration>
