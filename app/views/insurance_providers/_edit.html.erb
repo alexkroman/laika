@@ -22,6 +22,12 @@
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Relationship to Subscriber</td>
+    <td>
+      <%= f.select :coverage_role_type_id, @coverageRoleTypes.collect{|coverage_role_type| [coverage_role_type.name, coverage_role_type.id]} %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Financial Responsibility Type</td>
     <td>
       <%= f.select :role_class_relationship_formal_type_id, @roleClassRelationshipFormalTypes.collect{|role_class_relationship_formal_type| [role_class_relationship_formal_type.name, role_class_relationship_formal_type.id]} %>

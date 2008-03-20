@@ -4,8 +4,9 @@ class InsuranceProvider < ActiveRecord::Base
 
   belongs_to :patient_data
   belongs_to :insurance_type
+  belongs_to :coverage_role_type
   belongs_to :role_class_relationship_formal_type
-  
+
   has_one    :insurance_provider_patient
   has_one    :insurance_provider_subscriber
   has_one    :insurance_provider_guarantor
@@ -123,7 +124,10 @@ class InsuranceProvider < ActiveRecord::Base
               xml.performer("typeCode" => "PRF") {
                 xml.time("value" => insurance_provider_guarantor.effective_date.strftime("%Y%m%d"))
                 xml.assignedEntity {
-                  xml.code("code" => "GUAR", "displayName" => "Guarantor", "codeSystem" => "2.16.840.1.113883.5.110", "codeSystemName" => "RoleClass")
+                  xml.code("code" => role_class_relationship_formal_type.code, 
+                           "displayName" => role_class_relationship_formal_type.code, 
+                           "codeSystem" => "2.16.840.1.113883.5.110", 
+                           "codeSystemName" => "RoleClass")
                   xml.assignedPerson {
                     xml.name {
                       if insurance_provider_guarantor.person_name.name_prefix &&

@@ -1,17 +1,20 @@
 joe_smiths_insurance_provider:
   represented_organization: Blue Cross Blue Shield
+  coverage_role_type: self
   insurance_type: hmo
   role_class_relationship_formal_type: patient
   patient_data: joe_smith
 
 emily_jones_insurance_provider:
   represented_organization: Harvard Pilgrim
+  coverage_role_type: natural_child
   insurance_type: supplimental_policy
   role_class_relationship_formal_type: patient
   patient_data: emily_jones
 
 jennifer_thompsons_insurance_provider:
   represented_organization: Cheap Insurance
+  coverage_role_type: self
   insurance_type: commercial
   role_class_relationship_formal_type: patient
   patient_data: jennifer_thompson

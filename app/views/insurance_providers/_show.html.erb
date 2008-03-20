@@ -10,6 +10,12 @@
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Relationship to Subscriber</td>
+    <td>
+      <%=h insurance_provider.coverage_role_type.name %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Financial Responsibility Type</td>
     <td>
       <%=h insurance_provider.role_class_relationship_formal_type.name %>

@@ -12,10 +12,13 @@ class InsuranceProvidersController < PatientDataChildController
       @isoCountries = IsoCountry.find(:all, :order => "name ASC")
     end
     if !@insuranceTypes
-      @insuranceTypes = InsuranceType.find(:all, :order => "code ASC")
+      @insuranceTypes = InsuranceType.find(:all, :order => "name ASC")
     end
     if !@roleClassRelationshipFormalTypes
-      @roleClassRelationshipFormalTypes = RoleClassRelationshipFormalType.find(:all, :order => "code ASC")
+      @roleClassRelationshipFormalTypes = RoleClassRelationshipFormalType.find(:all, :order => "name ASC")
+    end
+    if !@coverageRoleTypes
+      @coverageRoleTypes = CoverageRoleType.find(:all, :order => "name ASC")
     end
     
     render :partial  => 'edit', :locals => {:insurance_provider =>  @insurance_provider,
@@ -28,10 +31,13 @@ class InsuranceProvidersController < PatientDataChildController
       @isoCountries = IsoCountry.find(:all, :order => "name ASC")
     end
     if !@insuranceTypes
-      @insuranceTypes = InsuranceType.find(:all, :order => "code ASC")
+      @insuranceTypes = InsuranceType.find(:all, :order => "name ASC")
     end
     if !@roleClassRelationshipFormalTypes
-      @roleClassRelationshipFormalTypes = RoleClassRelationshipFormalType.find(:all, :order => "code ASC")
+      @roleClassRelationshipFormalTypes = RoleClassRelationshipFormalType.find(:all, :order => "name ASC")
+    end
+    if !@coverageRoleTypes
+      @coverageRoleTypes = CoverageRoleType.find(:all, :order => "name ASC")
     end
     
     @insurance_provider = @patient_data.insurance_providers.find(params[:id])

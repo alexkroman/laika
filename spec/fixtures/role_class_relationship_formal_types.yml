@@ -19,7 +19,7 @@ assigned_entity:
   code: ASSIGNED
 
 contact:
-  name: ontact
+  name: Contact
   code: CON
 
 emergency_contact:
