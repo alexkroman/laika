@@ -49,6 +49,10 @@
                </originalText>
             </administrativeGenderCode>
             <birthTime value="19670323" />
+            <maritalStatusCode code="S" displayName="Never Married" codeSystemName="MaritalStatusCode" codeSystem="2.16.840.1.113883.5.2"/>
+            <religiousAffiliationCode code="1013" displayName="Christian" codeSystemName="Religious Affiliation" codeSystem="2.16.840.1.113883.5.1076"/>
+            <raceCode code="2108-9" displayName="European" codeSystemName="CDC Race and Ethnicity" codeSystem="2.16.840.1.113883.6.238"/>
+            <ethnicGroupCode code="2137-8" displayName="Spaniard" codeSystemName="CDC Race and Ethnicity" codeSystem="2.16.840.1.113883.6.238"/>
             <languageCommunication>
                <templateId root='2.16.840.1.113883.3.88.11.32.2' />
                <languageCode code="en-US" />
