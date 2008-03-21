@@ -165,7 +165,7 @@ class PatientData < ActiveRecord::Base
       
     xml.ClinicalDocument("xsi:schemaLocation" => "urn:hl7-org:v3 http://xreg2.nist.gov:8080/hitspValidation/schema/cdar2c32/infrastructure/cda/C32_CDA.xsd", 
                          "xmlns" => "urn:hl7-org:v3", 
-                         "xmlns:sdct" => "urn:hl7-org:sdct", 
+                         "xmlns:sdtc" => "urn:hl7-org:sdtc", 
                          "xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance") {
       xml.typeId("root" => "2.16.840.1.113883.1.3", 
                  "extension" => "POCD_HD000040")
