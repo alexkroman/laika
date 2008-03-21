@@ -73,7 +73,8 @@ class PatientData < ActiveRecord::Base
     
     # Information Source
     if self.information_source
-      errors.concat(self.information_source.validate_c32(clinical_document))
+      # Need to pass in the root element otherwise the first XPath expression doesn't work
+      errors.concat(self.information_source.validate_c32(clinical_document.root))
     end
     
     # Advance Directive
