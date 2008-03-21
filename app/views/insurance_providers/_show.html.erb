@@ -4,6 +4,10 @@
     <td><%=h insurance_provider.represented_organization %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Insurance Provider Group Number</td>
+    <td><%=h insurance_provider.group_number %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Insurance Type</td>
     <td>
       <%=h insurance_provider.insurance_type.name %>

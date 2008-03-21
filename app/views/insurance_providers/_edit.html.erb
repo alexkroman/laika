@@ -16,6 +16,12 @@
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Insurance Provider Group Number</td>
+    <td>
+      <%= f.text_field :group_number %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Insurance Type</td>
     <td>
       <%= f.select :insurance_type_id, @insuranceTypes.collect{|insurance_type| [insurance_type.name, insurance_type.id]} %>
