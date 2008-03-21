@@ -33,7 +33,6 @@ XPATH
       errors << match_value(adverse_event, "cda:effectiveTime/cda:high/@value", 'end_event', self.end_event.andand.to_formatted_s(:hl7_ts))
       errors << match_value(adverse_event, "cda:participant[@typeCode='CSM']/cda:participantRole[@classCode='MANU']/cda:playingEntity[@classCode='MMAT']/cda:name", 
                             'free_text_product', self.free_text_product)
-     
        # if self.severity_term
        #       
        #  severity_element = REXML::XPath.first(adverse_event, "cda:entryRelationship[@typeCode='SUBJ']/cda:observation[cda:templateId/@root='2.16.840.1.113883.10.20.1.55']",
@@ -112,43 +111,38 @@ XPATH
             xml.participant("typeCode" => "CSM") {
               xml.participantRole("classCode" => "MANU") {
                 xml.playingEntity("classCode" => "MMAT") {
-                 
-                    xml.code("code" => product_code, 
+                  xml.code("code" => product_code, 
                            "displayName" => free_text_product, 
                            "codeSystem" => "2.16.840.1.113883.6.88", 
                            "codeSystemName" => "RxNorm")
-                  
                   xml.name free_text_product
                 }
               }
             }
-            }
-            }
-            if severity_term
-              xml.entryRelationship("typeCode" => "SUBJ", "inversionInd" => "true") {
-                xml.observation("classCode" => "OBS", "moodCode" => "EVN") {
-                  xml.templateId("root" => "2.16.840.1.113883.10.20.1.55")
-                  xml.code("code" => "SEV", 
-                           "displayName" => "Severity",
-                           "codeSystem" => "2.16.840.1.113883.5.4", 
-                           "codeSystemName" => "ActCode")
-                  xml.text {
-                    xml.reference("value" => "#severity-" + id.to_s)
-                  }
-                  xml.statusCode("code" => "completed")
-                  xml.value("xsi:type" => "CD", 
-                            "code" => severity_term.code,
-                            "displayName" => severity_term.name,
-                            "codeSystem" => "2.16.840.1.113883.6.96", 
-                            "codeSystemName" => "SNOMED CT")
-                }
-              }
-            end
           }
         }
-      
-    
-    
+        #if severity_term
+        #  xml.entryRelationship("typeCode" => "SUBJ", "inversionInd" => "true") {
+        #    xml.observation("classCode" => "OBS", "moodCode" => "EVN") {
+        #      xml.templateId("root" => "2.16.840.1.113883.10.20.1.55")
+        #      xml.code("code" => "SEV", 
+        #               "displayName" => "Severity",
+        #               "codeSystem" => "2.16.840.1.113883.5.4", 
+        #               "codeSystemName" => "ActCode")
+        #     xml.text {
+        #        xml.reference("value" => "#severity-" + id.to_s)
+        #     }
+        #     xml.statusCode("code" => "completed")
+        #      xml.value("xsi:type" => "CD", 
+        #                "code" => severity_term.code,
+        #               "displayName" => severity_term.name,
+        #                "codeSystem" => "2.16.840.1.113883.6.96", 
+        #                "codeSystemName" => "SNOMED CT")
+        #    }
+        #  }
+        #end
+      }
+    }
   end
   
 end

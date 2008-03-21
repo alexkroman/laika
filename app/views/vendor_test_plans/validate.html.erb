@@ -1,33 +1,86 @@
+<% @numLaikaErrors = 0 %>
+<% @report.elements.to_a("//Result").each do |res| %>
+<%   res.elements.to_a("./error").each do |err| %> 
+<%     @numLaikaErrors += 1 %>
+<%   end %>
+<% end %>
+  <!-- Start Content -->
   <div class="content">
     <div class="container" >
-    <% @report.elements.to_a("//Result").each do |res| %>
-      <div class="report">
-        <h3><span><%= res.attributes['validator'] %></span>
-            <br/>
-            <span>Passed Validation: <%= res.attributes['isValid'] %></span></h3>
-            <div class="error-list">
-        <% errorCounter = 0 %>
-        <% res.elements.to_a("./error").each do |err| %> 
-          <% errorCounter += 1 %>
-          <% error_id = nil
-             if err.attributes['location'] 
-               error_id = @error_mapping[err.attributes['location']]
-             end %>
-          <div class="indent report_error">
-               <% if error_id %>
-                 <a style="color:#cc3300" href="#error_<%=error_id%>" ><b><%= errorCounter %>.</b> <span><%= err.to_s %></span></a>
-               <% else %>
-                 <span><%= err.to_s %></span>
-               <% end %>
+      <div class="column span-6 append-1">
+        <div id="results">
+          <% if @numLaikaErrors == 0 %>
+            <div class="pass">PASS</div>
+          <% else %>
+            <div class="fail">FAIL</div>
+          <% end %>
+          <div class="info">
+            <h5>Inspection ID: <%= @vendor_test_plan.vendor.public_id %></h5>
+            <p>Laika Testing Compliance</p>
+            <div class="widget">
+              <div class="left on">
+                <div class="visualIndication1">
+                  <div><span class="portion" style="width:23px"></span></div>
+                </div>
+                <span class="number"><%= @numLaikaErrors %></span> violations
+              </div>
+            </div>
+            <table id="details">
+              <tr>
+                <td class="lighttext">Test Date</td>
+                <td><%= @vendor_test_plan.updated_at.strftime("%m.%d.%Y") %></td>
+              </tr>
+              <tr>
+                <td class="lighttext">Test Proctor</td>
+                <td><a href="mailto:<%= @vendor_test_plan.user.email %>">
+                      <%= @vendor_test_plan.user.first_name %> 
+                      <%= @vendor_test_plan.user.last_name %></a>
+                </td>
+              </tr>
+            </table>
           </div>
-      <% end %> 
+        </div>
       </div>
+      <div class="column span-13 last">
+        <div id="template">
+          <h3>Laika XML Inspection Results</h3>
+          <table id="dashboard">
+            <tr valign="top">
+              <th width="125">Error Type</th>
+              <th>Error Message</th>
+            </tr>
+            <% @numLaikaErrors = 0 %>
+            <% @errorType = "C32" %>
+            <% @report.elements.to_a("//Result").each do |res| %>
+            <% @errorType = res.attributes['validator'] %>
+            <% res.elements.to_a("./error").each do |err| %> 
+              <% @numLaikaErrors += 1 %>
+              <% error_id = nil
+                 if err.attributes['location'] 
+                   error_id = @error_mapping[err.attributes['location']]
+                 end %>
+              <tr>
+                <td><%= @errorType.to_s %></td>
+                <td>
+                  <% if error_id %>
+                    <a style="color:#cc3300" href="javascript:scroll_to_module('error_<%=error_id%>', 1.0);" ><b><%= @numLaikaErrors %>.</b> <span><%= err.to_s %></span></a>
+                  <% else %>
+                    <b><%= @numLaikaErrors %>.</b> <span><%= err.to_s %></span>
+                  <% end %>
+                </td>
+              </tr>   
+            <% end %> 
+            <% end %>
+          </table> 
+        </div>
       </div>
-
-    <% end %>
-    <div class='xml-content'>
-    <span><h3>XML Content</h3></span>
-   <%= render :partial=>"node" , :locals=>{"element"=>@doc} %>
-   </div>
+      <h3>Vendor Generated XML</h3>
+      <hr/>
+      <!-- Start Pretty XML -->
+      <div class="column span-19 append-1">
+        <%= render :partial=>"node" , :locals=>{"element"=>@doc} %>
+      </div>
+      <!-- End Pretty XML -->
     </div>
   </div>
+<!-- End Content -->

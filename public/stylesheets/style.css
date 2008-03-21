@@ -341,7 +341,7 @@ table#dashboard a {
 }
 
 #results .left {
-	width:158px;
+	width:195px;
 	height:22px;
 	float:left;
 	text-align:right;
@@ -385,6 +385,7 @@ table#dashboard a {
 }
 
 #results .left .number {
+    font-weight:bold;
 	color:#ff2800;
 	font-size:1.3em;
 }

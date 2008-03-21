@@ -44,7 +44,8 @@ class InsuranceProvider < ActiveRecord::Base
             if represented_organization != nil
               xml.performer("typeCode" => "PRF") {
                 xml.assignedEntity("classCode" => "ASSIGNED") {
-                  xml.representedOrganization("classCode" => "ORG") {
+                  xml.representedOrganization("classCode" => "ORG") {\
+                    xml.id("root" => "2.16.840.1.113883.19.5")
                     xml.name represented_organization
                   }
                 }
