@@ -69,15 +69,20 @@
                   <% end %>
                 </td>
               </tr>   
-            <% end %> 
+            <% end %>
+            <% end %>
+            <% if @numLaikaErrors == 0 %>
+              <tr>
+                <td>--</td><td>No Errors Detected</td>
+              </tr>
             <% end %>
           </table> 
         </div>
       </div>
-      <h3>Vendor Generated XML</h3>
-      <hr/>
       <!-- Start Pretty XML -->
       <div class="column span-19 append-1">
+        <h3>Vendor Generated XML</h3>
+        <hr/>
         <%= render :partial=>"node" , :locals=>{"element"=>@doc} %>
       </div>
       <!-- End Pretty XML -->
