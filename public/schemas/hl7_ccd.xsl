@@ -94,7 +94,7 @@
 		 		 		 		 </xsl:call-template>
 		 		 		 </td>
 		 		    </tr>
-                    <tr><td colspan="3"/><td><font color="#BB2222"><b>CCHIT DISPLAY AND FILE Registration ___</b></font></td></tr>
+                    <tr><td colspan="3"/><td><font color="#DD1111"><b>CCHIT DISPLAY AND FILE Registration: ___</b></font></td></tr>
 		 		 </table>
 		 		 
                 <hr/>
@@ -246,7 +246,7 @@
 		 <a name="{generate-id(.)}" href="#toc"><xsl:value-of select="."/></a>
 		 </span></h3>
 		 <div align="right">
-		   <font color="#BB2222"><b>CCHIT DISPLAY AND FILE <xsl:value-of select="."/> ___</b></font><p/>
+		   <font color="#DD1111"><b>CCHIT DISPLAY AND FILE <xsl:value-of select="."/>: ___</b></font><p/>
 		 </div>
 
 </xsl:template>
