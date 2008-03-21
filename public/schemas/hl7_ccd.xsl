@@ -94,7 +94,7 @@
 		 		 		 		 </xsl:call-template>
 		 		 		 </td>
 		 		    </tr>
-
+                    <tr><td colspan="3"/><td><font color="#BB2222"><b>CCHIT DISPLAY AND FILE Registration ___</b></font></td></tr>
 		 		 </table>
 		 		 
                 <hr/>
@@ -102,7 +102,9 @@
                 		 <h3><a name="toc">Table of Contents</a></h3>
                 		 <ul>
                 		 		 <xsl:for-each select="n1:component/n1:structuredBody/n1:component/n1:section/n1:title">
-                		 		 		 <li><a href="#{generate-id(.)}"><xsl:value-of select="."/></a></li>
+                		 		 		 <li>
+                		 		 		   <a href="#{generate-id(.)}"><xsl:value-of select="."/></a> 
+                		 		 		 </li>
                 		 		 </xsl:for-each>
                 		 </ul>
                 </div>
@@ -233,12 +235,8 @@
 <!-- Component/Section -->    
 <xsl:template match="n1:component/n1:section">
 		 <xsl:apply-templates select="n1:title"/>
-		 		 
-		 <xsl:apply-templates select="n1:text"/>
-		 		 		 		 		 
-        <xsl:apply-templates select="n1:component/n1:section"/>
-     
-
+		 <xsl:apply-templates select="n1:text"/>		 		 		 		 		 
+         <xsl:apply-templates select="n1:component/n1:section"/>
 </xsl:template>
 
 <!--   Title  -->
@@ -247,6 +245,9 @@
 		 <h3><span style="font-weight:bold;">		 
 		 <a name="{generate-id(.)}" href="#toc"><xsl:value-of select="."/></a>
 		 </span></h3>
+		 <div align="right">
+		   <font color="#BB2222"><b>CCHIT DISPLAY AND FILE <xsl:value-of select="."/> ___</b></font><p/>
+		 </div>
 
 </xsl:template>
 

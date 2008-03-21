@@ -14,6 +14,16 @@ class PatientDataController < ApplicationController
     redirect_to :controller => 'patient_data', :action => 'show', :id => @patient_data.id
   end
   
+  def checklist
+    @patient_data = PatientData.find(params[:id])
+    
+    respond_to do |format|
+      format.xml  
+    end
+    
+  end
+
+  
   def show
     @patient_data = PatientData.find(params[:id])
     

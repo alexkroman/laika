@@ -191,32 +191,39 @@ class PatientData < ActiveRecord::Base
           registration_information.andand.to_c32(xml)
         }   
       }
+      
+      # Start Information Source
       information_source.andand.to_c32(xml)
+      # End Information Source
+      
       xml.custodian{
-         xml.assignedCustodian{
-                 xml.representedCustodianOrganization{
-                     xml.id
-                 }
-         }
-          
+        xml.assignedCustodian{
+          xml.representedCustodianOrganization{
+            xml.id
+          }
+        }
       }
+      
+      # Start Guardian Support
       if support && support.contact_type && support.contact_type.code != "GUARD" 
         support.to_c32(xml)
-      end          
-        
+      end
+      # End Guardian Support
       
+      # Start Healthcare Providers
       xml.documentationOf {
-          xml.serviceEvent("classCode" => "PCPR") {
-            xml.effectiveTime {
-               xml.low('value'=> "0")
-               xml.high('value'=> "2010")
-              }
-           providers.andand.each do |provider|
-             provider.to_c32(xml)
-           end      
-            }
-            
-           }         
+        xml.serviceEvent("classCode" => "PCPR") {
+          xml.effectiveTime {
+            xml.low('value'=> "0")
+            xml.high('value'=> "2010")
+          }
+          providers.andand.each do |provider|
+            provider.to_c32(xml)
+          end      
+        }
+      }
+      # End Healthcare Providers
+      
       xml.component {
         xml.structuredBody {
         
@@ -259,17 +266,45 @@ class PatientData < ActiveRecord::Base
                          "codeSystemName" => "LOINC")
                 xml.title "Conditions or Problems"
                 xml.text {
-                  conditions.andand.each do |condition|
-                  xml.content (condition.free_text_name, 
-                               "ID" => "problem-"+condition.id.to_s) 
-                  end
+                
+                  xml.table("border" => "1", "width" => "100%") {
+                    xml.thead {
+                      xml.tr {
+                        xml.th "Problem Name"
+                        xml.th "Problem Type"
+                        xml.th "Problem Date"
+                      }
+                    }
+                    xml.tbody {
+                     conditions.andand.each do |condition|
+                        xml.tr {
+                          if condition.free_text_name != nil
+                            xml.td {
+                              xml.content (condition.free_text_name, 
+                                           "ID" => "problem-"+condition.id.to_s) 
+                            }
+                          else
+                            xml.td
+                          end 
+                          if condition.problem_type != nil
+                            xml.td condition.problem_type.name
+                          else
+                            xml.td
+                          end  
+                          if condition.start_event != nil
+                            xml.td condition.start_event.strftime("%Y%m%d")
+                          else
+                            xml.td
+                          end    
+                        }
+                      end
+                    }
+                  }
                 }
                 
-                # Start structured XML
                 conditions.andand.each do |structuredCondition|
                   structuredCondition.to_c32(xml)
                 end
-                # End structured XML
               }
             }
           end
@@ -320,11 +355,9 @@ class PatientData < ActiveRecord::Base
                   }
                 }
                 
-                # Start structured XML
                 allergies.andand.each do |structuredAllergy|
                   structuredAllergy.to_c32(xml)
                 end
-                # End structured XML
               }
             }
           end
@@ -341,16 +374,41 @@ class PatientData < ActiveRecord::Base
                          "codeSystemName" => "LOINC")
                 xml.title "Insurance Providers"
                 xml.text {
-                  insurance_providers.andand.each do |insurance_provider|
-                    xml.paragraph insurance_provider.represented_organization
-                  end
+                  xml.table("border" => "1", "width" => "100%") {
+                    xml.thead {
+                      xml.tr {
+                        xml.th "Insurance Provider Name"
+                        xml.th "Insurance Provider Type"
+                        xml.th "Insurance Provider Group Number"
+                      }
+                    }
+                    xml.tbody {
+                     insurance_providers.andand.each do |insurance_provider|
+                        xml.tr {
+                          if insurance_provider.represented_organization != nil
+                            xml.td insurance_provider.represented_organization
+                          else
+                            xml.td
+                          end 
+                          if insurance_provider.represented_organization != nil
+                            xml.td insurance_provider.represented_organization
+                          else
+                            xml.td
+                          end  
+                          if insurance_provider.group_number != nil
+                            xml.td insurance_provider.group_number
+                          else
+                            xml.td
+                          end  
+                        }
+                      end
+                    }
+                  }
                 }
                 
-                # Start structured XML
                 insurance_providers.andand.each do |structuredInsuranceProvider|
                   structuredInsuranceProvider.to_c32(xml)
                 end
-                # End structured XML
               }
             }
           end
@@ -368,17 +426,56 @@ class PatientData < ActiveRecord::Base
                          "codeSystemName" => "LOINC")
                 xml.title "Medications"
                 xml.text {
-                  medications.andand.each do |medication|
-                    xml.content(medication.product_coded_display_name, 
-                                "ID" => "medication-"+medication.id.to_s)
-                  end
+                  xml.table("border" => "1", "width" => "100%") {
+                    xml.thead {
+                      xml.tr {
+                        xml.th "Product Display Name"
+                        xml.th "Free Text Brand Name"
+                        xml.th "Ordered Value"
+                        xml.th "Ordered Unit"
+                        xml.th "Expiration Time"
+                      }
+                    }
+                    xml.tbody {
+                     medications.andand.each do |medication|
+                        xml.tr {
+                          if medication.product_coded_display_name != nil
+                            xml.td {
+                              xml.content(medication.product_coded_display_name, 
+                                          "ID" => "medication-"+medication.id.to_s)
+                            }
+                          else
+                            xml.td
+                          end 
+                          if medication.free_text_brand_name != nil
+                            xml.td medication.free_text_brand_name
+                          else
+                            xml.td
+                          end  
+                          if medication.quantity_ordered_value != nil
+                            xml.td medication.quantity_ordered_value
+                          else
+                            xml.td
+                          end    
+                          if medication.quantity_ordered_unit != nil
+                            xml.td medication.quantity_ordered_unit
+                          else
+                            xml.td
+                          end   
+                          if medication.expiration_time != nil
+                            xml.td medication.expiration_time.strftime("%Y%m%d")
+                          else
+                            xml.td
+                          end   
+                        }
+                      end
+                    }
+                  }
                 }
                 
-                # Start structured XML
                 medications.andand.each do |structuredMedication|
                   structuredMedication.to_c32(xml)
                 end
-                # End structured XML
               }
             }
           end

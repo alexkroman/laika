@@ -59,6 +59,7 @@
                       <a href="javascript:toggle_div('execution_div_<%=vendor_test_plan.id%>');">execute</a>
                     <% else %>
                       <%= link_to 'xml', patient_data_instance_url(vendor_test_plan.patient_data, :format => 'xml') %> 
+                      <%= link_to 'checklist', {:controller => 'patient_data', :action => 'checklist', :id => vendor_test_plan.patient_data.id} %>
                     <% end %>
                   <% end %>
                 </td>
