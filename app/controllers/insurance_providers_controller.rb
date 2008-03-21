@@ -50,9 +50,9 @@ class InsuranceProvidersController < PatientDataChildController
     
     @insurance_provider = InsuranceProvider.new(params[:insurance_provider])
     
-    @insurance_provider.create_insurance_provider_patient_attributes(params)
-    @insurance_provider.create_insurance_provider_subscriber_attributes(params)
-    @insurance_provider.create_insurance_provider_guarantorattributes(params)
+    @insurance_provider.insurance_provider_patient = InsuranceProviderPatient.new(params[:insurance_provider_patient])
+    @insurance_provider.insurance_provider_subscriber = InsuranceProviderSubsriber.new(params[:insurance_provider_subscriber])
+    @insurance_provider.insurance_provider_guarantor = InsuranceProviderGuarantor.new(params[:insurance_provider_guarantor])
     
     @patient_data.insurance_providers << @insurance_provider
    
@@ -65,9 +65,9 @@ class InsuranceProvidersController < PatientDataChildController
     @insurance_provider = @patient_data.insurance_providers.find(params[:id])
     @insurance_provider.update_attributes(params[:insurance_provider])
     
-    #@insurance_provider.update_insurance_provider_patient_attributes(params)
-    #@insurance_provider.update_insurance_provider_subscriber_attributes(params)
-    #@insurance_provider.update_insurance_provider_guarantorattributes(params)
+    @insurance_provider.insurance_provider_patient.update_attributes(params[:insurance_provider_patient])
+    @insurance_provider.insurance_provider_subscriber.update_attributes(params[:insurance_provider_subscriber])
+    @insurance_provider.insurance_provider_guarantor.update_attributes(params[:insurance_provider_guarantor])
 
     render :partial  => 'show', :locals => {:insurance_provider =>  @insurance_provider,
                                             :patient_data => @patient_data}
