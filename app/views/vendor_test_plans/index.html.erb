@@ -42,7 +42,8 @@
                 <td><%= vendor_test_plan.kind.name %></td>
                 <td>
                   <% if vendor_test_plan.clinical_document != nil %>
-                    <%= error_count %> Errors
+                    <%  error_count_link_text = error_count.to_s + " Errors" %>
+                    <%= link_to error_count_link_text, validate_vendor_test_plan_url(vendor_test_plan) %>
                   <% else %>
                     --
                   <% end %>
