@@ -54,7 +54,7 @@ class PatientData < ActiveRecord::Base
     
     # Supports
     if self.support
-      errors.concat(self.registration_information.validate_c32(clinical_document))
+      errors.concat(self.support.validate_c32(clinical_document))
     end
     
     # Allergies
