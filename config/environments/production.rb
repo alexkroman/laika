@@ -19,3 +19,4 @@ config.action_view.cache_template_loading            = true
 # config.action_mailer.raise_delivery_errors = false
 
 VALIDATION_URL= "http://127.0.0.1:8080/validation/validate.lk"
+ActionController::AbstractRequest.relative_url_root = "/laika"
