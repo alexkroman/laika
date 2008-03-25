@@ -1,0 +1,12 @@
+test:
+  app_name: laika-test
+  rails_env: production
+  domain: test.cchit.org
+  mongrel_port: 8500
+
+demo:
+  app_name: laika-demo
+  rails_env: production
+  domain: demo.cchit.org
+  mongrel_port: 8510
+  
