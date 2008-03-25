@@ -207,6 +207,11 @@ emily_jones_insurance_provider_patient_address:
   addressable: emily_jones_insurance_provider_patient (InsuranceProviderPatient)
 
 emily_jones_insurance_provider_subscriber_address:
+  street_address_line_one: 1603 Rockville Pike
+  city: Rockville
+  state: MD
+  postal_code: 20847 
+  iso_country: usa
   addressable: emily_jones_insurance_provider_subscriber (InsuranceProviderSubscriber)
 
 emily_jones_insurance_provider_guarantor_address:
@@ -218,10 +223,25 @@ emily_jones_insurance_provider_guarantor_address:
   addressable: emily_jones_insurance_provider_guarantor (InsuranceProviderGuarantor)
 
 jennifer_thompsons_insurance_provider_patient_address:
+  street_address_line_one: 1603 Rockville Pike
+  city: Rockville
+  state: MD
+  postal_code: 20847 
+  iso_country: usa
   addressable: jennifer_thompsons_insurance_provider_patient (InsuranceProviderPatient)
 
 jennifer_thompsons_insurance_provider_subscriber_address:
+  street_address_line_one: 1603 Rockville Pike
+  city: Rockville
+  state: MD
+  postal_code: 20847 
+  iso_country: usa
   addressable: jennifer_thompsons_insurance_provider_subscriber (InsuranceProviderSubscriber)
 
 jennifer_thompsons_insurance_provider_guarantor_address:
+  street_address_line_one: 1603 Rockville Pike
+  city: Rockville
+  state: MD
+  postal_code: 20847 
+  iso_country: usa
   addressable: jennifer_thompsons_insurance_provider_guarantor (InsuranceProviderGuarantor)

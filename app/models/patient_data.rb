@@ -364,54 +364,54 @@ class PatientData < ActiveRecord::Base
           # End Allergies
 
           # Start Insurance Providers
-          #if insurance_providers.size > 0
-          #  xml.component {
-          #    xml.section {
-          #      xml.templateId("root" => "2.16.840.1.113883.10.20.1.9", 
-          #                     "assigningAuthorityName" => "CCD")         
-          #      xml.code("code" => "48768-6", 
-          #               "codeSystem" => "2.16.840.1.113883.6.1",
-          #               "codeSystemName" => "LOINC")
-          #      xml.title "Insurance Providers"
-          #      xml.text {
-          #        xml.table("border" => "1", "width" => "100%") {
-          #          xml.thead {
-          #            xml.tr {
-          #              xml.th "Insurance Provider Name"
-          #              xml.th "Insurance Provider Type"
-          #              xml.th "Insurance Provider Group Number"
-          #            }
-          #          }
-          #          xml.tbody {
-          #           insurance_providers.andand.each do |insurance_provider|
-          #             xml.tr {
-          #                if insurance_provider.represented_organization != nil
-          #                  xml.td insurance_provider.represented_organization
-          #                else
-          #                  xml.td
-          #                end 
-          #                if insurance_provider.represented_organization != nil
-          #                  xml.td insurance_provider.represented_organization
-          #                else
-          #                  xml.td
-          #                end  
-          #                if insurance_provider.group_number != nil
-          #                  xml.td insurance_provider.group_number
-          #                else
-          #                  xml.td
-          #                end  
-          #              }
-          #            end
-          #          }
-          #        }
-          #      }
-          #      
-          #      insurance_providers.andand.each do |structuredInsuranceProvider|
-          #        structuredInsuranceProvider.to_c32(xml)
-          #      end
-          #    }
-          #  }
-          #end
+          if insurance_providers.size > 0
+            xml.component {
+              xml.section {
+                xml.templateId("root" => "2.16.840.1.113883.10.20.1.9", 
+                               "assigningAuthorityName" => "CCD")         
+                xml.code("code" => "48768-6", 
+                        "codeSystem" => "2.16.840.1.113883.6.1",
+                         "codeSystemName" => "LOINC")
+                xml.title "Insurance Providers"
+                xml.text {
+                  xml.table("border" => "1", "width" => "100%") {
+                    xml.thead {
+                      xml.tr {
+                        xml.th "Insurance Provider Name"
+                        xml.th "Insurance Provider Type"
+                        xml.th "Insurance Provider Group Number"
+                     }
+                    }
+                    xml.tbody {
+                     insurance_providers.andand.each do |insurance_provider|
+                       xml.tr {
+                          if insurance_provider.represented_organization != nil
+                            xml.td insurance_provider.represented_organization
+                          else
+                            xml.td
+                          end 
+                          if insurance_provider.represented_organization != nil
+                            xml.td insurance_provider.represented_organization
+                          else
+                            xml.td
+                          end  
+                          if insurance_provider.group_number != nil
+                            xml.td insurance_provider.group_number
+                          else
+                            xml.td
+                          end  
+                        }
+                      end
+                    }
+                  }
+                }
+                
+                insurance_providers.andand.each do |structuredInsuranceProvider|
+                  structuredInsuranceProvider.to_c32(xml)
+                end
+              }
+            }
+          end
           # End Insurance Providers
 
           # Start Medications
