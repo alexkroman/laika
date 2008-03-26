@@ -39,11 +39,11 @@ class PatientData < ActiveRecord::Base
     end
     
     # Insurance Providers
-    #if self.insurance_providers 
-    #  self.insurance_providers.each do |insurance_providers|
-    #    errors.concat(insurance_providers.validate_c32(clinical_document))
-    #  end
-    #end
+    if self.insurance_providers 
+      self.insurance_providers.each do |insurance_providers|
+        errors.concat(insurance_providers.validate_c32(clinical_document))
+      end
+    end
     
     # Medications
     if self.medications 
@@ -101,7 +101,6 @@ class PatientData < ActiveRecord::Base
       copied_patient_data.registration_information.gender = self.registration_information.gender
       copied_patient_data.registration_information.religion = self.registration_information.religion
     end
-    
 
     self.languages.each do |language|
       copied_language = language.clone

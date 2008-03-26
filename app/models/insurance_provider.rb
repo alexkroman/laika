@@ -16,7 +16,34 @@ class InsuranceProvider < ActiveRecord::Base
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
   
   def validate_c32(document)
+    errors = []
+    begin
+      section = REXML::XPath.first(document,"//cda:section[cda:templateId/@root='2.16.840.1.113883.10.20.1.9']",@@default_namespaces)
+      parentAct = REXML::XPath.first(section,"cda:entry/cda:act[cda:templateId/@root='2.16.840.1.113883.10.20.1.20']",@@default_namespaces)
+      childAct = REXML::XPath.first(parentAct,"cda:entryRelationship/cda:act[cda:templateId/@root='2.16.840.1.113883.10.20.1.26']",@@default_namespaces)
     
+      if group_number
+        errors << match_value(childAct, "cda:id/@root", "group_number", self.group_number.to_s)
+      end
+      
+      if insurance_type 
+        code = REXML::XPath.first(childAct,"cda:code[@codeSystem='2.16.840.1.113883.6.255.1336']",@@default_namespaces)
+        errors.concat insurance_type.validate_c32(code)
+      end
+    
+      if represented_organization 
+        representedOrganization = REXML::XPath.first(childAct,
+          "cda:performer[@typeCode='PRF']/cda:assignedEntity[@classCode='ASSIGNED']/cda:representedOrganization[@classCode='ORG']",@@default_namespaces)
+        errors << match_value(representedOrganization, "cda:name", "represented_organization_name", self.represented_organization.to_s)
+      end
+    
+    rescue
+      errors << ContentError.new(:section => 'Insurance Provider', 
+                                 :error_message => 'Invalid, non-parsable XML for Insurance Provider data',
+                                 :type=>'error',
+                                 :location => document.xpath)
+    end
+    errors.compact
   end
   
   def to_c32(xml)
@@ -38,7 +65,7 @@ class InsuranceProvider < ActiveRecord::Base
                        "codeSystem" => "2.16.840.1.113883.6.255.1336", 
                        "codeSystemName" => "X12N-1336")
             else
-                xml.code("nullFlavour"=>"NA")
+              xml.code("nullFlavour"=>"NA")
             end
             xml.statusCode('code'=>'completed')
             
@@ -54,7 +81,6 @@ class InsuranceProvider < ActiveRecord::Base
                 }
               }
             end
-            
             
             # guarantor is provided only if there is some non-nil, non-empty data
             if insurance_provider_guarantor  && insurance_provider_guarantor.has_any_data
@@ -81,7 +107,6 @@ class InsuranceProvider < ActiveRecord::Base
               }
             end
             
-            
             # patient data is provided only if there is some non-nil, non-empty data
             if insurance_provider_patient  && insurance_provider_patient.has_any_data
               xml.participant("typeCode" => "COV") {
@@ -102,7 +127,6 @@ class InsuranceProvider < ActiveRecord::Base
             end
             
             insurance_provider_subscriber.andand.to_c32(xml)
-            
 
           }
         }
