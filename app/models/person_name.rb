@@ -48,7 +48,7 @@ class PersonName < ActiveRecord::Base
         xml.family(last_name, "qualifier" => "BR")
       end
       if name_suffix && name_suffix.size > 0
-        xml.prefix(name_suffix)
+        xml.suffix(name_suffix)
       end
     }    
   end
