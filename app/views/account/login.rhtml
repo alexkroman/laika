@@ -1,4 +1,4 @@
-    <% form_tag do -%>
+    <% form_tag({}, {:name => "laika_login_form"}) do -%>
     <div id="login">
         <div id="cap-top"></div>
         <div id="cap-body">
@@ -20,10 +20,10 @@
                 <p class="rememberme"><%= check_box_tag 'remember_me' %><span style="color:#888888;">Remember me.</span></p>
                 
                 <div style="margin-left:295px;width:auto;">
-                    <a href="/vendor_test_plans/"><%= image_tag "cancel_account.png" %></a>
-                    <input type="image" value="Login to Laika"  src="/images/login_landing.png" />
-                    <input class="login-account-btn" name="commit" type="submit" value="Create Laika Account" style="display:none" />
+                    <a class="whitebutton" href="#"><span>Cancel</span></a>
+                    <a class="bluebutton" href="javascript:submitLaikaLoginform();"><span>Login</span></a>
                 </div>
+                
                 
                 <div class="doggyhelp">
                 <div class="" style="text-align:right;font-size:11px;float:right;height:0px;position:relative;top:145px;left:37px;">
