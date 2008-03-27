@@ -49,7 +49,7 @@ class InformationSource < ActiveRecord::Base
             end
             if person_name.last_name &&
                person_name.last_name.size > 0
-              xml.family (person_name.last_name, "qualifier" => "BR")
+              xml.family(person_name.last_name, "qualifier" => "BR")
             end
             if person_name.name_suffix &&
                person_name.name_suffix.size > 0
@@ -58,7 +58,7 @@ class InformationSource < ActiveRecord::Base
           }
         }
         xml.representedOrganization {
-          xml.id ("root" => "2.16.840.1.113883.19.5") 
+          xml.id("root" => "2.16.840.1.113883.19.5") 
           xml.name organization_name
         }
       }

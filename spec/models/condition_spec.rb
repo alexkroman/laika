@@ -35,7 +35,7 @@ describe Condition, "can create a C32 representation of itself" do
                          "codeSystemName" => "LOINC")
                 xml.title "Conditions or Problems"
                 xml.text {
-                  xml.content (cond.free_text_name, "ID" => "problem-"+cond.id.to_s) 
+                  xml.content(cond.free_text_name, "ID" => "problem-"+cond.id.to_s) 
                 }
                 
                 cond.to_c32(xml)

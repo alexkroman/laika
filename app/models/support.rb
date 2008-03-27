@@ -7,10 +7,10 @@ class Support < ActiveRecord::Base
   include PersonLike
   include MatchHelper
   
-  def validate_c32(xml)
+  def validate_c32(document)
     errors = []
     begin
-      support = REXML::XPath.first(xml, "/cda:ClinicalDocument/cda:participant/cda:associatedEntity[cda:associatedPerson/cda:name/cda:given/text() = $first_name ] | /cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:guardian[cda:guardianPerson/cda:name/cda:given/text() = $first_name]",
+      support = REXML::XPath.first(document, "/cda:ClinicalDocument/cda:participant/cda:associatedEntity[cda:associatedPerson/cda:name/cda:given/text() = $first_name ] | /cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:guardian[cda:guardianPerson/cda:name/cda:given/text() = $first_name]",
          {'cda' => 'urn:hl7-org:v3'}, {"first_name" => person_name.first_name})
       if support
         time_element = REXML::XPath.first(support, "../cda:time", {'cda' => 'urn:hl7-org:v3'})
@@ -53,7 +53,7 @@ class Support < ActiveRecord::Base
       errors << ContentError.new(:section => 'Support', 
                                  :error_message => 'Invalid, non-parsable XML for supports data',
                                  :type=>'error',
-                                 :location => xml.xpath)
+                                 :location => document.xpath)
     end
     errors.compact
   end

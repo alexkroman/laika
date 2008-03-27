@@ -233,15 +233,15 @@ class PatientData < ActiveRecord::Base
                 xml.title "Results"
                 xml.text "Patient is currently pregnant"
                 xml.entry {
-                  xml.observation ("classCode" => "OBS", "moodCode" => "EVN") {
+                  xml.observation("classCode" => "OBS", "moodCode" => "EVN") {
                       # why is code here you ask, because the schema states it needs to be 
                       # event though the C32 doc does not include it, one more reason to just
                       # hate the CDA/CCD/C32 specs
-                      xml.code ("code" => "77386006", 
+                      xml.code("code" => "77386006", 
                                                     "displayName" => "Patient currently pregnant", 
                                                     "codeSystem" => "2.16.840.1.113883.6.96", 
                                                     "codeSystemName" => "SNOMED CT")                       
-                    xml.value ("xsi:type" => "CD", 
+                    xml.value("xsi:type" => "CD", 
                                "code" => "77386006", 
                                "displayName" => "Patient currently pregnant", 
                                "codeSystem" => "2.16.840.1.113883.6.96", 
@@ -279,7 +279,7 @@ class PatientData < ActiveRecord::Base
                         xml.tr {
                           if condition.free_text_name != nil
                             xml.td {
-                              xml.content (condition.free_text_name, 
+                              xml.content(condition.free_text_name, 
                                            "ID" => "problem-"+condition.id.to_s) 
                             }
                           else

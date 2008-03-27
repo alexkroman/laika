@@ -102,7 +102,7 @@ XPATH
         xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.6")
         xml.id("root" => "2C748172-7CC2-4902-8AF0-23A105C4401B")
         xml.code("nullFlavor"=>"NA")
-        xml.entryRelationship ("typeCode" => "SUBJ") {
+        xml.entryRelationship("typeCode" => "SUBJ") {
           xml.observation("classCode" => "OBS", "moodCode" => "EVN") {
             xml.templateId("root" => "2.16.840.1.113883.10.20.1.18")
             if adverse_event_type 

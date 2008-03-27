@@ -71,7 +71,7 @@ class Medication < ActiveRecord::Base
         xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.8", "assigningAuthorityName" => "HITSP/C32")
         xml.id
         xml.consumable {        
-          xml.manufacturedProduct ("classCode" => "MANU") {
+          xml.manufacturedProduct("classCode" => "MANU") {
             xml.templateId("root" => "2.16.840.1.113883.10.20.1.53", "assigningAuthorityName" => "CCD") 
             xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.9", "assigningAuthorityName" => "HITSP/C32") 
             xml.manufacturedMaterial("classCode" => "MMAT", "determinerCode" => "KIND") {
