@@ -53,7 +53,7 @@ class Support < ActiveRecord::Base
       errors << ContentError.new(:section => 'Support', 
                                  :error_message => 'Invalid, non-parsable XML for supports data',
                                  :type=>'error',
-                                 :location => document.xpath)
+                                 :location => xml.xpath)
     end
     errors.compact
   end
