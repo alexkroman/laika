@@ -9,8 +9,35 @@ class InsuranceProviderSubscriber < ActiveRecord::Base
   
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
   
-  def validate_c32(document)
+  def validate_c32(act)
     
+    unless act
+      return [ContentError.new]
+    end
+    
+    errors = []
+    
+    begin
+      particpantRole = REXML::XPath.first(act,"cda:participant[@typeCode='HLD']/cda:participantRole[@classCode='IND']",@@default_namespaces)
+      if person_name
+        errors.concat person_name.validate_c32(REXML::XPath.first(particpantRole,"cda:playingEntity/cda:name",@@default_namespaces))
+      end       
+      if address
+        errors.concat address.validate_c32(REXML::XPath.first(particpantRole,'cda:addr',@@default_namespaces))
+      end
+      if telecom
+        errors.concat telecom.validate_c32(REXML::XPath.first(particpantRole,'cda:telecom',@@default_namespaces))
+      end      
+    rescue
+      errors << ContentError.new(
+              :section => 'Insurance Provider Subscriber', 
+              :error_message => 'Failed checking name, address and telecom details on the insurance provider subcriber XML',
+              :type=>'error',
+              :location => act.xpath)
+    end
+    
+    return errors.compact
+  
   end
   
   def to_c32(xml)
@@ -20,7 +47,6 @@ class InsuranceProviderSubscriber < ActiveRecord::Base
         address.andand.to_c32(xml)
         telecom.andand.to_c32(xml)
         xml.playingEntity {
-           
             person_name.andand.to_c32(xml)
           if !date_of_birth.blank?
              xml.sdtc(:birthTime, "value" => date_of_birth.strftime("%Y%m%d"))

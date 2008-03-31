@@ -38,10 +38,9 @@ class InsuranceProvider < ActiveRecord::Base
         errors << match_value(representedOrganization, "cda:name", "represented_organization_name", self.represented_organization.to_s)
       end
       
-      
       if self.insurance_provider_guarantor && insurance_provider_guarantor.has_any_data
         
-        # start insurance provider's represented organization test
+        # insurance provider's represented organization test
         if represented_organization
           begin   
             errors << match_value(childAct, "cda:performer/@typeCode", "PRF", "PRF")
@@ -53,11 +52,11 @@ class InsuranceProvider < ActiveRecord::Base
               :location => childAct.xpath)
           end    
         end
-        # end insurance provider's represented organization test
         
         # TODO start insurance provider's effective date test
         # end insurance provider's effective date test
         
+        # insurance provider guarantor
         if insurance_provider_guarantor.person_name.first_name && insurance_provider_guarantor.person_name.last_name
           guarantor_name_element = REXML::XPath.first(childAct, 
             "cda:performer/cda:assignedEntity/cda:assignedPerson/cda:name[cda:given='#{self.insurance_provider_guarantor.person_name.first_name}' and cda:family='#{self.insurance_provider_guarantor.person_name.last_name}']",
@@ -72,10 +71,14 @@ class InsuranceProvider < ActiveRecord::Base
                                        :location => guarantor_name_element.xpath)
           end
         end
+        
+        # insurance provider subscriber
+        #if insurance_provider_subscriber
+        #  self.insurance_provider_subscriber.validate_c32(childAct)
+        #end
        
       end
 
-      
     rescue
       errors << ContentError.new(:section => 'Insurance Provider', 
                                  :error_message => 'Invalid, non-parsable XML for Insurance Provider data',
@@ -113,7 +116,7 @@ class InsuranceProvider < ActiveRecord::Base
               xml.performer("typeCode" => "PRF") {
                 xml.assignedEntity("classCode" => "ASSIGNED") {
                   xml.id('root'=>'2.16.840.1.113883.3.88.3.1')
-                  xml.representedOrganization("classCode" => "ORG") {\
+                  xml.representedOrganization("classCode" => "ORG") {
                     xml.id("root" => "2.16.840.1.113883.19.5")
                     xml.name represented_organization
                   }
@@ -140,7 +143,7 @@ class InsuranceProvider < ActiveRecord::Base
                   end
                   xml.code(code_atts)
                   xml.assignedPerson {
-                      insurance_provider_guarantor.person_name.to_c32(xml)
+                    insurance_provider_guarantor.person_name.to_c32(xml)
                   }
                 }
               }
@@ -155,14 +158,13 @@ class InsuranceProvider < ActiveRecord::Base
                            "codeSystem" => "2.16.840.1.113883.5.111", 
                            "codeSystemName" => "RoleCode") 
                     xml.playingEntity {
-                        insurance_provider_patient.person_name.andand.to_c32(xml)
+                      insurance_provider_patient.person_name.andand.to_c32(xml)
                       if !insurance_provider_patient.date_of_birth.blank?
                         xml.sdtc(:birthTime, "value" => insurance_provider_patient.date_of_birth.strftime("%Y%m%d"))
                       end
                     }
-                  }
                 }
-              
+              }
             end
             
             insurance_provider_subscriber.andand.to_c32(xml)
