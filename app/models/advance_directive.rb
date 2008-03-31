@@ -30,7 +30,7 @@ class AdvanceDirective < ActiveRecord::Base
                                    :location=>(text)? text.xpath : (code)? code.xpath : section.xpath )
       end
       if person_name
-        errors.concat  person_name.validate_c32(REXML::XPath.first(entity,'cda:playingEntity/cda:name',@@default_namespaces))
+        errors.concat person_name.validate_c32(REXML::XPath.first(entity,'cda:playingEntity/cda:name',@@default_namespaces))
       end       
       if address
         errors.concat address.validate_c32(REXML::XPath.first(entity,'cda:addr',@@default_namespaces))
@@ -114,14 +114,14 @@ class AdvanceDirective < ActiveRecord::Base
   
   private 
   def deref(code)
-      if code
-         ref = REXML::XPath.first(code,"cda:reference",@@default_namespaces)
-         if ref
-            REXML::XPath.first(code.document,"//cda:content[@ID=$id]/text()",@@default_namespaces,{"id"=>ref.attributes['value'].gsub("#",'')}) 
-         else
-            nil
-         end
-      end 
+    if code
+      ref = REXML::XPath.first(code,"cda:reference",@@default_namespaces)
+      if ref
+        REXML::XPath.first(code.document,"//cda:content[@ID=$id]/text()",@@default_namespaces,{"id"=>ref.attributes['value'].gsub("#",'')}) 
+      else
+        nil
+      end
+    end 
   end
- 
+
 end
