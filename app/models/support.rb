@@ -59,8 +59,7 @@ class Support < ActiveRecord::Base
   end
   
   def to_c32(xml)
-    if contact_type &&
-       contact_type.code == "GUARD"
+    if contact_type && contact_type.code == "GUARD"
       xml.guardian("classCode" => contact_type.code) {
         xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.3")
         if relationship
@@ -78,21 +77,19 @@ class Support < ActiveRecord::Base
     else
       xml.participant("typeCode" => "IND") {
         xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.3")
-
-        xml.time{
-                    if start_support 
-                              xml.low('value'=> start_support.strftime("%Y%m%d"))
-                            end
-                            if end_support
-                              xml.high('value'=> end_support.strftime("%Y%m%d"))
-                  end
-                }      
-
+        xml.time {
+          if start_support 
+            xml.low('value'=> start_support.strftime("%Y%m%d"))
+          end
+          if end_support
+            xml.high('value'=> end_support.strftime("%Y%m%d"))
+          end
+        }      
         xml.associatedEntity("classCode" => contact_type.code) {
           xml.code("code" => relationship.code, 
-               "displayName" => relationship.name,
-               "codeSystem" => "2.16.840.1.113883.5.111",
-               "codeSystemName" => "RoleCode")
+                   "displayName" => relationship.name,
+                   "codeSystem" => "2.16.840.1.113883.5.111",
+                   "codeSystemName" => "RoleCode")
           address.andand.to_c32(xml)
           telecom.andand.to_c32(xml) 
           xml.associatedPerson {
@@ -101,7 +98,5 @@ class Support < ActiveRecord::Base
         }
       }
     end            
-    
   end
- 
 end
