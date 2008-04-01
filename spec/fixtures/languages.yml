@@ -8,7 +8,6 @@ joe_smith_english_language:
 emily_jones_english_language:
   iso_language: english
   iso_country: usa
-  language_ability_mode: not_applicable
   preference: true
   patient_data: emily_jones
 
@@ -21,8 +20,6 @@ emily_jones_german_language:
 
 will_haynes_english_language:
   iso_language: english
-  iso_country: usa
-  language_ability_mode: not_applicable
   preference: true
   patient_data: will_haynes
   
@@ -36,27 +33,23 @@ will_haynes_chinese_language:
 jennifer_thompson_english_language:
   iso_language: english
   iso_country: usa
-  language_ability_mode: not_applicable
   preference: true
   patient_data: jennifer_thompson
   
 jennifer_thompson_estonian_language:
   iso_language: estonian
   iso_country: estonia
-  language_ability_mode: not_applicable
   preference: false
   patient_data: jennifer_thompson
 
 theodore_smith_english_language:
   iso_language: english
   iso_country: usa
-  language_ability_mode: not_applicable
   preference: true
   patient_data: theodore_smith
 
 david_carter_english_language:
   iso_language: english
   iso_country: usa
-  language_ability_mode: not_applicable
   preference: true
   patient_data: david_carter
