@@ -8,7 +8,7 @@
             <% for vendor_test_plan in @vendor_test_plans %>
              <% 
                 error_count = 0
-                if vendor_test_plan.clinical_document != nil
+                if vendor_test_plan.clinical_document
                   error_count = REXML::XPath.first(vendor_test_plan.clinical_document.validation_report(:xml),"count(//error)")
                  end
                  %> 
@@ -28,7 +28,7 @@
               
               <tr>
                 <td>
-                  <% if vendor_test_plan.clinical_document != nil %>
+                  <% if vendor_test_plan.clinical_document %>
                      <% if error_count > 0 %>
                        <%= image_tag "fail.png", :alt => 'Test Failed' %>failed</td>
                      <% else %>
@@ -41,7 +41,7 @@
                 <td><%= vendor_test_plan.updated_at.strftime("%d.%b.%Y")  %></td>
                 <td><%= vendor_test_plan.kind.name %></td>
                 <td>
-                  <% if vendor_test_plan.clinical_document != nil %>
+                  <% if vendor_test_plan.clinical_document %>
                     <%  error_count_link_text = error_count.to_s + " Errors" %>
                     <%= link_to error_count_link_text, validate_vendor_test_plan_url(vendor_test_plan) %>
                   <% else %>
@@ -49,7 +49,7 @@
                   <% end %>
                 </td>
                 <td class="actions">
-                  <% if vendor_test_plan.clinical_document != nil %>
+                  <% if vendor_test_plan.clinical_document %>
                     <%= link_to 'destroy', vendor_test_plan, :confirm => 'Are you sure you want to delete this Laika test?', :method => :delete %>
                     <%= link_to 'inspect', validate_vendor_test_plan_url(vendor_test_plan) %>
                   <% else %>
