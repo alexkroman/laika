@@ -1,7 +1,7 @@
   <%= render :partial => '/person_names/show', :locals => {:person_name => insurance_provider_guarantor.person_name}%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Guarantor Effective Date</td>
-    <td><% if insurance_provider_guarantor.effective_date != nil %><%=h insurance_provider_guarantor.effective_date.strftime("%m/%d/%Y") %><% end %></td>
+    <td><% if insurance_provider_guarantor.effective_date %><%=h insurance_provider_guarantor.effective_date.strftime("%m/%d/%Y") %><% end %></td>
   </tr>
     <%= render :partial => '/addresses/show', :locals => {:address => insurance_provider_guarantor.address}%>
   <%= render :partial => '/telecoms/show', :locals => {:telecom => insurance_provider_guarantor.telecom}%>

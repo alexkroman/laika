@@ -9,7 +9,7 @@
 </tr>
 <tr class="<%= cycle("darkzebra", "lightzebra")%>">
   <td class="lighttext">Code System Name</td>
-  <td><% if medication.code_system != nil %><%=h medication.code_system.name %><% end %></td>
+  <td><% if medication.code_system %><%=h medication.code_system.name %><% end %></td>
 </tr>
 <tr class="<%= cycle("darkzebra", "lightzebra")%>">
   <td class="lighttext">Free Text Brand Name</td>
@@ -17,7 +17,7 @@
 </tr>
 <tr class="<%= cycle("darkzebra", "lightzebra")%>">
   <td class="lighttext">Medication Type</td>
-  <td><% if medication.medication_type != nil %><%=h medication.medication_type.name %><% end %></td>
+  <td><% if medication.medication_type %><%=h medication.medication_type.name %><% end %></td>
 </tr>
 <tr class="<%= cycle("darkzebra", "lightzebra")%>">
   <td class="lighttext">Status</td>
@@ -33,7 +33,7 @@
 </tr>
 <tr class="<%= cycle("darkzebra", "lightzebra")%>">
   <td class="lighttext">Expiration Date</td>
-  <td><% if medication.expiration_time != nil %><%=h medication.expiration_time.strftime("%m/%d/%Y") %><% end %></td>
+  <td><% if medication.expiration_time %><%=h medication.expiration_time.strftime("%m/%d/%Y") %><% end %></td>
 </tr>
 <tr class="<%= cycle("darkzebra", "lightzebra")%>">
   <td></td>

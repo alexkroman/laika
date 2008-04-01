@@ -76,7 +76,7 @@ class Medication < ActiveRecord::Base
             xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.9", "assigningAuthorityName" => "HITSP/C32") 
             xml.manufacturedMaterial("classCode" => "MMAT", "determinerCode" => "KIND") {
               
-             if(product_code && !product_code.blank?)
+             if(product_code && !product_code.blank? && code_system && !code_system.blank?)
               xml.code("code" => product_code, 
                        "displayName" => product_coded_display_name, 
                        "codeSystem" => code_system.code, 

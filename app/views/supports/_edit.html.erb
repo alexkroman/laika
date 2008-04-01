@@ -6,11 +6,11 @@
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Start Support</td>
-    <td><input id="support_start_support" name="support[start_support]" size="30" type="text" <% if support.start_support != nil %>value="<%= support.start_support.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" /></td>
+    <td><input id="support_start_support" name="support[start_support]" size="30" type="text" <% if support.start_support %>value="<%= support.start_support.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" /></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">End Support</td>
-    <td><input id="support_end_support" name="support[end_support]" size="30" type="text" <% if support.end_support != nil %>value="<%= support.end_support.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" /></td>
+    <td><input id="support_end_support" name="support[end_support]" size="30" type="text" <% if support.end_support %>value="<%= support.end_support.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" /></td>
   </tr>
   <%= render :partial => '/person_names/edit', :locals => {:person_name => support.person_name}%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
@@ -22,7 +22,7 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Relationship</td>
     <td>
-      <%= f.select :relationship_id, @relationships.collect{|relationship| [relationship.name, relationship.id]} %>
+      <%= f.select :relationship_id, @relationships.collect{|relationship| [relationship.name, relationship.id]}, {:include_blank => true} %>
     </td>
   </tr>
   <%= render :partial => '/addresses/edit', :locals => {:address => support.address}%>

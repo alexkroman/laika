@@ -3,7 +3,7 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Start Service</td>
     <td>
-      <% if provider.start_service != nil %>
+      <% if provider.start_service %>
         <%=h provider.start_service %>
       <% end %>
     </td>
@@ -11,7 +11,7 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">End Service</td>
     <td>
-      <% if provider.end_service != nil %>
+      <% if provider.end_service %>
         <%=h provider.end_service %>
       <% end %>
     </td>
@@ -20,7 +20,7 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Provider Role</td>
     <td>
-      <% if provider.provider_role != nil %>
+      <% if provider.provider_role %>
         <%=h provider.provider_role.name %>
       <% end %>
     </td>
@@ -34,7 +34,7 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Provider Type</td>
     <td>
-      <% if provider.provider_type != nil %>
+      <% if provider.provider_type %>
         <%=h provider.provider_type.name %>
       <% end %>
     </td>

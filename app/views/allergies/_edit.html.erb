@@ -12,13 +12,13 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Start Event</td>
     <td>
-      <input id="allergy_start_event" name="allergy[start_event]" size="30" type="text" <% if allergy.start_event != nil %>value="<%= allergy.start_event.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" />
+      <input id="allergy_start_event" name="allergy[start_event]" size="30" type="text" <% if allergy.start_event %>value="<%= allergy.start_event.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" />
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">End Event</td>
     <td>
-      <input id="allergy_end_event" name="allergy[end_event]" size="30" type="text" <% if allergy.end_event != nil %>value="<%= allergy.end_event.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" />
+      <input id="allergy_end_event" name="allergy[end_event]" size="30" type="text" <% if allergy.end_event %>value="<%= allergy.end_event.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" />
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
@@ -38,7 +38,7 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Severity</td>
     <td>
-      <%= f.select :severity_term_id, @severity_terms.collect{|st| [st.name, st.id]} %>
+      <%= f.select :severity_term_id, @severity_terms.collect{|st| [st.name, st.id]}, {:include_blank => true} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">

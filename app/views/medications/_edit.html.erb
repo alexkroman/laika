@@ -20,7 +20,7 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Code System</td>
     <td>
-      <%= f.select :code_system_id, @codeSystems.collect{|codeSystem| [codeSystem.name, codeSystem.id]} %>
+      <%= f.select :code_system_id, @codeSystems.collect{|codeSystem| [codeSystem.name, codeSystem.id]}, {:include_blank => true} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
@@ -30,7 +30,7 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Medication Type</td>
     <td>
-      <%= f.select :medication_type_id, @medicationTypes.collect{|medicationType| [medicationType.name, medicationType.id]} %>
+      <%= f.select :medication_type_id, @medicationTypes.collect{|medicationType| [medicationType.name, medicationType.id]}, {:include_blank => true} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
@@ -47,7 +47,7 @@
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Expiration Date</td>
-    <td><input id="medication_expiration_time" name="medication[expiration_time]" size="30" type="text" <% if medication.expiration_time != nil %>value="<%= medication.expiration_time.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" /></td>
+    <td><input id="medication_expiration_time" name="medication[expiration_time]" size="30" type="text" <% if medication.expiration_time %>value="<%= medication.expiration_time.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" /></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td></td>

@@ -24,7 +24,7 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Insurance Type</td>
     <td>
-      <%= f.select :insurance_type_id, @insuranceTypes.collect{|insurance_type| [insurance_type.name, insurance_type.id]} %>
+      <%= f.select :insurance_type_id, @insuranceTypes.collect{|insurance_type| [insurance_type.name, insurance_type.id]}, {:include_blank => true} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">

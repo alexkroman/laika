@@ -14,7 +14,7 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Adverse Event Type</td>
     <td>
-      <%=h allergy.adverse_event_type.name %>
+      <% if allergy.adverse_event_type %><%=h allergy.adverse_event_type.name %><% end %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
@@ -23,12 +23,12 @@
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Product Code</td>
-    <td><%=h allergy.product_code %></td>
+    <td><% if allergy.product_code %><%=h allergy.product_code %><% end %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Severity</td>
     <td>
-      <%=h allergy.severity_term.name %>
+      <% if allergy.severity_term %><%=h allergy.severity_term.name %><% end %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">

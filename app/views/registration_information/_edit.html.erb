@@ -1,51 +1,50 @@
 <!-- Start Personal Information Module -->
-<% 
-   remote_form_for(:registration_information, 
+<% remote_form_for(:registration_information, 
                    :url => patient_data_instance_registration_information_path(patient_data),
                    :update => 'personInformationContainer', :method => http_method(registration_information)) do |f| %>
 <h5>Person Information</h5>
 <table>
-	<tr class="darkzebra">
-		<td class="lighttext">Person ID</td>
-		<td><%= f.text_field :person_identifier %></td>
-	</tr>
+  <tr class="darkzebra">
+    <td class="lighttext">Person ID</td>
+    <td><%= f.text_field :person_identifier %></td>
+  </tr>
   <%= render :partial => '/person_names/edit', :locals => {:person_name => registration_information.person_name}%>
-	<tr class="spacer"><td></td><td></td></tr>
-	<tr class="lightzebra">
-      <td class="lighttext">Gender</td>
-      <td>
-        <%= f.select :gender_id, @genders.collect{|gender| [gender.name, gender.id]} %>
-      </td>
-    </tr>
-	<tr class="darkzebra">
-        <td class="lighttext">Date of Birth</td>
-        <td><input id="registration_information_date_of_birth" name="registration_information[date_of_birth]" size="30" type="text" <% if registration_information.date_of_birth != nil %>value="<%= registration_information.date_of_birth.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" /></td>
-    </tr>
-    <tr class="lightzebra">
-      <td class="lighttext">Marital Status</td>
-      <td>
-        <%= f.select :marital_status_id, @maritalStatuses.collect{|marital_status| [marital_status.name, marital_status.id]} %>
-      </td>
-    </tr>
-    <tr class="lightzebra">
-      <td class="lighttext">Religion</td>
-      <td>
-        <%= f.select :religion_id, @religions.collect{|religion| [religion.name, religion.id]} %>
-      </td>
-    </tr>
-	<tr class="darkzebra">
-		<td class="lighttext">Race</td>
-        <td>
-          <%= f.select :race_id, @races.collect{|race| [race.name, race.id]} %>
-        </td>
-	</tr>
-	<tr class="lightzebra">
-		<td class="lighttext">Ethnicity</td>
-		<td>                         
-		  <%= f.select :ethnicity_id, @ethnicities.collect{|ethnicity| [ethnicity.name, ethnicity.id]} %>
-		</td>
-	</tr>
-	<tr class="spacer"><td></td><td></td></tr>
+  <tr class="spacer"><td></td><td></td></tr>
+  <tr class="lightzebra">
+    <td class="lighttext">Gender</td>
+    <td>
+      <%= f.select :gender_id, @genders.collect{|gender| [gender.name, gender.id]} %>
+    </td>
+  </tr>
+  <tr class="darkzebra">
+    <td class="lighttext">Date of Birth</td>
+    <td><input id="registration_information_date_of_birth" name="registration_information[date_of_birth]" size="30" type="text" <% if registration_information.date_of_birth %>value="<%= registration_information.date_of_birth.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" /></td>
+  </tr>
+  <tr class="lightzebra">
+    <td class="lighttext">Marital Status</td>
+    <td>
+      <%= f.select :marital_status_id, @maritalStatuses.collect{|marital_status| [marital_status.name, marital_status.id]}, {:include_blank => true} %>
+    </td>
+  </tr>
+  <tr class="lightzebra">
+    <td class="lighttext">Religion</td>
+    <td>
+      <%= f.select :religion_id, @religions.collect{|religion| [religion.name, religion.id]}, {:include_blank => true} %>
+    </td>
+  </tr>
+  <tr class="darkzebra">
+    <td class="lighttext">Race</td>
+    <td>
+      <%= f.select :race_id, @races.collect{|race| [race.name, race.id]}, {:include_blank => true} %>
+    </td>
+  </tr>
+  <tr class="lightzebra">
+    <td class="lighttext">Ethnicity</td>
+    <td>
+      <%= f.select :ethnicity_id, @ethnicities.collect{|ethnicity| [ethnicity.name, ethnicity.id]}, {:include_blank => true} %>
+    </td>
+  </tr>
+  <tr class="spacer"><td></td><td></td></tr>
   <%= render :partial => '/addresses/edit', :locals => {:address => registration_information.address}%>
   <%= render :partial => '/telecoms/edit', :locals => {:telecom => registration_information.telecom}%>
   <tr class="lightzebra">

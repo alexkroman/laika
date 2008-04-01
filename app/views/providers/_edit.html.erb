@@ -12,27 +12,26 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Start Service</td>
     <td>
-      <input id="provider_start_service" name="provider[start_service]" size="30" type="text" <% if provider.start_service != nil %>value="<%= provider.start_service.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" />
+      <input id="provider_start_service" name="provider[start_service]" size="30" type="text" <% if provider.start_service %>value="<%= provider.start_service.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" />
     </td>
   </tr>
-
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">End Service</td>
     <td>
-      <input id="provider_end_service" name="provider[end_service]" size="30" type="text" <% if provider.end_service != nil %>value="<%= provider.end_service.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" />
+      <input id="provider_end_service" name="provider[end_service]" size="30" type="text" <% if provider.end_service %>value="<%= provider.end_service.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" />
     </td>
   </tr>
   <%= render :partial => '/person_names/edit', :locals => {:person_name => provider.person_name}%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Provider Type</td>
     <td>
-      <%= f.select :provider_type_id, @providerTypes.collect{|provider_type| [provider_type.name, provider_type.id]} %>
+      <%= f.select :provider_type_id, @providerTypes.collect{|provider_type| [provider_type.name, provider_type.id]}, {:include_blank => true} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Provider Role</td>
     <td>
-      <%= f.select :provider_role_id, @providerRoles.collect{|provider_role| [provider_role.name, provider_role.id]} %>
+      <%= f.select :provider_role_id, @providerRoles.collect{|provider_role| [provider_role.name, provider_role.id]}, {:include_blank => true} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">

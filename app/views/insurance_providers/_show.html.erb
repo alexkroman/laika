@@ -10,19 +10,19 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Insurance Type</td>
     <td>
-      <%=h insurance_provider.insurance_type.name %>
+      <% if insurance_provider.insurance_type %><%=h insurance_provider.insurance_type.name %><% end %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Relationship to Subscriber</td>
     <td>
-      <%=h insurance_provider.coverage_role_type.name %>
+      <% if insurance_provider.coverage_role_type %><%=h insurance_provider.coverage_role_type.name %><% end %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Financial Responsibility Type</td>
     <td>
-      <%=h insurance_provider.role_class_relationship_formal_type.name %>
+      <% if insurance_provider.role_class_relationship_formal_type %><%=h insurance_provider.role_class_relationship_formal_type.name %><% end %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">

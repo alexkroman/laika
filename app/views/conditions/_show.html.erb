@@ -14,7 +14,7 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Problem Type</td>
     <td>
-      <%=h condition.problem_type.name %>
+      <% if condition.problem_type %><%=h condition.problem_type.name %><% end %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">

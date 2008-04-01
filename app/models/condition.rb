@@ -63,10 +63,12 @@ class Condition < ActiveRecord::Base
         xml.entryRelationship("typeCode" => "SUBJ") {
           xml.observation("classCode" => "OBS", "moodCode" => "EVN") {
             xml.templateId("root" => "2.16.840.1.113883.10.20.1.28", "assigningAuthorityName" => "CCD")
-            xml.code("code" => problem_type.code, 
-                     "displayName" => problem_type.name, 
-                     "codeSystem" => "2.16.840.1.113883.6.96", 
-                     "codeSystemName" => "SNOMED CT")
+            if problem_type
+              xml.code("code" => problem_type.code, 
+                       "displayName" => problem_type.name, 
+                       "codeSystem" => "2.16.840.1.113883.6.96", 
+                       "codeSystemName" => "SNOMED CT")
+            end 
             xml.text {
               xml.reference("value" => "#problem-"+id.to_s)
             }

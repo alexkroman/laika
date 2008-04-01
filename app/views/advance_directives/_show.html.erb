@@ -3,19 +3,19 @@
 <% if advance_directive -%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Advance Directive Type</td>
-    <td><% if advance_directive.advance_directive_type != nil %><%=h advance_directive.advance_directive_type.name %><% end %></td>
+    <td><% if advance_directive.advance_directive_type %><%=h advance_directive.advance_directive_type.name %><% end %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Free Text Description</td>
-    <td><% if advance_directive.free_text != nil %><%=h advance_directive.free_text %><% end %></td>
+    <td><% if advance_directive.free_text %><%=h advance_directive.free_text %><% end %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Start Effective Time</td>
-    <td><% if advance_directive.start_effective_time != nil %><%=h advance_directive.start_effective_time.strftime("%m/%d/%Y") %><% end %></td>
+    <td><% if advance_directive.start_effective_time %><%=h advance_directive.start_effective_time.strftime("%m/%d/%Y") %><% end %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">End Effective Time</td>
-    <td><% if advance_directive.end_effective_time != nil %><%=h advance_directive.end_effective_time.strftime("%m/%d/%Y") %><% end %></td>
+    <td><% if advance_directive.end_effective_time %><%=h advance_directive.end_effective_time.strftime("%m/%d/%Y") %><% end %></td>
   </tr>
   <%= render :partial => '/person_names/show', :locals => {:person_name => advance_directive.person_name}%>
   <%= render :partial => '/addresses/show', :locals => {:address => advance_directive.address}%>

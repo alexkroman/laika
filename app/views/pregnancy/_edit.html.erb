@@ -7,7 +7,7 @@
     <td class="lighttext">Pregnant</td>
     <td>
       <input id="pregnant" name="pregnant" type="checkbox" 
-        <% if @patient_data.pregnant != nil && @patient_data.pregnant == true %> checked=true <% end %> />
+        <% if @patient_data.pregnant && @patient_data.pregnant == true %> checked=true <% end %> />
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">

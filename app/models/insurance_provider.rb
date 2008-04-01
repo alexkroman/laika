@@ -150,19 +150,21 @@ class InsuranceProvider < ActiveRecord::Base
             end
             
             # patient data is provided only if there is some non-nil, non-empty data
-            if insurance_provider_patient  && insurance_provider_patient.has_any_data
+            if insurance_provider_patient && insurance_provider_patient.has_any_data
               xml.participant("typeCode" => "COV") {
                 xml.participantRole("classCode" => "PAT") {
-                  xml.code("code" => coverage_role_type.code, 
-                           "displayName" => coverage_role_type.name, 
-                           "codeSystem" => "2.16.840.1.113883.5.111", 
-                           "codeSystemName" => "RoleCode") 
-                    xml.playingEntity {
-                      insurance_provider_patient.person_name.andand.to_c32(xml)
-                      if !insurance_provider_patient.date_of_birth.blank?
-                        xml.sdtc(:birthTime, "value" => insurance_provider_patient.date_of_birth.strftime("%Y%m%d"))
-                      end
-                    }
+                  if coverage_role_type
+                    xml.code("code" => coverage_role_type.code, 
+                             "displayName" => coverage_role_type.name, 
+                             "codeSystem" => "2.16.840.1.113883.5.111", 
+                             "codeSystemName" => "RoleCode") 
+                  end
+                  xml.playingEntity {
+                    insurance_provider_patient.person_name.andand.to_c32(xml)
+                    if !insurance_provider_patient.date_of_birth.blank?
+                      xml.sdtc(:birthTime, "value" => insurance_provider_patient.date_of_birth.strftime("%Y%m%d"))
+                    end
+                  }
                 }
               }
             end

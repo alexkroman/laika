@@ -64,14 +64,16 @@ class AdvanceDirective < ActiveRecord::Base
             xml.templateId("root" => "2.16.840.1.113883.10.20.1.17", "assigningAuthorityName" => "CCD")
             xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.13", "assigningAuthorityName" => "HITSP/C32")
             xml.id
-            xml.code("code" => advance_directive_type.code, 
-                     "displayName" => advance_directive_type.name, 
-                     "codeSystem" => "2.16.840.1.113883.6.96",
-                     "codeSystemName" => "SNOMED CT") do
-              xml.originalText do
-                xml.reference("value" => "advance-directive-" + id.to_s)
+            if advance_directive_type
+              xml.code("code" => advance_directive_type.code, 
+                       "displayName" => advance_directive_type.name, 
+                       "codeSystem" => "2.16.840.1.113883.6.96",
+                       "codeSystemName" => "SNOMED CT") do
+                xml.originalText do
+                  xml.reference("value" => "advance-directive-" + id.to_s)
+                end
               end
-            end
+            end 
             
             xml.statusCode("code" => "completed")
             

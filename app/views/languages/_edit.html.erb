@@ -24,7 +24,7 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Mode</td>
     <td>
-      <%= f.select :language_ability_mode_id, @languageAbilityModes.collect{|language_ability_mode| [language_ability_mode.name, language_ability_mode.id]} %>       
+      <%= f.select :language_ability_mode_id, @languageAbilityModes.collect{|language_ability_mode| [language_ability_mode.name, language_ability_mode.id]}, {:include_blank => true} %>       
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">

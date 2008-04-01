@@ -3,20 +3,20 @@
 <% if support -%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Start Support</td>
-    <td><% if support.start_support != nil %><%=h support.start_support.strftime("%m/%d/%y") %><% end %></td>
+    <td><% if support.start_support %><%=h support.start_support.strftime("%m/%d/%y") %><% end %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">End Support</td>
-    <td><% if support.end_support != nil %><%=h support.end_support.strftime("%m/%d/%y") %><% end %></td>
+    <td><% if support.end_support %><%=h support.end_support.strftime("%m/%d/%y") %><% end %></td>
   </tr>
   <%= render :partial => '/person_names/show', :locals => {:person_name => support.person_name}%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Contact Type</td>
-    <td><% if support.contact_type != nil %><%=h support.contact_type.name %><% end %></td>
+    <td><% if support.contact_type %><%=h support.contact_type.name %><% end %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Relationship</td>
-    <td><% if support.relationship != nil %><%=h support.relationship.name %><% end %></td>
+    <td><% if support.relationship %><%=h support.relationship.name %><% end %></td>
   </tr>
   <%= render :partial => '/addresses/show', :locals => {:address => support.address}%>
   <%= render :partial => '/telecoms/show', :locals => {:telecom => support.telecom}%>
