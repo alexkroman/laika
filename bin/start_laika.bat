@@ -14,7 +14,7 @@ REM *******************************************
 pushd ..
 
 REM *******************************************
-REM Start up the Healthstories server
+REM Start up the Laika server
 REM *******************************************
 ruby script/server
 
