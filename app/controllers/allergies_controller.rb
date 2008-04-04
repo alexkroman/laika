@@ -11,6 +11,7 @@ class AllergiesController < PatientDataChildController
     end
     
     @allergy = Allergy.new
+    @patient_data.update_attribute(:no_known_allergies, false)
     
     render :partial  => 'edit', :locals => {:allergy => @allergy,
                                             :patient_data => @patient_data}
@@ -31,8 +32,11 @@ class AllergiesController < PatientDataChildController
   end
   
   def create
+    
     @allergy = Allergy.new(params[:allergy])
     @patient_data.allergies << @allergy
+    @patient_data.update_attribute(:no_known_allergies, false)
+    
     render :partial  => 'create', :locals => {:allergy => @allergy,
                                               :patient_data => @patient_data}
   end

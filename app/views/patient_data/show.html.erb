@@ -145,6 +145,7 @@
                else -%>
                 <%= render :partial => '/allergies/no_known_allergies_link', :locals => { :patient_data => @patient_data} %>
           <%   end -%>
+          <% end -%>
           <table id="addAllergy">
             <tr class="<%= cycle("darkzebra", "lightzebra")%>">
               <td></td>
@@ -154,7 +155,6 @@
               </td>                                       
             </tr>                                               
           </table>
-          <% end -%>
           </div>
           <!-- End Allergies and Drugs Module -->    
           
