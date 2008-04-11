@@ -36,15 +36,15 @@ Rails::Initializer.run do |config|
   # If you change this key, all old sessions will become invalid!
   # Make sure the secret is at least 30 characters and all random, 
   # no regular words or you'll be exposed to dictionary attacks.
-  config.action_controller.session = {
-    :session_key => '_laika_session',
-    :secret      => '451d52461398c0186576b60fc40b9c8304fb1b38a8f6dce0e6ec564fc7c16687db8d468681bc7053901c56c6ae2e2e394a7631e9f95ea52b4fc69d0e6e5a58a2'
-  }
+  # config.action_controller.session = {
+  #  :session_key => '_laika_session',
+  #  :secret      => '451d52461398c0186576b60fc40b9c8304fb1b38a8f6dce0e6ec564fc7c16687db8d468681bc7053901c56c6ae2e2e394a7631e9f95ea52b4fc69d0e6e5a58a2'
+  # }
 
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information
   # (create the session table with 'rake db:sessions:create')
-  # config.action_controller.session_store = :active_record_store
+  config.action_controller.session_store = :active_record_store
 
   # Use SQL instead of Active Record's schema dumper when creating the test database.
   # This is necessary if your schema can't be completely dumped by the schema dumper,
