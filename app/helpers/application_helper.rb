@@ -7,4 +7,8 @@ module ApplicationHelper
       'put'
     end
   end
+  
+  def required_field(req)
+     "<td>#{(req == :r2) ? 'R2' : (req == :req) ? 'R' : 'O'}</td>"
+  end
 end

@@ -8,14 +8,23 @@ class ClinicalDocumentsController < ApplicationController
   def create
     @clinical_document = ClinicalDocument.new(params[:clinical_document])
     @vendor_test_plan.clinical_document = @clinical_document
-    cache_validation_report
+    begin
+    @vendor_test_plan.cache_validation_report
+    rescue
+        flash[:notice] = "An error occurred while validating the document"
+    end
+    
     redirect_to vendor_test_plans_url
   end
 
   def update
     @clinical_document = @vendor_test_plan.clinical_document
     @clinical_document.update_attributes(params[:clinical_document])
-    cache_validation_report
+    begin
+    @vendor_test_plan.cache_validation_report
+    rescue
+        flash[:notice] = "An error occurred while validating the document"
+    end
     redirect_to vendor_test_plans_url
   end
 
@@ -33,33 +42,4 @@ class ClinicalDocumentsController < ApplicationController
     @vendor_test_plan = VendorTestPlan.find(@vendor_test_plan_id)
   end
   
-  def cache_validation_report
-      
-       xmlc = ""
-       File.open(@clinical_document.full_filename) do |f|
-           xmlc =  f.read()
-       end 
- 
-       doc = REXML::Document.new xmlc
-       report = ValidationUtil.validate('C32',xmlc)
-       add_inspection_results_to_validation_errors(report,@vendor_test_plan.validate_clinical_document_content)
-       @clinical_document.validation_report=report.to_s
- end  
-  
- def add_inspection_results_to_validation_errors(val_errors, inspection_results)
-          el = val_errors.root.add_element "Result",{"isValid"=>inspection_results.length == 0,
-              'validator'=>'Content Inspection'}
-          
-          inspection_results.each do |err|
-             err_el = el.add_element "error" 
-             err_el.text = %{ Section: #{err.section} 
-                              Subsection: #{err.subsection}
-                              Field Name: #{err.field_name}
-                              Error Message: #{err. error_message}
-             }
-             if err.location
-                 err_el.add_attribute "location", err.location
-             end
-          end
-       end    
 end

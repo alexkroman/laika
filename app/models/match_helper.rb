@@ -18,7 +18,57 @@ module MatchHelper
         end
       end
       
-      def section_name
+      
+      def safe_match(element,&block)
+         if element
+            begin
+               yield(element) 
+               return nil
+            rescue
+                return ContentError.new(:section => section_name, 
+                                        :error_message => 'Error during validation of the #{section_name} section: #{$!}',
+                                        :type=>'error',
+                                        :location => element.xpath)
+            end
+                
+         else
+             return ContentError.new(:section => section_name, 
+                                     :error_message => 'Null value supplied for matching',
+                                     :type=>'error',
+                                     :location =>nil)             
+         end
+         
+      end    
+      
+      
+      def match_required(element,xpath,namespaces,xpath_variables,subsection,error_message,error_location=nil,&block)
+        content = REXML::XPath.first(element,xpath,namespaces,xpath_variables )
+        if content
+        yield(content) if block_given?
+        return nil
+        else
+            return ContentError.new(:section =>section_name, 
+                                    :error_message => error_message,
+                                    :type=>'error',
+                                    :location => error_location)
+        end
+      end
+     
+      def content_required(content,subsection,error_message,error_location=nil,&block)
+             
+             if content
+             yield(content) if block_given?
+             return nil
+             else
+                 return ContentError.new(:section =>section_name, 
+                                         :error_message => error_message,
+                                         :type=>'error',
+                                         :location => error_location)
+             end
+      end
+      
+             
+     def section_name
         self.class.name
       end
       

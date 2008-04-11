@@ -42,4 +42,10 @@ class ClinicalDocument < ActiveRecord::Base
        
       return self.full_filename.gsub(self.filename,"clinical_document_report_#{self.id}.xml")
   end
+  
+  # has this document been validated? 
+  # This is determinded by whether or not the validation report file exists or not
+  def validated?
+    File.exists? (validation_report_filename) 
+  end
 end

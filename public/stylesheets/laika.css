@@ -315,4 +315,8 @@
     .remaining {
         margin-left: 23px ;
     }
+    td.required:after {
+     content: "R";
+     width:10px;
+    }
     

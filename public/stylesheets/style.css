@@ -518,3 +518,9 @@ table#dashboard a {
 	   border:1px solid #ccc;
        padding:10px;
     }
+td.required{
+	width: 10px;
+}
+td.required:after {
+     content: "Required";
+}    

@@ -90,20 +90,35 @@ class VendorTestPlansController < ApplicationController
   end
   
   
+  def revalidate
+      begin
+          @vendor_test_plan.cache_validation_report
+      rescue
+       flash[:notice] = "An error occurred while validating the document"
+     end
+     
+     redirect_to vendor_test_plans_url 
+  end
+  
   # perform the external validation and display the results
   def validate 
-      inspect_content
-      clinical_document = @vendor_test_plan.clinical_document  
-      xml = ""
+      @vendor_test_plan = VendorTestPlan.find(params[:id])
+      clinical_document = @vendor_test_plan.clinical_document
       xmlc = ""
       File.open(clinical_document.full_filename) do |f|
           xmlc =  f.read()
       end 
 
       @doc = REXML::Document.new xmlc
-      @report =@vendor_test_plan.clinical_document.validation_report(:xml)
+      if @vendor_test_plan.validated?
+        @report =@vendor_test_plan.clinical_document.validation_report(:xml)
+      else
+          @vendor_test_plan.validate_clinical_document_content
+          @report = REXML::Document.new "<ValidationResults/>"
+      end  
+      @vendor_test_plan.add_inspection_results_to_validation_errors(@report)
       @error_mapping = match_errors(@report,@doc)
-      # add_inspection_results_to_validation_errors(@report,@results)
+
    end
    
    
@@ -114,12 +129,10 @@ class VendorTestPlansController < ApplicationController
        error_map = {}
        error_id = 0
        @error_attributes = []
-       locs = @results.collect{|res| res.location}
-       locs.compact!
+       locs = []
        REXML::XPath.each(errors,'//@location') do |e| locs << e.value end
-       puts locs
+
        locs.each do |location|
-           puts location
         node = REXML::XPath.first(doc ,location)
        # puts "#{node.inspect} #{location}"
           if(node)
@@ -143,21 +156,5 @@ class VendorTestPlansController < ApplicationController
        error_map
    end  
   
-   
-   def add_inspection_results_to_validation_errors(val_errors, inspection_results)
-      el = val_errors.root.add_element "Result",{"isValid"=>inspection_results.length == 0,
-          'validator'=>'Content Inspection'}
-      
-      inspection_results.each do |err|
-         err_el = el.add_element "error" 
-         err_el.text = %{ Section: #{err.section} 
-                          Subsection: #{err.subsection}
-                          Field Name: #{err.field_name}
-                          Error Message: #{err. error_message}
-         }
-         if err.location
-             err_el.add_attribute "location", err.location
-         end
-      end
-   end
+ 
 end
