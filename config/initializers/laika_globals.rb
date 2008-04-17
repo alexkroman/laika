@@ -1,2 +1,2 @@
-VERSION_NUMBER = "0.9.9.676"
+VERSION_NUMBER = "1.0.0.692"
 FEEDBACK_EMAIL = "talk@projectlaika.org"
