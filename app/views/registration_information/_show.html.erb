@@ -2,10 +2,6 @@
 <h5>Person Information</h5>
 <table>
 <% if registration_information %>
-<tr class="<%= cycle("darkzebra", "lightzebra")%>">
-  <td class="lighttext">Person ID</td>
-  <td><%=h registration_information.person_identifier %></td>
-</tr>
 <%= render :partial => '/person_names/show', :locals => {:person_name => registration_information.person_name}%>
 <tr class="spacer"><td></td><td></td></tr>
 <tr class="<%= cycle("darkzebra", "lightzebra")%>">

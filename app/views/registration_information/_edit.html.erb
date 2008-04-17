@@ -4,10 +4,6 @@
                    :update => 'personInformationContainer', :method => http_method(registration_information)) do |f| %>
 <h5>Person Information</h5>
 <table>
-  <tr class="darkzebra">
-    <td class="lighttext">Person ID</td>
-    <td><%= f.text_field :person_identifier %></td>
-  </tr>
   <%= render :partial => '/person_names/edit', :locals => {:person_name => registration_information.person_name}%>
   <tr class="spacer"><td></td><td></td></tr>
   <tr class="lightzebra">
