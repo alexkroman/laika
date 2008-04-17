@@ -1,5 +1,4 @@
 joe_smith:
-  person_identifier: 24602
   date_of_birth: 1967-03-23
   gender: male
   religion: christian
@@ -9,7 +8,6 @@ joe_smith:
   patient_data: joe_smith
 
 joe_smith_test:
-  person_identifier: 24611
   date_of_birth: 1982-03-23
   gender: male
   religion: christian
@@ -19,7 +17,6 @@ joe_smith_test:
   patient_data: joe_smith_vendor_test
 
 emily_jones:
-  person_identifier: 24603
   date_of_birth: 2006-11-01
   gender: female
   religion: hinduism
@@ -29,7 +26,6 @@ emily_jones:
   patient_data: emily_jones
 
 will_haynes:
-  person_identifier: 24604
   date_of_birth: 2006-11-04
   gender: male
   religion: islam
@@ -39,7 +35,6 @@ will_haynes:
   patient_data: will_haynes
 
 jennifer_thompson:
-  person_identifier: 24605
   date_of_birth: 1975-04-10
   gender: female
   religion: judaism
@@ -49,7 +44,6 @@ jennifer_thompson:
   patient_data: jennifer_thompson
 
 theodore_smith:
-  person_identifier: 24606
   date_of_birth: 1929-11-08
   gender: male
   religion: orthodox
@@ -59,7 +53,6 @@ theodore_smith:
   patient_data: theodore_smith
 
 david_carter:
-  person_identifier: 24607
   date_of_birth: 2000-03-02
   gender: male
   religion: paganism
