@@ -120,7 +120,22 @@ class VendorTestPlansController < ApplicationController
       @error_mapping = match_errors(@report,@doc)
 
    end
-   
+
+  # perform the external validation and display the results
+  def checklist 
+      @vendor_test_plan = VendorTestPlan.find(params[:id])
+      clinical_document = @vendor_test_plan.clinical_document
+      xmlc = ""
+      File.open(clinical_document.full_filename) do |f|
+          xmlc =  f.read()
+      end 
+      @doc = REXML::Document.new xmlc
+      pi = REXML::Instruction.new('xml-stylesheet', 'type="text/xsl" href="/schemas/generate_and_format.xsl"')
+      @doc.insert_after(@doc.xml_decl, pi)
+      respond_to do |format|
+        format.xml  { render :text => @doc.to_s}
+      end
+   end   
    
    private 
    # method used to mark the elements in the document that have errors so they 

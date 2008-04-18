@@ -12,6 +12,11 @@
                                            :action => "edit", 
                                            :patient_data_instance_id => @patient_data.id},
                                  :method => 'get' %>
+      <%= link_to_remote 'Remove', :update => "pregnancyContainer",
+                                   :url =>  {:controller => "pregnancy", 
+                                             :action => "destroy", 
+                                             :patient_data_instance_id => @patient_data.id},
+                                   :method => 'delete' %>
     </td>
   </tr>
 </table>
