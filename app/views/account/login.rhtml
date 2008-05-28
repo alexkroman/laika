@@ -1,6 +1,6 @@
     <% form_tag({}, {:name => "laika_login_form"}) do -%>
     <div id="login">
-        <div id="cap-top"></div>
+    	<div id="cap-top"></div>
         <div id="cap-body">
             <div id="branding">
                 <%= image_tag "welcome.png", :id => 'imgLogo', :alt => 'Laika welcomes you!' %>
@@ -10,18 +10,20 @@
             <div id="panelLogin">
                 <div style="padding-bottom:18px">
                     <label>Email Address</label>
-                    <%= text_field_tag 'email' %>
+                    <input type="text" name="email" id="email"/>
                 </div>
                 <div style="padding-bottom:18px">
                     <label>Password</label>
-                    <%= password_field_tag 'password'  %>
+                    <input type="password" name="password" id="password"/>
                 </div>
+                                
+                <input type="hidden" name="eventHandler" value="" onkeypress="return submitKeyPress(event);"/>
                 
                 <p class="rememberme"><%= check_box_tag 'remember_me' %><span style="color:#888888;">Remember me.</span></p>
                 
                 <div style="margin-left:295px;width:auto;">
                     <a class="whitebutton" href="#"><span>Cancel</span></a>
-                    <a class="bluebutton" href="javascript:submitLaikaLoginform();"><span>Login</span></a>
+                     <a class="bluebutton"  href="javascript:submitLaikaLoginform();"><span>Login</span></a>
                 </div>
                 
                 
