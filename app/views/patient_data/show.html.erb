@@ -45,6 +45,9 @@
             <tr class="darkzebra">
               <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('commentsContainer', 1.0);">Comments</a></td>
             </tr>
+            <tr class="darkzebra">
+              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('resultsContainer', 1.0);">Results</a></td>
+            </tr>
           </table>
         </div>
       </div>
@@ -235,6 +238,25 @@
           </table>
           </div> 
           <!-- End Comments Module -->
+          
+          <!-- Start Results Module -->   
+          <div id="resultsContainer"> 
+          <h5>Results</h5>
+          <% for result in @patient_data.results -%>
+            <div id="result<%= result.id %>">
+              <%= render :partial => '/results/show', :locals => {:result  => result, :patient_data => @patient_data} %>
+            </div>
+          <% end -%>
+          <table id="addResult">
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td></td>
+              <td><%= link_to_remote 'Add', :url => new_patient_data_instance_result_path(@patient_data), 
+                                            :method => 'get', :update => 'addResult', :position => :before %>
+              </td>                                       
+            </tr>                                               
+          </table>  
+          </div>
+          <!-- End Results Module -->
                  
         </div>
       </div>

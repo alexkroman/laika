@@ -1,0 +1,54 @@
+<% if result.new_record?
+     result_div = 'resultNew' 
+     html_options = {} -%>
+<div id="resultNew">
+<% else
+     result_div = "result#{result.id}"
+     html_options = {:method => 'put'}
+   end %>
+<% remote_form_for(:result, result, :url => patient_data_instance_result_path(patient_data, result), :html => html_options,
+                   :update => result_div) do |f| -%>
+<table>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Result ID</td>
+    <td><%= f.text_field :result_id %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Date</td>
+    <td><input id="result_result_date" name="result[result_date]" size="30" type="text" <% if result.result_date %>value="<%= result.result_date.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" /></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Code System</td>
+    <td>
+      <%= f.select :code_system_id, @code_systems.collect{|code_system| [code_system.name, code_system.id]}, {:include_blank => true} %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Result Code</td>
+    <td><%= f.text_field :result_code %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Result Code Display Name</td>
+    <td><%= f.text_field :result_code_display_name %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Status Code</td>
+    <td><%= f.text_field :status_code %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Value</td>
+    <td><%= f.text_field :value_scalar %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Value Units</td>
+    <td><%= f.text_field :value_unit %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td></td>
+    <td><%= f.submit "Save" %></td>
+  </tr>
+</table>
+<% end -%>
+<% if result.new_record? -%>
+</div>
+<% end -%>

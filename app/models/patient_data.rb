@@ -10,6 +10,7 @@ class PatientData < ActiveRecord::Base
   has_one    :information_source
   has_one    :advance_directive
   has_many   :comments
+  has_many   :results
   belongs_to :vendor_test_plan
   belongs_to :user
   
@@ -155,6 +156,10 @@ class PatientData < ActiveRecord::Base
     end
     
     copied_patient_data.advance_directive = self.advance_directive.copy if self.advance_directive
+    
+    self.results.each do |result|
+      copied_patient_data.results << result.clone
+    end
     
     copied_patient_data
   end
@@ -483,6 +488,49 @@ class PatientData < ActiveRecord::Base
           # Start Advanced Directive
           advance_directive.andand.to_c32(xml)
           # End Advanced Directive
+          
+          # Start Results
+          unless results.empty?
+            xml.component do
+              xml.section do
+                xml.templateId("root" => "2.16.840.1.113883.10.20.1.14", 
+                               "assigningAuthorityName" => "CCD")
+                xml.code("code" => "30954-2", 
+                         "displayName" => "Relevant diagnostic tests", 
+                         "codeSystem" => "2.16.840.1.113883.6.1", 
+                         "codeSystemName" => "LOINC")
+                xml.title("Results")
+                xml.text do
+                  xml.table("border" => "1", "width" => "100%") do
+                    xml.thead do
+                      xml.tr do
+                        xml.th "Result ID"
+                        xml.th "Result Date"
+                        xml.th "Result Display Name"
+                        xml.th "Result Value"
+                        xml.th "Result Unit"
+                      end
+                    end
+                    xml.tbody do
+                      results.each do |result|
+                        xml.tr do 
+                          xml.td do
+                            xml.content(result.result_id, "ID" => "result-#{result.result_id}")
+                          end
+                          xml.td(result.result_date)
+                          xml.td(result.result_code_display_name)
+                          xml.td(result.value_scalar)
+                          xml.td(result.value_unit)
+                        end
+                      end
+                    end
+                  end
+                end
+                results.each {|result| result.to_c32(xml)}
+              end
+            end
+          end
+          # End Results
           
         }                   
       }

@@ -1,0 +1,47 @@
+<table>
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td class="lighttext">Result ID</td>
+  <td><%=h result.result_id %></td>
+</tr>
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td class="lighttext">Date</td>
+  <td><%=h result.result_date %></td>
+</tr>
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td class="lighttext">Code System Name</td>
+  <td><% if result.code_system %><%=h result.code_system.name %><% end %></td>
+</tr>
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td class="lighttext">Result Code</td>
+  <td><%=h result.result_code %></td>
+</tr>
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td class="lighttext">Result Code Display Name</td>
+  <td><%=h result.result_code_display_name %></td>
+</tr>
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td class="lighttext">Status Code</td>
+  <td><%=h result.status_code %></td>
+</tr>
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td class="lighttext">Value</td>
+  <td><%=h result.value_scalar %> <%=h result.value_unit %></td>
+</tr>
+
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td></td>
+  <td>
+  <span>
+    <%= link_to_remote 'Edit', :update => "result#{result.id}",
+                               :url => edit_patient_data_instance_result_path(patient_data, result),
+                               :method => 'get' %>
+    </span> 
+    
+   <span>
+    <%= link_to_remote 'Remove', :update => "result#{result.id}",
+                               :url => patient_data_instance_result_path(patient_data, result),
+                               :method => 'delete' %>
+    </span> 
+  </td>
+</tr>
+</table>
