@@ -11,6 +11,7 @@ class PatientData < ActiveRecord::Base
   has_one    :advance_directive
   has_many   :comments
   has_many   :results
+  has_many   :immunizations
   belongs_to :vendor_test_plan
   belongs_to :user
   
@@ -90,6 +91,13 @@ class PatientData < ActiveRecord::Base
       end
     end
     
+    # Immunizations
+    if self.immunizations
+      self.immunizations.each do |immunization|
+        errors.concat(immunization.validate_c32(clinical_document))
+      end
+    end
+    
     # Removes all the nils... just in case...
     errors.compact!
     errors
@@ -166,6 +174,10 @@ class PatientData < ActiveRecord::Base
     
     self.results.each do |result|
       copied_patient_data.results << result.clone
+    end
+    
+    self.immunizations.each do |immunization|
+      copied_patient_data.immunizations << immunization.clone
     end
     
     copied_patient_data

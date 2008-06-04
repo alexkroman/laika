@@ -39,14 +39,17 @@
             <tr class="lightzebra">
               <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('informationSourceContainer', 1.0);">Information Source</a></td>
             </tr>
-            <tr class="lightzebra">
+            <tr class="darkzebra">
               <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('advanceDirectiveContainer', 1.0);">Advance Directive</a></td>
             </tr>
-            <tr class="darkzebra">
+            <tr class="lightzebra">
               <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('commentsContainer', 1.0);">Comments</a></td>
             </tr>
             <tr class="darkzebra">
               <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('resultsContainer', 1.0);">Results</a></td>
+            </tr>
+            <tr class="lightzebra">
+              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('immunizationsContainer', 1.0);">Immunizations</a></td>
             </tr>
           </table>
         </div>
@@ -257,6 +260,26 @@
           </table>  
           </div>
           <!-- End Results Module -->
+          
+          <!-- Start Immunizations Module -->
+          <div id="immunizationsContainer">
+          <h5>Immunizations</h5>
+          <% for immunization in @patient_data.immunizations %>
+            <div id="immunization<%= immunization.id %>">
+              <%= render :partial => '/immunizations/show', 
+                         :locals => {:immunization  => immunization, :patient_data => @patient_data} %>
+            </div>
+          <% end %>
+          <table id="addImmunization">
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td></td>
+              <td><%= link_to_remote 'Add', :url => new_patient_data_instance_immunization_path(@patient_data), 
+                                            :method => 'get', :update => 'addImmunization', :position => :before %>
+              </td>                                       
+            </tr>                                               
+          </table>           
+          </div>
+          <!-- End Immunizations Module --> 
                  
         </div>
       </div>
