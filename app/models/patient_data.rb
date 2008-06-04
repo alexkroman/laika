@@ -83,6 +83,13 @@ class PatientData < ActiveRecord::Base
       errors.concat(self.advance_directive.validate_c32(clinical_document))
     end
     
+    # Results
+    if self.results
+      self.results.each do |result|
+        errors.concat(result.validate_c32(clinical_document))
+      end
+    end
+    
     # Removes all the nils... just in case...
     errors.compact!
     errors

@@ -13,3 +13,7 @@ fda_uniii:
 ndf_rt:
   name: NDF RT
   code: 2.16.840.1.113883.4.209
+
+loinc:
+  name: LOINC
+  code: 2.16.840.1.113883.6.1
