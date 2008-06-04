@@ -1,0 +1,63 @@
+adenovirus_4: 
+  code: 54
+  name: Adenovirus Type 4
+
+adenovirus_7:
+  code: 55
+  name: Adenovirus Type 7
+
+adenovirus_nos:
+  code: 82
+  name: Adenovirus NOS1
+
+anthrax:
+  code: 24
+  name: Anthrax
+
+bacillus_calmette_guerin:
+  code: 19
+  name: Bacillus Calmette Guerin
+
+botulinum_antitoxin:
+  code: 27
+  name: Botulinum Antitoxin
+
+cholera:
+  code: 26
+  name: Cholera
+
+cmvig:
+  code: 29
+  name: Cytomegalovirus Immune Globulin
+
+dengue_fever:
+  code: 56
+  name: Dengue Fever
+
+diphtheria_antitoxin:
+  code: 12
+  name: Diphtheria Antitoxin
+
+diphtheria_and_tetanus_toxoids_pediatric:
+  code: 28
+  name: Diphtheria and Tetanus Toxoids (pediatric)
+
+diphtheria_and_tetanus_toxoids_acellular_pertussis:
+  code: 20
+  name: Diphtheria and Tetanus Toxoids (acellular pertussis)
+  
+diphtheria_tetanus_toxoids_and_acellular_pertussis_vaccine:
+  code: 106
+  name: Diphtheria Tetanus Toxoids and Acellular Pertussis
+  
+diphtheria_tetanus_toxoids_and_acellular_pertussis_vaccine_nos:
+  code: 107
+  name: Diphtheria Tetanus Toxoids and Acellular Pertussis (NOS)
+  
+dtap_hepatitis_b:
+  code: 110
+  name: DTaP Hepatitis B and poliovirus vaccine
+
+dtap-haemophilus_influenzae_b:
+  code: 50 
+  name: DTaP Haemophilus Influenzae Type B

@@ -1,0 +1,36 @@
+joe_smith_immunization:
+  administration_date: 1966-12-31
+  refusal: false
+  vaccine: anthrax
+  lot_number_text: 
+  patient_data: joe_smith
+
+emily_jones_immunization:
+  administration_date: 1999-05-27
+  refusal: true
+  no_immunization_reason: patient_objections
+  vaccine: diphtheria_antitoxin
+  lot_number_text: 
+  patient_data: emily_jones
+
+will_haynes_immunization:
+  administration_date: 1998-09-03
+  refusal: false
+  vaccine: cholera
+  lot_number_text:
+  patient_data: will_haynes
+
+jennifer_thompson_immunization:
+  administration_date: 1999-05-27
+  refusal: true
+  no_immunization_reason: religious_objection
+  vaccine: dengue_fever
+  lot_number_text: 
+  patient_data: jennifer_thompson
+
+theodore_smith_immunization:
+  administration_date: 2000-02-12
+  refusal: false
+  vaccine: adenovirus_7
+  lot_number_text: 
+  patient_data: theodore_smith
