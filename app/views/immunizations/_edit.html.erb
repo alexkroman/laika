@@ -1,0 +1,46 @@
+<% if immunization.new_record?
+     immunization_div = 'immunizationNew' 
+     html_options = {} -%>
+<div id="immunizationNew">
+<% else
+     immunization_div = "immunization#{immunization.id}"
+     html_options = {:method => 'put'}
+   end %>
+<% remote_form_for(:immunization, immunization, :url => patient_data_instance_immunization_path(patient_data, immunization), :html => html_options,
+                   :update => immunization_div) do |f| -%>
+
+<table>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Administration Date</td>
+    <td>
+      <input id="administration_date" name="immunization[administration_date]" size="30" type="text" <% if immunization.administration_date %>value="<%= immunization.administration_date.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" />
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Vaccine Type</td>
+    <td>
+      <%= f.select :vaccine_id, @vaccines.collect{|vaccine| [vaccine.name, vaccine.id]}, {:include_blank => true} %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Lot Number Text</td>
+    <td><%= f.text_field :lot_number_text %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Patient Refusal</td>
+    <td>
+      <%= f.check_box :refusal %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">No Immunization Reason</td>
+    <td>
+      <%= f.select :no_immunization_reason_id, @no_immunization_reasons.collect{|no_immunization_reason| [no_immunization_reason.name, no_immunization_reason.id]}, {:include_blank => true} %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td></td>
+    <td><%= f.submit "Save" %></td>
+  </tr>
+</table>
+<% end %>
