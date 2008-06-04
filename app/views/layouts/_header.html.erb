@@ -1,6 +1,6 @@
         <!-- Start Header -->
         <div class="header">
-          <div class="right top"><p>Welcome, <%= self.current_user.first_name %> | <%= link_to 'Logout', :controller => 'account', :action => 'logout' %></p></div>
+          <div class="right top"><p>Welcome, <span style="color:#FFFFFF"><%= self.current_user.first_name %></span> | <%= link_to 'Logout', :controller => 'account', :action => 'logout' %></p></div>
           <div class="doggy"><%= image_tag "laika.png", :alt => 'Laika' %></div>
           <div class="right">
             <ul id="smallnav">

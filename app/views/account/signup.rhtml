@@ -15,7 +15,7 @@
                 <div>
                     <ul class="register">
 <li>
-<label class="desc" for="email"><b>1.</b>What's Your Email Address*</label>
+<label class="desc" for="email"><b>1.</b> What's Your Email Address*</label>
 <div>
 <%= f.text_field :email %>
 </div>
@@ -24,55 +24,40 @@
 
 
 <li>
-<label class="desc" for="email"><b>2.</b>Your First Name?</label>
-<div>
+<div class="left" style="float:left; width:233px;display:inline;">
+<label class="desc" for="email"><b>2.</b> Your First Name?</label>
 <%= f.text_field :first_name %>
 </div>
-<br/>
-</li>
-
-<li>
-<label class="desc" for="email"><b>3.</b>Your Last Name?</label>
-<div>
+<label class="desc" for="email">Your Last Name?</label>
 <%= f.text_field :last_name %>
-</div>
-<br/>
+<div style="padding-bottom:28px;"></div>
 </li>
 
 <li>
 <div class="left" style="float:left; width:233px;display:inline;">
-<label class="desc" for="password"><b>4.</b> Choose a Password</label>
+<label class="desc" for="password"><b>3.</b> Choose a Password</label>
 <%= f.password_field :password %>
 <p>Must be at least 6 characters long.</p>
 </div>
-<div class="right" style="width:200px;display:inline;">
 <label class="desc" for="password1">Verify Password</label>
 <%= f.password_field :password_confirmation %>
 <div style="padding-bottom:28px;"></div>
-</div>
 </li>
 
 <li>
-<label class="desc" for="email"><b>5.</b>Your Company?</label>
-<div>
+<div class="left" style="float:left; width:233px;display:inline;">
+<label class="desc" for="email"><b>4.</b> Your Company?</label>
 <%= f.text_field :company %>
 </div>
-<br/>
-</li>
-
-<li>
-<label class="desc" for="email"><b>6.</b>Your Company's URL?</label>
-<div>
+<label class="desc" for="email">Your Company's URL?</label>
 <%= f.text_field :company_url %>
-</div>
-<br/>
 </li>
 
 <li>
-<div style="padding-top:18px">
+<div style="padding-top:18px"></div>
+<span id="regcheckbox">
 <%= f.check_box :send_updates %>
-<label style="display:inline">Keep me updated about the Laika project.</label>
-</div>
+<label style="display:inline">Keep me updated about the Laika project.</label></span>
 </li>
 
 </ul>
@@ -80,9 +65,9 @@
                 </div>
                 
                 <div style="margin:20px 0 0 20px;"><%= image_tag "register_doggy.png" %>
-                    <div style="float:left;position:relative; top:-159px; left:28px; font-size:11px;"><a>Why do I need to register?</a></div>
+                    <div style="float:left;position:relative; top:-162px; left:30px; font-size:11px;"><a>Why do I need to register?</a></div>
                     <a href="/vendor_test_plans/"><%= image_tag "cancel_account.png" %></a>
-                    <input type="image" value="Create Laika Account"  src="/images/create_account.png" />
+                    <input type="image" value="Create Laika Account"  src="/images/create_account.png" class="actbtn" />
                     <input class="create-account-btn" name="commit" type="submit" value="Create Laika Account" style="display:none" />
                 </div>
             </div>

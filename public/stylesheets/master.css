@@ -18,9 +18,6 @@
 
 ==============================================================*/
 
-
-/
-
 /* @group Input */
 
 label {
@@ -28,17 +25,17 @@ label {
 	font-weight: normal;
 }
 
-input.textbox340:hov r {
-	background: #EFF5F9;
-}
-
 input {
 	padding: 0 0 0 4px;
 	vertical-align: middle;
 }
 
+input.textbox340:hov r {
+	background: #EFF5F9;
+}
+
 input, select, textarea {
-	font-size: 12px;
+	font-size: 18px;
 }
 
 
@@ -48,14 +45,14 @@ input.textbox340 {
 
 span.label {
 	color: #888;
-}
+}
 
 /* @end */
 
 /* @group Login */
 
 body.login {
-	background: #d7d7d7;
+	background: #fafafa;
 }
 
 div#login {
@@ -72,7 +69,7 @@ div#cap-top {
 * html #cap-top {
 	margin-bottom: -8px;
 }
-ú
+
 * html div#cap-top {
 	background-image: none;
 	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/cap-top.png", sizingMethod="crop");
@@ -131,14 +128,11 @@ div#login div#branding  h1 {
 
 div#login label {
 	color: #888;
-	display: block;
+	/*display: block;*/
 	font-size: 12px;
 }
 
-div#login input#txtLogin,
-div#login input#txtPassword,
-div#login input#txtEmailAddressResetPass,
-div#login input.textbox340 {
+div#login input {
 	background: #fafafa;
 	border: 1px solid #eee;
 	font-size: 18px;
@@ -146,6 +140,10 @@ div#login input.textbox340 {
 	margin: 0;
 	padding: 3px;
 	width: 440px;
+}
+
+div#login ul.register input {
+	width: 200px;
 }
 
 div#login input.checkbox {
@@ -184,14 +182,6 @@ div#login input#btnRetrieve,
 div#login input#btnUpdate {
 	float: right;
 	margin-bottom: 10px;
-}
-
-p.rememberme {
-	margin: 0;
-	position: relative;
-	left: 45px;
-	width: 260px;
-	display:block;
 }
 
 body.login div#panelErrorMsg {
@@ -236,6 +226,33 @@ input.login-account-btn {
     cursor: pointer; /* hand-shaped cursor */
     cursor: hand; /* for IE 5.x */
 }
+
+.doggyhelp {
+	padding-bottom:0;
+	position:relative;
+	left:-10px;
+}
+
+.doggyhelp img {
+	margin:0;
+}
+
+.doggyhelp a {
+	text-decoration:none;
+}
+
+ul.register span#regcheckbox input {
+	width: 15px;
+}
+
+div#login input.actbtn {
+	padding-left:4px;
+	border:0;
+	background: transparent;
+	width:155px;
+	height:90px;
+}
+
 
 /* @end */
 

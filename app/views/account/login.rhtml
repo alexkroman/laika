@@ -18,9 +18,7 @@
                 </div>
                                 
                 <input type="hidden" name="eventHandler" value="" onkeypress="return submitKeyPress(event);"/>
-                
-                <p class="rememberme"><%= check_box_tag 'remember_me' %><span style="color:#888888;">Remember me.</span></p>
-                
+                <br />
                 <div style="margin-left:295px;width:auto;">
                     <a class="whitebutton" href="#"><span>Cancel</span></a>
                      <a class="bluebutton"  href="javascript:submitLaikaLoginform();"><span>Login</span></a>
@@ -36,13 +34,15 @@
                 </div>
                     <%= image_tag "login_doggy_two.png", :style => 'position:relative;top:11px;' %>
                     <% if flash[:notice] != nil && flash[:notice].length >= 0 %>
-                      <div style="float:left;width:160px; position:relative; top:-144px; left:58px; line-height:1.2em; font-size:11px;">
+                      <div style="float:left;width:160px; position:relative; top:-156px; left:56px; line-height:1.2em; font-size:11px;">
+                      <div style="float:left;position:relative; top:90px; left:-30px; font-size:11px;"><%= link_to 'Lost your password?', :action => 'forgot_password' %></div>
                       <%= flash[:notice] %>
                       </div>
                     <% else %>
                       <div style="float:left;width:160px; position:relative; top:-138px; left:58px; line-height:1.2em; font-size:11px;">Don't have an account?<br> No worries, <%= link_to 'create one now!', :action => 'signup' %></div>
+                      <div style="float:left;position:relative; top:-96px; left:25px; font-size:11px;"><%= link_to 'Lost your password?', :action => 'forgot_password' %></div>
                     <% end %>
-                    <div style="float:left;position:relative; top:-96px; left:25px; font-size:11px;"><%= link_to 'Lost your password?', :action => 'forgot_password' %></div>
+                    
                 </div>
             </div>
                         
