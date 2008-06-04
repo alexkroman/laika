@@ -60,7 +60,7 @@ XPATH
                                    :location => section.andand.xpath)
       end
     rescue
-      errors << ContentError.new(:section => 'Support', 
+      errors << ContentError.new(:section => 'Allergy', 
                                  :error_message => 'Invalid, non-parsable XML for allergy data',
                                  :type=>'error',
                                  :location => document.xpath)
