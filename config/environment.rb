@@ -62,7 +62,7 @@ Rails::Initializer.run do |config|
 end
 
 
-ENV['HOST_URL'] = 'http://localhost'
+ENV['HOST_URL'] = 'http://demo.cchit.org/laika'
 ENV['HELP_LIST'] = 'talk@projectlaika.org'
 
 ActionMailer::Base.smtp_settings = {
