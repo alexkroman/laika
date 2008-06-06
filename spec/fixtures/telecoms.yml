@@ -153,3 +153,23 @@ jennifer_thompsons_insurance_provider_subscriber_telecom:
 
 jennifer_thompsons_insurance_provider_telecom:
   reachable: jennifer_thompsons_insurance_provider_guarantor (InsuranceProviderGuarantor)
+  
+joe_smiths_encounter_provider_telecom:
+  home_phone: +1-312-555-1234
+  reachable: joe_smith_encounter (Encounter)
+  
+emily_jones_encounter_provider_telecom:
+  home_phone: +1-312-555-1234
+  reachable: emily_jones_encounter (Encounter)
+  
+will_haynes_encounter_provider_telecom:
+  home_phone: +1-312-555-1234
+  reachable: will_haynes_encounter (Encounter)
+  
+jennifer_thompson_encounter_provider_telecom:
+  home_phone: +1-312-555-1234
+  reachable: jennifer_thompson_encounter (Encounter)
+  
+theodore_smith_encounter_provider_telecom:
+  home_phone: +1-312-555-1234
+  reachable: theodore_smith_encounter (Encounter)

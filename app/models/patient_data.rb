@@ -12,6 +12,7 @@ class PatientData < ActiveRecord::Base
   has_many   :comments
   has_many   :results
   has_many   :immunizations
+  has_many   :encounters
   belongs_to :vendor_test_plan
   belongs_to :user
   
@@ -107,6 +108,13 @@ class PatientData < ActiveRecord::Base
       end
     end
     
+    # Encounters
+    if self.encounters
+      self.encounters.each do |encounter|
+        errors.concat(encounter.validate_c32(clinical_document))
+      end
+    end
+    
     # Removes all the nils... just in case...
     errors.compact!
     errors
@@ -187,6 +195,10 @@ class PatientData < ActiveRecord::Base
     
     self.immunizations.each do |immunization|
       copied_patient_data.immunizations << immunization.clone
+    end
+    
+    self.encounters.each do |encounter|
+      copied_patient_data.encounters << encounter.copy
     end
     
     copied_patient_data
@@ -639,6 +651,39 @@ class PatientData < ActiveRecord::Base
           end
           # End Immunizations
           
+          # Start Encounters
+          unless encounters.empty?
+            xml.component do
+              xml.section do
+                 xml.templateId("root" => "2.16.840.1.113883.10.20.1.3", 
+                       "assigningAuthorityName" => "CCD")
+                 xml.code("code" => "46240-8", 
+                          "codeSystem" => "2.16.840.1.113883.6.1", 
+                          "codeSystemName" => "LOINC")
+                 xml.title("Encounters")  
+                 xml.text do
+                  xml.table("border" => "1", "width" => "100%") do
+                    xml.thead do
+                      xml.tr do
+                        xml.th "Encounter"
+                        xml.th "Encounter Date"
+                      end
+                    end
+                    xml.tbody do
+                      encounters.each do |encounter|
+                        xml.tr do 
+                          xml.td(encounter.name)
+                          xml.td(encounter.encounter_date)
+                        end
+                      end
+                    end
+                  end
+                end
+                encounters.each {|encounter| encounter.to_c32(xml)}
+              end
+            end
+          end
+          # End Encounters
         }                   
       }
     }      

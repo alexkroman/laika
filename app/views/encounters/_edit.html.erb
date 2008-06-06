@@ -1,0 +1,46 @@
+<% if encounter.new_record?
+     encounter_div = 'encounterNew' 
+     html_options = {} -%>
+<div id="encounterNew">
+<% else
+     encounter_div = "encounter#{encounter.id}"
+     html_options = {:method => 'put'}
+   end %>
+<% remote_form_for(:encounter, encounter, :url => patient_data_instance_encounter_path(patient_data, encounter), :html => html_options,
+                   :update => encounter_div) do |f| -%>
+
+<table>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Encounter Date</td>
+    <td>
+      <input id="encounter_date" name="encounter[encounter_date]" size="30" type="text" <% if encounter.encounter_date %>value="<%= encounter.encounter_date.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" />
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Encounter ID</td>
+    <td><%= f.text_field :encounter_id %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Free Text</td>
+    <td><%= f.text_field :free_text %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Encounter Name</td>
+    <td><%= f.text_field :name %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Encounter Code</td>
+    <td><%= f.text_field :code %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td colspan="2" class="lighttext">Encounter Provider</td>
+  </tr>
+  <%= render :partial => '/person_names/edit', :locals => {:person_name => encounter.person_name}%>
+  <%= render :partial => '/addresses/edit', :locals => {:address => encounter.address}%>
+  <%= render :partial => '/telecoms/edit', :locals => {:telecom => encounter.telecom}%>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td></td>
+    <td><%= f.submit "Save" %></td>
+  </tr>
+</table>
+<% end %>

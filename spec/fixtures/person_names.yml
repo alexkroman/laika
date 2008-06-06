@@ -244,3 +244,33 @@ jennifer_thompsons_insurance_provider_guarantor:
   first_name: Emily
   last_name: Jones
   nameable: jennifer_thompsons_insurance_provider_guarantor (InsuranceProviderGuarantor)
+  
+joe_smiths_encounter_provider_name:
+  name_prefix: Dr.
+  first_name: Dem
+  last_name: Bones
+  nameable: joe_smith_encounter (Encounter)
+
+emily_jones_encounter_provider_name:
+  name_prefix: Dr.
+  first_name: Dem
+  last_name: Bones
+  nameable: emily_jones_encounter (Encounter)
+
+will_haynes_encounter_provider_name:
+  name_prefix: Dr.
+  first_name: Dem
+  last_name: Bones
+  nameable: will_haynes_encounter (Encounter)
+
+jennifer_thompson_encounter_provider_name:
+  name_prefix: Dr.
+  first_name: Dem
+  last_name: Bones
+  nameable: jennifer_thompson_encounter (Encounter)
+
+theodore_smith_encounter_provider_name:
+  name_prefix: Dr.
+  first_name: Dem
+  last_name: Bones
+  nameable: theodore_smith_encounter (Encounter)

@@ -1,0 +1,39 @@
+joe_smith_encounter:
+  encounter_id:
+  free_text: IUD
+  name: Insertion of intrauterine device (IUD)
+  code: 58300
+  encounter_date: 1966-12-31
+  patient_data: joe_smith
+
+emily_jones_encounter:
+  encounter_id:
+  free_text: IUD
+  name: Insertion of intrauterine device (IUD)
+  code: 58300
+  encounter_date: 1966-12-31
+  patient_data: emily_jones
+
+will_haynes_encounter:
+  encounter_id:
+  free_text: IUD
+  name: Insertion of intrauterine device (IUD)
+  code: 58300
+  encounter_date: 1966-12-31
+  patient_data: will_haynes
+
+jennifer_thompson_encounter:
+  encounter_id:
+  free_text: IUD
+  name: Insertion of intrauterine device (IUD)
+  code: 58300
+  encounter_date: 1966-12-31
+  patient_data: jennifer_thompson
+
+theodore_smith_encounter:
+  encounter_id:
+  free_text: IUD
+  name: Insertion of intrauterine device (IUD)
+  code: 58300
+  encounter_date: 1966-12-31
+  patient_data: theodore_smith

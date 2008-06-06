@@ -46,10 +46,16 @@
               <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('commentsContainer', 1.0);">Comments</a></td>
             </tr>
             <tr class="darkzebra">
-              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('resultsContainer', 1.0);">Results</a></td>
+              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('vitalSignsContainer', 1.0);">Vital Signs</a></td>
             </tr>
             <tr class="lightzebra">
+              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('resultsContainer', 1.0);">Results</a></td>
+            </tr>
+            <tr class="darkzebra">
               <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('immunizationsContainer', 1.0);">Immunizations</a></td>
+            </tr>
+            <tr class="lightzebra">
+              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('encountersContainer', 1.0);">Encounters</a></td>
             </tr>
           </table>
         </div>
@@ -242,7 +248,7 @@
           </div> 
           <!-- End Comments Module -->
           
-          <!-- Start Results Module -->   
+          <!-- Start Vital Signs Module -->   
           <div id="vitalSignsContainer"> 
           <h5>Vital Signs</h5>
           <% for result in @patient_data.vital_signs -%>
@@ -261,7 +267,7 @@
             </tr>                                               
           </table>  
           </div>
-          <!-- End Results Module -->
+          <!-- End Vital Signs Module  -->
           
           <!-- Start Results Module -->   
           <div id="resultsContainer"> 
@@ -301,7 +307,27 @@
           </table>           
           </div>
           <!-- End Immunizations Module --> 
-                 
+                
+          <!-- Start Encounters Module -->
+          <div id="encountersContainer">
+          <h5>Encounters</h5>
+          <% for encounter in @patient_data.encounters %>
+            <div id="encounter<%= encounter.id %>">
+              <%= render :partial => '/encounters/show', 
+                         :locals => {:encounter  => encounter, :patient_data => @patient_data} %>
+            </div>
+          <% end %>
+          <table id="addEncounter">
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td></td>
+              <td><%= link_to_remote 'Add', :url => new_patient_data_instance_encounter_path(@patient_data), 
+                                            :method => 'get', :update => 'addEncounter', :position => :before %>
+              </td>                                       
+            </tr>                                               
+          </table>           
+          </div>
+          <!-- End Encounters Module --> 
+           
         </div>
       </div>
     </div>
