@@ -243,9 +243,30 @@
           <!-- End Comments Module -->
           
           <!-- Start Results Module -->   
+          <div id="vitalSignsContainer"> 
+          <h5>Vital Signs</h5>
+          <% for result in @patient_data.vital_signs -%>
+            <div id="result<%= result.id %>">
+              <%= render :partial => '/results/show', :locals => {:result  => result, :patient_data => @patient_data} %>
+            </div>
+          <% end -%>
+          <table id="addVital">
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td></td>
+              <!-- Callback at the end to modify the form and let the controller we are creating a vital sign instead of a result -->
+              <td><%= link_to_remote 'Add', :url => new_patient_data_instance_result_path(@patient_data), 
+                                            :method => 'get', :update => 'addVital', :position => :before,
+                                            :complete => "Element.insert('resultForm', '<input type=\"hidden\" name=\"type\" value=\"vital\"/>')" %>
+              </td>                                       
+            </tr>                                               
+          </table>  
+          </div>
+          <!-- End Results Module -->
+          
+          <!-- Start Results Module -->   
           <div id="resultsContainer"> 
           <h5>Results</h5>
-          <% for result in @patient_data.results -%>
+          <% for result in @patient_data.results_only -%>
             <div id="result<%= result.id %>">
               <%= render :partial => '/results/show', :locals => {:result  => result, :patient_data => @patient_data} %>
             </div>

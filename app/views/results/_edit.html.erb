@@ -1,6 +1,6 @@
 <% if result.new_record?
      result_div = 'resultNew' 
-     html_options = {} -%>
+     html_options = {:id => 'resultForm'} -%>
 <div id="resultNew">
 <% else
      result_div = "result#{result.id}"

@@ -8,3 +8,16 @@ jennifer_thompson_result:
   result_date: 2007-11-17
   value_scalar: 135
   value_unit: mg/dL
+  type: Result
+  
+jennifer_thompson_vital_sign:
+  patient_data: jennifer_thompson
+  result_id: 33d07056-bd27-4c90-891d-eb716d3170c4
+  result_code: 3141-9
+  result_code_display_name: Body Weight (Measured)
+  code_system: loinc
+  status_code: N
+  result_date: 2007-11-17
+  value_scalar: 155
+  value_unit: lbs
+  type: VitalSign

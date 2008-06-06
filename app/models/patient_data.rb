@@ -17,6 +17,15 @@ class PatientData < ActiveRecord::Base
   
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
   
+  # Grabs only results, and omits vital signs
+  def results_only
+    results.find(:all, :conditions => "type = 'Result'")
+  end
+  
+  def vital_signs
+    results.find(:all, :conditions => "type = 'VitalSign'")
+  end
+  
   def validate_c32(clinical_document)
  
     errors = []
@@ -508,8 +517,51 @@ class PatientData < ActiveRecord::Base
           advance_directive.andand.to_c32(xml)
           # End Advanced Directive
           
+          # Start Vital Signs
+          unless vital_signs.empty?
+            xml.component do
+              xml.section do
+                xml.templateId("root" => "2.16.840.1.113883.10.20.1.16", 
+                               "assigningAuthorityName" => "CCD")
+                xml.code("code" => "8716-3", 
+                         "displayName" => "Vital signs", 
+                         "codeSystem" => "2.16.840.1.113883.6.1", 
+                         "codeSystemName" => "LOINC")
+                xml.title("Vital signs")
+                xml.text do
+                  xml.table("border" => "1", "width" => "100%") do
+                    xml.thead do
+                      xml.tr do
+                        xml.th "Vital Sign ID"
+                        xml.th "Vital Sign Date"
+                        xml.th "Vital Sign Display Name"
+                        xml.th "Vital Sign Value"
+                        xml.th "Vital Sign Unit"
+                      end
+                    end
+                    xml.tbody do
+                      vital_signs.each do |vital_sign|
+                        xml.tr do 
+                          xml.td do
+                            xml.content(vital_sign.result_id, "ID" => "vital_sign-#{vital_sign.result_id}")
+                          end
+                          xml.td(vital_sign.result_date)
+                          xml.td(vital_sign.result_code_display_name)
+                          xml.td(vital_sign.value_scalar)
+                          xml.td(vital_sign.value_unit)
+                        end
+                      end
+                    end
+                  end
+                end
+                vital_signs.each {|vital_sign| vital_sign.to_c32(xml)}
+              end
+            end
+          end
+          # End Vital Signs
+          
           # Start Results
-          unless results.empty?
+          unless results_only.empty?
             xml.component do
               xml.section do
                 xml.templateId("root" => "2.16.840.1.113883.10.20.1.14", 
@@ -531,7 +583,7 @@ class PatientData < ActiveRecord::Base
                       end
                     end
                     xml.tbody do
-                      results.each do |result|
+                      results_only.each do |result|
                         xml.tr do 
                           xml.td do
                             xml.content(result.result_id, "ID" => "result-#{result.result_id}")
@@ -545,7 +597,7 @@ class PatientData < ActiveRecord::Base
                     end
                   end
                 end
-                results.each {|result| result.to_c32(xml)}
+                results_only.each {|result| result.to_c32(xml)}
               end
             end
           end

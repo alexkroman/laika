@@ -8,11 +8,23 @@ class Result < ActiveRecord::Base
   
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
   
+  def section_template_id
+    '2.16.840.1.113883.10.20.1.14'
+  end
+  
+  def statement_ccd_template_id
+    '2.16.840.1.113883.10.20.1.31'
+  end
+  
+  def statement_c32_template_id
+    '2.16.840.1.113883.3.88.11.32.16'
+  end
+  
   def to_c32(xml)
     xml.entry do
       xml.observation("classCode" => "OBS", "moodCode" => "EVN") do
-        xml.templateId("root" => "2.16.840.1.113883.10.20.1.31", "assigningAuthorityName" => "CCD")
-        xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.16", "assigningAuthorityName" => "HITSP/C32")
+        xml.templateId("root" => statement_ccd_template_id, "assigningAuthorityName" => "CCD")
+        xml.templateId("root" => statement_c32_template_id, "assigningAuthorityName" => "HITSP/C32")
         if self.result_id
           xml.id("root" => self.result_id)
         end
@@ -36,11 +48,11 @@ class Result < ActiveRecord::Base
     errors = []
     errors << safe_match(document) do 
       errors << match_required(document,
-                                "//cda:section[./cda:templateId[@root = '2.16.840.1.113883.10.20.1.14']]",
+                                "//cda:section[./cda:templateId[@root = '#{section_template_id}']]",
                                 @@default_namespaces,
                                 {},
                                 nil,
-                                "C32 Result section with templateId 2.16.840.1.113883.10.20.1.14 not found",
+                                "C32 Result section with templateId #{section_template_id} not found",
                                 document.xpath) do |section|
         errors << match_required(section,
                                  "./cda:entry/cda:observation[cda:id/@root = $id]",
