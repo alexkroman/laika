@@ -17,8 +17,9 @@ class Immunization < ActiveRecord::Base
   def to_c32(xml)
     
     xml.entry('typeCode'=>'DRIV') {
-      xml.substanceAdministration('classCode' => 'SBADM', 'moodCode' => 'EVN', 'negationInd' => refusal) {
-        xml.templateId('root' => '2.16.840.1.113883.10.20.1.24')
+      xml.substanceAdministration('classCode' => 'SBADM', 'moodCode' => 'EVN', 'negationInd' => refusal) {        
+        xml.templateId("root" => "2.16.840.1.113883.10.20.1.24", "assigningAuthorityName" => "CCD")
+        xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.14", "assigningAuthorityName" => "HITSP/C32")
         xml.id('root'=>'41755f58-d7c0-4aab-9f7c-a3a5d8df4581')
         xml.statusCode('code' => 'completed')
         if administration_date != nil 
@@ -30,7 +31,9 @@ class Immunization < ActiveRecord::Base
 		  xml.manufacturedProduct {
 		    xml.templateId ('root' => '2.16.840.1.113883.10.20.1.53')
 			xml.manufacturedMaterial{
-			  immunization.andand.to_c32(xml)
+			  if vaccine != nil
+			    vaccine.andand.to_c32(xml)
+              end 
 	          xml.lotNumberText lot_number_text
 	        }
           }

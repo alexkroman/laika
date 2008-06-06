@@ -551,6 +551,42 @@ class PatientData < ActiveRecord::Base
           end
           # End Results
           
+         # Start Immunizations
+          unless immunizations.empty?
+            xml.component do
+              xml.section do
+                xml.templateId("root" => "2.16.840.1.113883.10.20.1.6", 
+                               "assigningAuthorityName" => "CCD")
+                xml.code("code" => "11369-6", 
+                         "codeSystem" => "2.16.840.1.113883.6.1", 
+                         "codeSystemName" => "LOINC")
+                xml.title("Immunizations")
+                xml.text do
+                  xml.table("border" => "1", "width" => "100%") do
+                    xml.thead do
+                      xml.tr do
+                        xml.th "Vaccine"
+                        xml.th "Administration Date"
+                      end
+                    end
+                    xml.tbody do
+                      immunizations.each do |immunization|
+                        xml.tr do 
+                           if immunization.vaccine != nil
+                            xml.td(immunization.vaccine.name)
+                          end
+                          xml.td(immunization.administration_date)
+                        end
+                      end
+                    end
+                  end
+                end
+                immunizations.each {|immunization| immunization.to_c32(xml)}
+              end
+            end
+          end
+          # End Immunizations
+          
         }                   
       }
     }      
