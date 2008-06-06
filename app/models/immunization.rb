@@ -14,8 +14,7 @@ class Immunization < ActiveRecord::Base
     errors.compact
   end
   
-  def to_c32(xml)
-    
+  def to_c32(xml)    
     xml.entry('typeCode'=>'DRIV') {
       xml.substanceAdministration('classCode' => 'SBADM', 'moodCode' => 'EVN', 'negationInd' => refusal) {        
         xml.templateId("root" => "2.16.840.1.113883.10.20.1.24", "assigningAuthorityName" => "CCD")
@@ -38,6 +37,9 @@ class Immunization < ActiveRecord::Base
 	        }
           }
         }
+        if no_immunization_reason == true
+          no_immunization_reason.andand.to_c32(xml)
+        end 
       }
     }
          
