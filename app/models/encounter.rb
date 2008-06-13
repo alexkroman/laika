@@ -28,13 +28,11 @@ class Encounter < ActiveRecord::Base
         end
         xml.participant('typeCode'=>'PRF') {
           xml.participantRole('classCode' => 'PROV') {        
-            xml.playingEntity {
-              address.andand.to_c32(xml)
-              telecom.andand.to_c32(xml)  
-              xml.playingEntity do
-                person_name.andand.to_c32(xml)
-              end
-            }
+            address.andand.to_c32(xml)
+            telecom.andand.to_c32(xml)  
+            xml.playingEntity do
+              person_name.andand.to_c32(xml)
+            end
           }
         }
       }
