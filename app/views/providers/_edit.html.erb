@@ -12,13 +12,13 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Start Service</td>
     <td>
-      <input id="provider_start_service" name="provider[start_service]" size="30" type="text" <% if provider.start_service %>value="<%= provider.start_service.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" />
+      <%= f.calendar_date_select :start_service %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">End Service</td>
     <td>
-      <input id="provider_end_service" name="provider[end_service]" size="30" type="text" <% if provider.end_service %>value="<%= provider.end_service.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" />
+      <%= f.calendar_date_select :end_service %>
     </td>
   </tr>
   <%= render :partial => '/person_names/edit', :locals => {:person_name => provider.person_name}%>

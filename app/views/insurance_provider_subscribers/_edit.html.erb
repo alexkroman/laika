@@ -8,7 +8,7 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Patient Birth Date</td>
     <td>
-      <input id="insurance_provider_subscriber_date_of_birth" name="insurance_provider_subscriber[date_of_birth]" size="30" type="text" <% if insurance_provider_subscriber.date_of_birth %>value="<%= insurance_provider_subscriber.date_of_birth.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" />
+      <%= calendar_date_select_tag "insurance_provider_subscriber_date_of_birth", insurance_provider_subscriber.date_of_birth %>
     </td>
   </tr>
   <%= render :partial => '/addresses/edit', :locals => {:address => insurance_provider_subscriber.address}%>

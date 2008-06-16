@@ -6,7 +6,7 @@
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Time</td>
-    <td><input id="information_source_time" name="information_source[time]" size="30" type="text" <% if information_source.time %>value="<%= information_source.time.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" /></td>
+    <td><%= f.calendar_date_select :time %></td>
   </tr>
   <%= render :partial => '/person_names/edit', :locals => {:person_name => information_source.person_name}%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">

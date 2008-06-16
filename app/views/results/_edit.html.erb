@@ -15,7 +15,9 @@
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Date</td>
-    <td><input id="result_result_date" name="result[result_date]" size="30" type="text" <% if result.result_date %>value="<%= result.result_date.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" /></td>
+    <td>
+      <%= f.calendar_date_select :result_date %>
+    </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Code System</td>

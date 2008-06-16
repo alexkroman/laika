@@ -47,7 +47,7 @@
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Expiration Date</td>
-    <td><input id="medication_expiration_time" name="medication[expiration_time]" size="30" type="text" <% if medication.expiration_time %>value="<%= medication.expiration_time.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" /></td>
+    <td><%= f.calendar_date_select :expiration_time %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td></td>

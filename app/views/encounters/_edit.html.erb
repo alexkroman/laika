@@ -13,7 +13,7 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Encounter Date</td>
     <td>
-      <input id="encounter_date" name="encounter[encounter_date]" size="30" type="text" <% if encounter.encounter_date %>value="<%= encounter.encounter_date.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" />
+      <%= f.calendar_date_select :encounter_date %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">

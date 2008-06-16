@@ -14,7 +14,7 @@
   </tr>
   <tr class="darkzebra">
     <td class="lighttext">Date of Birth</td>
-    <td><input id="registration_information_date_of_birth" name="registration_information[date_of_birth]" size="30" type="text" <% if registration_information.date_of_birth %>value="<%= registration_information.date_of_birth.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" /></td>
+    <td><%= f.calendar_date_select :date_of_birth %></td>
   </tr>
   <tr class="lightzebra">
     <td class="lighttext">Marital Status</td>

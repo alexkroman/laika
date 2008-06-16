@@ -2,7 +2,7 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Patient Birth Date</td>
     <td>
-      <input id="insurance_provider_guarantor_effective_date" name="insurance_provider_guarantor[effective_date]" size="30" type="text" <% if insurance_provider_guarantor.effective_date %>value="<%= insurance_provider_guarantor.effective_date.strftime("%m/%d/%Y") %>"<% end %> onClick="GetDate(this);" />
+     <%= calendar_date_select_tag "insurance_provider_guarantor_effective_date", insurance_provider_guarantor.effective_date %>
     </td>
   </tr>
     <%= render :partial => '/addresses/edit', :locals => {:address => insurance_provider_guarantor.address}%>

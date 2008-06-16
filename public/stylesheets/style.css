@@ -525,4 +525,8 @@ td.required{
 }
 td.required:after {
      content: "Required";
-}    
+}
+
+td img {
+  margin: 0;
+}
