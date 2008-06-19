@@ -24,7 +24,11 @@ module Laika
         if the_model.has_attribute?(attr_name.to_s)
           @fields << PropertyField.new(attr_name, the_model, subobject, options[:label])
         elsif the_model.class.reflect_on_association(attr_name)
-          @fields << SubpropertyField.new(attr_name, the_model, subobject, options[:label])
+          f = SubpropertyField.new(attr_name, the_model, subobject, options[:label])
+          if options[:collection]
+            f.collection = options[:collection]
+          end
+          @fields << f
         else
           #oh noes!
         end
@@ -65,15 +69,21 @@ module Laika
     end
     
     class SubpropertyField < Field
+      attr_accessor :collection
+      
       def value
         @model.send(@name).andand.name
       end
       
       def edit_box(form_object)
-        ref = @model.class.reflect_on_association(@name)
-        code_class = ref.class_name
-        objs = code_class.find(:all, :order => "name ASC")
-        form_object.select(@name, objs.collect{|obj| [obj.name, obj.id]}, {:include_blank => true})
+        unless @collection
+          ref = @model.class.reflect_on_association(@name)
+          code_class = Object.const_get(ref.class_name)
+          objs = code_class.find(:all, :order => "name ASC")
+          @collection = objs.collect{|obj| [obj.name, obj.id]}
+        end
+        attribute_name = (@name.to_s + '_id').to_sym
+        form_object.select(attribute_name, @collection, {:include_blank => true})
       end
     end
   end

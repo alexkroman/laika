@@ -12,6 +12,34 @@ class RegistrationInformation < ActiveRecord::Base
   include PersonLike
   include MatchHelper
   
+  def view
+    v = Laika::UIBuilder::View.new(self)
+    v.add_field(:person_name, :subattribute => :name_prefix)
+    v.add_field(:person_name, :subattribute => :first_name)
+    v.add_field(:person_name, :subattribute => :last_name)
+    v.add_field(:person_name, :subattribute => :name_suffix)
+    v.add_field(:gender)
+    v.add_field(:date_of_birth)
+    v.add_field(:marital_status)
+    v.add_field(:religion)
+    v.add_field(:race)
+    v.add_field(:ethnicity)
+    v.add_field(:address, :subattribute => :street_address_line_one, :label => 'Street address')
+    v.add_field(:address, :subattribute => :street_address_line_two, :label => '')
+    v.add_field(:address, :subattribute => :city)
+    v.add_field(:address, :subattribute => :state, :collection => Laika::Constants::STATES)
+    v.add_field(:address, :subattribute => :postal_code)
+    v.add_field(:address, :subattribute => :iso_country, :label => 'Country')
+    v.add_field(:telecom, :subattribute => :home_phone)
+    v.add_field(:telecom, :subattribute => :work_phone)
+    v.add_field(:telecom, :subattribute => :mobile_phone)
+    v.add_field(:telecom, :subattribute => :vacation_home_phone)
+    v.add_field(:telecom, :subattribute => :email)
+    v.add_field(:telecom, :subattribute => :url)
+    v
+  end
+  
+  
   # Checks the contents of the REXML::Document passed in to make sure that they match the
   # information in this object. Will return an empty array if everything passes. Otherwise,
   # it will return an array of ContentErrors with a description of what's wrong.
