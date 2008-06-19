@@ -33,6 +33,7 @@ describe PatientData, "can create a C32 representation of itself" do
     patient_data.to_c32(xml)
     document = REXML::Document.new(StringIO.new(buffer))
     errors = patient_data.validate_c32(document.root)
+    puts errors.map { |e| e.error_message }.join(' ')
     errors.should be_empty
   end
 end

@@ -6,7 +6,7 @@ describe InsuranceProvider, "it can validate insurance provider entries in a C32
   it "should verify an insurance provider matches in a C32 doc" do
     document = REXML::Document.new(File.new(RAILS_ROOT + '/spec/test_data/insurance_provider/insurance_provider.xml'))
     joe_insurance_provider = insurance_providers(:joe_smiths_insurance_provider)
-    errors = joe_insurance_provider.validate_c32(document)
+    errors = joe_insurance_provider.validate_c32(document.root)
     puts errors.map { |e| e.error_message }.join(' ')
     errors.should be_empty
   end
