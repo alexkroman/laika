@@ -113,7 +113,7 @@ class AdvanceDirective < ActiveRecord::Base
                 xml.templateId('root'=>'2.16.840.1.113883.10.20.1.37')
                 xml.code('code'=>"33999-4", 'codeSystem'=>"2.16.840.1.113883.6.1", 'displayName'=>"Status")
                 xml.statusCode('code'=>"completed")
-                xml.value('xsi:type'=>"CE", 'code'=>"15240007", 'codeSystem'=>"2.16.840.1.113883.6.96", 'displayName'=>"Current and verified")
+                xml.value('xsi:type'=>"CE", 'code'=>"425392003", 'codeSystem'=>"2.16.840.1.113883.6.96", 'displayName'=>"Current and verified")
               end
             end
           end
