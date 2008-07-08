@@ -17,4 +17,25 @@ class ApplicationController < ActionController::Base
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery :secret => 'dece9bb4d13101130349c3bef2c45b37'
   
+  protected
+
+  def rescue_action_in_public(exception)
+    render :template => "rescues/error"
+  end
+
+  #def log_error(exception) 
+  #  super(exception)
+  #  begin
+  #    logger.error("Attempting to send error email")
+  #    ErrorMailer.deliver_errormail(exception, 
+  #     clean_backtrace(exception), 
+  #      session.instance_variable_get("@data"), 
+  #      params,
+  #      request.env)
+  #  rescue => e
+  #    logger.error("Failed to send error email")
+  #    logger.error(e)
+  #  end
+  #end
+  
 end

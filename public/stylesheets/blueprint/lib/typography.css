@@ -75,8 +75,8 @@ address     { margin-top: 1.5em; font-style: italic; }
 del         { color:#666; }
 
 a:focus, 
-a:hover     { color: #666; }
-a           { color: #40affe; text-decoration: none; }
+a:hover     { color: #666666; }
+a           { color: #40afee; text-decoration: none; }
 
 blockquote  { margin: 1.5em; color: #666; font-style: italic; }
 strong      { font-weight: bold; }

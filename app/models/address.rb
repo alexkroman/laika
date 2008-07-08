@@ -13,21 +13,19 @@ class Address < ActiveRecord::Base
   # it will return an array of ContentErrors with a description of what's wrong.
   def validate_c32(address_element)
     errors = []
-
     if address_element
-
       errors << match_value(address_element, 'cda:streetAddressLine[1]', 'street_address_line_one', self.street_address_line_one)
       errors << match_value(address_element, 'cda:streetAddressLine[2]', 'street_address_line_two', self.street_address_line_two)
       errors << match_value(address_element, 'cda:city', 'city', self.city)
       errors << match_value(address_element, 'cda:state', 'state', self.state)
       errors << match_value(address_element, 'cda:postalCode', 'postal_code', self.postal_code)
-
       if self.iso_country
         errors << match_value(address_element, 'cda:country', 'country', self.iso_country.code)
       end
     else
-       errors << ContentError.new(:section => self.addressable_type.underscore, :subsection => 'address',
-           :error_message => 'Address element is nil')
+       errors << ContentError.new(:section => self.addressable_type.underscore, 
+                                  :subsection => 'address',
+                                  :error_message => 'Address element is nil')
     end
     errors.compact
   end
@@ -43,25 +41,25 @@ class Address < ActiveRecord::Base
   end
   
   def to_c32(xml = XML::Builder.new)
-        xml.addr {
-          if street_address_line_one && street_address_line_one.size > 0
-            xml.streetAddressLine street_address_line_one
-          end
-          if street_address_line_two && street_address_line_two.size > 0
-            xml.streetAddressLine street_address_line_two
-          end
-          if city && city.size > 0
-            xml.city city
-          end
-          if state && state.size > 0
-            xml.state state
-          end
-          if postal_code && postal_code.size > 0
-            xml.postalCode postal_code
-          end
-          if iso_country 
-            xml.country iso_country.code
-          end
-         }
+    xml.addr {
+      if street_address_line_one && street_address_line_one.size > 0
+        xml.streetAddressLine street_address_line_one
+      end
+      if street_address_line_two && street_address_line_two.size > 0
+        xml.streetAddressLine street_address_line_two
+      end
+      if city && city.size > 0
+        xml.city city
+      end
+      if state && state.size > 0
+        xml.state state
+      end
+      if postal_code && postal_code.size > 0
+        xml.postalCode postal_code
+      end
+      if iso_country 
+        xml.country iso_country.code
+      end
+    }
   end
 end

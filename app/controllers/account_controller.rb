@@ -27,7 +27,7 @@ class AccountController < ApplicationController
       end
       
     end
-    flash[:notice] = "Sorry mate, your email and password <b>don't match</b>.  Would you like to <a href='/account/signup'>create an account?</a>"
+    flash[:notice] = "Sorry mate, your email and password <b>don't match</b>.  Would you like to <a href='/account/signup' class='loginlink'>create an account?</a>"
   end
 
   def signup
@@ -37,14 +37,13 @@ class AccountController < ApplicationController
     self.current_user = @user
     
     # Either direct to the Dashboard or the Library, depending on if the user has vendor test plans
-      @vendor_test_plans = self.current_user.vendor_test_plans
-      numVendorTestPlans = @vendor_test_plans.size
-      if numVendorTestPlans == 0
-        redirect_to(:controller => '/patient_data', :action => 'index')
-      else
-        redirect_to(:controller => '/vendor_test_plans', :action => 'index')
+    @vendor_test_plans = self.current_user.vendor_test_plans
+    numVendorTestPlans = @vendor_test_plans.size
+    if numVendorTestPlans == 0
+      redirect_to(:controller => '/patient_data', :action => 'index')
+    else
+      redirect_to(:controller => '/vendor_test_plans', :action => 'index')
     end
-    
   rescue ActiveRecord::RecordInvalid
     render :action => 'signup'
   end
@@ -73,15 +72,15 @@ class AccountController < ApplicationController
     @user = User.find_by_password_reset_code(params[:id])
     raise if @user.nil?
     return if @user unless params[:password]
-      if (params[:password] == params[:password_confirmation])
-        self.current_user = @user #for the next two lines to work
-        current_user.password_confirmation = params[:password_confirmation]
-        current_user.password = params[:password]
-        @user.reset_password
-        flash[:notice] = current_user.save ? "Your Laika password has been reset" : "Your Laika password has not been reset" 
-      else
-        flash[:notice] = "Password mismatch" 
-      end  
+    if (params[:password] == params[:password_confirmation])
+      self.current_user = @user #for the next two lines to work
+      current_user.password_confirmation = params[:password_confirmation]
+      current_user.password = params[:password]
+      @user.reset_password
+      flash[:notice] = current_user.save ? "Your Laika password has been reset" : "Your Laika password has not been reset" 
+    else
+      flash[:notice] = "Password mismatch" 
+    end  
   rescue
     #logger.error "Invalid Reset Code entered" 
     flash[:notice] = "Sorry - That is an invalid password reset code.<P>Please check your code and try again.<P>(Perhaps your email client inserted a carriage return?"        

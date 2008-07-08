@@ -64,11 +64,20 @@
 
                 </div>
                 
-                <div style="margin:20px 0 0 20px;"><%= image_tag "register_doggy.png" %>
-                    <div style="float:left;position:relative; top:-162px; left:30px; font-size:11px;"><a>Why do I need to register?</a></div>
-                    <a href="/vendor_test_plans/"><%= image_tag "cancel_account.png" %></a>
-                    <input type="image" value="Create Laika Account"  src="/images/create_account.png" class="actbtn" />
+                <div style="margin:20px 0 0 20px;"><%= image_tag "register_doggy.png", :id => 'firstdog', :style => 'visibility:visible'%>
+                    <a href="/vendor_test_plans/"><%= image_tag "cancel_account.png"%></a>
+                    <input type="image" value="Create Laika Account"  src="/images/create_account.png" class="actbtn" style="z-index:100"/>
                     <input class="create-account-btn" name="commit" type="submit" value="Create Laika Account" style="display:none" />
+                    <div id="whyreg">
+                    	<a href="#" id="whyreglink" onclick="toggleVisibility('firstdog','whyreglink', 'regpopup'); return false;">Why do I need to register?</a>
+                      <span id="regpopup" style="display:none;">
+                      <%= image_tag "why_register_doggy.png", :class => 'doggyappear' %>
+                    	<div id="doggyappeartxt" onclick="toggleVisibility('firstdog','whyreglink', 'regpopup'); return false;">
+                    	<span id="barkpad">Bark! Bark!</span><br />
+                    	Prevents unauthorized data access<br />
+                    	and gives you a "Laika" identity!
+                    </span></div>
+                </div>
                 </div>
             </div>
                         

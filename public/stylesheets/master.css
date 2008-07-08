@@ -246,13 +246,56 @@ ul.register span#regcheckbox input {
 }
 
 div#login input.actbtn {
+	float:right;
+	position:relative;
+	top:-55px;
 	padding-left:4px;
 	border:0;
 	background: transparent;
-	width:155px;
-	height:90px;
+	width:157px;
+	height:31px;
 }
 
+.loginlink {
+	color: #40afee;
+	text-decoration: none;
+}
+
+a:hover.loginlink {
+	color: #40afee;
+	text-decoration: none;
+}
+
+#regpopup {
+	float:left;
+	font-size:11px;
+}
+
+div#whyreg {
+	float: left;
+	position: relative;
+	top: -158px;
+	left: 30px;
+	font-size: 11px;
+}
+
+.doggyappear {
+	position: relative;
+	top: -17px;
+	right: 30px;
+}
+
+div#doggyappeartxt {
+	position: relative;
+	top: -165px;
+	left: 5px;
+	font-size: 11px;
+	float: left;
+}
+
+#barkpad {
+	padding-left: 60px;
+}
 
 /* @end */
 

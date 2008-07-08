@@ -25,24 +25,23 @@ class Immunization < ActiveRecord::Base
           xml.effectiveTime ('xsi:type' => "IVL_TS") {
             xml.center('value' => administration_date.strftime("%Y%m%d")) 
           }
-	    end
-	    xml.consumable {
-		  xml.manufacturedProduct {
-		    xml.templateId ('root' => '2.16.840.1.113883.10.20.1.53')
-			xml.manufacturedMaterial{
-			  if vaccine != nil
-			    vaccine.andand.to_c32(xml)
+	      end
+	      xml.consumable {
+		      xml.manufacturedProduct {
+		        xml.templateId ('root' => '2.16.840.1.113883.10.20.1.53')
+			      xml.manufacturedMaterial {
+			        if vaccine != nil
+			          vaccine.andand.to_c32(xml)
               end 
-	          xml.lotNumberText lot_number_text
-	        }
+	            xml.lotNumberText lot_number_text
+	          }
           }
         }
         if no_immunization_reason == true
           no_immunization_reason.andand.to_c32(xml)
         end 
       }
-    }
-         
+    }       
   end
   
 end

@@ -14,38 +14,37 @@ class AdvanceDirective < ActiveRecord::Base
     begin
       section = REXML::XPath.first(document,"//cda:section[cda:templateId/@root='2.16.840.1.113883.10.20.1.1']",@@default_namespaces)
       if section
-          observation = REXML::XPath.first(section,"cda:entry/cda:observation[cda:templateId/@root='2.16.840.1.113883.10.20.1.17']",@@default_namespaces)
-             # match person type info
-             entity = REXML::XPath.first(observation,"cda:participant[@typeCode='CST']/cda:participantRole[@classCode='AGNT']",@@default_namespaces)
-             code = REXML::XPath.first(observation,"cda:code",@@default_namespaces)
-             text =  REXML::XPath.first(code,"cda:originalText",@@default_namespaces)
-             deref_text = deref(text)
+        observation = REXML::XPath.first(section,"cda:entry/cda:observation[cda:templateId/@root='2.16.840.1.113883.10.20.1.17']",@@default_namespaces)
+        # match person type info
+        entity = REXML::XPath.first(observation,"cda:participant[@typeCode='CST']/cda:participantRole[@classCode='AGNT']",@@default_namespaces)
+        code = REXML::XPath.first(observation,"cda:code",@@default_namespaces)
+        text =  REXML::XPath.first(code,"cda:originalText",@@default_namespaces)
+        deref_text = deref(text)
            
-             if advance_directive_type
-               errors.concat advance_directive_type.validate_c32(code)
-             end
+        if advance_directive_type
+          errors.concat advance_directive_type.validate_c32(code)
+        end
            
-             if(deref_text != free_text)
-               errors << ContentError.new(:section=>"Advance Directive",
-                                          :error_message=>"Directive text #{free_text} does not match #{deref_text}",
-                                          :location=>(text)? text.xpath : (code)? code.xpath : section.xpath )
-             end
-             if person_name
-               errors.concat person_name.validate_c32(REXML::XPath.first(entity,'cda:playingEntity/cda:name',@@default_namespaces))
-             end       
-             if address
-               errors.concat address.validate_c32(REXML::XPath.first(entity,'cda:addr',@@default_namespaces))
-             end
-             if telecom
-               errors.concat telecom.validate_c32(entity)
-             end      
+        if(deref_text != free_text)
+          errors << ContentError.new(:section=>"Advance Directive",
+                                     :error_message=>"Directive text #{free_text} does not match #{deref_text}",
+                                     :location=>(text)? text.xpath : (code)? code.xpath : section.xpath )
+        end
+        if person_name
+          errors.concat person_name.validate_c32(REXML::XPath.first(entity,'cda:playingEntity/cda:name',@@default_namespaces))
+        end       
+        if address
+          errors.concat address.validate_c32(REXML::XPath.first(entity,'cda:addr',@@default_namespaces))
+        end
+        if telecom
+          errors.concat telecom.validate_c32(entity)
+        end      
       else
           errors << ContentError.new(:section => 'Advance Directive', 
-                                          :error_message => 'Advance Directive not found in document',
-                                          :type=>'error',
-                                          :location => document.xpath)          
+                                    :error_message => 'Advance Directive not found in document',
+                                    :type=>'error',
+                                    :location => document.xpath)          
       end    
-1
     rescue
       errors << ContentError.new(:section => 'Advance Directive', 
                                  :error_message => 'Invalid, non-parsable XML for advance directive data',
