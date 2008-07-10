@@ -9,7 +9,17 @@ class AccountController < ApplicationController
   end
 
   def login
+    
+    # extracting the subversion version number from the .svn/entries file for Laika
+    File.open(".svn/entries", "r") do |f|
+      temp = f.gets
+      temp = f.gets
+      temp = f.gets
+      @version = f.gets
+    end
+    
     return unless request.post?
+    
     self.current_user = User.authenticate(params[:email], params[:password])
     if logged_in?
       if params[:remember_me] == "1"
@@ -27,7 +37,9 @@ class AccountController < ApplicationController
       end
       
     end
-    flash[:notice] = "Sorry mate, your email and password <b>don't match</b>.  Would you like to <a href='/account/signup' class='loginlink'>create an account?</a>"
+    
+    flash[:notice] = "Sorry mate, your email and password <b>do not match</b>.  Want to <a href='/account/signup' class='loginlink'>create an account?</a>"
+    
   end
 
   def signup
