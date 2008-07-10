@@ -1,28 +1,43 @@
-<% @numLaikaErrors = 0 %>
+<% @numXMLValidationErrors = 0 %>
+<% @numContentInspectionErrors = 0 %>
 <% @report.elements.to_a("//Result").each do |res| %>
+<%   @errorType = res.attributes['validator'] %>
 <%   res.elements.to_a("./error").each do |err| %> 
-<%     @numLaikaErrors += 1 %>
+<%     if @errorType.to_s == "Content Inspection" %>
+<%       @numContentInspectionErrors += 1 %>
+<%     else %>
+<%       @numXMLValidationErrors += 1 %>
+<%     end %>
 <%   end %>
 <% end %>
+
   <!-- Start Content -->
   <div class="content">
     <div class="container" >
       <div class="column span-6 append-1">
         <div id="results">
-          <% if @numLaikaErrors == 0 %>
+          <% if @numXMLValidationErrors == 0 %>
             <div class="pass">PASS</div>
           <% else %>
             <div class="fail">FAIL</div>
           <% end %>
           <div class="info">
             <h5>Inspection ID: <%= @vendor_test_plan.vendor.public_id %></h5>
-            <p>Laika Testing Compliance</p>
+            <p>Test Result Summary</p>
             <div class="widget">
               <div class="left on">
                 <div class="visualIndication1">
                   <div><span class="portion" style="width:23px"></span></div>
                 </div>
-                <span class="number"><%= @numLaikaErrors %></span> violations
+                <span class="number"><%= @numXMLValidationErrors %></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; XML Validation Violations
+              </div>
+            </div>
+			<div class="widget">
+              <div class="left on">
+                <div class="visualIndication1">
+                  <div><span class="portion" style="width:23px"></span></div>
+                </div>
+                <span class="number"><%= @numContentInspectionErrors %></span>&nbsp; Content Inspection Violations
               </div>
             </div>
             <table id="details">
@@ -43,40 +58,78 @@
       </div>
       <div class="column span-13 last">
         <div id="template">
-          <h3>Laika XML Inspection Results</h3>
+          <h3>XML Validation Results</h3>
           <table id="dashboard">
             <tr valign="top">
               <th width="125">Error Type</th>
               <th>Error Message</th>
             </tr>
-            <% @numLaikaErrors = 0 %>
+            <% @numXMLValidationErrors = 0 %>
             <% @errorType = "C32" %>
             <% @report.elements.to_a("//Result").each do |res| %>
-            <% @errorType = res.attributes['validator'] %>
-            <% res.elements.to_a("./error").each do |err| %> 
-              <% @numLaikaErrors += 1 %>
-              <% error_id = nil
-                 if err.attributes['location'] 
-                   error_id = @error_mapping[err.attributes['location']]
-                 end %>
+            <%   @errorType = res.attributes['validator'] %>
+            <%   res.elements.to_a("./error").each do |err| %> 
+            <%     if @errorType.to_s != "Content Inspection" %>
+            <%       @numXMLValidationErrors += 1 %>
+            <%       error_id = nil
+                     if err.attributes['location'] 
+                       error_id = @error_mapping[err.attributes['location']]
+                     end %>
+               <tr>
+                <td><%= @errorType.to_s %></td>
+                <td>
+                  <% if error_id %>
+                    <a style="color:#cc3300" href="javascript:scroll_to_module('error_<%=error_id%>', 1.0);" ><b><%= @errorCounter %>.</b> <span><%= err.to_s %></span></a>
+                  <% else %>
+                    <b><%= @numXMLValidationErrors %>.</b> <span><%= err.to_s %></span>
+                  <% end %>
+                </td>
+              </tr>  
+            <%     end %> 
+            <%   end %>
+            <% end %>
+            <% if @numXMLValidationErrors == 0 %>
+              <tr>
+                <td>--</td><td>No XML Validation Errors Detected</td>
+              </tr>
+            <% end %>
+          </table> 
+		  <h3>Content Inspection Results</h3>
+          <table id="dashboard">
+            <tr valign="top">
+              <th width="125">Error Type</th>
+              <th>Error Message</th>
+            </tr>
+            <% @numContentInspectionErrors = 0 %>
+            <% @errorType = "C32" %>
+            <% @report.elements.to_a("//Result").each do |res| %>
+            <%   @errorType = res.attributes['validator'] %>
+            <%   res.elements.to_a("./error").each do |err| %> 
+            <%     if @errorType.to_s == "Content Inspection" %>
+            <%       @numContentInspectionErrors += 1 %>
+            <%       error_id = nil
+                     if err.attributes['location'] 
+                       error_id = @error_mapping[err.attributes['location']]
+                     end %>
               <tr>
                 <td><%= @errorType.to_s %></td>
                 <td>
                   <% if error_id %>
-                    <a style="color:#cc3300" href="javascript:scroll_to_module('error_<%=error_id%>', 1.0);" ><b><%= @numLaikaErrors %>.</b> <span><%= err.to_s %></span></a>
+                    <a style="color:#cc3300" href="javascript:scroll_to_module('error_<%=error_id%>', 1.0);" ><b><%= @numContentInspectionErrors %>.</b> <span><%= err.to_s %></span></a>
                   <% else %>
-                    <b><%= @numLaikaErrors %>.</b> <span><%= err.to_s %></span>
+                    <b><%= @errorCounter %>.</b> <span><%= err.to_s %></span>
                   <% end %>
                 </td>
               </tr>   
-            <% end %>
-            <% end %>
-            <% if @numLaikaErrors == 0 %>
+	        <%     end %> 
+	        <%   end %>
+	        <% end %>
+            <% if @numContentInspectionErrors == 0 %>
               <tr>
-                <td>--</td><td>No Errors Detected</td>
+                <td>--</td><td>No Data Inspection Errors Detected</td>
               </tr>
             <% end %>
-          </table> 
+          </table>
         </div>
       </div>
       <!-- Start Pretty XML -->
