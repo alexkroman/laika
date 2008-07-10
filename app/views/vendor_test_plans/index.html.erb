@@ -31,7 +31,6 @@
                 <td>
                   <% if vendor_test_plan.clinical_document %>
                     <%  if vendor_test_plan.validated? %>
-                   
                      <% if error_count > 0 %>
                        <%= image_tag "fail.png", :alt => 'Test Failed' %>failed</td>
                      <% else %>

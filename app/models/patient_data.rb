@@ -285,9 +285,9 @@ class PatientData < ActiveRecord::Base
                       # event though the C32 doc does not include it, one more reason to just
                       # hate the CDA/CCD/C32 specs
                       xml.code("code" => "77386006", 
-                                                    "displayName" => "Patient currently pregnant", 
-                                                    "codeSystem" => "2.16.840.1.113883.6.96", 
-                                                    "codeSystemName" => "SNOMED CT")                       
+                               "displayName" => "Patient currently pregnant", 
+                               "codeSystem" => "2.16.840.1.113883.6.96", 
+                               "codeSystemName" => "SNOMED CT")                       
                     xml.value("xsi:type" => "CD", 
                                "code" => "77386006", 
                                "displayName" => "Patient currently pregnant", 
@@ -312,7 +312,6 @@ class PatientData < ActiveRecord::Base
                          "codeSystemName" => "LOINC")
                 xml.title "Conditions or Problems"
                 xml.text {
-                
                   xml.table("border" => "1", "width" => "100%") {
                     xml.thead {
                       xml.tr {
