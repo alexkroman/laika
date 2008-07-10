@@ -1,3 +1,5 @@
+require 'faker'
+
 # Encapsulates the telecom section of a C32. Instead of having
 # a bunch of telecom instances as part of a has_many, we've
 # rolled the common ones into a single record. This should
@@ -89,7 +91,13 @@ class Telecom < ActiveRecord::Base
     end
     if url && url.size > 0
       xml.telecom("value" => url)
-   end
+    end
+  end
+  
+  def randomize()
+    self.home_phone = Faker::PhoneNumber.phone_number
+    self.work_phone = Faker::PhoneNumber.phone_number
+    self.mobile_phone = Faker::PhoneNumber.phone_number
   end
 
 end

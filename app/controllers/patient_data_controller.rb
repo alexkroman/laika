@@ -1,3 +1,5 @@
+require 'faker'
+
 class PatientDataController < ApplicationController
 
   def index
@@ -6,32 +8,41 @@ class PatientDataController < ApplicationController
     @kinds = Kind.find(:all)
     @users = User.find(:all)
   end
-
-  def create
-    @patient_data = PatientData.new(params[:patient_data])
+  
+  def autoCreate
+    @patient_data = PatientData.new    
+    @patient_data.registration_information = RegistrationInformation.new
+    @patient_data.randomize()
     @patient_data.user = current_user
     @patient_data.save!
     redirect_to :controller => 'patient_data', :action => 'show', :id => @patient_data.id
   end
+
+  def create
+    @patient_data = PatientData.new(params[:patient_data])
+    @patient_data.user = current_user
+    if @patient_data.name == ""
+      # TODO: NEED TO NOTIFY USER THAT PATIENT NEEDS A NAME
+      redirect_to '/patient_data'
+    else	
+      @patient_data.save!
+      redirect_to :controller => 'patient_data', :action => 'show', :id => @patient_data.id
+    end
+  end
   
   def checklist
     @patient_data = PatientData.find(params[:id])
-    
     respond_to do |format|
       format.xml  
     end
-    
   end
 
-  
   def show
     @patient_data = PatientData.find(params[:id])
-    
     respond_to do |format|
       format.html 
       format.xml  
     end
-    
   end
 
   def set_no_known_allergies

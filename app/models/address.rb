@@ -1,7 +1,12 @@
+require 'faker'
+
 class Address < ActiveRecord::Base
+  
   strip_attributes!
 
   belongs_to :iso_country
+  belongs_to :iso_state
+  belongs_to :zip_code
   belongs_to :addressable, :polymorphic => true
   
   include MatchHelper
@@ -62,4 +67,14 @@ class Address < ActiveRecord::Base
       end
     }
   end
+  
+  def randomize()
+    @zip = ZipCode.find(:all).sort_by{rand}.first
+    self.street_address_line_one = Faker::Address.street_address
+    self.city = @zip.town
+    self.state = @zip.state
+    self.postal_code = @zip.zip
+    self.iso_country = IsoCountry.find 1004581944 #sets the country as the USA
+  end
+  
 end

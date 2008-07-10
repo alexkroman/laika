@@ -1,3 +1,5 @@
+require 'faker'
+
 class PatientData < ActiveRecord::Base
   has_one    :registration_information
   has_many   :languages
@@ -688,5 +690,22 @@ class PatientData < ActiveRecord::Base
       }
     }      
   end  
+  
+  def randomize()
+    self.no_known_allergies = true
+    self.pregnant = nil
+
+    @first_name = Faker::Name.first_name
+    @last_name = Faker::Name.last_name
+    self.name = @first_name + " " +  @last_name
+
+    @name = PersonName.new
+    @name.first_name = @first_name
+    @name.last_name = @last_name
+
+    self.registration_information.randomize(@name)
+    self.registration_information.address = Address.new
+    self.registration_information.address.randomize()
+  end
   
 end
