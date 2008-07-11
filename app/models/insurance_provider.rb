@@ -15,6 +15,11 @@ class InsuranceProvider < ActiveRecord::Base
   
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
   
+  #Reimplementing from MatchHelper
+  def section_name
+    "Insurance Providers Module"
+  end
+  
   def validate_c32(document)
     errors = []
     

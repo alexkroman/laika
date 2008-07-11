@@ -2,8 +2,14 @@ class InformationSource < ActiveRecord::Base
   strip_attributes!
     
   belongs_to :patient_data  
+  
   include PersonLike
   include MatchHelper
+  
+  #Reimplementing from MatchHelper
+  def section_name
+    "Information Source Module"
+  end
   
   def validate_c32(document)
     errors = []

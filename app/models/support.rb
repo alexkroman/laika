@@ -4,8 +4,14 @@ class Support < ActiveRecord::Base
   belongs_to :patient_data
   belongs_to :contact_type
   belongs_to :relationship
+  
   include PersonLike
   include MatchHelper
+  
+  #Reimplementing from MatchHelper
+  def section_name
+    "Supports Module"
+  end
   
   def validate_c32(document)
     errors = []

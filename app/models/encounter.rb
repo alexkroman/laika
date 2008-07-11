@@ -8,6 +8,11 @@ class Encounter < ActiveRecord::Base
   
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"} 
   
+  #Reimplementing from MatchHelper
+  def section_name
+    "Encounters Module"
+  end
+  
   def validate_c32(document)
     errors=[]  
     errors.compact

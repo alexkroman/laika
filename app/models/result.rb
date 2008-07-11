@@ -20,6 +20,11 @@ class Result < ActiveRecord::Base
     '2.16.840.1.113883.3.88.11.32.16'
   end
   
+  #Reimplementing from MatchHelper
+  def section_name
+    "Results Module"
+  end
+  
   def to_c32(xml)
     xml.entry do
       xml.observation("classCode" => "OBS", "moodCode" => "EVN") do

@@ -14,6 +14,11 @@ class Immunization < ActiveRecord::Base
     errors.compact
   end
   
+  #Reimplementing from MatchHelper
+  def section_name
+    "Immunizations Module"
+  end
+  
   def to_c32(xml)    
     xml.entry('typeCode'=>'DRIV') {
       xml.substanceAdministration('classCode' => 'SBADM', 'moodCode' => 'EVN', 'negationInd' => refusal) {        

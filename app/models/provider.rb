@@ -8,8 +8,13 @@ class Provider < ActiveRecord::Base
   belongs_to :provider_role
   
   include PersonLike
-  
   include MatchHelper
+  
+  #Reimplementing from MatchHelper
+  def section_name
+    "Healthcare Providers Module"
+  end
+  
   def validate_c32(document)
     errors = []
     begin

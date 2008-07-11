@@ -39,6 +39,10 @@ class RegistrationInformation < ActiveRecord::Base
     v
   end
   
+  #Reimplementing from MatchHelper
+  def section_name
+    "Person Information Module"
+  end
   
   # Checks the contents of the REXML::Document passed in to make sure that they match the
   # information in this object. Will return an empty array if everything passes. Otherwise,

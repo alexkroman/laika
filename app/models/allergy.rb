@@ -8,6 +8,11 @@ class Allergy < ActiveRecord::Base
   include MatchHelper
   
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
+  
+  #Reimplementing from MatchHelper
+  def section_name
+    "Allergies Module"
+  end
 
   def validate_c32(document)
     errors = []
