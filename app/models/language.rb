@@ -65,4 +65,12 @@ class Language < ActiveRecord::Base
       end
     }  
   end
+  
+  def randomize()
+    self.iso_country = IsoCountry.find(:all).sort_by{rand}.first
+    self.iso_language = IsoLanguage.find(:all).sort_by{rand}.first
+    self.language_ability_mode = LanguageAbilityMode.find(:all).sort_by{rand}.first
+    self.preference = false
+  end
+  
 end

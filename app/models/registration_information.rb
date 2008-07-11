@@ -129,14 +129,17 @@ class RegistrationInformation < ActiveRecord::Base
     }
   end
   
-  
   def randomize(patient)
     self.person_name = patient
+    self.gender = Gender.find(:all).sort_by{rand}.first
     self.race = Race.find(:all).sort_by{rand}.first
     self.ethnicity = Ethnicity.find(:all).sort_by{rand}.first
     self.religion = Religion.find(:all).sort_by{rand}.first
     self.marital_status = MaritalStatus.find(:all).sort_by{rand}.first
     self.date_of_birth =  DateTime.new(1930 + rand(78), rand(12) + 1, rand(28) + 1)
+
+    self.address = Address.new
+    self.address.randomize()
 
     self.telecom = Telecom.new
     self.telecom.randomize()

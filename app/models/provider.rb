@@ -1,3 +1,5 @@
+require 'faker'
+
 class Provider < ActiveRecord::Base
   strip_attributes!
 
@@ -104,4 +106,28 @@ class Provider < ActiveRecord::Base
       end
     }
   end
+  
+  def randomize(reg_info)
+    self.address = Address.new
+    self.person_name = PersonName.new
+    self.telecom = Telecom.new
+    self.person_name.first_name = Faker::Name.first_name
+    self.person_name.last_name = Faker::Name.last_name
+
+    self.start_service = DateTime.new(reg_info.date_of_birth.year + rand(DateTime.now.year - reg_info.date_of_birth.year), rand(12) + 1, rand(28) + 1)
+    self.end_service = DateTime.new(self.start_service.year + rand(DateTime.now.year - self.start_service.year), rand(12) + 1, rand(28) + 1)
+
+    self.provider_type = ProviderType.find(:all).sort_by{rand}.first
+    self.provider_role = ProviderRole.find(:all).sort_by{rand}.first
+
+    #Creates the address of the healthcare provider. Makes it in the same state/town as the patient
+    self.address.street_address_line_one = Faker::Address.street_address
+    self.address.city = reg_info.address.city
+    self.address.state = reg_info.address.state
+    self.address.iso_country = reg_info.address.iso_country
+    self.address.postal_code = reg_info.address.postal_code
+
+    self.telecom.randomize()
+  end
+  
 end

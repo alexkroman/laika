@@ -89,54 +89,66 @@ class VendorTestPlansController < ApplicationController
     @results = @vendor_test_plan.validate_clinical_document_content
   end
   
-  
   def revalidate
       begin
           @vendor_test_plan.cache_validation_report
       rescue
        flash[:notice] = "An error occurred while validating the document"
-     end
-     
+     end   
      redirect_to vendor_test_plans_url 
   end
   
   # perform the external validation and display the results
   def validate 
-      @vendor_test_plan = VendorTestPlan.find(params[:id])
-      clinical_document = @vendor_test_plan.clinical_document
-      xmlc = ""
-      File.open(clinical_document.full_filename) do |f|
-          xmlc =  f.read()
-      end 
+    @vendor_test_plan = VendorTestPlan.find(params[:id])
+    clinical_document = @vendor_test_plan.clinical_document
+    xmlc = ""
+    File.open(clinical_document.full_filename) do |f|
+      xmlc =  f.read()
+    end 
 
-      @doc = REXML::Document.new xmlc
-      if @vendor_test_plan.validated?
-        @report =@vendor_test_plan.clinical_document.validation_report(:xml)
-      else
-          @vendor_test_plan.validate_clinical_document_content
-          @report = REXML::Document.new "<ValidationResults/>"
-      end  
-      @vendor_test_plan.add_inspection_results_to_validation_errors(@report)
-      @error_mapping = match_errors(@report,@doc)
-
+    @doc = REXML::Document.new xmlc
+    if @vendor_test_plan.validated?
+      @report =@vendor_test_plan.clinical_document.validation_report(:xml)
+    else
+      @vendor_test_plan.validate_clinical_document_content
+      @report = REXML::Document.new "<ValidationResults/>"
+    end  
+    @vendor_test_plan.add_inspection_results_to_validation_errors(@report)
+    @error_mapping = match_errors(@report,@doc)
    end
 
   # perform the external validation and display the results
   def checklist 
-      @vendor_test_plan = VendorTestPlan.find(params[:id])
-      clinical_document = @vendor_test_plan.clinical_document
+    @vendor_test_plan = VendorTestPlan.find(params[:id])
+    clinical_document = @vendor_test_plan.clinical_document
+      test = ""
+      File.open(clinical_document.full_filename, "r+") do |f|
+        while input = f.gets
+          if input =~ /\<\?xml\-stylesheet.*\?\>/
+            if $' =~ /\n/
+              test << $` + $'
+            end
+          else
+            test << input
+          end 	 		
+        end
+      end
+      f = File.open(clinical_document.full_filename, "w+") do |f|
+        f.write test
+      end
       xmlc = ""
       File.open(clinical_document.full_filename) do |f|
-          xmlc =  f.read()
+        xmlc =  f.read()
       end 
       @doc = REXML::Document.new xmlc
       pi = REXML::Instruction.new('xml-stylesheet', 
                                   'type="text/xsl" href="' + ActionController::AbstractRequest.relative_url_root + '/schemas/generate_and_format.xsl"')
-      @doc.insert_after(@doc.xml_decl, pi)
-      respond_to do |format|
-        format.xml  { render :text => @doc.to_s}
-      end
-   end   
+    @doc.insert_after(@doc.xml_decl, pi)
+    respond_to do |format|
+      format.xml  { render :text => @doc.to_s}
+    end
+  end   
    
    private 
    # method used to mark the elements in the document that have errors so they 

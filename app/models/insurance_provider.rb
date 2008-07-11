@@ -177,4 +177,29 @@ class InsuranceProvider < ActiveRecord::Base
     }
   end
  
+ 
+  def randomize(patient_info)
+    self.insurance_provider_patient = InsuranceProviderPatient.new
+    self.insurance_provider_patient.randomize(patient_info)
+
+    self.insurance_provider_subscriber = InsuranceProviderSubscriber.new
+    self.insurance_provider_subscriber.randomize()
+
+    self.insurance_provider_guarantor = InsuranceProviderGuarantor.new
+    self.insurance_provider_guarantor.randomize()
+
+    self.role_class_relationship_formal_type = RoleClassRelationshipFormalType.find(:all).sort_by{rand}.first
+    self.coverage_role_type = CoverageRoleType.find(:all).sort_by{rand}.first
+    self.insurance_type = InsuranceType.find(:all).sort_by{rand}.first
+    if (self.insurance_type_id != 606711552)
+      self.group_number = nil
+    else
+      self.group_number = (100000000 + rand(8999999999)) #generates a random 9 digit group number
+    end
+
+    @organizations = ["Aetna", "Altius", "Anthem Blue Cross", "Health Net", "Medica", "Pacificare", "Unicare", "Lifewise", "CIGNIA", "Medical Mutual", "Harvard Pilgrim", "Humana", "MetLife"]
+    self.represented_organization = @organizations.sort_by{rand}.first
+
+  end
+ 
 end

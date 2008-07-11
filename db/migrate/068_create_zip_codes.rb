@@ -10,6 +10,6 @@ class CreateZipCodes < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :iso_countries
+    drop_table :zip_codes
   end
 end

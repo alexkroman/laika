@@ -62,12 +62,15 @@
       </div>
       <div class="column span-13 last">
         <div id="template">
-        
-          <!-- Start Registration Module -->
+
+          <!-- Start Person Information Module -->
           <div id="personInformationContainer">
-            <%= render :partial => '/registration_information/show', :locals => {:registration_information  => @patient_data.registration_information, :patient_data => @patient_data} %>
+            <%= render :partial => '/patient_data_child/show', 
+                       :locals => {:patient_data_child_model_display_name => "Person Information",
+                                   :patient_data_child_model_object => @patient_data.registration_information, 
+                                   :patient_data => @patient_data} %>
           </div>
-          <!-- End Registration Module -->
+          <!-- End Person Information Module -->
 
           <!-- Start Languages Module -->
           <div id="languageContainer"><h5>Languages</h5>

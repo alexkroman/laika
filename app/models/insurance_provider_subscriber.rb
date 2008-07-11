@@ -55,5 +55,16 @@ class InsuranceProviderSubscriber < ActiveRecord::Base
       }
     }
   end
+  
+  def randomize()
+    self.person_name = PersonName.new
+    self.address = Address.new
+    self.telecom = Telecom.new
+
+    self.person_name.first_name = Faker::Name.first_name
+    self.person_name.last_name = Faker::Name.last_name
+    self.address.randomize()
+    self.telecom.randomize()
+  end
  
 end

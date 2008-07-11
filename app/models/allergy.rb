@@ -164,4 +164,17 @@ XPATH
     }
   end
   
+  def randomize(birth_date)
+    @possible_allergin = ["Asprin 1191", "Codeine 2670", "Penicillin 70618"]
+    @allergin = @possible_allergin[rand(3)]
+
+    @reaction_ids = [8554641, 119947300, 187333246, 376673858, 382054374, 460947278] 
+    self.start_event = DateTime.new(birth_date.year + rand(DateTime.now.year - birth_date.year), rand(12) + 1, rand(28) +1)
+     
+    self.adverse_event_type = AdverseEventType.find @reaction_ids[rand(6)]
+    self.free_text_product = @allergin.split[0]
+    self.product_code = @allergin.split[1]
+    self.severity_term = SeverityTerm.find(:all).sort_by{rand}.first
+  end
+  
 end

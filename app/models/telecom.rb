@@ -95,9 +95,21 @@ class Telecom < ActiveRecord::Base
   end
   
   def randomize()
-    self.home_phone = Faker::PhoneNumber.phone_number
-    self.work_phone = Faker::PhoneNumber.phone_number
-    self.mobile_phone = Faker::PhoneNumber.phone_number
+    self.home_phone = format_number() 
+    self.work_phone = format_number()
+    self.mobile_phone = format_number()
   end
 
+  def format_number()
+    @number = Faker::PhoneNumber.phone_number
+    @number = @number.gsub /\./, "-"
+    @number = @number.gsub /\)/, "-"
+    @number = @number.gsub /\(/, "1-"
+    @number = @number.gsub /\ x.*/, ""
+    if (@number.split("-")[0] == "1")
+      @number = "+" + @number
+    else
+      @number = "+1-" + @number
+    end
+  end
 end

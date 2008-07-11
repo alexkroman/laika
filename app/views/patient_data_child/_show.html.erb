@@ -1,9 +1,10 @@
-<!-- Start Personal Information Module -->
-<h5>Person Information</h5>
+<!-- Start Generic Patient Data Child Module -->
+<% patient_data_child_model_div_id = patient_data_child_model_object.class.class_name + patient_data_child_model_object.id.to_s %>
+<div id="<%= patient_data_child_model_div_id %>">
+<h5><%= patient_data_child_model_display_name %></h5>
 <table>
-<% if registration_information %>
-
-<% view = registration_information.view 
+<% if patient_data_child_model_object %>
+<% view = patient_data_child_model_object.view 
    view.fields.each do |field| -%>
 <tr class="<%= cycle("darkzebra", "lightzebra")%>">
   <td class="lighttext"><%= field.label %></td>
@@ -14,27 +15,27 @@
 <tr class="<%= cycle("darkzebra", "lightzebra")%>">
   <td></td>
   <td>
-  <span>
-    <%= link_to_remote 'Edit', :update => RegistrationInformation.class_name + 'Container', 
+    <span>
+    <%= link_to_remote 'Edit', :update => patient_data_child_model_div_id, 
                                :url => edit_patient_data_instance_registration_information_path(patient_data),
                                :method => 'get' %>
-  </span>   
-  
+    </span>   
     <span>
-    <%= link_to_remote 'Remove', :update => RegistrationInformation.class_name + 'Container', 
+    <%= link_to_remote 'Remove', :update => patient_data_child_model_div_id, 
                                  :url => patient_data_instance_registration_information_path(patient_data),
                                  :method => 'delete' %>
-  </span> 
+    </span> 
   </td>
 </tr>
   <% else -%>
   <tr class="darkzebra">
-    <td class="lighttext">There is no registration data for this test case</td>
-    <td><%= link_to_remote 'Create some', :update => RegistrationInformation.class_name + 'Container', 
+    <td class="lighttext">There is no " + patient_data_child_model_display_name + " data for this test case</td>
+    <td><%= link_to_remote 'Create some', :update => patient_data_child_model_div_id, 
                                           :url => new_patient_data_instance_registration_information_path(patient_data), 
                                           :method => 'get' %>
     </td>
   </tr>
   <% end -%>
 </table>  
-<!-- End Personal Information Module -->
+</div>
+<!-- End Generic Patient Data Child Module -->

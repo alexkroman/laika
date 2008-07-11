@@ -8,4 +8,9 @@ class PatientDataChildController < ApplicationController
     redirect_to patient_data_url unless @patient_data_id
     @patient_data = PatientData.find(@patient_data_id)
   end
+  
+  def show
+    params[:patient_data_chiled_model_class].find(params[:patient_data_instance_id])
+  end
+  
 end

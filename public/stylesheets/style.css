@@ -530,3 +530,14 @@ td.required:after {
 td img {
   margin: 0;
 }
+
+form.button-to,
+form.button-to div {
+    display: inline;
+}
+
+form.new_patient_data,
+form.new_patient_data {
+    display: inline;
+}
+

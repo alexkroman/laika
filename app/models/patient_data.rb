@@ -691,20 +691,33 @@ class PatientData < ActiveRecord::Base
   end  
   
   def randomize()
-    self.no_known_allergies = true
-    self.pregnant = nil
+     self.pregnant = false
 
-    @first_name = Faker::Name.first_name
-    @last_name = Faker::Name.last_name
-    self.name = @first_name + " " +  @last_name
+     @first_name = Faker::Name.first_name
+     @last_name = Faker::Name.last_name
+     self.name = @first_name + " " +  @last_name
 
-    @name = PersonName.new
-    @name.first_name = @first_name
-    @name.last_name = @last_name
+     @name = PersonName.new
+     @name.first_name = @first_name
+     @name.last_name = @last_name
 
-    self.registration_information.randomize(@name)
-    self.registration_information.address = Address.new
-    self.registration_information.address.randomize()
-  end
+     self.registration_information.randomize(@name)
+
+     @provider = Provider.new
+     @provider.randomize(self.registration_information)
+     self.providers << @provider
+
+     @insurance = InsuranceProvider.new
+     @insurance.randomize(self.registration_information)
+     self.insurance_providers << @insurance
+
+     @allergy = Allergy.new
+     @allergy.randomize(self.registration_information.date_of_birth)
+     self.allergies << @allergy
+
+     @language = Language.new
+     @language.randomize()
+     self.languages << @language
+   end
   
 end

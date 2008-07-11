@@ -7,12 +7,11 @@
               <% form_for(PatientData.new) do |f| %>
                 <label for="name">Name:</label>
                 <%= f.text_field :name %>
-                <%= f.submit "Create" %>
+                <%= f.submit "Create Named Template" %>
               <% end %>
-              <p/>
               <%= button_to("Create Random Template", :action => 'autoCreate') %>
-              <p/>
             </div>
+            <br/>
             <table id="dashboard">
             
               <tr>

@@ -8,6 +8,6 @@ class CreateIsoStates < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :iso_countries
+    drop_table :iso_states
   end
 end
