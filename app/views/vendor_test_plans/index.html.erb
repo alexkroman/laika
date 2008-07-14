@@ -11,8 +11,7 @@
                 if vendor_test_plan.validated?
                   error_count = REXML::XPath.first(vendor_test_plan.clinical_document.validation_report(:xml),"count(//error)")
                   error_count += vendor_test_plan.content_errors.length
-                 end
-                 %> 
+                end %> 
               <% if currentVendorTestId == nil || currentVendorTestId != vendor_test_plan.vendor.id %>
                 </table>
                 <h3>Laika Inspection ID: <%= vendor_test_plan.vendor.public_id %></h3>

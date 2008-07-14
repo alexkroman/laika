@@ -10,5 +10,4 @@ class PatientDataChildController < ApplicationController
     @patient_data = PatientData.find(@patient_data_id)
   end
 
-
 end
