@@ -1,8 +1,9 @@
 class PatientDataChildController < ApplicationController
+
   before_filter :find_patient_data
   
   private
-  
+
   def find_patient_data
     @patient_data_id = params[:patient_data_instance_id]
     redirect_to patient_data_url unless @patient_data_id
@@ -12,5 +13,5 @@ class PatientDataChildController < ApplicationController
   def show
     params[:patient_data_chiled_model_class].find(params[:patient_data_instance_id])
   end
-  
+
 end

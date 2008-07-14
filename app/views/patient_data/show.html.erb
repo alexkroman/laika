@@ -10,52 +10,84 @@
               <th><h5>CCD/C32 Modules</h5></th>
             </tr>
             <tr class="darkzebra">
-              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('personInformationContainer', 1.0);">Person Information</a></td>
+              <td class="lighttext">
+                <a href="#" onclick="javascript:scroll_to_module_and_highlight('<%= RegistrationInformation.class_name %>Container', 1.0);">Person Information</a>
+              </td>
             </tr>
             <tr class="lightzebra">
-              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('languageContainer', 1.0);">Language Spoken</a></td>
+              <td class="lighttext">
+                <a href="#" onclick="javascript:scroll_to_module_and_highlight('languageContainer', 1.0);">Language Spoken</a>
+              </td>
             </tr>
             <tr class="darkzebra">
-              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('supportContainer', 1.0);">Support</a></td>
+              <td class="lighttext">
+                <a href="#" onclick="javascript:scroll_to_module_and_highlight('supportContainer', 1.0);">Support</a>
+              </td>
             </tr>
             <tr class="lightzebra">
-              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('healthCareProviderContainer', 1.0);">HealthCare Provider</a></td>
+              <td class="lighttext">
+                <a href="#" onclick="javascript:scroll_to_module_and_highlight('healthCareProviderContainer', 1.0);">HealthCare Provider</a>
+              </td>
             </tr>
             <tr class="darkzebra">
-              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('insuranceProviderContainer', 1.0);">Insurance Provider</a></td>
+              <td class="lighttext">
+                <a href="#" onclick="javascript:scroll_to_module_and_highlight('insuranceProviderContainer', 1.0);">Insurance Provider</a>
+              </td>
             </tr>
             <tr class="lightzebra">
-              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('allergiesAndDrugsContainer', 1.0);">Allergies and Drugs</a></td>
+              <td class="lighttext">
+                <a href="#" onclick="javascript:scroll_to_module_and_highlight('allergiesAndDrugsContainer', 1.0);">Allergies and Drugs</a>
+              </td>
             </tr>
             <tr class="darkzebra">
-              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('conditionsContainer', 1.0);">Conditions</a></td>
+              <td class="lighttext">
+                <a href="#" onclick="javascript:scroll_to_module_and_highlight('conditionsContainer', 1.0);">Conditions</a>
+              </td>
             </tr>
             <tr class="lightzebra">
-              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('medicationsContainer', 1.0);">Medications</a></td>
+              <td class="lighttext">
+                <a href="#" onclick="javascript:scroll_to_module_and_highlight('medicationsContainer', 1.0);">Medications</a>
+              </td>
             </tr>
             <tr class="darkzebra">
-              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('pregnancyContainer', 1.0);">Pregnancy</a></td>
+              <td class="lighttext">
+                <a href="#" onclick="javascript:scroll_to_module_and_highlight('pregnancyContainer', 1.0);">Pregnancy</a>
+              </td>
             </tr>
             <tr class="lightzebra">
-              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('informationSourceContainer', 1.0);">Information Source</a></td>
+              <td class="lighttext">
+                <a href="#" onclick="javascript:scroll_to_module_and_highlight('informationSourceContainer', 1.0);">Information Source</a>
+              </td>
             </tr>
             <tr class="darkzebra">
-              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('advanceDirectiveContainer', 1.0);">Advance Directive</a></td>
+              <td class="lighttext">
+                <a href="#" onclick="javascript:scroll_to_module_and_highlight('advanceDirectiveContainer', 1.0);">Advance Directive</a>
+              </td>
             </tr>
             <tr class="lightzebra">
-              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('commentsContainer', 1.0);">Comments</a></td>
+              <td class="lighttext">
+                <a href="#" onclick="javascript:scroll_to_module_and_highlight('commentsContainer', 1.0);">Comments</a>
+              </td>
             </tr>
             <tr class="darkzebra">
-              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('vitalSignsContainer', 1.0);">Vital Signs</a></td>
+              <td class="lighttext">
+                <a href="#" onclick="javascript:scroll_to_module_and_highlight('vitalSignsContainer', 1.0);">Vital Signs</a>
+              </td>
             </tr>
             <tr class="lightzebra">
-              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('resultsContainer', 1.0);">Results</a></td>
+              <td class="lighttext">
+                <a href="#" onclick="javascript:scroll_to_module_and_highlight('resultsContainer', 1.0);">Results</a>
+              </td>
             </tr>
             <tr class="darkzebra">
-              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('immunizationsContainer', 1.0);">Immunizations</a></td>
+              <td class="lighttext">
+                <a href="#" onclick="javascript:scroll_to_module_and_highlight('immunizationsContainer', 1.0);">Immunizations</a>
+              </td>
             </tr>
             <tr class="lightzebra">
-              <td class="lighttext"><a href="#" onclick="javascript:scroll_to_module_and_highlight('encountersContainer', 1.0);">Encounters</a></td>
+              <td class="lighttext">
+                <a href="#" onclick="javascript:scroll_to_module_and_highlight('encountersContainer', 1.0);">Encounters</a>
+              </td>
             </tr>
           </table>
         </div>
@@ -64,9 +96,10 @@
         <div id="template">
 
           <!-- Start Person Information Module -->
-          <div id="personInformationContainer">
+          <div id="<%= RegistrationInformation.class_name %>Container">
             <%= render :partial => '/patient_data_child/show', 
                        :locals => {:patient_data_child_model_display_name => "Person Information",
+                                   :patient_data_child_class => RegistrationInformation,
                                    :patient_data_child_model_object => @patient_data.registration_information, 
                                    :patient_data => @patient_data} %>
           </div>
