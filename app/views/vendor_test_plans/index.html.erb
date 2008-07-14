@@ -5,15 +5,24 @@
           <div class="container">
             
             <% currentVendorTestId = nil %>
-            <% for vendor_test_plan in @vendor_test_plans %>
-             <% 
-                error_count = 0
-                if vendor_test_plan.validated?
-                  error_count = REXML::XPath.first(vendor_test_plan.clinical_document.validation_report(:xml),"count(//error)")
-                  error_count += vendor_test_plan.content_errors.length
-                end %> 
+            <% for vendor_test_plan in @vendor_test_plans 
+                 numXMLValidationErrors = 0
+                 numContentInspectionErrors = 0
+				 if vendor_test_plan.validated?
+				   report = vendor_test_plan.clinical_document.validation_report(:xml)
+				   report.elements.to_a("//Result").each do |res| 
+				     errorType = res.attributes['validator'] 
+				     res.elements.to_a("./error").each do |err|  
+				       if errorType.to_s == "Content Inspection"
+				         numContentInspectionErrors += 1 
+				       else 
+				         numXMLValidationErrors += 1
+				       end 
+				     end
+				   end 
+				 end %> 
               <% if currentVendorTestId == nil || currentVendorTestId != vendor_test_plan.vendor.id %>
-                </table>
+                
                 <h3>Laika Inspection ID: <%= vendor_test_plan.vendor.public_id %></h3>
                 <table id="dashboard">
                   <tr>
@@ -21,7 +30,7 @@
                     <th class="selected"><a href="#"><div>Test Case</div></a></th>
                     <th><a href="#"><div>Last Tested</div></a></th>
                     <th><a href="#"><div>Test Type</div></a></th>
-                    <th><a href="#"><div>Violations</div></a></th>
+                    <th><a href="#"><div>Validation Errors</div></a></th>
                     <th class="noarrow"><div>Actions</div></th>
                   </tr>
               <% end %>
@@ -30,7 +39,7 @@
                 <td>
                   <% if vendor_test_plan.clinical_document %>
                     <%  if vendor_test_plan.validated? %>
-                     <% if error_count > 0 %>
+                     <% if numXMLValidationErrors > 0 %>
                        <%= image_tag "fail.png", :alt => 'Test Failed' %>failed</td>
                      <% else %>
                        <%= image_tag "pass.png", :alt => 'Test Passed' %>passed</td>
@@ -44,14 +53,13 @@
                 <td><%= link_to vendor_test_plan.patient_data.name, patient_data_instance_url(vendor_test_plan.patient_data)%></td>
                 <td><%= vendor_test_plan.updated_at.strftime("%d.%b.%Y")  %></td>
                 <td><%= vendor_test_plan.kind.name %></td>
-                <td>
+				<td>
                   <% if vendor_test_plan.clinical_document %>
                     <%  if !vendor_test_plan.validated?
-                        error_count = "N/A"
+                        numXMLValidationErrors = "N/A"
                      end %>
-                    <%  error_count_link_text = error_count.to_s + " Errors" %>
+                    <%  error_count_link_text = numXMLValidationErrors.to_s + " Errors" %>
                     <%= link_to error_count_link_text, validate_vendor_test_plan_url(vendor_test_plan) %>
-                    
                   <% else %>
                     --
                   <% end %>
