@@ -13,6 +13,7 @@
   <%= javascript_include_tag 'common' %>  
   <!--<%= javascript_include_tag 'scriptaculous' %>-->
   <script type="text/javascript" src="<%= javascript_path('scriptaculous') %>scriptaculous.js?load=effects,dragdrop,controls"></script>
+
   <%= calendar_date_select_includes "silver" %>
   
   <%= stylesheet_link_tag 'blueprint/screen', :media => "screen, projection" %>
@@ -31,6 +32,18 @@
 
   <script language="JavaScript" type="text/JavaScript">
   <!--
+
+    function update_value(x, y)
+	{
+		document.getElementById(y).value = document.getElementById(x).value
+    }
+
+    function swap_div(id1, id2)
+    {
+      $(id1).style.display="none";		
+      $(id2).style.display="inline";
+      //Effect.toggle(id2,'appear'); 
+    }
   
     function toggle_div(id)
     {

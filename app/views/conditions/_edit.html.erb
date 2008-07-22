@@ -1,3 +1,5 @@
+<%= javascript_include_tag :defaults %>
+
 <% if condition.new_record?
      condition_div = 'conditionNew' 
      html_options = {} -%>
@@ -7,7 +9,7 @@
      html_options = {:method => 'put'}
    end %>
 <% remote_form_for(:condition, condition, :url => patient_data_instance_condition_path(patient_data, condition), :html => html_options,
-                   :update => condition_div) do |f| -%>
+                   :update => condition_div, :name => "conditions_form") do |f| -%>
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Start Event</td>
@@ -29,11 +31,13 @@
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Free Text Problem Name</td>
-    <td><%= f.text_field :free_text_name %></td>
+    <td>
+	  <%= text_field_with_auto_complete :snowmed_problem, :name, {:value => condition.free_text_name}, :method => :get %>
+	</td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td></td>
-    <td><%= f.submit "Save" %></td>
+    <td><input id="condition_name" name="condition[free_text_name]" type="hidden" value="<%=condition.free_text_name%>"></td>
+	<td><%= f.submit "Save", :onclick => "update_value('snowmed_problem_name', 'condition_name')" %></td>
   </tr>
 </table>
 <% end %>

@@ -1,5 +1,7 @@
 class ConditionsController < PatientDataChildController
   
+  auto_complete_for :snowmed_problem, :name
+  
   # TODO: Need a way to nil out the end_event through the web ui
 
   def new
