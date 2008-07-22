@@ -61,6 +61,7 @@
 		 		 		 		 		 		 <xsl:with-param name="telecom" 
 		 		 		 		 		 		    select="$patientRole/n1:telecom"/>
 		 		 		 		 		 </xsl:call-template>
+		                                 <tr><td colspan="3"/><td><font color="#DD1111"><b>CCHIT DISPLAY AND FILE Name: ___</b></font></td></tr>
 		 		 		 		 </xsl:if>
                                  </td>
                        <td width='15%' align='right' valign="top"><b><xsl:text>MRN: </xsl:text></b></td>
@@ -71,14 +72,16 @@
                        <td width='35%' valign="top"><xsl:call-template name="formatDate">
    		 		                        <xsl:with-param name="date" 
  		 		                 select="/n1:ClinicalDocument/n1:recordTarget/n1:patientRole/n1:patient/n1:birthTime/@value"/>
-                              </xsl:call-template></td>
+                              </xsl:call-template>
+                       <tr><td colspan="3"/><td><font color="#DD1111"><b>CCHIT DISPLAY AND FILE Birthdate: ___</b></font></td></tr>
+                   </td>
                    <td width='15%' align='right' valign="top"><b><xsl:text>Sex: </xsl:text></b></td>
 		 		    <td width='35%' valign="top"><xsl:variable name="sex" 
                                 select="/n1:ClinicalDocument/n1:recordTarget/n1:patientRole/n1:patient/n1:administrativeGenderCode/@code"/>
                            <xsl:choose>
                                <xsl:when test="$sex='M'">Male</xsl:when>
                                <xsl:when test="$sex='F'">Female</xsl:when>
-                           </xsl:choose></td>		 		        
+                           </xsl:choose><tr><td colspan="3"/><td><font color="#DD1111"><b>CCHIT DISPLAY AND FILE Gender: ___</b></font></td></tr> </td>		 		        
 		 		    </tr>
 		 		    <tr>
 		 		 		 <td width="15%" valign="top"><b>Guardian: </b></td>
@@ -246,7 +249,13 @@
 		 <a name="{generate-id(.)}" href="#toc"><xsl:value-of select="."/></a>
 		 </span></h3>
 		 <div align="right">
-		   <font color="#DD1111"><b>CCHIT DISPLAY AND FILE <xsl:value-of select="."/>: ___</b></font><p/>
+			<!-- This if statement has been placed here so that only "Conditions and Problems" and "Medications" -->
+			<!-- will have a checklist in their section. This is intended to conform with the verification       -->
+			<!-- requirements. POTENTIAL ISSUE: If you change the title text of either of the above sections     -->
+			<!-- this code will break and the checklist will not be displayed. -->
+		   <xsl:if test=".='Allergies, Adverse Reactions, Alerts' or .='Medications'">
+			 <font color="#DD1111"><b>CCHIT DISPLAY AND FILE <xsl:value-of select="."/>: ___</b></font><p/>
+		  </xsl:if>
 		 </div>
 
 </xsl:template>
