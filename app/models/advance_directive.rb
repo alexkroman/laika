@@ -121,6 +121,20 @@ class AdvanceDirective < ActiveRecord::Base
     end
   end
   
+  def randomize(birth_date)
+    self.address = Address.new
+    self.person_name = PersonName.new
+    self.telecom = Telecom.new
+
+    self.person_name.first_name = Faker::Name.first_name
+    self.person_name.last_name = Faker::Name.last_name
+    self.advance_directive_type = AdvanceDirectiveType.find(:all).sort_by{rand}.first
+    self.free_text = "Do not give " + self.advance_directive_type.name
+    self.address.randomize()
+    self.telecom.randomize()
+    self.start_effective_time = DateTime.new(birth_date.year + rand(DateTime.now.year - birth_date.year), rand(12) + 1, rand(28) +1)
+  end
+  
   private 
   def deref(code)
     if code
@@ -132,5 +146,5 @@ class AdvanceDirective < ActiveRecord::Base
       end
     end 
   end
-
+  
 end

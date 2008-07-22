@@ -691,33 +691,84 @@ class PatientData < ActiveRecord::Base
   end  
   
   def randomize()
-     self.pregnant = false
 
-     @first_name = Faker::Name.first_name
-     @last_name = Faker::Name.last_name
-     self.name = @first_name + " " +  @last_name
+    # need to ensure that the random name for registration is
+    # the same name as this patient data
+    @first_name = Faker::Name.first_name
+    @last_name = Faker::Name.last_name
+    self.name = @first_name + " " +  @last_name
+    
+    @name = PersonName.new
+    @name.first_name = @first_name
+    @name.last_name = @last_name
+    
+    self.registration_information.randomize(@name)
 
-     @name = PersonName.new
-     @name.first_name = @first_name
-     @name.last_name = @last_name
+    # if patient is female, 10% chance patient is pregnant
+    if self.registration_information.gender.code == 'F'
+      random_pregnant = rand(10) 
+      if random_pregnant > 8
+        self.pregnant = true 
+      else
+        self.pregnant = false
+      end
+    else
+      self.pregnant = nil
+    end 
 
-     self.registration_information.randomize(@name)
+    @provider = Provider.new
+    @provider.randomize(self.registration_information)
+    self.providers << @provider
 
-     @provider = Provider.new
-     @provider.randomize(self.registration_information)
-     self.providers << @provider
+    @insurance = InsuranceProvider.new
+    @insurance.randomize(self.registration_information)
+    self.insurance_providers << @insurance
 
-     @insurance = InsuranceProvider.new
-     @insurance.randomize(self.registration_information)
-     self.insurance_providers << @insurance
+    @allergy = Allergy.new
+    @allergy.randomize(self.registration_information.date_of_birth)
+    self.allergies << @allergy
 
-     @allergy = Allergy.new
-     @allergy.randomize(self.registration_information.date_of_birth)
-     self.allergies << @allergy
+    @condition = Condition.new
+    @condition.randomize(self.registration_information.date_of_birth)
+    self.conditions << @condition
 
-     @language = Language.new
-     @language.randomize()
-     self.languages << @language
-   end
+    @language = Language.new
+    @language.randomize()
+    self.languages << @language
+
+    @immunization = Immunization.new
+    @immunization.randomize(self.registration_information.date_of_birth)
+    self.immunizations << @immunization
+
+    @medication = Medication.new
+    @medication.randomize()
+    self.medications << @medication
+
+    self.support = Support.new
+    self.support.randomize(self.registration_information.date_of_birth)
+    
+    self.information_source = InformationSource.new
+    self.information_source.randomize()
+
+    @result = Result.new
+    @result.randomize()
+    @result.type = 'Result'
+    self.results << @result
+
+    @vital_sign = VitalSign.new
+    @vital_sign.randomize()
+    self.results << @vital_sign
+
+    self.advance_directive = AdvanceDirective.new
+    self.advance_directive.randomize(self.registration_information.date_of_birth)
+
+    @comment = Comment.new
+    @comment.randomize()
+    self.comments << @comment
+
+    @encounter = Encounter.new
+    @encounter.randomize(self.registration_information.date_of_birth)
+    self.encounters << @encounter
+  end
   
 end

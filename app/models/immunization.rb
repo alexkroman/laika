@@ -49,4 +49,16 @@ class Immunization < ActiveRecord::Base
     }       
   end
   
+  def randomize(birth_date)
+    self.administration_date = DateTime.new(birth_date.year + rand(DateTime.now.year - birth_date.year), rand(12) + 1, rand(28) +1)
+    self.lot_number_text = "mm345-417-DFF"
+    self.vaccine = Vaccine.find(:all).sort_by{rand}.first
+    if (rand > 0.5)
+      self.refusal = true
+      self.no_immunization_reason = NoImmunizationReason.find(:all).sort_by{rand}.first
+    else
+      self.refusal = false
+    end
+  end
+  
 end

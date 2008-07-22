@@ -154,4 +154,18 @@ class Medication < ActiveRecord::Base
     }
   end
   
+  def randomize()
+    @product_names = ["Metoprolol", "Cephalexin", "Albuterol inhalant", "Prednisone", "Clopidogrel"]
+    @product_codes = [430618, 197454, 307782, 312615, 309362]
+    @brand_names = ["Generic Brand",  "Keflex", "ACTUAT inhalant", "", "Plavix"]
+    @index = rand(6)
+
+    self.product_coded_display_name = @product_names[@index]
+    self.product_code = @product_codes[@index]
+    self.code_system = CodeSystem.find 353033998
+    self.free_text_brand_name = @brand_names[@index]
+    self.medication_type = MedicationType.find(:all).sort_by{rand}.first
+    self.expiration_time = DateTime.new(2008 + rand(4), rand(12) + 1, rand(28) + 1)
+  end
+  
 end
