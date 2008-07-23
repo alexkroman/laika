@@ -86,8 +86,7 @@ class Condition < ActiveRecord::Base
   end
    
   def randomize(birth_date)
-    @possible_condition = ["Chronic mixed headache syndrome", "Penicillin", "Pulmonary Arteritis", "Abdominal Mass", "Retinal Detachment", "Acute low back pain"]
-    @condition = @possible_condition[rand(6)]
+    @condition = SnowmedProblem.find(:all).sort_by{rand}.first.name
     self.start_event = DateTime.new(birth_date.year + rand(DateTime.now.year - birth_date.year), rand(12) + 1, rand(28) +1)
     self.problem_type = ProblemType.find(:all).sort_by{rand}.first
     self.free_text_name = @condition
