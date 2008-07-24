@@ -61,6 +61,8 @@ Rails::Initializer.run do |config|
   
 end
 
+ActiveSupport::CoreExtensions::Date::Conversions::DATE_FORMATS[:default] = '%d.%b.%Y'
+ActiveSupport::CoreExtensions::Time::Conversions::DATE_FORMATS[:default]  = '%d.%b.%Y'
 
 ENV['HOST_URL'] = 'http://demo.cchit.org/laika'
 ENV['HELP_LIST'] = 'talk@projectlaika.org'
