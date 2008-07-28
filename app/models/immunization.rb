@@ -20,33 +20,33 @@ class Immunization < ActiveRecord::Base
   end
   
   def to_c32(xml)    
-    xml.entry('typeCode'=>'DRIV') {
-      xml.substanceAdministration('classCode' => 'SBADM', 'moodCode' => 'EVN', 'negationInd' => refusal) {        
+    xml.entry('typeCode'=>'DRIV') do
+      xml.substanceAdministration('classCode' => 'SBADM', 'moodCode' => 'EVN', 'negationInd' => refusal) do       
         xml.templateId("root" => "2.16.840.1.113883.10.20.1.24", "assigningAuthorityName" => "CCD")
         xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.14", "assigningAuthorityName" => "HITSP/C32")
         xml.id('root'=>'41755f58-d7c0-4aab-9f7c-a3a5d8df4581')
         xml.statusCode('code' => 'completed')
         if administration_date != nil 
-          xml.effectiveTime ('xsi:type' => "IVL_TS") {
+          xml.effectiveTime ('xsi:type' => "IVL_TS") do
             xml.center('value' => administration_date.strftime("%Y%m%d")) 
-          }
+          end
 	      end
-	      xml.consumable {
-		      xml.manufacturedProduct {
+	      xml.consumable do
+		      xml.manufacturedProduct do 
 		        xml.templateId ('root' => '2.16.840.1.113883.10.20.1.53')
-			      xml.manufacturedMaterial {
+			      xml.manufacturedMaterial do
 			        if vaccine != nil
 			          vaccine.andand.to_c32(xml)
               end 
-	            xml.lotNumberText lot_number_text
-	          }
-          }
-        }
-        if no_immunization_reason == true
+	            xml.lotNumberText(lot_number_text)
+	          end
+          end
+        end
+        if no_immunization_reason 
           no_immunization_reason.andand.to_c32(xml)
         end 
-      }
-    }       
+      end
+    end       
   end
   
   def randomize(birth_date)
