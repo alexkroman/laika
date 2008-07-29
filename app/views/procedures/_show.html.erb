@@ -1,0 +1,39 @@
+<table>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Procedure Id</td>
+    <td>
+      <%=h procedure.procedure_id %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Procedure Name</td>
+    <td>
+      <%=h procedure.name %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Procedure Code</td>
+    <td>
+      <%=h procedure.code %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Procedure Date</td>
+    <td><%=h procedure.procedure_date %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td></td>
+    <td>
+    <span>
+      <%= link_to_remote 'Edit', :update => "procedure#{procedure.id}",
+                                 :url => edit_patient_data_instance_procedure_path(patient_data, procedure),
+                                 :method => 'get' %>
+    </span>
+    <span>
+      <%= link_to_remote 'Remove', :update => "procedure#{procedure.id}",
+                                 :url => patient_data_instance_procedure_path(patient_data, procedure),
+                                 :method => 'delete' %>
+    </span>    
+    </td>
+  </tr>
+</table>

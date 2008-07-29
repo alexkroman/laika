@@ -1,0 +1,43 @@
+<%= javascript_include_tag :defaults %>
+
+<% if procedure.new_record?
+     procedure_div = 'procedureNew' 
+     html_options = {} -%>
+<div id="procedureNew">
+<% else
+     procedure_div = "procedure#{procedure.id}"
+     html_options = {:method => 'put'}
+   end %>
+<% remote_form_for(:procedure, procedure, :url => patient_data_instance_procedure_path(patient_data, procedure), :html => html_options,
+                   :update => procedure_div, :name => "procedures_form") do |f| -%>
+<table>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Procedure Id</td>
+    <td>
+      <%= f.text_field :procedure_id %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Procedure Name</td>
+    <td>
+      <%= f.text_field :name %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Procedure Code</td>
+    <td>
+      <%= f.text_field :code %>
+    </td>
+  </tr><tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Procedure Date</td>
+    <td>
+      <%= f.calendar_date_select :procedure_date %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td></td>
+	<td><%= f.submit "Save", :onclick => "update_value('snowmed_problem_name', 'procedure_name')" %></td>
+  </tr>
+</table>
+<% end %>
+

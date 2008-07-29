@@ -1,0 +1,29 @@
+<% if medical_equipment.new_record?
+     medical_equipment_div = 'medicalEquipmentNew' 
+     html_options = {} -%>
+<div id="medicalEquipmentNew">
+<% else
+     medical_equipment_div = "medical_equipment#{medical_equipment.id}"
+     html_options = {:method => 'put'}
+   end %>
+<% remote_form_for(:medical_equipment, medical_equipment, 
+                   :url => patient_data_instance_medical_equipment_path(patient_data, medical_equipment), 
+                   :html => html_options,
+                   :update => medical_equipment_div) do |f| -%>
+<table>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Name</td>
+    <td><%= f.text_field :name %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Code</td>
+    <td>
+      <%= f.text_field :code %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td></td>
+    <td><%= f.submit "Save" %></td>
+  </tr>
+</table>
+<% end %>

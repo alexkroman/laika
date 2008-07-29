@@ -1,0 +1,26 @@
+<table>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Name</td>
+    <td><%=h medical_equipment.name %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Code</td>
+    <td><%= h medical_equipment.code %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td></td>
+    <td>
+    <span>
+    <%= link_to_remote 'Edit', :update => "medical_equipment#{medical_equipment.id}",
+                               :url => edit_patient_data_instance_medical_equipment_path(patient_data, medical_equipment),
+                               :method => 'get' %>
+    </span>
+    <span>
+     <%= link_to_remote 'Remove', :update => "medical_equipment#{medical_equipment.id}",
+                               :url => patient_data_instance_medical_equipment_path(patient_data, medical_equipment),
+                               :confirm=>"Are you sure you wish to remove this medical equipment?",
+                               :method => 'delete' %>
+    </span>                           
+    </td>
+  </tr>
+</table>

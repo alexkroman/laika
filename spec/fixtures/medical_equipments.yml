@@ -1,0 +1,24 @@
+joe_smith_medical_equipment:
+  name: Implantable cardio defibrillator
+  code: 72506001
+  patient_data: joe_smith
+
+emily_jones_medical_equipment:
+  name: Implantable cardio defibrillator
+  code: 72506001
+  patient_data: emily_jones
+
+will_haynes_medical_equipment:
+  name: Implantable cardio defibrillator
+  code: 72506001
+  patient_data: will_haynes
+
+jennifer_thompson_medical_equipment:
+  name: Implantable cardio defibrillator
+  code: 72506001
+  patient_data: jennifer_thompson
+
+theodore_smith_medical_equipment:
+  name: Implantable cardio defibrillator
+  code: 72506001
+  patient_data: theodore_smith

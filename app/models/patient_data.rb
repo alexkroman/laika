@@ -15,6 +15,8 @@ class PatientData < ActiveRecord::Base
   has_many   :results
   has_many   :immunizations
   has_many   :encounters
+  has_many   :procedures
+  has_many   :medical_equipments
   belongs_to :vendor_test_plan
   belongs_to :user
   
@@ -201,6 +203,14 @@ class PatientData < ActiveRecord::Base
     
     self.encounters.each do |encounter|
       copied_patient_data.encounters << encounter.copy
+    end
+    
+    self.procedures.each do |procedure|
+      copied_patient_data.procedures << procedure.clone
+    end
+    
+    self.medical_equipments.each do |medical_equipment|
+      copied_patient_data.medical_equipments << medical_equipment.clone
     end
     
     copied_patient_data
@@ -685,6 +695,55 @@ class PatientData < ActiveRecord::Base
             end
           end
           # End Encounters
+                    
+          # Start Procedures
+          unless procedures.empty?
+            xml.component do
+              xml.section do
+                xml.templateId("root" => "2.16.840.1.113883.10.20.1.12", 
+                               "assigningAuthorityName" => "CCD")
+                xml.code("code" => "47519-4", 
+                         "displayName" => "Conditions", 
+                         "codeSystem" => "2.16.840.1.113883.6.1", 
+                         "codeSystemName" => "LOINC")
+                xml.title("Procedures")
+                xml.text do
+                  xml.table("border" => "1", "width" => "100%") do
+                    xml.thead do
+                      xml.tr do
+                        xml.th "Procedure Name"
+                        xml.th "Date"
+                      end
+                    end
+                    xml.tbody do
+                     procedures.andand.each do |procedure|
+                        xml.tr do
+                          if procedure.name
+                            xml.td do
+                              xml.content(procedure.name, 
+                                           "ID" => "Proc-"+procedure.id.to_s) 
+                            end
+                          else
+                            xml.td
+                          end 
+                          if procedure.procedure_date
+                            xml.td(procedure.procedure_date.strftime("%Y"))
+                          else
+                            xml.td
+                          end    
+                        end
+                      end
+                    end
+                  end
+                end
+                procedures.andand.each do |structuredProcedure|
+                  structuredProcedure.to_c32(xml)
+                end
+              end
+            end
+          end
+          # End Procedures
+          
         }                   
       }
     }      
@@ -769,6 +828,14 @@ class PatientData < ActiveRecord::Base
     @encounter = Encounter.new
     @encounter.randomize(self.registration_information.date_of_birth)
     self.encounters << @encounter
+    
+    @procedure = Procedure.new
+    @procedure.randomize(self.registration_information.date_of_birth)
+    self.procedures << @procedure
+    
+    @medical_equipment = MedicalEquipment.new
+    @medical_equipment.randomize()
+    self.medical_equipments << @medical_equipment
   end
   
 end
