@@ -39,6 +39,16 @@
   <%= render :partial => '/addresses/edit', :locals => {:address => encounter.address}%>
   <%= render :partial => '/telecoms/edit', :locals => {:telecom => encounter.telecom}%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Location Name</td>
+    <td><%= f.text_field :location_name %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Location Code</td>
+    <td>
+      <%= f.select :encounter_location_code_id, @encounter_location_codes.collect{|encounter_location_code| [encounter_location_code.name, encounter_location_code.id]}, {:include_blank => true} %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td></td>
     <td><%= f.submit "Save" %></td>
   </tr>

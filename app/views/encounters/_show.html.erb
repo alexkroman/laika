@@ -26,6 +26,14 @@
   <%= render :partial => '/addresses/show', :locals => {:address => encounter.address}%>
   <%= render :partial => '/telecoms/show', :locals => {:telecom => encounter.telecom}%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Location Name</td>
+    <td><%=h encounter.location_name %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Location Code</td>
+    <td><% if encounter.encounter_location_code %><%=h encounter.encounter_location_code.name %><% end %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td></td>
     <td>
     <span>

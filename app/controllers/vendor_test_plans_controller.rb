@@ -77,7 +77,7 @@ class VendorTestPlansController < ApplicationController
   def destroy
     @vendor_test_plan = VendorTestPlan.find(params[:id])
     @vendor_test_plan.destroy
-
+    
     respond_to do |format|
       format.html { redirect_to(vendor_test_plans_url) }
       format.xml  { head :ok }
@@ -90,12 +90,13 @@ class VendorTestPlansController < ApplicationController
   end
   
   def revalidate
-      begin
-          @vendor_test_plan.cache_validation_report
-      rescue
-       flash[:notice] = "An error occurred while validating the document"
-     end   
-     redirect_to vendor_test_plans_url 
+    begin
+      @vendor_test_plan.cache_validation_report
+    rescue
+      flash[:notice] = "An error occurred while validating the document"
+    end  
+     
+    redirect_to vendor_test_plans_url 
   end
   
   # perform the external validation and display the results
@@ -103,86 +104,94 @@ class VendorTestPlansController < ApplicationController
     @vendor_test_plan = VendorTestPlan.find(params[:id])
     clinical_document = @vendor_test_plan.clinical_document
     xmlc = ""
+    
     File.open(clinical_document.full_filename) do |f|
       xmlc =  f.read()
-    end 
-
+    end
+    
     @doc = REXML::Document.new xmlc
     if @vendor_test_plan.validated?
       @report =@vendor_test_plan.clinical_document.validation_report(:xml)
     else
       @vendor_test_plan.validate_clinical_document_content
       @report = REXML::Document.new "<ValidationResults/>"
-    end  
+    end
+    
     @vendor_test_plan.add_inspection_results_to_validation_errors(@report)
     @error_mapping = match_errors(@report,@doc)
-   end
+  end
 
   # perform the external validation and display the results
   def checklist 
     @vendor_test_plan = VendorTestPlan.find(params[:id])
     clinical_document = @vendor_test_plan.clinical_document
-      test = ""
-      File.open(clinical_document.full_filename, "r+") do |f|
-        while input = f.gets
-          if input =~ /\<\?xml\-stylesheet.*\?\>/
-            if $' =~ /\n/
-              test << $` + $'
-            end
-          else
-            test << input
-          end 	 		
-        end
+    test = ""
+    
+    File.open(clinical_document.full_filename, "r+") do |f|
+      while input = f.gets
+        if input =~ /\<\?xml\-stylesheet.*\?\>/
+          if $' =~ /\n/
+            test << $` + $'
+          end
+        else
+          test << input
+        end 	 		
       end
-      f = File.open(clinical_document.full_filename, "w+") do |f|
-        f.write test
-      end
-      xmlc = ""
-      File.open(clinical_document.full_filename) do |f|
-        xmlc =  f.read()
-      end 
-      @doc = REXML::Document.new xmlc
-      pi = REXML::Instruction.new('xml-stylesheet', 
-                                  'type="text/xsl" href="' + ActionController::AbstractRequest.relative_url_root + '/schemas/generate_and_format.xsl"')
+    end
+    
+    f = File.open(clinical_document.full_filename, "w+") do |f|
+      f.write test
+    end
+    
+    xmlc = ""
+    File.open(clinical_document.full_filename) do |f|
+      xmlc =  f.read()
+    end 
+    
+    @doc = REXML::Document.new xmlc
+    pi = REXML::Instruction.new('xml-stylesheet', 
+      'type="text/xsl" href="' + 
+      ActionController::AbstractRequest.relative_url_root + 
+      '/schemas/generate_and_format.xsl"')
     @doc.insert_after(@doc.xml_decl, pi)
+    
     respond_to do |format|
       format.xml  { render :text => @doc.to_s}
     end
   end   
    
-   private 
-   # method used to mark the elements in the document that have errors so they 
-   # can be linked to
-   def match_errors(errors, doc)
-       error_map = {}
-       error_id = 0
-       @error_attributes = []
-       locs = []
-       REXML::XPath.each(errors,'//@location') do |e| locs << e.value end
-
-       locs.each do |location|
-        node = REXML::XPath.first(doc ,location)
-       # puts "#{node.inspect} #{location}"
-          if(node)
-             elem = node
-              if node.class == REXML::Attribute
-                  @error_attributes << node
-              elem = node.element
-             # if element
-              end
-              
-              if elem 
-              unless elem.attributes['error_id']
-                 elem.add_attribute('error_id',"#{error_id}") 
-                 error_id += 1
-              end
-              error_map[location] = elem.attributes['error_id']
-              end
-          end 
-           
-       end
-       error_map
-   end  
+  private 
+  # method used to mark the elements in the document that have errors so they 
+  # can be linked to
+  def match_errors(errors, doc)
+    error_map = {}
+    error_id = 0
+    @error_attributes = []
+    locs = []
+    
+    REXML::XPath.each(errors,'//@location') do |e| 
+      locs << e.value 
+    end
+    
+    locs.each do |location|
+      node = REXML::XPath.first(doc ,location)
+      if(node)
+        elem = node
+        if node.class == REXML::Attribute
+          @error_attributes << node
+          elem = node.element
+        end
+        if elem
+          unless elem.attributes['error_id']
+            elem.add_attribute('error_id',"#{error_id}") 
+            error_id += 1
+          end
+          error_map[location] = elem.attributes['error_id']
+        end
+      end
+    end
+    
+    error_map
+  end  
   
- 
 end

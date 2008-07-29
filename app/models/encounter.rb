@@ -2,6 +2,7 @@ class Encounter < ActiveRecord::Base
   strip_attributes!
 
   belongs_to :patient_data
+  belongs_to :encounter_location_code
   
   include PersonLike
   include MatchHelper

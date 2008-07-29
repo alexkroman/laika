@@ -4,6 +4,9 @@ class EncountersController < PatientDataChildController
     if !@isoCountries
       @isoCountries = IsoCountry.find(:all, :order => "name ASC")
     end
+    if !@encounter_location_codes
+      @encounter_location_codes = EncounterLocationCode.find(:all, :order => "name ASC")
+    end
     
     @encounter = Encounter.new
     
@@ -18,6 +21,9 @@ class EncountersController < PatientDataChildController
   def edit
     if !@isoCountries
       @isoCountries = IsoCountry.find(:all, :order => "name ASC")
+    end
+    if !@encounter_location_codes
+      @encounter_location_codes = EncounterLocationCode.find(:all, :order => "name ASC")
     end
     
     @encounter = @patient_data.encounters.find(params[:id])
