@@ -1,5 +1,11 @@
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Allergy Type Code</td>
+    <td>
+      <% if allergy.allergy_type_code %><%=h allergy.allergy_type_code.name %><% end %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Start Event</td>
     <td>
       <%=h allergy.start_event %>
@@ -29,6 +35,12 @@
     <td class="lighttext">Severity</td>
     <td>
       <% if allergy.severity_term %><%=h allergy.severity_term.name %><% end %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Status Code</td>
+    <td>
+      <% if allergy.allergy_status_code %><%=h allergy.allergy_status_code.name %><% end %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">

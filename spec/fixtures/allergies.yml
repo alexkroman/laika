@@ -6,6 +6,8 @@ joes_allergy:
   product_code: 70618
   adverse_event_type: propensity_to_adverse_reactions
   severity_term: moderate
+  allergy_type_code: allergy
+  allergy_status_code: active
   patient_data: joe_smith
 
 emilys_allergy:
@@ -15,6 +17,8 @@ emilys_allergy:
   product_code: 70618
   adverse_event_type: drug_allergy
   severity_term: moderate_to_severe
+  allergy_type_code: allergy
+  allergy_status_code: prior_history
   patient_data: emily_jones
 
 teds_first_allergy:
@@ -24,6 +28,8 @@ teds_first_allergy:
   product_code: 1191
   adverse_event_type: propensity_to_adverse_reactions_to_drug
   severity_term: severe
+  allergy_type_code: allergy
+  allergy_status_code: active
   patient_data: theodore_smith
 
 teds_second_allergy:
@@ -33,6 +39,8 @@ teds_second_allergy:
   product_code: 2670
   adverse_event_type: allergy_to_substance
   severity_term: fatal
+  allergy_type_code: allergy
+  allergy_status_code: prior_history
   patient_data: theodore_smith
 
 wills_allergy:
@@ -42,6 +50,8 @@ wills_allergy:
   product_code: 1191
   adverse_event_type: drug_intolerance
   severity_term: mild
+  allergy_type_code: adverse_reaction
+  allergy_status_code: no_longer_active
   patient_data: will_haynes
 
 davids_allergy:
@@ -51,4 +61,6 @@ davids_allergy:
   product_code: 2670
   adverse_event_type: drug_allergy
   severity_term: mild_to_moderate
+  allergy_type_code: adverse_reaction
+  allergy_status_code: active
   patient_data: david_carter

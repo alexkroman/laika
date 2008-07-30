@@ -4,6 +4,8 @@ class Allergy < ActiveRecord::Base
   belongs_to :patient_data
   belongs_to :adverse_event_type
   belongs_to :severity_term
+  belongs_to :allergy_status_code
+  belongs_to :allergy_type_code
   
   include MatchHelper
   
@@ -101,26 +103,29 @@ XPATH
   
   def to_c32(xml)
     
-    xml.entry {
-      xml.act("classCode" => "ACT", "moodCode" => "EVN") {
+    xml.entry do
+      xml.act("classCode" => "ACT", "moodCode" => "EVN") do
         xml.templateId("root" => "2.16.840.1.113883.10.20.1.27")
         xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.6")
         xml.id("root" => "2C748172-7CC2-4902-8AF0-23A105C4401B")
         xml.code("nullFlavor"=>"NA")
-        xml.entryRelationship("typeCode" => "SUBJ") {
-          xml.observation("classCode" => "OBS", "moodCode" => "EVN") {
+        xml.entryRelationship("typeCode" => "SUBJ") do
+          xml.observation("classCode" => "OBS", "moodCode" => "EVN") do
             xml.templateId("root" => "2.16.840.1.113883.10.20.1.18")
+            if allergy_type_code
+              xml.value("code" => allergy_type_code.code, "displayName" => allergy_type_code.name)
+            end 
             if adverse_event_type 
               xml.code("code" => adverse_event_type.code, 
                        "displayName" => adverse_event_type.name, 
                        "codeSystem" => "2.16.840.1.113883.6.96", 
                        "codeSystemName" => "SNOMED CT")
-             else
-                xml.code("nullFlavor"=>"N/A")
+            else
+              xml.code("nullFlavor"=>"N/A")
             end
-               xml.statusCode("code"=>"completed")
+            xml.statusCode("code"=>"completed")
             if start_event != nil || end_event != nil
-              xml.effectiveTime {
+              xml.effectiveTime do
                 if start_event != nil 
                   xml.low("value" => start_event.strftime("%Y%m%d"))
                 end
@@ -129,57 +134,76 @@ XPATH
                 else
                   xml.high("nullFlavor" => "UNK")
                 end
-              }
+              end
             end
-            xml.participant("typeCode" => "CSM") {
-              xml.participantRole("classCode" => "MANU") {
-                xml.playingEntity("classCode" => "MMAT") {
+            xml.participant("typeCode" => "CSM") do
+              xml.participantRole("classCode" => "MANU") do
+                xml.playingEntity("classCode" => "MMAT") do
                   xml.code("code" => product_code, 
                            "displayName" => free_text_product, 
                            "codeSystem" => "2.16.840.1.113883.6.88", 
                            "codeSystemName" => "RxNorm")
                   xml.name free_text_product
-                }
-              }
-            }
-          }
-        }
+                end
+              end
+            end
+            #if allergy_status_code
+            #  xml.entryRelationship("typeCode" => "REFR") do
+            #    xml.observation("classCode" => "OBS", "moodCode" => "EVN") do
+            #      xml.templateId("root" => "2.16.840.1.113883.10.20.1.39")
+            #     xml.code("code" => "33999-4", 
+            #               "displayName" => "Status",
+            #               "codeSystem" => "2.16.840.1.113883.6.1", 
+            #               "codeSystemName" => "AlertStatusCode")
+            #      xml.statusCode("code" => "completed")
+            #      xml.value("xsi:type" => "CE", 
+            #                "code" => allergy_status_code.code,
+            #                "displayName" => allergy_status_code.name,
+            #                "codeSystem" => "2.16.840.1.113883.6.96", 
+            #                "codeSystemName" => "SNOMED CT") 
+            #    end
+            #  end
+            #end
+          end
+        end
         
         #if severity_term
-        #  xml.entryRelationship("typeCode" => "SUBJ", "inversionInd" => "true") {
-        #    xml.observation("classCode" => "OBS", "moodCode" => "EVN") {
+        #  xml.entryRelationship("typeCode" => "SUBJ", "inversionInd" => "true") do
+        #    xml.observation("classCode" => "OBS", "moodCode" => "EVN") do
         #      xml.templateId("root" => "2.16.840.1.113883.10.20.1.55")
         #      xml.code("code" => "SEV", 
         #               "displayName" => "Severity",
         #               "codeSystem" => "2.16.840.1.113883.5.4", 
         #               "codeSystemName" => "ActCode")
-        #     xml.text {
+        #     xml.text do
         #        xml.reference("value" => "#severity-" + id.to_s)
-        #     }
+        #     end
         #     xml.statusCode("code" => "completed")
         #      xml.value("xsi:type" => "CD", 
         #                "code" => severity_term.code,
         #               "displayName" => severity_term.name,
         #                "codeSystem" => "2.16.840.1.113883.6.96", 
         #                "codeSystemName" => "SNOMED CT")
-        #    }
-        #  }
+        #    end
+        #  end
         #end
-      }
-    }
+        
+      end
+    end
   end
   
   def randomize(birth_date)
     @possible_allergin = ["Asprin 1191", "Codeine 2670", "Penicillin 70618"]
     @allergin = @possible_allergin[rand(3)]
-
-    @reaction_ids = [8554641, 119947300, 187333246, 376673858, 382054374, 460947278] 
-    self.start_event = DateTime.new(birth_date.year + rand(DateTime.now.year - birth_date.year), rand(12) + 1, rand(28) +1)
-     
-    self.adverse_event_type = AdverseEventType.find @reaction_ids[rand(6)]
     self.free_text_product = @allergin.split[0]
     self.product_code = @allergin.split[1]
-    self.severity_term = SeverityTerm.find(:all).sort_by{rand}.first
+    
+    self.start_event = DateTime.new(birth_date.year + rand(DateTime.now.year - birth_date.year), rand(12) + 1, rand(28) +1)
+    
+    self.adverse_event_type = AdverseEventType.find(:all).sort_by {rand}.first
+    self.severity_term = SeverityTerm.find(:all).sort_by {rand}.first
+    self.allergy_type_code = AllergyTypeCode.find(:all).sort_by {rand}.first
+    self.allergy_status_code = AllergyStatusCode.find(:all).sort_by {rand}.first
   end
   
 end

@@ -21,6 +21,12 @@
   <%= render :partial => '/addresses/show', :locals => {:address => advance_directive.address}%>
   <%= render :partial => '/telecoms/show', :locals => {:telecom => advance_directive.telecom}%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Status Code</td>
+    <td>
+      <% if advance_directive.advance_directive_status_code %><%=h advance_directive.advance_directive_status_code.name %><% end %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td></td>
     <td>
     <span>

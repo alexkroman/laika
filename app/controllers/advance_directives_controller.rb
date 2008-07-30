@@ -8,6 +8,9 @@ class AdvanceDirectivesController < PatientDataChildController
     if !@advance_directive_types
       @advance_directive_types = AdvanceDirectiveType.find(:all, :order => "name ASC")
     end
+    if !@advance_directive_status_codes
+      @advance_directive_status_codes = AdvanceDirectiveStatusCode.find(:all, :order => "name ASC")
+    end
     
     @advance_directive = AdvanceDirective.new
     
@@ -26,6 +29,9 @@ class AdvanceDirectivesController < PatientDataChildController
     end
     if !@advance_directive_types
       @advance_directive_types = AdvanceDirectiveType.find(:all, :order => "name ASC")
+    end
+    if !@advance_directive_status_codes
+      @advance_directive_status_codes = AdvanceDirectiveStatusCode.find(:all, :order => "name ASC")
     end
     
     @advance_directive = @patient_data.advance_directive
@@ -48,6 +54,7 @@ class AdvanceDirectivesController < PatientDataChildController
     @advance_directive = AdvanceDirective.new(params[:advance_directive])
     @patient_data.advance_directive = @advance_directive
     @advance_directive.create_person_attributes(params)
+    
     render :partial  => 'show', :locals => {:advance_directive => @advance_directive,
                                             :patient_data => @patient_data}
   end
@@ -56,6 +63,7 @@ class AdvanceDirectivesController < PatientDataChildController
     @advance_directive = @patient_data.advance_directive
     @advance_directive.update_attributes(params[:advance_directive])
     @advance_directive.update_person_attributes(params)
+    
     render :partial  => 'show', :locals => {:advance_directive => @advance_directive,
                                             :patient_data => @patient_data}
   end
@@ -63,6 +71,7 @@ class AdvanceDirectivesController < PatientDataChildController
   def destroy
     @advance_directive = @patient_data.advance_directive
     @advance_directive.destroy
+    
     render :partial  => 'show', :locals => {:advance_directive => nil,
                                                 :patient_data => @patient_data}
   end

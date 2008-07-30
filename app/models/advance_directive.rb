@@ -3,6 +3,8 @@ class AdvanceDirective < ActiveRecord::Base
     
   belongs_to :patient_data  
   belongs_to :advance_directive_type
+  belongs_to :advance_directive_status_code
+  
   include PersonLike
   
   include MatchHelper
@@ -106,13 +108,18 @@ class AdvanceDirective < ActiveRecord::Base
                 end
               end
             end
-          
-            xml.entryRelationship('typeCode'=>"REFR") do
-              xml.observation('classCode'=>"OBS" ,'moodCode'=>"EVN") do
-                xml.templateId('root'=>'2.16.840.1.113883.10.20.1.37')
-                xml.code('code'=>"33999-4", 'codeSystem'=>"2.16.840.1.113883.6.1", 'displayName'=>"Status")
-                xml.statusCode('code'=>"completed")
-                xml.value('xsi:type'=>"CE", 'code'=>"425392003", 'codeSystem'=>"2.16.840.1.113883.6.96", 'displayName'=>"Current and verified")
+            
+            xml.entryRelationship("typeCode" => "REFR") do
+              xml.observation("classCode" => "OBS", "moodCode" => "EVN") do
+                xml.templateId("root" => "2.16.840.1.113883.10.20.1.37")
+                xml.code("code" => "33999-4", 
+                         "codeSystem"=>"2.16.840.1.113883.6.1", 
+                         "displayName" => "Status")
+                xml.statusCode('code' => "completed")
+                xml.value("xsi:type" => "CE", 
+                          "code" => advance_directive_status_code.code, 
+                          "codeSystem" => "2.16.840.1.113883.6.96", 
+                          "displayName" => advance_directive_status_code.name)
               end
             end
           end
@@ -128,7 +135,8 @@ class AdvanceDirective < ActiveRecord::Base
 
     self.person_name.first_name = Faker::Name.first_name
     self.person_name.last_name = Faker::Name.last_name
-    self.advance_directive_type = AdvanceDirectiveType.find(:all).sort_by{rand}.first
+    self.advance_directive_type = AdvanceDirectiveType.find(:all).sort_by {rand}.first
+    self.advance_directive_status_code = AdvanceDirectiveStatusCode.find(:all).sort_by {rand}.first
     self.free_text = "Do not give " + self.advance_directive_type.name
     self.address.randomize()
     self.telecom.randomize()
