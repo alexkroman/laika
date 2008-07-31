@@ -27,7 +27,18 @@
   <td class="lighttext">Value</td>
   <td><%=h result.value_scalar %> <%=h result.value_unit %></td>
 </tr>
-
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td class="lighttext">Organizer ID</td>
+  <td><%=h result.organizer_id %></td>
+</tr>
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td class="lighttext">Organizer Status</td>
+  <td><% if result.act_status_code %><%=h result.act_status_code.name %><% end %></td>
+</tr>
+<tr class="<%= cycle("darkzebra", "lightzebra")%>">
+  <td class="lighttext">Organizer Code</td>
+  <td><% if result.result_type_code %><%=h result.result_type_code.name %><% end %></td>
+</tr>
 <tr class="<%= cycle("darkzebra", "lightzebra")%>">
   <td></td>
   <td>

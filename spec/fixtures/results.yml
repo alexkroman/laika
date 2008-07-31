@@ -9,6 +9,9 @@ jennifer_thompson_result:
   value_scalar: 135
   value_unit: mg/dL
   type: Result
+  organizer_id: 7c5a02a0-67a4-11ca-bd13-0700a00a9a45
+  act_status_code: completed
+  result_type_code: chemistry
   
 jennifer_thompson_vital_sign:
   patient_data: jennifer_thompson
@@ -21,3 +24,6 @@ jennifer_thompson_vital_sign:
   value_scalar: 155
   value_unit: lbs
   type: VitalSign
+  organizer_id: 3b3b01b0-13a0-10ab-aa12-0200200c5a43
+  act_status_code: completed
+  result_type_code: chemistry

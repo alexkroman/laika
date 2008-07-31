@@ -5,7 +5,7 @@
   <%= render :partial => '/person_names/show', :locals => {:person_name => insurance_provider_subscriber.person_name}%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Subscriber Birth Date</td>
-    <td><% if insurance_provider_subscriber.date_of_birth %><%=h insurance_provider_subscriber.date_of_birth.strftime("%m/%d/%Y") %><% end %></td>
+    <td><% if insurance_provider_subscriber.date_of_birth %><%=h insurance_provider_subscriber.date_of_birth %><% end %></td>
   </tr>
   <%= render :partial => '/addresses/show', :locals => {:address => insurance_provider_subscriber.address}%>
   <%= render :partial => '/telecoms/show', :locals => {:telecom => insurance_provider_subscriber.telecom}%>

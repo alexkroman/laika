@@ -46,6 +46,22 @@
     <td><%= f.text_field :value_unit %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Organizer ID</td>
+    <td><%= f.text_field :organizer_id %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Organizer Status</td>
+    <td>
+      <%= f.select :act_status_code_id, @act_status_codes.collect{|asc| [asc.name, asc.id]}, {:include_blank => true} %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Organizer Code</td>
+    <td>
+      <%= f.select :result_type_code_id, @result_type_codes.collect{|rtc| [rtc.name, rtc.id]}, {:include_blank => true} %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td></td>
     <td><%= f.submit "Save" %></td>
   </tr>

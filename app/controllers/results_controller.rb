@@ -5,9 +5,16 @@
 class ResultsController < PatientDataChildController
 
   def new
+    
     unless @code_systems
       @code_systems = CodeSystem.find(:all, :order => "name DESC")
-    end 
+    end
+    unless @act_status_codes
+      @act_status_codes = ActStatusCode.find(:all, :order => "name DESC")
+    end
+    unless @result_type_codes
+      @result_type_codes = ResultTypeCode.find(:all, :order => "name DESC")
+    end
     
     @result = Result.new
     
@@ -16,9 +23,16 @@ class ResultsController < PatientDataChildController
   end
 
   def edit
+    
     unless @code_systems
       @code_systems = CodeSystem.find(:all, :order => "name DESC")
-    end 
+    end
+    unless @act_status_codes
+      @act_status_codes = ActStatusCode.find(:all, :order => "name DESC")
+    end
+    unless @result_type_codes
+      @result_type_codes = ResultTypeCode.find(:all, :order => "name DESC")
+    end
     
     @result = @patient_data.results.find(params[:id])
     
@@ -31,6 +45,7 @@ class ResultsController < PatientDataChildController
   # there is a callback at the end which puts a "type" hidden field in the form
   # indicating it is a VitalSign so we can create the correct record.
   def create
+    
     if 'vital'.eql? params[:type]
       @result = VitalSign.new(params[:result])
     else

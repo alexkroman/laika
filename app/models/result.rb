@@ -3,6 +3,8 @@ class Result < ActiveRecord::Base
 
   belongs_to :patient_data
   belongs_to :code_system
+  belongs_to :result_type_code
+  belongs_to :act_status_code
   
   include MatchHelper
   
@@ -89,11 +91,13 @@ class Result < ActiveRecord::Base
   end
   
   def randomize()
+    
     self.result_id = rand(100).to_s + 'd' + rand(100000).to_s + '-bd' + rand(100).to_s + '-4c90-891d-eb716d' + rand(10000).to_s + 'c4'
     self.result_date = DateTime.new(2000 + rand(9), rand(12) + 1, rand(28) + 1)
     self.code_system = CodeSystem.find 143755023 # sets code system as LOINC
     self.status_code = 'N'
     self.value_scalar = (100 + rand(100)).to_s
+    
     if (rand < 0.5)
       self.value_unit = 'lbs'
       self.result_code_display_name = 'Body Weight'
@@ -103,6 +107,14 @@ class Result < ActiveRecord::Base
       self.result_code_display_name = 'Cholesterol'
       self.result_code = '2093-3'
     end
+    
+    # Only create organizer data 1/2 the time
+    if (rand < 0.5)
+      organizer_id = "33d07056-bd27-4c90-891d-eb716d3170c4"
+      result_type_code = ResultTypeCode.find(:all).sort_by {rand}.first
+      act_status_code = ActStatusCode.find(:all).sort_by {rand}.first
+    end
+    
   end
   
 end

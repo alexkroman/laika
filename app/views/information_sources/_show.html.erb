@@ -3,7 +3,7 @@
 <% if information_source -%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Time</td>
-    <td><% if information_source.time %><%=h information_source.time.strftime("%m/%d/%Y") %><% end %></td>
+    <td><% if information_source.time %><%=h information_source.time %><% end %></td>
   </tr>
    <%= render :partial => '/person_names/show', :locals => {:person_name => information_source.person_name}%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">

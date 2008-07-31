@@ -50,7 +50,8 @@ class MedicalEquipment < ActiveRecord::Base
     # TODO: need to have a pool of potential medical equipments in the database
     self.name = "Automatic implantable cardioverter defibrillator"
     self.code = "72506001"
-    self.encounter_date = DateTime.new(birth_date.year + rand(DateTime.now.year - birth_date.year), rand(12) + 1, rand(28) +1)
+    self.supply_id = "03ca01b0-7be1-11db-8fe1-0822200c9a33"
+    self.date_supplied = DateTime.new(birth_date.year + rand(DateTime.now.year - birth_date.year), rand(12) + 1, rand(28) +1)
   end
   
 end

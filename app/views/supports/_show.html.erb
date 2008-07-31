@@ -3,11 +3,11 @@
 <% if support -%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Start Support</td>
-    <td><% if support.start_support %><%=h support.start_support.strftime("%m/%d/%y") %><% end %></td>
+    <td><% if support.start_support %><%=h support.start_support %><% end %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">End Support</td>
-    <td><% if support.end_support %><%=h support.end_support.strftime("%m/%d/%y") %><% end %></td>
+    <td><% if support.end_support %><%=h support.end_support %><% end %></td>
   </tr>
   <%= render :partial => '/person_names/show', :locals => {:person_name => support.person_name}%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
