@@ -14,6 +14,8 @@ class RegistrationInformation < ActiveRecord::Base
   
   def view
     v = Laika::UIBuilder::View.new(self)
+    v.add_field(:document_timestamp)
+    v.add_field(:person_identifier)
     v.add_field(:person_name, :subattribute => :name_prefix)
     v.add_field(:person_name, :subattribute => :first_name)
     v.add_field(:person_name, :subattribute => :last_name)
@@ -99,54 +101,64 @@ class RegistrationInformation < ActiveRecord::Base
                                  :type=>'error',
                                  :location => document.xpath)
     end
-    errors.compact
-  end
-  
-  
-  def to_c32(xml = Builder::XmlMarkup.new)
-    xml.id("extension" => "1234567890")
     
+    errors.compact
+    
+  end
+
+  def to_c32(xml = Builder::XmlMarkup.new)
+    
+    xml.id("extension" => person_identifier)
+
     address.andand.to_c32(xml)
     telecom.andand.to_c32(xml)
-    
-    xml.patient { 
+
+    xml.patient do
       person_name.andand.to_c32(xml)
       gender.andand.to_c32(xml)
       if date_of_birth
         xml.birthTime("value" => date_of_birth.strftime("%Y%m%d"))  
-      end      
+      end
+
       marital_status.andand.to_c32(xml)
       religion.andand.to_c32(xml)
       race.andand.to_c32(xml)
       ethnicity.andand.to_c32(xml)
-      
+
       # do the gaurdian stuff here non gaurdian is placed elsewhere
       if patient_data.support &&
          patient_data.support.contact_type &&
          patient_data.support.contact_type.code == "GUARD"
         patient_data.support.to_c32(xml)
       end  
-      
+
       patient_data.languages.andand.each do |language|
         language.to_c32(xml)
-      end 
-    }
+      end
+
+    end
+    
   end
   
   def randomize(patient)
+    
+    self.person_identifier = "1234567890"
+    self.document_timestamp = DateTime.new(2000 + rand(8), rand(12) + 1, rand(28) + 1)
+    
     self.person_name = patient
     self.gender = Gender.find(:all).sort_by{rand}.first
     self.race = Race.find(:all).sort_by{rand}.first
     self.ethnicity = Ethnicity.find(:all).sort_by{rand}.first
     self.religion = Religion.find(:all).sort_by{rand}.first
     self.marital_status = MaritalStatus.find(:all).sort_by{rand}.first
-    self.date_of_birth =  DateTime.new(1930 + rand(78), rand(12) + 1, rand(28) + 1)
+    self.date_of_birth = DateTime.new(1930 + rand(78), rand(12) + 1, rand(28) + 1)
 
     self.address = Address.new
     self.address.randomize()
 
     self.telecom = Telecom.new
     self.telecom.randomize()
+    
   end
   
 end

@@ -17,7 +17,7 @@ class MedicalEquipment < ActiveRecord::Base
   end
 
   def to_c32(xml)
-    
+
     xml.entry("typeCode" => "DRIV") do
       xml.supply("classCode" => "SPLY", "moodCode" => "EVN") do
         xml.templateId("root" => "2.16.840.1.113883.10.20.1.34")

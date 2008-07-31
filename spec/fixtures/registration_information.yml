@@ -5,6 +5,8 @@ joe_smith:
   race: european
   ethnicity: spaniard
   marital_status: never_married
+  person_identifier: 1234567890
+  document_timestamp: 1972-04-12
   patient_data: joe_smith
 
 joe_smith_test:
@@ -14,6 +16,8 @@ joe_smith_test:
   race: european
   ethnicity: spaniard
   marital_status: never_married
+  person_identifier: 1234567890
+  document_timestamp: 1985-05-23
   patient_data: joe_smith_vendor_test
 
 emily_jones:
@@ -23,6 +27,8 @@ emily_jones:
   race: polish
   ethnicity: not_hispanic_or_latino
   marital_status: married
+  person_identifier: 1234567890
+  document_timestamp: 2007-03-26
   patient_data: emily_jones
 
 will_haynes:
@@ -32,6 +38,8 @@ will_haynes:
   race: scottish
   ethnicity: not_hispanic_or_latino
   marital_status: divorced
+  person_identifier: 1234567890
+  document_timestamp: 2007-06-08
   patient_data: will_haynes
 
 jennifer_thompson:
@@ -41,6 +49,8 @@ jennifer_thompson:
   race: mexican_american_indian
   ethnicity: mexican
   marital_status: polygamous
+  person_identifier: 1234567890
+  document_timestamp: 1987-06-18
   patient_data: jennifer_thompson
 
 theodore_smith:
@@ -50,6 +60,8 @@ theodore_smith:
   race: israeili
   ethnicity: not_hispanic_or_latino
   marital_status: domestic_partner
+  person_identifier: 1234567890
+  document_timestamp: 1999-02-28
   patient_data: theodore_smith
 
 david_carter:
@@ -59,4 +71,6 @@ david_carter:
   race: irish
   ethnicity: not_hispanic_or_latino
   marital_status: annulled
+  person_identifier: 1234567890
+  document_timestamp: 2003-01-06
   patient_data: david_carter

@@ -2,6 +2,7 @@
 
 # The production environment is meant for finished, "live" apps.
 # Code is not reloaded between requests
+ActionController::AbstractRequest.relative_url_root = "/laika"
 config.cache_classes = true
 
 # Use a different logger for distributed setups
@@ -18,5 +19,4 @@ config.action_view.cache_template_loading            = true
 # Disable delivery errors, bad email addresses will be ignored
 # config.action_mailer.raise_delivery_errors = false
 
-VALIDATION_URL= "http://127.0.0.1:8080/validation/validate.lk"
-ActionController::AbstractRequest.relative_url_root = "/laika"
+VALIDATION_URL= "http://127.0.0.1:80/validation/validate.lk"

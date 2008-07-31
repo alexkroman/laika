@@ -1,6 +1,7 @@
 require 'faker'
 
 class PatientData < ActiveRecord::Base
+
   has_one    :registration_information
   has_many   :languages
   has_many   :providers
@@ -126,6 +127,7 @@ class PatientData < ActiveRecord::Base
   end
 
   def copy
+
     copied_patient_data = self.clone
     copied_patient_data.save!
 
@@ -221,7 +223,7 @@ class PatientData < ActiveRecord::Base
     xml.ClinicalDocument("xsi:schemaLocation" => "urn:hl7-org:v3 http://xreg2.nist.gov:8080/hitspValidation/schema/cdar2c32/infrastructure/cda/C32_CDA.xsd",
                          "xmlns" => "urn:hl7-org:v3",
                          "xmlns:sdtc" => "urn:hl7-org:sdtc",
-                         "xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance") {
+                         "xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance") do
       xml.typeId("root" => "2.16.840.1.113883.1.3",
                  "extension" => "POCD_HD000040")
       xml.templateId("root" => "2.16.840.1.113883.3.27.1776",
@@ -238,14 +240,21 @@ class PatientData < ActiveRecord::Base
                "codeSystem" => "2.16.840.1.113883.6.1", 
                "codeSystemName" => "LOINC")
       xml.title(name)
-      xml.effectiveTime("value" => updated_at.strftime("%Y%m%d%H%M%S-0500"))
+      if registration_information && registration_information.document_timestamp
+        xml.effectiveTime("value" => registration_information.document_timestamp.strftime("%Y%m%d%H%M%S-0500"))
+      else
+        xml.effectiveTime("value" => updated_at.strftime("%Y%m%d%H%M%S-0500"))
+      end
       xml.confidentialityCode
       xml.languageCode("code" => "en-US")
+
+      # Start Person (Registation) Information
       xml.recordTarget do
         xml.patientRole do
           registration_information.andand.to_c32(xml)
         end
       end
+      # End Person (Registation) Information
 
       # Start Information Source
       information_source.andand.to_c32(xml)
@@ -279,8 +288,9 @@ class PatientData < ActiveRecord::Base
       end
       # End Healthcare Providers
 
-      xml.component {
-        xml.structuredBody {
+      # Start CCD/C32 Modules
+      xml.component do
+        xml.structuredBody do
 
           # Start Pregnancy
           if (pregnant != nil && pregnant == true)   
@@ -812,9 +822,12 @@ class PatientData < ActiveRecord::Base
             end
           end
           # End Medical Equipments
-        }
-      }
-    }
+          
+        end
+      end
+      # END CCD/C32 Modules
+      
+    end
   end
 
   def randomize()
@@ -824,11 +837,11 @@ class PatientData < ActiveRecord::Base
     @first_name = Faker::Name.first_name
     @last_name = Faker::Name.last_name
     self.name = @first_name + " " +  @last_name
-    
+
     @name = PersonName.new
     @name.first_name = @first_name
     @name.last_name = @last_name
-    
+
     self.registration_information.randomize(@name)
 
     # if patient is female, 10% chance patient is pregnant
@@ -896,14 +909,15 @@ class PatientData < ActiveRecord::Base
     @encounter = Encounter.new
     @encounter.randomize(self.registration_information.date_of_birth)
     self.encounters << @encounter
-    
+
     @procedure = Procedure.new
     @procedure.randomize(self.registration_information.date_of_birth)
     self.procedures << @procedure
-    
+
     @medical_equipment = MedicalEquipment.new
     @medical_equipment.randomize(self.registration_information.date_of_birth)
     self.medical_equipments << @medical_equipment
+
   end
-  
+
 end
