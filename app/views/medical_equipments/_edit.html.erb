@@ -22,6 +22,18 @@
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Supply ID</td>
+    <td>
+      <%= f.text_field :supply_id %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Date Supplied</td>
+    <td>
+      <%= f.calendar_date_select :date_supplied %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td></td>
     <td><%= f.submit "Save" %></td>
   </tr>
