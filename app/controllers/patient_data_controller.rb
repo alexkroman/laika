@@ -39,6 +39,11 @@ class PatientDataController < ApplicationController
 
   def show
     @patient_data = PatientData.find(params[:id])
+    if @patient_data.vendor_test_plan_id 
+      @show_dashboard = true
+    else
+      @show_dashboard = false
+    end
     respond_to do |format|
       format.html 
       format.xml  

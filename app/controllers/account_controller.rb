@@ -21,6 +21,7 @@ class AccountController < ApplicationController
     return unless request.post?
     
     self.current_user = User.authenticate(params[:email], params[:password])
+    
     if logged_in?
       if params[:remember_me] == "1"
         self.current_user.remember_me
@@ -52,8 +53,10 @@ class AccountController < ApplicationController
     @vendor_test_plans = self.current_user.vendor_test_plans
     numVendorTestPlans = @vendor_test_plans.size
     if numVendorTestPlans == 0
+      @show_dashboard = false
       redirect_to(:controller => '/patient_data', :action => 'index')
     else
+      @show_dashboard = true
       redirect_to(:controller => '/vendor_test_plans', :action => 'index')
     end
   rescue ActiveRecord::RecordInvalid

@@ -11,10 +11,16 @@
           </div>
           <div class="right">
             <ul id="bignav">
-              <% if current_page?(:controller => 'users') %>
+              <% if @show_dashboard == true %>
+                <li id="active"><%= link_to('Dashboard', :controller => 'vendor_test_plans') %></li>
+                <li><%= link_to('Library', :controller => 'patient_data') %></li>
+              <% elsif current_page?(:controller => 'users') %>
                 <li><%= link_to('Dashboard', :controller => 'vendor_test_plans') %></li>
                 <li><%= link_to('Library', :controller => 'patient_data') %></li>
               <% elsif current_page?(:controller => 'vendor_test_plans')  %>
+                <li id="active"><%= link_to('Dashboard', :controller => 'vendor_test_plans') %></li>
+                <li><%= link_to('Library', :controller => 'patient_data') %></li>
+              <% elsif @show_dashboard == true %>
                 <li id="active"><%= link_to('Dashboard', :controller => 'vendor_test_plans') %></li>
                 <li><%= link_to('Library', :controller => 'patient_data') %></li>
               <% else %>
