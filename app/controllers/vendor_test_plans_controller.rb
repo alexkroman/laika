@@ -109,11 +109,15 @@ class VendorTestPlansController < ApplicationController
       xmlc =  f.read()
     end
     
-    @doc = REXML::Document.new xmlc
-    if @vendor_test_plan.validated?
-      @report =@vendor_test_plan.clinical_document.validation_report(:xml)
-    else
-      @vendor_test_plan.validate_clinical_document_content
+    begin
+      @doc = REXML::Document.new xmlc
+      if @vendor_test_plan.validated?
+        @report = @vendor_test_plan.clinical_document.validation_report(:xml)
+      else
+        @vendor_test_plan.validate_clinical_document_content
+        @report = REXML::Document.new "<ValidationResults/>"
+      end
+    rescue
       @report = REXML::Document.new "<ValidationResults/>"
     end
     
