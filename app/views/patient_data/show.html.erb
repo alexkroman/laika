@@ -106,12 +106,9 @@
         <div id="template">
 
           <!-- Start Person Information Module -->
-          <div id="<%= RegistrationInformation.class_name %>Container">
-            <%= render :partial => '/patient_data_child/show', 
-                       :locals => {:patient_data_child_model_display_name => "Person Information",
-                                   :patient_data_child_class => RegistrationInformation,
-                                   :patient_data_child_model_object => @patient_data.registration_information, 
-                                   :patient_data => @patient_data} %>
+          <div id="personInformationContainer">
+            <%= render :partial => '/registration_information/show', 
+                       :locals => {:registration_information  => @patient_data.registration_information, :patient_data => @patient_data} %>
           </div>
           <!-- End Person Information Module -->
 
