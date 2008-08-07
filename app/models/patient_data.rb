@@ -733,7 +733,7 @@ class PatientData < ActiveRecord::Base
                 xml.templateId("root" => "2.16.840.1.113883.10.20.1.12", 
                                "assigningAuthorityName" => "CCD")
                 xml.code("code" => "47519-4", 
-                         "displayName" => "Conditions", 
+                         "displayName" => "Procedures", 
                          "codeSystem" => "2.16.840.1.113883.6.1", 
                          "codeSystemName" => "LOINC")
                 xml.title("Procedures")

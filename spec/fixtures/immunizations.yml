@@ -7,8 +7,7 @@ joe_smith_immunization:
 
 emily_jones_immunization:
   administration_date: 1999-05-27
-  refusal: true
-  no_immunization_reason: patient_objections
+  refusal: false
   vaccine: diphtheria_antitoxin
   lot_number_text: mm345-417-DFF
   patient_data: emily_jones
@@ -22,8 +21,7 @@ will_haynes_immunization:
 
 jennifer_thompson_immunization:
   administration_date: 1999-05-27
-  refusal: true
-  no_immunization_reason: religious_objection
+  refusal: false
   vaccine: dengue_fever
   lot_number_text: mm345-417-DFF
   patient_data: jennifer_thompson

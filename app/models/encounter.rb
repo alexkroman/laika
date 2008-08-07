@@ -2,6 +2,7 @@ class Encounter < ActiveRecord::Base
   strip_attributes!
 
   belongs_to :patient_data
+  belongs_to :encounter_type
   belongs_to :encounter_location_code
   
   include PersonLike
@@ -27,6 +28,11 @@ class Encounter < ActiveRecord::Base
         xml.templateId('root' => '2.16.840.1.113883.3.88.11.32.17',
                        'assigningAuthorityName' => 'HITSP/C32') 
         xml.id ('root' => encounter_id)
+        if encounter_type
+          xml.code("code" => encounter_type.code, "codeSystem" => "2.16.840.1.113883.5.4", "displayName" => encounter_type.name) do
+            xml.originalText free_text
+          end
+        end
         if encounter_date != nil 
           xml.effectiveTime do
             xml.low('value'=> encounter_date.strftime('%Y%m%d'))

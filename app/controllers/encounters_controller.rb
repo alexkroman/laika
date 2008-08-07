@@ -7,6 +7,9 @@ class EncountersController < PatientDataChildController
     if !@encounter_location_codes
       @encounter_location_codes = EncounterLocationCode.find(:all, :order => "name ASC")
     end
+    if !@encounter_types
+      @encounter_types = EncounterType.find(:all, :order => "name ASC")
+    end
     
     @encounter = Encounter.new
     
@@ -24,6 +27,9 @@ class EncountersController < PatientDataChildController
     end
     if !@encounter_location_codes
       @encounter_location_codes = EncounterLocationCode.find(:all, :order => "name ASC")
+    end
+    if !@encounter_types
+     @encounter_types = EncounterType.find(:all, :order => "name ASC")
     end
     
     @encounter = @patient_data.encounters.find(params[:id])

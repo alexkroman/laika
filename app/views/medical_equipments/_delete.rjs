@@ -1,1 +1,1 @@
-page.remove "medicalEquipment#{params[:id]}"
+page.remove "medical_equipment#{params[:id]}"

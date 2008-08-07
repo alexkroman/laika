@@ -26,7 +26,7 @@
     <span>
      <%= link_to_remote 'Remove', :update => "medical_equipment#{medical_equipment.id}",
                                :url => patient_data_instance_medical_equipment_path(patient_data, medical_equipment),
-                               :confirm=>"Are you sure you wish to remove this medical equipment?",
+                               :confirm=>"Are you sure you wish to remove this medical device?",
                                :method => 'delete' %>
     </span>                           
     </td>

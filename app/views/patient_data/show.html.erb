@@ -371,45 +371,45 @@
           </div>
           <!-- End Encounters Module --> 
 
-		  <!-- Start Procedures Module -->
-		  <div id="proceduresContainer">
-		  <h5>Procedures</h5>
-		  <% for procedure in @patient_data.procedures %>
-		    <div id="procedure<%= procedure.id %>">
-		      <%= render :partial => '/procedures/show', 
-		                 :locals => {:procedure => procedure, :patient_data => @patient_data} %>
-		    </div>
-		  <% end %>
-		  <table id="addProcedure">
-		    <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-		      <td></td>
-		      <td><%= link_to_remote 'Add', :url => new_patient_data_instance_procedure_path(@patient_data), 
-		                                    :method => 'get', :update => 'addProcedure', :position => :before %>
-		      </td>                                       
-		    </tr>                                               
-		  </table>           
-	 	  </div>
-		  <!-- End Procedures Module -->
-		
+          <!-- Start Procedures Module -->
+          <div id="proceduresContainer">
+          <h5>Procedures</h5>
+          <% for procedure in @patient_data.procedures %>
+            <div id="procedure<%= procedure.id %>">
+              <%= render :partial => '/procedures/show', 
+                         :locals => {:procedure => procedure, :patient_data => @patient_data} %>
+            </div>
+          <% end %>
+          <table id="addProcedure">
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td></td>
+              <td><%= link_to_remote 'Add', :url => new_patient_data_instance_procedure_path(@patient_data), 
+                                            :method => 'get', :update => 'addProcedure', :position => :before %>
+              </td>
+            </tr>
+          </table>           
+          </div>
+          <!-- End Procedures Module -->
+
           <!-- Start Medical Equipments Module -->
-	      <div id="medicalEquipmentsContainer">
-	      <h5>Medical Equipments</h5>
-	      <% for medical_equipment in @patient_data.medical_equipments %>
-	        <div id="medical_equipment<%= medical_equipment.id %>">
-	          <%= render :partial => '/medical_equipments/show', 
-	                     :locals => {:medical_equipment => medical_equipment, :patient_data => @patient_data} %>
-	        </div>
-	      <% end %>
-	      <table id="addMedicalEquipment">
-	        <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-	          <td></td>
-	          <td><%= link_to_remote 'Add', :url => new_patient_data_instance_medical_equipment_path(@patient_data), 
-	                                        :method => 'get', :update => 'addMedicalEquipment', :position => :before %>
-	          </td>                                       
-	        </tr>                                               
-	      </table>           
-	      </div>
-	      <!-- End Medical Equipments Module -->
+          <div id="medicalEquipmentsContainer">
+          <h5>Medical Equipments</h5>
+          <% for medical_equipment in @patient_data.medical_equipments %>
+            <div id="medical_equipment<%= medical_equipment.id %>">
+              <%= render :partial => '/medical_equipments/show', 
+                         :locals => {:medical_equipment => medical_equipment, :patient_data => @patient_data} %>
+            </div>
+          <% end %>
+          <table id="addMedicalEquipment">
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td></td>
+              <td><%= link_to_remote 'Add', :url => new_patient_data_instance_medical_equipment_path(@patient_data), 
+                                            :method => 'get', :update => 'addMedicalEquipment', :position => :before %> 
+              </td>
+            </tr>
+          </table>
+          </div>
+          <!-- End Medical Equipments Module -->
 
         </div>
       </div>

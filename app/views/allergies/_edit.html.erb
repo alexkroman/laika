@@ -10,9 +10,9 @@
                    :update => allergy_div) do |f| -%>
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Allergy Type Code</td>
+    <td class="lighttext">Alert Type</td>
     <td>
-      <%= f.select :allergy_type_code_id, @allergy_type_codes.collect{|atc| [atc.name, atc.id]}, {:include_blank => true} %>
+      <%= f.select :adverse_event_type_id, @adverse_event_types.collect{|aet| [aet.name, aet.id]} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
@@ -25,12 +25,6 @@
     <td class="lighttext">End Event</td>
     <td>
       <%= f.calendar_date_select :end_event %>
-    </td>
-  </tr>
-  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Adverse Event Type</td>
-    <td>
-      <%= f.select :adverse_event_type_id, @adverse_event_types.collect{|aet| [aet.name, aet.id]} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">

@@ -112,9 +112,6 @@ XPATH
         xml.entryRelationship("typeCode" => "SUBJ") do
           xml.observation("classCode" => "OBS", "moodCode" => "EVN") do
             xml.templateId("root" => "2.16.840.1.113883.10.20.1.18")
-            if allergy_type_code
-              xml.value("code" => allergy_type_code.code, "displayName" => allergy_type_code.name)
-            end 
             if adverse_event_type 
               xml.code("code" => adverse_event_type.code, 
                        "displayName" => adverse_event_type.name, 
@@ -147,23 +144,23 @@ XPATH
                 end
               end
             end
-            #if allergy_status_code
-            #  xml.entryRelationship("typeCode" => "REFR") do
-            #    xml.observation("classCode" => "OBS", "moodCode" => "EVN") do
-            #      xml.templateId("root" => "2.16.840.1.113883.10.20.1.39")
-            #     xml.code("code" => "33999-4", 
-            #               "displayName" => "Status",
-            #               "codeSystem" => "2.16.840.1.113883.6.1", 
-            #               "codeSystemName" => "AlertStatusCode")
-            #      xml.statusCode("code" => "completed")
-            #      xml.value("xsi:type" => "CE", 
-            #                "code" => allergy_status_code.code,
-            #                "displayName" => allergy_status_code.name,
-            #                "codeSystem" => "2.16.840.1.113883.6.96", 
-            #                "codeSystemName" => "SNOMED CT") 
-            #    end
-            #  end
-            #end
+            if allergy_status_code
+              xml.entryRelationship("typeCode" => "REFR") do
+                xml.observation("classCode" => "OBS", "moodCode" => "EVN") do
+                  xml.templateId("root" => "2.16.840.1.113883.10.20.1.39")
+                  xml.code("code" => "33999-4", 
+                           "displayName" => "Status",
+                           "codeSystem" => "2.16.840.1.113883.6.1", 
+                           "codeSystemName" => "AlertStatusCode")
+                  xml.statusCode("code" => "completed")
+                  xml.value("xsi:type" => "CE", 
+                            "code" => allergy_status_code.code,
+                            "displayName" => allergy_status_code.name,
+                            "codeSystem" => "2.16.840.1.113883.6.96", 
+                            "codeSystemName" => "SNOMED CT") 
+                end
+              end
+            end
           end
         end
         

@@ -32,6 +32,7 @@
     <span>
       <%= link_to_remote 'Remove', :update => "procedure#{procedure.id}",
                                  :url => patient_data_instance_procedure_path(patient_data, procedure),
+                                 :confirm=>"Are you sure you wish to remove this procedure?",
                                  :method => 'delete' %>
     </span>    
     </td>

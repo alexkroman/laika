@@ -45,7 +45,8 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">There is no advance directive data for this test case</td>
     <td><%= link_to_remote 'Create some', :update => 'advanceDirectiveContainer',
-                                          :url => new_patient_data_instance_advance_directive_path(patient_data), 
+                                          :url => new_patient_data_instance_advance_directive_path(patient_data),
+                                          :confirm=>"Are you sure you wish to remove this advance directive?",
                                           :method => 'get' %>
     </td>
   </tr>

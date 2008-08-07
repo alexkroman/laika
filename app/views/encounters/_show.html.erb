@@ -15,9 +15,9 @@
     <td class="lighttext">Encounter Name</td>
     <td><%=h encounter.name %></td>
   </tr>
-    <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Encounter Code</td>
-    <td><%=h encounter.code %></td>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Encounter Type</td>
+    <td><% if encounter.encounter_type %><%=h encounter.encounter_type.name %><% end %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td colspan="2" class="lighttext">Encounter Provider</td>

@@ -29,8 +29,10 @@
     <td><%= f.text_field :name %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Encounter Code</td>
-    <td><%= f.text_field :code %></td>
+    <td class="lighttext">Encounter Type</td>
+    <td>
+      <%= f.select :encounter_type_id, @encounter_types.collect{|encounter_type| [encounter_type.name, encounter_type.id]}, {:include_blank => true} %>
+    </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td colspan="2" class="lighttext">Encounter Provider</td>

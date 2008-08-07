@@ -1,8 +1,8 @@
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Allergy Type Code</td>
+    <td class="lighttext">Alert Type</td>
     <td>
-      <% if allergy.allergy_type_code %><%=h allergy.allergy_type_code.name %><% end %>
+      <% if allergy.adverse_event_type %><%=h allergy.adverse_event_type.name %><% end %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
@@ -15,12 +15,6 @@
     <td class="lighttext">End Event</td>
     <td>
       <%=h allergy.end_event %>
-    </td>
-  </tr>
-  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Adverse Event Type</td>
-    <td>
-      <% if allergy.adverse_event_type %><%=h allergy.adverse_event_type.name %><% end %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
@@ -55,6 +49,7 @@
       <span>
       <%= link_to_remote 'Remove', :update => "allergy#{allergy.id}",
                                  :url => patient_data_instance_allergy_path(patient_data, allergy),
+                                 :confirm=>"Are you sure you wish to remove this allergy?",
                                  :method => 'delete' %>
      </span>
     </td>
