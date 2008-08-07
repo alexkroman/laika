@@ -1,29 +1,27 @@
         <!-- Start Content -->
         <div class="content">
-          
           <!-- Start Container -->
           <div class="container">
-            
             <% currentVendorTestId = nil %>
-            <% for vendor_test_plan in @vendor_test_plans 
+            <% for vendor_test_plan in @vendor_test_plans
                  numXMLValidationErrors = 0
                  numContentInspectionErrors = 0
-				 if vendor_test_plan.validated?
-				   report = vendor_test_plan.clinical_document.validation_report(:xml)
-				   report.elements.to_a("//Result").each do |res| 
-				     errorType = res.attributes['validator'] 
-				     res.elements.to_a("./error").each do |err|  
-				       if errorType.to_s == "Content Inspection"
-				         numContentInspectionErrors += 1 
-				       else 
-				         numXMLValidationErrors += 1
-				       end 
-				     end
-				   end 
-				 end %> 
+                 if vendor_test_plan.validated?
+                   report = vendor_test_plan.clinical_document.validation_report(:xml)
+                   report.elements.to_a("//Result").each do |res|
+                     errorType = res.attributes['validator']
+                     res.elements.to_a("./error").each do |err|
+                       if errorType.to_s == "Content Inspection"
+                         numContentInspectionErrors += 1 
+                       else
+                         numXMLValidationErrors += 1
+                       end 
+                     end
+                   end
+                 end %>
               <% if currentVendorTestId == nil || currentVendorTestId != vendor_test_plan.vendor.id %>
                 </table>
-	            <h3>Laika Inspection ID: <%= vendor_test_plan.vendor.public_id %></h3>
+                <h3>Laika Inspection ID: <%= vendor_test_plan.vendor.public_id %></h3>
                 <table id="dashboard">
                   <tr>
                     <th><a href="#"><div>Status</div></a></th>
@@ -34,7 +32,6 @@
                     <th class="noarrow"><div>Actions</div></th>
                   </tr>
               <% end %>
-              
               <tr>
                 <td>
                   <% if vendor_test_plan.clinical_document %>
@@ -51,10 +48,10 @@
                     <%= image_tag "inprogress.png", :alt => 'Test In Progress' %>in progress</td>
                   <% end %>
                 <td>
-                  <% if vendor_test_plan.validated? %>
-                    <%= link_to vendor_test_plan.patient_data.name, patient_data_instance_url(vendor_test_plan.patient_data)%>
-                  <% else %>
+                  <% if vendor_test_plan.clinical_document && !vendor_test_plan.validated? %>
                     <%= vendor_test_plan.patient_data.name %>
+                  <% else %>
+                    <%= link_to vendor_test_plan.patient_data.name, patient_data_instance_url(vendor_test_plan.patient_data) %>
                   <% end %>
                 </td>
                 <td><%= vendor_test_plan.updated_at.strftime("%d.%b.%Y")  %></td>
@@ -104,8 +101,8 @@
                           <label>Document Type &nbsp;&nbsp;&nbsp;&nbsp;
                             <%= f.select :doc_type, ['C32'] %>
                           </label>
-                          <br/>                              
-                          <label>Clinical Document            
+                          <br/>
+                          <label>Clinical Document
                             <%= f.file_field :uploaded_data %>
                           </label>
                           <br/>
@@ -116,15 +113,11 @@
                 </td>
               </tr>
               <% end %>
-              
               <% currentVendorTestId = vendor_test_plan.vendor.id %>
-            
             <% end %>
             <!-- End Vendor Test Plan Loop -->
             </table>
-            
           </div>
           <!-- End Container -->
-          
         </div>
         <!-- End Content -->

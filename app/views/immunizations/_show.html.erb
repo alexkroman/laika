@@ -4,7 +4,7 @@
     <td><%=h immunization.administration_date %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Vaccine Name</td>
+    <td class="lighttext">Product</td>
     <td>
       <% if immunization.vaccine %><%=h immunization.vaccine.name %><% end %>
     </td>

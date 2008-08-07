@@ -17,7 +17,7 @@
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Vaccine Type</td>
+    <td class="lighttext">Product</td>
     <td>
       <%= f.select :vaccine_id, @vaccines.collect{|vaccine| [vaccine.name, vaccine.id]}, {:include_blank => true} %>
     </td>
