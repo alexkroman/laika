@@ -45,15 +45,21 @@
                        <%= image_tag "pass.png", :alt => 'Test Passed' %>passed</td>
                      <% end %> 
                      <% else %>
-                     validation error
+                       validation error
                      <% end %>
                   <% else %>
                     <%= image_tag "inprogress.png", :alt => 'Test In Progress' %>in progress</td>
                   <% end %>
-                <td><%= link_to vendor_test_plan.patient_data.name, patient_data_instance_url(vendor_test_plan.patient_data)%></td>
+                <td>
+                  <% if vendor_test_plan.validated? %>
+                    <%= link_to vendor_test_plan.patient_data.name, patient_data_instance_url(vendor_test_plan.patient_data)%>
+                  <% else %>
+                    <%= vendor_test_plan.patient_data.name %>
+                  <% end %>
+                </td>
                 <td><%= vendor_test_plan.updated_at.strftime("%d.%b.%Y")  %></td>
                 <td><%= vendor_test_plan.kind.name %></td>
-				<td>
+                <td>
                   <% if vendor_test_plan.clinical_document %>
                     <%  if !vendor_test_plan.validated?
                         numXMLValidationErrors = "N/A"
@@ -70,8 +76,10 @@
                       <%= link_to 'revalidate', revalidate_vendor_test_plan_url(vendor_test_plan) %>
                     <% end %>
                     <%= link_to 'destroy', vendor_test_plan, :confirm => 'Are you sure you want to delete this Laika test?', :method => :delete %>
-                    <%= link_to 'inspect', validate_vendor_test_plan_url(vendor_test_plan) %>
-                    <%= link_to 'checklist', {:controller => 'vendor_test_plans', :action => 'checklist', :id => vendor_test_plan.id} %>
+                    <% if vendor_test_plan.validated? %>
+                      <%= link_to 'inspect', validate_vendor_test_plan_url(vendor_test_plan) %>
+                      <%= link_to 'checklist', {:controller => 'vendor_test_plans', :action => 'checklist', :id => vendor_test_plan.id} %>
+                    <% end %>
                   <% else %>
                     <%= link_to 'edit', patient_data_instance_url(vendor_test_plan.patient_data)%>
                     <%= link_to 'destroy', vendor_test_plan, :confirm => 'Are you sure you want to delete this Laika test?', :method => :delete %>

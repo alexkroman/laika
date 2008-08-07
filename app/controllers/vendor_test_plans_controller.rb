@@ -118,7 +118,7 @@ class VendorTestPlansController < ApplicationController
         @report = REXML::Document.new "<ValidationResults/>"
       end
     rescue
-      @report = REXML::Document.new "<ValidationResults/>"
+      @report = REXML::Document.new "<ValidationResults><Result validator='C32 Schematron Validator' isValid='false'><error>Catastrophic data error.  Non-parseable XML uploaded to Laika</error></Result><Result validator='CCD Schematron Validator' isValid='true'/><Result validator='C32 Schema Validator' isValid='true'/></ValidationResults>"
     end
     
     @vendor_test_plan.add_inspection_results_to_validation_errors(@report)
