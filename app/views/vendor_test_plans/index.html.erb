@@ -2,6 +2,7 @@
         <div class="content">
           <!-- Start Container -->
           <div class="container">
+            <span style="float:right; position:relative; right:8px; top:4px"><%= link_to "Export Inspection Reports", :action => :export, :controller => :test_plan_manager %><br/></span>
             <% currentVendorTestId = nil %>
             <% for vendor_test_plan in @vendor_test_plans
                  numXMLValidationErrors = 0
@@ -51,7 +52,7 @@
                   <% if vendor_test_plan.clinical_document && !vendor_test_plan.validated? %>
                     <%= vendor_test_plan.patient_data.name %>
                   <% else %>
-                    <%= link_to vendor_test_plan.patient_data.name, patient_data_instance_url(vendor_test_plan.patient_data) %>
+                    <%= link_to h(vendor_test_plan.patient_data.name), patient_data_instance_url(vendor_test_plan.patient_data) %>
                   <% end %>
                 </td>
                 <td><%= vendor_test_plan.updated_at.strftime("%d.%b.%Y")  %></td>
