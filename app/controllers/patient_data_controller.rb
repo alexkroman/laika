@@ -23,7 +23,7 @@ class PatientDataController < ApplicationController
     @patient_data.user = current_user
     if @patient_data.name == ""
       $no_patient_name = true
-      redirect_to '/patient_data'
+      redirect_to ActionController::AbstractRequest.relative_url_root + '/patient_data'
     else
       $no_patient_name = false
       @patient_data.save!
