@@ -22,9 +22,10 @@ class PatientDataController < ApplicationController
     @patient_data = PatientData.new(params[:patient_data])
     @patient_data.user = current_user
     if @patient_data.name == ""
-      # TODO: NEED TO NOTIFY USER THAT PATIENT NEEDS A NAME
+      $no_patient_name = true
       redirect_to '/patient_data'
-    else	
+    else
+      $no_patient_name = false
       @patient_data.save!
       redirect_to :controller => 'patient_data', :action => 'show', :id => @patient_data.id
     end

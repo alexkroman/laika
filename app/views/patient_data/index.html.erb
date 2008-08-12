@@ -1,7 +1,19 @@
         <!-- Start Content -->
         <div class="content">
-      
           <div class="container">
+            <script type="text/javascript">
+		          var dialog = new Element('div');
+              dialog.insert(new Element('div', {'style': 'background: #65b0c9;'}).insert('<h3>Error!</h3>'));
+              dialog.insert(new Element('img', {'src': '<%= ActionController::AbstractRequest.relative_url_root %>/images/warning.png'}));
+		          dialog.insert(new Element('p').insert('Enter a patient name!'));
+              dialog.insert(new Element('br'));
+              dialog.insert(new Element('a', {'href': 'javascript:overlay.hide();void(0);', 'class': 'bluebutton'}).insert('<span>OK</span>'));
+		          var overlay = new DialogOverlay(dialog);
+	          </script>
+            <% if $no_patient_name %>
+              <script>overlay.show();</script>
+              <% $no_patient_name = false %>
+            <% end %>
             <h3>Create New C32 Patient Template</h3>
             <div>
               <% form_for(PatientData.new) do |f| %>
@@ -25,14 +37,14 @@
               
               <% for patient_data in @patient_data_list -%>
               <tr>
-                <td><%= link_to patient_data.name, patient_data_instance_url(patient_data) %></td>
+                <td><%= link_to h(patient_data.name), patient_data_instance_url(patient_data) %></td>
                 <td>CCD/C32</td>
                 <td><%= patient_data.user.first_name %> <%= patient_data.user.last_name %></td>
                 <td><%= patient_data.created_at.strftime("%d.%b.%Y") %></td>
                 <td><%= patient_data.updated_at.strftime("%d.%b.%Y") %></td>
                 <td class="actions" width=270px>
                   <%= link_to 'edit', patient_data_instance_url(patient_data)%> 
-                  <%= link_to 'destroy', patient_data_instance_url(patient_data), :confirm => 'Are you sure you want to delete this Laika template?', :method => :delete %>
+                  <%= link_to 'delete', patient_data_instance_url(patient_data), :confirm => 'Are you sure you want to delete this Laika template?', :method => :delete %>
                   <a href="javascript:toggle_div('assignment_div_<%=patient_data.id%>');">assign</a>
                   <div id="assignment_div_<%=patient_data.id%>" style="display:none">
                     <form action="<%= url_for :controller => 'test_plan_manager', :action => 'assign_patient_data' %>">
