@@ -27,7 +27,7 @@ class Encounter < ActiveRecord::Base
                        'assigningAuthorityName' => 'CCD')
         xml.templateId('root' => '2.16.840.1.113883.3.88.11.32.17',
                        'assigningAuthorityName' => 'HITSP/C32') 
-        xml.id ('root' => encounter_id)
+        xml.id('root' => encounter_id)
         if encounter_type
           xml.code("code" => encounter_type.code, "codeSystem" => "2.16.840.1.113883.5.4", "displayName" => encounter_type.name) do
             xml.originalText free_text

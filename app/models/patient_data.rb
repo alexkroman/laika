@@ -799,12 +799,12 @@ class PatientData < ActiveRecord::Base
                      medical_equipments.andand.each do |medical_equipment|
                         xml.tr do
                           if medical_equipment.name
-                            xml.td (medical_equipment.name)
+                            xml.td(medical_equipment.name)
                           else
                             xml.td
                           end 
                           if medical_equipment.date_supplied
-                            xml.td (medical_equipment.date_supplied)
+                            xml.td(medical_equipment.date_supplied)
                           else
                             xml.td
                           end 

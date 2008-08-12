@@ -28,7 +28,7 @@ class ClinicalDocument < ActiveRecord::Base
         f.puts rep.to_s
       end             
     when File
-      File.copy (rep.path,validation_report_filename)
+      File.copy(rep.path,validation_report_filename)
     end         
   end
   
@@ -42,7 +42,7 @@ class ClinicalDocument < ActiveRecord::Base
   # has this document been validated? 
   # This is determinded by whether or not the validation report file exists or not
   def validated?
-    File.exists? (validation_report_filename) 
+    File.exists?(validation_report_filename) 
   end
   
 end
