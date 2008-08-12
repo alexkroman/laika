@@ -84,7 +84,6 @@ class Encounter < ActiveRecord::Base
     self.address.randomize()
     self.telecom = Telecom.new
     self.telecom.randomize()
-    self.code = (10000 + rand(89999)).to_s
     
     self.free_text = @possible_procedures[@possible_procedures_index]
     self.name = @descriptions[@possible_procedures_index]    
