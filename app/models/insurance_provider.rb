@@ -138,13 +138,13 @@ class InsuranceProvider < ActiveRecord::Base
                 end
                 xml.assignedEntity do
                   xml.id
-                  code_atts = {"code"=>"PAYOR","codeSystem" => "2.16.840.1.113883.5.110"}
+                  code_atts = {"code" => "PAYOR","codeSystem" => "2.16.840.1.113883.5.110"}
                   if insurance_type && insurance_type.code == 'PP'
-                      if insurance_provider_guarantor
-                          code_atts['code']= "GUAR"
-                      else
-                          code_atts['code']= "PAT"
-                      end
+                    if insurance_provider_guarantor
+                      code_atts['code'] = "GUAR"
+                    else
+                      code_atts['code'] = "PAT"
+                    end
                   end
                   xml.code(code_atts)
                   xml.assignedPerson do
