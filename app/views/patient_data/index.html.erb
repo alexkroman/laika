@@ -1,19 +1,6 @@
         <!-- Start Content -->
         <div class="content">
           <div class="container">
-            <!--<script type="text/javascript">
-		          var dialog = new Element('div');
-              dialog.insert(new Element('div', {'style': 'background: #65b0c9;'}).insert('<h3>Error!</h3>'));
-              dialog.insert(new Element('img', {'src': '<%= ActionController::AbstractRequest.relative_url_root %>/images/warning.png'}));
-		          dialog.insert(new Element('p').insert('Enter a patient name!'));
-              dialog.insert(new Element('br'));
-              dialog.insert(new Element('a', {'href': 'javascript:overlay.hide();void(0);', 'class': 'bluebutton'}).insert('<span>OK</span>'));
-		          var overlay = new DialogOverlay(dialog);
-	          </script>
-            <% if $no_patient_name %>
-              <script>overlay.show();</script>
-              <% $no_patient_name = false %>
-            <% end %>-->
             <h3>Create New C32 Patient Template</h3>
             <div>
               <% form_for(PatientData.new) do |f| %>
