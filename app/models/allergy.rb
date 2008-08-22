@@ -163,30 +163,29 @@ XPATH
             end
           end
         end
-        
         #if severity_term
         #  xml.entryRelationship("typeCode" => "SUBJ", "inversionInd" => "true") do
         #    xml.observation("classCode" => "OBS", "moodCode" => "EVN") do
         #      xml.templateId("root" => "2.16.840.1.113883.10.20.1.55")
-        #      xml.code("code" => "SEV", 
-        #               "displayName" => "Severity",
+        #     xml.code("code" => "SEV", 
+        #              "displayName" => "Severity",
         #               "codeSystem" => "2.16.840.1.113883.5.4", 
         #               "codeSystemName" => "ActCode")
         #     xml.text do
         #        xml.reference("value" => "#severity-" + id.to_s)
         #     end
         #     xml.statusCode("code" => "completed")
-        #      xml.value("xsi:type" => "CD", 
-        #                "code" => severity_term.code,
-        #               "displayName" => severity_term.name,
-        #                "codeSystem" => "2.16.840.1.113883.6.96", 
-        #                "codeSystemName" => "SNOMED CT")
+        #     xml.value("xsi:type" => "CD", 
+        #               "code" => severity_term.code,
+        #              "displayName" => severity_term.name,
+        #               "codeSystem" => "2.16.840.1.113883.6.96", 
+        #               "codeSystemName" => "SNOMED CT")
         #    end
         #  end
         #end
-        
       end
     end
+    
   end
   
   def randomize(birth_date)

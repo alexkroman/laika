@@ -64,11 +64,6 @@
                 <a href="#" onclick="javascript:scroll_to_module_and_highlight('advanceDirectiveContainer', 1.0);">Advance Directive</a>
               </td>
             </tr>
-            <tr class="lightzebra">
-              <td class="lighttext">
-                <a href="#" onclick="javascript:scroll_to_module_and_highlight('commentsContainer', 1.0);">Comments</a>
-              </td>
-            </tr>
             <tr class="darkzebra">
               <td class="lighttext">
                 <a href="#" onclick="javascript:scroll_to_module_and_highlight('vitalSignsContainer', 1.0);">Vital Signs</a>
@@ -271,25 +266,6 @@
             <%= render :partial => '/advance_directives/show', :locals => {:advance_directive => @patient_data.advance_directive, :patient_data => @patient_data} %>
           </div>
           <!-- End Information Source Module -->   
-                 
-          <!-- Start Comments Module -->
-          <div id="commentsContainer"><h5>Comments</h5>
-          <% for comment in @patient_data.comments -%>
-            <div id="comment<%= comment.id %>">
-              <%= render :partial => '/comments/show', :locals => {:comment  => comment, :patient_data => @patient_data} %>
-            </div>
-          <% end -%>
-          <table id="addComment">
-            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-              <td></td>
-              <td>
-                <%= link_to_remote 'Add', :url => new_patient_data_instance_comment_path(@patient_data), 
-                                          :method => 'get', :update => 'addComment', :position => :before %>
-              </td>                                       
-            </tr>                                               
-          </table>
-          </div> 
-          <!-- End Comments Module -->
           
           <!-- Start Vital Signs Module -->   
           <div id="vitalSignsContainer"> 

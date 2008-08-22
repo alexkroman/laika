@@ -10,6 +10,14 @@
                    :update => allergy_div) do |f| -%>
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Free Text Product Name</td>
+    <td><%= f.text_field :free_text_product %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Product Code</td>
+    <td><%= f.text_field :product_code %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Alert Type</td>
     <td>
       <%= f.select :adverse_event_type_id, @adverse_event_types.collect{|aet| [aet.name, aet.id]} %>
@@ -25,20 +33,6 @@
     <td class="lighttext">End Event</td>
     <td>
       <%= f.calendar_date_select :end_event %>
-    </td>
-  </tr>
-  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Free Text Product Name</td>
-    <td><%= f.text_field :free_text_product %></td>
-  </tr>
-  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Product Code</td>
-    <td><%= f.text_field :product_code %></td>
-  </tr>
-  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Severity</td>
-    <td>
-      <%= f.select :severity_term_id, @severity_terms.collect{|st| [st.name, st.id]}, {:include_blank => true} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
