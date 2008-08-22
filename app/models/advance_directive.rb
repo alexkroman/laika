@@ -12,7 +12,9 @@ class AdvanceDirective < ActiveRecord::Base
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
   
   def validate_c32(document)
+    
     errors = []
+    
     begin
       section = REXML::XPath.first(document,"//cda:section[cda:templateId/@root='2.16.840.1.113883.10.20.1.1']",@@default_namespaces)
       if section
@@ -53,10 +55,13 @@ class AdvanceDirective < ActiveRecord::Base
                                  :type=>'error',
                                  :location => document.xpath)
     end
+    
     errors.compact
+    
   end
   
   def to_c32(xml)
+    
     xml.component do
       xml.section do
         xml.templateId("root" => "2.16.840.1.113883.10.20.1.1")
@@ -122,10 +127,12 @@ class AdvanceDirective < ActiveRecord::Base
                           "displayName" => advance_directive_status_code.name)
               end
             end
+            
           end
         end
       end
     end
+    
   end
   
   def randomize(birth_date)
@@ -144,6 +151,7 @@ class AdvanceDirective < ActiveRecord::Base
   end
   
   private 
+  
   def deref(code)
     if code
       ref = REXML::XPath.first(code,"cda:reference",@@default_namespaces)
