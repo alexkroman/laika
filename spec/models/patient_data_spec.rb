@@ -22,8 +22,7 @@ describe PatientData, "can copy itself" do
 end
 
 describe PatientData, "can create a C32 representation of itself" do
-  fixtures :patient_data, :registration_information, :person_names, :addresses,
-           :telecoms, :genders, :medications
+  fixtures :patient_data, :registration_information, :person_names, :addresses, :telecoms, :genders
   
   it "should create valid C32 content" do
     patient_data = patient_data(:joe_smith)

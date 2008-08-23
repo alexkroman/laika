@@ -40,7 +40,7 @@ class PatientData < ActiveRecord::Base
     if self.registration_information != nil
       errors.concat(self.registration_information.validate_c32(clinical_document))
     end
-
+    
     # Languages
     if self.languages 
       self.languages.each do |language|
@@ -80,7 +80,7 @@ class PatientData < ActiveRecord::Base
         errors.concat(allergy.validate_c32(clinical_document))
       end
     end 
-
+    
     # Conditions
     if self.conditions
       self.conditions.each do |condition|
@@ -93,7 +93,7 @@ class PatientData < ActiveRecord::Base
       # Need to pass in the root element otherwise the first XPath expression doesn't work
       errors.concat(self.information_source.validate_c32(clinical_document.root))
     end
-
+    
     # Advance Directive
     if self.advance_directive
       errors.concat(self.advance_directive.validate_c32(clinical_document))
@@ -112,14 +112,14 @@ class PatientData < ActiveRecord::Base
         errors.concat(immunization.validate_c32(clinical_document))
       end
     end
-
+    
     # Encounters
     if self.encounters
       self.encounters.each do |encounter|
         errors.concat(encounter.validate_c32(clinical_document))
       end
     end
-
+    
     # Removes all the nils... just in case...
     errors.compact!
     errors
