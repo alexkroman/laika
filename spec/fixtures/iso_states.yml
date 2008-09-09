@@ -98,15 +98,30 @@ massachusetts:
     iso_abbreviation: MA
     old_format:  Mass
 
+maryland:
+     name:  Maryland    
+     iso_abbreviation: MD
+     old_format:  Md
+
 maine:
     name:  Maine   
     iso_abbreviation: ME
     old_format:  ME 
 
-maryland:
-    name:  Maryland    
-    iso_abbreviation: MD
-    old_format:  Md
+michigan:
+    name:  Michigan   
+    iso_abbreviation: MI
+    old_format:  Mich
+
+minnesota:
+    name:  Minnesota   
+    iso_abbreviation: MN
+    old_format:  Minn
+
+missouri:
+    name:  Missouri   
+    iso_abbreviation: MO
+    old_format:  Mo
 
 mississippi:
     name:  Mississippi   
@@ -207,16 +222,21 @@ utah:
     name:  Utah    
     iso_abbreviation: UT
     old_format:  UT
- 
-vermont:
-    name:  Vermont   
-    iso_abbreviation: VT
-    old_format:  Vt
 
 virginia:
     name:  Virginia   
     iso_abbreviation: VA
     old_format:  Va
+
+vermont:
+    name:  Vermont   
+    iso_abbreviation: VT
+    old_format:  Vt
+
+washington:
+    name:  Washington
+    iso_abbreviation: WA
+    old_format:  Wa
 
 wisconsin:
     name:  Wisconson  
@@ -228,9 +248,7 @@ west_virginia:
     iso_abbreviation: WV
     old_format:  W.Va.
 
-
 wyoming:
     name:  Wyoming   
     iso_abbreviation: WY
     old_format:  Wyo
-

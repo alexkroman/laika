@@ -1,4 +1,5 @@
 class Medication < ActiveRecord::Base
+
   strip_attributes!
 
   belongs_to :patient_data

@@ -67,7 +67,7 @@ ENV['HOST_URL'] = 'http://demo.cchit.org/laika'
 ENV['HELP_LIST'] = 'talk@projectlaika.org'
 
 ActionMailer::Base.smtp_settings = {
-  :address => "demo.cchit.org",
+  :address => "mail.mitre.org",
   :port => 25,
-  :domain => "cchit.org",
+  :domain => "mitre.org",
 }
