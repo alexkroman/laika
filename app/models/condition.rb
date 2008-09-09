@@ -47,14 +47,14 @@ class Condition < ActiveRecord::Base
   end
   
   def to_c32(xml)
-    xml.entry {
-      xml.act("classCode" => "ACT", "moodCode" => "EVN") {
+    xml.entry do
+      xml.act("classCode" => "ACT", "moodCode" => "EVN") do
         xml.templateId("root" => "2.16.840.1.113883.10.20.1.27", "assigningAuthorityName" => "CCD")
         xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.7", "assigningAuthorityName" => "HITSP/C32")
         xml.id
         xml.code("nullFlavor"=>"NA")
         if start_event != nil || end_event != nil
-          xml.effectiveTime {
+          xml.effectiveTime do
             if start_event != nil 
               xml.low("value" => start_event.strftime("%Y%m%d"))
             end
@@ -63,10 +63,10 @@ class Condition < ActiveRecord::Base
             else
               xml.high("nullFlavor" => "UNK")
             end
-          }
+          end
         end
-        xml.entryRelationship("typeCode" => "SUBJ") {
-          xml.observation("classCode" => "OBS", "moodCode" => "EVN") {
+        xml.entryRelationship("typeCode" => "SUBJ") do
+          xml.observation("classCode" => "OBS", "moodCode" => "EVN") do
             xml.templateId("root" => "2.16.840.1.113883.10.20.1.28", "assigningAuthorityName" => "CCD")
             if problem_type
               xml.code("code" => problem_type.code, 
@@ -74,15 +74,25 @@ class Condition < ActiveRecord::Base
                        "codeSystem" => "2.16.840.1.113883.6.96", 
                        "codeSystemName" => "SNOMED CT")
             end 
-            xml.text {
+            xml.text do
               xml.reference("value" => "#problem-"+id.to_s)
-            }
+            end
             xml.statusCode("code" => "completed")
-          } 
-        }
-      }
-    }
-
+            # only write out the coded value if the name of the condition is in the SNOMED list
+            if free_text_name
+              snowmed_problem = SnowmedProblem.find(:first, :conditions => {:name => free_text_name})
+              if snowmed_problem
+                xml.value("xsi:type" => "CD", 
+                        "code" => snowmed_problem.code, 
+                        "displayName" => free_text_name,
+                        "codeSystem" => "2.16.840.1.113883.6.96",
+                        "codeSystemName" => 'SNOMED CT')
+              end
+            end
+          end
+        end
+      end
+    end
   end
    
   def randomize(birth_date)
