@@ -272,7 +272,7 @@
           <h5>Vital Signs</h5>
           <% for result in @patient_data.vital_signs -%>
             <div id="result<%= result.id %>">
-              <%= render :partial => '/results/show', :locals => {:result  => result, :patient_data => @patient_data} %>
+              <%= render :partial => '/results/show', :locals => {:result  => result, :is_vital_sign => true, :patient_data => @patient_data} %>
             </div>
           <% end -%>
           <table id="addVital">
@@ -293,7 +293,7 @@
           <h5>Results</h5>
           <% for result in @patient_data.results_only -%>
             <div id="result<%= result.id %>">
-              <%= render :partial => '/results/show', :locals => {:result  => result, :patient_data => @patient_data} %>
+              <%= render :partial => '/results/show', :locals => {:result  => result, :is_vital_sign => false, :patient_data => @patient_data} %>
             </div>
           <% end -%>
           <table id="addResult">

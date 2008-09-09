@@ -5,7 +5,7 @@
 class ResultsController < PatientDataChildController
 
   def new
-    
+
     unless @code_systems
       @code_systems = CodeSystem.find(:all, :order => "name DESC")
     end
@@ -15,15 +15,18 @@ class ResultsController < PatientDataChildController
     unless @result_type_codes
       @result_type_codes = ResultTypeCode.find(:all, :order => "name DESC")
     end
-    
+    unless @loinc_lab_codes
+      @loinc_lab_codes = LoincLabCode.find(:all, :order => "name ASC")
+    end
+
     @result = Result.new
-    
+
     render :partial  => 'edit', :locals => {:result => @result,
                                             :patient_data => @patient_data}
   end
 
   def edit
-    
+
     unless @code_systems
       @code_systems = CodeSystem.find(:all, :order => "name DESC")
     end
@@ -33,9 +36,12 @@ class ResultsController < PatientDataChildController
     unless @result_type_codes
       @result_type_codes = ResultTypeCode.find(:all, :order => "name DESC")
     end
-    
+    unless @loinc_lab_codes
+      @loinc_lab_codes = LoincLabCode.find(:all, :order => "name ASC")
+    end
+
     @result = @patient_data.results.find(params[:id])
-    
+
     render :partial  => 'edit', :locals => {:result => @result,
                                             :patient_data => @patient_data}
   end
@@ -45,14 +51,14 @@ class ResultsController < PatientDataChildController
   # there is a callback at the end which puts a "type" hidden field in the form
   # indicating it is a VitalSign so we can create the correct record.
   def create
-    
+
     if 'vital'.eql? params[:type]
       @result = VitalSign.new(params[:result])
     else
       @result = Result.new(params[:result])
       @result.type = 'Result' # AR's STI doesn't set this for us... not sure why
     end
-    
+
     @patient_data.results << @result
     render :partial  => 'create', :locals => {:result => @result,
                                               :patient_data => @patient_data}
@@ -70,4 +76,5 @@ class ResultsController < PatientDataChildController
     @result.destroy
     render :partial  => 'delete.rjs'
   end
+
 end

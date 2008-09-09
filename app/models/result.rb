@@ -4,6 +4,7 @@ class Result < ActiveRecord::Base
 
   belongs_to :patient_data
   belongs_to :code_system
+  belongs_to :loinc_lab_code
   belongs_to :result_type_code
   belongs_to :act_status_code
 
