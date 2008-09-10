@@ -4,21 +4,26 @@
           <div class="container">
             <span style="float:right; position:relative; right:40px; top:4px"><%= link_to "Export Report", :action => :export, :controller => :test_plan_manager %></span>
             <% currentVendorTestId = nil %>
-            <% for vendor_test_plan in @vendor_test_plans
-                 numXMLValidationErrors = 0
-                 numContentInspectionErrors = 0
+            <% for vendor_test_plan in @vendor_test_plans                
+                 numErrors = 0
+                 numWarnings = 0
                  if vendor_test_plan.validated?
-                   report = vendor_test_plan.clinical_document.validation_report(:xml)
-                   report.elements.to_a("//Result").each do |res|
-                     errorType = res.attributes['validator']
-                     res.elements.to_a("./error").each do |err|
-                       if errorType.to_s == "Content Inspection"
-                         numContentInspectionErrors += 1 
-                       else
-                         numXMLValidationErrors += 1
-                       end 
+                   numErrors = 0
+                   numWarnings = 0
+                   if vendor_test_plan.validated?
+                     report = vendor_test_plan.clinical_document.validation_report(:xml)
+                     vendor_test_plan.add_inspection_results_to_validation_errors(report)
+                     report.elements.to_a("//Result").each do |res|
+                       errorType = res.attributes['validator']
+                       res.elements.to_a("./error").each do |err|
+                         if errorType.to_s == "Content Inspection"
+                           numWarnings += 1
+                         else
+                           numErrors += 1
+                         end
+                       end
                      end
-                   end
+                   end 
                  end %>
               <% if currentVendorTestId == nil || currentVendorTestId != vendor_test_plan.vendor.id %>
                 </table>
@@ -29,7 +34,8 @@
                     <th class="selected"><a href="#"><div>Test Case</div></a></th>
                     <th><a href="#"><div>Last Tested</div></a></th>
                     <th><a href="#"><div>Test Type</div></a></th>
-                    <th><a href="#"><div>Validation Errors</div></a></th>
+                    <th><a href="#"><div>Errors</div></a></th>
+                    <th><a href="#"><div>Warnings</div></a></th>
                     <th class="noarrow"><div>Actions</div></th>
                   </tr>
               <% end %>
@@ -37,13 +43,13 @@
                 <td>
                   <% if vendor_test_plan.clinical_document %>
                     <%  if vendor_test_plan.validated? %>
-                     <% if numXMLValidationErrors > 0 %>
+                     <% if numErrors > 0 %>
                        <%= image_tag "fail.png", :alt => 'Test Failed' %>failed</td>
                      <% else %>
                        <%= image_tag "pass.png", :alt => 'Test Passed' %>passed</td>
                      <% end %> 
                      <% else %>
-                       validation error
+                       <%= image_tag "fail.png", :alt => 'Test Failed' %>failed</td>
                      <% end %>
                   <% else %>
                     <%= image_tag "inprogress.png", :alt => 'Test In Progress' %>in progress</td>
@@ -60,10 +66,23 @@
                 <td>
                   <% if vendor_test_plan.clinical_document %>
                     <%  if !vendor_test_plan.validated?
-                        numXMLValidationErrors = "N/A"
-                     end %>
-                    <%  error_count_link_text = numXMLValidationErrors.to_s + " Errors" %>
+                          error_count_link_text = "validation error"
+                        else
+                          error_count_link_text = numErrors.to_s + " Errors"
+                        end %>
                     <%= link_to error_count_link_text, validate_vendor_test_plan_url(vendor_test_plan) %>
+                  <% else %>
+                    --
+                  <% end %>
+                </td>
+                <td>
+                  <% if vendor_test_plan.clinical_document %>
+                    <%  if !vendor_test_plan.validated?
+                          warning_count_link_text = "N/A"
+                        else
+                          warning_count_link_text = numWarnings.to_s + " Warnings"
+                        end %>
+                    <%= link_to warning_count_link_text, validate_vendor_test_plan_url(vendor_test_plan) %>
                   <% else %>
                     --
                   <% end %>

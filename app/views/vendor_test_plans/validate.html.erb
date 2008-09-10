@@ -1,22 +1,25 @@
-<% @numXMLValidationErrors = 0 %>
-<% @numContentInspectionErrors = 0 %>
-<% @report.elements.to_a("//Result").each do |res| %>
-<%   @errorType = res.attributes['validator'] %>
-<%   res.elements.to_a("./error").each do |err| %> 
-<%     if @errorType.to_s == "Content Inspection" %>
-<%       @numContentInspectionErrors += 1 %>
-<%     else %>
-<%       @numXMLValidationErrors += 1 %>
-<%     end %>
-<%   end %>
-<% end %>
-
+<% @umlsEnabed = false
+   @numXMLValidationErrors = 0
+   @numContentInspectionWarnings = 0 
+   @numUMLSWarnings = 0
+   @report.elements.to_a("//Result").each do |res| 
+     @errorType = res.attributes['validator']
+     res.elements.to_a("./error").each do |err|
+       if @errorType.to_s == "Content Inspection"
+         @numContentInspectionWarnings += 1 
+       elsif @errorType.to_s == "UMLS CodeSystem Validator"
+         @numUMLSWarnings += 1
+       else 
+         @numXMLValidationErrors += 1
+       end 
+     end 
+   end %>
   <!-- Start Content -->
   <div class="content">
     <div class="container" >
       <div class="column span-6 append-1">
         <div id="results">
-          <% if @numXMLValidationErrors == 0 %>
+          <% if @numXMLValidationErrors == 0 && @vendor_test_plan.validated? %>
             <div class="pass">PASS</div>
           <% else %>
             <div class="fail">FAIL</div>
@@ -29,17 +32,33 @@
                 <div class="visualIndication1">
                   <div><span class="portion" style="width:23px"></span></div>
                 </div>
-                <span class="number"><%= @numXMLValidationErrors %></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; XML Validation Errors
+                <% if @vendor_test_plan.validated? %>
+                  <span class="number"><%= @numXMLValidationErrors %></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; XML Validation Errors
+                <% else %>
+                  Unrecoverable XML Validation Error
+                <% end %>
               </div>
             </div>
-			<div class="widget">
+            <% if @vendor_test_plan.validated? %>
+            <% if @umlsEnabed %>
+            <div class="widget">
               <div class="left on">
                 <div class="visualIndication1">
                   <div><span class="portion" style="width:23px"></span></div>
                 </div>
-                <span class="number"><%= @numContentInspectionErrors %></span>&nbsp; Content Inspection Warnings
+                <span class="number"><%= @numUMLSWarnings %></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; UMLS Code Warnings
               </div>
             </div>
+            <% end %>
+            <div class="widget">
+              <div class="left on">
+                <div class="visualIndication1">
+                  <div><span class="portion" style="width:23px"></span></div>
+                </div>
+                <span class="number"><%= @numContentInspectionWarnings %></span>&nbsp; Content Inspection Warnings
+              </div>
+            </div>
+            <% end %>
             <table id="details">
               <tr>
                 <td class="lighttext">Test Date</td>
@@ -52,9 +71,13 @@
                       <%= @vendor_test_plan.user.last_name %></a>
                 </td>
               </tr>
-			  <tr>
-                <td class="lighttext">Code Testing</td>
-                <td>Disabled</td>
+              <tr>
+                <td class="lighttext">UMLS Coded Value Testing</td>
+                <% if @umlsEnabed %>
+                  <td>Enabled</td>
+                <% else %>
+                  <td>Disabled</td>
+                <% end %>
               </tr>
             </table>
           </div>
@@ -94,23 +117,30 @@
             <% end %>
             <% if @numXMLValidationErrors == 0 %>
               <tr>
-                <td>--</td><td>No XML Validation Errors Detected</td>
+                <td>--</td>
+                <td>
+                  <% if @vendor_test_plan.validated? %>
+                    No XML Validation Errors Detected
+                  <% else %>
+                    Unrecoverable XML Validation Error
+                  <% end %>
+                </td>
               </tr>
             <% end %>
           </table> 
-		  <h3>Content Inspection Results</h3>
+          <h3>Content Inspection Results</h3>
           <table id="dashboard">
             <tr valign="top">
-              <th width="125">Error Type</th>
-              <th>Error Message</th>
+              <th width="125">Warning Type</th>
+              <th>Warning Message</th>
             </tr>
-            <% @numContentInspectionErrors = 0 %>
+            <% @numContentInspectionWarnings = 0 %>
             <% @errorType = "C32" %>
             <% @report.elements.to_a("//Result").each do |res| %>
             <%   @errorType = res.attributes['validator'] %>
             <%   res.elements.to_a("./error").each do |err| %> 
             <%     if @errorType.to_s == "Content Inspection" %>
-            <%       @numContentInspectionErrors += 1 %>
+            <%       @numContentInspectionWarnings += 1 %>
             <%       error_id = nil
                      if err.attributes['location'] 
                        error_id = @error_mapping[err.attributes['location']]
@@ -119,21 +149,73 @@
                 <td><%= @errorType.to_s %></td>
                 <td>
                   <% if error_id %>
-                    <a style="color:#cc3300" href="javascript:scroll_to_module('error_<%=error_id%>', 1.0);" ><b><%= @numContentInspectionErrors %>.</b> <span><%= err.to_s %></span></a>
+                    <a style="color:#cc3300" href="javascript:scroll_to_module('error_<%=error_id%>', 1.0);" ><b><%= @numContentInspectionWarnings %>.</b> <span><%= err.to_s %></span></a>
                   <% else %>
                     <b><%= @errorCounter %>.</b> <span><%= err.to_s %></span>
                   <% end %>
                 </td>
               </tr>   
-	        <%     end %> 
-	        <%   end %>
-	        <% end %>
-            <% if @numContentInspectionErrors == 0 %>
+            <%     end %> 
+            <%   end %>
+            <% end %>
+            <% if @numContentInspectionWarnings == 0 %>
               <tr>
-                <td>--</td><td>No Data Inspection Warnings Detected</td>
+                <td>--</td>
+                <td>
+                  <% if @vendor_test_plan.validated? %>
+                    No Content Inspection Warnings Detected
+                  <% else %>
+                    Unrecoverable XML Validation Error
+                  <% end %>
+                </td>
               </tr>
             <% end %>
           </table>
+          <% if @umlsEnabed %>
+          <h3>UMLS Code Testing Results</h3>
+          <table id="dashboard">
+            <tr valign="top">
+              <th width="125">Warning Type</th>
+              <th>Warning Message</th>
+            </tr>
+            <% @numUMLSWarnings = 0 %>
+            <% @errorType = "C32" %>
+            <% @report.elements.to_a("//Result").each do |res| %>
+            <%   @errorType = res.attributes['validator'] %>
+            <%   res.elements.to_a("./error").each do |err| %> 
+            <%     if @errorType.to_s == "UMLS CodeSystem Validator" %>
+            <%       @numUMLSWarnings += 1 %>
+            <%       error_id = nil
+                     if err.attributes['location'] 
+                       error_id = @error_mapping[err.attributes['location']]
+                     end %>
+              <tr>
+                <td><%= @errorType.to_s %></td>
+                <td>
+                  <% if error_id %>
+                    <a style="color:#cc3300" href="javascript:scroll_to_module('error_<%=error_id%>', 1.0);" ><b><%= @numUMLSWarnings %>.</b> <span><%= err.to_s %></span></a>
+                  <% else %>
+                    <b><%= @errorCounter %>.</b> <span><%= err.to_s %></span>
+                  <% end %>
+                </td>
+              </tr>   
+            <%     end %> 
+            <%   end %>
+            <% end %>
+            <% if @numUMLSWarnings == 0 %>
+              <tr>
+                <td>--</td>
+                <td>
+                  <% if @vendor_test_plan.validated? %>
+                    No UMLS Coded Warnings Detected
+                  <% else %>
+                    Unrecoverable XML Validation Error
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </table>
+          <% end %>
         </div>
       </div>
       <!-- Start Pretty XML -->

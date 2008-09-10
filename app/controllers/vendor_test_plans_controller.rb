@@ -1,5 +1,5 @@
 class VendorTestPlansController < ApplicationController
-  
+
   # GET /vendor_test_plans
   # GET /vendor_test_plans.xml
   def index
@@ -77,25 +77,24 @@ class VendorTestPlansController < ApplicationController
   def destroy
     @vendor_test_plan = VendorTestPlan.find(params[:id])
     @vendor_test_plan.destroy
-    
+
     respond_to do |format|
       format.html { redirect_to(vendor_test_plans_url) }
       format.xml  { head :ok }
     end
   end
-  
+
   def inspect_content
     @vendor_test_plan = VendorTestPlan.find(params[:id])
     @results = @vendor_test_plan.validate_clinical_document_content
   end
-  
+
   def revalidate
     begin
       @vendor_test_plan.cache_validation_report
     rescue
       flash[:notice] = "An error occurred while validating the document"
     end  
-     
     redirect_to vendor_test_plans_url 
   end
   
@@ -104,11 +103,11 @@ class VendorTestPlansController < ApplicationController
     @vendor_test_plan = VendorTestPlan.find(params[:id])
     clinical_document = @vendor_test_plan.clinical_document
     xmlc = ""
-    
+
     File.open(clinical_document.full_filename) do |f|
       xmlc =  f.read()
     end
-    
+
     begin
       @doc = REXML::Document.new xmlc
       if @vendor_test_plan.validated?
@@ -120,7 +119,7 @@ class VendorTestPlansController < ApplicationController
     rescue
       @report = REXML::Document.new "<ValidationResults><Result validator='C32 Schematron Validator' isValid='false'><error>Catastrophic data error.  Non-parseable XML uploaded to Laika</error></Result><Result validator='CCD Schematron Validator' isValid='true'/><Result validator='C32 Schema Validator' isValid='true'/></ValidationResults>"
     end
-    
+
     @vendor_test_plan.add_inspection_results_to_validation_errors(@report)
     @error_mapping = match_errors(@report,@doc)
   end
@@ -130,7 +129,7 @@ class VendorTestPlansController < ApplicationController
     @vendor_test_plan = VendorTestPlan.find(params[:id])
     clinical_document = @vendor_test_plan.clinical_document
     test = ""
-    
+
     File.open(clinical_document.full_filename, "r+") do |f|
       while input = f.gets
         if input =~ /\<\?xml\-stylesheet.*\?\>/
@@ -142,23 +141,23 @@ class VendorTestPlansController < ApplicationController
         end 	 		
       end
     end
-    
+
     f = File.open(clinical_document.full_filename, "w+") do |f|
       f.write test
     end
-    
+
     xmlc = ""
     File.open(clinical_document.full_filename) do |f|
       xmlc =  f.read()
     end 
-    
+
     @doc = REXML::Document.new xmlc
     pi = REXML::Instruction.new('xml-stylesheet', 
       'type="text/xsl" href="' + 
       ActionController::AbstractRequest.relative_url_root + 
       '/schemas/generate_and_format.xsl"')
     @doc.insert_after(@doc.xml_decl, pi)
-    
+
     respond_to do |format|
       format.xml  { render :text => @doc.to_s}
     end
@@ -172,11 +171,11 @@ class VendorTestPlansController < ApplicationController
     error_id = 0
     @error_attributes = []
     locs = []
-    
+
     REXML::XPath.each(errors,'//@location') do |e| 
       locs << e.value 
     end
-    
+
     locs.each do |location|
       node = REXML::XPath.first(doc ,location)
       if(node)
@@ -194,7 +193,7 @@ class VendorTestPlansController < ApplicationController
         end
       end
     end
-    
+
     error_map
   end  
   
