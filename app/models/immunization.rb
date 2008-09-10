@@ -1,24 +1,25 @@
 class Immunization < ActiveRecord::Base
+
   strip_attributes!
 
   belongs_to :vaccine
   belongs_to :no_immunization_reason
   belongs_to :patient_data
-  
+
   include MatchHelper
-  
+
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"} 
-  
+
   def validate_c32(document)
     errors=[]  
     errors.compact
   end
-  
+
   #Reimplementing from MatchHelper
   def section_name
     "Immunizations Module"
   end
-  
+
   def to_c32(xml)    
     xml.entry('typeCode'=>'DRIV') do
       xml.substanceAdministration('classCode' => 'SBADM', 'moodCode' => 'EVN', 'negationInd' => refusal) do
@@ -48,7 +49,7 @@ class Immunization < ActiveRecord::Base
       end
     end
   end
-  
+
   def randomize(birth_date)
     self.administration_date = DateTime.new(birth_date.year + rand(DateTime.now.year - birth_date.year), rand(12) + 1, rand(28) + 1)
     self.lot_number_text = "mm345-417-DFF"
@@ -60,5 +61,5 @@ class Immunization < ActiveRecord::Base
       self.refusal = false
     end
   end
-  
+
 end

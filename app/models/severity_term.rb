@@ -1,5 +1,5 @@
 class SeverityTerm < ActiveRecord::Base
-  
+
   include MatchHelper
 
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
@@ -18,7 +18,6 @@ class SeverityTerm < ActiveRecord::Base
       errors << ContentError.new(:section => "Allergies", :subsection => "SeverityTerm",
                                  :error_message => "Unable to find severity term text",
                                  :location => severity_element.xpath)
-      
     end
     errors << match_value(severity_element, 'cda:value/@code', 'code', self.code)
     errors.compact
@@ -27,21 +26,23 @@ class SeverityTerm < ActiveRecord::Base
   def section_name
     'allergies'
   end
-  
+
   def subsection_name
     'severity'
   end
 
   # TODO: Pull this code out into a helper module
   private 
+  
   def deref(code)
-      if code
-         ref = REXML::XPath.first(code,"cda:reference",@@default_namespaces)
-         if ref
-            REXML::XPath.first(code.document,"//cda:content[@ID=$id]/text()",@@default_namespaces,{"id"=>ref.attributes['value'].gsub("#",'')}) 
-         else
-            nil
-         end
-      end 
+    if code
+      ref = REXML::XPath.first(code,"cda:reference",@@default_namespaces)
+      if ref
+        REXML::XPath.first(code.document,"//cda:content[@ID=$id]/text()",@@default_namespaces,{"id"=>ref.attributes['value'].gsub("#",'')}) 
+      else
+        nil
+      end
+    end
   end
+
 end

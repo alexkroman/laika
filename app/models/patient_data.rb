@@ -12,7 +12,6 @@ class PatientData < ActiveRecord::Base
   has_many   :conditions
   has_one    :information_source
   has_one    :advance_directive
-  has_many   :comments
   has_many   :results
   has_many   :immunizations
   has_many   :encounters
@@ -23,11 +22,16 @@ class PatientData < ActiveRecord::Base
 
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
 
-  # Grabs only results, and omits vital signs
+  # Results and Vital Signs are stored in the same 
+  # table in the database, 'results'.
+  # This grabs only the results, and omits vital signs
   def results_only
     results.find(:all, :conditions => "type = 'Result'")
   end
 
+  # Results and Vital Signs are stored in the same 
+  # table in the database, 'results'.
+  # This grabs only the vital signs, and omits results
   def vital_signs
     results.find(:all, :conditions => "type = 'VitalSign'")
   end
@@ -112,18 +116,17 @@ class PatientData < ActiveRecord::Base
         errors.concat(immunization.validate_c32(clinical_document))
       end
     end
-    
+
     # Encounters
     if self.encounters
       self.encounters.each do |encounter|
         errors.concat(encounter.validate_c32(clinical_document))
       end
     end
-    
-    # Removes all the nils... just in case...
+
+    # Removes all the nils... just in case.
     errors.compact!
     errors
-
   end
 
   def copy
@@ -188,10 +191,6 @@ class PatientData < ActiveRecord::Base
     end
 
     copied_patient_data.information_source = self.information_source.copy if self.information_source
-
-    self.comments.each do |comment|
-      copied_patient_data.comments << comment.copy
-    end
 
     copied_patient_data.advance_directive = self.advance_directive.copy if self.advance_directive
 
@@ -291,7 +290,7 @@ class PatientData < ActiveRecord::Base
       # Start CCD/C32 Modules
       xml.component do
         xml.structuredBody do
-
+          
           # Start Pregnancy
           if (pregnant != nil && pregnant == true)   
             xml.component do
@@ -366,6 +365,7 @@ class PatientData < ActiveRecord::Base
                   end
                 end
 
+                # XML content inspection
                 conditions.andand.each do |structuredCondition|
                   structuredCondition.to_c32(xml)
                 end
@@ -420,6 +420,7 @@ class PatientData < ActiveRecord::Base
                   end
                 end
 
+                # XML content inspection
                 allergies.andand.each do |structuredAllergy|
                   structuredAllergy.to_c32(xml)
                 end
@@ -472,6 +473,7 @@ class PatientData < ActiveRecord::Base
                   end
                 end
 
+                # XML content inspection
                 insurance_providers.andand.each do |structuredInsuranceProvider|
                   structuredInsuranceProvider.to_c32(xml)
                 end
@@ -503,7 +505,6 @@ class PatientData < ActiveRecord::Base
                         xml.th "Expiration Time"
                       end
                     end
-
                     xml.tbody do
                       medications.andand.each do |medication|
                         xml.tr do
@@ -541,6 +542,7 @@ class PatientData < ActiveRecord::Base
                   end
                 end
 
+                # XML content inspection
                 medications.andand.each do |structuredMedication|
                   structuredMedication.to_c32(xml)
                 end
@@ -592,6 +594,7 @@ class PatientData < ActiveRecord::Base
                   end
                 end
 
+                # XML content inspection
                 vital_signs.each do |vital_sign| 
                   vital_sign.to_c32(xml)
                 end
@@ -639,6 +642,7 @@ class PatientData < ActiveRecord::Base
                   end
                 end
 
+                # XML content inspection
                 results_only.each do |result| 
                   result.to_c32(xml)
                 end
@@ -679,6 +683,7 @@ class PatientData < ActiveRecord::Base
                   end
                 end
 
+                # XML content inspection
                 immunizations.each do |immunization| 
                   immunization.to_c32(xml)
                 end
@@ -717,6 +722,7 @@ class PatientData < ActiveRecord::Base
                   end
                 end
 
+                # XML content inspection
                 encounters.each do |encounter| 
                   encounter.to_c32(xml)
                 end
@@ -767,6 +773,7 @@ class PatientData < ActiveRecord::Base
                   end
                 end
 
+                # XML content inspection
                 procedures.andand.each do |structuredProcedure|
                   structuredProcedure.to_c32(xml)
                 end
@@ -814,6 +821,7 @@ class PatientData < ActiveRecord::Base
                   end
                 end
 
+                # XML content inspection
                 medical_equipments.andand.each do |structuredMedicalEquipment|
                   structuredMedicalEquipment.to_c32(xml)
                 end
@@ -822,11 +830,9 @@ class PatientData < ActiveRecord::Base
             end
           end
           # End Medical Equipments
-          
         end
       end
       # END CCD/C32 Modules
-      
     end
   end
 
@@ -901,10 +907,6 @@ class PatientData < ActiveRecord::Base
 
     self.advance_directive = AdvanceDirective.new
     self.advance_directive.randomize(self.registration_information.date_of_birth)
-
-    @comment = Comment.new
-    @comment.randomize()
-    self.comments << @comment
 
     @encounter = Encounter.new
     @encounter.randomize(self.registration_information.date_of_birth)

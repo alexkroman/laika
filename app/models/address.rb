@@ -1,16 +1,16 @@
 require 'faker'
 
 class Address < ActiveRecord::Base
-  
+
   strip_attributes!
 
   belongs_to :iso_country
   belongs_to :iso_state
   belongs_to :zip_code
   belongs_to :addressable, :polymorphic => true
-  
+
   include MatchHelper
-  
+
   # Checks the contents of the REXML::Element passed in to make sure that they match the
   # information in this object. This method expects the the element passed in to be the
   # address element that it will evaluate.
@@ -34,7 +34,7 @@ class Address < ActiveRecord::Base
     end
     errors.compact
   end
-  
+
   #Reimplementing from MatchHelper
   def section_name
     self.addressable_type.underscore
@@ -44,9 +44,9 @@ class Address < ActiveRecord::Base
   def subsection_name
     'address'
   end
-  
+
   def to_c32(xml = XML::Builder.new)
-    xml.addr {
+    xml.addr do
       if street_address_line_one && street_address_line_one.size > 0
         xml.streetAddressLine street_address_line_one
       end
@@ -65,9 +65,9 @@ class Address < ActiveRecord::Base
       if iso_country 
         xml.country iso_country.code
       end
-    }
+    end
   end
-  
+
   def randomize()
     @zip = ZipCode.find(:all).sort_by{rand}.first
     self.street_address_line_one = Faker::Address.street_address
@@ -76,5 +76,5 @@ class Address < ActiveRecord::Base
     self.postal_code = @zip.zip
     self.iso_country = IsoCountry.find 1004581944 #sets the country as the USA
   end
-  
+
 end

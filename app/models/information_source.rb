@@ -1,16 +1,17 @@
-class InformationSource < ActiveRecord::Base  
+class InformationSource < ActiveRecord::Base
+
   strip_attributes!
-    
+
   belongs_to :patient_data  
-  
+
   include PersonLike
   include MatchHelper
-  
+
   #Reimplementing from MatchHelper
   def section_name
     "Information Source Module"
   end
-  
+
   def validate_c32(document)
     errors = []
     begin      
@@ -32,21 +33,20 @@ class InformationSource < ActiveRecord::Base
     end
     errors.compact
   end
-  
-  
+
   def section
     "InformationSource"
   end
-  
+
   def to_c32(xml)
-    xml.author {
+    xml.author do
       if self.time
         xml.time("value"=>time.strftime("%Y%m%d"))
-      end 
-      xml.assignedAuthor {
+      end
+      xml.assignedAuthor do
         xml.id("root"=>document_id)
-        xml.assignedPerson {
-          xml.name {
+        xml.assignedPerson do
+          xml.name do
             if person_name.name_prefix &&
                person_name.name_prefix.size > 0
               xml.prefix person_name.name_prefix
@@ -63,16 +63,16 @@ class InformationSource < ActiveRecord::Base
                person_name.name_suffix.size > 0
               xml.prefix person_name.name_suffix
             end
-          }
-        }
-        xml.representedOrganization {
-          xml.id("root" => "2.16.840.1.113883.19.5") 
+          end
+        end
+        xml.representedOrganization do
+          xml.id("root" => "2.16.840.1.113883.19.5")
           xml.name organization_name
-        }
-      }
-    }      
+        end
+      end
+    end
   end
-  
+
   def randomize()
     chars = ('A'..'Z').to_a
     char = chars[rand(chars.length)]
@@ -82,7 +82,5 @@ class InformationSource < ActiveRecord::Base
     self.person_name.last_name = Faker::Name.last_name
     self.document_id = 'ABC-1234567-' + char + char
   end
-  
+
 end
-
-

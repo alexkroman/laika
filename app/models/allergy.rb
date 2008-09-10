@@ -21,7 +21,7 @@ class Allergy < ActiveRecord::Base
     errors = []
     begin
       section = REXML::XPath.first(document,"//cda:section[cda:templateId[@root = '2.16.840.1.113883.10.20.1.2']]", @@default_namespaces)
-      
+
       # To find the allergy we are looking for, we know that the product free text name will always be there
       # below is the monster XPath expression to find it
       xpath = <<XPATH
@@ -57,7 +57,6 @@ XPATH
                               'product_code', 
                               self.product_code)
         # if self.severity_term
-        #       
         #  severity_element = REXML::XPath.first(adverse_event, "cda:entryRelationship[@typeCode='SUBJ']/cda:observation[cda:templateId/@root='2.16.840.1.113883.10.20.1.55']",
         #                                        @@default_namespaces)
         #  if severity_element
@@ -107,7 +106,6 @@ XPATH
   end
 
   def to_c32(xml)
-
     xml.entry do
       xml.act("classCode" => "ACT", "moodCode" => "EVN") do
         xml.templateId("root" => "2.16.840.1.113883.10.20.1.27")

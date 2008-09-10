@@ -1,6 +1,7 @@
 require 'digest/sha1'
+
 class User < ActiveRecord::Base
-  
+
   # Virtual attribute for the unencrypted password
   attr_accessor :password
 
@@ -57,12 +58,12 @@ class User < ActiveRecord::Base
     self.remember_token            = nil
     save(false)
   end
-  
+
   def forgot_password
     @forgotten_password = true
     self.make_password_reset_code
   end
-  
+
   def reset_password
     # First update the password_reset_code before setting the 
     # reset_password flag to avoid duplicate email notifications.
@@ -76,26 +77,28 @@ class User < ActiveRecord::Base
 
   def recently_forgot_password?
     @forgotten_password
-  end  
-  
+  end
+
   # method called by usernamestamp plugin
   def display_name
     return self.first_name + " " + self.last_name
   end
-  
+
   protected
-    # before filter 
-    def encrypt_password
-      return if password.blank?
-      self.salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{email}--") if new_record?
-      self.crypted_password = encrypt(password)
-    end
-    
-    def password_required?
-      crypted_password.blank? || !password.blank?
-    end
-  
-    def make_password_reset_code
-      self.password_reset_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
-    end    
+
+  # before filter 
+  def encrypt_password
+    return if password.blank?
+    self.salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{email}--") if new_record?
+    self.crypted_password = encrypt(password)
+  end
+
+  def password_required?
+    crypted_password.blank? || !password.blank?
+  end
+
+  def make_password_reset_code
+    self.password_reset_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
+  end
+
 end

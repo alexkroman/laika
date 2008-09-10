@@ -1,22 +1,22 @@
 class InsuranceProviderGuarantor < ActiveRecord::Base
-  
+
   strip_attributes!
 
-  belongs_to :insurance_provider  
+  belongs_to :insurance_provider
+
   include PersonLike
-  
   include MatchHelper
-  
+
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
-  
+
   def validate_c32(document)
-    
+
   end
-  
+
   def to_c32(xml)
-   
+
   end
-  
+
   def randomize()
     self.person_name = PersonName.new
     self.address = Address.new
@@ -28,5 +28,5 @@ class InsuranceProviderGuarantor < ActiveRecord::Base
     self.telecom.randomize()
     self.effective_date =  DateTime.new(1950 + rand(58), rand(12) + 1, rand(28) + 1)
   end
- 
+
 end

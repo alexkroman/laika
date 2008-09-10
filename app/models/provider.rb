@@ -1,20 +1,21 @@
 require 'faker'
 
 class Provider < ActiveRecord::Base
+
   strip_attributes!
 
   belongs_to :patient_data
   belongs_to :provider_type
   belongs_to :provider_role
-  
+
   include PersonLike
   include MatchHelper
-  
+
   #Reimplementing from MatchHelper
   def section_name
     "Healthcare Providers Module"
   end
-  
+
   def validate_c32(document)
     errors = []
     begin
@@ -67,9 +68,9 @@ class Provider < ActiveRecord::Base
     end
     errors.compact
   end
- 
+
   def to_c32(xml)
-    xml.performer("typeCode" => "PRF") {
+    xml.performer("typeCode" => "PRF") do
       xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.4", 
                      "assigningAuthorityName" => "HITSP/C32")
       unless provider_role.blank?
@@ -84,7 +85,7 @@ class Provider < ActiveRecord::Base
           xml.high('value'=> end_service.strftime("%Y%m%d"))
         end
       end
-    
+
       xml.assignedEntity do
         xml.id
         provider_type.andand.to_c32(xml)
@@ -93,7 +94,7 @@ class Provider < ActiveRecord::Base
         xml.assignedPerson do
           person_name.andand.to_c32(xml)
         end
-    
+
         unless organization.blank?
           xml.representedOrganization do
             xml.id("root" => "2.16.840.1.113883.3.72.5", 
@@ -109,9 +110,9 @@ class Provider < ActiveRecord::Base
           end
         end
       end
-    }
+    end
   end
-  
+
   def randomize(reg_info)
     self.address = Address.new
     self.person_name = PersonName.new
@@ -134,5 +135,5 @@ class Provider < ActiveRecord::Base
 
     self.telecom.randomize()
   end
-  
+
 end

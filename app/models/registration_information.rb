@@ -1,5 +1,5 @@
 class RegistrationInformation < ActiveRecord::Base
-  
+
   strip_attributes!
 
   belongs_to :patient_data
@@ -11,7 +11,12 @@ class RegistrationInformation < ActiveRecord::Base
 
   include PersonLike
   include MatchHelper
-  
+
+  #TODO: We plan on automating the HTML view from the various C32 modules, so that
+  #      each attribution on a module does not require a <tr> row in the HTML
+  #      The RegistrationInformation class is the first class where we will try 
+  #      this automated view generation out.  In the meantime, this method will no
+  #      affect performance in other parts of the Laika framework.
   def view
     v = Laika::UIBuilder::View.new(self)
     v.add_field(:document_timestamp)
@@ -45,7 +50,7 @@ class RegistrationInformation < ActiveRecord::Base
   def section_name
     "Person Information Module"
   end
-  
+
   # Checks the contents of the REXML::Document passed in to make sure that they match the
   # information in this object. Will return an empty array if everything passes. Otherwise,
   # it will return an array of ContentErrors with a description of what's wrong.
@@ -74,21 +79,22 @@ class RegistrationInformation < ActiveRecord::Base
                                                {'cda' => 'urn:hl7-org:v3'})
           errors.concat(self.address.validate_c32(address_element))
         end
+
         errors << match_value(patient_element, 'cda:patient/cda:administrativeGenderCode/@code', 'gender', self.gender.andand.code)
         errors << match_value(patient_element, 'cda:patient/cda:administrativeGenderCode/@displayName', 'gender', self.gender.andand.name)
-      
+
         errors << match_value(patient_element, 'cda:patient/cda:maritalStatusCode/@code', 'marital_status', self.marital_status.andand.code)
         errors << match_value(patient_element, 'cda:patient/cda:maritalStatusCode/@displayName', 'marital_status', self.marital_status.andand.name)
-      
+
         errors << match_value(patient_element, 'cda:patient/cda:religiousAffiliationCode/@code', 'religion', self.religion.andand.code)
         errors << match_value(patient_element, 'cda:patient/cda:religiousAffiliationCode/@displayName', 'religion', self.religion.andand.name)
-      
+
         errors << match_value(patient_element, 'cda:patient/cda:raceCode/@code', 'race', self.race.andand.code)
         errors << match_value(patient_element, 'cda:patient/cda:raceCode/@displayName', 'race', self.race.andand.name)
-      
+
         errors << match_value(patient_element, 'cda:patient/cda:ethnicGroupCode/@code', 'ethnicity', self.ethnicity.andand.code)
         errors << match_value(patient_element, 'cda:patient/cda:ethnicGroupCode/@displayName', 'ethnicity', self.ethnicity.andand.name)
-      
+
         errors << match_value(patient_element, 'cda:patient/cda:birthTime/@value', 'date_of_birth', self.date_of_birth.andand.to_formatted_s(:hl7_ts))
       else
         errors << ContentError.new(:section => 'registration_information', 
@@ -101,13 +107,13 @@ class RegistrationInformation < ActiveRecord::Base
                                  :type=>'error',
                                  :location => document.xpath)
     end
-    
+
     errors.compact
-    
+
   end
 
   def to_c32(xml = Builder::XmlMarkup.new)
-    
+
     xml.id("extension" => person_identifier)
 
     address.andand.to_c32(xml)
@@ -137,14 +143,14 @@ class RegistrationInformation < ActiveRecord::Base
       end
 
     end
-    
+
   end
-  
+
   def randomize(patient)
-    
+
     self.person_identifier = "1234567890"
     self.document_timestamp = DateTime.new(2000 + rand(8), rand(12) + 1, rand(28) + 1)
-    
+
     self.person_name = patient
     self.gender = Gender.find(:all).sort_by{rand}.first
     self.race = Race.find(:all).sort_by{rand}.first
@@ -158,7 +164,7 @@ class RegistrationInformation < ActiveRecord::Base
 
     self.telecom = Telecom.new
     self.telecom.randomize()
-    
+
   end
-  
+
 end

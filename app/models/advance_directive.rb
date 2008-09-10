@@ -1,20 +1,20 @@
-class AdvanceDirective < ActiveRecord::Base  
+class AdvanceDirective < ActiveRecord::Base
+
   strip_attributes!
-    
+
   belongs_to :patient_data  
   belongs_to :advance_directive_type
   belongs_to :advance_directive_status_code
-  
+
   include PersonLike
-  
   include MatchHelper
 
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
-  
+
   def validate_c32(document)
-    
+
     errors = []
-    
+
     begin
       section = REXML::XPath.first(document,"//cda:section[cda:templateId/@root='2.16.840.1.113883.10.20.1.1']",@@default_namespaces)
       if section
@@ -24,11 +24,11 @@ class AdvanceDirective < ActiveRecord::Base
         code = REXML::XPath.first(observation,"cda:code",@@default_namespaces)
         text =  REXML::XPath.first(code,"cda:originalText",@@default_namespaces)
         deref_text = deref(text)
-           
+
         if advance_directive_type
           errors.concat advance_directive_type.validate_c32(code)
         end
-           
+
         if(deref_text != free_text)
           errors << ContentError.new(:section=>"Advance Directive",
                                      :error_message=>"Directive text #{free_text} does not match #{deref_text}",
@@ -36,32 +36,32 @@ class AdvanceDirective < ActiveRecord::Base
         end
         if person_name
           errors.concat person_name.validate_c32(REXML::XPath.first(entity,'cda:playingEntity/cda:name',@@default_namespaces))
-        end       
+        end
         if address
           errors.concat address.validate_c32(REXML::XPath.first(entity,'cda:addr',@@default_namespaces))
         end
         if telecom
           errors.concat telecom.validate_c32(entity)
-        end      
+        end
       else
           errors << ContentError.new(:section => 'Advance Directive', 
                                     :error_message => 'Advance Directive not found in document',
                                     :type=>'error',
                                     :location => document.xpath)          
-      end    
+      end
     rescue
       errors << ContentError.new(:section => 'Advance Directive', 
                                  :error_message => 'Invalid, non-parsable XML for advance directive data',
                                  :type=>'error',
                                  :location => document.xpath)
     end
-    
+
     errors.compact
-    
+
   end
-  
+
   def to_c32(xml)
-    
+
     xml.component do
       xml.section do
         xml.templateId("root" => "2.16.840.1.113883.10.20.1.1")
@@ -72,7 +72,7 @@ class AdvanceDirective < ActiveRecord::Base
         xml.text do
           xml.content(free_text, "ID" => "advance-directive-" + id.to_s)
         end
-        
+
         xml.entry do
           xml.observation("classCode" => "OBS", "moodCode" => "EVN") do
             xml.templateId("root" => "2.16.840.1.113883.10.20.1.17", "assigningAuthorityName" => "CCD")
@@ -88,9 +88,9 @@ class AdvanceDirective < ActiveRecord::Base
                 end
               end
             end 
-            
+
             xml.statusCode("code" => "completed")
-            
+
             if start_effective_time != nil || start_effective_time != nil
               xml.effectiveTime do
                 if start_effective_time != nil 
@@ -103,7 +103,7 @@ class AdvanceDirective < ActiveRecord::Base
                 end
               end
             end
-            
+
             xml.participant("typeCode" => "CST") do
               xml.participantRole("classCode" => "AGNT") do
                 address.andand.to_c32(xml)
@@ -113,7 +113,7 @@ class AdvanceDirective < ActiveRecord::Base
                 end
               end
             end
-            
+
             xml.entryRelationship("typeCode" => "REFR") do
               xml.observation("classCode" => "OBS", "moodCode" => "EVN") do
                 xml.templateId("root" => "2.16.840.1.113883.10.20.1.37")
@@ -127,14 +127,13 @@ class AdvanceDirective < ActiveRecord::Base
                           "displayName" => advance_directive_status_code.name)
               end
             end
-            
           end
         end
       end
     end
-    
+
   end
-  
+
   def randomize(birth_date)
     self.address = Address.new
     self.person_name = PersonName.new
@@ -149,9 +148,9 @@ class AdvanceDirective < ActiveRecord::Base
     self.telecom.randomize()
     self.start_effective_time = DateTime.new(birth_date.year + rand(DateTime.now.year - birth_date.year), rand(12) + 1, rand(28) +1)
   end
-  
+
   private 
-  
+
   def deref(code)
     if code
       ref = REXML::XPath.first(code,"cda:reference",@@default_namespaces)
@@ -162,5 +161,5 @@ class AdvanceDirective < ActiveRecord::Base
       end
     end 
   end
-  
+
 end

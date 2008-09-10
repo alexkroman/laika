@@ -1,27 +1,28 @@
 class Encounter < ActiveRecord::Base
+
   strip_attributes!
 
   belongs_to :patient_data
   belongs_to :encounter_type
   belongs_to :encounter_location_code
-  
+
   include PersonLike
   include MatchHelper
-  
+
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"} 
-  
+
   #Reimplementing from MatchHelper
   def section_name
     "Encounters Module"
   end
-  
+
   def validate_c32(document)
     errors=[]  
     errors.compact
   end
-  
+
   def to_c32(xml)    
-  	xml.entry('typeCode'=>'DRIV') do
+    xml.entry('typeCode'=>'DRIV') do
       xml.encounter('classCode'=>'ENC', 'moodCode'=>'EVN') do
         xml.templateId('root' => '2.16.840.1.113883.10.20.1.21', 
                        'assigningAuthorityName' => 'CCD')
@@ -71,7 +72,7 @@ class Encounter < ActiveRecord::Base
     @possible_procedures = ['Heart Valve', 'IUD', 'Artificial Hip', 'Bypass', 'Hypothermia']
     @descriptions = ['Heart Valve Replacement', 'Insertion of intrauterine device (IUD)', 'Hip replacement surgery', 'Bypass surgery', 'Treatement for hypothermia']
     @possible_procedures_index = rand(@possible_procedures.size)
-    
+
     @possible_encounter_locations = ['South Shore Hospital', 'General Hospital', 'Lahey Clinic', 'Darwin Clinic', 'Sagacious Hospital']
     @possible_encounter_locations_index = rand(@possible_encounter_locations.size)
 
@@ -84,12 +85,12 @@ class Encounter < ActiveRecord::Base
     self.address.randomize()
     self.telecom = Telecom.new
     self.telecom.randomize()
-    
+
     self.free_text = @possible_procedures[@possible_procedures_index]
     self.name = @descriptions[@possible_procedures_index]    
-    
+
     self.location_name = @possible_encounter_locations[@possible_encounter_locations_index]
     self.encounter_location_code = EncounterLocationCode.find(:all).sort_by{rand}.first
   end
-  
+
 end

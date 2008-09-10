@@ -1,20 +1,21 @@
 require 'faker'
 
 class Support < ActiveRecord::Base
+
   strip_attributes!
 
   belongs_to :patient_data
   belongs_to :contact_type
   belongs_to :relationship
-  
+
   include PersonLike
   include MatchHelper
-  
+
   #Reimplementing from MatchHelper
   def section_name
     "Supports Module"
   end
-  
+
   def validate_c32(document)
     errors = []
     begin
@@ -65,10 +66,10 @@ class Support < ActiveRecord::Base
     end
     errors.compact
   end
-  
+
   def to_c32(xml)
     if contact_type && contact_type.code == "GUARD"
-      xml.guardian("classCode" => contact_type.code) {
+      xml.guardian("classCode" => contact_type.code) do
         xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.3")
         if relationship
           xml.code("code" => relationship.code, 
@@ -78,36 +79,36 @@ class Support < ActiveRecord::Base
         end
         address.andand.to_c32(xml)
         telecom.andand.to_c32(xml)
-        xml.guardianPerson {
+        xml.guardianPerson do
           person_name.to_c32(xml)
-        }
-      }
+        end
+      end
     else
-      xml.participant("typeCode" => "IND") {
+      xml.participant("typeCode" => "IND") do
         xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.3")
-        xml.time {
+        xml.time do
           if start_support 
             xml.low('value'=> start_support.strftime("%Y%m%d"))
           end
           if end_support
             xml.high('value'=> end_support.strftime("%Y%m%d"))
           end
-        }      
-        xml.associatedEntity("classCode" => contact_type.code) {
+        end
+        xml.associatedEntity("classCode" => contact_type.code) do
           xml.code("code" => relationship.code, 
                    "displayName" => relationship.name,
                    "codeSystem" => "2.16.840.1.113883.5.111",
                    "codeSystemName" => "RoleCode")
           address.andand.to_c32(xml)
           telecom.andand.to_c32(xml) 
-          xml.associatedPerson {
+          xml.associatedPerson do
             person_name.andand.to_c32(xml)
-          }
-        }
-      }
+          end
+        end
+      end
     end            
   end
-  
+
   def randomize(birth_date)
     self.start_support = DateTime.new(birth_date.year + rand(DateTime.now.year - birth_date.year), rand(12) + 1, rand(28) +1)
     self.end_support = DateTime.new(start_support.year + rand(DateTime.now.year - start_support.year), rand(12) + 1, rand(28) +1)
@@ -121,5 +122,5 @@ class Support < ActiveRecord::Base
     self.contact_type = ContactType.find(:all).sort_by{rand}.first
     self.relationship = Relationship.find(:all).sort_by{rand}.first
   end
-  
+
 end

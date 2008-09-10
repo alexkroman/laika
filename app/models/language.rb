@@ -1,18 +1,19 @@
 class Language < ActiveRecord::Base
+
   belongs_to :patient_data
   belongs_to :iso_country
   belongs_to :iso_language
   belongs_to :language_ability_mode
-  
+
   include MatchHelper
-  
+
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
-  
+
   #Reimplementing from MatchHelper
   def section_name
     "Languages Module"
   end
-  
+
   def validate_c32(document)
     errors = []
     begin
@@ -43,7 +44,7 @@ class Language < ActiveRecord::Base
     end
     errors.compact
   end
-  
+
   # Creates the language code as specified in Section 2.2 of the CCD Spec
   def language_code
     if self.iso_country
@@ -52,7 +53,7 @@ class Language < ActiveRecord::Base
       self.iso_language.code      
     end
   end
-  
+
   def to_c32(xml)
     xml.languageCommunication {
       xml.templateId("root" => "2.16.840.1.113883.3.88.11.32.2")
@@ -70,12 +71,12 @@ class Language < ActiveRecord::Base
       end
     }  
   end
-  
+
   def randomize()
     self.iso_country = IsoCountry.find(:all).sort_by{rand}.first
     self.iso_language = IsoLanguage.find(:all).sort_by{rand}.first
     self.language_ability_mode = LanguageAbilityMode.find(:all).sort_by{rand}.first
     self.preference = false
   end
-  
+
 end

@@ -6,11 +6,13 @@ require 'faker'
 # make validation easier when dealing with phone numbers
 # vs. email addresses
 class Telecom < ActiveRecord::Base
+
   strip_attributes!
 
-  # did you expect telecomable? ;-)
+  # AG: did you expect telecomable? ;-)
+  # RM: yes... yes I did...
   belongs_to :reachable, :polymorphic => true
-  
+
   # Expects an REXML::Element which it can query for telecom elements a direct childeren.
   # This method will try to find all of the telecom for any of the attributes that it has
   # which are non-nil
@@ -26,9 +28,9 @@ class Telecom < ActiveRecord::Base
     errors << validate_individual_telecom(nil, self.email, telecom_elements)
     errors.compact
   end
-  
+
   private
-  
+
   # Tries to find a single telecom value in a list of telecoms
   # Will return nil and do nothing if desired_value is nil.
   # Will return nil if it finds a matching telecom element
@@ -42,10 +44,8 @@ class Telecom < ActiveRecord::Base
       else
         stripped_desired_value = 'mailto:' + stripped_desired_value
       end
-
       telecom_elements.each do |telecom_element|
         stripped_telecom_value = telecom_element.attributes['value'].gsub(/[-\(\)s]/, '')
-        
         if stripped_desired_value.eql? stripped_telecom_value
           if telecom_element.attributes['use']
             if telecom_element.attributes['use'].eql? possible_use_attribute
@@ -72,7 +72,7 @@ class Telecom < ActiveRecord::Base
       return nil
     end
   end
-  
+
   def to_c32(xml= XML::Builder.new)
     if home_phone && home_phone.size > 0
       xml.telecom("use" => "HP", "value" => 'tel:' + home_phone)
@@ -93,7 +93,7 @@ class Telecom < ActiveRecord::Base
       xml.telecom("value" => url)
     end
   end
-  
+
   def randomize()
     self.home_phone = format_number() 
     self.work_phone = format_number()
@@ -112,4 +112,5 @@ class Telecom < ActiveRecord::Base
       @number = "+1-" + @number
     end
   end
+
 end
