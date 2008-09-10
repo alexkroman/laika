@@ -1,4 +1,5 @@
 class Allergy < ActiveRecord::Base
+
   strip_attributes!
 
   belongs_to :patient_data
@@ -6,11 +7,11 @@ class Allergy < ActiveRecord::Base
   belongs_to :severity_term
   belongs_to :allergy_status_code
   belongs_to :allergy_type_code
-  
+
   include MatchHelper
-  
+
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
-  
+
   #Reimplementing from MatchHelper
   def section_name
     "Allergies Module"
@@ -32,7 +33,7 @@ class Allergy < ActiveRecord::Base
       cda:playingEntity[@classCode='MMAT']/
       cda:name/text() = $free_text_product]
 XPATH
-    
+
       #strip out all of the whitespace at the beginning and end of the expression
       xpath.gsub!(/^\s*/, '')
       xpath.gsub!(/\s*$/, '')
@@ -78,7 +79,7 @@ XPATH
     end
     errors.compact
   end
-  
+
   # Will get called by patient data if the boolean is set there
   def check_no_known_allergies_c32(clinical_document)
     errors = []
@@ -104,9 +105,9 @@ XPATH
     end
     errors.compact
   end
-  
+
   def to_c32(xml)
-    
+
     xml.entry do
       xml.act("classCode" => "ACT", "moodCode" => "EVN") do
         xml.templateId("root" => "2.16.840.1.113883.10.20.1.27")
@@ -189,21 +190,21 @@ XPATH
         #end
       end
     end
-    
+
   end
-  
+
   def randomize(birth_date)
     @possible_allergin = ["Asprin 1191", "Codeine 2670", "Penicillin 70618"]
     @allergin = @possible_allergin[rand(3)]
     self.free_text_product = @allergin.split[0]
     self.product_code = @allergin.split[1]
-    
+
     self.start_event = DateTime.new(birth_date.year + rand(DateTime.now.year - birth_date.year), rand(12) + 1, rand(28) +1)
-    
+
     self.adverse_event_type = AdverseEventType.find(:all).sort_by {rand}.first
     self.severity_term = SeverityTerm.find(:all).sort_by {rand}.first
     self.allergy_type_code = AllergyTypeCode.find(:all).sort_by {rand}.first
     self.allergy_status_code = AllergyStatusCode.find(:all).sort_by {rand}.first
   end
-  
+
 end
