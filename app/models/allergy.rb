@@ -51,6 +51,10 @@ XPATH
                               "cda:participant[@typeCode='CSM']/cda:participantRole[@classCode='MANU']/cda:playingEntity[@classCode='MMAT']/cda:name", 
                               'free_text_product', 
                               self.free_text_product)
+        errors << match_value(adverse_event, 
+                              "cda:participant[@typeCode='CSM']/cda:participantRole[@classCode='MANU']/cda:playingEntity[@classCode='MMAT']/cda:code[@codeSystem='2.16.840.1.113883.6.88']/@code", 
+                              'product_code', 
+                              self.product_code)
         # if self.severity_term
         #       
         #  severity_element = REXML::XPath.first(adverse_event, "cda:entryRelationship[@typeCode='SUBJ']/cda:observation[cda:templateId/@root='2.16.840.1.113883.10.20.1.55']",
