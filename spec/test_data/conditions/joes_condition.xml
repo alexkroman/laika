@@ -127,7 +127,7 @@
           <code code="11450-4" displayName="Problems" codeSystemName="LOINC" codeSystem="2.16.840.1.113883.6.1"/>
           <title>Conditions or Problems</title>
           <text>
-            <content ID="problem-1021520352">Abdominal mass</content>
+            <content ID="problem-1021520352">Abdominal mass finding</content>
           </text>
           <entry>
             <act classCode="ACT" moodCode="EVN">
