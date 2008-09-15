@@ -1,4 +1,4 @@
-<% @umlsEnabed = false
+<% @umlsEnabed = true
    @numXMLValidationErrors = 0
    @numContentInspectionWarnings = 0 
    @numUMLSWarnings = 0
@@ -39,17 +39,6 @@
                 <% end %>
               </div>
             </div>
-            <% if @vendor_test_plan.validated? %>
-            <% if @umlsEnabed %>
-            <div class="widget">
-              <div class="left on">
-                <div class="visualIndication1">
-                  <div><span class="portion" style="width:23px"></span></div>
-                </div>
-                <span class="number"><%= @numUMLSWarnings %></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; UMLS Code Warnings
-              </div>
-            </div>
-            <% end %>
             <div class="widget">
               <div class="left on">
                 <div class="visualIndication1">
@@ -58,7 +47,16 @@
                 <span class="number"><%= @numContentInspectionWarnings %></span>&nbsp; Content Inspection Warnings
               </div>
             </div>
-            <% end %>
+            <div class="widget">
+              <div class="left on">
+                <div class="visualIndication1">
+                  <div><span class="portion" style="width:23px"></span></div>
+                </div>
+                <% if @vendor_test_plan.validated? %>
+                  <span class="number"><%= @numUMLSWarnings %></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; UMLS Code Warnings
+                <% end %>
+              </div>
+            </div>
             <table id="details">
               <tr>
                 <td class="lighttext">Test Date</td>
@@ -171,7 +169,6 @@
               </tr>
             <% end %>
           </table>
-          <% if @umlsEnabed %>
           <h3>UMLS Code Testing Results</h3>
           <table id="dashboard">
             <tr valign="top">
@@ -215,7 +212,6 @@
               </tr>
             <% end %>
           </table>
-          <% end %>
         </div>
       </div>
       <!-- Start Pretty XML -->

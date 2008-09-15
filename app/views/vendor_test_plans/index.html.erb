@@ -16,7 +16,7 @@
                      report.elements.to_a("//Result").each do |res|
                        errorType = res.attributes['validator']
                        res.elements.to_a("./error").each do |err|
-                         if errorType.to_s == "Content Inspection"
+                         if errorType.to_s == "Content Inspection" || errorType.to_s == "UMLS CodeSystem Validator"
                            numWarnings += 1
                          else
                            numErrors += 1
