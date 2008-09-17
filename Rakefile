@@ -8,3 +8,10 @@ require 'rake/testtask'
 require 'rake/rdoctask'
 
 require 'tasks/rails'
+
+begin
+  require 'metric_fu'
+rescue LoadError
+  # do nothing... this is only needed on the continous integration server
+  # so we won't worry if we don't find the gem installed
+end
