@@ -1,6 +1,0 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-all_scripts_test_plan:
-  vendor: allScripts
-  kind: generateAndFormat
-  user: rob_mccready
