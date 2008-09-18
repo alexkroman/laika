@@ -2,7 +2,6 @@
         <div class="content">
           <!-- Start Container -->
           <div class="container">
-            <span style="float:right; position:relative; right:40px; top:4px"><%= link_to "Export Report", :action => :export, :controller => :test_plan_manager %></span>
             <% currentVendorTestId = nil %>
             <% for vendor_test_plan in @vendor_test_plans                
                  numErrors = 0
