@@ -11,11 +11,14 @@ class AccountController < ApplicationController
   def login
     
     # extracting the subversion version number from the .svn/entries file for Laika
-    File.open(".svn/entries", "r") do |f|
-      temp = f.gets
-      temp = f.gets
-      temp = f.gets
-      @version = f.gets
+    entries_path = '.svn/entries'
+    if File.exists?(entries_path)
+      File.open(entries_path, "r") do |f|
+        temp = f.gets
+        temp = f.gets
+        temp = f.gets
+        @version = f.gets
+      end
     end
     
     return unless request.post?
