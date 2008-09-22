@@ -6,3 +6,4 @@ config/database.yml
 coverage
 public/laika
 *.DS_Store
+tmp/*
