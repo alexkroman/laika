@@ -88,3 +88,16 @@ juhan_sonin:
   updated_at: 2008-02-05
   terms_of_service: true
   send_updates: true
+
+alex_kroman:
+  first_name: Alex
+  last_name: Kroman
+  email: alex@opensourcery.com
+  company: OpenSourcery
+  company_url: www.opensourcery.com
+  salt: salt
+  crypted_password: <%= Digest::SHA1.hexdigest("--salt--laika--") %>
+  created_at: 2008-08-29
+  updated_at: 2008-08-29
+  terms_of_service: true
+  send_updates: true

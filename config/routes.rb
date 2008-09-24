@@ -3,9 +3,11 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :vendors
 
+  map.resources :users
+
   map.resources :patient_data, 
                 :has_one  => [:registration_information, :support, :information_source, :advance_directive],
-                :has_many => [:languages, :providers, :insurance_providers, :medications, 
+                :has_many => [:template_information, :languages, :providers, :insurance_providers, :medications, 
                               :allergies, :conditions, :comments, :results, :immunizations, 
                               :encounters, :procedures, :medical_equipments],
                 :singular => :patient_data_instance,

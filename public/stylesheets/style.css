@@ -541,3 +541,10 @@ form.new_patient_data {
     display: inline;
 }
 
+.fieldWithErrors input {
+  background-color: pink;
+}
+
+.user-box {
+  margin-top: 20px;
+}
