@@ -95,10 +95,12 @@ class Support < ActiveRecord::Base
           end
         end
         xml.associatedEntity("classCode" => contact_type.code) do
-          xml.code("code" => relationship.code, 
-                   "displayName" => relationship.name,
-                   "codeSystem" => "2.16.840.1.113883.5.111",
-                   "codeSystemName" => "RoleCode")
+          if relationship
+            xml.code("code" => relationship.code, 
+                     "displayName" => relationship.name,
+                     "codeSystem" => "2.16.840.1.113883.5.111",
+                     "codeSystemName" => "RoleCode")
+          end
           address.andand.to_c32(xml)
           telecom.andand.to_c32(xml) 
           xml.associatedPerson do
