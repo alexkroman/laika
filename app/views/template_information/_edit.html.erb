@@ -1,18 +1,8 @@
-<!-- Start Personal Information Module -->
 <% @template_information = template_information %>
 <% remote_form_for(:template_information,
                    :url => patient_data_instance_template_information_path(template_information),
                    :update => 'templateInformationContainer', :method => http_method(template_information)) do |f| %>
-<h5>Template Information</h5>
-<table>
-  <tr class="darkzebra">
-    <td class="lighttext">Template Name</td>
-    <td><%= f.text_field :name %></td>
-  </tr>
-  <tr class="lightzebra">
-    <td></td>
-    <td><%= f.submit "Save" %></td>
-  </tr>
-</table>
-<!-- End Personal Information Module -->
+    <%= f.text_field :name %>
+    <br />
+    <%= f.submit "Save" %>
 <% end %>

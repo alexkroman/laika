@@ -1,19 +1,7 @@
-<!-- Start Template Information Module -->
-<h5>Template Information</h5>
-<table>
-  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Template Name</td>
-    <td><%=h template_information.name %></td>
-  </tr>
-  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td></td>
-    <td>
-      <span>
-        <%= link_to_remote 'Edit', :update => 'templateInformationContainer',
-                                   :url => edit_patient_data_instance_template_information_path(template_information),
-                                   :method => 'get' %>
-      </span>
-    </td>
-  </tr>
-</table>
-<!-- End Template Information Module -->
+<div id="templateInformationContainer">
+  <h3 style="position: fixed;"><%=h @patient_data.name %></h3>
+  <br />
+  <%= link_to_remote 'Edit', :update => 'templateInformationContainer',
+    :url => edit_patient_data_instance_template_information_path(@patient_data),
+    :method => 'get' %>
+  </div> 
