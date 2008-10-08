@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+
   map.resources :vendor_test_plans, :has_one => :clinical_document, :member => {:inspect_content => :get,:validate => :get,:revalidate=>:get}
 
   map.resources :vendors
@@ -7,8 +8,10 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :patient_data, 
                 :has_one  => [:registration_information, :support, :information_source, :advance_directive],
-                :has_many => [:template_information, :languages, :providers, :insurance_providers, :medications, 
-                              :allergies, :conditions, :comments, :results, :immunizations, 
+                :has_many => [:template_information, :languages, :providers, :insurance_providers, 
+                              :insurance_provider_patients, :insurance_provider_subscribers, 
+                              :insurance_provider_guarantors, :medications, :allergies, :conditions, 
+                              :comments, :results, :immunizations, 
                               :encounters, :procedures, :medical_equipments],
                 :singular => :patient_data_instance,
                 :member   => {:set_no_known_allergies => :post, :checklist => :get}

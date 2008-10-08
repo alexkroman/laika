@@ -6,7 +6,9 @@
      insurance_provider_div = "insurance_provider#{insurance_provider.id}"
      html_options = {:method => 'put'}
    end %>
-<% remote_form_for(:insurance_provider, insurance_provider, :url => patient_data_instance_insurance_provider_path(patient_data, insurance_provider), :html => html_options,
+<% remote_form_for(:insurance_provider, insurance_provider,
+                   :url => patient_data_instance_insurance_provider_path(patient_data, insurance_provider),
+                   :html => html_options,
                    :update => insurance_provider_div) do |f| -%>
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
@@ -36,25 +38,28 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Financial Responsibility Type</td>
     <td>
-      <%= f.select :role_class_relationship_formal_type_id, @roleClassRelationshipFormalTypes.collect{|role_class_relationship_formal_type| [role_class_relationship_formal_type.name, role_class_relationship_formal_type.id]} %>
+      <%= f.select :role_class_relationship_formal_type_id, 
+            @roleClassRelationshipFormalTypes.collect{|role_class_relationship_formal_type| [role_class_relationship_formal_type.name, role_class_relationship_formal_type.id]} %>
     </td>
   </tr>
-  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td colspan="2" class="lighttext">Insurance Provider Patient</td>
-  </tr>
-  <%= render :partial => '/insurance_provider_patients/edit', :locals => {:insurance_provider_patient => insurance_provider.insurance_provider_patient}%> 
-  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td colspan="2" class="lighttext">Insurance Provider Subscriber</td>
-  </tr>
-  <%= render :partial => '/insurance_provider_subscribers/edit', :locals => {:insurance_provider_subscriber => insurance_provider.insurance_provider_subscriber}%>
-  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td colspan="2" class="lighttext">Insurance Provider Guarantor</td>
-  </tr>
-  <%= render :partial => '/insurance_provider_guarantors/edit', :locals => {:insurance_provider_guarantor => insurance_provider.insurance_provider_guarantor}%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td></td>
     <td><%= f.submit "Save" %></td>
   </tr>
-</table>
 <% end %>
-
+  <div id="insurance_provider_patient<%= insurance_provider.insurance_provider_patient.id %>">
+    <%= render :partial => '/insurance_provider_patients/show', 
+               :locals => {:insurance_provider_patient => insurance_provider.insurance_provider_patient,
+                           :patient_data => @patient_data} %>
+  </div>
+  <div id="insurance_provider_subscriber<%= insurance_provider.insurance_provider_subscriber.id %>">
+    <%= render :partial => '/insurance_provider_subscribers/show', 
+               :locals => {:insurance_provider_subscriber => insurance_provider.insurance_provider_subscriber,
+                           :patient_data => @patient_data} %>
+  </div>
+  <div id="insurance_provider_guarantor<%= insurance_provider.insurance_provider_guarantor.id %>">
+    <%= render :partial => '/insurance_provider_guarantors/show', 
+               :locals => {:insurance_provider_guarantor => insurance_provider.insurance_provider_guarantor,
+                           :patient_data => @patient_data} %>
+  </div>
+</table>

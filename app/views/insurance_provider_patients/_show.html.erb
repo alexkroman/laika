@@ -1,3 +1,7 @@
+<table>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td colspan="2" class="lighttext">Insurance Provider Patient</td>
+  </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Member ID</td>
     <td><% if insurance_provider_patient.member_id %><%=h insurance_provider_patient.member_id %><% end %></td>
@@ -17,3 +21,14 @@
   </tr>
   <%= render :partial => '/addresses/show', :locals => {:address => insurance_provider_patient.address}%>
   <%= render :partial => '/telecoms/show', :locals => {:telecom => insurance_provider_patient.telecom}%>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td></td>
+    <td>
+    <span>
+      <%= link_to_remote 'Edit', :update => "insurance_provider_patient#{insurance_provider_patient.id}",
+                                 :url => edit_patient_data_instance_insurance_provider_patient_path(patient_data, insurance_provider_patient),
+                                 :method => 'get' %>
+    </span> 
+    </td>
+  </tr>
+</table>

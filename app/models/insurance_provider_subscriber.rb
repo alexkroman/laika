@@ -1,5 +1,5 @@
 class InsuranceProviderSubscriber < ActiveRecord::Base
-  
+
   strip_attributes!
 
   belongs_to :insurance_provider
@@ -27,7 +27,7 @@ class InsuranceProviderSubscriber < ActiveRecord::Base
       end
       if telecom
         errors.concat telecom.validate_c32(REXML::XPath.first(particpantRole,'cda:telecom',@@default_namespaces))
-      end      
+      end
     rescue
       errors << ContentError.new(
               :section => 'Insurance Provider Subscriber', 
