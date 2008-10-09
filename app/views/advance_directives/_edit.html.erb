@@ -30,7 +30,7 @@
   <tr>  
     <td class="lighttext">Advance Directive Status Code</td>
     <td>
-      <%= f.select :advance_directive_status_code_id, @advance_directive_status_codes.collect{|adsc| [adsc.name, adsc.id]}, {:include_blank => true} %>
+      <%= f.select :advance_directive_status_code_id, @advance_directive_status_codes.collect{|adsc| [adsc.name, adsc.id]} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">

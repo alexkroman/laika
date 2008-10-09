@@ -20,7 +20,7 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Code System</td>
     <td>
-      <%= f.select :code_system_id, @codeSystems.collect{|codeSystem| [codeSystem.name, codeSystem.id]}, {:include_blank => true} %>
+      <%= f.select :code_system_id, @medicationCodeSystems.collect{|medicationCodeSystems| [medicationCodeSystems.name, medicationCodeSystems.id]}, {:include_blank => true} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
