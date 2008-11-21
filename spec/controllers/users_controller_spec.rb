@@ -4,7 +4,7 @@ describe UsersController do
   describe "handling GET /users" do
 
     before(:each) do
-      @user = mock_model(User)
+      @user = mock_model(User, :administrator? => false)
       @users = [@user]
       @vendor = mock_model(Vendor)
       @vendors = [@vendor]
@@ -47,7 +47,7 @@ describe UsersController do
   describe "handling GET /users/1/edit" do
 
     before(:each) do
-      @user = mock_model(User)
+      @user = mock_model(User, :administrator? => false, :display_name => 'Alf')
       User.stub!(:find).and_return(@user)
       controller.stub!(:current_user).and_return(@user)
     end
@@ -75,7 +75,7 @@ describe UsersController do
   describe "handling PUT /users/1" do
 
     before(:each) do
-      @user = mock_model(User, :to_param => "1")
+      @user = mock_model(User, :to_param => "1", :administrator? => false)
       User.stub!(:find).and_return(@user)
       controller.stub!(:current_user).and_return(@user)
     end
@@ -131,6 +131,7 @@ describe UsersController do
       end
 
     end
+
   end
 
 end

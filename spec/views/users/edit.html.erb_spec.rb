@@ -4,14 +4,14 @@ describe "/users/edit.html.erb" do
   include UsersHelper
   
   before do
-    @user = mock_model(User)
-    @user.stub!(:first_name).and_return("MyString")
-    @user.stub!(:last_name).and_return("MyString")
-    @user.stub!(:email).and_return("MyString")
-    @user.stub!(:company).and_return("MyString")
-    @user.stub!(:company_url).and_return("MyString")
-    @user.stub!(:password).and_return("MyString")
-    @user.stub!(:password_confirmation).and_return("MyString")
+    @user = User.new(
+      :first_name => "MyString",
+      :last_name => "MyString",
+      :email => "MyString",
+      :company => "MyString",
+      :company_url => "MyString",
+      :password => "MyString",
+      :password_confirmation => "MyString")
     assigns[:user] = @user
   end
 

@@ -1,6 +1,10 @@
         <!-- Start Content -->
         <div class="content">
           
+<% if flash[:notice] %>
+  <p style="color: red"><%= flash[:notice] %></p>
+<% end %>
+
           <div class="container">
           
             <!-- Start User Block -->
@@ -12,7 +16,15 @@
                  user_counter += 1 %>
               <div class="column span-6">
                 <div class="personinfo">
-                  <strong><%= user.display_name %></strong> <span class="small">(Administrator)</span>
+                  <strong><%= user.display_name %></strong>
+                  <% if user.administrator? %>
+                    <span class="small">(Administrator)</span>
+                  <% end %>
+                  <% if current_user.administrator? %>
+                    <%= link_to 'edit', edit_user_url(user) %> |
+                    <%= link_to 'delete', user_url(user), :method => 'DELETE',
+                        :confirm => "This action cannot be undone. Are you sure you want to delete #{user.display_name}?" %>
+                  <% end %>
                   <br/><a href="http://<%= user.company_url %>"><%= user.company %></a>
                   <br/><a href="mailto:<%= user.email %>" ><%= user.email %></a>
                   <br/><small>Created <%= distance_of_time_in_words(Time.now, user.created_at) %> ago</small>

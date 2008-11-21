@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   validates_format_of       :email, :with => /(^([^@\s]+)@((?:[-_a-z0-9]+\.)+[a-z]{2,})$)|(^$)/i
   before_save               :encrypt_password
 
-  has_many :roles, :through => :user_roles, :as => :trustable
+  has_many :roles, :through => :user_roles
   has_many :user_roles, :dependent => :destroy
   has_many :vendor_test_plans, :order => "vendor_id"
 
@@ -82,6 +82,10 @@ class User < ActiveRecord::Base
   # method called by usernamestamp plugin
   def display_name
     return self.first_name + " " + self.last_name
+  end
+
+  def administrator?
+    roles.include? Role.administrator
   end
 
   protected
