@@ -46,11 +46,16 @@
                           <option value="<%= kind.id %>"><%= kind.name %></option>
                         <% end -%>
                       </select>
-                      <select name="user_id">
-                        <% for user in @users -%>
-                          <option value="<%= user.id %>"><%= user.display_name %></option>
-                        <% end -%>
-                      </select>
+                      <% if current_user.administrator? -%>
+                        <select name="user_id">
+                          <option value="<%= current_user.id %>"><%= current_user.display_name %></option>
+                          <% @users.select {|u| u != current_user}.each do |user| -%>
+                            <option value="<%= user.id %>"><%= user.display_name %></option>
+                          <% end -%>
+                        </select>
+                      <% else -%>
+                        <input type="hidden" name="user_id" value="<%= current_user.id %>"/>
+                      <% end -%>
                       <p/>
                       <input type="submit" value="Assign"/>
                     </form>
