@@ -1,0 +1,31 @@
+dennis_wilson_role:
+  user: dennis_wilson
+  role: administrator
+  
+amit_trivedi_role:
+  user: amit_trivedi
+  role: administrator
+
+rob_mccready_role:
+  user: rob_mccready
+  role: administrator
+
+rob_dingwell_role:
+  user: rob_dingwell
+  role: administrator
+    
+andy_gregorowicz_role:
+  user: andy_gregorowicz
+  role: administrator
+  
+harry_sleeper_role:
+  user: harry_sleeper
+  role: administrator
+  
+juhan_sonino_role:
+  user: juhan_sonino
+  role: administrator
+
+alex_kroman_role:
+  user: alex_kroman
+  role: administrator
