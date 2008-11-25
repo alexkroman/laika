@@ -60,7 +60,7 @@
                     <%= link_to h(vendor_test_plan.patient_data.name), patient_data_instance_url(vendor_test_plan.patient_data) %>
                   <% end %>
                 </td>
-                <td><%= vendor_test_plan.updated_at.strftime("%d.%b.%Y")  %></td>
+                <td><%= vendor_test_plan.updated_at.strftime("%d.%b.%Y %I:%M %P %Z")  %></td>
                 <td><%= vendor_test_plan.kind.name %></td>
                 <td>
                   <% if vendor_test_plan.clinical_document %>
