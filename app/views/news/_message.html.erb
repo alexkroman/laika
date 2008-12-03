@@ -1,0 +1,14 @@
+<div class="message" id="message_<%= message.id %>">
+  <%= simple_format message.body %>
+  <span class="byline">
+    Posted by <%=h message.author.display_name %> on <%= message.created_at %>
+    <% if message.updated? %><br />
+      Updated by <%=h message.updater.display_name %> on <%= message.updated_at %>
+    <% end %>
+    <% if current_user.administrator? %>
+      <%= link_to 'edit', edit_news_url(message) %> |
+      <%= link_to 'delete', news_url(message), :method => 'DELETE',
+        :confirm => 'Are you sure you want to delete this post?' %>
+    <% end %>
+  </span>
+</div>

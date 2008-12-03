@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   # Call for "remember me" functionality
   before_filter :login_from_cookie
-  
+
   before_filter :login_required, :except => [:login, :signup, :forgot_password, :reset_password]
 
   # See ActionController::RequestForgeryProtection for details
@@ -18,6 +18,15 @@ class ApplicationController < ActionController::Base
   protect_from_forgery :secret => 'dece9bb4d13101130349c3bef2c45b37'
   
   protected
+
+  def require_administrator
+    if current_user.andand.administrator?
+      true
+    else
+      redirect_to :controller => 'vendor_test_plans'
+      false
+    end
+  end
 
   def rescue_action_in_public(exception)
     render :template => "rescues/error"

@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe User do
-  fixtures :users, :roles
+  fixtures :users
 
   describe "with administrator role" do
     before(:each) do

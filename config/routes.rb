@@ -18,6 +18,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :document_locations
 
+  map.resources :news
+
   map.root :controller => "vendor_test_plans"
   # The priority is based upon order of creation: first created -> highest priority.
 

@@ -1,0 +1,7 @@
+<div class="content"><div class="container">
+  <h3>Edit Post
+  <%= error_messages_for :message %>
+  <% form_for :message, :url => news_url(@message), :html => {:method => 'PUT'} do |f| %>
+    <%= render_partial 'news/message_form', f %>
+  <% end %>
+</div></div>

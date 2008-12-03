@@ -3,5 +3,4 @@ class Role < ActiveRecord::Base
   def self.administrator
     find_by_name(ADMINISTRATOR_NAME) || create(:name => ADMINISTRATOR_NAME)
   end
-
 end

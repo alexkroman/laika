@@ -4,17 +4,18 @@
           <div class="doggy"><%= image_tag "laika.png", :alt => 'Laika' %></div>
           <div class="right">
             <ul id="smallnav">
-              <li <% if current_page?(:controller => 'users') %>id="active"<% end %>><%= link_to 'People &amp; Inspections', :controller => 'users' %></li>
+              <li <% if current_controller? 'news' %>id="active"<% end %>><%= link_to 'News', news_index_url %></li>
+              <li <% if current_controller? 'users' %>id="active"<% end %>><%= link_to 'People &amp; Inspections', :controller => 'users' %></li>
               <li><a href="http://laika.sourceforge.net/about.html">About</a></li>
               <li><a href="mailto:<%= FEEDBACK_EMAIL %>">Feedback</a></li>
             </ul>
           </div>
           <div class="right">
             <ul id="bignav">
-              <% if @show_dashboard == true %>
+              <% if @show_dashboard or current_page?(:controller => 'vendor_test_plans')  %>
                 <li id="active"><%= link_to('Dashboard', :controller => 'vendor_test_plans') %></li>
                 <li><%= link_to('Library', :controller => 'patient_data') %></li>
-              <% elsif current_page?(:controller => 'users') %>
+              <% elsif current_controller?('users') or current_controller?('news') %>
                 <li><%= link_to('Dashboard', :controller => 'vendor_test_plans') %></li>
                 <li><%= link_to('Library', :controller => 'patient_data') %></li>
               <% elsif current_page?(:controller => 'vendor_test_plans')  %>

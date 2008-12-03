@@ -11,4 +11,8 @@ module ApplicationHelper
   def required_field(req)
      "<td>#{(req == :r2) ? 'R2' : (req == :req) ? 'R' : 'O'}</td>"
   end
+
+  def current_controller?(name)
+    controller.controller_name == name
+  end
 end

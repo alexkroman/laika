@@ -548,3 +548,31 @@ form.new_patient_data {
 .user-box {
   margin-top: 20px;
 }
+
+h3 > span {
+  font-size: .7em;
+  margin-left: 1em
+}
+.news {
+  padding: 1em;
+}
+.message > p {
+  margin-top: 2.5ex;
+  color: #333;
+  margin-bottom: .5ex;
+}
+.message > em {
+  color: gray;
+  background-color: white
+}
+.message > strong {
+  color: black;
+}
+
+.message {
+  font-size: 1.2em;
+}
+
+.message .byline {
+  font-size: .8em;
+}
