@@ -53,19 +53,31 @@
               <br/><br/>
             <% end %>
             
-            <% num_vendors = @vendors.size 
-               vendor_counter = 0
-               while vendor_counter < num_vendors
-                 vendor = @vendors[vendor_counter] 
-                 vendor_counter += 1 %>
+            <% @vendors.each do |vendor| -%>
               <div class="column span-6">
                 <div class="vendorinfo">
-                  <div>Inspection ID: <strong><%=h vendor.public_id %></strong></div>
-                  <br/><small>Created <%= distance_of_time_in_words(Time.now, vendor.created_at) %> ago</small>
-                  <br/><small>Edited <%= distance_of_time_in_words(Time.now, vendor.created_at) %> ago</small>
+                  <% form_for vendor do |vendor_form| -%>
+                    <div>Inspection ID:
+                      <span id="vendor_<%= vendor.id %>"><strong><%=h vendor.public_id %></strong>
+                        <% if vendor.editable_by? current_user -%>
+                          <%= link_to_function 'rename',
+                            "$('vendor_#{vendor.id}').hide();$('vendor_edit_#{vendor.id}').show();" %>&nbsp;|&nbsp;<%=
+                          link_to 'delete', vendor_url(vendor), :method => 'DELETE',
+                          :confirm => "#{vendor.public_id} has #{pluralize vendor.vendor_test_plans.count, 'test case'} assigned, are you sure you want to delete?" %>
+                        <% end -%>
+                      </span>
+                      <span id="vendor_edit_<%= vendor.id %>" style="display:none">
+                          <br />
+                          <%= vendor_form.text_field :public_id, :size => 10 %>
+                          <%= vendor_form.submit 'Rename' %>
+                      </span>
+                    </div>
+                    <br clear="all"/><small>Created <%= distance_of_time_in_words(Time.now, vendor.created_at) %> ago</small>
+                    <br/><small>Edited <%= distance_of_time_in_words(Time.now, vendor.updated_at) %> ago</small>
+                  <% end -%>
                 </div>
               </div>
-            <% end %>  
+            <% end -%>
             <!-- End Inspection Block -->
             
           </div>

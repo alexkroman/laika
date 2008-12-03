@@ -1,76 +1,35 @@
 class VendorsController < ApplicationController
-  # GET /vendors
-  # GET /vendors.xml
-  def index
-    @vendors = Vendor.find(:all)
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @vendors }
-    end
-  end
-
-  # GET /vendors/1
-  # GET /vendors/1.xml
-  def show
-    @vendor = Vendor.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @vendor }
-    end
-  end
-
-  # GET /vendors/new
-  # GET /vendors/new.xml
-  def new
-    @vendor = Vendor.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @vendor }
-    end
-  end
-
-  # GET /vendors/1/edit
-  def edit
-    @vendor = Vendor.find(params[:id])
-  end
-
-  # POST /vendors
-  # POST /vendors.xml
   def create
-    @vendor = Vendor.new(params[:vendor])
-    @vendor.save
-    redirect_to :controller => 'users'
+    vendor = Vendor.new(params[:vendor])
+    vendor.user = current_user
+    if vendor.save
+      flash[:notice] = "Vendor inspection ID was successfully created."
+    else
+      flash[:notice] = "Failed to create a new vendor inspection ID: #{vendor.errors.full_messages.join(', ')}."
+    end
+    redirect_to users_url
   end
 
-  # PUT /vendors/1
-  # PUT /vendors/1.xml
   def update
-    @vendor = Vendor.find(params[:id])
-
-    respond_to do |format|
-      if @vendor.update_attributes(params[:vendor])
-        flash[:notice] = 'Vendor was successfully updated.'
-        format.html { redirect_to(@vendor) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @vendor.errors, :status => :unprocessable_entity }
-      end
+    vendor = Vendor.find(params[:id])
+    if not vendor.editable_by? current_user
+      flash[:notice] = 'You are not permitted to rename this vendor inspection ID.'
+    elsif vendor.update_attributes(params[:vendor])
+      flash[:notice] = 'Vendor inspection ID was successfully updated.'
+    else
+      flash[:notice] = "Failed to rename vendor inspection ID: #{vendor.errors.full_messages.join(', ')}."
     end
+    redirect_to users_url
   end
 
-  # DELETE /vendors/1
-  # DELETE /vendors/1.xml
   def destroy
-    @vendor = Vendor.find(params[:id])
-    @vendor.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(vendors_url) }
-      format.xml  { head :ok }
+    vendor = Vendor.find(params[:id])
+    if vendor.editable_by? current_user
+      vendor.destroy
+      flash[:notice] = "The vendor inspection ID has been deleted."
+    else
+      flash[:notice] = "You cannot delete this vendor inspection ID."
     end
+    redirect_to users_url
   end
 end

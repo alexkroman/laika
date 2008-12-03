@@ -4,13 +4,13 @@ describe UsersController do
   describe "handling GET /users" do
 
     before(:each) do
-      @user = mock_model(User, :administrator? => false)
+      @user = mock_model(User, :administrator? => false, :vendors => [])
       @users = [@user]
       @vendor = mock_model(Vendor)
       @vendors = [@vendor]
       User.stub!(:find).and_return(@user)
       User.stub!(:find).with(:all).and_return(@users)
-      Vendor.stub!(:find).with(:all).and_return(@vendors)
+      Vendor.stub!(:unclaimed).and_return(@vendors)
       controller.stub!(:current_user).and_return(@user)
     end
   
@@ -33,8 +33,8 @@ describe UsersController do
       do_get
     end
   
-    it "should find all vendors" do
-      Vendor.should_receive(:find).with(:all).and_return(@vendors)
+    it "should find user-specific vendors" do
+      @user.should_receive(:vendors).and_return(@vendors)
       do_get
     end
 
@@ -47,7 +47,7 @@ describe UsersController do
   describe "handling GET /users/1/edit" do
 
     before(:each) do
-      @user = mock_model(User, :administrator? => false, :display_name => 'Alf')
+      @user = mock_model(User, :administrator? => false, :display_name => 'Alf', :vendors => [])
       User.stub!(:find).and_return(@user)
       controller.stub!(:current_user).and_return(@user)
     end
@@ -75,7 +75,7 @@ describe UsersController do
   describe "handling PUT /users/1" do
 
     before(:each) do
-      @user = mock_model(User, :to_param => "1", :administrator? => false)
+      @user = mock_model(User, :to_param => "1", :administrator? => false, :vendors => [])
       User.stub!(:find).and_return(@user)
       controller.stub!(:current_user).and_return(@user)
     end

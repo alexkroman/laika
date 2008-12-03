@@ -4,7 +4,7 @@ class PatientDataController < ApplicationController
 
   def index
     @patient_data_list = PatientData.find(:all, :conditions => {:vendor_test_plan_id => nil}, :order => "name ASC")
-    @vendors = Vendor.find(:all)
+    @vendors = current_user.vendors + Vendor.unclaimed
     @kinds = Kind.find(:all)
     @users = User.find(:all)
   end
