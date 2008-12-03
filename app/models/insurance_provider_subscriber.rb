@@ -30,7 +30,7 @@ class InsuranceProviderSubscriber < ActiveRecord::Base
       end
     rescue
       errors << ContentError.new(
-              :section => 'Insurance Provider Subscriber', 
+              :section => 'Subscriber Information', 
               :error_message => 'Failed checking name, address and telecom details on the insurance provider subcriber XML',
               :type=>'error',
               :location => act.xpath)
