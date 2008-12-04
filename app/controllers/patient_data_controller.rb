@@ -47,7 +47,11 @@ class PatientDataController < ApplicationController
     end
     respond_to do |format|
       format.html 
-      format.xml  
+      format.xml  do
+        send_data @patient_data.to_xml,
+          :filename => "#{@patient_data.id}.xml",
+          :type => 'application/x-download'
+      end
     end
   end
 
