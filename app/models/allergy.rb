@@ -12,6 +12,17 @@ class Allergy < ActiveRecord::Base
 
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
 
+  def requirements
+    {
+      :free_text_product => :hitsp_optional,
+      :product_code => :hitsp_r2_required,
+      :adverse_event_type_id => :required,
+      :start_event => :hitsp_r2_optional,
+      :end_event => :hitsp_r2_optional,
+      :allergy_status_code_id => :hitsp_r2_optional,
+    }
+  end
+
   #Reimplementing from MatchHelper
   def section_name
     "Allergies Module"

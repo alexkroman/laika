@@ -9,6 +9,16 @@ class Condition < ActiveRecord::Base
 
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
 
+  def requirements
+    {
+      :start_event => :hitsp_r2_optional,
+      :end_event => :hitsp_r2_optional,
+      :problem_type_id => :hitsp_r2_required,
+      :snowmed_problem => :required,
+    }
+  end
+
+
   #Reimplementing from MatchHelper
   def section_name
     "Conditions Module"

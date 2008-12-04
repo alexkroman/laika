@@ -1,4 +1,4 @@
-  <!-- Start Content -->
+  <darkzebra!-- Start Content -->
   <div class="content">
     <div class="container" >
       <div class="column span-6 append-1">
@@ -16,7 +16,7 @@
             </tr>
             <tr class="lightzebra">
               <td class="lighttext">
-                <a href="#" onclick="javascript:scroll_to_module_and_highlight('languageContainer', 1.0);">Language Spoken</a>
+                <a href="#" onclick="javascript:scroll_to_module_and_highlight('languageContainer', 1.0);">Languages Spoken</a>
               </td>
             </tr>
             <tr class="darkzebra">
@@ -26,7 +26,7 @@
             </tr>
             <tr class="lightzebra">
               <td class="lighttext">
-                <a href="#" onclick="javascript:scroll_to_module_and_highlight('healthCareProviderContainer', 1.0);">HealthCare Provider</a>
+                <a href="#" onclick="javascript:scroll_to_module_and_highlight('healthCareProviderContainer', 1.0);">Healthcare Provider</a>
               </td>
             </tr>
             <tr class="darkzebra">
@@ -36,7 +36,7 @@
             </tr>
             <tr class="lightzebra">
               <td class="lighttext">
-                <a href="#" onclick="javascript:scroll_to_module_and_highlight('allergiesAndDrugsContainer', 1.0);">Allergies and Drugs</a>
+                <a href="#" onclick="javascript:scroll_to_module_and_highlight('allergiesAndDrugsContainer', 1.0);">Allergy / Drug Sensitivity</a>
               </td>
             </tr>
             <tr class="darkzebra">
@@ -46,7 +46,7 @@
             </tr>
             <tr class="lightzebra">
               <td class="lighttext">
-                <a href="#" onclick="javascript:scroll_to_module_and_highlight('medicationsContainer', 1.0);">Medications</a>
+                <a href="#" onclick="javascript:scroll_to_module_and_highlight('medicationsContainer', 1.0);">Medication</a>
               </td>
             </tr>
             <tr class="darkzebra">
@@ -66,27 +66,27 @@
             </tr>
             <tr class="darkzebra">
               <td class="lighttext">
-                <a href="#" onclick="javascript:scroll_to_module_and_highlight('vitalSignsContainer', 1.0);">Vital Signs</a>
+                <a href="#" onclick="javascript:scroll_to_module_and_highlight('vitalSignsContainer', 1.0);">Vital Sign</a>
               </td>
             </tr>
             <tr class="lightzebra">
               <td class="lighttext">
-                <a href="#" onclick="javascript:scroll_to_module_and_highlight('resultsContainer', 1.0);">Results</a>
+                <a href="#" onclick="javascript:scroll_to_module_and_highlight('resultsContainer', 1.0);">Result</a>
               </td>
             </tr>
             <tr class="darkzebra">
               <td class="lighttext">
-                <a href="#" onclick="javascript:scroll_to_module_and_highlight('immunizationsContainer', 1.0);">Immunizations</a>
+                <a href="#" onclick="javascript:scroll_to_module_and_highlight('immunizationsContainer', 1.0);">Immunization</a>
               </td>
             </tr>
             <tr class="lightzebra">
               <td class="lighttext">
-                <a href="#" onclick="javascript:scroll_to_module_and_highlight('encountersContainer', 1.0);">Encounters</a>
+                <a href="#" onclick="javascript:scroll_to_module_and_highlight('encountersContainer', 1.0);">Encounter<o/a>
               </td>
             </tr>
             <tr class="darkzebra">
               <td class="lighttext">
-                <a href="#" onclick="javascript:scroll_to_module_and_highlight('proceduresContainer', 1.0);">Procedures</a>
+                <a href="#" onclick="javascript:scroll_to_module_and_highlight('proceduresContainer', 1.0);">Procedure</a>
               </td>
             </tr>
           </table>
@@ -104,7 +104,7 @@
           <!-- End Person Information Module -->
 
           <!-- Start Languages Module -->
-          <div id="languageContainer"><h5>Languages</h5>
+          <div id="languageContainer"><h5>Languages Spoken (Required)</h5>
           <% for language in @patient_data.languages -%>
             <div id="language<%= language.id %>">
               <%= render :partial => '/languages/show', :locals => {:language  => language,
@@ -155,7 +155,7 @@
 
           <!-- Start Insurance Provider Module -->
           <div id="insuranceProviderContainer">
-          <h5>Insurance Providers</h5>
+          <h5>Insurance Provider</h5>
           <% for insurance_provider in @patient_data.insurance_providers %>
             <div id="insurance_provider<%= insurance_provider.id %>">
               <%= render :partial => '/insurance_providers/show',
@@ -179,7 +179,7 @@
 
           <!-- Start Allergies and Drugs Module -->
           <div id="allergiesAndDrugsContainer">
-          <h5>Allergies and Drugs</h5>
+          <h5>Allergy / Drug Sensitivity (Required)</h5>
           <% if @patient_data.no_known_allergies -%>
           <table>
             <tr class="<%= cycle("darkzebra", "lightzebra")%>">
@@ -239,7 +239,7 @@
 
           <!-- Start Medications Module -->
           <div id="medicationsContainer"> 
-          <h5>Medications</h5>
+          <h5>Medication</h5>
           <% for medication in @patient_data.medications -%>
             <div id="medication<%= medication.id %>">
               <%= render :partial => '/medications/show', :locals => {:medication  => medication,
@@ -283,7 +283,7 @@
 
           <!-- Start Vital Signs Module -->
           <div id="vitalSignsContainer">
-          <h5>Vital Signs</h5>
+          <h5>Vital Sign</h5>
           <% for result in @patient_data.vital_signs -%>
             <div id="result<%= result.id %>">
               <%= render :partial => '/results/show', :locals => {:result  => result,
@@ -295,7 +295,7 @@
             <tr class="<%= cycle("darkzebra", "lightzebra")%>">
               <td></td>
               <!-- Callback at the end to modify the form and let the controller we are creating a vital sign instead of a result -->
-              <td><%= link_to_remote 'Add', :url => new_patient_data_instance_result_path(@patient_data),
+              <td><%= link_to_remote 'Add', :url => new_patient_data_instance_result_path(@patient_data, :is_vital_sign => true),
                                             :method => 'get',
                                             :update => 'addVital',
                                             :position => :before,
@@ -308,7 +308,7 @@
 
           <!-- Start Results Module -->
           <div id="resultsContainer"> 
-          <h5>Results</h5>
+          <h5>Result</h5>
           <% for result in @patient_data.results_only -%>
             <div id="result<%= result.id %>">
               <%= render :partial => '/results/show', :locals => {:result  => result,
@@ -319,7 +319,7 @@
           <table id="addResult">
             <tr class="<%= cycle("darkzebra", "lightzebra")%>">
               <td></td>
-              <td><%= link_to_remote 'Add', :url => new_patient_data_instance_result_path(@patient_data),
+              <td><%= link_to_remote 'Add', :url => new_patient_data_instance_result_path(@patient_data, :is_vital_sign => false),
                                             :method => 'get',
                                             :update => 'addResult',
                                             :position => :before %>
@@ -331,7 +331,7 @@
 
           <!-- Start Immunizations Module -->
           <div id="immunizationsContainer">
-          <h5>Immunizations</h5>
+          <h5>Immunization</h5>
           <% for immunization in @patient_data.immunizations %>
             <div id="immunization<%= immunization.id %>">
               <%= render :partial => '/immunizations/show',
@@ -354,7 +354,7 @@
 
           <!-- Start Encounters Module -->
           <div id="encountersContainer">
-          <h5>Encounters</h5>
+          <h5>Encounter</h5>
           <% for encounter in @patient_data.encounters %>
             <div id="encounter<%= encounter.id %>">
               <%= render :partial => '/encounters/show', 
@@ -376,7 +376,7 @@
 
           <!-- Start Procedures Module -->
           <div id="proceduresContainer">
-          <h5>Procedures</h5>
+          <h5>Procedure</h5>
           <% for procedure in @patient_data.procedures %>
             <div id="procedure<%= procedure.id %>">
               <%= render :partial => '/procedures/show', 

@@ -12,24 +12,25 @@
                    :update => procedure_div, :name => "procedures_form") do |f| -%>
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Procedure Id</td>
+    <td class="lighttext">Procedure Id <%= print_validation_for procedure, :procedure_id %></td>
     <td>
-      <%= f.text_field :procedure_id %>
+      <%= f.text_field :procedure_id, :onfocus => "Effect.BlindDown('uuid-#{controller.class}');", :onblur => "Effect.BlindUp('uuid-#{controller.class}');" %>
+      <em><%= render :partial => '/layouts/uuid_help_text' %></em>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Free Text</td>
+    <td class="lighttext">Free Text <%= print_validation_for procedure, :name %></td>
     <td>
       <%= f.text_field :name %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Procedure Code</td>
+    <td class="lighttext">Procedure Code <%= print_validation_for procedure, :code %></td>
     <td>
       <%= f.text_field :code %>
     </td>
   </tr><tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Procedure Date</td>
+  <td class="lighttext">Procedure Date <%= print_validation_for procedure, :procedure_date %></td>
     <td>
       <%= f.calendar_date_select :procedure_date %>
     </td>

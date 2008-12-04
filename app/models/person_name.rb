@@ -6,6 +6,44 @@ class PersonName < ActiveRecord::Base
 
   include MatchHelper
 
+  def requirements
+    case nameable_type
+    when 'RegistrationInformation'
+    {
+      :first_name => :required,
+      :last_name => :required,
+    }
+    when 'InformationSource':
+    {
+      :first_name => :required,
+      :last_name => :required,
+    }
+    when 'Provider':
+    {
+      :first_name => :hitsp_r2_optional,
+      :last_name => :hitsp_r2_optional,
+    }
+    when 'InsuranceProviderPatient', 'InsuranceProviderSubscriber', 'InsuranceProviderGuarantor':
+    {
+      :first_name => :required,
+      :last_name => :required,
+
+    }
+    when 'AdvanceDirective':
+    {
+      :first_name => :hitsp_required,
+      :last_name => :hitsp_required
+
+    }
+    when 'Encounter':
+    {
+      :first_name => :hitsp_r2_required,
+      :last_name => :hitsp_r2_required,
+    }
+    end
+  end
+
+
   # Checks the contents of the REXML::Element passed in to make sure that they match the
   # information in this object. This method expects the the element passed in to be the
   # name element that it will evaluate.

@@ -11,6 +11,18 @@ class Provider < ActiveRecord::Base
   include PersonLike
   include MatchHelper
 
+  def requirements
+    {
+      :start_service => :hitsp_optional,
+      :end_service => :hitsp_optional,
+      :provider_type_id => :hitsp_r2_optional,
+      :provider_role_id => :hitsp_r2_optional,
+      :provider_role_free_text => :hitsp_r2_optional,
+      :organization => :hitsp_r2_optional,
+      :patient_identifier => :hitsp_r2_optional,
+    }
+  end
+
   #Reimplementing from MatchHelper
   def section_name
     "Healthcare Providers Module"

@@ -5,30 +5,30 @@
 <h5>Advance Directive</h5>
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Advance Directive Type</td>
+    <td class="lighttext">Advance Directive Type <%= print_validation_for @advance_directive, :advance_directive_type_id %></td>
     <td>
       <%= f.select :advance_directive_type_id, @advance_directive_types.collect{|advance_directive_type| [advance_directive_type.name, advance_directive_type.id]}, {:include_blank => true} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Free Text Description</td>
+    <td class="lighttext">Free Text Description <%= print_validation_for @advance_directive, :free_text %></td>
     <td>
       <%= f.text_field :free_text %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Start Effective Time</td>
+    <td class="lighttext">Start Effective Time <%= print_validation_for @advance_directive, :start_effective_time %></td>
     <td><%= f.calendar_date_select :start_effective_time %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">End Effective Time</td>
+    <td class="lighttext">End Effective Time <%= print_validation_for @advance_directive, :end_effective_time %></td>
     <td><%= f.calendar_date_select :end_effective_time %></td>
   </tr>
   <%= render :partial => '/person_names/edit', :locals => {:person_name => advance_directive.person_name}%>
   <%= render :partial => '/addresses/edit', :locals => {:address => advance_directive.address}%>
   <%= render :partial => '/telecoms/edit', :locals => {:telecom => advance_directive.telecom}%>
   <tr>  
-    <td class="lighttext">Advance Directive Status Code</td>
+    <td class="lighttext">Advance Directive Status Code <%= print_validation_for @advance_directive, :advance_directive_status_code_id %></td>
     <td>
       <%= f.select :advance_directive_status_code_id, @advance_directive_status_codes.collect{|adsc| [adsc.name, adsc.id]} %>
     </td>

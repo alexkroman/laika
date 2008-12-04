@@ -12,6 +12,19 @@ class Result < ActiveRecord::Base
 
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
 
+  def requirements
+    {
+      :result_id => :required,
+      :result_date => :required,
+      :code_system_id => :required,
+      :result_code => :required,
+      :result_code_display_name => :required,
+      :status_code => :required,
+      :value_scalar => :required,
+      :value_unit => :required,
+    }
+  end
+
   def section_template_id
     '2.16.840.1.113883.10.20.1.14'
   end

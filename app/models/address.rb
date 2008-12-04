@@ -10,6 +10,53 @@ class Address < ActiveRecord::Base
   belongs_to :addressable, :polymorphic => true
 
   include MatchHelper
+  
+  def requirements
+    case addressable_type
+      when 'RegistrationInformation':
+        {
+          :street_address_line_one => :required,
+          :city => :required,
+          :state => :required,
+          :postal_code => :required,
+          :iso_country_id => :required,
+        }
+      when 'Support', 'Provider', 'Encounter':
+        {
+          :street_address_line_one => :hitsp_r2_optional,
+          :city => :hitsp_r2_optional,
+          :state => :hitsp_r2_required,
+          :postal_code => :hitsp_r2_optional,
+          :iso_country_id => :hitsp_r2_required,
+        }
+      when 'InsuranceProviderSubscriber':
+        {
+          :state => :required,
+          :iso_country_id => :required,
+        } 
+      when 'InsuranceProviderPatient':
+        {
+          :street_address_line_one => :hitsp_r2_optional,
+          :city => :hitsp_r2_optional,
+          :state => :hitsp_r2_optional,
+          :postal_code => :hitsp_r2_optional,
+          :iso_country_id => :hitsp_r2_optional,
+        }
+      when 'InsuranceProviderGuarantor':
+        {
+          :state => :required,
+          :iso_country_id => :required,
+        }
+      when 'AdvanceDirective':
+        {
+          :street_address_line_one => :hitsp_r2_optional,
+          :city => :hitsp_r2_optional,
+          :state => :hitsp_r2_optional,
+          :postal_code => :hitsp_r2_optional,
+          :iso_country_id => :hitsp_r2_optional,
+        }
+    end
+  end
 
   # Checks the contents of the REXML::Element passed in to make sure that they match the
   # information in this object. This method expects the the element passed in to be the

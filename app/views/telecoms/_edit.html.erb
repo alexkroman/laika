@@ -1,26 +1,26 @@
 <% fields_for telecom do |telecom_form| -%>
 <tr class="lightzebra">
-  <td class="lighttext">Home Phone</td>
+  <td class="lighttext">Home Phone <%= print_validation_for(telecom, :home_phone) %></td>
   <td><%= telecom_form.text_field :home_phone %></td>
 </tr>
 <tr class="darkzebra">
-  <td class="lighttext">Work Phone</td>
+  <td class="lighttext">Work Phone <%= print_validation_for(telecom, :work_phone) %></td>
   <td><%= telecom_form.text_field :work_phone %></td>
 </tr>
 <tr class="lightzebra">
-  <td class="lighttext">Mobile Phone</td>
+  <td class="lighttext">Mobile Phone <%= print_validation_for(telecom, :mobile_phone) %></td>
   <td><%= telecom_form.text_field :mobile_phone %></td>
 </tr>
 <tr class="darkzebra">
-  <td class="lighttext">Vacation Home Phone</td>
+  <td class="lighttext">Vacation Home Phone <%= print_validation_for(telecom, :vacation_home_phone) %></td>
   <td><%= telecom_form.text_field :vacation_home_phone %></td>
 </tr>
 <tr class="lightzebra">
-  <td class="lighttext">Email</td>
+  <td class="lighttext">Email <%= print_validation_for(telecom, :email) %></td>
   <td><%= telecom_form.text_field :email %></td>
 </tr>
 <tr class="darkzebra">
-  <td class="lighttext">URL</td>
+  <td class="lighttext">URL <%= print_validation_for(telecom, :url) %></td>
   <td><%= telecom_form.text_field :url %></td>
 </tr>
 <% end -%>

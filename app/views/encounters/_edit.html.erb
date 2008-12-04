@@ -11,25 +11,28 @@
 
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Encounter Date</td>
+    <td class="lighttext">Encounter Date <%= print_validation_for encounter, :encounter_date %></td>
     <td>
       <%= f.calendar_date_select :encounter_date %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Encounter ID</td>
-    <td><%= f.text_field :encounter_id %></td>
+    <td class="lighttext">Encounter ID <%= print_validation_for encounter, :encounter_id %></td>
+    <td>
+      <%= f.text_field :encounter_id, :onfocus => "Effect.BlindDown('uuid-#{controller.class}');", :onblur => "Effect.BlindUp('uuid-#{controller.class}');" %>
+      <em><%= render :partial => '/layouts/uuid_help_text' %></em>
+    </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Free Text</td>
+    <td class="lighttext">Free Text <%= print_validation_for encounter, :free_text %></td>
     <td><%= f.text_field :free_text %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Encounter Name</td>
+    <td class="lighttext">Encounter Name <%= print_validation_for encounter, :name %></td>
     <td><%= f.text_field :name %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Encounter Type</td>
+    <td class="lighttext">Encounter Type <%= print_validation_for encounter, :encounter_type_id %></td>
     <td>
       <%= f.select :encounter_type_id, @encounter_types.collect{|encounter_type| [encounter_type.name, encounter_type.id]}, {:include_blank => true} %>
     </td>
@@ -41,11 +44,11 @@
   <%= render :partial => '/addresses/edit', :locals => {:address => encounter.address}%>
   <%= render :partial => '/telecoms/edit', :locals => {:telecom => encounter.telecom}%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Location Name</td>
+    <td class="lighttext">Location Name <%= print_validation_for encounter, :location_name %></td>
     <td><%= f.text_field :location_name %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Location Code</td>
+    <td class="lighttext">Location Code <%= print_validation_for encounter, :encounter_location_code_id %></td>
     <td>
       <%= f.select :encounter_location_code_id, @encounter_location_codes.collect{|encounter_location_code| [encounter_location_code.name, encounter_location_code.id]}, {:include_blank => true} %>
     </td>

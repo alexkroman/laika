@@ -9,6 +9,15 @@ class InsuranceProviderPatient < ActiveRecord::Base
 
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
 
+  def requirements
+    {
+      :member_id => :hitsp_r2_optional,
+      :start_coverage_date => :hitsp_r2_optional,
+      :end_coverage_date => :hitsp_r2_optional,
+      :date_of_birth => :required,
+    }
+  end
+
   def validate_c32(document)
 
   end

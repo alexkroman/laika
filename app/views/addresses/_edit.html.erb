@@ -1,18 +1,18 @@
   <% fields_for address do |address_form| -%>
   <tr class="lightzebra">
-    <td class="lighttext">Street Address</td>
+    <td class="lighttext">Street Address <%= print_validation_for(address, :street_address_line_one) %></td>
     <td><%= address_form.text_field :street_address_line_one %></td>
   </tr>
   <tr class="darkzebra">
-    <td class="darkzebra"></td>
+    <td class="darkzebra"><%= print_validation_for(address, :street_address_line_two) %></td>
     <td><%= address_form.text_field :street_address_line_two %></td>
   </tr>
   <tr class="lightzebra">
-    <td class="lighttext">City</td>
+    <td class="lighttext">City <%= print_validation_for(address, :city) %></td>
     <td><%= address_form.text_field :city %></td>
   </tr>
   <tr class="darkzebra">
-    <td class="darkzebra">State</td>
+    <td class="lighttext">State <%= print_validation_for(address, :state) %></td>
     <td><%= address_form.select :state, 
               ["AK",
               "AL",
@@ -74,11 +74,11 @@
               "WY"] %></td>
   </tr>
   <tr class="lightzebra">
-    <td class="lighttext">Postal Code</td>
+    <td class="lighttext">Postal Code <%= print_validation_for(address, :postal_code) %></td>
     <td><%= address_form.text_field :postal_code %></td>
   </tr>
   <tr class="darkzebra">
-    <td class="darkzebra">Country</td>
+    <td class="lighttext">Country <%= print_validation_for(address, :iso_country_id) %></td>
     <td>
       <%= address_form.select :iso_country_id, @isoCountries.collect{|iso_country| [iso_country.name, iso_country.id]} %>       
     </td>

@@ -2,21 +2,22 @@
 <% remote_form_for(:information_source, 
                    :url => patient_data_instance_information_source_path(patient_data),
                    :update => 'informationSourceContainer', :method => http_method(information_source)) do |f| %>
-<h5>Information Source</h5>
+<h5>Information Source (Required)</h5>
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Time</td>
+    <td class="lighttext">Time <%= print_validation_for @information_source, :time %></td>
     <td><%= f.calendar_date_select :time %></td>
   </tr>
   <%= render :partial => '/person_names/edit', :locals => {:person_name => information_source.person_name}%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Document ID</td>
+    <td class="lighttext">Document ID <%= print_validation_for @information_source, :document_id %></td>
     <td>
-      <%= f.text_field :document_id %>
+      <%= f.text_field :document_id, :onfocus => "Effect.BlindDown('uuid-#{controller.class}');", :onblur => "Effect.BlindUp('uuid-#{controller.class}');" %>
+      <em><%= render :partial => '/layouts/uuid_help_text' %></em>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Represented Organization Name</td>
+    <td class="lighttext">Represented Organization Name <%= print_validation_for @information_source, :organization_name %></td>
     <td>
       <%= f.text_field :organization_name %>
     </td>

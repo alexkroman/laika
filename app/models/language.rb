@@ -9,6 +9,14 @@ class Language < ActiveRecord::Base
 
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
 
+  def requirements
+    {
+      :iso_language_id => :required,
+      :iso_country_id => :required,
+      :preference => :required,
+    }
+  end
+
   #Reimplementing from MatchHelper
   def section_name
     "Languages Module"

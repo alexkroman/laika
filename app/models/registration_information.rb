@@ -12,6 +12,16 @@ class RegistrationInformation < ActiveRecord::Base
   include PersonLike
   include MatchHelper
 
+  def requirements
+    {
+      :document_timestamp => :required,
+      :person_identifier => :required,
+      :gender_id => :required,
+      :date_of_birth => :required,
+      :marital_status_id => :hitsp_r2_optional,
+    }
+  end
+
   #TODO: We plan on automating the HTML view from the various C32 modules, so that
   #      each attribution on a module does not require a <tr> row in the HTML
   #      The RegistrationInformation class is the first class where we will try 

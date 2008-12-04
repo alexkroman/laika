@@ -8,6 +8,14 @@ class Procedure < ActiveRecord::Base
 
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
 
+  def requirements
+    {
+      :procedure_id => :required,
+      :code => :required,
+      :procedure_date => :hitsp_r2_optional,
+    }
+  end
+
   #Reimplementing from MatchHelper
   def section_name
     "Procedures Module"

@@ -1,18 +1,18 @@
 <% fields_for person_name do |person_name_form| -%>
 <tr class="lightzebra">
-  <td class="lighttext">Prefix</td>
+  <td class="lighttext">Prefix <%= print_validation_for person_name, :name_prefix %></td>
   <td><%= person_name_form.text_field :name_prefix %></td>
 </tr>
 <tr class="darkzebra">
-  <td class="lighttext">First Name</td>
+  <td class="lighttext">First Name <%= print_validation_for person_name, :first_name %></td>
   <td><%= person_name_form.text_field :first_name %></td>
 </tr>
 <tr class="lightzebra">
-  <td class="lighttext">Last Name</td>
+  <td class="lighttext">Last Name <%= print_validation_for person_name, :last_name %></td>
   <td><%= person_name_form.text_field :last_name %></td>
 </tr>
 <tr class="darkzebra">
-  <td class="lighttext">Suffix</td>
+  <td class="lighttext">Suffix <%= print_validation_for person_name, :name_suffix %></td>
   <td><%= person_name_form.text_field :name_suffix %></td>
 </tr>
 <% end -%>

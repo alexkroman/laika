@@ -1,4 +1,4 @@
-<h5>Supports</h5>
+<h5>Support (HITSP required)</h5>
 <table>
 <% if support -%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
@@ -18,7 +18,7 @@
     <td class="lighttext">Relationship</td>
     <td><% if support.relationship %><%=h support.relationship.name %><% end %></td>
   </tr>
-  <%= render :partial => '/addresses/show', :locals => {:address => support.address}%>
+  <%= render :partial => '/addresses/show', :locals => {:address => support.address, :required => ['sdf'], :hitsp_required => ['sdfsdf']}%>
   <%= render :partial => '/telecoms/show', :locals => {:telecom => support.telecom}%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td></td>

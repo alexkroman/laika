@@ -10,6 +10,20 @@ class Medication < ActiveRecord::Base
   
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
   
+  def requirements
+    {
+      :product_coded_display_name => :hitsp_required,
+      :product_code => :hitsp_r2_required,
+      :code_system_id => :hitsp_r2_required,
+      :medication_type_id => :hitsp_r2_required,
+      :free_text_brand_name => :hitsp_r2_required,
+      :status => :hitsp_r2_optional,
+      :quantity_ordered_value => :hitsp_r2_optional,
+      :quantity_ordered_unit => :hitsp_r2_optional,
+      :expiration_date => :hitsp_r2_optional,
+    }
+  end
+
   #Reimplementing from MatchHelper
   def section_name
     "Medications Module"

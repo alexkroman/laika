@@ -12,6 +12,14 @@ class InformationSource < ActiveRecord::Base
     "Information Source Module"
   end
 
+  def requirements
+    {
+      :time => :required,
+      :document_id => :required,
+      :organization_name => :required,
+    }
+  end
+
   def validate_c32(document)
     errors = []
     begin      

@@ -576,3 +576,13 @@ h3 > span {
 .message .byline {
   font-size: .8em;
 }
+
+.validation_for {
+  font-size: 0.8em;
+  background-color: #eee;
+}
+
+.required {
+  background-color: pink;
+  
+}

@@ -12,25 +12,25 @@
                    :update => condition_div, :name => "conditions_form") do |f| -%>
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Start Event</td>
+    <td class="lighttext">Start Event <%= print_validation_for condition, :start_event %></td>
     <td>
       <%= f.calendar_date_select :start_event %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">End Event</td>
+    <td class="lighttext">End Event <%= print_validation_for condition, :end_event %></td>
     <td>
       <%= f.calendar_date_select :end_event %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Problem Type</td>
+    <td class="lighttext">Problem Type <%= print_validation_for condition, :problem_type_id %></td>
     <td>
       <%= f.select :problem_type_id, @problem_types.collect{|problem| [problem.name, problem.id]}, {:include_blank => true} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Free Text Problem Name</td>
+    <td class="lighttext">Free Text Problem Name <%= print_validation_for condition, :snowmed_problem %></td>
     <td>
 	  <%= text_field_with_auto_complete :snowmed_problem, :name, {:value => condition.free_text_name}, :method => :get %>
 	</td>

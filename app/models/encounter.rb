@@ -11,6 +11,15 @@ class Encounter < ActiveRecord::Base
 
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"} 
 
+  def requirements
+    {
+      :encounter_date => :required,
+      :encounter_id => :required,
+      :free_text => :required,
+      :encounter_type_id => :hitsp_r2_optional,
+    }
+  end
+
   #Reimplementing from MatchHelper
   def section_name
     "Encounters Module"

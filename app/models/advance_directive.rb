@@ -11,6 +11,16 @@ class AdvanceDirective < ActiveRecord::Base
 
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
 
+  def requirements
+    {
+      :advance_directive_type_id => :hitsp_r2_required,
+      :free_text => :hitsp_required,
+      :start_effective_time => :hitsp_optional,
+      :end_effective_time => :hitsp_optional,
+      :advance_directive_status_code_id => :required,
+    }
+  end
+
   def validate_c32(document)
 
     errors = []

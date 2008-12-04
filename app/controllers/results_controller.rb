@@ -6,6 +6,8 @@ class ResultsController < PatientDataChildController
 
   def new
 
+    @is_vital_sign = params[:is_vital_sign]
+
     unless @code_systems
       @code_systems = CodeSystem.find(:all, :order => "name DESC")
     end
@@ -26,6 +28,8 @@ class ResultsController < PatientDataChildController
   end
 
   def edit
+
+    @is_vital_sign = params[:is_vital_sign]
 
     unless @code_systems
       @code_systems = CodeSystem.find(:all, :order => "name DESC")

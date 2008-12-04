@@ -12,31 +12,31 @@
                    :update => insurance_provider_div) do |f| -%>
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Insurance Provider Organization</td>
+    <td class="lighttext">Insurance Provider Organization <%= print_validation_for insurance_provider, :represented_organization %></td>
     <td>
       <%= f.text_field :represented_organization %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Insurance Provider Group Number</td>
+    <td class="lighttext">Insurance Provider Group Number <%= print_validation_for insurance_provider, :group_number %></td>
     <td>
       <%= f.text_field :group_number %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Insurance Type</td>
+    <td class="lighttext">Insurance Type <%= print_validation_for insurance_provider, :insurance_type_id %></td>
     <td>
       <%= f.select :insurance_type_id, @insuranceTypes.collect{|insurance_type| [insurance_type.name, insurance_type.id]}, {:include_blank => true} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Relationship to Subscriber</td>
+    <td class="lighttext">Relationship to Subscriber <%= print_validation_for insurance_provider, :coverage_role_type_id %></td>
     <td>
       <%= f.select :coverage_role_type_id, @coverageRoleTypes.collect{|coverage_role_type| [coverage_role_type.name, coverage_role_type.id]} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Financial Responsibility Type</td>
+    <td class="lighttext">Financial Responsibility Type <%= print_validation_for insurance_provider, :role_class_relationship_formal_type_id %> </td>
     <td>
       <%= f.select :role_class_relationship_formal_type_id, 
             @roleClassRelationshipFormalTypes.collect{|role_class_relationship_formal_type| [role_class_relationship_formal_type.name, role_class_relationship_formal_type.id]} %>

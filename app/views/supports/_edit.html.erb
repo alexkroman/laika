@@ -2,27 +2,27 @@
 <% remote_form_for(:support, 
                    :url => patient_data_instance_support_path(patient_data),
                    :update => 'supportContainer', :method => http_method(support)) do |f| %>
-<h5>Support</h5>
+<h5>Support (HITSP required)</h5>
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Start Support</td>
+    <td class="lighttext">Start Support <%= print_validation_for @support, :start_support %></td>
     <td>
       <%= f.calendar_date_select :start_support %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">End Support</td>
+    <td class="lighttext">End Support <%= print_validation_for @support, :end_support %></td>
     <td><%= f.calendar_date_select :end_support %></td>
   </tr>
   <%= render :partial => '/person_names/edit', :locals => {:person_name => support.person_name}%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Contact</td>
+    <td class="lighttext">Contact <%= print_validation_for @support, :contact_type_id %></td>
     <td>
       <%= f.select :contact_type_id, @contactTypes.collect{|contact| [contact.name, contact.id]} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Relationship</td>
+    <td class="lighttext">Relationship <%= print_validation_for @support, :relationship_id %></td>
     <td>
       <%= f.select :relationship_id, @relationships.collect{|relationship| [relationship.name, relationship.id]}, {:include_blank => true} %>
     </td>

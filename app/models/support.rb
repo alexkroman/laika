@@ -11,6 +11,13 @@ class Support < ActiveRecord::Base
   include PersonLike
   include MatchHelper
 
+  def requirements
+    {
+      :contact_type_id => :required,
+      :relationship_id => :hitsp_r2_required,
+    }
+  end
+
   #Reimplementing from MatchHelper
   def section_name
     "Supports Module"

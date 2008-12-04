@@ -13,6 +13,20 @@ class Telecom < ActiveRecord::Base
   # RM: yes... yes I did...
   belongs_to :reachable, :polymorphic => true
 
+  def requirements
+    case reachable_type
+      when 'Provider', 'Support', 'InsuranceProviderPatient', 'AdvanceDirective', 'Encounter': 
+        {
+          :home_phone => :hitsp_r2_optional,
+          :work_phone => :hitsp_r2_optional,
+          :mobile_phone => :hitsp_r2_optional,
+          :vacation_home_phone => :hitsp_r2_optional,
+          :email => :hitsp_r2_optional,
+          :url => :hitsp_r2_optional,
+        }
+    end
+  end
+
   # Expects an REXML::Element which it can query for telecom elements a direct childeren.
   # This method will try to find all of the telecom for any of the attributes that it has
   # which are non-nil

@@ -10,6 +10,15 @@ class Immunization < ActiveRecord::Base
 
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"} 
 
+  def requirements
+    {
+      :vaccine_id => :required,
+      :lot_number_text => :hitsp_r2_optional,
+      :refusal => :required,
+      :no_immunization_reason_id => :hitsp_r2_optional,
+    }
+  end
+
   def validate_c32(document)
     errors=[]  
     errors.compact
