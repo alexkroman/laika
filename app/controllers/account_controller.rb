@@ -1,23 +1,21 @@
 class AccountController < ApplicationController
-  # Be sure to include AuthenticationSystem in Application Controller instead
-  include AuthenticatedSystem
   # If you want "remember me" functionality, add this before_filter to Application Controller
   before_filter :login_from_cookie
 
+  class InvalidPasswordResetCode < StandardError; end
+
   def index
-    redirect_to(:action => 'login') unless logged_in? || User.count > 0
   end
 
   def login
-    
     # extracting the subversion version number from the .svn/entries file for Laika
     entries_path = '.svn/entries'
     if File.exists?(entries_path)
-      File.open(entries_path, "r") do |f|
-        temp = f.gets
-        temp = f.gets
-        temp = f.gets
-        @version = f.gets
+      File.open(entries_path, "r").enum_with_index do |line,i|
+        if i == 3
+          @version = line
+          break
+        end
       end
     end
     
@@ -32,18 +30,19 @@ class AccountController < ApplicationController
       end
       
       # Either direct to the Dashboard or the Library, depending on if the user has vendor test plans
-      @vendor_test_plans = self.current_user.vendor_test_plans
-      numVendorTestPlans = @vendor_test_plans.size
-      if numVendorTestPlans == 0
+      if current_user.vendor_test_plans.size == 0
         redirect_to(:controller => '/patient_data', :action => 'index')
       else
         redirect_to(:controller => '/vendor_test_plans', :action => 'index')
       end
       
+    else
+      flash[:notice] = %{
+        Sorry mate, your email and password <b>do not match</b>.
+        Want to <a href='/account/signup' class='loginlink'>create an account?</a>
+      }
+      redirect_to :action => 'login'
     end
-    
-    flash[:notice] = "Sorry mate, your email and password <b>do not match</b>.  Want to <a href='/account/signup' class='loginlink'>create an account?</a>"
-    
   end
 
   def signup
@@ -52,16 +51,8 @@ class AccountController < ApplicationController
     @user.save!
     self.current_user = @user
     
-    # Either direct to the Dashboard or the Library, depending on if the user has vendor test plans
-    @vendor_test_plans = self.current_user.vendor_test_plans
-    numVendorTestPlans = @vendor_test_plans.size
-    if numVendorTestPlans == 0
-      @show_dashboard = false
-      redirect_to(:controller => '/patient_data', :action => 'index')
-    else
-      @show_dashboard = true
-      redirect_to(:controller => '/vendor_test_plans', :action => 'index')
-    end
+    # user has no test plans on initial signup, go straight to patient data
+    redirect_to(:controller => '/patient_data', :action => 'index')
   rescue ActiveRecord::RecordInvalid
     render :action => 'signup'
   end
@@ -79,29 +70,36 @@ class AccountController < ApplicationController
     if @user = User.find_by_email(params[:email])
       @user.forgot_password
       @user.save
-      flash[:notice] = "We found the email address " + params[:email] + ", and just sent a password reset link"
+      flash[:notice] = "We found the email address #{params[:email]}, and just sent a password reset link"
+      redirect_to :action => 'login'
     else
-      flash[:notice] = "Sorry, we couldn't find email address <b>" + params[:email] + "</b>" 
+      flash[:notice] = "Sorry, we couldn't find email address <b>#{params[:email]}</b>" 
+      redirect_to :action => 'forgot_password'
     end
   end
   
   def reset_password
     #logger.debug("password reset code is #{params[:id]}")
-    @user = User.find_by_password_reset_code(params[:id])
-    raise if @user.nil?
+    @user = User.find_by_password_reset_code(params[:id]) if params[:id]
+    raise InvalidPasswordResetCode if @user.nil?
     return if @user unless params[:password]
-    if (params[:password] == params[:password_confirmation])
-      self.current_user = @user #for the next two lines to work
-      current_user.password_confirmation = params[:password_confirmation]
-      current_user.password = params[:password]
+    if params[:password] == params[:password_confirmation]
+      @user.password_confirmation = params[:password_confirmation]
+      @user.password = params[:password]
       @user.reset_password
-      flash[:notice] = current_user.save ? "Your Laika password has been reset" : "Your Laika password has not been reset" 
+      if @user.save
+        flash[:notice] = "Your Laika password has been reset"
+        redirect_to :action => 'login'
+      else
+        @notice = "Your Laika password has not been reset" 
+      end
     else
-      flash[:notice] = "Password mismatch" 
+      @notice = "Password mismatch"
     end  
-  rescue
+  rescue InvalidPasswordResetCode
     #logger.error "Invalid Reset Code entered" 
-    flash[:notice] = "Sorry - That is an invalid password reset code.<P>Please check your code and try again.<P>(Perhaps your email client inserted a carriage return?"        
+    flash[:notice] = "Sorry - That is an invalid password reset code.<P>Please check your code and try again.<P>(Perhaps your email client inserted a carriage return?"
+    redirect_to :action => 'forgot_password'
   end  
   
 end
