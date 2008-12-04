@@ -12,6 +12,8 @@ describe "/users/edit.html.erb" do
       :company_url => "MyString",
       :password => "MyString",
       :password_confirmation => "MyString")
+      
+    @user.id = 42
     assigns[:user] = @user
   end
 

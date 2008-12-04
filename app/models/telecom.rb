@@ -43,8 +43,6 @@ class Telecom < ActiveRecord::Base
     errors.compact
   end
 
-  private
-
   # Tries to find a single telecom value in a list of telecoms
   # Will return nil and do nothing if desired_value is nil.
   # Will return nil if it finds a matching telecom element
