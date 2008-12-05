@@ -92,19 +92,19 @@ class Address < ActiveRecord::Base
 
   def to_c32(xml = XML::Builder.new)
     xml.addr do
-      if street_address_line_one && street_address_line_one.size > 0
+      if street_address_line_one.present?
         xml.streetAddressLine street_address_line_one
       end
-      if street_address_line_two && street_address_line_two.size > 0
+      if street_address_line_two.present?
         xml.streetAddressLine street_address_line_two
       end
-      if city && city.size > 0
+      if city.present?
         xml.city city
       end
-      if state && state.size > 0
+      if state.present?
         xml.state state
       end
-      if postal_code && postal_code.size > 0
+      if postal_code.present?
         xml.postalCode postal_code
       end
       if iso_country 
