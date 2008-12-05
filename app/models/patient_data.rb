@@ -1,5 +1,3 @@
-require 'faker'
-
 class PatientData < ActiveRecord::Base
 
   has_one    :registration_information

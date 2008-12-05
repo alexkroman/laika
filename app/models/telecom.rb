@@ -1,5 +1,3 @@
-require 'faker'
-
 # Encapsulates the telecom section of a C32. Instead of having
 # a bunch of telecom instances as part of a has_many, we've
 # rolled the common ones into a single record. This should

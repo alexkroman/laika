@@ -1,5 +1,3 @@
-require 'faker'
-
 class Provider < ActiveRecord::Base
 
   strip_attributes!

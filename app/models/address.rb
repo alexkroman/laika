@@ -1,5 +1,3 @@
-require 'faker'
-
 class Address < ActiveRecord::Base
 
   strip_attributes!

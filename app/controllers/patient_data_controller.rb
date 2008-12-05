@@ -1,5 +1,3 @@
-require 'faker'
-
 class PatientDataController < ApplicationController
 
   def index

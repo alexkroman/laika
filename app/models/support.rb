@@ -1,5 +1,3 @@
-require 'faker'
-
 class Support < ActiveRecord::Base
 
   strip_attributes!
