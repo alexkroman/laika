@@ -77,7 +77,7 @@ class Procedure < ActiveRecord::Base
   def randomize(birth_date)
     # TODO: need to have a pool of potential procdures in the database
     self.name = "Total hip replacement, left"
-    self.id = "e401f340-7be2-11db-9fe1-0800200c9a66"
+    self.procedure_id = "e401f340-7be2-11db-9fe1-0800200c9a66"
     self.code = "52734007"
     self.procedure_date = DateTime.new(birth_date.year + rand(DateTime.now.year - birth_date.year), rand(12) + 1, rand(28) +1)
   end
