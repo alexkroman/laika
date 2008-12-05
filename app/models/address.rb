@@ -114,12 +114,13 @@ class Address < ActiveRecord::Base
   end
 
   def randomize()
-    @zip = ZipCode.find(:all).sort_by{rand}.first
+    offset = rand(ZipCode.count)
+    zip = ZipCode.find(:all, :limit => 1, :offset => offset).first
     self.street_address_line_one = Faker::Address.street_address
-    self.city = @zip.town
-    self.state = @zip.state
-    self.postal_code = @zip.zip
-    self.iso_country = IsoCountry.find 1004581944 #sets the country as the USA
+    self.city = zip.town
+    self.state = zip.state
+    self.postal_code = zip.zip
+    self.iso_country = IsoCountry.find(1004581944) #sets the country as the USA
   end
 
 end
