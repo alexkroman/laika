@@ -22,40 +22,6 @@ class RegistrationInformation < ActiveRecord::Base
     }
   end
 
-  #TODO: We plan on automating the HTML view from the various C32 modules, so that
-  #      each attribution on a module does not require a <tr> row in the HTML
-  #      The RegistrationInformation class is the first class where we will try 
-  #      this automated view generation out.  In the meantime, this method will no
-  #      affect performance in other parts of the Laika framework.
-  def view
-    v = Laika::UIBuilder::View.new(self)
-    v.add_field(:document_timestamp)
-    v.add_field(:person_identifier)
-    v.add_field(:person_name, :subattribute => :name_prefix)
-    v.add_field(:person_name, :subattribute => :first_name)
-    v.add_field(:person_name, :subattribute => :last_name)
-    v.add_field(:person_name, :subattribute => :name_suffix)
-    v.add_field(:gender)
-    v.add_field(:date_of_birth)
-    v.add_field(:marital_status)
-    v.add_field(:religion)
-    v.add_field(:race)
-    v.add_field(:ethnicity)
-    v.add_field(:address, :subattribute => :street_address_line_one, :label => 'Street address')
-    v.add_field(:address, :subattribute => :street_address_line_two, :label => '')
-    v.add_field(:address, :subattribute => :city)
-    v.add_field(:address, :subattribute => :state, :collection => Laika::Constants::STATES)
-    v.add_field(:address, :subattribute => :postal_code)
-    v.add_field(:address, :subattribute => :iso_country, :label => 'Country')
-    v.add_field(:telecom, :subattribute => :home_phone)
-    v.add_field(:telecom, :subattribute => :work_phone)
-    v.add_field(:telecom, :subattribute => :mobile_phone)
-    v.add_field(:telecom, :subattribute => :vacation_home_phone)
-    v.add_field(:telecom, :subattribute => :email)
-    v.add_field(:telecom, :subattribute => :url)
-    v
-  end
-  
   #Reimplementing from MatchHelper
   def section_name
     "Person Information Module"
