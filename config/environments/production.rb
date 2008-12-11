@@ -2,7 +2,7 @@
 
 # The production environment is meant for finished, "live" apps.
 # Code is not reloaded between requests
-ActionController::AbstractRequest.relative_url_root = ""
+config.action_controller.relative_url_root = ""
 config.cache_classes = true
 
 # Use a different logger for distributed setups

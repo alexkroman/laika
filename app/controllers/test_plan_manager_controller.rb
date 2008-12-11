@@ -100,7 +100,7 @@ class TestPlanManagerController < ApplicationController
       end
     end
 
-    redirect_to ActionController::AbstractRequest.relative_url_root + "/report.csv"
+    redirect_to relative_url_root + "/report.csv"
 
   end
 

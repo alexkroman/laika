@@ -154,7 +154,7 @@ class VendorTestPlansController < ApplicationController
     @doc = REXML::Document.new xmlc
     pi = REXML::Instruction.new('xml-stylesheet', 
       'type="text/xsl" href="' + 
-      ActionController::AbstractRequest.relative_url_root + 
+      relative_url_root + 
       '/schemas/generate_and_format.xsl"')
     @doc.insert_after(@doc.xml_decl, pi)
 

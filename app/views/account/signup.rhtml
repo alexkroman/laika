@@ -47,8 +47,8 @@
            </ul>
          </div>
          <div style="margin:20px 0 0 20px;"><%= image_tag "register_doggy.png", :id => 'firstdog', :style => 'visibility:visible'%>
-           <a href="<%= ActionController::AbstractRequest.relative_url_root %>/vendor_test_plans/" style="position:relative; z-index:100"><%= image_tag "cancel_account.png"%></a>
-           <input type="image" value="Create Laika Account" src="<%= ActionController::AbstractRequest.relative_url_root %>/images/create_account.png" class="actbtn" style="z-index:100"/>
+           <a href="<%= controller.relative_url_root %>/vendor_test_plans/" style="position:relative; z-index:100"><%= image_tag "cancel_account.png"%></a>
+           <input type="image" value="Create Laika Account" src="<%= controller.relative_url_root %>/images/create_account.png" class="actbtn" style="z-index:100"/>
            <input class="create-account-btn" name="commit" type="submit" value="Create Laika Account" style="display:none" />
            <div id="whyreg">
              <a href="#" id="whyreglink" onclick="toggleVisibility('firstdog','whyreglink', 'regpopup'); return false;">Why do I need to register?</a>

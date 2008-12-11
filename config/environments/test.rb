@@ -1,9 +1,11 @@
 # Settings specified here will take precedence over those in config/environment.rb
 
+
 # The test environment is used exclusively to run your application's
 # test suite.  You never need to work with it otherwise.  Remember that
 # your test database is "scratch space" for the test suite and is wiped
 # and recreated between test runs.  Don't rely on the data there!
+config.action_controller.relative_url_root = ""
 config.cache_classes = true
 
 # Log error messages when you accidentally call methods on nil.
