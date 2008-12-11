@@ -18,6 +18,8 @@ class PatientData < ActiveRecord::Base
   belongs_to :vendor_test_plan
   belongs_to :user
 
+  validates_presence_of :name
+
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
 
   # Results and Vital Signs are stored in the same 

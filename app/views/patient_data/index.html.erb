@@ -1,6 +1,11 @@
         <!-- Start Content -->
         <div class="content">
           <div class="container">
+
+<% if flash[:notice] %> 
+  <div class="notice"><%= flash[:notice] %></div>
+<% end %>
+
             <h3>Create New C32 Patient Template</h3>
             <div>
               <% form_for(PatientData.new) do |f| %>

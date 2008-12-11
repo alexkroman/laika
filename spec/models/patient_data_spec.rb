@@ -9,6 +9,11 @@ describe PatientData, "can copy itself" do
     @patient_data_copy = @patient_data.copy
   end
 
+  it "should require a name" do
+    @patient_data.name = ''
+    @patient_data.should_not be_valid
+  end
+
   it "should copy its name when copied" do
     @patient_data_copy.name.should == 'Joe Smith'
   end
