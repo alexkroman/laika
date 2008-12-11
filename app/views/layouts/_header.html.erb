@@ -12,22 +12,10 @@
           </div>
           <div class="right">
             <ul id="bignav">
-              <% if @show_dashboard or current_page?(:controller => 'vendor_test_plans')  %>
-                <li id="active"><%= link_to('Dashboard', :controller => 'vendor_test_plans') %></li>
-                <li><%= link_to('Library', :controller => 'patient_data') %></li>
-              <% elsif current_controller?('users') or current_controller?('news') %>
-                <li><%= link_to('Dashboard', :controller => 'vendor_test_plans') %></li>
-                <li><%= link_to('Library', :controller => 'patient_data') %></li>
-              <% elsif current_page?(:controller => 'vendor_test_plans')  %>
-                <li id="active"><%= link_to('Dashboard', :controller => 'vendor_test_plans') %></li>
-                <li><%= link_to('Library', :controller => 'patient_data') %></li>
-              <% elsif @show_dashboard == true %>
-                <li id="active"><%= link_to('Dashboard', :controller => 'vendor_test_plans') %></li>
-                <li><%= link_to('Library', :controller => 'patient_data') %></li>
-              <% else %>
-                <li><%= link_to('Dashboard', :controller => 'vendor_test_plans') %></li>
-                <li id="active"><%= link_to('Library', :controller => 'patient_data') %></li>
-              <% end %>
+              <li <%= 'id="active"' if @show_dashboard || current_controller?('vendor_test_plans') %>>
+                <%= link_to('Dashboard', vendor_test_plans_url) %></li>
+              <li <%= 'id="active"' if !@show_dashboard && current_controller?('patient_data') %>>
+                <%= link_to('Library', patient_data_url) %></li>
             </ul>
           </div>
         </div>
