@@ -15,7 +15,7 @@
   There is currently no news.
 <% end %>
 
-<%= @messages.collect { |m| render_partial 'news/message', m } %>
+<%= @messages.collect { |m| render :partial => 'news/message', :object => m } %>
 </div>
 
 </div></div>

@@ -55,6 +55,19 @@ describe NewsController do
 
     it_should_behave_like "all news users"
 
+    it "should display the new message template" do
+      get :new
+      assigns[:message].should_not be_nil
+      response.should render_template('news/new')
+    end
+
+    it "should display the edit message template" do
+      msg = SystemMessage.create!(:body => 'hi world', :author => @admin)
+      get :edit, :id => msg.id
+      assert_equal assigns[:message], msg
+      response.should render_template('news/edit')
+    end
+
     it "should create a new news" do
       count = SystemMessage.count
       post :create, :message => {:body => 'hi world'}
