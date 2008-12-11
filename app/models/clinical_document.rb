@@ -6,6 +6,9 @@ class ClinicalDocument < ActiveRecord::Base
 
   belongs_to :vendor_test_plan
 
+  # prevent records from being created when there is no associated file data
+  validates_presence_of :filename, :size
+
   # get the contents of the validation report or nil if one does not exist
   def validation_report(format=:string)
     if File.exists?(validation_report_filename)
