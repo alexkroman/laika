@@ -18,6 +18,24 @@ class VendorTestPlan < ActiveRecord::Base
     clinical_document.andand.validated?
   end
 
+  def count_errors_and_warnings
+    errors = 0
+    warnings = 0
+    report = clinical_document.validation_report(:xml)
+    add_inspection_results_to_validation_errors(report)
+    report.elements.to_a("//Result").each do |res|
+      errorType = res.attributes['validator']
+      res.elements.to_a("./error").each do |err|
+        if errorType.to_s == "Content Inspection" || errorType.to_s == "UMLS CodeSystem Validator"
+          warnings += 1
+        else
+          errors += 1
+        end
+      end 
+    end
+    return errors, warnings
+  end
+
   def cache_validation_report
     validate_clinical_document_content
     xmlc = ""

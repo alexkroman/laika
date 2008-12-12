@@ -3,11 +3,22 @@ class VendorTestPlansController < ApplicationController
   # GET /vendor_test_plans
   # GET /vendor_test_plans.xml
   def index
-    @vendor_test_plans = self.current_user.vendor_test_plans
+    vendor_test_plans = self.current_user.vendor_test_plans
 
     respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @vendor_test_plans }
+      format.html do
+        @vendor_test_plans = {}
+        @errors = {}
+        @warnings = {}
+        vendor_test_plans.each do |vendor_test_plan|
+          (@vendor_test_plans[vendor_test_plan.vendor] ||= []) << vendor_test_plan
+          if vendor_test_plan.validated?
+            @errors[vendor_test_plan], @warnings[vendor_test_plan] = vendor_test_plan.count_errors_and_warnings
+          end
+        end
+        @vendors = @vendor_test_plans.keys
+      end
+      format.xml  { render :xml => vendor_test_plans }
     end
   end
 
