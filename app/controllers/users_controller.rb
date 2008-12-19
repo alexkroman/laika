@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-
   before_filter :find_user, :except => [:index]
+  page_title 'Laika People & Inspections'
 
   def index
     @users = User.find(:all)

@@ -19,6 +19,21 @@ class ApplicationController < ActionController::Base
   
   protected
 
+  # Set the page title for the controller, can be overridden by calling page_title in any controller action.
+  def self.page_title(title)
+    class_eval %{
+      before_filter :set_page_title
+      def set_page_title
+        @page_title = %{#{title}}
+      end
+    }
+  end
+
+  # Set the page title for the current action.
+  def page_title(title)
+    @page_title = title
+  end
+
   def require_administrator
     if current_user.andand.administrator?
       true

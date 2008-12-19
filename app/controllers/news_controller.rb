@@ -1,5 +1,6 @@
 class NewsController < ApplicationController
   before_filter :require_administrator, :except => :index
+  page_title 'Laika News'
 
   def index
     @messages = SystemMessage.find :all, :order => 'created_at DESC', :limit => 30

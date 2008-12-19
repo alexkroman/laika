@@ -1,98 +1,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-    <title>Welcome to Laika</title>
-
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta http-equiv="Cache-Control" content="no-cache"><!-- no java_main.js so we don't check for idle state -->
+    <meta http-equiv="Cache-Control" content="no-cache" />
 
-    <%= javascript_include_tag 'prototype' %>
-    <%= javascript_include_tag 'scriptaculous' %>
+    <title>Welcome to Laika</title>
 
     <%= stylesheet_link_tag 'blueprint/screen', :media => "screen, projection" %>
     <%= stylesheet_link_tag 'blueprint/screen', :media => "print" %>
     <%= stylesheet_link_tag 'style', :media => "screen, projection, print"%>
     <%= stylesheet_link_tag 'progressbar', :media => "screen, projection, print"%>
+    <%= stylesheet_link_tag 'master' %>
 
     <!--[if IE 7]>
     <%= stylesheet_link_tag 'ie7master' %>
-    <!--[else]>
-    <%= stylesheet_link_tag 'master' %>  
     <![endif]--> 
     <!--[if lt IE 7]>
     <link rel="stylesheet" href="/CatalystStyles/ie6.css" type="text/css" media="screen" />    
     <![endif]-->    
     
-    <script language="JavaScript" type="text/JavaScript">
-    <!--
-  
-	function submitKeyPress(e)
-	{
-	var keynum;
-	if(window.event) 
-	  {
-	  keynum = e.keyCode;
-	  }
-	else if(e.which)
-	  {
-	  keynum = e.which;
-	  }
-	else return true;
-	
-	if (keynum == 13)
-	   {
-	   document.laika_login_form.submit();
-	   return false;
-	   }
-	else
-	   return true;
-	}
-	
-    function submitLaikaLoginform()
-    {      
-      document.laika_login_form.submit(); 
-    }
-
-	function submitLaikaAccountCreationform()
-    {      
-      document.laika_account_creation_form.submit(); 
-    }
-      
-    function submitResetPasswordinform()
-    {
-      document.laika_reset_form.submit(); 
-    }
-
-    function wait(msecs)
-    {
-      var start = new Date().getTime();
-      var cur = start
-      while(cur - start < msecs)
-      {
-        cur = new Date().getTime();
-      }		
-    }
-
-    function toggleVisibility(id1,id2,id3)
-    {
-		  if ($(id1).style.visibility=="hidden")
-      {
-        Effect.toggle(id3,'appear');
-        wait(200);
-        $(id1).style.visibility="visible";
-        $(id2).style.visibility="visible";
-		  }
-		  else
-      {
-        Effect.toggle(id3,'appear');
-		  	$(id1).style.visibility="hidden";
-        $(id2).style.visibility="hidden";
-		  }
-		}          
-    //-->    
-    </script>
-    
+    <%= javascript_include_tag 'prototype' %>
+    <%= javascript_include_tag 'scriptaculous' %>
+    <%= javascript_include_tag 'account' %>
 </head>
 
 <body class="login" onkeypress="return submitKeyPress(event);">

@@ -35,5 +35,11 @@ module ApplicationHelper
              end
   end
 
+  def javascript_include_if_exists(name, *args)
+    if FileTest.exist?(File.join(RAILS_ROOT, 'public', 'javascripts', "#{name}.js"))
+      javascript_include_tag(name, *args)
+    end
+  end
+
 
 end

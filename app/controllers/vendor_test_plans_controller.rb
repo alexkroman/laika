@@ -1,4 +1,5 @@
 class VendorTestPlansController < ApplicationController
+  page_title 'Laika Dashboard'
 
   # GET /vendor_test_plans
   # GET /vendor_test_plans.xml
