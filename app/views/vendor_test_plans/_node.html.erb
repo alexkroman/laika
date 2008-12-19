@@ -1,9 +1,9 @@
-<% error_id = (element.attributes['error_id']) 
+<% error_id = (doc.attributes['error_id']) 
 %><div <%=  error_id ? "id='error_#{error_id}' " : '' %> class="indent "><%
-case element.node_type
-  when :element
-%><div <%=  error_id ? "class='error'" : '' %> ><span class="markup">&lt;</span><span class="start-tag "><%= element.name %></span><%
- element.attributes.to_a.each do |attribute| 
+case doc.node_type
+  when :doc
+%><div <%=  error_id ? "class='error'" : '' %> ><span class="markup">&lt;</span><span class="start-tag "><%= doc.name %></span><%
+ doc.attributes.to_a.each do |attribute| 
   if attribute.name != 'error_id' 
  %><span class="attribute-name <%= @error_attributes.index(attribute) ? 'attribute_error' : '' %>"> <%= attribute.name %></span><span class="markup">=</span><span class="attribute-value">"<%=attribute.value %>"</span><%  end 
  end
@@ -14,12 +14,12 @@ case element.node_type
  <span class="markup">?&gt;</span>
  </div><%
  end
- if element.children.length > 0 
+ if doc.children.length > 0 
  
-    if element.node_type == :element
+    if doc.node_type == :doc
      %><span class="markup">&gt;</span></div><% 
      end
- element.children.each do |child| %>
+ doc.children.each do |child| %>
 
 <%
        case child.node_type
@@ -27,8 +27,8 @@ case element.node_type
            #should not happen but just in case
          when :text
           %><div class="text"><%= child.value %></div><%
-         when :element
-          %><%= render :partial=>"node", :locals=>{'element'=>child} %><%
+         when :doc
+          %><%= render :partial=>"node", :locals=>{'doc'=>child} %><%
          when :cdata
            %><%=  render :partial=>"cdata", :locals=>{'cdata'=>child}%><%
          when :comment
@@ -37,12 +37,12 @@ case element.node_type
            %><div class="indent pi">&lt;?<%= child.target %>  <%= child.content %>?&gt;</div><%
        end
      end
-     if element.node_type == :element 
-        %><span class="markup">&lt;/</span><span class="end-tag"><%= element.name %></span><span class="markup">&gt;</span><% 
+     if doc.node_type == :doc 
+        %><span class="markup">&lt;/</span><span class="end-tag"><%= doc.name %></span><span class="markup">&gt;</span><% 
      end
      
 else 
- if element.node_type == :element
+ if doc.node_type == :doc
     %><span class="markup">/&gt;</span></div><%
      end
  end %>
