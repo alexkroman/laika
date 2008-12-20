@@ -4,7 +4,7 @@ class VendorTestPlansController < ApplicationController
   # GET /vendor_test_plans
   # GET /vendor_test_plans.xml
   def index
-    vendor_test_plans = self.current_user.vendor_test_plans
+    vendor_test_plans = current_user.vendor_test_plans
 
     respond_to do |format|
       format.html do
