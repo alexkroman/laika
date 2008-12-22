@@ -1,5 +1,6 @@
 class PatientDataController < ApplicationController
   page_title 'Laika Test Library'
+  before_filter :set_patient_data, :except => %w[ index create autoCreate ]
 
   def index
     @patient_data_list = PatientData.find(:all, :conditions => {:vendor_test_plan_id => nil}, :order => "name ASC")
@@ -28,14 +29,12 @@ class PatientDataController < ApplicationController
   end
   
   def checklist
-    @patient_data = PatientData.find(params[:id])
     respond_to do |format|
       format.xml  
     end
   end
 
   def show
-    @patient_data = PatientData.find(params[:id])
     if @patient_data.vendor_test_plan_id 
       @show_dashboard = true
     else
@@ -52,25 +51,37 @@ class PatientDataController < ApplicationController
   end
 
   def set_no_known_allergies
-    @patient_data = PatientData.find(params[:id])
     @patient_data.update_attribute(:no_known_allergies, true)
     render :partial => '/allergies/no_known_allergies'
   end
   
   def set_pregnant
-    @patient_data = PatientData.find(params[:id])
     @patient_data.update_attribute(:pregnant, true)
   end
   
   def set_not_pregnant
-    @patient_data = PatientData.find(params[:id])
     @patient_data.update_attribute(:pregnant, false)
   end
   
   def destroy
-    @patient_data = PatientData.find(params[:id])
     @patient_data.destroy
     redirect_to :controller => 'patient_data', :action => 'index'
+  end
+
+  def edit_template_info
+    render :layout => false
+  end
+
+  def update
+    if @patient_data.update_attributes(params[:patient_data])
+      render :partial => 'template_info'
+    else
+      render :action => 'edit_template_info', :layout => false
+    end
+  end
+
+  def set_patient_data
+    @patient_data = PatientData.find(params[:id])
   end
 
 end

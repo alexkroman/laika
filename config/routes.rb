@@ -14,7 +14,7 @@ ActionController::Routing::Routes.draw do |map|
                               :comments, :results, :immunizations, 
                               :encounters, :procedures, :medical_equipments],
                 :singular => :patient_data_instance,
-                :member   => {:set_no_known_allergies => :post, :checklist => :get}
+                :member   => {:set_no_known_allergies => :post, :checklist => :get, :edit_template_info => :get}
 
   map.resources :document_locations
 

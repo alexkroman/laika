@@ -1,0 +1,6 @@
+<% remote_form_for(@patient_data,
+                   :url => patient_data_instance_path(@patient_data),
+                   :method => 'put',
+                   :update => 'templateInformationContainer') do |f| %>
+    <%= f.text_field :name %>
+<% end %>

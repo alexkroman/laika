@@ -3,6 +3,6 @@
   <br/>
   <%= link_to_remote 'Edit', 
         :update => 'templateInformationContainer',
-        :url => edit_patient_data_instance_template_information_path(@patient_data),
+        :url => {:controller => 'patient_data', :action => 'edit_template_info', :index => @patient_data},
         :method => 'get' %>
 </div> 
