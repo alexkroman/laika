@@ -20,7 +20,11 @@ describe PatientDataController do
   end
 
   it "should return xml content as downloadable" do
-    PatientData.stub!(:find).and_return(PatientData.new)
+    pd_mock = mock('pd')
+    pd_mock.stub!(:to_c32).and_return('<ClinicalDocument/>')
+    pd_mock.stub!(:vendor_test_plan_id).and_return(false)
+    pd_mock.stub!(:id).and_return(7)
+    PatientData.stub!(:find).and_return(pd_mock)
     get :show, :id => 1, :format => 'xml'
     response.headers['type'].should == 'application/x-download'
   end
