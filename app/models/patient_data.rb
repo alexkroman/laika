@@ -242,7 +242,7 @@ class PatientData < ActiveRecord::Base
       if registration_information && registration_information.document_timestamp
         xml.effectiveTime("value" => registration_information.document_timestamp.strftime("%Y%m%d%H%M%S-0500"))
       else
-        xml.effectiveTime("value" => updated_at.strftime("%Y%m%d%H%M%S-0500"))
+        xml.effectiveTime("value" => updated_at.andand.strftime("%Y%m%d%H%M%S-0500"))
       end
       xml.confidentialityCode
       xml.languageCode("code" => "en-US")
