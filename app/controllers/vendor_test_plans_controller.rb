@@ -140,30 +140,8 @@ class VendorTestPlansController < ApplicationController
   def checklist 
     @vendor_test_plan = VendorTestPlan.find(params[:id])
     clinical_document = @vendor_test_plan.clinical_document
-    test = ""
-
-    File.open(clinical_document.full_filename, "r+") do |f|
-      while input = f.gets
-        if input =~ /\<\?xml\-stylesheet.*\?\>/
-          if $' =~ /\n/
-            test << $` + $'
-          end
-        else
-          test << input
-        end 	 		
-      end
-    end
-
-    f = File.open(clinical_document.full_filename, "w+") do |f|
-      f.write test
-    end
-
-    xmlc = ""
-    File.open(clinical_document.full_filename) do |f|
-      xmlc =  f.read()
-    end 
-
-    @doc = REXML::Document.new xmlc
+    
+    @doc = clinical_document.as_xml_document(true)
     pi = REXML::Instruction.new('xml-stylesheet', 
       'type="text/xsl" href="' + 
       relative_url_root + 
