@@ -11,4 +11,20 @@ describe ClinicalDocument, "can store validation reports" do
     filename_regex = Regexp.new("clinical_document_report_#{@joe.id}.xml$")
     @joe.validation_report_filename.should match(filename_regex)
   end
+  
+  it "should be able to obtain document as an REXML::Document " do
+     require "rexml/document"
+     doc = @joe.as_xml_document
+     doc.class.should  == REXML::Document
+     # the test document has one stylesheet declaration so this should equal 1
+     doc.instructions.length.should == 1
+     # ask for the doc again with the stylesheet tags stripped out
+     doc =  @joe.as_xml_document(true)
+     doc.instructions.length.should == 0
+     
+     
+  end
+  
+  
+  
 end
