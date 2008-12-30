@@ -8,7 +8,9 @@ describe VendorTestPlansController do
   end
 
   describe "without test plans" do
-    before(:each) { @user.stub!(:vendor_test_plans).and_return([]) }
+    before(:each) do
+      VendorTestPlan.stub!(:find).and_return([])
+    end
 
     it "should setup display of the dashboard" do
       get :index
@@ -22,7 +24,7 @@ describe VendorTestPlansController do
       @vendor2 = stub :vendor2
       @vtp1 = stub :plan, :vendor => @vendor1, :validated? => false
       @vtp2 = stub :plan, :vendor => @vendor2, :validated? => true, :count_errors_and_warnings => [1,2]
-      @user.stub!(:vendor_test_plans).and_return([ @vtp1, @vtp2 ])
+      VendorTestPlan.stub!(:find).and_return([ @vtp1, @vtp2 ])
     end
 
     it "should setup display of the dashboard" do
@@ -34,5 +36,6 @@ describe VendorTestPlansController do
       assigns[:warnings][@vtp2].should == 2
       response.should be_success
     end
+
   end
 end

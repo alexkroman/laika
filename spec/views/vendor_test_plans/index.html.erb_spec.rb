@@ -3,6 +3,8 @@ require File.dirname(__FILE__) + '/../../spec_helper'
 describe "vendor_test_plans/index.html.erb" do
   fixtures :users, :kinds
 
+  before(:each) { @controller.stub!(:sort_spec).and_return(nil) }
+
   it "should list a generate-and-format test plan with no clinical document" do
     vtp = VendorTestPlan.create(
       :kind => kinds(:generateAndFormat),

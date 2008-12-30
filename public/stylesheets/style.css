@@ -149,6 +149,10 @@ table#dashboard a {
 	color:#777777;
 }
 
+#dashboard th div {
+	padding-right:15px;
+}
+
 #dashboard th.selected {
 	background:url(../images/table_header_selected.png) repeat-x;
 	border: 1px solid #929292;
@@ -158,14 +162,18 @@ table#dashboard a {
 	color:#424242;
 }
 
-#dashboard th div {
+#dashboard th.sortable div {
 	background:url(/images/lightarrow.png) no-repeat right;
-	padding-right:15px;
 }
 
-#dashboard th.selected div {
+#dashboard th.sorted-descending div {
+	background:url(/images/darkarrow_up.png) no-repeat right;
+}
+
+#dashboard th.sorted-ascending div {
 	background:url(/images/darkarrow.png) no-repeat right;
 }
+
 
 #dashboard th.noarrow div {
 	background:white;

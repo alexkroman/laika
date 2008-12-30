@@ -4,13 +4,13 @@
         <h3>Laika Inspection ID: <%= vendor.public_id %></h3>
         <table id="dashboard">
           <tr>
-            <th><a href="#"><div>Status</div></a></th>
-            <th class="selected"><a href="#"><div>Test Case</div></a></th>
-            <th><a href="#"><div>Last Tested</div></a></th>
-            <th><a href="#"><div>Test Type</div></a></th>
-            <th><a href="#"><div>Errors</div></a></th>
-            <th><a href="#"><div>Warnings</div></a></th>
-            <th class="noarrow"><div>Actions</div></th>
+            <th><div>Status</div></th>
+            <th class="<%= sort_order_class('patient_data.name') %>"><%= link_to_sort 'patient_data.name', '<div>Test Case</div>' %></th>
+            <th class="<%= sort_order_class('updated_at') %>"><%= link_to_sort 'updated_at', '<div>Last Tested</div>' %></th>
+            <th class="<%= sort_order_class('kinds.name') %>"><%= link_to_sort 'kinds.name', '<div>Test Type</div>' %></th>
+            <th><div>Errors</div></th>
+            <th><div>Warnings</div></th>
+            <th><div>Actions</div></th>
           </tr>
         <% @vendor_test_plans[vendor].each do |vendor_test_plan| -%>
           <tr id="vendor_test_plan_<%= vendor_test_plan.id %>"><td>
