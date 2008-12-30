@@ -1,9 +1,16 @@
+require_dependency 'sort_order'
+
 class PatientDataController < ApplicationController
   page_title 'Laika Test Library'
   before_filter :set_patient_data, :except => %w[ index create autoCreate ]
 
+  include SortOrder
+  self.valid_sort_fields = %w[ name created_at updated_at ]
+
   def index
-    @patient_data_list = PatientData.find(:all, :conditions => {:vendor_test_plan_id => nil}, :order => "name ASC")
+    @patient_data_list = PatientData.find(:all,
+      :conditions => {:vendor_test_plan_id => nil},
+      :order => sort_order || "name ASC")
     @vendors = current_user.vendors + Vendor.unclaimed
     @kinds = Kind.find(:all)
     @users = User.find(:all)

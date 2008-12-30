@@ -19,12 +19,12 @@
             <table id="dashboard">
             
               <tr>
-                <th class="selected"><a href="#"><div>Template</div></a></th>
-                <th><a href="#"><div>Test Type</div></a></th>
-                <th><a href="#"><div>Created by</div></a></th>
-                <th><a href="#"><div>Created on</div></a></th>
-                <th><a href="#"><div>Last modified</div></a></th>
-                <th class="noarrow"><a href="#"><div>Actions</div></a></th>
+                <th class="<%= sort_order_class('name') %>"><%= link_to_sort 'name', '<div>Template</div>' %></th>
+                <th><div>Test Type</div></th>
+                <th><div>Created by</div></th>
+                <th class="<%= sort_order_class('created_at') %>"><%= link_to_sort 'created_at', '<div>Created on</div>' %></th>
+                <th class="<%= sort_order_class('updated_at') %>"><%= link_to_sort 'updated_at', '<div>Last modified</div>' %></th>
+                <th><div>Actions</div></th>
               </tr>
               
               <% for patient_data in @patient_data_list -%>
