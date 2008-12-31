@@ -58,8 +58,6 @@
                             <option value="<%= user.id %>"><%= user.display_name %></option>
                           <% end -%>
                         </select>
-                      <% else -%>
-                        <input type="hidden" name="user_id" value="<%= current_user.id %>"/>
                       <% end -%>
                       <p/>
                       <input type="submit" value="Assign"/>

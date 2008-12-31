@@ -7,7 +7,7 @@ class TestPlanManagerController < ApplicationController
     # find the associated meta-data
     vendor = Vendor.find(params[:vendor_id])
     kind = Kind.find(params[:kind_id])
-    user = User.find(params[:user_id])
+    user = current_user.administrator? ? User.find(params[:user_id]) : current_user
 
     vtp = VendorTestPlan.new(:vendor => vendor, :kind => kind, :user => user)
     vtp.save!
