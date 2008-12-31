@@ -19,11 +19,11 @@
             <table id="dashboard">
             
               <tr>
-                <th class="<%= sort_order_class('name') %>"><%= link_to_sort 'name', '<div>Template</div>' %></th>
+                <th class="<%= sort_order_class('name') %>"><%= link_to_sort 'name', 'Template' %></th>
                 <th><div>Test Type</div></th>
                 <th><div>Created by</div></th>
-                <th class="<%= sort_order_class('created_at') %>"><%= link_to_sort 'created_at', '<div>Created on</div>' %></th>
-                <th class="<%= sort_order_class('updated_at') %>"><%= link_to_sort 'updated_at', '<div>Last modified</div>' %></th>
+                <th class="<%= sort_order_class('created_at') %>"><%= link_to_sort 'created_at', 'Created on' %></th>
+                <th class="<%= sort_order_class('updated_at') %>"><%= link_to_sort 'updated_at', 'Last modified' %></th>
                 <th><div>Actions</div></th>
               </tr>
               
@@ -31,7 +31,7 @@
               <tr>
                 <td><%= link_to h(patient_data.name), patient_data_instance_url(patient_data) %></td>
                 <td>CCD/C32</td>
-                <td><%= patient_data.user.first_name %> <%= patient_data.user.last_name %></td>
+                <td><%=h patient_data.user.first_name %> <%=h patient_data.user.last_name %></td>
                 <td><%= patient_data.created_at.strftime("%d.%b.%Y") %></td>
                 <td><%= patient_data.updated_at.strftime("%d.%b.%Y") %></td>
                 <td class="actions" width=270px>
