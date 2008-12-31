@@ -42,13 +42,15 @@
                     <form action="<%= url_for :controller => 'test_plan_manager', :action => 'assign_patient_data' %>">
                       <input type="hidden" name="pd_id" value="<%= patient_data.id %>"/>
                       <select name="vendor_id">
-                        <% for vendor in @vendors -%>
-                          <option value="<%= vendor.id %>"><%= vendor.public_id %></option>
+                        <% @vendors.each do |vendor| -%>
+                          <option <%= vendor == @previous_vendor ? 'selected="selected"' : '' %>
+                            value="<%= vendor.id %>"><%= vendor.public_id %></option>
                         <% end -%>
                       </select>
                       <select name="kind_id">
-                        <% for kind in @kinds -%>
-                          <option value="<%= kind.id %>"><%= kind.name %></option>
+                        <% @kinds.each do |kind| -%>
+                          <option  <%= kind == @previous_kind ? 'selected="selected"' : '' %>
+                            value="<%= kind.id %>"><%= kind.name %></option>
                         <% end -%>
                       </select>
                       <% if current_user.administrator? -%>

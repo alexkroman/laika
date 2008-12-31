@@ -1,5 +1,4 @@
 class TestPlanManagerController < ApplicationController
-
   def assign_patient_data
 
     copied_patient_data = PatientData.find(params[:pd_id]).copy
@@ -8,6 +7,10 @@ class TestPlanManagerController < ApplicationController
     vendor = Vendor.find(params[:vendor_id])
     kind = Kind.find(params[:kind_id])
     user = current_user.administrator? ? User.find(params[:user_id]) : current_user
+
+    # save the vendor/kind selections in the session for next time
+    session[:previous_vendor_id] = params[:vendor_id]
+    session[:previous_kind_id] = params[:kind_id]
 
     vtp = VendorTestPlan.new(:vendor => vendor, :kind => kind, :user => user)
     vtp.save!
