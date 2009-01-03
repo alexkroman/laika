@@ -29,3 +29,7 @@ juhan_sonino_role:
 alex_kroman_role:
   user: alex_kroman
   role: administrator
+
+zack_hobson_role:
+  user: zack_hobson
+  role: administrator

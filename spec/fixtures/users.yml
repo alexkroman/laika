@@ -101,3 +101,16 @@ alex_kroman:
   updated_at: 2008-08-29
   terms_of_service: true
   send_updates: true
+
+zack_hobson:
+  first_name: Zack
+  last_name: Hobson
+  email: zack@opensourcery.com
+  company: OpenSourcery
+  company_url: www.opensourcery.com
+  salt: salt
+  crypted_password: <%= Digest::SHA1.hexdigest("--salt--laika--") %>
+  created_at: 2008-08-29
+  updated_at: 2008-08-29
+  terms_of_service: true
+  send_updates: true
