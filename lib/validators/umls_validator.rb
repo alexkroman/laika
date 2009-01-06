@@ -70,22 +70,31 @@ module Validators
            code = el.attributes["code"] 
            name = el.attributes["name"]
            map = @mapping[oid]        
-           # if there isnt a mapping for leave it alone , we know nothing about the code system and cannot pass judgment 
-           # on whether or not it's valid.  
-           if map && code 
-              cs = map["codesystem"]
-              parent = map["umlscode"]
-              valid = parent ? in_code_system_with_parent(cs,parent,code)  :  in_code_system(cs,code)
-             
-             # figure out how to handle the errors here
-              unless valid
-                 errors << el
-              end          
-           end       
+
+           # figure out how to handle the errors here
+            unless validate_code(oid,code,name)
+               errors << el
+            end          
+                 
          end   
          errors     
         end
 
+        # validate whether the code with the given name, if present, exists in the code system mapped to the oid
+        def validate_code(oid,code,name=nil)
+          valid = true  
+          map = @mapping[oid]   
+          
+          # if there isnt a mapping for leave it alone , we know nothing about the code system and cannot pass judgment 
+          # on whether or not it's valid.   
+          if map && code 
+              cs = map["codesystem"]
+              parent = map["umlscode"]
+              valid = parent ? in_code_system_with_parent(cs,parent,code)  :  in_code_system(cs,code)
+            end
+         valid
+        end
+        
 
     private 
          # look for an entry in the UMLS db that corrisponds to the maping, if there is one, in the mapping table
