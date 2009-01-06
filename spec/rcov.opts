@@ -1,2 +1,2 @@
---exclude "spec/*,gems/*,Library/*,usr/local/*" 
+--exclude "spec/*,gems/*,Library/*,usr/local/*,erb,eval,DELEGATION,fcntl,parser,yaml,recognize_optimized" 
 --rails
