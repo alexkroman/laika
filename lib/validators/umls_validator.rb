@@ -3,7 +3,12 @@ module Validators
     #Base class that sets the connection information for all of the other  UMLS models to use
     class UmlsBase < ActiveRecord::Base
         self.abstract_class = true
-        establish_connection("umls_#{RAILS_ENV}")     
+        # if the db is not configured it will break the build while loading the files
+        # this is a complete hack so the build will not break when umls is not configured or 
+        # being tested
+        if ActiveRecord::Base.configurations["umls_#{RAILS_ENV}" ]
+           establish_connection("umls_#{RAILS_ENV}")     
+        end    
     end
     
     class UmlsCodeHierarchy < UmlsBase
