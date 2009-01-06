@@ -1,9 +1,8 @@
 class PregnancyController < ApplicationController
 
   def edit
-    @patient_data_id = params[:patient_data_instance_id]
-    @patient_data = PatientData.find(@patient_data_id)
-    render :partial  => 'edit', :locals => {:patient_data => @patient_data}
+    @patient_data = PatientData.find params[:patient_data_instance_id]
+    render :layout => false
   end
 
   def update
@@ -15,7 +14,7 @@ class PregnancyController < ApplicationController
     end
     @patient_data.pregnant = pregnancy
     @patient_data.save!
-    render :partial  => 'show', :locals => {:patient_data => @patient_data}
+    render :partial  => 'show'
   end
   
   # DELETE /pregnancy/1
@@ -24,7 +23,8 @@ class PregnancyController < ApplicationController
     @patient_data_id = params[:patient_data_instance_id]
     @patient_data = PatientData.find(@patient_data_id)
     @patient_data.pregnant = nil
-    render :partial  => 'show', :locals => {:patient_data => @patient_data}
+    @patient_data.save!
+    render :partial  => 'show'
   end
 
 end
