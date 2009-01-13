@@ -1,13 +1,11 @@
 <% if encounter.new_record?
-     encounter_div = 'encounterNew' 
-     html_options = {} -%>
-<div id="encounterNew">
+  encounter_div = 'encounterNew' %>
+  <div id="encounterNew">
 <% else
-     encounter_div = "encounter#{encounter.id}"
-     html_options = {:method => 'put'}
-   end %>
-<% remote_form_for(:encounter, encounter, :url => patient_data_instance_encounter_path(patient_data, encounter), :html => html_options,
-                   :update => encounter_div) do |f| -%>
+  encounter_div = "encounter#{encounter.id}"
+end %>
+<% remote_form_for(:encounter, encounter, :url => patient_data_url_for(patient_data, encounter),
+                   :html => {:method => http_method(encounter)}, :update => encounter_div) do |f| -%>
 
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">

@@ -1,14 +1,13 @@
 <%= javascript_include_tag :defaults %>
 
 <% if procedure.new_record?
-     procedure_div = 'procedureNew' 
-     html_options = {} -%>
+     procedure_div = 'procedureNew' -%>
 <div id="procedureNew">
 <% else
      procedure_div = "procedure#{procedure.id}"
-     html_options = {:method => 'put'}
    end %>
-<% remote_form_for(:procedure, procedure, :url => patient_data_instance_procedure_path(patient_data, procedure), :html => html_options,
+   <% remote_form_for(:procedure, procedure, :url => patient_data_url_for(patient_data, procedure),
+                    :html => {:method => http_method(procedure)},
                    :update => procedure_div, :name => "procedures_form") do |f| -%>
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">

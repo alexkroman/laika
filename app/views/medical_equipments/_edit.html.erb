@@ -1,15 +1,11 @@
 <% if medical_equipment.new_record?
-     medical_equipment_div = 'medicalEquipmentNew' 
-     html_options = {} -%>
+  medical_equipment_div = 'medicalEquipmentNew'  -%>
 <div id="medicalEquipmentNew">
 <% else
      medical_equipment_div = "medical_equipment#{medical_equipment.id}"
-     html_options = {:method => 'put'}
    end %>
-<% remote_form_for(:medical_equipment, medical_equipment, 
-                   :url => patient_data_instance_medical_equipment_path(patient_data, medical_equipment), 
-                   :html => html_options,
-                   :update => medical_equipment_div) do |f| -%>
+<% remote_form_for(:medical_equipment, medical_equipment, :url => patient_data_url_for(patient_data, medical_equipment), 
+                   :html => {:method => http_method(medical_equipment)}, :update => medical_equipment_div) do |f| -%>
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Name</td>

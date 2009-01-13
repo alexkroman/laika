@@ -1,13 +1,11 @@
 <% if allergy.new_record?
-     allergy_div = 'allergyNew' 
-     html_options = {} -%>
+     allergy_div = 'allergyNew' -%>
 <div id="allergyNew">
 <% else
      allergy_div = "allergy#{allergy.id}"
-     html_options = {:method => 'put'}
    end %>
-<% remote_form_for(:allergy, allergy, :url => patient_data_instance_allergy_path(patient_data, allergy), :html => html_options,
-                   :update => allergy_div) do |f| -%>
+   <% remote_form_for(:allergy, allergy, :url => patient_data_url_for(patient_data, allergy),
+                      :html => {:method => http_method(allergy)}, :update => allergy_div) do |f| -%>
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Free Text Product Name <%= print_validation_for allergy, :free_text_product %></td>

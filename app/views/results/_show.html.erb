@@ -44,7 +44,7 @@
   <td>
   <span>
     <%= link_to_remote 'Edit', :update => "result#{result.id}",
-                               :url => edit_patient_data_instance_result_path(patient_data, result, :is_vital_sign => is_vital_sign),
+                               :url => edit_patient_data_instance_result_path(patient_data, result, :is_vital_sign => @is_vital_sign),
                                :method => 'get' %>
     </span> 
     

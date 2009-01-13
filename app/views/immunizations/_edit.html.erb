@@ -1,13 +1,11 @@
 <% if immunization.new_record?
-     immunization_div = 'immunizationNew' 
-     html_options = {} -%>
+  immunization_div = 'immunizationNew' -%>
 <div id="immunizationNew">
 <% else
      immunization_div = "immunization#{immunization.id}"
-     html_options = {:method => 'put'}
    end %>
-<% remote_form_for(:immunization, immunization, :url => patient_data_instance_immunization_path(patient_data, immunization), :html => html_options,
-                   :update => immunization_div) do |f| -%>
+   <% remote_form_for(:immunization, immunization, :url => patient_data_url_for(patient_data, immunization),
+                      :html => {:method => http_method(immunization)}, :update => immunization_div) do |f| -%>
 
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">

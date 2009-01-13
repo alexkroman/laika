@@ -1,12 +1,12 @@
 <% if result.new_record?
      result_div = 'resultNew' 
-     html_options = {:id => 'resultForm'} -%>
+     html_options = {:id => 'resultForm', :method => http_method(result)} -%>
 <div id="resultNew">
 <% else
      result_div = "result#{result.id}"
-     html_options = {:method => 'put'}
+     html_options = { :method => http_method(result) }
    end %>
-   <% remote_form_for(:result, result, :url => patient_data_instance_result_path(patient_data, result, :is_vital_sign => @is_vital_sign), :html => html_options,
+   <% remote_form_for(:result, result, :url => patient_data_url_for(patient_data, result, :is_vital_sign => @is_vital_sign), :html => html_options,
                    :update => result_div) do |f| -%>
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
@@ -15,7 +15,7 @@
       <%= f.text_field :result_id, :onfocus => "Effect.BlindDown('uuid-#{controller.class}#{@is_vital_sign}');", :onblur => "Effect.BlindUp('uuid-#{controller.class}#{@is_vital_sign}');" %>
       <br />
       <em>
-        <%= render :partial => '/layouts/uuid_help_text', :locals => { :is_vital_sign => @is_vital_sign } %>
+        <%= render :partial => '/layouts/uuid_help_text' %>
       </em> 
     </td>
   </tr>

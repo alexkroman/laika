@@ -1,14 +1,13 @@
 <%= javascript_include_tag :defaults %>
 
 <% if condition.new_record?
-     condition_div = 'conditionNew' 
-     html_options = {} -%>
+  condition_div = 'conditionNew' -%>
 <div id="conditionNew">
 <% else
      condition_div = "condition#{condition.id}"
-     html_options = {:method => 'put'}
    end %>
-<% remote_form_for(:condition, condition, :url => patient_data_instance_condition_path(patient_data, condition), :html => html_options,
+<% remote_form_for(:condition, condition, :url => patient_data_url_for(patient_data, condition),
+                   :html => {:method => http_method(condition)},
                    :update => condition_div, :name => "conditions_form") do |f| -%>
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
