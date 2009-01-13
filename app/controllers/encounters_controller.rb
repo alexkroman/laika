@@ -1,16 +1,6 @@
 class EncountersController < PatientDataChildController
 
   def new
-    if !@isoCountries
-      @isoCountries = IsoCountry.find(:all, :order => "name ASC")
-    end
-    if !@encounter_location_codes
-      @encounter_location_codes = EncounterLocationCode.find(:all, :order => "name ASC")
-    end
-    if !@encounter_types
-      @encounter_types = EncounterType.find(:all, :order => "name ASC")
-    end
-    
     @encounter = Encounter.new
     
     @encounter.person_name = PersonName.new
@@ -22,16 +12,6 @@ class EncountersController < PatientDataChildController
   end
 
   def edit
-    if !@isoCountries
-      @isoCountries = IsoCountry.find(:all, :order => "name ASC")
-    end
-    if !@encounter_location_codes
-      @encounter_location_codes = EncounterLocationCode.find(:all, :order => "name ASC")
-    end
-    if !@encounter_types
-     @encounter_types = EncounterType.find(:all, :order => "name ASC")
-    end
-    
     @encounter = @patient_data.encounters.find(params[:id])
     
     unless @encounter.person_name

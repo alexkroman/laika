@@ -1,4 +1,5 @@
 class ProviderRole < ActiveRecord::Base
+  named_scope :all, :order => 'name ASC'
 
    include MatchHelper
 

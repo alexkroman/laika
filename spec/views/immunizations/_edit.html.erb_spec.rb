@@ -4,8 +4,8 @@ describe "immunizations/_edit.html.erb" do
   fixtures :users
 
   before do
-    assigns[:no_immunization_reasons] = []
-    assigns[:vaccines] = []
+    NoImmunizationReason.stub!(:all).and_return([])
+    Vaccine.stub!(:all).and_return([])
   end
 
   describe "with an existing immunization (immunizations/edit)" do

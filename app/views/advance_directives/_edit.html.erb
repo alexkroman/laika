@@ -7,7 +7,7 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Advance Directive Type <%= print_validation_for @advance_directive, :advance_directive_type_id %></td>
     <td>
-      <%= f.select :advance_directive_type_id, @advance_directive_types.collect{|advance_directive_type| [advance_directive_type.name, advance_directive_type.id]}, {:include_blank => true} %>
+      <%= f.select :advance_directive_type_id, AdvanceDirectiveType.all.collect{|advance_directive_type| [advance_directive_type.name, advance_directive_type.id]}, {:include_blank => true} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
@@ -30,7 +30,7 @@
   <tr>  
     <td class="lighttext">Advance Directive Status Code <%= print_validation_for @advance_directive, :advance_directive_status_code_id %></td>
     <td>
-      <%= f.select :advance_directive_status_code_id, @advance_directive_status_codes.collect{|adsc| [adsc.name, adsc.id]} %>
+      <%= f.select :advance_directive_status_code_id, AdvanceDirectiveStatusCode.all.collect{|adsc| [adsc.name, adsc.id]} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">

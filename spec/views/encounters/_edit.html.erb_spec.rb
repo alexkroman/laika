@@ -4,9 +4,9 @@ describe "encounters/_edit.html.erb" do
   fixtures :users
 
   before do
-    assigns[:encounter_types] = []
-    assigns[:isoCountries] = []
-    assigns[:encounter_location_codes] = []
+    EncounterType.stub!(:all).and_return([])
+    IsoCountry.stub!(:all).and_return([])
+    EncounterLocationCode.stub!(:all).and_return([])
   end
 
   describe "with an existing encounter (encounters/edit)" do

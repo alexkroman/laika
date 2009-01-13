@@ -18,7 +18,7 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Code System <%= print_validation_for medication, :code_system_id %></td>
     <td>
-      <%= f.select :code_system_id, @medicationCodeSystems.collect{|medicationCodeSystems| [medicationCodeSystems.name, medicationCodeSystems.id]}, {:include_blank => true} %>
+      <%= f.select :code_system_id, CodeSystem.medication.collect{|medicationCodeSystems| [medicationCodeSystems.name, medicationCodeSystems.id]}, {:include_blank => true} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
@@ -28,7 +28,7 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Medication Type <%= print_validation_for medication, :medication_type_id %></td>
     <td>
-      <%= f.select :medication_type_id, @medicationTypes.collect{|medicationType| [medicationType.name, medicationType.id]}, {:include_blank => true} %>
+      <%= f.select :medication_type_id, MedicationType.all.collect{|medicationType| [medicationType.name, medicationType.id]}, {:include_blank => true} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">

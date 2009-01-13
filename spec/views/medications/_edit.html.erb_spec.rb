@@ -4,8 +4,8 @@ describe "medications/_edit.html.erb" do
   fixtures :users
 
   before do
-    assigns[:medicationTypes] = []
-    assigns[:medicationCodeSystems] = []
+    MedicationType.stub!(:all).and_return([])
+    CodeSystem.stub!(:medication).and_return([])
   end
 
   describe "with an existing medication (medications/edit)" do

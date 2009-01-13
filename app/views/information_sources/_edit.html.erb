@@ -13,7 +13,7 @@
     <td class="lighttext">Document ID <%= print_validation_for @information_source, :document_id %></td>
     <td>
       <%= f.text_field :document_id, :onfocus => "Effect.BlindDown('uuid-#{controller.class}');", :onblur => "Effect.BlindUp('uuid-#{controller.class}');" %>
-      <em><%= render :partial => '/layouts/uuid_help_text' %></em>
+      <em><%= render :partial => '/layouts/uuid_help_text', :locals => { :is_vital_sign => false } %></em>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">

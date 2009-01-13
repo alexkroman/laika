@@ -9,19 +9,19 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Language <%= print_validation_for language, :iso_language_id %></td>
     <td>
-      <%= f.select :iso_language_id, @isoLanguages.collect{|iso_language| [iso_language.name, iso_language.id]} %>       
+      <%= f.select :iso_language_id, IsoLanguage.all.collect{|iso_language| [iso_language.name, iso_language.id]} %>       
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Country <%= print_validation_for language, :iso_country_id %></td>
     <td>
-      <%= f.select :iso_country_id, @isoCountries.collect{|iso_country| [iso_country.name, iso_country.id]} %>       
+      <%= f.select :iso_country_id, IsoCountry.all.collect{|iso_country| [iso_country.name, iso_country.id]} %>       
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Mode <%= print_validation_for language, :language_ability_mode_id %></td>
     <td>
-      <%= f.select :language_ability_mode_id, @languageAbilityModes.collect{|language_ability_mode| [language_ability_mode.name, language_ability_mode.id]}, {:include_blank => true} %>       
+      <%= f.select :language_ability_mode_id, LanguageAbilityMode.all.collect{|language_ability_mode| [language_ability_mode.name, language_ability_mode.id]}, {:include_blank => true} %>       
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">

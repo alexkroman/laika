@@ -1,4 +1,5 @@
 class ResultTypeCode < ActiveRecord::Base
+  named_scope :all, :order => 'name ASC'
 
   include MatchHelper
 

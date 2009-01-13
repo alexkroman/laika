@@ -4,7 +4,7 @@ describe "conditions/_edit.html.erb" do
   fixtures :users
 
   before do
-    assigns[:problem_types] = []
+    ProblemType.stub!(:all).and_return([])
   end
 
   describe "with an existing condition (conditions/edit)" do

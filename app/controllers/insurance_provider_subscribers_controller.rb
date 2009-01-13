@@ -1,12 +1,6 @@
 class InsuranceProviderSubscribersController < PatientDataChildController
 
   def edit
-
-    if !@isoCountries
-      @isoCountries = IsoCountry.find(:all, :order => "name ASC")
-    end
-
-    @insurance_provider_subscriber
     for insurance_provider in @patient_data.insurance_providers
       if (insurance_provider.insurance_provider_subscriber.id.to_s == params[:id])
         @insurance_provider_subscriber = insurance_provider.insurance_provider_subscriber
@@ -18,8 +12,6 @@ class InsuranceProviderSubscribersController < PatientDataChildController
   end
 
   def update
-
-    @insurance_provider_subscriber
     for insurance_provider in @patient_data.insurance_providers
       if (insurance_provider.insurance_provider_subscriber.id.to_s == params[:id])
         @insurance_provider_subscriber = insurance_provider.insurance_provider_subscriber

@@ -4,10 +4,8 @@ describe "allergies/_edit.html.erb" do
   fixtures :users
 
   before do
-    assigns[:severity_terms] = []
-    assigns[:adverse_event_types] = []
-    assigns[:allergy_status_codes] = []
-    assigns[:allergy_type_codes] = []
+    AdverseEventType.stub!(:all).and_return([])
+    AllergyStatusCode.stub!(:all).and_return([])
   end
 
   describe "with an existing allergy (allergies/edit)" do

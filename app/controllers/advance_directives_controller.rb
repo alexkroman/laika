@@ -1,17 +1,6 @@
 class AdvanceDirectivesController < PatientDataChildController
 
   def new
-    
-    if !@isoCountries
-      @isoCountries = IsoCountry.find(:all, :order => "name ASC")
-    end
-    if !@advance_directive_types
-      @advance_directive_types = AdvanceDirectiveType.find(:all, :order => "name ASC")
-    end
-    if !@advance_directive_status_codes
-      @advance_directive_status_codes = AdvanceDirectiveStatusCode.find(:all, :order => "name ASC")
-    end
-    
     @advance_directive = AdvanceDirective.new
     
     @advance_directive.person_name = PersonName.new
@@ -23,17 +12,6 @@ class AdvanceDirectivesController < PatientDataChildController
   end
 
   def edit
-    
-    if !@isoCountries
-      @isoCountries = IsoCountry.find(:all, :order => "name ASC")
-    end
-    if !@advance_directive_types
-      @advance_directive_types = AdvanceDirectiveType.find(:all, :order => "name ASC")
-    end
-    if !@advance_directive_status_codes
-      @advance_directive_status_codes = AdvanceDirectiveStatusCode.find(:all, :order => "name ASC")
-    end
-    
     @advance_directive = @patient_data.advance_directive
     
     unless @advance_directive.person_name

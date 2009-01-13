@@ -3,20 +3,6 @@ class AllergiesController < PatientDataChildController
   # TODO: Need a way to nil out the end_event through the web ui
 
   def new
-    
-    if !@severity_terms
-      @severity_terms = SeverityTerm.find(:all, :order => "name ASC")
-    end
-    if !@adverse_event_types
-      @adverse_event_types = AdverseEventType.find(:all, :order => "name ASC")
-    end
-    if !@allergy_status_codes
-      @allergy_status_codes = AllergyStatusCode.find(:all, :order => "name ASC")
-    end 
-    if !@allergy_type_codes
-       @allergy_type_codes = AllergyTypeCode.find(:all, :order => "name ASC")
-    end
-    
     @allergy = Allergy.new
     @patient_data.update_attribute(:no_known_allergies, false)
     
@@ -25,27 +11,12 @@ class AllergiesController < PatientDataChildController
   end
 
   def edit
-    
-    if !@severity_terms
-      @severity_terms = SeverityTerm.find(:all, :order => "name ASC")
-    end
-    if !@adverse_event_types
-      @adverse_event_types = AdverseEventType.find(:all, :order => "name ASC")
-    end
-    if !@allergy_status_codes
-      @allergy_status_codes = AllergyStatusCode.find(:all, :order => "name ASC")
-    end
-    if !@allergy_type_codes
-      @allergy_type_codes = AllergyTypeCode.find(:all, :order => "name ASC")
-    end
-    
     @allergy = @patient_data.allergies.find(params[:id])
     render :partial => 'edit', :locals => {:allergy => @allergy,
                                            :patient_data => @patient_data}
   end
   
   def create
-    
     @allergy = Allergy.new(params[:allergy])
     @patient_data.allergies << @allergy
     @patient_data.update_attribute(:no_known_allergies, false)
@@ -55,7 +26,6 @@ class AllergiesController < PatientDataChildController
   end
   
   def update
-    
     @allergy = @patient_data.allergies.find(params[:id])
     @allergy.update_attributes(params[:allergy])
     
@@ -64,7 +34,6 @@ class AllergiesController < PatientDataChildController
   end
   
   def destroy
-    
     @allergy = @patient_data.allergies.find(params[:id])
     @allergy.destroy
     

@@ -22,38 +22,11 @@ class InsuranceProvidersController < PatientDataChildController
     @insurance_provider.insurance_provider_guarantor.telecom = Telecom.new
     @insurance_provider_guarantor = @insurance_provider.insurance_provider_guarantor
 
-    if !@isoCountries
-      @isoCountries = IsoCountry.find(:all, :order => "name ASC")
-    end
-    if !@insuranceTypes
-      @insuranceTypes = InsuranceType.find(:all, :order => "name ASC")
-    end
-    if !@roleClassRelationshipFormalTypes
-      @roleClassRelationshipFormalTypes = RoleClassRelationshipFormalType.find(:all, :order => "name ASC")
-    end
-    if !@coverageRoleTypes
-      @coverageRoleTypes = CoverageRoleType.find(:all, :order => "name ASC")
-    end
-
     render :partial  => 'edit', :locals => {:insurance_provider => @insurance_provider,
                                             :patient_data => @patient_data}  
   end
 
   def edit
-
-    if !@isoCountries
-      @isoCountries = IsoCountry.find(:all, :order => "name ASC")
-    end
-    if !@insuranceTypes
-      @insuranceTypes = InsuranceType.find(:all, :order => "name ASC")
-    end
-    if !@roleClassRelationshipFormalTypes
-      @roleClassRelationshipFormalTypes = RoleClassRelationshipFormalType.find(:all, :order => "name ASC")
-    end
-    if !@coverageRoleTypes
-      @coverageRoleTypes = CoverageRoleType.find(:all, :order => "name ASC")
-    end
-
     @insurance_provider = @patient_data.insurance_providers.find(params[:id])
 
     render :partial  => 'edit', :locals => {:insurance_provider => @insurance_provider,

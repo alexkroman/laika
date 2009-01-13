@@ -1,16 +1,5 @@
 class LanguagesController < PatientDataChildController
   def new
-    
-    if !@isoLanguages
-      @isoLanguages = IsoLanguage.find(:all, :order => "name ASC")
-    end
-    if !@isoCountries
-      @isoCountries = IsoCountry.find(:all, :order => "name ASC")
-    end
-    if !@languageAbilityModes
-      @languageAbilityModes = LanguageAbilityMode.find(:all, :order => "name ASC")
-    end
-  
     @language = Language.new
     
     render :partial  => 'edit', :locals => {:language => @language,
@@ -19,17 +8,6 @@ class LanguagesController < PatientDataChildController
   end
   
   def edit
-    
-    if !@isoLanguages
-      @isoLanguages = IsoLanguage.find(:all, :order => "name ASC")
-    end
-    if !@isoCountries
-      @isoCountries = IsoCountry.find(:all, :order => "name ASC")
-    end
-    if !@languageAbilityModes
-      @languageAbilityModes = LanguageAbilityMode.find(:all, :order => "name ASC")
-    end
-    
     @language = @patient_data.languages.find(params[:id])
    
     render :partial  => 'edit', :locals => {:language => @language,
@@ -38,7 +16,6 @@ class LanguagesController < PatientDataChildController
   end
   
   def create
-    
     @language = Language.new(params[:language])
     @patient_data.languages << @language
     
@@ -48,7 +25,6 @@ class LanguagesController < PatientDataChildController
   end
   
   def update
-    
     @language = @patient_data.languages.find(params[:id])
     @language.update_attributes(params[:language])
     

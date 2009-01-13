@@ -5,22 +5,7 @@
 class ResultsController < PatientDataChildController
 
   def new
-
     @is_vital_sign = params[:is_vital_sign]
-
-    unless @code_systems
-      @code_systems = CodeSystem.find(:all, :order => "name DESC")
-    end
-    unless @act_status_codes
-      @act_status_codes = ActStatusCode.find(:all, :order => "name DESC")
-    end
-    unless @result_type_codes
-      @result_type_codes = ResultTypeCode.find(:all, :order => "name DESC")
-    end
-    unless @loinc_lab_codes
-      @loinc_lab_codes = LoincLabCode.find(:all, :order => "name ASC")
-    end
-
     @result = Result.new
 
     render :partial  => 'edit', :locals => {:result => @result,
@@ -28,22 +13,7 @@ class ResultsController < PatientDataChildController
   end
 
   def edit
-
     @is_vital_sign = params[:is_vital_sign]
-
-    unless @code_systems
-      @code_systems = CodeSystem.find(:all, :order => "name DESC")
-    end
-    unless @act_status_codes
-      @act_status_codes = ActStatusCode.find(:all, :order => "name DESC")
-    end
-    unless @result_type_codes
-      @result_type_codes = ResultTypeCode.find(:all, :order => "name DESC")
-    end
-    unless @loinc_lab_codes
-      @loinc_lab_codes = LoincLabCode.find(:all, :order => "name ASC")
-    end
-
     @result = @patient_data.results.find(params[:id])
 
     render :partial  => 'edit', :locals => {:result => @result,
@@ -55,7 +25,6 @@ class ResultsController < PatientDataChildController
   # there is a callback at the end which puts a "type" hidden field in the form
   # indicating it is a VitalSign so we can create the correct record.
   def create
-
     if 'vital'.eql? params[:type]
       @result = VitalSign.new(params[:result])
     else

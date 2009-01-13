@@ -4,9 +4,9 @@ describe "languages/_edit.html.erb" do
   fixtures :users
 
   before do
-    assigns[:isoLanguages] = []
-    assigns[:isoCountries] = []
-    assigns[:languageAbilityModes] = []
+    IsoLanguage.stub!(:all).and_return([])
+    IsoCountry.stub!(:all).and_return([])
+    LanguageAbilityMode.stub!(:all).and_return([])
   end
 
   describe "with an existing language (languages/edit)" do

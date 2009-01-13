@@ -28,7 +28,7 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Code System <%= print_validation_for result, :code_system_id %></td>
     <td>
-      <%= f.select :code_system_id, @code_systems.collect{|code_system| [code_system.name, code_system.id]}, {:include_blank => true} %>
+      <%= f.select :code_system_id, CodeSystem.all.collect{|code_system| [code_system.name, code_system.id]}, {:include_blank => true} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
@@ -58,13 +58,13 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Organizer Status <%= print_validation_for result, :act_status_code_id %></td>
     <td>
-      <%= f.select :act_status_code_id, @act_status_codes.collect{|asc| [asc.name, asc.id]}, {:include_blank => true} %>
+      <%= f.select :act_status_code_id, ActStatusCode.all.collect{|asc| [asc.name, asc.id]}, {:include_blank => true} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Organizer Code <%= print_validation_for result, :result_type_code_id %></td>
     <td>
-      <%= f.select :result_type_code_id, @result_type_codes.collect{|rtc| [rtc.name, rtc.id]}, {:include_blank => true} %>
+      <%= f.select :result_type_code_id, ResultTypeCode.all.collect{|rtc| [rtc.name, rtc.id]}, {:include_blank => true} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
