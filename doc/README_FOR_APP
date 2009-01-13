@@ -1,2 +1,24 @@
-Use this README file to introduce your application and point to useful places in the API for learning more.
-Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
+This is Laika, an open source electronic health record (EHR) testing framework.
+
+The target platform is JRuby on Rails, running under Glassfish.
+
+To run the spec suite:
+
+ $ rake spec
+ or
+ $ jruby -S rake spec
+
+To run the selenium test suite (the app server must be running in test mode at port 4000):
+
+ $ rake selenium:test
+ or
+ $ jruby -S rake selenium:test
+
+For complete validation functionality the UMLS database (including SNOMED)
+is required, see: http://www.nlm.nih.gov/research/umls/
+
+The Laika SVN repository is hosted on SourceForge:
+https://laika.svn.sourceforge.net/svnroot/laika/webapp/trunk
+
+For more info about this project: http://laika.sourceforge.net/about.html
+
