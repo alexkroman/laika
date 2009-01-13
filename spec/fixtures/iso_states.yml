@@ -8,6 +8,11 @@ alabama:
     iso_abbreviation: AL
     old_format:  Ala
 
+american_samoa:
+    name: American Samoa
+    iso_abbreviation: AS
+    old_format: AS
+
 arkansas:
     name:  Arkansas   
     iso_abbreviation: AR
@@ -52,6 +57,11 @@ georgia:
     name:  Georgia   
     iso_abbreviation: GA
     old_format:  Ga
+
+guam:
+    name: Guam
+    iso_abbreviation: GU
+    old_format: GU
 
 hawaii:
     name:  Hawaii    
@@ -98,6 +108,11 @@ massachusetts:
     iso_abbreviation: MA
     old_format:  Mass
 
+marshall_islands:
+     name:  Marshall Islands    
+     iso_abbreviation: MH
+     old_format:  MH
+
 maryland:
      name:  Maryland    
      iso_abbreviation: MD
@@ -112,6 +127,11 @@ michigan:
     name:  Michigan   
     iso_abbreviation: MI
     old_format:  Mich
+
+micronesia:
+    name: Federated States of Micronesia
+    iso_abbreviation: FM
+    old_format: FM
 
 minnesota:
     name:  Minnesota   
@@ -188,10 +208,20 @@ oregon:
     iso_abbreviation: OR
     old_format:  Ore
 
+palau:
+    name:  Palau
+    iso_abbreviation: PW
+    old_format:  PW
+
 pennsylvania:
     name:  Pennsylvania  
     iso_abbreviation: PA
     old_format:  Penn
+
+puerto_rico:
+    name:  Puerto Rico
+    iso_abbreviation: PR
+    old_format:  PR
 
 rhode_island:
     name:  Rhode Island  
@@ -222,6 +252,11 @@ utah:
     name:  Utah    
     iso_abbreviation: UT
     old_format:  UT
+
+virgin_islands:
+     name:  Virgin Islands    
+     iso_abbreviation: VI
+     old_format:  VI
 
 virginia:
     name:  Virginia   
