@@ -6,6 +6,7 @@
    end %>
 <% remote_form_for(:insurance_provider, insurance_provider,
                    :url => patient_data_url_for(patient_data, insurance_provider),
+                   :html => { :method => http_method(insurance_provider) },
                    :update => insurance_provider_div) do |f| -%>
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
@@ -43,20 +44,22 @@
     <td></td>
     <td><%= f.submit "Save" %></td>
   </tr>
+</table>
 <% end %>
+<% unless insurance_provider.new_record? -%>
   <div id="insurance_provider_patient<%= insurance_provider.insurance_provider_patient.id %>">
     <%= render :partial => '/insurance_provider_patients/show', 
                :locals => {:insurance_provider_patient => insurance_provider.insurance_provider_patient,
-                           :patient_data => @patient_data} %>
+                           :patient_data => patient_data} %>
   </div>
   <div id="insurance_provider_subscriber<%= insurance_provider.insurance_provider_subscriber.id %>">
     <%= render :partial => '/insurance_provider_subscribers/show', 
                :locals => {:insurance_provider_subscriber => insurance_provider.insurance_provider_subscriber,
-                           :patient_data => @patient_data} %>
+                           :patient_data => patient_data} %>
   </div>
   <div id="insurance_provider_guarantor<%= insurance_provider.insurance_provider_guarantor.id %>">
     <%= render :partial => '/insurance_provider_guarantors/show', 
                :locals => {:insurance_provider_guarantor => insurance_provider.insurance_provider_guarantor,
-                           :patient_data => @patient_data} %>
+                           :patient_data => patient_data} %>
   </div>
-</table>
+<% end -%>

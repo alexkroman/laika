@@ -8,7 +8,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :patient_data, 
                 :has_one  => [:registration_information, :support, :information_source, :advance_directive],
-                :has_many => [:template_information, :languages, :providers, :insurance_providers, 
+                :has_many => [:languages, :providers, :insurance_providers, 
                               :insurance_provider_patients, :insurance_provider_subscribers, 
                               :insurance_provider_guarantors, :medications, :allergies, :conditions, 
                               :comments, :results, :immunizations, 
