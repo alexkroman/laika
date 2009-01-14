@@ -5,7 +5,7 @@ describe "encounters/_edit.html.erb" do
 
   before do
     EncounterType.stub!(:all).and_return([])
-    IsoCountry.stub!(:all).and_return([])
+    IsoCountry.stub!(:all).and_return(stub_everything(:dropdown_items => []))
     EncounterLocationCode.stub!(:all).and_return([])
   end
 
