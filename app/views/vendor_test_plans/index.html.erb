@@ -1,5 +1,8 @@
 <div class="content">
   <div class="container">
+    <span style="float:right; position:relative; right:40px; top:4px">
+      <%= link_to "Export Report", :action => :export, :controller => :test_plan_manager %>
+    </span>
       <% @vendors.each do |vendor| -%>
         <h3>Laika Inspection ID: <%= vendor.public_id %></h3>
         <table id="dashboard">
