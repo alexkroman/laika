@@ -309,7 +309,7 @@
           <!-- Start Results Module -->
           <div id="resultsContainer"> 
           <h5>Result</h5>
-          <% for result in @patient_data.results_only -%>
+          <% for result in @patient_data.results -%>
             <div id="result<%= result.id %>">
               <%= render :partial => '/results/show', :locals => {:result  => result,
                                                                   :is_vital_sign => false,

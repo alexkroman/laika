@@ -29,8 +29,8 @@ class PatientData < ActiveRecord::Base
   has_c32_component   :conditions
 
   has_many   :vital_signs
-  has_many   :results_only, :class_name => 'Result'
-  has_many   :results,      :class_name => 'AbstractResult'
+  has_many   :results
+  has_many   :all_results, :class_name => 'AbstractResult'
 
   has_c32_component   :immunizations
   has_c32_component   :encounters
@@ -112,8 +112,8 @@ class PatientData < ActiveRecord::Base
     end
 
     # Results
-    if self.results
-      self.results.each do |result|
+    if self.all_results
+      self.all_results.each do |result|
         errors.concat(result.validate_c32(clinical_document))
       end
     end
@@ -202,8 +202,8 @@ class PatientData < ActiveRecord::Base
 
     copied_patient_data.advance_directive = self.advance_directive.copy if self.advance_directive
 
-    self.results.each do |result|
-      copied_patient_data.results << result.clone
+    self.all_results.each do |result|
+      copied_patient_data.all_results << result.clone
     end
 
     self.immunizations.each do |immunization|
@@ -361,7 +361,7 @@ class PatientData < ActiveRecord::Base
           # End Vital Signs
 
           # Start Results
-          unless results_only.empty?
+          unless results.empty?
             xml.component do
               xml.section do
                 xml.templateId("root" => "2.16.840.1.113883.10.20.1.14", 
@@ -383,7 +383,7 @@ class PatientData < ActiveRecord::Base
                       end
                     end
                     xml.tbody do
-                      results_only.each do |result|
+                      results.each do |result|
                         xml.tr do 
                           xml.td do
                             xml.content(result.result_id, "ID" => "result-#{result.result_id}")
@@ -399,7 +399,7 @@ class PatientData < ActiveRecord::Base
                 end
 
                 # XML content inspection
-                results_only.each do |result| 
+                results.each do |result| 
                   result.to_c32(xml)
                 end
 
@@ -483,12 +483,11 @@ class PatientData < ActiveRecord::Base
 
     @result = Result.new
     @result.randomize()
-    @result.type = 'Result'
     self.results << @result
 
     @vital_sign = VitalSign.new
     @vital_sign.randomize()
-    self.results << @vital_sign
+    self.vital_signs << @vital_sign
 
     self.advance_directive = AdvanceDirective.new
     self.advance_directive.randomize(self.registration_information.date_of_birth)

@@ -20,7 +20,7 @@ insurance_types iso_countries iso_languages iso_states kinds language_ability_mo
 languages loinc_lab_codes marital_statuses medical_equipments medications
 medication_types no_immunization_reasons patient_data person_names problem_types
 procedures provider_roles providers provider_types races registration_information
-relationships religions results result_type_codes role_class_relationship_formal_types
+relationships religions abstract_results result_type_codes role_class_relationship_formal_types
 roles severity_terms snowmed_problems supports telecoms user_roles users vaccines
 vendors zip_codes
   ]

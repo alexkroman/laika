@@ -14,7 +14,7 @@ class ResultsController < PatientDataChildController
 
   def edit
     @is_vital_sign = params[:is_vital_sign]
-    @result = @patient_data.results.find(params[:id])
+    @result = @patient_data.all_results.find(params[:id])
 
     render :partial  => 'edit', :locals => {:result => @result,
                                             :patient_data => @patient_data}
@@ -31,20 +31,20 @@ class ResultsController < PatientDataChildController
       @result = Result.new(params[:result])
     end
 
-    @patient_data.results << @result
+    @patient_data.all_results << @result
     render :partial  => 'create', :locals => {:result => @result,
                                               :patient_data => @patient_data}
   end
 
   def update
-    @result = @patient_data.results.find(params[:id])
+    @result = @patient_data.all_results.find(params[:id])
     @result.update_attributes(params[:result])
     render :partial  => 'show', :locals => {:result => @result,
                                             :patient_data => @patient_data}
   end
 
   def destroy
-    @result = @patient_data.results.find(params[:id])
+    @result = @patient_data.all_results.find(params[:id])
     @result.destroy
     render :partial  => 'delete.rjs'
   end
