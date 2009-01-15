@@ -216,4 +216,57 @@ XPATH
     self.allergy_status_code = AllergyStatusCode.find(:all).sort_by {rand}.first
   end
 
+  def self.c32_component(allergies, xml)
+    if allergies.size > 0
+      xml.component do
+        xml.section do
+          xml.templateId("root" => "2.16.840.1.113883.10.20.1.2", 
+                         "assigningAuthorityName" => "CCD")
+          xml.code("code" => "48765-2", 
+                   "codeSystem" => "2.16.840.1.113883.6.1")
+          xml.title "Allergies, Adverse Reactions, Alerts"
+          xml.text do
+            xml.table("border" => "1", "width" => "100%") do
+              xml.thead do
+                xml.tr do
+                  xml.th "Substance"
+                  xml.th "Event Type"
+                  xml.th "Severity"
+                end
+              end
+              xml.tbody do
+                allergies.andand.each do |allergy|
+                  xml.tr do
+                    if allergy.free_text_product != nil
+                      xml.td allergy.free_text_product
+                    else
+                      xml.td
+                    end 
+                    if allergy.adverse_event_type != nil
+                      xml.td allergy.adverse_event_type.name
+                    else
+                      xml.td
+                    end  
+                    if allergy.severity_term != nil
+                      xml.td do
+                        xml.content(allergy.severity_term.name, 
+                                    "ID" => "severity-" + allergy.id.to_s)
+                      end
+                    else
+                      xml.td
+                    end
+                  end
+                end
+              end
+            end
+          end
+
+          # XML content inspection
+          yield
+
+        end
+      end
+    end
+  end
+
 end

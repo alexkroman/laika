@@ -183,4 +183,73 @@ class Medication < ActiveRecord::Base
     self.expiration_time = DateTime.new(2008 + rand(4), rand(12) + 1, rand(28) + 1)
   end
   
+  def self.c32_component(medications, xml)
+    # Start Medications
+    if medications.size > 0
+      xml.component do
+        xml.section do
+          xml.templateId("root" => "2.16.840.1.113883.10.20.1.8", 
+                         "assigningAuthorityName" => "CCD")
+          xml.code("code" => "10160-0", 
+                   "displayName" => "History of medication use", 
+                   "codeSystem" => "2.16.840.1.113883.6.1", 
+                   "codeSystemName" => "LOINC")
+          xml.title "Medications"
+          xml.text do
+            xml.table("border" => "1", "width" => "100%") do
+              xml.thead do
+                xml.tr do
+                  xml.th "Product Display Name"
+                  xml.th "Free Text Brand Name"
+                  xml.th "Ordered Value"
+                  xml.th "Ordered Unit"
+                  xml.th "Expiration Time"
+                end
+              end
+              xml.tbody do
+                medications.andand.each do |medication|
+                  xml.tr do
+                    if medication.product_coded_display_name != nil
+                      xml.td do
+                        xml.content(medication.product_coded_display_name, 
+                                    "ID" => "medication-"+medication.id.to_s)
+                      end
+                    else
+                      xml.td
+                    end 
+                    if medication.free_text_brand_name != nil
+                      xml.td medication.free_text_brand_name
+                    else
+                      xml.td
+                    end  
+                    if medication.quantity_ordered_value != nil
+                      xml.td medication.quantity_ordered_value
+                    else
+                      xml.td
+                    end    
+                    if medication.quantity_ordered_unit != nil
+                      xml.td medication.quantity_ordered_unit
+                    else
+                      xml.td
+                    end   
+                    if medication.expiration_time != nil
+                      xml.td medication.expiration_time.strftime("%Y%m%d")
+                    else
+                      xml.td
+                    end   
+                  end
+                end
+              end
+            end
+          end
+
+          # XML content inspection
+          yield
+
+        end
+      end
+    end
+    # End Medications 
+  end
+  
 end

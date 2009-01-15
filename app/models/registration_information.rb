@@ -114,9 +114,7 @@ class RegistrationInformation < ActiveRecord::Base
         patient_data.support.to_c32(xml)
       end  
 
-      patient_data.languages.andand.each do |language|
-        language.to_c32(xml)
-      end
+      patient_data.languages.to_c32(xml)
 
     end
 

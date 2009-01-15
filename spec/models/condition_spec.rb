@@ -10,7 +10,7 @@ describe Condition, "can validate itself" do
   it "should validate without errors" do
     document = REXML::Document.new(File.new(RAILS_ROOT + '/spec/test_data/conditions/joes_condition.xml'))
     errors = @cond.validate_c32(document.root)
-    puts errors.map{|e| e.error_message}.join(' ') 
+    #puts errors.map{|e| e.error_message}.join(' ') 
     errors.should be_empty
   end 
 end

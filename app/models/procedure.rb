@@ -82,4 +82,52 @@ class Procedure < ActiveRecord::Base
     self.procedure_date = DateTime.new(birth_date.year + rand(DateTime.now.year - birth_date.year), rand(12) + 1, rand(28) +1)
   end
 
+  def self.c32_component(procedures, xml)
+    unless procedures.empty?
+      xml.component do
+        xml.section do
+          xml.templateId("root" => "2.16.840.1.113883.10.20.1.12", 
+                         "assigningAuthorityName" => "CCD")
+          xml.code("code" => "47519-4", 
+                   "displayName" => "Procedures", 
+                   "codeSystem" => "2.16.840.1.113883.6.1", 
+                   "codeSystemName" => "LOINC")
+          xml.title("Procedures")
+          xml.text do
+            xml.table("border" => "1", "width" => "100%") do
+              xml.thead do
+                xml.tr do
+                  xml.th "Procedure Name"
+                  xml.th "Date"
+                end
+              end
+              xml.tbody do
+               procedures.andand.each do |procedure|
+                  xml.tr do
+                    if procedure.name
+                      xml.td do
+                        xml.content(procedure.name, 
+                                     "ID" => "Proc-"+procedure.id.to_s) 
+                      end
+                    else
+                      xml.td
+                    end 
+                    if procedure.procedure_date
+                      xml.td(procedure.procedure_date.strftime("%Y"))
+                    else
+                      xml.td
+                    end    
+                  end
+                end
+              end
+            end
+          end
+
+          # XML content inspection
+          yield
+
+        end
+      end
+    end
+  end
 end

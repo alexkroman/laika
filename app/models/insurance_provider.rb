@@ -224,4 +224,56 @@ class InsuranceProvider < ActiveRecord::Base
 
   end
  
+  def self.c32_component(insurance_providers, xml)
+    # Start Insurance Providers
+    if insurance_providers.size > 0
+      xml.component do
+        xml.section do
+          xml.templateId("root" => "2.16.840.1.113883.10.20.1.9", 
+                         "assigningAuthorityName" => "CCD")         
+          xml.code("code" => "48768-6", 
+                  "codeSystem" => "2.16.840.1.113883.6.1",
+                   "codeSystemName" => "LOINC")
+          xml.title "Insurance Providers"
+          xml.text do
+            xml.table("border" => "1", "width" => "100%") do
+              xml.thead do
+                xml.tr do
+                  xml.th "Insurance Provider Name"
+                  xml.th "Insurance Provider Type"
+                  xml.th "Insurance Provider Group Number"
+                end
+              end
+              xml.tbody do
+               insurance_providers.andand.each do |insurance_provider|
+                 xml.tr do
+                    if insurance_provider.represented_organization != nil
+                      xml.td insurance_provider.represented_organization
+                    else
+                      xml.td
+                    end 
+                    if insurance_provider.represented_organization != nil
+                      xml.td insurance_provider.represented_organization
+                    else
+                      xml.td
+                    end  
+                    if insurance_provider.group_number != nil
+                      xml.td insurance_provider.group_number
+                    else
+                      xml.td
+                    end 
+                  end
+                end
+              end
+            end
+          end
+
+          # XML content inspection
+          yield
+
+        end
+      end
+    end
+    # End Insurance Providers
+  end
 end

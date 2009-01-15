@@ -146,4 +146,15 @@ class Provider < ActiveRecord::Base
     self.telecom.randomize()
   end
 
+  def self.c32_component(providers, xml)
+    xml.documentationOf do
+      xml.serviceEvent("classCode" => "PCPR") do
+        xml.effectiveTime do
+          xml.low('value'=> "0")
+          xml.high('value'=> "2010")
+        end
+        yield
+      end
+    end
+  end
 end

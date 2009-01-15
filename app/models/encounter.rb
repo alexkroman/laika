@@ -102,4 +102,42 @@ class Encounter < ActiveRecord::Base
     self.encounter_location_code = EncounterLocationCode.find(:all).sort_by{rand}.first
   end
 
+  def self.c32_component(encounters, xml)
+    # Start Encounters
+    unless encounters.empty?
+      xml.component do
+        xml.section do
+           xml.templateId("root" => "2.16.840.1.113883.10.20.1.3", 
+                 "assigningAuthorityName" => "CCD")
+           xml.code("code" => "46240-8", 
+                    "codeSystem" => "2.16.840.1.113883.6.1", 
+                    "codeSystemName" => "LOINC")
+           xml.title("Encounters")  
+           xml.text do
+            xml.table("border" => "1", "width" => "100%") do
+              xml.thead do
+                xml.tr do
+                  xml.th "Encounter"
+                  xml.th "Encounter Date"
+                end
+              end
+              xml.tbody do
+                encounters.each do |encounter|
+                  xml.tr do 
+                    xml.td(encounter.name)
+                    xml.td(encounter.encounter_date)
+                  end
+                end
+              end
+            end
+          end
+
+          # XML content inspection
+          yield
+
+        end
+      end
+    end
+    # End Encounters
+  end
 end

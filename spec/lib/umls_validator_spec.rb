@@ -40,7 +40,7 @@ describe Validators::Umls::UmlsValidator, "Can validate codes/code_systems " do
         document = REXML::Document.new(File.new(RAILS_ROOT + '/spec/test_data/validators/invalid_codes.xml'))
         errors =  @validator.validate(document)
         errors.length.should == 2
-        puts errors
+        #puts errors
       end
       
   end

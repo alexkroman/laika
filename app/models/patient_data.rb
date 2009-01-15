@@ -1,20 +1,39 @@
 class PatientData < ActiveRecord::Base
+  module C32Component
+    def to_c32(xml)
+      if proxy_reflection.klass.respond_to? :c32_component
+        proxy_reflection.klass.c32_component(self, xml) { map {|r| r.to_c32(xml)} }
+      else
+        map {|r| r.to_c32(xml)}
+      end
+    end
+  end
+
+  def self.has_c32_component(rel, args = {})
+    has_many rel, args.merge(:extend => C32Component)
+  end
+
 
   has_one    :registration_information
-  has_many   :languages
-  has_many   :providers
-  has_many   :medications
   has_one    :support
-  has_many   :allergies
-  has_many   :insurance_providers
-  has_many   :conditions
   has_one    :information_source
   has_one    :advance_directive
+
+  has_c32_component   :languages
+  has_c32_component   :providers
+  has_c32_component   :medications
+
+  has_c32_component   :allergies
+  has_c32_component   :insurance_providers
+
+  has_c32_component   :conditions
+
   has_many   :results
-  has_many   :immunizations
-  has_many   :encounters
-  has_many   :procedures
-  has_many   :medical_equipments
+  has_c32_component   :immunizations
+  has_c32_component   :encounters
+  has_c32_component   :procedures
+  has_c32_component   :medical_equipments
+
   belongs_to :vendor_test_plan
   belongs_to :user
 
@@ -239,6 +258,9 @@ class PatientData < ActiveRecord::Base
                "codeSystem" => "2.16.840.1.113883.6.1", 
                "codeSystemName" => "LOINC")
       xml.title(name)
+
+      # FIXME Hard-coding EST time zone doesn't seem like a great idea...
+      # TZ should either come from the environment or be an option set on deployment.
       if registration_information && registration_information.document_timestamp
         xml.effectiveTime("value" => registration_information.document_timestamp.strftime("%Y%m%d%H%M%S-0500"))
       else
@@ -274,283 +296,28 @@ class PatientData < ActiveRecord::Base
       # End Guardian Support
 
       # Start Healthcare Providers
-      xml.documentationOf do
-        xml.serviceEvent("classCode" => "PCPR") do
-          xml.effectiveTime do
-            xml.low('value'=> "0")
-            xml.high('value'=> "2010")
-          end
-          providers.andand.each do |provider|
-            provider.to_c32(xml)
-          end
-        end
-      end
+      providers.to_c32(xml)
       # End Healthcare Providers
 
       # Start CCD/C32 Modules
       xml.component do
         xml.structuredBody do
           
-          # Start Pregnancy
-          if (pregnant != nil && pregnant == true)   
-            xml.component do
-              xml.section do
-                xml.title "Results"
-                xml.text "Patient is currently pregnant"
-                xml.entry do
-                  xml.observation("classCode" => "OBS", "moodCode" => "EVN") do
-                    # why is code here you ask, because the schema states it needs to be 
-                    # event though the C32 doc does not include it, one more reason to just
-                    # hate the CDA/CCD/C32 specs
-                    xml.code("code" => "77386006",
-                             "displayName" => "Patient currently pregnant",
-                             "codeSystem" => "2.16.840.1.113883.6.96",
-                             "codeSystemName" => "SNOMED CT")
-                    xml.value("xsi:type" => "CD",
-                              "code" => "77386006",
-                              "displayName" => "Patient currently pregnant",
-                              "codeSystem" => "2.16.840.1.113883.6.96",
-                              "codeSystemName" => "SNOMED CT")
-                  end
-                end
-              end
-            end
-          end
-          # End Pregnancy
+          pregnancy_c32(xml)
 
           # Start Conditions
-          if conditions.size > 0
-            xml.component do
-              xml.section do
-                xml.templateId("root" => "2.16.840.1.113883.10.20.1.11",
-                               "assigningAuthorityName" => "CCD")
-                xml.code("code" => "11450-4",
-                         "displayName" => "Problems",
-                         "codeSystem" => "2.16.840.1.113883.6.1",
-                         "codeSystemName" => "LOINC")
-                xml.title "Conditions or Problems"
-                xml.text do
-                  xml.table("border" => "1", "width" => "100%") do
-                    xml.thead do
-                      xml.tr do
-                        xml.th "Problem Name"
-                        xml.th "Problem Type"
-                        xml.th "Problem Date"
-                      end
-                    end
-                    xml.tbody do
-                     conditions.andand.each do |condition|
-                        xml.tr do
-                          if condition.free_text_name != nil
-                            xml.td do
-                              xml.content(condition.free_text_name, 
-                                           "ID" => "problem-"+condition.id.to_s)
-                            end
-                          else
-                            xml.td
-                          end 
-                          if condition.problem_type != nil
-                            xml.td condition.problem_type.name
-                          else
-                            xml.td
-                          end  
-                          if condition.start_event != nil
-                            xml.td condition.start_event.strftime("%Y%m%d")
-                          else
-                            xml.td
-                          end
-                        end
-                      end
-                    end
-                  end
-                end
-
-                # XML content inspection
-                conditions.andand.each do |structuredCondition|
-                  structuredCondition.to_c32(xml)
-                end
-
-              end
-            end
-          end
+          conditions.to_c32(xml)
           # End Conditions
 
           # Start Allergies
-          if allergies.size > 0
-            xml.component do
-              xml.section do
-                xml.templateId("root" => "2.16.840.1.113883.10.20.1.2", 
-                               "assigningAuthorityName" => "CCD")
-                xml.code("code" => "48765-2", 
-                         "codeSystem" => "2.16.840.1.113883.6.1")
-                xml.title "Allergies, Adverse Reactions, Alerts"
-                xml.text do
-                  xml.table("border" => "1", "width" => "100%") do
-                    xml.thead do
-                      xml.tr do
-                        xml.th "Substance"
-                        xml.th "Event Type"
-                        xml.th "Severity"
-                      end
-                    end
-                    xml.tbody do
-                      allergies.andand.each do |allergy|
-                        xml.tr do
-                          if allergy.free_text_product != nil
-                            xml.td allergy.free_text_product
-                          else
-                            xml.td
-                          end 
-                          if allergy.adverse_event_type != nil
-                            xml.td allergy.adverse_event_type.name
-                          else
-                            xml.td
-                          end  
-                          if allergy.severity_term != nil
-                            xml.td do
-                              xml.content(allergy.severity_term.name, 
-                                          "ID" => "severity-" + allergy.id.to_s)
-                            end
-                          else
-                            xml.td
-                          end
-                        end
-                      end
-                    end
-                  end
-                end
-
-                # XML content inspection
-                allergies.andand.each do |structuredAllergy|
-                  structuredAllergy.to_c32(xml)
-                end
-
-              end
-            end
-          end
+          allergies.to_c32(xml)
           # End Allergies
 
           # Start Insurance Providers
-          if insurance_providers.size > 0
-            xml.component do
-              xml.section do
-                xml.templateId("root" => "2.16.840.1.113883.10.20.1.9", 
-                               "assigningAuthorityName" => "CCD")         
-                xml.code("code" => "48768-6", 
-                        "codeSystem" => "2.16.840.1.113883.6.1",
-                         "codeSystemName" => "LOINC")
-                xml.title "Insurance Providers"
-                xml.text do
-                  xml.table("border" => "1", "width" => "100%") do
-                    xml.thead do
-                      xml.tr do
-                        xml.th "Insurance Provider Name"
-                        xml.th "Insurance Provider Type"
-                        xml.th "Insurance Provider Group Number"
-                      end
-                    end
-                    xml.tbody do
-                     insurance_providers.andand.each do |insurance_provider|
-                       xml.tr do
-                          if insurance_provider.represented_organization != nil
-                            xml.td insurance_provider.represented_organization
-                          else
-                            xml.td
-                          end 
-                          if insurance_provider.represented_organization != nil
-                            xml.td insurance_provider.represented_organization
-                          else
-                            xml.td
-                          end  
-                          if insurance_provider.group_number != nil
-                            xml.td insurance_provider.group_number
-                          else
-                            xml.td
-                          end 
-                        end
-                      end
-                    end
-                  end
-                end
-
-                # XML content inspection
-                insurance_providers.andand.each do |structuredInsuranceProvider|
-                  structuredInsuranceProvider.to_c32(xml)
-                end
-
-              end
-            end
-          end
+          insurance_providers.to_c32(xml)
           # End Insurance Providers
 
-          # Start Medications
-          if medications.size > 0
-            xml.component do
-              xml.section do
-                xml.templateId("root" => "2.16.840.1.113883.10.20.1.8", 
-                               "assigningAuthorityName" => "CCD")
-                xml.code("code" => "10160-0", 
-                         "displayName" => "History of medication use", 
-                         "codeSystem" => "2.16.840.1.113883.6.1", 
-                         "codeSystemName" => "LOINC")
-                xml.title "Medications"
-                xml.text do
-                  xml.table("border" => "1", "width" => "100%") do
-                    xml.thead do
-                      xml.tr do
-                        xml.th "Product Display Name"
-                        xml.th "Free Text Brand Name"
-                        xml.th "Ordered Value"
-                        xml.th "Ordered Unit"
-                        xml.th "Expiration Time"
-                      end
-                    end
-                    xml.tbody do
-                      medications.andand.each do |medication|
-                        xml.tr do
-                          if medication.product_coded_display_name != nil
-                            xml.td do
-                              xml.content(medication.product_coded_display_name, 
-                                          "ID" => "medication-"+medication.id.to_s)
-                            end
-                          else
-                            xml.td
-                          end 
-                          if medication.free_text_brand_name != nil
-                            xml.td medication.free_text_brand_name
-                          else
-                            xml.td
-                          end  
-                          if medication.quantity_ordered_value != nil
-                            xml.td medication.quantity_ordered_value
-                          else
-                            xml.td
-                          end    
-                          if medication.quantity_ordered_unit != nil
-                            xml.td medication.quantity_ordered_unit
-                          else
-                            xml.td
-                          end   
-                          if medication.expiration_time != nil
-                            xml.td medication.expiration_time.strftime("%Y%m%d")
-                          else
-                            xml.td
-                          end   
-                        end
-                      end
-                    end
-                  end
-                end
-
-                # XML content inspection
-                medications.andand.each do |structuredMedication|
-                  structuredMedication.to_c32(xml)
-                end
-
-              end
-            end
-          end
-          # End Medications 
+          medications.to_c32(xml)
 
           # Start Advanced Directive
           advance_directive.andand.to_c32(xml)
@@ -652,184 +419,13 @@ class PatientData < ActiveRecord::Base
           end
           # End Results
 
-          # Start Immunizations
-          unless immunizations.empty?
-            xml.component do
-              xml.section do
-                xml.templateId("root" => "2.16.840.1.113883.10.20.1.6", 
-                               "assigningAuthorityName" => "CCD")
-                xml.code("code" => "11369-6", 
-                         "codeSystem" => "2.16.840.1.113883.6.1", 
-                         "codeSystemName" => "LOINC")
-                xml.title("Immunizations")
-                xml.text do
-                  xml.table("border" => "1", "width" => "100%") do
-                    xml.thead do
-                      xml.tr do
-                        xml.th "Vaccine"
-                        xml.th "Administration Date"
-                      end
-                    end
-                    xml.tbody do
-                      immunizations.each do |immunization|
-                        xml.tr do 
-                           if immunization.vaccine != nil
-                            xml.td(immunization.vaccine.name)
-                          end
-                          xml.td(immunization.administration_date)
-                        end
-                      end
-                    end
-                  end
-                end
+          immunizations.to_c32(xml)
 
-                # XML content inspection
-                immunizations.each do |immunization| 
-                  immunization.to_c32(xml)
-                end
+          encounters.to_c32(xml)
 
-              end
-            end
-          end
-          # End Immunizations
+          procedures.to_c32(xml)
 
-          # Start Encounters
-          unless encounters.empty?
-            xml.component do
-              xml.section do
-                 xml.templateId("root" => "2.16.840.1.113883.10.20.1.3", 
-                       "assigningAuthorityName" => "CCD")
-                 xml.code("code" => "46240-8", 
-                          "codeSystem" => "2.16.840.1.113883.6.1", 
-                          "codeSystemName" => "LOINC")
-                 xml.title("Encounters")  
-                 xml.text do
-                  xml.table("border" => "1", "width" => "100%") do
-                    xml.thead do
-                      xml.tr do
-                        xml.th "Encounter"
-                        xml.th "Encounter Date"
-                      end
-                    end
-                    xml.tbody do
-                      encounters.each do |encounter|
-                        xml.tr do 
-                          xml.td(encounter.name)
-                          xml.td(encounter.encounter_date)
-                        end
-                      end
-                    end
-                  end
-                end
-
-                # XML content inspection
-                encounters.each do |encounter| 
-                  encounter.to_c32(xml)
-                end
-
-              end
-            end
-          end
-          # End Encounters
-
-          # Start Procedures
-          unless procedures.empty?
-            xml.component do
-              xml.section do
-                xml.templateId("root" => "2.16.840.1.113883.10.20.1.12", 
-                               "assigningAuthorityName" => "CCD")
-                xml.code("code" => "47519-4", 
-                         "displayName" => "Procedures", 
-                         "codeSystem" => "2.16.840.1.113883.6.1", 
-                         "codeSystemName" => "LOINC")
-                xml.title("Procedures")
-                xml.text do
-                  xml.table("border" => "1", "width" => "100%") do
-                    xml.thead do
-                      xml.tr do
-                        xml.th "Procedure Name"
-                        xml.th "Date"
-                      end
-                    end
-                    xml.tbody do
-                     procedures.andand.each do |procedure|
-                        xml.tr do
-                          if procedure.name
-                            xml.td do
-                              xml.content(procedure.name, 
-                                           "ID" => "Proc-"+procedure.id.to_s) 
-                            end
-                          else
-                            xml.td
-                          end 
-                          if procedure.procedure_date
-                            xml.td(procedure.procedure_date.strftime("%Y"))
-                          else
-                            xml.td
-                          end    
-                        end
-                      end
-                    end
-                  end
-                end
-
-                # XML content inspection
-                procedures.andand.each do |structuredProcedure|
-                  structuredProcedure.to_c32(xml)
-                end
-
-              end
-            end
-          end
-          # End Procedures
-
-          # Start Medical Equipment
-          unless medical_equipments.empty?
-            xml.component do
-              xml.section do
-                xml.templateId("root" => "2.16.840.1.113883.10.20.1.7", 
-                               "assigningAuthorityName" => "CCD")
-                xml.code("code" => "46264-8", 
-                         "displayName" => "Medical Equipment", 
-                         "codeSystem" => "2.16.840.1.113883.6.1", 
-                         "codeSystemName" => "LOINC")
-                xml.title("Medical Equipment")
-                xml.text do
-                  xml.table("border" => "1", "width" => "100%") do
-                    xml.thead do
-                      xml.tr do
-                        xml.th "Supply/Device"
-                        xml.th "Date Supplied"
-                      end
-                    end
-                    xml.tbody do
-                     medical_equipments.andand.each do |medical_equipment|
-                        xml.tr do
-                          if medical_equipment.name
-                            xml.td(medical_equipment.name)
-                          else
-                            xml.td
-                          end 
-                          if medical_equipment.date_supplied
-                            xml.td(medical_equipment.date_supplied)
-                          else
-                            xml.td
-                          end 
-                        end
-                      end
-                    end
-                  end
-                end
-
-                # XML content inspection
-                medical_equipments.andand.each do |structuredMedicalEquipment|
-                  structuredMedicalEquipment.to_c32(xml)
-                end
-
-              end
-            end
-          end
-          # End Medical Equipments
+          medical_equipments.to_c32(xml)
         end
       end
       # END CCD/C32 Modules
@@ -922,4 +518,34 @@ class PatientData < ActiveRecord::Base
 
   end
 
+ private
+
+  # If the patient is pregnant, this method will add the appropriate
+  # C32 component to the provided XML::Builder object.
+  def pregnancy_c32(xml)
+    if pregnant
+      xml.component do
+        xml.section do
+          xml.title "Results"
+          xml.text "Patient is currently pregnant"
+          xml.entry do
+            xml.observation("classCode" => "OBS", "moodCode" => "EVN") do
+              # why is code here you ask, because the schema states it needs to be 
+              # event though the C32 doc does not include it, one more reason to just
+              # hate the CDA/CCD/C32 specs
+              xml.code("code" => "77386006",
+                       "displayName" => "Patient currently pregnant",
+                       "codeSystem" => "2.16.840.1.113883.6.96",
+                       "codeSystemName" => "SNOMED CT")
+              xml.value("xsi:type" => "CD",
+                        "code" => "77386006",
+                        "displayName" => "Patient currently pregnant",
+                        "codeSystem" => "2.16.840.1.113883.6.96",
+                        "codeSystemName" => "SNOMED CT")
+            end
+          end
+        end
+      end
+    end
+  end
 end
