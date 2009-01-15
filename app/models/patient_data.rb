@@ -28,7 +28,10 @@ class PatientData < ActiveRecord::Base
 
   has_c32_component   :conditions
 
-  has_many   :results
+  has_many   :vital_signs
+  has_many   :results_only, :class_name => 'Result'
+  has_many   :results,      :class_name => 'AbstractResult'
+
   has_c32_component   :immunizations
   has_c32_component   :encounters
   has_c32_component   :procedures
@@ -40,20 +43,6 @@ class PatientData < ActiveRecord::Base
   validates_presence_of :name
 
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
-
-  # Results and Vital Signs are stored in the same 
-  # table in the database, 'results'.
-  # This grabs only the results, and omits vital signs
-  def results_only
-    results.find(:all, :conditions => "type = 'Result'")
-  end
-
-  # Results and Vital Signs are stored in the same 
-  # table in the database, 'results'.
-  # This grabs only the vital signs, and omits results
-  def vital_signs
-    results.find(:all, :conditions => "type = 'VitalSign'")
-  end
 
   def validate_c32(clinical_document)
 

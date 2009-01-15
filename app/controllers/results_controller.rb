@@ -25,11 +25,10 @@ class ResultsController < PatientDataChildController
   # there is a callback at the end which puts a "type" hidden field in the form
   # indicating it is a VitalSign so we can create the correct record.
   def create
-    if 'vital'.eql? params[:type]
+    if params[:type] == 'vital'
       @result = VitalSign.new(params[:result])
     else
       @result = Result.new(params[:result])
-      @result.type = 'Result' # AR's STI doesn't set this for us... not sure why
     end
 
     @patient_data.results << @result

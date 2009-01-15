@@ -1,10 +1,10 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe VitalSign, "it can validate vital sign entries in a C32" do
-  fixtures :results, :code_systems
+  fixtures :abstract_results, :code_systems
   
   before(:each) do
-    @vs = results(:jennifer_thompson_vital_sign)
+    @vs = abstract_results(:jennifer_thompson_vital_sign)
   end  
   
   it "should validate without errors" do
@@ -15,10 +15,10 @@ describe VitalSign, "it can validate vital sign entries in a C32" do
 end
 
 describe VitalSign, "it can generate a valid C32 representation of itself" do
-  fixtures :results, :code_systems
+  fixtures :abstract_results, :code_systems
   
   before(:each) do
-    @vs = results(:jennifer_thompson_vital_sign)
+    @vs = abstract_results(:jennifer_thompson_vital_sign)
   end
   
   it "should create valid C32 content" do

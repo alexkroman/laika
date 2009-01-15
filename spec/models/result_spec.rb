@@ -1,10 +1,10 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Result, "it can validate result entries in a C32" do
-  fixtures :results, :code_systems
+  fixtures :abstract_results, :code_systems
   
   before(:each) do
-    @result = results(:jennifer_thompson_result)
+    @result = abstract_results(:jennifer_thompson_result)
   end  
   
   it "should validate without errors" do
@@ -15,10 +15,10 @@ describe Result, "it can validate result entries in a C32" do
 end
 
 describe Result, "it can generate a valid C32 representation of itself" do
-  fixtures :results, :code_systems
+  fixtures :abstract_results, :code_systems
   
   before(:each) do
-    @result = results(:jennifer_thompson_result)
+    @result = abstract_results(:jennifer_thompson_result)
   end
   
   it "should create valid C32 content" do
