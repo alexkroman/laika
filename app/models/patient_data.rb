@@ -13,29 +13,24 @@ class PatientData < ActiveRecord::Base
     has_many rel, args.merge(:extend => C32Component)
   end
 
+  has_c32_component :languages
+  has_c32_component :providers
+  has_c32_component :medications
+  has_c32_component :allergies
+  has_c32_component :insurance_providers
+  has_c32_component :conditions
+  has_c32_component :vital_signs
+  has_c32_component :results
+  has_c32_component :immunizations
+  has_c32_component :encounters
+  has_c32_component :procedures
+  has_c32_component :medical_equipments
 
   has_one    :registration_information
   has_one    :support
   has_one    :information_source
   has_one    :advance_directive
-
-  has_c32_component   :languages
-  has_c32_component   :providers
-  has_c32_component   :medications
-
-  has_c32_component   :allergies
-  has_c32_component   :insurance_providers
-
-  has_c32_component   :conditions
-
-  has_many   :vital_signs
-  has_many   :results
   has_many   :all_results, :class_name => 'AbstractResult'
-
-  has_c32_component   :immunizations
-  has_c32_component   :encounters
-  has_c32_component   :procedures
-  has_c32_component   :medical_equipments
 
   belongs_to :vendor_test_plan
   belongs_to :user
@@ -266,9 +261,7 @@ class PatientData < ActiveRecord::Base
       end
       # End Person (Registation) Information
 
-      # Start Information Source
       information_source.andand.to_c32(xml)
-      # End Information Source
 
       xml.custodian do
         xml.assignedCustodian do
@@ -278,15 +271,11 @@ class PatientData < ActiveRecord::Base
         end
       end
 
-      # Start Guardian Support
       if support && support.contact_type && support.contact_type.code != "GUARD"
         support.to_c32(xml)
       end
-      # End Guardian Support
 
-      # Start Healthcare Providers
       providers.to_c32(xml)
-      # End Healthcare Providers
 
       # Start CCD/C32 Modules
       xml.component do
@@ -294,119 +283,19 @@ class PatientData < ActiveRecord::Base
           
           pregnancy_c32(xml)
 
-          # Start Conditions
           conditions.to_c32(xml)
-          # End Conditions
 
-          # Start Allergies
           allergies.to_c32(xml)
-          # End Allergies
 
-          # Start Insurance Providers
           insurance_providers.to_c32(xml)
-          # End Insurance Providers
 
           medications.to_c32(xml)
 
-          # Start Advanced Directive
           advance_directive.andand.to_c32(xml)
-          # End Advanced Directive
 
-          # Start Vital Signs
-          unless vital_signs.empty?
-            xml.component do
-              xml.section do
-                xml.templateId("root" => "2.16.840.1.113883.10.20.1.16", 
-                               "assigningAuthorityName" => "CCD")
-                xml.code("code" => "8716-3", 
-                         "displayName" => "Vital signs", 
-                         "codeSystem" => "2.16.840.1.113883.6.1", 
-                         "codeSystemName" => "LOINC")
-                xml.title("Vital signs")
-                xml.text do
-                  xml.table("border" => "1", "width" => "100%") do
-                    xml.thead do
-                      xml.tr do
-                        xml.th "Vital Sign ID"
-                        xml.th "Vital Sign Date"
-                        xml.th "Vital Sign Display Name"
-                        xml.th "Vital Sign Value"
-                        xml.th "Vital Sign Unit"
-                      end
-                    end
-                    xml.tbody do
-                      vital_signs.each do |vital_sign|
-                        xml.tr do 
-                          xml.td do
-                            xml.content(vital_sign.result_id, "ID" => "vital_sign-#{vital_sign.result_id}")
-                          end
-                          xml.td(vital_sign.result_date)
-                          xml.td(vital_sign.result_code_display_name)
-                          xml.td(vital_sign.value_scalar)
-                          xml.td(vital_sign.value_unit)
-                        end
-                      end
-                    end
-                  end
-                end
+          vital_signs.to_c32(xml)
 
-                # XML content inspection
-                vital_signs.each do |vital_sign| 
-                  vital_sign.to_c32(xml)
-                end
-
-              end
-            end
-          end
-          # End Vital Signs
-
-          # Start Results
-          unless results.empty?
-            xml.component do
-              xml.section do
-                xml.templateId("root" => "2.16.840.1.113883.10.20.1.14", 
-                               "assigningAuthorityName" => "CCD")
-                xml.code("code" => "30954-2", 
-                         "displayName" => "Relevant diagnostic tests", 
-                         "codeSystem" => "2.16.840.1.113883.6.1", 
-                         "codeSystemName" => "LOINC")
-                xml.title("Results")
-                xml.text do
-                  xml.table("border" => "1", "width" => "100%") do
-                    xml.thead do
-                      xml.tr do
-                        xml.th "Result ID"
-                        xml.th "Result Date"
-                        xml.th "Result Display Name"
-                        xml.th "Result Value"
-                        xml.th "Result Unit"
-                      end
-                    end
-                    xml.tbody do
-                      results.each do |result|
-                        xml.tr do 
-                          xml.td do
-                            xml.content(result.result_id, "ID" => "result-#{result.result_id}")
-                          end
-                          xml.td(result.result_date)
-                          xml.td(result.result_code_display_name)
-                          xml.td(result.value_scalar)
-                          xml.td(result.value_unit)
-                        end
-                      end
-                    end
-                  end
-                end
-
-                # XML content inspection
-                results.each do |result| 
-                  result.to_c32(xml)
-                end
-
-              end
-            end
-          end
-          # End Results
+          results.to_c32(xml)
 
           immunizations.to_c32(xml)
 
