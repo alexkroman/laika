@@ -17,7 +17,7 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Product <%= print_validation_for immunization, :vaccine_id %></td>
     <td>
-      <%= f.select :vaccine_id, Vaccine.all.collect{|vaccine| [vaccine.name, vaccine.id]}, {:include_blank => true} %>
+      <%= f.select :vaccine_id, Vaccine.select_options, {:include_blank => true} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
@@ -33,7 +33,7 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">No Immunization Reason <%= print_validation_for immunization, :no_immunization_reason_id %></td>
     <td>
-      <%= f.select :no_immunization_reason_id, NoImmunizationReason.all.collect{|no_immunization_reason| [no_immunization_reason.name, no_immunization_reason.id]}, {:include_blank => true} %>
+      <%= f.select :no_immunization_reason_id, NoImmunizationReason.select_options, {:include_blank => true} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">

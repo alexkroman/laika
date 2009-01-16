@@ -3,11 +3,6 @@ require File.dirname(__FILE__) + '/../../spec_helper'
 describe "allergies/_edit.html.erb" do
   fixtures :users
 
-  before do
-    AdverseEventType.stub!(:all).and_return([])
-    AllergyStatusCode.stub!(:all).and_return([])
-  end
-
   describe "with an existing allergy (allergies/edit)" do
     before do
       @patient_data = PatientData.create!(:name => 'foo', :user => User.find(:first))

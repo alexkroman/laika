@@ -1,5 +1,5 @@
 class Vaccine < ActiveRecord::Base
-  named_scope :all, :order => 'name ASC'
+  has_select_options
 
   #Reimplementing from MatchHelper
   def section_name

@@ -3,12 +3,6 @@ require File.dirname(__FILE__) + '/../../spec_helper'
 describe "encounters/_edit.html.erb" do
   fixtures :users
 
-  before do
-    EncounterType.stub!(:all).and_return([])
-    IsoCountry.stub!(:all).and_return(stub_everything(:dropdown_items => []))
-    EncounterLocationCode.stub!(:all).and_return([])
-  end
-
   describe "with an existing encounter (encounters/edit)" do
     before do
       @patient_data = PatientData.create!(:name => 'foo', :user => User.find(:first))

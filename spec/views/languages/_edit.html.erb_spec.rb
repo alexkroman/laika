@@ -3,12 +3,6 @@ require File.dirname(__FILE__) + '/../../spec_helper'
 describe "languages/_edit.html.erb" do
   fixtures :users
 
-  before do
-    IsoLanguage.stub!(:all).and_return([])
-    IsoCountry.stub!(:all).and_return([])
-    LanguageAbilityMode.stub!(:all).and_return([])
-  end
-
   describe "with an existing language (languages/edit)" do
     before do
       @patient_data = PatientData.create!(:name => 'foo', :user => User.find(:first))

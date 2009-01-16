@@ -4,9 +4,6 @@ describe "results/_edit.html.erb" do
   fixtures :users
 
   before do
-    CodeSystem.stub!(:all).and_return([])
-    ActStatusCode.stub!(:all).and_return([])
-    ResultTypeCode.stub!(:all).and_return([])
     assigns[:is_vital_sign] = true
   end
 

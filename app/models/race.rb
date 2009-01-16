@@ -1,5 +1,5 @@
 class Race < ActiveRecord::Base
-  named_scope :all, :order => 'name ASC'
+  has_select_options
 
   def to_c32(xml)
     xml.raceCode("code" => code, 

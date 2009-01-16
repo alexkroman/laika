@@ -3,10 +3,6 @@ require File.dirname(__FILE__) + '/../../spec_helper'
 describe "conditions/_edit.html.erb" do
   fixtures :users
 
-  before do
-    ProblemType.stub!(:all).and_return([])
-  end
-
   describe "with an existing condition (conditions/edit)" do
     before do
       @patient_data = PatientData.create!(:name => 'foo', :user => User.find(:first))

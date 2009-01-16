@@ -3,12 +3,6 @@ require File.dirname(__FILE__) + '/../../spec_helper'
 describe "insurance_providers/_edit.html.erb" do
   fixtures :users
 
-  before do
-    InsuranceType.stub!(:all).and_return([])
-    CoverageRoleType.stub!(:all).and_return([])
-    RoleClassRelationshipFormalType.stub!(:all).and_return([])
-  end
-
   describe "with an existing insurance_provider (insurance_providers/edit)" do
     before do
       @patient_data = PatientData.create!(:name => 'foo', :user => User.find(:first))

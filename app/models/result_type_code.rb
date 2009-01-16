@@ -1,5 +1,5 @@
 class ResultTypeCode < ActiveRecord::Base
-  named_scope :all, :order => 'name ASC'
+  has_select_options
 
   include MatchHelper
 

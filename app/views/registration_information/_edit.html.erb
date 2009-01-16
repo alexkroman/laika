@@ -16,7 +16,7 @@
   <tr class="spacer"><td></td><td></td></tr>
   <tr class="lightzebra">
     <td class="lighttext">Gender <%= print_validation_for(@registration_information, :gender_id) %></td>
-    <td><%= f.select :gender_id, Gender.all.collect{|gender| [gender.name, gender.id]} %></td>
+    <td><%= f.select :gender_id, Gender.select_options %></td>
   </tr>
   <tr class="darkzebra">
     <td class="lighttext">Date of Birth <%= print_validation_for(@registration_information, :date_of_birth) %></td>
@@ -24,19 +24,19 @@
   </tr>
   <tr class="lightzebra">
     <td class="lighttext">Marital Status <%= print_validation_for(@registration_information, :marital_status_id) %></td>
-    <td><%= f.select :marital_status_id, MaritalStatus.all.collect{|marital_status| [marital_status.name, marital_status.id]}, {:include_blank => true} %></td>
+    <td><%= f.select :marital_status_id, MaritalStatus.select_options, {:include_blank => true} %></td>
   </tr>
   <tr class="lightzebra">
     <td class="lighttext">Religion <%= print_validation_for(@registration_information, :religion_id) %> </td>
-    <td><%= f.select :religion_id, Religion.all.collect{|religion| [religion.name, religion.id]}, {:include_blank => true} %></td>
+    <td><%= f.select :religion_id, Religion.select_options, {:include_blank => true} %></td>
   </tr>
   <tr class="darkzebra">
     <td class="lighttext">Race <%= print_validation_for(@registration_information, :race_id) %></td>
-    <td><%= f.select :race_id, Race.all.collect{|race| [race.name, race.id]}, {:include_blank => true} %></td>
+    <td><%= f.select :race_id, Race.select_options, {:include_blank => true} %></td>
   </tr>
   <tr class="lightzebra">
     <td class="lighttext">Ethnicity <%= print_validation_for(@registration_information, :ethnicity_id) %></td>
-    <td><%= f.select :ethnicity_id, Ethnicity.all.collect{|ethnicity| [ethnicity.name, ethnicity.id]}, {:include_blank => true} %></td>
+    <td><%= f.select :ethnicity_id, Ethnicity.select_options, {:include_blank => true} %></td>
   </tr>
   <tr class="spacer"><td></td><td></td></tr>
   <%= render :partial => '/addresses/edit', :locals => {:address => registration_information.address}%>

@@ -24,7 +24,7 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Alert Type <%= print_validation_for allergy, :adverse_event_type_id %></td>
     <td>
-      <%= f.select :adverse_event_type_id, AdverseEventType.all.collect{|aet| [aet.name, aet.id]} %>
+      <%= f.select :adverse_event_type_id, AdverseEventType.select_options %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
@@ -42,7 +42,7 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Status Code <%= print_validation_for allergy, :allergy_status_code_id %></td>
     <td>
-      <%= f.select :allergy_status_code_id, AllergyStatusCode.all.collect{|asc| [asc.name, asc.id]}, {:include_blank => true} %>
+      <%= f.select :allergy_status_code_id, AllergyStatusCode.select_options, {:include_blank => true} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">

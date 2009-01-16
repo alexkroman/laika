@@ -3,11 +3,6 @@ require File.dirname(__FILE__) + '/../../spec_helper'
 describe "medications/_edit.html.erb" do
   fixtures :users
 
-  before do
-    MedicationType.stub!(:all).and_return([])
-    CodeSystem.stub!(:medication).and_return([])
-  end
-
   describe "with an existing medication (medications/edit)" do
     before do
       @patient_data = PatientData.create!(:name => 'foo', :user => User.find(:first))

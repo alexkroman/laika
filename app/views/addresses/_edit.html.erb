@@ -13,7 +13,7 @@
   </tr>
   <tr class="darkzebra">
     <td class="lighttext">State <%= print_validation_for(address, :state) %></td>
-    <td><%= address_form.select :state, IsoState.all.dropdown_items %></td>
+    <td><%= address_form.select :state, IsoState.select_options, :include_blank => true %></td>
   </tr>
   <tr class="lightzebra">
     <td class="lighttext">Postal Code <%= print_validation_for(address, :postal_code) %></td>
@@ -22,7 +22,7 @@
   <tr class="darkzebra">
     <td class="lighttext">Country <%= print_validation_for(address, :iso_country_id) %></td>
     <td>
-      <%= address_form.select :iso_country_id, IsoCountry.all.dropdown_items %>       
+      <%= address_form.select :iso_country_id, IsoCountry.select_options, :include_blank => true %>       
     </td>
   </tr>
   <% end -%>

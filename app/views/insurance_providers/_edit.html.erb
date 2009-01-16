@@ -24,20 +24,20 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Insurance Type <%= print_validation_for insurance_provider, :insurance_type_id %></td>
     <td>
-      <%= f.select :insurance_type_id, InsuranceType.all.collect{|insurance_type| [insurance_type.name, insurance_type.id]}, {:include_blank => true} %>
+      <%= f.select :insurance_type_id, InsuranceType.select_options, {:include_blank => true} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Relationship to Subscriber <%= print_validation_for insurance_provider, :coverage_role_type_id %></td>
     <td>
-      <%= f.select :coverage_role_type_id, CoverageRoleType.all.collect{|coverage_role_type| [coverage_role_type.name, coverage_role_type.id]} %>
+      <%= f.select :coverage_role_type_id, CoverageRoleType.select_options %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Financial Responsibility Type <%= print_validation_for insurance_provider, :role_class_relationship_formal_type_id %> </td>
     <td>
       <%= f.select :role_class_relationship_formal_type_id, 
-            RoleClassRelationshipFormalType.all.collect{|role_class_relationship_formal_type| [role_class_relationship_formal_type.name, role_class_relationship_formal_type.id]} %>
+            RoleClassRelationshipFormalType.select_options %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">

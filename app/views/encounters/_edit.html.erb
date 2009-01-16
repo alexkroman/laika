@@ -32,7 +32,7 @@ end %>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Encounter Type <%= print_validation_for encounter, :encounter_type_id %></td>
     <td>
-      <%= f.select :encounter_type_id, EncounterType.all.collect{|encounter_type| [encounter_type.name, encounter_type.id]}, {:include_blank => true} %>
+      <%= f.select :encounter_type_id, EncounterType.select_options, {:include_blank => true} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
@@ -48,7 +48,7 @@ end %>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Location Code <%= print_validation_for encounter, :encounter_location_code_id %></td>
     <td>
-      <%= f.select :encounter_location_code_id, EncounterLocationCode.all.collect{|encounter_location_code| [encounter_location_code.name, encounter_location_code.id]}, {:include_blank => true} %>
+      <%= f.select :encounter_location_code_id, EncounterLocationCode.select_options, {:include_blank => true} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
