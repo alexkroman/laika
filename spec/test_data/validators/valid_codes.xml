@@ -25,9 +25,9 @@
                                  </originalText>
                               </code>
 <code code='33999-4' displayName='Status' codeSystem='2.16.840.1.113883.6.1' codeSystemName='LOINC'/>
-<value xsi:type='CE' code='55561003' displayName='Active' codeSystem='2.16.840.1.113883.6.96' codeSystemName='SNOMED CT'/>
+<value type='CE' code='55561003' displayName='Active' codeSystem='2.16.840.1.113883.6.96' codeSystemName='SNOMED CT'/>
 
-<value xsi:type='CE' code='56018004' codeSystem='2.16.840.1.113883.6.96' displayName='Wheezing'/>
+<value type='CE' code='56018004' codeSystem='2.16.840.1.113883.6.96' displayName='Wheezing'/>
 <routeCode code='C38288' displayName='Oral' codeSystem='2.16.840.1.113883.3.26.1.1' codeSystemName='FDA RouteOfAdministration'/>
 <code code='309362' codeSystem='2.16.840.1.113883.6.88' displayName='Clopidogrel 75 MG oral tablet'>
                                  <originalText>
@@ -35,7 +35,7 @@
                                  </originalText>
                               </code>
 <code code='33999-4' displayName='Status' codeSystem='2.16.840.1.113883.6.1' codeSystemName='LOINC'/>
-<value xsi:type='CE' code='55561003' displayName='Active' codeSystem='2.16.840.1.113883.6.96' codeSystemName='SNOMED CT'/>
+<value type='CE' code='55561003' displayName='Active' codeSystem='2.16.840.1.113883.6.96' codeSystemName='SNOMED CT'/>
 <routeCode code='C38288' displayName='Oral' codeSystem='2.16.840.1.113883.3.26.1.1' codeSystemName='FDA RouteOfAdministration'/>
 <code code='430618' codeSystem='2.16.840.1.113883.6.88' displayName='Metoprolol 25 MG oral tablet'>
                                  <originalText>Metoprolol</originalText>
@@ -46,16 +46,16 @@
                                  <originalText>Prednisone</originalText>
                               </code>
 <code code='33999-4' displayName='Status' codeSystem='2.16.840.1.113883.6.1' codeSystemName='LOINC'/>
-<value xsi:type='CE' code='55561003' displayName='Active' codeSystem='2.16.840.1.113883.6.96' codeSystemName='SNOMED CT'/>
+<value type='CE' code='55561003' displayName='Active' codeSystem='2.16.840.1.113883.6.96' codeSystemName='SNOMED CT'/>
 <code code='329505003' codeSystem='2.16.840.1.113883.6.96' displayName='Over the counter product'/>
 <routeCode code='C38288' displayName='Oral' codeSystem='2.16.840.1.113883.3.26.1.1' codeSystemName='FDA RouteOfAdministration'/>
 <code code='197454' codeSystem='2.16.840.1.113883.6.88' displayName='Cephalexin 500 MG oral tablet'>
                                  <originalText>Cephalexin</originalText>
                               </code>
 <code code='33999-4' displayName='Status' codeSystem='2.16.840.1.113883.6.1' codeSystemName='LOINC'/>
-<value xsi:type='CE' code='55561003' displayName='Active' codeSystem='2.16.840.1.113883.6.96' codeSystemName='SNOMED CT'/>
+<value type='CE' code='55561003' displayName='Active' codeSystem='2.16.840.1.113883.6.96' codeSystemName='SNOMED CT'/>
 <code code='73639000' codeSystem='2.16.840.1.113883.6.96' displayName='Prescription Drug'/>
-<value xsi:type='CE' code='32398004' codeSystem='2.16.840.1.113883.6.96' displayName='Bronchitis'/>
+<value type='CE' code='32398004' codeSystem='2.16.840.1.113883.6.96' displayName='Bronchitis'/>
 <code code='10160-0' displayName='Alerts' codeSystem='2.16.840.1.113883.6.1' codeSystemName='LOINC'/>
 <code code='420134006' displayName='propensity to adverse reactions' codeSystemName='SNOMED CT' codeSystem='2.16.840.1.113883.6.96'>
                               <originalText>
@@ -77,7 +77,7 @@
                                           change.
                                        </originalText>
                                     </code>
-<value xsi:type='CD' code='247472004' displayName='Weal' codeSystem='2.16.840.1.113883.6.96' codeSystemName='SNOMED CT'/>
+<value type='CD' code='247472004' displayName='Weal' codeSystem='2.16.840.1.113883.6.96' codeSystemName='SNOMED CT'/>
 <code code='SEV' displayName='Severity' codeSystem='2.16.840.1.113883.5.4' codeSystemName='ActCode'/>
-<value xsi:type='CD' code='6736007' displayName='Moderate' codeSystem='2.16.840.1.113883.6.96' codeSystemName='SNOMED CT'/>
+<value type='CD' code='6736007' displayName='Moderate' codeSystem='2.16.840.1.113883.6.96' codeSystemName='SNOMED CT'/>
 </codes>
