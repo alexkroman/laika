@@ -10,16 +10,6 @@ describe PatientData do
     @patient_data.should_not be_valid
   end
 
-  it "should create a C32 representation of itself" do
-    buffer = ""
-    xml = Builder::XmlMarkup.new(:target => buffer, :indent => 2)
-    @patient_data.to_c32(xml)
-    document = REXML::Document.new(StringIO.new(buffer))
-    errors = @patient_data.validate_c32(document.root)
-    #puts errors.map { |e| e.error_message }.join(' ')
-    errors.should be_empty
-  end
-
   describe "copied with .copy()" do
   
     before { @patient_data_copy = @patient_data.copy }
@@ -37,6 +27,59 @@ describe PatientData do
       @patient_data_copy.registration_information.person_name.last_name.should ==
         @patient_data.registration_information.person_name.last_name
     end
+  end
+end
+
+describe PatientData, "with patient data and validation fixtures" do
+  fixtures %w[
+act_status_codes addresses advance_directive_status_codes advance_directives
+advance_directive_types adverse_event_types allergies allergy_status_codes
+allergy_type_codes clinical_documents code_systems conditions contact_types
+coverage_role_types encounter_location_codes encounters encounter_types ethnicities
+genders immunizations information_sources insurance_provider_guarantors
+insurance_provider_patients insurance_provider_subscribers insurance_providers
+insurance_types iso_countries iso_languages iso_states kinds language_ability_modes
+languages loinc_lab_codes marital_statuses medical_equipments medications
+medication_types no_immunization_reasons patient_data person_names problem_types
+procedures provider_roles providers provider_types races registration_information
+relationships religions abstract_results result_type_codes role_class_relationship_formal_types
+roles severity_terms supports telecoms user_roles users vaccines vendors zip_codes
+  ]
+
+  c32_validity = {
+    :david_carter       => true,
+    :emily_jones        => true,
+    :jennifer_thompson  => true,
+    :theodore_smith     => true,
+    :joe_smith          => true,
+    :will_haynes        => false, # XXX why invalid? is it supposed to be?
+  }
+
+  c32_validity.keys.each do |patient|
+    it "should round-trip validate #{patient} #{c32_validity[patient] ? 'without' : 'with'} errors" do
+      record = patient_data(patient)
+      document = REXML::Document.new(record.to_c32)
+      if c32_validity[patient]
+        record.validate_c32(document).should be_empty
+      else
+        record.validate_c32(document).should_not be_empty
+      end
+    end
+  end
+
+  it "should validate different patients with errors" do
+    patient1 = patient_data(:david_carter)
+    patient2 = patient_data(:joe_smith)
+    document1 = REXML::Document.new(patient1.to_c32)
+    document2 = REXML::Document.new(patient2.to_c32)
+
+    # validate themselves (no errors)
+    patient1.validate_c32(document1).should be_empty
+    patient2.validate_c32(document2).should be_empty
+
+    # validate each other (has errors)
+    patient2.validate_c32(document1).should_not be_empty
+    patient1.validate_c32(document2).should_not be_empty
   end
 end
 
