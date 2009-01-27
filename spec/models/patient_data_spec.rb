@@ -46,24 +46,20 @@ relationships religions abstract_results result_type_codes role_class_relationsh
 roles severity_terms supports telecoms user_roles users vaccines vendors zip_codes
   ]
 
-  c32_validity = {
-    :david_carter       => true,
-    :emily_jones        => true,
-    :jennifer_thompson  => true,
-    :theodore_smith     => true,
-    :joe_smith          => true,
-    :will_haynes        => false, # XXX why invalid? is it supposed to be?
-  }
-
-  c32_validity.keys.each do |patient|
-    it "should round-trip validate #{patient} #{c32_validity[patient] ? 'without' : 'with'} errors" do
+  [ :david_carter, :emily_jones, :jennifer_thompson, :theodore_smith, :joe_smith ].each do |patient| 
+    it "should round-trip validate #{patient} without errors or warnings" do
       record = patient_data(patient)
       document = REXML::Document.new(record.to_c32)
-      if c32_validity[patient]
-        record.validate_c32(document).should be_empty
-      else
-        record.validate_c32(document).should_not be_empty
-      end
+      record.validate_c32(document).should be_empty
+    end
+  end
+
+  # XXX why invalid? is it supposed to be?
+  [ :will_haynes ].each do |patient| 
+    it "should round-trip validate #{patient} with errors or warnings" do
+      record = patient_data(patient)
+      document = REXML::Document.new(record.to_c32)
+      record.validate_c32(document).should_not be_empty
     end
   end
 
