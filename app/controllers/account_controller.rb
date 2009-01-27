@@ -8,17 +8,6 @@ class AccountController < ApplicationController
   end
 
   def login
-    # extracting the subversion version number from the .svn/entries file for Laika
-    entries_path = '.svn/entries'
-    if File.exists?(entries_path)
-      File.open(entries_path, "r").enum_with_index do |line,i|
-        if i == 3
-          @version = line
-          break
-        end
-      end
-    end
-    
     return unless request.post?
     
     self.current_user = User.authenticate(params[:email], params[:password])
