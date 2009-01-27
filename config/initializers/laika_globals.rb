@@ -5,7 +5,6 @@ ERROR_EMAIL = "rmccready@mitre.org"
 
 # Extract the subversion revision number from the
 # Capistrano REVISION file or the .svn/entries file
-LAIKA_REVISION = ''
 begin
   revision_path = File.dirname(__FILE__) + '/../../REVISION'
   entries_path = '.svn/entries'
