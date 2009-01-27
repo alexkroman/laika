@@ -20,7 +20,7 @@ emily_jones_mom:
 will_haynes_dad:
   start_support: 1981-11-05
   end_support: 2010-02-13
-  contact_type: guardian
+  contact_type: next_of_kin
   relationship: father
   patient_data: will_haynes
 
