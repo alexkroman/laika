@@ -120,7 +120,7 @@ class Address < ActiveRecord::Base
     self.city = zip.town
     self.state = zip.state
     self.postal_code = zip.zip
-    self.iso_country = IsoCountry.find(1004581944) #sets the country as the USA
+    self.iso_country = IsoCountry.find_by_code('US') #sets the country as the USA
   end
 
 end
