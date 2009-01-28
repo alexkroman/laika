@@ -1,0 +1,19 @@
+
+2009-01-27 Laika v1.3.6
+
+    * Add an administrator role (#1928263)
+    * Non-admin users can only assign to themselves (#2153978)
+    * Dashboard Last Tested now includes the time (#2093828)
+    * Add news functionality (#2118111)
+    * Rename labels for insurance provider subsections (#2119806)
+    * Add support for editing existing vendor inspections (#1928269)
+    * Highlight required sections to create valid C32 (#2015562)
+    * Allow a direct XML download for Display and File tests (#2183158)
+    * Block creation of patient templates with null names (#1996532)
+    * Require clinical document when executing Generate and Format tests (#2187517)
+    * Added working sort controls to Dashboard and Library (#2265100)
+    * Retain previous selections when assigning templates. (#2265085)
+    * State and country dropdowns permit blanks (#2119651)
+    * Fixed and re-enabled Export Report from the Dashboard (#2053633)
+    * All built-in template validate without warnings or errors (#2540887)
+
