@@ -9,6 +9,11 @@ class ClinicalDocument < ActiveRecord::Base
   # prevent records from being created when there is no associated file data
   validates_presence_of :filename, :size
 
+  def destroy
+    File.unlink(validation_report_filename)
+    super
+  end
+
 
   # return the contents of the document as an REXML::Document
   # if the current data is nil attachemnt_foo  will throw a conversion error

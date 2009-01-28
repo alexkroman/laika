@@ -20,8 +20,8 @@ class User < ActiveRecord::Base
 
   has_many :roles, :through => :user_roles
   has_many :user_roles, :dependent => :destroy
-  has_many :vendor_test_plans, :order => "vendor_id"
-  has_many :vendors
+  has_many :vendor_test_plans, :order => "vendor_id", :dependent => :destroy
+  has_many :vendors, :dependent => :destroy
 
   # Authenticates a user by their email name and unencrypted password.  Returns the user or nil.
   def self.authenticate(email, password)

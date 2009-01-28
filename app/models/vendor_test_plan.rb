@@ -1,11 +1,11 @@
 class VendorTestPlan < ActiveRecord::Base
 
-  has_one :patient_data
+  has_one :patient_data, :dependent => :destroy
   belongs_to :vendor
   belongs_to :kind
   belongs_to :user
-  has_one :clinical_document
-  has_many :content_errors
+  has_one :clinical_document, :dependent => :destroy
+  has_many :content_errors, :dependent => :destroy
 
   def validate_clinical_document_content
     content_errors.clear
