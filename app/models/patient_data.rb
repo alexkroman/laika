@@ -1,18 +1,4 @@
 class PatientData < ActiveRecord::Base
-  module C32Component
-    def to_c32(xml)
-      if proxy_reflection.klass.respond_to? :c32_component
-        proxy_reflection.klass.c32_component(self, xml) { map {|r| r.to_c32(xml)} }
-      else
-        map {|r| r.to_c32(xml)}
-      end
-    end
-  end
-
-  def self.has_c32_component(rel, args = {})
-    has_many rel, args.merge(:extend => C32Component)
-  end
-
   has_c32_component :languages
   has_c32_component :providers
   has_c32_component :medications
@@ -26,10 +12,10 @@ class PatientData < ActiveRecord::Base
   has_c32_component :procedures
   has_c32_component :medical_equipments
 
-  has_one    :registration_information
-  has_one    :support
-  has_one    :information_source
-  has_one    :advance_directive
+  has_one    :registration_information, :dependent => :destroy
+  has_one    :support, :dependent => :destroy
+  has_one    :information_source, :dependent => :destroy
+  has_one    :advance_directive, :dependent => :destroy
   has_many   :all_results, :class_name => 'AbstractResult'
 
   belongs_to :vendor_test_plan
