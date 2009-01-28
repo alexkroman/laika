@@ -76,5 +76,20 @@ roles severity_terms supports telecoms user_roles users vaccines vendors zip_cod
     record.medications.clear
     record.validate_c32(document).should_not be_empty
   end
+
+  it "should validate identical patients with 3 conditions" do
+    pending "SF ticket 2094022"
+    record = patient_data(:joe_smith)
+    record.conditions.clear
+    3.times do |i|
+      record.conditions << Condition.new(
+        :start_event => Date.today + i,
+        :free_text_name => "condition #{i}"
+        :problem_type => ProblemType.find(:first),
+      )
+    end
+    document = REXML::Document.new(record.to_c32)
+    record.validate_c32(document).should be_empty
+  end
 end
 
