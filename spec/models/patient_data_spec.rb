@@ -84,8 +84,8 @@ roles severity_terms supports telecoms user_roles users vaccines vendors zip_cod
     3.times do |i|
       record.conditions << Condition.new(
         :start_event => Date.today + i,
-        :free_text_name => "condition #{i}"
-        :problem_type => ProblemType.find(:first),
+        :free_text_name => "condition #{i}",
+        :problem_type => ProblemType.find(:first)
       )
     end
     document = REXML::Document.new(record.to_c32)
