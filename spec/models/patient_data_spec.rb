@@ -30,7 +30,7 @@ describe PatientData do
   end
 end
 
-describe PatientData, "with patient data and validation fixtures" do
+describe PatientData, "with built-in records" do
   fixtures %w[
 act_status_codes addresses advance_directive_status_codes advance_directives
 advance_directive_types adverse_event_types allergies allergy_status_codes
@@ -67,6 +67,14 @@ roles severity_terms supports telecoms user_roles users vaccines vendors zip_cod
     # validate each other (has errors)
     patient2.validate_c32(document1).should_not be_empty
     patient1.validate_c32(document2).should_not be_empty
+  end
+
+  it "should fail to validate when medication entries differ" do
+    pending "SF ticket 2101046"
+    record = patient_data(:jennifer_thompson)
+    document = REXML::Document.new(record.to_c32)
+    record.medications.clear
+    record.validate_c32(document).should_not be_empty
   end
 end
 
