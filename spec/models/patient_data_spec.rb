@@ -1,9 +1,13 @@
 require File.dirname(__FILE__) + '/../spec_helper'
+require "lib/validators/c32_validator"
 
 describe PatientData do
   fixtures :patient_data, :registration_information, :person_names, :addresses, :telecoms, :genders
-
-  before { @patient_data = patient_data(:joe_smith) }
+  before(:each) do
+     @patient_data = patient_data(:joe_smith) 
+  end
+  
+ 
 
   it "should require a name" do
     @patient_data.name = ''
@@ -12,7 +16,10 @@ describe PatientData do
 
   describe "copied with .copy()" do
   
-    before { @patient_data_copy = @patient_data.copy }
+    before(:each) do
+       @patient_data_copy = @patient_data.copy
+    end
+ 
   
     it "should have the same name as its source" do
       @patient_data_copy.name.should == @patient_data.name

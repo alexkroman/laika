@@ -1,6 +1,8 @@
 require File.dirname(__FILE__) + '/../spec_helper'
+require "lib/validators/c32_validator"
 
 describe AdvanceDirective, "can validate itself" do
+  
   fixtures :advance_directives, :advance_directive_types
   
   before(:each) do
@@ -8,6 +10,8 @@ describe AdvanceDirective, "can validate itself" do
   end  
   
   it "should validate without errors" do
+    # this will add the validate_c32 
+    
     document = REXML::Document.new(File.new(RAILS_ROOT + '/spec/test_data/advance_directive/jenny_advance_directive.xml'))
     errors = @ad.validate_c32(document.root)
     errors.should be_empty
@@ -17,6 +21,7 @@ end
 describe AdvanceDirective, "can create a C32 representation of itself" do
   fixtures :advance_directives, :advance_directive_types, :advance_directive_status_codes
 
+  
   it "should create valid C32 content" do
     ad = advance_directives(:jennifer_thompson_advance_directive)
     document = LaikaSpecHelper.build_c32 do |xml|

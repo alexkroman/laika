@@ -1,8 +1,11 @@
-require 'mongrel_cluster/recipes'
-require 'yaml'
+#require 'mongrel_cluster/recipes'
+#require 'yaml'
 
 settings = YAML::load_file('config/deploy_settings.yml')
 server_settings = settings[ENV['deploy_environment']]
+
+puts "HAHSHDAHSD"
+puts server_settings
 
 set :application, server_settings['app_name']
 set :repository,  "https://laika.svn.sourceforge.net/svnroot/laika/webapp/trunk"
@@ -23,7 +26,7 @@ role :web, domain
 role :db,  domain, :primary => true
 set :rails_env, server_settings['rails_env']
 
-set :user, # SET TO THE APP USER
+#set :user, # SET TO THE APP USER
 set :group, 'deploy'
 
 # Setup Mongrel

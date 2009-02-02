@@ -17,7 +17,7 @@ class VendorTestPlansController < ApplicationController
           :user_id => current_user
         }, :order => sort_order || 'created_at ASC').each do |vendor_test_plan|
           (@vendor_test_plans[vendor_test_plan.vendor] ||= []) << vendor_test_plan
-          if vendor_test_plan.validated?
+          if vendor_test_plan.clinical_document
             @errors[vendor_test_plan], @warnings[vendor_test_plan] = vendor_test_plan.count_errors_and_warnings
           end
         end
@@ -102,42 +102,15 @@ class VendorTestPlansController < ApplicationController
 
   def inspect_content
     @vendor_test_plan = VendorTestPlan.find(params[:id])
-    @results = @vendor_test_plan.validate_clinical_document_content
+
   end
 
-  def revalidate
-    begin
-      @vendor_test_plan.cache_validation_report
-    rescue
-      flash[:notice] = "An error occurred while validating the document"
-    end  
-    redirect_to vendor_test_plans_url 
-  end
+
   
   # perform the external validation and display the results
   def validate 
     @vendor_test_plan = VendorTestPlan.find(params[:id])
-    clinical_document = @vendor_test_plan.clinical_document
-    xmlc = ""
-
-    File.open(clinical_document.full_filename) do |f|
-      xmlc =  f.read()
-    end
-
-    begin
-      @doc = REXML::Document.new xmlc
-      if @vendor_test_plan.validated?
-        @report = @vendor_test_plan.clinical_document.validation_report(:xml)
-      else
-        @vendor_test_plan.validate_clinical_document_content
-        @report = REXML::Document.new "<ValidationResults/>"
-      end
-    rescue
-      @report = REXML::Document.new "<ValidationResults><Result validator='C32 Schematron Validator' isValid='false'><error>Catastrophic data error.  Non-parseable XML uploaded to Laika</error></Result><Result validator='CCD Schematron Validator' isValid='true'/><Result validator='C32 Schema Validator' isValid='true'/></ValidationResults>"
-    end
-
-    @vendor_test_plan.add_inspection_results_to_validation_errors(@report)
-    @error_mapping = match_errors(@report,@doc)
+  
   end
 
   # perform the external validation and display the results
@@ -157,38 +130,7 @@ class VendorTestPlansController < ApplicationController
     end
   end   
    
-  private 
-  # method used to mark the elements in the document that have errors so they 
-  # can be linked to
-  def match_errors(errors, doc)
-    error_map = {}
-    error_id = 0
-    @error_attributes = []
-    locs = []
 
-    REXML::XPath.each(errors,'//@location') do |e| 
-      locs << e.value 
-    end
-
-    locs.each do |location|
-      node = REXML::XPath.first(doc ,location)
-      if(node)
-        elem = node
-        if node.class == REXML::Attribute
-          @error_attributes << node
-          elem = node.element
-        end
-        if elem
-          unless elem.attributes['error_id']
-            elem.add_attribute('error_id',"#{error_id}") 
-            error_id += 1
-          end
-          error_map[location] = elem.attributes['error_id']
-        end
-      end
-    end
-
-    error_map
-  end  
+ 
   
 end

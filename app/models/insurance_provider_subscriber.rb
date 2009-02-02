@@ -5,39 +5,7 @@ class InsuranceProviderSubscriber < ActiveRecord::Base
   belongs_to :insurance_provider
 
   include PersonLike
-  include MatchHelper
 
-  @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
-
-  def validate_c32(act)
-
-    unless act
-      return [ContentError.new]
-    end
-
-    errors = []
-
-    begin
-      particpantRole = REXML::XPath.first(act,"cda:participant[@typeCode='HLD']/cda:participantRole[@classCode='IND']",@@default_namespaces)
-      if person_name
-        errors.concat person_name.validate_c32(REXML::XPath.first(particpantRole,"cda:playingEntity/cda:name",@@default_namespaces))
-      end       
-      if address
-        errors.concat address.validate_c32(REXML::XPath.first(particpantRole,'cda:addr',@@default_namespaces))
-      end
-      if telecom
-        errors.concat telecom.validate_c32(REXML::XPath.first(particpantRole,'cda:telecom',@@default_namespaces))
-      end
-    rescue
-      errors << ContentError.new(
-              :section => 'Subscriber Information', 
-              :error_message => 'Failed checking name, address and telecom details on the insurance provider subcriber XML',
-              :type=>'error',
-              :location => act.xpath)
-    end
-
-    return errors.compact
-  end
 
   def to_c32(xml)
     xml.participant("typeCode" => "HLD") do

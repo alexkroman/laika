@@ -1,6 +1,7 @@
+require 'lib/validation.rb'
 module Validators
   module Schema
-    class Validator
+    class Validator < Validation::BaseValidator
       require 'java'
       import 'javax.xml.validation.SchemaFactory'
       import 'javax.xml.XMLConstants'
@@ -18,8 +19,8 @@ module Validators
       end
       
       # Validate the document against the configured schema
-      def validate(document)
-        valid = true
+      def validate(patient_data, document)
+        errors = []
         begin 
           doc = @document_builder.parse(ByteArrayInputStream.new(java.lang.String.new(document.to_s).getBytes))
           source = javax.xml.transform.dom.DOMSource.new(doc)
@@ -27,19 +28,20 @@ module Validators
           validator.validate(source);
        rescue 
           # this is where we will do something with the error
-          valid = false
+          
+          errors << ContentError.new(:error_message=>$!.message, :validator=>@validator_name,:inspection_type=>::XML_VALIDATION_INSPECTION)
        end
-       valid
+       errors
       end
       
       
       private 
       # set the schema file and create the java objects to perfrom the validation
       def set_schema(file)
-        factory = SchemaFactory.newInstance(XMLConstants::W3C_XML_SCHEMA_NS_URI)
-        schemaFile =  StreamSource.new(java.io.File.new(file));
+        factory = javax.xml.validation.SchemaFactory.newInstance(javax.xml.XMLConstants::W3C_XML_SCHEMA_NS_URI)
+        schemaFile =  javax.xml.transform.stream.StreamSource.new(java.io.File.new(file));
         @schema = factory.newSchema(schemaFile)
-        @document_builder = DocumentBuilderFactory.newInstance().newDocumentBuilder()
+        @document_builder = javax.xml.parsers.DocumentBuilderFactory.newInstance().newDocumentBuilder()
       end
 
     end

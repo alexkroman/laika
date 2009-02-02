@@ -81,29 +81,7 @@ describe "vendor_test_plans/index.html.erb" do
     end
   end
 
-  it "should list a generate-and-format test plan with an unvalidated clinical document" do
-    vtp = VendorTestPlan.create(
-      :kind => kinds(:generateAndFormat),
-      :patient_data => PatientData.create(:name => 'xfoox',
-                                          :user => users(:alex_kroman)))
-    doc = ClinicalDocument.new
-    doc.filename = 'xxx'
-    doc.size = 1
-    vtp.clinical_document = doc
-    vendor = stub(:vendor, :public_id => 'xxxyyy')
-    assigns[:vendors] = [vendor]
-    assigns[:vendor_test_plans] = { vendor => [ vtp ] }
 
-    render "vendor_test_plans/index.html.erb"
-
-    response.should have_tag("h3", /#{vendor.public_id}/)
-    response.should have_tag("table[id=dashboard]>tr[id=vendor_test_plan_#{vtp.id}]") do
-      with_tag 'td', /xfoox/
-      with_tag 'td', 'validation error'
-      with_tag 'td>a', /revalidate/
-      with_tag 'td>a', /delete/
-    end
-  end
 
   it "should list a display-and-file test plan" do
     vtp = VendorTestPlan.create(

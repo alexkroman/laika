@@ -1,10 +1,14 @@
 <!-- Start Content -->
+<%
+@errors = @vendor_test_plan.validate_clinical_document_content
+
+%>
   <div class="content">
     <div class="container" >
       <div class="column span-6 append-1">
         <h3>Inspection Results</h3>
         <div id="results">
-          <% if @results.size == 0 -%>
+          <% if @errors.size == 0 -%>
             <div class="pass">PASS</div>
           <% else -%>
             <div class="fail">FAIL</div>
@@ -17,7 +21,7 @@
                 <div class="visualIndication1">
                   <div><span class="portion" style="width:23px"></span></div>
                 </div>
-                <span class="number"><%= @results.size %></span> violations
+                <span class="number"><%= @errors.size %></span> violations
               </div>
               <a href="#"><div class="right on">ON</div></a>
             </div>
@@ -47,14 +51,18 @@
               <th>Field</th>
               <th>Message</th>
               <th>Location</th>
+               <th>Inspection Type</th>
+                <th>Validator</th>
             </tr>
-            <% @results.each do |error| %>
+            <% @errors.each do |error| %>
             <tr>
               <td><%= error.section %></td>
               <td><%= error.subsection %></td>
               <td><%= error.field_name %></td>
               <td><%= error.error_message %></td>
                <td><%= error.location %></td>
+               <td><%= error.inspection_type %></td>
+               <td><%= error.validator %></td>
             </tr>
             <% end -%>
           </table> 

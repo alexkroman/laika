@@ -22,8 +22,9 @@ describe VendorTestPlansController do
     before(:each) do
       @vendor1 = stub :vendor1
       @vendor2 = stub :vendor2
-      @vtp1 = stub :plan, :vendor => @vendor1, :validated? => false
-      @vtp2 = stub :plan, :vendor => @vendor2, :validated? => true, :count_errors_and_warnings => [1,2]
+      @clinical_document = ClinicalDocument.find(:first)
+      @vtp1 = stub :plan, :vendor => @vendor1, :validated? => false, :clinical_document=>nil
+      @vtp2 = stub :plan, :vendor => @vendor2, :validated? => true, :count_errors_and_warnings => [1,2], :clinical_document=>@clinical_document
       VendorTestPlan.stub!(:find).and_return([ @vtp1, @vtp2 ])
     end
 

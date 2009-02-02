@@ -401,7 +401,7 @@ Problems section
 							<templateId root='2.16.840.1.113883.10.20.1.50'/> <!-- Problem status observation template -->
 							<code code="33999-4" codeSystem="2.16.840.1.113883.6.1" displayName="Status"/>
 							<statusCode code="completed"/>
-							<value xsi:type="CE" code="55561003" codeSystem="2.16.840.1.113883.6.96" displayName="Active"/>
+							<value xsi:type="CE" code="555610034" codeSystem="2.16.840.1.113883.6.96" displayName="Active"/>
 						</observation>
 					</entryRelationship>
 				</observation>

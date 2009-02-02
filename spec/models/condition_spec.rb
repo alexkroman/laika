@@ -1,4 +1,5 @@
 require File.dirname(__FILE__) + '/../spec_helper'
+require "lib/validators/c32_validator"
 
 describe Condition, "can validate itself" do
   fixtures :conditions, :problem_types
@@ -18,6 +19,8 @@ end
 describe Condition, "can create a C32 representation of itself" do
   fixtures :conditions, :problem_types
 
+
+  
   it "should create valid C32 content" do
     cond = conditions(:joes_condition)
     

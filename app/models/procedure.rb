@@ -4,10 +4,7 @@ class Procedure < ActiveRecord::Base
 
   belongs_to :patient_data
 
-  include MatchHelper
-
-  @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
-
+  
   def requirements
     {
       :procedure_id => :required,
@@ -16,14 +13,8 @@ class Procedure < ActiveRecord::Base
     }
   end
 
-  #Reimplementing from MatchHelper
-  def section_name
-    "Procedures Module"
-  end
 
-  def validate_c32(document)
-
-  end
+ 
 
   def to_c32(xml)
     xml.entry("typeCode" => "DRIV") do

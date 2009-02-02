@@ -1,7 +1,11 @@
 require File.dirname(__FILE__) + '/../spec_helper'
+require "lib/validators/c32_validator"
+
 
 describe Allergy, "it can validate allergy entries in a C32" do
   fixtures :allergies, :severity_terms, :adverse_event_types
+  
+
   
   it "should verify an allergy matches in a C32 doc" do
     document = REXML::Document.new(File.new(RAILS_ROOT + '/spec/test_data/allergies/joe_allergy.xml'))
@@ -21,6 +25,7 @@ end
 describe Allergy, "can create a C32 representation of itself" do
   fixtures :allergies, :severity_terms, :adverse_event_types
   
+ 
   it "should create valid C32 content" do
     joe_allergy = allergies(:joes_allergy)
     

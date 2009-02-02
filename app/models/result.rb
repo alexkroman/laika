@@ -8,6 +8,7 @@ class Result < AbstractResult
     '2.16.840.1.113883.3.88.11.32.16'
   end
 
+
   def self.c32_component(results, xml)
     # Start Results
     unless results.empty?
@@ -45,14 +46,17 @@ class Result < AbstractResult
                 end
               end
             end
+
           end
 
           yield
+
 
         end
       end
     end
     # End Results
   end
+
 
 end

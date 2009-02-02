@@ -1,3 +1,4 @@
+require 'lib/validation.rb'
 module Validators
    module Umls
     #Base class that sets the connection information for all of the other  UMLS models to use
@@ -43,23 +44,23 @@ module Validators
     end
 
     # Class that validates documents against codes and codesystems in the UMLS database
-    class UmlsValidator
+    class UmlsValidator < Validation::BaseValidator
         # The mapping file maps the oid's that would be found in a clinical document to the logical codesystem 
         # identifier in the UMLS db
         UMLS_MAPPING_DEFAULT = "config/UMLS_MAPPING_FILE.yaml"
-
-        attr_accessor :mapping
         
-        include Singleton
+        attr_accessor :mapping, :msg_type
+        
 
-        def initialize
+        def initialize(m_type)
          @mapping = YAML.load_file(UMLS_MAPPING_DEFAULT)    
+         @msg_type=m_type
         end   
 
 
         # Validate a given xml document against the umls db. This validation only looks to see 
         # if the code 
-        def validate(document)
+        def validate(pateint_data,document)
        
          errors = []
          
@@ -78,7 +79,11 @@ module Validators
 
            # figure out how to handle the errors here
             unless validate_code(oid,code,name)
-               errors << el
+               errors << ContentError.new(:location=>el.xpath,
+                                          :error_message=>"Code #{code} not found in CodeSystem #{oid}",
+                                          :validator=>"UmlsValidator",
+                                          "msg_type"=>msg_type,
+                                          :inspection_type=>::UMLS_CODESYSTEM_INSPECTION)
             end          
                  
          end   
@@ -95,7 +100,7 @@ module Validators
           if map && code 
               cs = map["codesystem"]
               parent = map["umlscode"]
-              valid = parent ? in_code_system_with_parent(cs,parent,code)  :  in_code_system(cs,code)
+              valid = parent ? in_code_system_with_parent(cs,parent,code,name)  :  in_code_system(cs,code,name)
             end
          valid
         end

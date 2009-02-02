@@ -78,13 +78,12 @@ class TestPlanManagerController < ApplicationController
               end
               report << "Result:,"
               error_count = 0
-              if vendor_test_plan.validated?
-                error_count = REXML::XPath.first(vendor_test_plan.clinical_document.validation_report(:xml),"count(//error)")
-                error_count += vendor_test_plan.content_errors.length	        	          
+              if vendor_test_plan.clinical_document
+                error_count = vendor_test_plan.content_errors.length	        	          
                 if error_count > 0
                   report << "failure\n"
                   report << "Number of errors:, "
-                  report << error_count 
+                  report << error_count.to_s
                   report << "\n"
                 else
                   report << "success\n"

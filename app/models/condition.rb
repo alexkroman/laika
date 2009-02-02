@@ -5,9 +5,7 @@ class Condition < ActiveRecord::Base
   belongs_to :patient_data
   belongs_to :problem_type
 
-  include MatchHelper
-
-  @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
+ 
 
   def requirements
     {
@@ -19,50 +17,7 @@ class Condition < ActiveRecord::Base
   end
 
 
-  #Reimplementing from MatchHelper
-  def section_name
-    "Conditions Module"
-  end
-
-  def validate_c32(document)
-    errors = []
-    begin
-      section = REXML::XPath.first(document,"//cda:section[cda:templateId/@root='2.16.840.1.113883.10.20.1.11']",@@default_namespaces)
-      act = REXML::XPath.first(section,"cda:entry/cda:act[cda:templateId/@root='2.16.840.1.113883.10.20.1.27']",@@default_namespaces)
-      observation = REXML::XPath.first(act,"cda:entryRelationship[@typeCode='SUBJ']/cda:observation[cda:templateId/@root='2.16.840.1.113883.10.20.1.28']",@@default_namespaces)
-      code = REXML::XPath.first(observation,"cda:code[@codeSystem='2.16.840.1.113883.6.96']",@@default_namespaces)
-      if problem_type
-        errors.concat problem_type.validate_c32(code)
-      end
-      errors << match_value(act, "cda:effectiveTime/cda:low/@value", "start_event", start_event.andand.to_formatted_s(:hl7_ts))
-      errors << match_value(act, "cda:effectiveTime/cda:high/@value", "end_event", end_event.andand.to_formatted_s(:hl7_ts))
-      if free_text_name
-        text =  REXML::XPath.first(observation,"cda:text",@@default_namespaces)
-        deref_text = deref(text)
-        if(deref_text != free_text_name)
-          errors << ContentError.new(:section => "Condition",
-                                     :error_message => "Free text name #{free_text_name} does not match #{deref_text}",
-                                     :location => (text)? text.xpath : (code)? code.xpath : section.xpath)
-        end
-        # if the free text name matches a code from the SNOMED problem list, perform a coded value inspection
-        snowmed_problem = SnowmedProblem.find(:first, :conditions => {:name => free_text_name})
-        if snowmed_problem
-          code =  REXML::XPath.first(observation,"cda:value",@@default_namespaces)
-          errors << match_value(observation, 
-                                "cda:value[@codeSystem='2.16.840.1.113883.6.96']/@code", 
-                                'condition_code', 
-                                snowmed_problem.code)
-        end
-      end
-    rescue
-      errors << ContentError.new(:section => 'Condition',
-                                 :error_message => 'Invalid, non-parsable XML for condition data',
-                                 :type => 'error',
-                                 :location => document.xpath)
-    end
-    errors.compact
-  end
-
+ 
   def to_c32(xml)
     xml.entry do
       xml.act("classCode" => "ACT", "moodCode" => "EVN") do
@@ -118,18 +73,7 @@ class Condition < ActiveRecord::Base
     self.free_text_name = SnowmedProblem.find(:all).sort_by{rand}.first.name
   end
 
-  private 
 
-  def deref(code)
-   if code
-    ref = REXML::XPath.first(code,"cda:reference",@@default_namespaces)
-    if ref
-       REXML::XPath.first(code.document,"//cda:content[@ID=$id]/text()",@@default_namespaces,{"id"=>ref.attributes['value'].gsub("#",'')})
-    else
-       nil
-     end
-   end 
- end
 
   def self.c32_component(conditions, xml)
     if conditions.size > 0

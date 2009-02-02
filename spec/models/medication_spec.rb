@@ -1,8 +1,8 @@
 require File.dirname(__FILE__) + '/../spec_helper'
-
+require "lib/validators/c32_validator"
 describe Medication, 'it can validate medication elements in a C32' do
   fixtures :medications, :code_systems, :medication_types
-  
+
   it "should verify a medication in a C32 doc" do
     document = REXML::Document.new(File.new(RAILS_ROOT + '/spec/test_data/medications/jenny_medication.xml'))
     med = medications(:jennifer_thompson_medication)
@@ -13,7 +13,7 @@ end
 
 describe Medication, "can create a C32 representation of itself" do
   fixtures :medications, :code_systems, :medication_types
-  
+
   it "should create valid C32 content" do
     med = medications(:jennifer_thompson_medication)
     
@@ -42,6 +42,7 @@ describe Medication, "can create a C32 representation of itself" do
       end
     end
     errors = med.validate_c32(document.root)
+    puts errors.inspect if !errors.empty?
     errors.should be_empty
   end
 end

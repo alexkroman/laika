@@ -61,6 +61,7 @@ Rails::Initializer.run do |config|
   config.gem 'andand'
   config.gem 'faker'
   config.gem 'calendar_date_select'
+
 end
 
 ActiveSupport::CoreExtensions::Date::Conversions::DATE_FORMATS[:default] = '%d.%b.%Y'
@@ -74,3 +75,4 @@ ActionMailer::Base.smtp_settings = {
   :port => 25,
   :domain => "mitre.org",
 }
+

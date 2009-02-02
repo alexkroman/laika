@@ -1,5 +1,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
-
+require "lib/validators/c32_validator"
+ # this will add the validate_c32 
+  
 describe InformationSource, "Must be present" do
   fixtures :information_sources, :person_names
   
@@ -24,7 +26,7 @@ end
 
 describe InformationSource, "can create a C32 representation of itself" do
   fixtures :information_sources, :person_names
-  
+
   it "should create valid C32 content" do
     information_source = information_sources(:jennifer_thompson_information_source)
     

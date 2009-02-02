@@ -1,8 +1,11 @@
 require File.dirname(__FILE__) + '/../spec_helper'
+require "lib/validators/c32_validator"
+ # this will add the validate_c32 
 
 describe Support do
   fixtures :relationships, :contact_types, :person_names,
            :addresses, :telecoms, :iso_countries, :supports
+
 
   it "should generate valid c32 with guardian type" do
     pending "SF ticket 2539006"
@@ -20,6 +23,7 @@ describe Support do
     support.validate_c32(document).should be_empty
   end
            
+
   it "should verify a support matches in a C32 document" do
     document = REXML::Document.new(File.new(RAILS_ROOT + '/spec/test_data/supports/jenny_support.xml'))
     support = supports(:jennifer_thompson_husband)

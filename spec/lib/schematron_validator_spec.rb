@@ -23,15 +23,15 @@ if defined?(JRUBY_VERSION)
   describe Validators::Schematron::CompiledValidator , "can validate xml against schematron rules" do
   
     it "should validate clinical documents conforming to schematron rules"  do
-      validator = Validators::Schematron::CompiledValidator.new(File.dirname(__FILE__) + "/../test_data/validators/compiled_schematron.xsl")
+      validator = Validators::Schematron::CompiledValidator.new("test validator", File.dirname(__FILE__) + "/../test_data/validators/compiled_schematron.xsl")
       xml = File.open(File.dirname(__FILE__) + "/../test_data/validators/schematron_test_good.xml","r") do |f| f.read() end
-      validator.validate(REXML::Document.new(xml)).should == true
+      validator.validate(nil,REXML::Document.new(xml)).should be_empty
     end
   
     it "should not validate documents not conforming to schematron rules "  do
-      validator = Validators::Schematron::CompiledValidator.new(File.dirname(__FILE__) + "/../test_data/validators/compiled_schematron.xsl")
+      validator = Validators::Schematron::CompiledValidator.new("test validator", File.dirname(__FILE__) + "/../test_data/validators/compiled_schematron.xsl")
       xml = File.open(File.dirname(__FILE__) + "/../test_data/validators/schematron_test_bad.xml","r") do |f| f.read() end
-      validator.validate(REXML::Document.new(xml)).should == false
+      validator.validate(nil,REXML::Document.new(xml)).should_not be_empty
     end
 
   
@@ -40,15 +40,15 @@ if defined?(JRUBY_VERSION)
   describe Validators::Schematron::UncompiledValidator , "can validate xml against schematron rules" do
   
     it "should validate clinical documents conforming to schematron rules"  do
-      validator = Validators::Schematron::UncompiledValidator.new(File.dirname(__FILE__) + "/../test_data/validators/schematron_rules.xml",File.dirname(__FILE__) + "/../test_data/validators/schematron_1.5_svrl_new.xsl")
+      validator = Validators::Schematron::UncompiledValidator.new("test validator", File.dirname(__FILE__) + "/../test_data/validators/schematron_rules.xml",File.dirname(__FILE__) + "/../test_data/validators/schematron_1.5_svrl_new.xsl")
        xml = File.open(File.dirname(__FILE__) + "/../test_data/validators/schematron_test_good.xml","r") do |f| f.read() end
-      validator.validate(REXML::Document.new(xml)).should == true
+      validator.validate(nil,REXML::Document.new(xml)).should be_empty
     end
   
     it "should not validate documents not conforming to schematron rules "  do
-          validator = Validators::Schematron::UncompiledValidator.new(File.dirname(__FILE__) + "/../test_data/validators/schematron_rules.xml",File.dirname(__FILE__) + "/../test_data/validators/schematron_1.5_svrl_new.xsl")
+          validator = Validators::Schematron::UncompiledValidator.new("test validator", File.dirname(__FILE__) + "/../test_data/validators/schematron_rules.xml",File.dirname(__FILE__) + "/../test_data/validators/schematron_1.5_svrl_new.xsl")
           xml = File.open(File.dirname(__FILE__) + "/../test_data/validators/schematron_test_bad.xml","r") do |f| f.read() end
-          validator.validate(REXML::Document.new(xml)).should == false
+          validator.validate(nil,REXML::Document.new(xml)).should_not be_empty
     end
   
   

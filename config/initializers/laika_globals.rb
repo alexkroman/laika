@@ -2,6 +2,10 @@
 LAIKA_VERSION = "1.3.6"
 FEEDBACK_EMAIL = "talk@projectlaika.org"
 ERROR_EMAIL = "rmccready@mitre.org"
+CONTENT_INSPECTION="ContentInspection"
+XML_VALIDATION_INSPECTION="XmlValidationInspection"
+UMLS_CODESYSTEM_INSPECTION="UmlsCodeSystemInspection"
+
 
 # Extract the subversion revision number from the
 # Capistrano REVISION file or the .svn/entries file
@@ -20,3 +24,4 @@ LAIKA_REVISION = begin
     'x'
   end
 end
+

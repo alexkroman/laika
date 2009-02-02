@@ -1,8 +1,10 @@
 require File.dirname(__FILE__) + '/../spec_helper'
-
+require "lib/validators/c32_validator"
+ # this will add the validate_c32 
+  
 describe Language do
   fixtures :languages, :iso_languages, :iso_countries, :language_ability_modes
-  
+
   it "should create valid C32 without an iso_country" do
     pending "SF ticket 2539066"
     language = Language.new(
@@ -20,6 +22,7 @@ describe Language do
     #puts errors.map { |e| e.error_message }.join(' ')
     errors.should be_empty
   end
+
 
   it "should create valid C32 content" do
     joe_language = languages(:joe_smith_english_language)

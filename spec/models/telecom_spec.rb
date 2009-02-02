@@ -1,5 +1,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
-
+require "lib/validators/c32_validator"
+ # this will add the validate_c32 
+  
 describe Telecom, "can validate it's content" do
   fixtures :telecoms
   

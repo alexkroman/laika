@@ -11,5 +11,6 @@ describe Address, "can create a instance with random values" do
     address.state.should_not be_blank
     address.postal_code.should_not be_blank
     address.iso_country.should == iso_countries(:usa)
+
   end
 end

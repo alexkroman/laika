@@ -9,8 +9,10 @@ class ClinicalDocumentsController < ApplicationController
     @clinical_document = ClinicalDocument.new(params[:clinical_document])
     @vendor_test_plan.clinical_document = @clinical_document
     begin
-    @vendor_test_plan.cache_validation_report
+    logger.debug("calling validate")
+    @vendor_test_plan.validate_clinical_document_content
     rescue
+      logger.error($!)
         flash[:notice] = "An error occurred while validating the document"
     end
     
@@ -21,7 +23,7 @@ class ClinicalDocumentsController < ApplicationController
     @clinical_document = @vendor_test_plan.clinical_document
     @clinical_document.update_attributes(params[:clinical_document])
     begin
-    @vendor_test_plan.cache_validation_report
+    @vendor_test_plan.validate_clinical_document_content
     rescue
         flash[:notice] = "An error occurred while validating the document"
     end

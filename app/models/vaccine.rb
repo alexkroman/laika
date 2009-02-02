@@ -1,10 +1,7 @@
 class Vaccine < ActiveRecord::Base
   has_select_options
 
-  #Reimplementing from MatchHelper
-  def section_name
-    "Vaccines Module"
-  end
+
 
   def to_c32(xml)
     xml.code('code' => code, 

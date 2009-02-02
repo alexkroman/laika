@@ -1,5 +1,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
-
+require "lib/validators/c32_validator"
+ # this will add the validate_c32 
+  
 describe Result, "it can validate result entries in a C32" do
   fixtures :abstract_results, :code_systems
   

@@ -1,5 +1,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
-
+require "lib/validators/c32_validator"
+ # this will add the validate_c32 
+  
 describe VitalSign, "it can validate vital sign entries in a C32" do
   fixtures :abstract_results, :code_systems
   
@@ -18,6 +20,7 @@ describe VitalSign, "it can generate a valid C32 representation of itself" do
   fixtures :abstract_results, :code_systems
   
   before(:each) do
+
     @vs = abstract_results(:jennifer_thompson_vital_sign)
   end
   

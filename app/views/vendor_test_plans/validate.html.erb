@@ -2,24 +2,17 @@
    @numXMLValidationErrors = 0
    @numContentInspectionWarnings = 0 
    @numUMLSWarnings = 0
-   @report.elements.to_a("//Result").each do |res| 
-     @errorType = res.attributes['validator']
-     res.elements.to_a("./error").each do |err|
-       if @errorType.to_s == "Content Inspection"
-         @numContentInspectionWarnings += 1 
-       elsif @errorType.to_s == "UMLS CodeSystem Validator"
-         @numUMLSWarnings += 1
-       else 
-         @numXMLValidationErrors += 1
-       end 
-     end 
-   end %>
+   doc = @vendor_test_plan.clinical_document.as_xml_document
+   
+     errors = @vendor_test_plan.validate_clinical_document_content
+     @error_mapping = match_errors(errors,doc)
+     %>
   <!-- Start Content -->
   <div class="content">
     <div class="container" >
       <div class="column span-6 append-1">
         <div id="results">
-          <% if @numXMLValidationErrors == 0 && @vendor_test_plan.validated? %>
+          <% if @numXMLValidationErrors == 0 && @vendor_test_plan.clinical_document %>
             <div class="pass">PASS</div>
           <% else %>
             <div class="fail">FAIL</div>
@@ -32,8 +25,8 @@
                 <div class="visualIndication1">
                   <div><span class="portion" style="width:23px"></span></div>
                 </div>
-                <% if @vendor_test_plan.validated? %>
-                  <span class="number"><%= @numXMLValidationErrors %></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; XML Validation Errors
+                <% if @vendor_test_plan.clinical_document %>
+                  <span class="number"><%= @vendor_test_plan.content_errors.count(:conditions=>{:inspection_type=>::XML_VALIDATION_INSPECTION}) %></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; XML Validation Errors
                 <% else %>
                   Unrecoverable XML Validation Error
                 <% end %>
@@ -44,7 +37,7 @@
                 <div class="visualIndication1">
                   <div><span class="portion" style="width:23px"></span></div>
                 </div>
-                <span class="number"><%= @numContentInspectionWarnings %></span>&nbsp; Content Inspection Warnings
+                <span class="number"><%= @vendor_test_plan.content_errors.count(:conditions=>{:inspection_type=>::CONTENT_INSPECTION}) %></span>&nbsp; Content Inspection Warnings
               </div>
             </div>
             <div class="widget">
@@ -52,8 +45,8 @@
                 <div class="visualIndication1">
                   <div><span class="portion" style="width:23px"></span></div>
                 </div>
-                <% if @vendor_test_plan.validated? %>
-                  <span class="number"><%= @numUMLSWarnings %></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; UMLS Code Warnings
+                <% if @vendor_test_plan.clinical_document %>
+                  <span class="number"><%= @vendor_test_plan.content_errors.count(:conditions=>{:inspection_type=>::UMLS_CODESYSTEM_INSPECTION}) %></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; UMLS Code Warnings
                 <% end %>
               </div>
             </div>
@@ -81,144 +74,14 @@
           </div>
         </div>
       </div>
-      <div class="column span-13 last">
-        <div id="template">
-          <h3>XML Validation Results</h3>
-          <table id="dashboard">
-            <tr valign="top">
-              <th width="125">Error Type</th>
-              <th>Error Message</th>
-            </tr>
-            <% @numXMLValidationErrors = 0 %>
-            <% @errorType = "C32" %>
-            <% @report.elements.to_a("//Result").each do |res| %>
-            <%   @errorType = res.attributes['validator'] %>
-            <%   res.elements.to_a("./error").each do |err| %> 
-            <%     if @errorType.to_s != "Content Inspection" && @errorType.to_s != "UMLS CodeSystem Validator"%>
-            <%       @numXMLValidationErrors += 1 %>
-            <%       error_id = nil
-                     if err.attributes['location'] 
-                       error_id = @error_mapping[err.attributes['location']]
-                     end %>
-               <tr>
-                <td><%= @errorType.to_s %></td>
-                <td>
-                  <% if error_id %>
-                    <a style="color:#cc3300" href="javascript:scroll_to_module('error_<%=error_id%>', 1.0);" ><b><%= @errorCounter %>.</b> <span><%= err.to_s %></span></a>
-                  <% else %>
-                    <b><%= @numXMLValidationErrors %>.</b> <span><%= err.to_s %></span>
-                  <% end %>
-                </td>
-              </tr>  
-            <%     end %> 
-            <%   end %>
-            <% end %>
-            <% if @numXMLValidationErrors == 0 %>
-              <tr>
-                <td>--</td>
-                <td>
-                  <% if @vendor_test_plan.validated? %>
-                    No XML Validation Errors Detected
-                  <% else %>
-                    Unrecoverable XML Validation Error
-                  <% end %>
-                </td>
-              </tr>
-            <% end %>
-          </table> 
-          <h3>Content Inspection Results</h3>
-          <table id="dashboard">
-            <tr valign="top">
-              <th width="125">Warning Type</th>
-              <th>Warning Message</th>
-            </tr>
-            <% @numContentInspectionWarnings = 0 %>
-            <% @errorType = "C32" %>
-            <% @report.elements.to_a("//Result").each do |res| %>
-            <%   @errorType = res.attributes['validator'] %>
-            <%   res.elements.to_a("./error").each do |err| %> 
-            <%     if @errorType.to_s == "Content Inspection" %>
-            <%       @numContentInspectionWarnings += 1 %>
-            <%       error_id = nil
-                     if err.attributes['location'] 
-                       error_id = @error_mapping[err.attributes['location']]
-                     end %>
-              <tr>
-                <td><%= @errorType.to_s %></td>
-                <td>
-                  <% if error_id %>
-                    <a style="color:#cc3300" href="javascript:scroll_to_module('error_<%=error_id%>', 1.0);" ><b><%= @numContentInspectionWarnings %>.</b> <span><%= err.to_s %></span></a>
-                  <% else %>
-                    <b><%= @errorCounter %>.</b> <span><%= err.to_s %></span>
-                  <% end %>
-                </td>
-              </tr>   
-            <%     end %> 
-            <%   end %>
-            <% end %>
-            <% if @numContentInspectionWarnings == 0 %>
-              <tr>
-                <td>--</td>
-                <td>
-                  <% if @vendor_test_plan.validated? %>
-                    No Content Inspection Warnings Detected
-                  <% else %>
-                    Unrecoverable XML Validation Error
-                  <% end %>
-                </td>
-              </tr>
-            <% end %>
-          </table>
-          <h3>UMLS Code Testing Results</h3>
-          <table id="dashboard">
-            <tr valign="top">
-              <th width="125">Warning Type</th>
-              <th>Warning Message</th>
-            </tr>
-            <% @numUMLSWarnings = 0 %>
-            <% @errorType = "C32" %>
-            <% @report.elements.to_a("//Result").each do |res| %>
-            <%   @errorType = res.attributes['validator'] %>
-            <%   res.elements.to_a("./error").each do |err| %> 
-            <%     if @errorType.to_s == "UMLS CodeSystem Validator" %>
-            <%       @numUMLSWarnings += 1 %>
-            <%       error_id = nil
-                     if err.attributes['location'] 
-                       error_id = @error_mapping[err.attributes['location']]
-                     end %>
-              <tr>
-                <td><%= @errorType.to_s %></td>
-                <td>
-                  <% if error_id %>
-                    <a style="color:#cc3300" href="javascript:scroll_to_module('error_<%=error_id%>', 1.0);" ><b><%= @numUMLSWarnings %>.</b> <span><%= err.to_s %></span></a>
-                  <% else %>
-                    <b><%= @errorCounter %>.</b> <span><%= err.to_s %></span>
-                  <% end %>
-                </td>
-              </tr>   
-            <%     end %> 
-            <%   end %>
-            <% end %>
-            <% if @numUMLSWarnings == 0 %>
-              <tr>
-                <td>--</td>
-                <td>
-                  <% if @vendor_test_plan.validated? %>
-                    No UMLS Coded Warnings Detected
-                  <% else %>
-                    Unrecoverable XML Validation Error
-                  <% end %>
-                </td>
-              </tr>
-            <% end %>
-          </table>
-        </div>
-      </div>
+        <%= render :partial=>"error_list",:locals=>{:header=>"XML Validation Results", :errors=>@vendor_test_plan.content_errors.find_all_by_inspection_type(::XML_VALIDATION_INSPECTION)} %>
+        <%= render :partial=>"error_list",:locals=>{:header=>"Content Inspection Results", :errors=>@vendor_test_plan.content_errors.find_all_by_inspection_type(::CONTENT_INSPECTION)} %>
+        <%= render :partial=>"error_list",:locals=>{:header=>"UMLS Validation Results", :errors=>@vendor_test_plan.content_errors.find_all_by_inspection_type(::UMLS_CODESYSTEM_INSPECTION)} %>
       <!-- Start Pretty XML -->
       <div class="column span-19 append-1">
         <h3>Vendor Generated XML</h3>
         <hr/>
-        <%= render :partial => "node" , :locals => {:doc => @doc} %>
+        <%= render :partial => "node" , :locals => {:doc => doc} %>
       </div>
       <!-- End Pretty XML -->
     </div>

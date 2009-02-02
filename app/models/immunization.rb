@@ -6,9 +6,7 @@ class Immunization < ActiveRecord::Base
   belongs_to :no_immunization_reason
   belongs_to :patient_data
 
-  include MatchHelper
-
-  @@default_namespaces = {"cda"=>"urn:hl7-org:v3"} 
+ 
 
   def requirements
     {
@@ -19,16 +17,7 @@ class Immunization < ActiveRecord::Base
     }
   end
 
-  def validate_c32(document)
-    errors=[]  
-    errors.compact
-  end
-
-  #Reimplementing from MatchHelper
-  def section_name
-    "Immunizations Module"
-  end
-
+  
   def to_c32(xml)    
     xml.entry('typeCode'=>'DRIV') do
       xml.substanceAdministration('classCode' => 'SBADM', 'moodCode' => 'EVN', 'negationInd' => refusal) do

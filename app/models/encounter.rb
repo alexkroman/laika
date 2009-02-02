@@ -7,9 +7,8 @@ class Encounter < ActiveRecord::Base
   belongs_to :encounter_location_code
 
   include PersonLike
-  include MatchHelper
-
-  @@default_namespaces = {"cda"=>"urn:hl7-org:v3"} 
+  
+  
 
   def requirements
     {
@@ -20,16 +19,7 @@ class Encounter < ActiveRecord::Base
     }
   end
 
-  #Reimplementing from MatchHelper
-  def section_name
-    "Encounters Module"
-  end
-
-  def validate_c32(document)
-    errors=[]  
-    errors.compact
-  end
-
+ 
   def to_c32(xml)    
     xml.entry('typeCode'=>'DRIV') do
       xml.encounter('classCode'=>'ENC', 'moodCode'=>'EVN') do

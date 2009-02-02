@@ -1,19 +1,7 @@
 class ProviderType < ActiveRecord::Base
   has_select_options
 
-  include MatchHelper
-
-  def validate_c32(type)
-    unless type
-      return [ContentError.new(:section => 'Provider', 
-                               :subsection => 'ProviderType',
-                               :error_message => 'Unable to find provider type')]
-    end
-    errors = []
-    errors << match_value(type,'@code','code',code)
-    errors << match_value(type,'@displayName','displayName',name)
-    return errors.compact
-  end
+ 
 
   def to_c32(xml)
     xml.code("code" => code,

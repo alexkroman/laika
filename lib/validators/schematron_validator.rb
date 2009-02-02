@@ -1,3 +1,4 @@
+require 'lib/validation.rb'
 module Validators
   module Schematron
     require 'java'
@@ -18,14 +19,14 @@ module Validators
     
     # base validator class, handles the acutal validation process as it's common between the compiled (XSLT pre computed) 
     # and the uncompiled (Do a transform of the schematron rules resulting in a stylesheet and use that stylesheet to do the validation)
-    class BaseValidator
+    class BaseValidator < Validation::BaseValidator
       
    
       
       # validate the document, This performs the XSLT transform on the document and then looks for any errors in the 
       # resulting doc, errors show up as failed-assert elements in the result.
-      def validate(document)
-           valid = true
+      def validate(patient_data,document)
+           errors = []
            style = get_schematron_processor
            #yes actually need to convert to java.io.String to work
            source = Validators::Schematron.create_source(document.to_s)
@@ -36,13 +37,14 @@ module Validators
            redoc = REXML::Document.new result
            # loop over failed assertions 
            redoc.elements.to_a("//svrl:failed-assert").each do |el|
-             valid = false
-             el.attributes["location"]
-             el.text
+            
              # do something here with the values
-
+            errors << ContentError.new(:location=>el.attributes["location"],
+                                       :error_message=>el.text,
+                                       :validator=>name,
+                                       :inspection_type=>::XML_VALIDATION_INSPECTION)
            end
-           valid
+           errors
       end
         
         
@@ -57,13 +59,14 @@ module Validators
     
     class UncompiledValidator < BaseValidator
       
-      attr_accessor :schematron_file, :stylesheet, :cache
+      attr_accessor :schematron_file, :stylesheet, :cache, :name
       
       # create a new UnCompiledValidator
       # schematron_file - the base schematron rule set that will be used to create the XSLT stylesheet used to perform the validation
       # stylesheet - this is the stylesheet that will be used on the schematron rules to create the validation stylesheet
       # cache - whether or not to cache the validation stylesheet, if false (default) then it will compute the validation stylesheet each time validate is called
-      def initialize(schematron_file, stylesheet, cache=false)
+      def initialize(name,schematron_file, stylesheet, cache=false)
+        @name = name
         @schematron_file  = schematron_file
         @stylesheet = stylesheet
         @cache = cache       
@@ -93,10 +96,11 @@ module Validators
     # 
     class CompiledValidator < BaseValidator
       
-      attr_accessor :stylesheet
+      attr_accessor :stylesheet, :name
       
       # stylesheet -  the precomputed validation stylesheet used to validate the document
-      def initialize(stylesheet)
+      def initialize(name,stylesheet)
+        @name = name
         @stylesheet = stylesheet
       end
 
