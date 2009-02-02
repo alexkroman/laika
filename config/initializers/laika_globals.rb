@@ -14,7 +14,7 @@ LAIKA_REVISION = begin
     end
   elsif File.exists?(entries_path)
     File.open(entries_path, "r") do |entries|
-      entries.lines.take(4).last.chomp
+      entries.to_a[3].chomp
     end
   else
     'x'
