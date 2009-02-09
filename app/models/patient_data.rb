@@ -112,7 +112,9 @@ class PatientData < ActiveRecord::Base
     copied_patient_data
   end
 
-  def to_c32(xml = Builder::XmlMarkup.new)
+  def to_c32(xml = nil)
+    xml ||= Builder::XmlMarkup.new(:indent => 2)
+    xml.instruct!
 
     xml.ClinicalDocument("xsi:schemaLocation" => "urn:hl7-org:v3 http://xreg2.nist.gov:8080/hitspValidation/schema/cdar2c32/infrastructure/cda/C32_CDA.xsd",
                          "xmlns" => "urn:hl7-org:v3",
