@@ -28,7 +28,6 @@ describe VendorTestPlansController do
     end
 
     it "should setup display of the dashboard" do
-       pending "SF ticket 2263302"
       get :index
       assigns[:vendors].to_set.should == [@vendor1, @vendor2].to_set
       assigns[:errors][@vtp1].should be_nil
