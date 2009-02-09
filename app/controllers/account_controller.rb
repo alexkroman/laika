@@ -27,8 +27,8 @@ class AccountController < ApplicationController
       
     else
       flash[:notice] = %{
-        Sorry mate, your email and password <b>do not match</b>.
-        Want to <a href='/account/signup' class='loginlink'>create an account?</a>
+        Sorry mate, your email and password <strong>do not match</strong>.
+        Want to <a href='#{relative_url_root}/account/signup' class='loginlink'>create an account?</a>
       }
       redirect_to :action => 'login'
     end
