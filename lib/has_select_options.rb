@@ -7,6 +7,7 @@
 # - You can change the generated method name, useful if you need multiple methods
 # - You can pass a block to change the output of select_options. The block argument is a single record.
 # - The output of select_options can be passed to a form.select helper.
+# - You can explicitly pass an array of objects that you'd like to select from instead.
 #
 # By default, select_options will select all records sorted by name ascending.
 # The default output for each record is [name, id].
@@ -43,8 +44,8 @@
 module HasSelectOptionsExtension
   def has_select_options(args = {})
     (class << self; self; end).instance_eval do
-      define_method(args.delete(:name) || :select_options) do
-        find(:all, { :order => 'name ASC' }.merge(args)).map do |r|
+      define_method(args.delete(:name) || :select_options) do |*x|
+        (x.size > 0 ? x[0] : find(:all, { :order => 'name ASC' }.merge(args))).map do |r|
           block_given? ? yield(r) : [r.name, r.id]
         end
       end

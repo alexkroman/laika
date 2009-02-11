@@ -39,31 +39,17 @@
                   <%= link_to 'delete', patient_data_instance_url(patient_data), :confirm => 'Are you sure you want to delete this Laika template?', :method => :delete %>
                   <a href="javascript:toggle_div('assignment_div_<%=patient_data.id%>');">assign</a>
                   <div id="assignment_div_<%=patient_data.id%>" style="display:none">
-                    <form action="<%= url_for :controller => 'test_plan_manager', :action => 'assign_patient_data' %>">
+                    <% form_for VendorTestPlan.new(:kind_id => @previous_kind, :vendor_id => @previous_vendor, :user_id => current_user.id),
+                      :url => {:controller => 'test_plan_manager', :action => 'assign_patient_data' } do |f| -%>
                       <input type="hidden" name="pd_id" value="<%= patient_data.id %>"/>
-                      <select name="vendor_id">
-                        <% @vendors.each do |vendor| -%>
-                          <option <%= vendor == @previous_vendor ? 'selected="selected"' : '' %>
-                            value="<%= vendor.id %>"><%= vendor.public_id %></option>
-                        <% end -%>
-                      </select>
-                      <select name="kind_id">
-                        <% @kinds.each do |kind| -%>
-                          <option  <%= kind == @previous_kind ? 'selected="selected"' : '' %>
-                            value="<%= kind.id %>"><%= kind.name %></option>
-                        <% end -%>
-                      </select>
+                      <%= f.select :vendor_id, Vendor.select_options(@vendors) %>
+                      <%= f.select :kind_id, Kind.select_options %>
                       <% if current_user.administrator? -%>
-                        <select name="user_id">
-                          <option value="<%= current_user.id %>"><%= current_user.display_name %></option>
-                          <% @users.select {|u| u != current_user}.each do |user| -%>
-                            <option value="<%= user.id %>"><%= user.display_name %></option>
-                          <% end -%>
-                        </select>
+                        <%= f.select :user_id, User.select_options %>
                       <% end -%>
                       <p/>
                       <input type="submit" value="Assign"/>
-                    </form>
+                    <% end -%>
                   </div>
                 </td>
               </tr>

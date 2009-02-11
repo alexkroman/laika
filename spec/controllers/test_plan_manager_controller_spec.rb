@@ -17,7 +17,7 @@ describe TestPlanManagerController do
 
       User.should_not_receive(:find)
 
-      get :assign_patient_data, :pd_id => patient_data, :vendor_id => vendor, :kind_id => kind
+      get :assign_patient_data, :pd_id => patient_data, :vendor_test_plan => { :vendor_id => vendor, :kind_id => kind }
     end
   end
 
@@ -37,7 +37,7 @@ describe TestPlanManagerController do
 
       User.should_receive(:find).with(other)
 
-      get :assign_patient_data, :user_id => other, :pd_id => patient_data, :vendor_id => vendor, :kind_id => kind
+      get :assign_patient_data, :pd_id => patient_data, :vendor_test_plan => {:user_id => other, :vendor_id => vendor, :kind_id => kind }
     end
   end
 end

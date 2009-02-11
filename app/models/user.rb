@@ -1,6 +1,7 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
+  has_select_options(:order => 'last_name ASC, first_name ASC') {|r| [r.display_name, r.id] }
 
   # Virtual attribute for the unencrypted password
   attr_accessor :password

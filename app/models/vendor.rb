@@ -1,4 +1,6 @@
 class Vendor < ActiveRecord::Base
+  has_select_options(:order => 'user_id ASC, public_id ASC') {|r| [ r.public_id, r.id ] }
+
   belongs_to :user
   attr_protected :user
   has_many :vendor_test_plans, :dependent => :destroy

@@ -13,13 +13,11 @@ class PatientDataController < ApplicationController
       :order => sort_order || "name ASC")
 
     @vendors = current_user.vendors + Vendor.unclaimed
-    @kinds = Kind.find(:all)
-    @users = User.find(:all)
 
     # These session values are set by TestPlanManagerController#assign_patient_data
     # so that previous selections are retained as a convenience in the UI.
-    @previous_vendor = Vendor.find(session[:previous_vendor_id]) if session[:previous_vendor_id]
-    @previous_kind = Kind.find(session[:previous_kind_id]) if session[:previous_kind_id]
+    @previous_vendor = Vendor.find_by_id(session[:previous_vendor_id]) if session[:previous_vendor_id]
+    @previous_kind = Kind.find_by_id(session[:previous_kind_id]) if session[:previous_kind_id]
   end
   
   def autoCreate
