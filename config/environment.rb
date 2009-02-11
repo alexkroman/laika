@@ -61,6 +61,7 @@ Rails::Initializer.run do |config|
   config.gem 'andand'
   config.gem 'faker'
   config.gem 'calendar_date_select'
+  config.gem 'xds-client'
 
 end
 
