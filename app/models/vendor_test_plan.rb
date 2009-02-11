@@ -8,10 +8,8 @@ class VendorTestPlan < ActiveRecord::Base
   has_one :clinical_document, :dependent => :destroy
   has_many :content_errors, :dependent => :destroy
 
-
-  
-  before_save :_bf
-  after_save :_bf
+  #before_save :_bf
+  #after_save :_bf
   def _bf
     puts self.errors
   end

@@ -35,7 +35,7 @@ describe VendorTestPlan do
     vtp.save
     
     errors, warnings = vtp.count_errors_and_warnings
-    puts vtp.content_errors
+    #puts vtp.content_errors
     errors.should == 2
     warnings.should == 1
   end
