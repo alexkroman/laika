@@ -36,7 +36,7 @@
             <% end %>
           </td>
           <td><%= vendor_test_plan.updated_at.strftime("%d.%b.%Y %I:%M %p %Z")  %></td>
-          <td><%= vendor_test_plan.kind.name %></td>
+          <td><%= vendor_test_plan.kind.display_name %></td>
           <td>
             <% if vendor_test_plan.clinical_document %>
 

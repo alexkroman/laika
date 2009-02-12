@@ -1,5 +1,7 @@
 displayAndFile:
+  test_type: C32
   name: Display and File
   
 generateAndFormat:
+  test_type: C32
   name: Generate and Format
