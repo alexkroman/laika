@@ -6,6 +6,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :users
 
+  map.resources :xds_patients
+
   map.resources(:patient_data, 
                 :has_one  => [:registration_information, :support, :information_source, :advance_directive],
                 :has_many => [:languages, :providers, :insurance_providers, 

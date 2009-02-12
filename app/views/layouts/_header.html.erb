@@ -14,6 +14,8 @@
             <ul id="bignav">
               <li <%= 'id="active"' if @show_dashboard || current_controller?('vendor_test_plans') %>>
                 <%= link_to('Dashboard', vendor_test_plans_url) %></li>
+              <li <%= 'id="active"' if !@show_dashboard && current_controller?('xds_patients') %>>
+                <%= link_to('XDS', xds_patients_url) %></li>
               <li <%= 'id="active"' if !@show_dashboard && current_controller?('patient_data') %>>
                 <%= link_to('Library', patient_data_url) %></li>
             </ul>

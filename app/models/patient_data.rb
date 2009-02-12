@@ -23,6 +23,7 @@ class PatientData < ActiveRecord::Base
 
   validates_presence_of :name
 
+  has_select_options :conditions => 'vendor_test_plan_id IS NULL'
 
   def copy
 

@@ -44,10 +44,14 @@
 module HasSelectOptionsExtension
   def has_select_options(args = {})
     (class << self; self; end).instance_eval do
-      define_method(args.delete(:name) || :select_options) do |*x|
+      method_name = args.delete(:name) || :select_options
+      define_method(method_name) do |*x|
         (x.size > 0 ? x[0] : find(:all, { :order => 'name ASC' }.merge(args))).map do |r|
           block_given? ? yield(r) : [r.name, r.id]
         end
+      end
+      define_method("html_#{method_name}") do |*x|
+        send(method_name, *x).map { |r| %{ <option value="#{r[1]}">#{r[0]}</option> } }
       end
     end
   end
