@@ -8,7 +8,7 @@
     <h3>XDS Registry</h3>
 
     <div id="add_xds_patient">
-      <% form_tag(:url => xds_patients_url, :method => 'post') do -%>
+      <% form_tag(xds_patients_url, :method => 'post') do -%>
         <%= submit_tag "Add a Patient" %>
         <%= select_tag :patient_data_id, PatientData.html_select_options %>
       <% end -%>
