@@ -5,3 +5,11 @@ displayAndFile:
 generateAndFormat:
   test_type: C32
   name: Generate and Format
+
+queryAndRetrieve:
+  test_type: XDS
+  name: Query and Retrieve
+
+provideAndRegister:
+  test_type: XDS
+  name: Provide and Register

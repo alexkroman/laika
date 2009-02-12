@@ -1,6 +1,6 @@
 class CodeSystem < ActiveRecord::Base
-  has_select_options :name => :select_options
-  has_select_options :name => :medication_select_options,
+  has_select_options :method_name => :select_options
+  has_select_options :method_name => :medication_select_options,
     :order => "name DESC",
     :conditions => {
       :code => [ # performs a SQL IN

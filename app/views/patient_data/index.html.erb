@@ -43,7 +43,7 @@
                       :url => {:controller => 'test_plan_manager', :action => 'assign_patient_data' } do |f| -%>
                       <input type="hidden" name="pd_id" value="<%= patient_data.id %>"/>
                       <%= f.select :vendor_id, Vendor.select_options(@vendors) %>
-                      <%= f.select :kind_id, Kind.select_options %>
+                      <%= f.select :kind_id, Kind.dashboard_options %>
                       <% if current_user.administrator? -%>
                         <%= f.select :user_id, User.select_options %>
                       <% end -%>

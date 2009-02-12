@@ -9,6 +9,10 @@ class HasSelectOptionsTester
   def self.find(*args)
     [1..3].map {|i| HasSelectOptionsTester.new(i, "option #{i}") }
   end
+
+  def uc_name
+    name.upcase
+  end
 end
 
 describe HasSelectOptionsExtension do
@@ -25,11 +29,20 @@ describe HasSelectOptionsExtension do
     end
   end
 
-  describe "with a custom name" do
-    before { HasSelectOptionsTester.has_select_options(:name => 'my_options') }
+  describe "with a method name" do
+    before { HasSelectOptionsTester.has_select_options(:method_name => 'my_options') }
 
     it "should use that name instead of the default" do
       HasSelectOptionsTester.my_options.should == [1..3].map {|i| ["option #{i}", i] }
+    end
+  end
+  
+  describe "with a label column" do
+    before { HasSelectOptionsTester.has_select_options(:label_column => 'uc_name') }
+
+    it "should use that column for the option label instead of :name" do
+      objects = [1..3].map {|i| HasSelectOptionsTester.new(i, "stuff") }
+      HasSelectOptionsTester.select_options(objects).should == [1..3].map {|i| ["STUFF", i] }
     end
   end
   
