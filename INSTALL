@@ -2,3 +2,15 @@ This space intentionally left blank.
 
 TODO: Detailed instructions for installing Laika on JRuby/Glassfish.
 
+Dependencies
+============
+
+ * JRuby >= 1.1.6
+ * Sun Java 1.5 (1.6 is not yet supported)
+ * MySQL >= 5.0 (for UMLS)
+ * PostgreSQL >= 8.1 (for XDS)
+
+(Laika itself supports either Postgres or MySQL database storage.)
+
+
+
