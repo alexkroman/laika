@@ -58,11 +58,15 @@ Rails::Initializer.run do |config|
   # Make Active Record use UTC-base instead of local time
   # config.active_record.default_timezone = :utc
 
+  # These are dependencies we need to run the application.
   config.gem 'andand'
   config.gem 'faker'
   config.gem 'calendar_date_select'
   config.gem 'xds-client'
-  config.gem 'rspec', :lib => 'spec'
+
+  # These are dependencies for the tests.
+  # We just want to make sure they're available without loading them.
+  config.gem 'rspec', :lib => false
   config.gem 'rspec-rails', :lib => false
 
 end
