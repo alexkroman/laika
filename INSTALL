@@ -12,5 +12,23 @@ Dependencies
 
 (Laika itself supports either Postgres or MySQL database storage.)
 
+Installing/using multiple version of Java in Ubuntu
+===================================================
 
+ $ # install both Java 1.5 and Java 1.6
+ $ sudo aptitude install sun-java5-jdk openjdk-6-jdk
+ 
+ $ # use Java 1.5
+ $ sudo update-java-alternatives -s java-1.5.0-sun
+ $ java -version
+ java version "1.5.0_16"
+ Java(TM) 2 Runtime Environment, Standard Edition (build 1.5.0_16-b02)
+ Java HotSpot(TM) Server VM (build 1.5.0_16-b02, mixed mode)
+
+ $ # use Java 1.6
+ $ sudo update-java-alternatives -s java-6-openjdk
+ $ java -version
+ java version "1.6.0_0"
+ IcedTea6 1.3.1 (6b12-0ubuntu6) Runtime Environment (build 1.6.0_0-b12)
+ OpenJDK Server VM (build 1.6.0_0-b12, mixed mode)
 

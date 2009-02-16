@@ -1,1 +1,0 @@
-This gem was created to easily allow JRuby applications to interact with XDS. The client was generated using CXF (http://cxf.apache.org/). This gem contains all of the jar files necessary to use the client.
