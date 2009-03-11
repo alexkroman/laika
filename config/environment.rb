@@ -10,6 +10,17 @@ RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
+# XXX ActiveRecord extensions need to be loaded first, otherwise some
+# operations that utilize AR during init will fail. There's probably a
+# better way to do this.
+require 'activerecord'
+require_dependency 'has_select_options'
+require_dependency 'has_c32_component'
+class ActiveRecord::Base
+  extend HasSelectOptionsExtension
+  extend HasC32ComponentExtension
+end
+
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
