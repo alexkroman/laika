@@ -142,9 +142,7 @@ module Rails
     end
 
     def install
-      cmd = "#{gem_command} #{install_command.join(' ')}"
-      puts cmd
-      puts %x(#{cmd})
+      Gem::GemRunner.new.run(install_command)
     end
 
     def unpack_to(directory)
