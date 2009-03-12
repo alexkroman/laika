@@ -99,6 +99,8 @@ module VendorTestPlansHelper
           xds_test_status(vtp)
         when "C32"
           c32_test_status(vtp)
+        else
+          test_results_status(vtp)    
       end
       
   end
@@ -121,10 +123,11 @@ module VendorTestPlansHelper
     if vtp.kind.name == "Query and Retrieve"
       render :partial=>"status_area" , :locals=>{:vendor_test_plan=>vtp}
     else
-      
+      test_results_status(vtp)
     end
   end
   
+
   def c32_test_status(vtp)
     if vtp.kind.name == "Generate and Format"
        if vtp.clinical_document 

@@ -61,6 +61,7 @@ class VendorTestPlansController < ApplicationController
 
     respond_to do |format|
       if @vendor_test_plan.save
+        @vendor_test_plan.test_result = TestResult.new(:result => 'IN-PROGRESS')
         flash[:notice] = 'VendorTestPlan was successfully created.'
         format.html { redirect_to(@vendor_test_plan) }
         format.xml  { render :xml => @vendor_test_plan, :status => :created, :location => @vendor_test_plan }
