@@ -142,7 +142,9 @@ module Rails
     end
 
     def install
-      Gem::GemRunner.new.run(install_command)
+      cmd = "#{gem_command} #{install_command.join(' ')}"
+      puts cmd
+      puts %x(#{cmd})
     end
 
     def unpack_to(directory)
@@ -230,7 +232,14 @@ module Rails
 
     private
       def gem_command
-        RUBY_PLATFORM =~ /win32/ ? 'gem.bat' : 'gem'
+        case RUBY_PLATFORM
+          when /win32/
+            'gem.bat'
+          when /java/
+            'jruby -S gem'
+          else
+            'gem'
+        end
       end
 
       def install_command
