@@ -1,6 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :message_logs
 
+  map.resources :atna_audits
 
   map.resources :vendor_test_plans, :has_one => [:clinical_document, :test_result],
                                     :member => {:inspect_content => :get,

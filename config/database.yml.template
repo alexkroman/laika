@@ -1,4 +1,11 @@
 
+# ATNA message log
+syslog:
+  adapter: postgresql
+  database: syslog
+  username:
+  password:
+
 # UMLS database settings
 umls_development:
   adapter: mysql
