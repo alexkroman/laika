@@ -73,12 +73,14 @@ Rails::Initializer.run do |config|
   config.gem 'andand'
   config.gem 'faker'
   config.gem 'calendar_date_select'
-  config.gem 'xds-client'
+  config.gem 'xds-facade'
 
   # These are dependencies for the tests.
   # We just want to make sure they're available without loading them.
   config.gem 'rspec', :lib => false
   config.gem 'rspec-rails', :lib => false
+
+  config.gem 'mislav-will_paginate', :version => '~> 2.3.6', :lib => 'will_paginate', :Source => 'http://gems.github.com'
 
 end
 
@@ -94,3 +96,9 @@ ActionMailer::Base.smtp_settings = {
   :domain => "mitre.org",
 }
 
+
+XDS_HOST = "http://129.6.24.109:9080"
+XDS_REGISTRY_URLS = {:register_stored_query=>"#{XDS_HOST}/tf5/services/xdsregistryb",
+                     :retrieve_document_set_request=>"#{XDS_HOST}/tf5/services/xdsrepositoryb"}
+                     
+AFFINITY_DOMAIN_CONFIG = XDS::AffinityDomainConfig.new(File.expand_path(File.dirname(__FILE__) + '/affinity_domain_config.xml'))

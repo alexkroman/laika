@@ -4,6 +4,7 @@ unless ENV['RAILS_ENV'] == "test" || ENV['RAILS_ENV'].nil?
   require 'lib/validators/schema_validator.rb'
   require 'lib/validators/schematron_validator.rb'
   require 'lib/validators/umls_validator.rb'
+  require 'lib/validators/xds_metadata_validator.rb'
   Validation.register_validator :C32, Validators::C32Validation::Validator.new
   Validation.register_validator :C32, Validators::Schema::Validator.new("C32 Schema Validator", "resources/schemas/infrastructure/cda/C32_CDA.xsd")
   Validation.register_validator :C32, Validators::Schematron::CompiledValidator.new("CCD Schematron Validator","resources/schematron/ccd_errors.xslt")

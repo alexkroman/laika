@@ -1,0 +1,56 @@
+<tr>
+  <td>Author Person</td>
+  <td><%= text_field_tag 'metadata[author][person]' %></td>
+</tr>
+<tr>
+  <td>Author Institution</td>
+  <td><%= text_field_tag 'metadata[author][institution]' %></td>
+</tr>
+<tr>
+  <td>Author Role</td>
+  <td><%= text_field_tag 'metadata[author][role]' %></td>
+</tr>
+<tr>
+  <td>Author Specialty</td>
+  <td><%= text_field_tag 'metadata[author][specialty]' %></td>
+</tr>
+<% coded_values = [:class_code, :confidentiality_code, :format_code, :healthcare_facility_type_code, :practice_setting_code, :type_code]
+   coded_values.each do |cv|
+-%>
+<tr>
+  <td><%= cv.to_s.humanize %></td>
+  <td><%= select_tag("metadata[#{cv.to_s}]", options_for_select(AFFINITY_DOMAIN_CONFIG.select_options(cv))) %></td>
+</tr>
+<% end -%>
+<tr>
+  <td>Patient Id</td>
+  <td><%= text_field_tag 'metadata[patient_id]' %></td>
+</tr>
+<tr>
+  <td>Source Patient Id</td>
+  <td><%= text_field_tag 'metadata[source_patient_id]' %></td>
+</tr>
+<tr>
+  <td>Source Patient Identifier</td>
+  <td><%= text_field_tag 'metadata[source_patient_info][source_patient_identifier]' %></td>
+</tr>
+<tr>
+  <td>Source Patient Name</td>
+  <td><%= text_field_tag 'metadata[source_patient_info][name]' %></td>
+</tr>
+<tr>
+  <td>Source Patient Gender</td>
+  <td><%= text_field_tag 'metadata[source_patient_info][gender]' %></td>
+</tr>
+<tr>
+  <td>Source Patient Date of Birth</td>
+  <td><%= text_field_tag 'metadata[source_patient_info][date_of_birth]' %></td>
+</tr>
+<tr>
+  <td>Unique Id</td>
+  <td><%= text_field_tag 'metadata[unique_id]' %></td>
+</tr>
+<tr>
+  <td>Repository Unique Id</td>
+  <td><%= text_field_tag 'metadata[repository_unique_id]' %></td>
+</tr>

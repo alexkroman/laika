@@ -1,0 +1,166 @@
+<!-- Start Content -->
+  <div class="content">
+    <div class="container" >
+      <div class="column span-6 append-1">
+        <div id="results">
+          <% if @vendor_test_plan.test_result%>
+            <% if @vendor_test_plan.test_result.result == "PASS"%>
+            <div class="pass">PASS</div>
+            <% else %>
+            <div class="fail">FAIL</div>
+            <% end %>
+          <div class="info">
+            <h5>Inspection ID: <%= @vendor_test_plan.vendor.public_id %></h5>
+            <% if @vendor_test_plan.kind.display_name == "PIX Feed" %>
+            <p>Test Result Summary</p>
+            <div class="widget">
+              <div class="left on">
+                <table border="0">
+                  <tr>
+                    <td><span class="number"><% if @vendor_test_plan.test_result.result == "PASS"%>0<% else %>1<% end %></span></td>
+                    <td>PIX Feed Errors</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="widget">
+              <div class="left on">
+                <table>
+                  <tr>
+                    <td><span class="number">0 </span></td>
+                    <td>PIX Feed Warnings</td>
+                  </tr>
+                 </table>
+             </div>
+            </div>
+            <% end %>
+            <table id="details">
+              <tr>
+                <td class="lighttext">Test Date</td>
+                <td><%= @vendor_test_plan.updated_at.strftime("%m.%d.%Y") %></td>
+              </tr>
+              <tr>
+                <td class="lighttext">Test Proctor</td>
+                <td><a href="mailto:<%= @vendor_test_plan.user.email %>">
+                      <%= @vendor_test_plan.user.first_name %>
+                      <%= @vendor_test_plan.user.last_name %></a>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <% else %>
+          <div class="pass">Assign Result</div>
+          <div class="info">
+            <h5>Inspection ID: <%= @vendor_test_plan.vendor.public_id %></h5>
+            <p>Test Result</p>
+              <table id="details">
+              <tr>
+                <% form_for(:test_result, :url => vendor_test_plan_test_result_url(@vendor_test_plan)) do |f| %>
+                  <td><%= f.select :result, ['FAIL', 'PASS'] %>
+                  <%= f.submit "Assign" %> <br/><br/></td>
+                <% end %>
+              </tr>
+              </table>
+            <table id="details">
+              <tr>
+                <td class="lighttext">Test Date</td>
+                <td><%= @vendor_test_plan.updated_at.strftime("%m.%d.%Y") %></td>
+              </tr>
+              <tr>
+                <td class="lighttext">Test Proctor</td>
+                <td><a href="mailto:<%= @vendor_test_plan.user.email %>">
+                      <%= @vendor_test_plan.user.first_name %>
+                      <%= @vendor_test_plan.user.last_name %></a>
+                </td>
+              </tr>
+            </table>
+          </div>
+
+          <% end %>
+        </div>
+		<% if @vendor_test_plan.test_result && @vendor_test_plan.test_result.result == "FAIL"%>
+        	<h5><%= link_to 'View HL7 Message Log', message_logs_url, :popup => ['new window', 'width=1000, height=500, left = 450, top = 100, resizable=false, scrollbars=yes' ] %></h5>
+      	<% end %>
+      </div>
+      <div class="column span-13 last">
+        <div id="template">
+          <h3>Patient Details In PIX Manager</h3><br />
+          <table id="dashboard">
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td><h3><%=h @patient_data.name %></h3></td>
+              <td><h5>Person Information</h5></td>
+            </tr>
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td class="lighttext">Person Identifer Global</td>
+              <td><%=h @patient_data.registration_information.person_identifier %></td>
+            </tr>
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td class="lighttext">Person Identifer Local</td>
+              <td></td>
+            </tr>
+          <% for patient_identifier in @patient_data.patient_identifiers %>
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td class="lighttext"></td>
+              <% if @vendor_test_plan.test_result%>
+                <% if @vendor_test_plan.test_result.patient_identifier == patient_identifier.patient_identifier && @vendor_test_plan.test_result.assigning_authority == patient_identifier.identifier_domain_identifier %>
+              <td bgcolor="yellow"><%=h patient_identifier.patient_identifier %>^^^<%=h patient_identifier.identifier_domain_identifier %></td>
+                <% else %>
+              <td><%=h patient_identifier.patient_identifier %>^^^<%=h patient_identifier.identifier_domain_identifier %></td>
+                <% end %>
+              <% else %>
+              <td><%=h patient_identifier.patient_identifier %>^^^<%=h patient_identifier.identifier_domain_identifier %></td>
+              <% end %>
+            </tr>
+          <% end %>
+          <% if @vendor_test_plan.kind.display_name == "PIX Feed" %>
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td class="lighttext">Person Identifer Expected</td>
+              <td bgcolor="yellow"><%=h @vendor_test_plan.test_result.patient_identifier %>^^^<%=h @vendor_test_plan.test_result.assigning_authority %></td>
+            </tr>
+          <% end %>
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td class="lighttext">Prefix</td>
+              <td><%=h @patient_data.registration_information.person_name.name_prefix %></td>
+            </tr>
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td class="lighttext">First name</td>
+              <td><%=h @patient_data.registration_information.person_name.first_name %></td>
+            </tr>
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td class="lighttext">Last name</td>
+              <td><%=h @patient_data.registration_information.person_name.last_name %></td>
+            </tr>
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td class="lighttext">Suffix</td>
+              <td><%=h @patient_data.registration_information.person_name.name_suffix %></td>
+            </tr>
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td class="lighttext">Date of birth</td>
+              <td><%=h @patient_data.registration_information.date_of_birth %></td>
+            </tr>
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td class="lighttext">Religion</td>
+              <td><%=h @patient_data.registration_information.religion.name %></td>
+            </tr>
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td class="lighttext">Marital status</td>
+              <td><%=h @patient_data.registration_information.marital_status.name %></td>
+            </tr>
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td class="lighttext">Gender</td>
+              <td><%=h @patient_data.registration_information.gender.name %></td>
+            </tr>
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td class="lighttext">Race</td>
+              <td><%=h @patient_data.registration_information.race.name %></td>
+            </tr>
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td class="lighttext">Ethnicity</td>
+              <td><%=h @patient_data.registration_information.ethnicity.name %></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- End Content -->

@@ -6,7 +6,7 @@
   <div class="notice"><%= flash[:notice] %></div>
 <% end %>
 
-            <h3>Create New C32 Patient Template</h3>
+            <h3>Create New Patient Template</h3>
             <div>
               <% form_for(PatientData.new) do |f| %>
                 <label for="name">Name:</label>
@@ -20,7 +20,7 @@
             
               <tr>
                 <th class="<%= sort_order_class('name') %>"><%= link_to_sort 'name', 'Template' %></th>
-                <th><div>Test Type</div></th>
+                <!--th><div>Test Type</div></th-->
                 <th><div>Created by</div></th>
                 <th class="<%= sort_order_class('created_at') %>"><%= link_to_sort 'created_at', 'Created on' %></th>
                 <th class="<%= sort_order_class('updated_at') %>"><%= link_to_sort 'updated_at', 'Last modified' %></th>
@@ -30,7 +30,7 @@
               <% for patient_data in @patient_data_list -%>
               <tr>
                 <td><%= link_to h(patient_data.name), patient_data_instance_url(patient_data) %></td>
-                <td>CCD/C32</td>
+                <!--td>CCD/C32</td-->
                 <td><%=h patient_data.user.first_name %> <%=h patient_data.user.last_name %></td>
                 <td><%= patient_data.created_at.strftime("%d.%b.%Y") %></td>
                 <td><%= patient_data.updated_at.strftime("%d.%b.%Y") %></td>

@@ -1,12 +1,20 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :message_logs
 
-  map.resources :vendor_test_plans, :has_one => :clinical_document, :member => {:inspect_content => :get,:validate => :get,:revalidate=>:get}
+
+  map.resources :vendor_test_plans, :has_one => [:clinical_document, :test_result],
+                                    :member => {:inspect_content => :get,
+                                                :validate => :get,
+                                                :validatepix => :get,
+                                                :revalidate => :get,
+                                                :xds_query_checklist => :get,
+                                                :checklist => :get,
+                                                :set_status => :get,
+                                                :validate_p_and_r => :get}
 
   map.resources :vendors
 
   map.resources :users
-
-  map.resources :xds_patients
 
   map.resources(:patient_data, 
                 :has_one  => [:registration_information, :support, :information_source, :advance_directive],
@@ -14,15 +22,25 @@ ActionController::Routing::Routes.draw do |map|
                               :insurance_provider_patients, :insurance_provider_subscribers, 
                               :insurance_provider_guarantors, :medications, :allergies, :conditions, 
                               :comments, :results, :immunizations, 
-                              :encounters, :procedures, :medical_equipments],
+                              :encounters, :procedures, :medical_equipments, :patient_identifiers],
                 :member   => {:set_no_known_allergies => :post, :checklist => :get, :edit_template_info => :get},
                 :singular => :patient_data_instance) do |patient_data|
     patient_data.resources :vital_signs, :controller => 'results'
   end
 
+  map.with_options :controller => 'xds_patients' do |xds_patients|
+    xds_patients.xds_patients '/xds_patients', :action => 'index'
+    xds_patients.query_xds_patient '/xds_patients/query/:id', :action => 'query'
+    xds_patients.provide_and_register_setup_xds_patient '/xds_patients/provide_and_register_setup/:id', :action => 'provide_and_register_setup'
+    xds_patients.provide_and_register_xds_patient '/xds_patients/provide_and_register/:id', :action => 'provide_and_register'
+    xds_patients.do_provide_and_register_xds_patient '/xds_patients/do_provide_and_register', :action => 'do_provide_and_register'
+  end
+
   map.resources :document_locations
 
   map.resources :news
+
+  map.resources :pix_patient_data
 
   map.root :controller => "vendor_test_plans"
   # The priority is based upon order of creation: first created -> highest priority.

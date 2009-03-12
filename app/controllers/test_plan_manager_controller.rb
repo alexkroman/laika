@@ -14,11 +14,27 @@ class TestPlanManagerController < ApplicationController
     session[:previous_kind_id] = test_plan[:kind_id]
 
     vtp = VendorTestPlan.new(:vendor => vendor, :kind => kind, :user => user)
+    if params[:metadata]
+      if params[:metadata].kind_of?(String)
+        vtp.metadata = YAML.load(params[:metadata])         
+      else
+        md = XDS::Metadata.new
+        md.from_hash(params[:metadata], AFFINITY_DOMAIN_CONFIG)
+        vtp.metadata = md
+      end
+
+    end
     vtp.save!
 
     copied_patient_data.vendor_test_plan = vtp
     copied_patient_data.save!
 
+    if vtp.metadata 
+        doc = XDSUtils.retrieve_document(vtp.metadata)
+        cd = ClinicalDocument.new(:uploaded_data=>doc, :vendor_test_plan_id=>vtp.id)
+        vtp.clinical_document = cd   
+    end
+    
     redirect_to vendor_test_plans_url
 
   end

@@ -11,6 +11,7 @@ class PatientData < ActiveRecord::Base
   has_c32_component :encounters
   has_c32_component :procedures
   has_c32_component :medical_equipments
+  has_c32_component :patient_identifiers
 
   has_one    :registration_information, :dependent => :destroy
   has_one    :support, :dependent => :destroy
@@ -24,7 +25,7 @@ class PatientData < ActiveRecord::Base
   validates_presence_of :name
 
   has_select_options :conditions => 'vendor_test_plan_id IS NULL'
-
+  
   def copy
 
     copied_patient_data = self.clone
@@ -38,6 +39,12 @@ class PatientData < ActiveRecord::Base
       copied_patient_data.registration_information.marital_status = self.registration_information.marital_status
       copied_patient_data.registration_information.gender = self.registration_information.gender
       copied_patient_data.registration_information.religion = self.registration_information.religion
+    end
+
+    self.patient_identifiers.each do |pid|
+      copied_patient_identifiers = pid.clone
+      copied_patient_identifiers.patient_data = copied_patient_data
+      copied_patient_identifiers.save!
     end
 
     self.languages.each do |language|
@@ -286,6 +293,10 @@ class PatientData < ActiveRecord::Base
     @medical_equipment = MedicalEquipment.new
     @medical_equipment.randomize(self.registration_information.date_of_birth)
     self.medical_equipments << @medical_equipment
+
+    @patient_identifier = PatientIdentifier.new
+    @patient_identifier.randomize()
+    self.patient_identifiers << @patient_identifier
 
   end
 

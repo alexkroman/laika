@@ -1,0 +1,28 @@
+<tr>
+    <td colspan="6" align="right">
+      <div id="execution_div_<%=vendor_test_plan.id%>" style="display:none">
+        <% if !vendor_test_plan.clinical_document %>
+          <br/>
+          <% form_for(:clinical_document, 
+                      :url => vendor_test_plan_clinical_document_url(vendor_test_plan),
+                      :html => {
+                        :multipart => true,
+                        :onSubmit => %[
+                          if ($("upload_#{vendor_test_plan.id}").value.blank())
+                            { alert("You must specify a file to upload."); return false }
+                          else return true
+                        ] }) do |f| -%>
+              <label>Document Type &nbsp;&nbsp;&nbsp;&nbsp;
+                <%= f.select :doc_type, ['C32'] %>
+              </label>
+              <br/>
+              <label>Clinical Document
+                <%= f.file_field  :uploaded_data, :id => "upload_#{vendor_test_plan.id}" %>
+              </label>
+              <br/>
+              <%= submit_tag 'Attach' %>
+          <% end -%>
+        <% end %>
+      </div>
+    </td>
+</tr> <!-- if generate and format -->

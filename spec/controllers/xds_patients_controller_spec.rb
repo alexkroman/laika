@@ -6,10 +6,5 @@ describe XdsPatientsController do
   it "reads existing entries from the XDS server"
   it "adds a document to the XDS server"
 
-  it "retrieves a patient record" do
-    PatientData.should_receive(:find).with('123')
-    post :create, :patient_data_id => '123'
-  end
-
 end
 

@@ -89,6 +89,11 @@
                 <a href="#" onclick="javascript:scroll_to_module_and_highlight('proceduresContainer', 1.0);">Procedure</a>
               </td>
             </tr>
+            <tr class="lightzebra">
+              <td class="lighttext">
+                <a href="#" onclick="javascript:scroll_to_module_and_highlight('identifiersContainer', 1.0);">Patient Identifiers</a>
+              </td>
+            </tr>
           </table>
         </div>
       </div>
@@ -419,7 +424,33 @@
           </div>
           <!-- End Medical Equipments Module -->
 
+          <!-- Start Patient Identifier Module -->
+          <div id="identifiersContainer">
+          <h5>Patient Identifiers</h5>
+          <% #for patient_identifier in @patient_data.procedures
+          %>
+          <% for patient_identifier in @patient_data.patient_identifiers
+          %>
+            <div id="patient_identifier<%= patient_identifier.id %>">
+              <%= render :partial => '/patient_identifiers/show',
+                         :locals => {:patient_identifier => patient_identifier,
+                                     :patient_data => @patient_data} %>
         </div>
+          <% end %>
+          <table id="addPatientIdentifier">
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td></td>
+              <td><%= link_to_remote 'Add', :url => new_patient_data_instance_patient_identifier_path(@patient_data),
+                                            :method => 'get',
+                                            :update => 'addPatientIdentifier',
+                                            :position => :before %>
+              </td>
+            </tr>
+          </table>
       </div>
+          <!-- End Patient Identifier Module -->
+
+    </div>
+  </div>
     </div>
   </div>

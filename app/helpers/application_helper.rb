@@ -50,4 +50,8 @@ module ApplicationHelper
   end
 
 
+  def selected_value(select_id)
+      "$('#{select_id}').options[$('#{select_id}').selectedIndex].value"
+  end
+
 end

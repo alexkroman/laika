@@ -102,35 +102,63 @@ class VendorTestPlansController < ApplicationController
 
   def inspect_content
     @vendor_test_plan = VendorTestPlan.find(params[:id])
-
   end
 
-
-  
   # perform the external validation and display the results
   def validate 
-    @vendor_test_plan = VendorTestPlan.find(params[:id])
-  
+    @vendor_test_plan = VendorTestPlan.find(params[:id])  
   end
 
-  # perform the external validation and display the results
+  def validatepix
+    @vendor_test_plan = VendorTestPlan.find(params[:id])
+    @patient_data = @vendor_test_plan.patient_data
+  end
+
   def checklist 
     @vendor_test_plan = VendorTestPlan.find(params[:id])
     clinical_document = @vendor_test_plan.clinical_document
     
     @doc = clinical_document.as_xml_document(true)
-    pi = REXML::Instruction.new('xml-stylesheet', 
-      'type="text/xsl" href="' + 
-      relative_url_root + 
-      '/schemas/generate_and_format.xsl"')
-    @doc.insert_after(@doc.xml_decl, pi)
-
-    respond_to do |format|
-      format.xml  { render :text => @doc.to_s}
+    
+    if @doc.root && @doc.root.name == "ClinicalDocument"
+      pi = REXML::Instruction.new('xml-stylesheet', 
+        'type="text/xsl" href="' + 
+        relative_url_root + 
+        '/schemas/generate_and_format.xsl"')
+      @doc.insert_after(@doc.xml_decl, pi)
+      render :xml => @doc.to_s
+    else
+      redirect_to clinical_document.public_filename
     end
-  end   
-   
-
- 
+  end
   
+  def xds_query_checklist
+    @vendor_test_plan = VendorTestPlan.find(params[:id])
+    @metadata = @vendor_test_plan.metadata
+    render :layout => false
+  end
+ 
+  def set_status
+    vendor_test_plan = VendorTestPlan.find(params[:id])
+    if vendor_test_plan.user == current_user
+      results = vendor_test_plan.test_result || TestResult.new(:vendor_test_plan_id=>vendor_test_plan.id)
+      case params["status"]
+        when "pass"
+          results.result="PASS"
+        when "fail"
+          results.result = "FAIL"
+        when "inprogress"
+          results.result = "IN-PROGRESS"         
+      end
+      results.save!
+    end
+    redirect_to vendor_test_plans_url
+  end
+  
+
+  def validate_p_and_r
+    @vendor_test_plan = VendorTestPlan.find(params[:id])
+    @vendor_test_plan.validate_xds_provide_and_register
+  end
+
 end

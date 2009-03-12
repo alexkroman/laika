@@ -5,8 +5,11 @@ class VendorTestPlan < ActiveRecord::Base
   belongs_to :kind
   belongs_to :user
 
+  has_one :test_result, :dependent => :destroy
   has_one :clinical_document, :dependent => :destroy
   has_many :content_errors, :dependent => :destroy
+  
+  serialize :metadata, XDS::Metadata
 
   #before_save :_bf
   #after_save :_bf
@@ -33,6 +36,32 @@ class VendorTestPlan < ActiveRecord::Base
     return errors, warnings
   end
 
- 
+  def validate_xds_provide_and_register
+    rsqr = XDS::RegistryStoredQueryRequest.new(XDS_REGISTRY_URLS[:register_stored_query], 
+                                                {"$XDSDocumentEntryPatientId" => "'#{metadata.patient_id}'",
+                                                 "$XDSDocumentEntryStatus" => "('urn:oasis:names:tc:ebxml-regrep:StatusType:Approved')"})
+    query_results = rsqr.execute
+    if query_results
+      metadata_of_interest = query_results.find {|qr| qr.unique_id = metadata.unique_id}
+      if metadata_of_interest
+        validator = Validators::XdsMetadataValidator.new
+        validation_errors = validator.validate(metadata, metadata_of_interest)
+        if validation_errors.empty?
+          test_result = TestResult.new(:result => 'PASS')
+        else
+          content_errors << validation_errors
+          test_result = TestResult.new(:result => 'FAIL')
+        end
+        cdoc = ClinicalDocument.new(:uploaded_data=>XDSUtils.retrieve_document(metadata_of_interest))
+        self.clinical_document = cdoc
+      else
+        content_errors << ContentError.new(:error_message => "Unable to find metadata in the XDS Registry",
+                                           :validator => "XDS Metadata Validator", :inspection_type => 'XDS Provide and Register')
+        test_result = TestResult.new(:result => 'FAIL')
+      end
+    else
+      
+    end
+  end
 
 end

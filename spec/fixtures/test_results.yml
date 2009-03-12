@@ -1,0 +1,5 @@
+pixfeed:
+  vendor_test_plan: all_scripts_test_plan
+  result: PASS
+  patient_identifier: 1234567890
+  assigning_authority: CCHIT&1.2.3.4.5.6.7.8.9&ISO

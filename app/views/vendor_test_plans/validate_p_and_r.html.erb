@@ -1,0 +1,68 @@
+<!-- Start Content -->
+  <div class="content">
+    <div class="container" >
+      <div class="column span-6 append-1">
+        <h3>Inspection Results</h3>
+        <div id="results">
+          <% if @vendor_test_plan.content_errors.size == 0 -%>
+            <div class="pass">PASS</div>
+          <% else -%>
+            <div class="fail">FAIL</div>
+          <% end -%>
+          <div class="info">
+            <h5>Inspection ID: <%= @vendor_test_plan.vendor.public_id %></h5>
+            <p>Required Compliance</p>
+            <div class="widget">
+              <div class="left on">
+                <div class="visualIndication1">
+                  <div><span class="portion" style="width:23px"></span></div>
+                </div>
+                <span class="number"><%= @vendor_test_plan.content_errors.size %></span> violations
+              </div>
+              <a href="#"><div class="right on">ON</div></a>
+            </div>
+            <table id="details">
+              <tr>
+                <td class="lighttext">Test Date</td>
+                <td><%= @vendor_test_plan.updated_at %></td>
+              </tr>
+              <tr>
+                <td class="lighttext">Test Proctor</td>
+                <td><a href="mailto:<%= @vendor_test_plan.user.email %>">
+                      <%= @vendor_test_plan.user.first_name %> 
+                      <%= @vendor_test_plan.user.last_name %></a>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="column span-13 last">
+        <div id="template">
+          <h3>Verification Results</h3>
+          <table id="dashboard">
+            <tr valign="top">
+              <th>Section</th>
+              <th>Subsection</th>
+              <th>Field</th>
+              <th>Message</th>
+              <th>Location</th>
+               <th>Inspection Type</th>
+                <th>Validator</th>
+            </tr>
+            <% @vendor_test_plan.content_errors.each do |error| %>
+            <tr>
+              <td><%= error.section %></td>
+              <td><%= error.subsection %></td>
+              <td><%= error.field_name %></td>
+              <td><%= error.error_message %></td>
+               <td><%= error.location %></td>
+               <td><%= error.inspection_type %></td>
+               <td><%= error.validator %></td>
+            </tr>
+            <% end -%>
+          </table> 
+        </div>
+      </div>
+    </div>
+  </div>

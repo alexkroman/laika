@@ -13,3 +13,15 @@ queryAndRetrieve:
 provideAndRegister:
   test_type: XDS
   name: Provide and Register
+
+pixFeed:
+  test_type: PIX
+  name: Feed
+
+pixQuery:
+  test_type: PIX
+  name: Query
+
+pdQuery:
+  test_type: PDQ
+  name: Query

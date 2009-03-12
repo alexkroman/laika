@@ -17,17 +17,8 @@
           </tr>
         <% @vendor_test_plans[vendor].each do |vendor_test_plan| -%>
           <tr id="vendor_test_plan_<%= vendor_test_plan.id %>"><td>
-            <% if vendor_test_plan.clinical_document %>
-             
-                <% if @errors[vendor_test_plan] > 0 %>
-                  <%= image_tag "fail.png", :alt => 'Test Failed' %>failed</td>
-                <% else %>
-                  <%= image_tag "pass.png", :alt => 'Test Passed' %>passed</td>
-                <% end %> 
-
-            <% else %>
-              <%= image_tag "inprogress.png", :alt => 'Test In Progress' %>in progress</td>
-            <% end %>
+              <%= vendor_test_plan_status(vendor_test_plan) %>
+            </td>
             <td>
             <% if vendor_test_plan.clinical_document%>
               <%= vendor_test_plan.patient_data.name %>
@@ -37,70 +28,17 @@
           </td>
           <td><%= vendor_test_plan.updated_at.strftime("%d.%b.%Y %I:%M %p %Z")  %></td>
           <td><%= vendor_test_plan.kind.display_name %></td>
-          <td>
-            <% if vendor_test_plan.clinical_document %>
-
-              <%= link_to pluralize(@errors[vendor_test_plan], "Error"), validate_vendor_test_plan_url(vendor_test_plan) %>
-            <% else %>
-              --
-            <% end %>
+          <td>         
+            <%= link_to pluralize(@errors[vendor_test_plan], "Error"), validate_vendor_test_plan_url(vendor_test_plan) %>          
           </td>
-          <td>
-            <% if vendor_test_plan.clinical_document %>
-
+          <td>         
               <%= link_to pluralize(@warnings[vendor_test_plan], "Warning"), validate_vendor_test_plan_url(vendor_test_plan) %>
-            <% else %>
-              --
-            <% end %>
           </td>
           <td class="actions">
-            <% if vendor_test_plan.clinical_document %>
-
-                <%= link_to 'revalidate', revalidate_vendor_test_plan_url(vendor_test_plan) %>
-              <%= link_to 'delete', vendor_test_plan, :confirm => 'Are you sure you want to delete this Laika test?', :method => :delete %>
-            
-                <%= link_to 'inspect', validate_vendor_test_plan_url(vendor_test_plan) %>
-                <%= link_to 'checklist', {:controller => 'vendor_test_plans', :action => 'checklist', :id => vendor_test_plan.id} %>
-             
-            <% else %>
-              <%= link_to 'edit', patient_data_instance_url(vendor_test_plan.patient_data)%>
-              <%= link_to 'delete', vendor_test_plan, :confirm => 'Are you sure you want to delete this Laika test?', :method => :delete %>
-              <% if vendor_test_plan.kind.name == "Generate and Format" %>
-                <a href="javascript:toggle_div('execution_div_<%=vendor_test_plan.id%>');">execute</a>
-              <% else %>
-                <%= link_to 'xml', patient_data_instance_url(vendor_test_plan.patient_data, :format => 'xml') %> 
-                <%= link_to 'checklist', {:controller => 'patient_data', :action => 'checklist', :id => vendor_test_plan.patient_data.id} %>
-              <% end %>
-            <% end %>
-          </td></tr>
-          <% if vendor_test_plan.kind.name == "Generate and Format" %><tr>
-            <td colspan="6" align="right">
-              <div id="execution_div_<%=vendor_test_plan.id%>" style="display:none">
-                <% if !vendor_test_plan.clinical_document %>
-                  <br/>
-                  <% form_for(:clinical_document, 
-                              :url => vendor_test_plan_clinical_document_url(vendor_test_plan),
-                              :html => {
-                                :multipart => true,
-                                :onSubmit => %[
-                                  if ($("upload_#{vendor_test_plan.id}").value.blank())
-                                    { alert("You must specify a file to upload."); return false }
-                                  else return true
-                                ] }) do |f| -%>
-                      <label>Document Type &nbsp;&nbsp;&nbsp;&nbsp;
-                        <%= f.select :doc_type, ['C32'] %>
-                      </label>
-                      <br/>
-                      <label>Clinical Document
-                        <%= f.file_field  :uploaded_data, :id => "upload_#{vendor_test_plan.id}" %>
-                      </label>
-                      <br/>
-                      <%= submit_tag 'Attach' %>
-                  <% end -%>
-                <% end %>
-              </div>
-            </td>
-        </tr><% end %> <!-- if generate and format -->
+            <%= action_area(vendor_test_plan) %>
+          </td>
+          </tr>
+          <%= execution_div(vendor_test_plan) %>
       <% end %> <!-- vendor_test_plan loop -->
       </table> <!-- .dashboard -->
     <% end %> <!-- vendor loop -->

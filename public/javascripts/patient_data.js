@@ -10,11 +10,6 @@ function swap_div(id1, id2)
   //Effect.toggle(id2,'appear'); 
 }
 
-function toggle_div(id)
-{
-  Effect.toggle(id,'slide'); 
-}
-
 function scroll_to_module_and_highlight(id, time)
 {
   scroll_to_module(id,time);

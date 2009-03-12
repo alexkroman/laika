@@ -1,0 +1,18 @@
+<% if !vendor_test_plan.test_result %>
+<tr>
+  <td colspan="6" align="right">
+    <div id="execution_div_<%=vendor_test_plan.id%>" style="display:none">
+        <br/>
+      <% form_for(:test_result, :url => vendor_test_plan_test_result_url(vendor_test_plan)) do |f| %>
+        <%= f.error_messages %>
+          <%= f.label :local_patient_identifier %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= f.text_field :patient_identifier %>
+              <br/>
+          <%= f.label :local_assigning_authority %> <%= f.text_field :assigning_authority %>
+              <br/>
+              <input type="hidden" id="test_result_result" name="test_result[result]" value="FAIL"/>
+          <%= f.submit "Verify" %>
+      <% end %>
+    </div>
+  </td>
+</tr>
+<% end %>
