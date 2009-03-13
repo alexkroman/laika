@@ -55,8 +55,7 @@ machine:
  $ cap deploy:setup      # bootstrap deployment
  $ cap deploy:cold       # start glassfish, if necessary
 
- $ cap deploy:update     # export the latest trunk from SVN to the server
- $ cap deploy:migrations # run the database migrations
+ $ cap deploy:migrations # deploy and run the database migrations
  $ cap deploy:start      # start the application
 
 As deployed, the app is configured to run in production mode on the web
