@@ -6,7 +6,7 @@ login: &login
 
 # ATNA message log
 syslog:
-  adapter: jdbcpostgresql
+  adapter: jdbcmysql
   database: syslog
   <<: *login
 
@@ -32,7 +32,7 @@ development:
 # laika production settings
 production:
   adapter: jdbcmysql
-  database: laika
+  database: laikadev
   <<: *login
 
 # Warning: The database defined as "test" will be erased and

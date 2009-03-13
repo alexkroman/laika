@@ -29,7 +29,7 @@ set :user_sudo, false
 # application-specific configuration
 set :application, 'laika'
 set :repository,  'https://laika.svn.sourceforge.net/svnroot/laika/webapp/trunk'
-set :deploy_to,   '/vol/laika/webapp'
+set :deploy_to,   '/vol/laika'
 set :rails_env,   'production'
 set :rake,        '/usr/local/jruby/bin/jruby -S rake'
 
