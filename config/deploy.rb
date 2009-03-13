@@ -1,63 +1,58 @@
-#require 'mongrel_cluster/recipes'
-#require 'yaml'
+#
+# This deploy script is designed to deploy Laika to a configured Amazon EC2
+# instance.
+#
+# To deploy Laika, go to the parent directory and type 'cap deploy'
+#
 
-settings = YAML::load_file('config/deploy_settings.yml')
-server_settings = settings[ENV['deploy_environment']]
+#
+# You must specify scm_username, scm_password and server_name in deploy_local.rb.
+#
+load File.dirname(__FILE__) + '/deploy_local.rb'
 
-puts "HAHSHDAHSD"
-puts server_settings
+#
+# In order to automatically authenticate via SSH you must add the correct
+# PEM key to your ssh-agent:
+#
+#  $ ssh-add $YOUR_AMAZON_SSH_PEM_KEY
+#
+set :ssh_options, { :forward_agent => true }
 
-set :application, server_settings['app_name']
-set :repository,  "https://laika.svn.sourceforge.net/svnroot/laika/webapp/trunk"
-set :deploy_to, "/var/www/apps/#{application}"
-#set :runner, "mongrel_user"
+# glassfish config, see lib/recipes/glassfish.rb
+set :context_root, "/"
+set :glassfish_location, "/usr/local/glassfish"
 
-# If you aren't deploying to /u/apps/#{application} on the target
-# servers (which is the default), you can specify the actual location
-# via the :deploy_to variable:
-# set :deploy_to, "/var/www/#{application}"
+# FIXME For now, we are deploying to EC2 as the root user.
+set :user, 'root'
+set :user_sudo, false
 
-# If you aren't using Subversion to manage your source code, specify
-# your SCM below:
-# set :scm, :subversion
-set :domain, server_settings['domain']
-role :app, domain
-role :web, domain
-role :db,  domain, :primary => true
-set :rails_env, server_settings['rails_env']
+# application-specific configuration
+set :application, 'laika'
+set :repository,  'https://laika.svn.sourceforge.net/svnroot/laika/webapp/trunk'
+set :deploy_to,   '/var/www'
+set :rails_env,   'production'
+set :rake,        '/usr/local/jruby/bin/jruby -S rake'
 
-#set :user, # SET TO THE APP USER
-set :group, 'deploy'
+role :app, server_name
+role :web, server_name
+role :db,  server_name, :primary => true
 
-# Setup Mongrel
-set :mongrel_servers, 2
-set :mongrel_port, server_settings['mongrel_port']
-set :mongrel_address, "127.0.0.1"
-set :mongrel_environment, rails_env
-set :mongrel_config, "/etc/mongrel_cluster/#{application}.conf"
-set :mongrel_user, user
-set :mongrel_group, group
-default_run_options[:pty] = true
+namespace :deploy do
+  after  "deploy:update_code", "deploy:copy_production_configuration"
+  #after "deploy:copy_production_configuration", "deploy:symlink_vendor_plugins"
+  # before "deploy:migrate",     "deploy:create_production_database"
+  #after  "deploy:restart",     "deploy:backgroundrb_restart"
 
-desc "Copy necessary config files to server"
-task :after_update_code do
-  put(File.read("config/mongrel_cluster.yml"), "#{release_path}/config/mongrel_cluster.yml", :mode => 0660)
-  put(File.read("config/database.yml"), "#{release_path}/config/database.yml", :mode => 0660)
-  #run <<-CMD
-  #  sed -i -e '1 i ActionController::AbstractRequest.relative_url_root = "/laika"' #{release_path}/config/routes.rb
-  #CMD
-  run "ln -s #{shared_path}/clinical_documents #{release_path}/public/clinical_documents"
-  sudo "chgrp apache #{release_path}/config/{database.yml,mongrel_cluster.yml}"
-  sudo "chgrp apache #{release_path}/tmp"
-end 
+  configurations = {
+    "database.yml"   => "#{shared_path}/config/database.yml",
+  }
 
-desc "Add our own directories to the shared folder"
-task :after_setup, :roles => [:web, :app] do
-  run "mkdir -p -m 775 #{shared_path}/clinical_documents"
-  sudo "chgrp apache #{shared_path}/clinical_documents"
+  desc "Copy production configuration files stored on the same remote server"
+  task :copy_production_configuration, :roles => :app do
+    configurations.each_pair do |file, src|
+      run "cp #{src} #{release_path}/config/#{file}"
+    end
+  end
 end
 
-desc "Restart the web server"
-task :restart, :roles => :app do
-  sudo "/usr/sbin/apachectl graceful"
-end 
+
