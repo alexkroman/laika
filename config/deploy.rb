@@ -62,4 +62,11 @@ namespace :laika do
   end
 end
 
+namespace :remote do
+  desc "Open a screen on the deploy target server."
+  task :screen do
+    system "ssh -t #{user}@#{server_name} screen"
+  end
+end
+
 
