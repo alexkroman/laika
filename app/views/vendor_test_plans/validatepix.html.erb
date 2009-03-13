@@ -78,9 +78,10 @@
 
           <% end %>
         </div>
-		<% if @vendor_test_plan.test_result && @vendor_test_plan.test_result.result == "FAIL"%>
+    <%# XXX https://sourceforge.net/tracker/index.php?func=detail&aid=2684053&group_id=205665&atid=994554 %>
+		<%# if @vendor_test_plan.test_result && @vendor_test_plan.test_result.result == "FAIL"%>
         	<h5><%= link_to 'View HL7 Message Log', message_logs_url, :popup => ['new window', 'width=1000, height=500, left = 450, top = 100, resizable=false, scrollbars=yes' ] %></h5>
-      	<% end %>
+      	<%# end %>
       </div>
       <div class="column span-13 last">
         <div id="template">
