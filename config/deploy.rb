@@ -29,7 +29,7 @@ set :user_sudo, false
 # application-specific configuration
 set :application, 'laika'
 set :repository,  'https://laika.svn.sourceforge.net/svnroot/laika/webapp/trunk'
-set :deploy_to,   '/var/www'
+set :deploy_to,   '/vol/laika/webapp'
 set :rails_env,   'production'
 set :rake,        '/usr/local/jruby/bin/jruby -S rake'
 
@@ -37,11 +37,10 @@ role :app, server_name
 role :web, server_name
 role :db,  server_name, :primary => true
 
-namespace :deploy do
-  after  "deploy:update_code", "deploy:copy_production_configuration"
-  #after "deploy:copy_production_configuration", "deploy:symlink_vendor_plugins"
-  # before "deploy:migrate",     "deploy:create_production_database"
-  #after  "deploy:restart",     "deploy:backgroundrb_restart"
+# these tasks are all automatic and shouldn't need to be called explicitly
+namespace :laika do
+  after  "deploy:update_code", "laika:copy_production_configuration"
+  after  "deploy:setup", "laika:bootstrap_production_configuration"
 
   configurations = {
     "database.yml"   => "#{shared_path}/config/database.yml",
@@ -51,6 +50,14 @@ namespace :deploy do
   task :copy_production_configuration, :roles => :app do
     configurations.each_pair do |file, src|
       run "cp #{src} #{release_path}/config/#{file}"
+    end
+  end
+
+  desc "Copy configuration templates to the shared server config"
+  task :bootstrap_production_configuration, :roles => :app do
+    run "mkdir -p #{shared_path}/config"
+    configurations.each_pair do |file, dest|
+      upload "config/#{file}.template", dest, :via => :scp
     end
   end
 end

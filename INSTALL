@@ -10,6 +10,9 @@ Dependencies
 
 (Laika itself supports either Postgres or MySQL database storage.)
 
+See http://laika.wiki.sourceforge.net/LaikaXDSPIXPDQAlpha for information
+about getting an Amazon EC2 system prepared to run Laika.
+
 Installing/using multiple version of Java in Ubuntu
 ===================================================
 
@@ -33,13 +36,10 @@ Installing/using multiple version of Java in Ubuntu
 Deploying to Amazon EC2
 =======================
 
-[Dumped from an email to the laika-dev list.]
-
-This script and the deployment process it enables are not complete, but
-I wanted to give a quick run-through of how it works so far. The first
+Here is a quick run-through of how deployment works so far. The first
 step is to get a recent AMI of a base system. I used ami-362acd5f for
-today's work. The rest assumes you've got this or a similar instance
-running and can connect to it using SSH.
+today's work. The rest of this section assumes you've got this or a
+similar instance running and can connect to it using SSH.
 
 From a checked-out copy of the latest webapp/trunk on your local
 machine:
@@ -47,15 +47,14 @@ machine:
  $ # add your Amazon-supplied SSH key to the ssh-agent
  $ ssh-add ~/ec2-keys/mykey.pem
 
- $ # bootstrap the database config for the first deploy
- $ ssh root@my-amazon-instance 'mkdir -p /var/www/shared/config'
- $ scp config/database.yml.template root@my-amazon-instance:/var/www/shared/config/database.yml
-
  $ # customize your deployment config:
  $ cp config/deploy_local.rb.example config/deploy_local.rb
  $ vi config/deploy_local.rb
  
- $ cap deploy:cold       # start glassfish
+ $ # this is only needed once
+ $ cap deploy:setup      # bootstrap deployment
+ $ cap deploy:cold       # start glassfish, if necessary
+
  $ cap deploy:update     # export the latest trunk from SVN to the server
  $ cap deploy:migrations # run the database migrations
  $ cap deploy:start      # start the application
