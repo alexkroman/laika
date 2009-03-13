@@ -1,6 +1,4 @@
-This space intentionally left blank.
-
-TODO: Detailed instructions for installing Laika on JRuby/Glassfish.
+Laika is a Ruby on Rails application that targets JRuby/Glassfish for deployment.
 
 Dependencies
 ============
@@ -31,4 +29,41 @@ Installing/using multiple version of Java in Ubuntu
  java version "1.6.0_0"
  IcedTea6 1.3.1 (6b12-0ubuntu6) Runtime Environment (build 1.6.0_0-b12)
  OpenJDK Server VM (build 1.6.0_0-b12, mixed mode)
+
+Deploying to Amazon EC2
+=======================
+
+[Dumped from an email to the laika-dev list.]
+
+This script and the deployment process it enables are not complete, but
+I wanted to give a quick run-through of how it works so far. The first
+step is to get a recent AMI of a base system. I used ami-362acd5f for
+today's work. The rest assumes you've got this or a similar instance
+running and can connect to it using SSH.
+
+From a checked-out copy of the latest webapp/trunk on your local
+machine:
+
+ $ # add your Amazon-supplied SSH key to the ssh-agent
+ $ ssh-add ~/ec2-keys/mykey.pem
+
+ $ # bootstrap the database config for the first deploy
+ $ ssh root@my-amazon-instance 'mkdir -p /var/www/shared/config'
+ $ scp config/database.yml.template root@my-amazon-instance:/var/www/shared/config/database.yml
+
+ $ # customize your deployment config:
+ $ cp config/deploy_local.rb.example config/deploy_local.rb
+ $ vi config/deploy_local.rb
+ 
+ $ cap deploy:cold       # start glassfish
+ $ cap deploy:update     # export the latest trunk from SVN to the server
+ $ cap deploy:migrations # run the database migrations
+ $ cap deploy:start      # start the application
+
+As deployed, the app is configured to run in production mode on the web
+root URL. I say "configured to" because I have yet to get glassfish to
+respect my wishes in this regard: I can run the app standalone in dev or
+production mode, but I can't figure out how to get it to play nice with
+glassfish. Hopefully Ben or somebody else with glassfish experience can
+determine what the problem is.
 
