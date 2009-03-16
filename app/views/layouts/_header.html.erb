@@ -4,6 +4,7 @@
           <div class="doggy"><%= image_tag "laika.png", :alt => 'Laika' %></div>
           <div class="right">
             <ul id="smallnav">
+              <li <% if current_controller? 'atna_audits' %>id="active"<% end %>><%= link_to 'ATNA Log', atna_audits_url %></li>
               <li <% if current_controller? 'news' %>id="active"<% end %>><%= link_to 'News', news_index_url %></li>
               <li <% if current_controller? 'users' %>id="active"<% end %>><%= link_to 'People &amp; Inspections', :controller => 'users' %></li>
               <li><a href="http://laika.sourceforge.net/about.html">About</a></li>
