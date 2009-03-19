@@ -43,17 +43,15 @@ class VendorTestPlan < ActiveRecord::Base
     content_errors.clear
     query_results = rsqr.execute
     if query_results
-      metadata_of_interest = query_results.find {|qr| qr.unique_id = metadata.unique_id}
+      metadata_of_interest = query_results.find {|qr| qr.unique_id == metadata.unique_id}
       if metadata_of_interest
         validator = Validators::XdsMetadataValidator.new
         validation_errors = validator.validate(metadata, metadata_of_interest)
         if validation_errors.empty?
           self.test_result = TestResult.new(:result => 'PASS')
-          puts "passed"
         else
           content_errors << validation_errors
           self.test_result = TestResult.new(:result => 'FAIL')
-          puts "falied"
         end
         cdoc = ClinicalDocument.new(:uploaded_data=>XDSUtils.retrieve_document(metadata_of_interest))
         self.clinical_document = cdoc
