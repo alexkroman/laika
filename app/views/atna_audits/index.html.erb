@@ -2,8 +2,8 @@
   <div class="container">
     <h3>Listing message logs</h3>
     <br/>
-    <% if flash[:notice] %>
-      <div class="notice"><%= flash[:notice] %></div>
+    <% if @notice %>
+      <div class="notice"><%= @notice %></div>
     <% end %>
     <% if @atna_audits %>
     <%= will_paginate @atna_audits %>

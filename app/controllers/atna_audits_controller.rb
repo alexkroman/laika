@@ -71,6 +71,6 @@ class AtnaAuditsController < ApplicationController
       @values << ex.to_s.sub("org.xml.sax.SAXParseException:","")
     rescue ActiveRecord::ActiveRecordError
     rescue Exception => ex
-      flash[:notice] = "Could not access the ATNA database. " + ex.to_s.sub("org.postgresql.util.PSQLException: ", "")
+      @notice = "Could not access the ATNA database. " + ex.to_s.sub("org.postgresql.util.PSQLException: ", "")
   end
 end
