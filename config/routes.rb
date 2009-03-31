@@ -7,7 +7,6 @@ ActionController::Routing::Routes.draw do |map|
                                     :member => {:inspect_content => :get,
                                                 :validate => :get,
                                                 :validatepix => :get,
-                                                :revalidate => :get,
                                                 :xds_query_checklist => :get,
                                                 :checklist => :get,
                                                 :set_status => :get,
