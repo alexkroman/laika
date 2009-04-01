@@ -10,11 +10,11 @@
         "Conditions Module"
       end
 
-      def validate_c32(document)
+      def validate_c32(document, index = 0)
         errors = []
         begin
           section = REXML::XPath.first(document,"//cda:section[cda:templateId/@root='2.16.840.1.113883.10.20.1.11']",MatchHelper::DEFAULT_NAMESPACES)
-          act = REXML::XPath.first(section,"cda:entry/cda:act[cda:templateId/@root='2.16.840.1.113883.10.20.1.27']",MatchHelper::DEFAULT_NAMESPACES)
+          act = REXML::XPath.match(section,"cda:entry/cda:act[cda:templateId/@root='2.16.840.1.113883.10.20.1.27']",MatchHelper::DEFAULT_NAMESPACES)[index]
           observation = REXML::XPath.first(act,"cda:entryRelationship[@typeCode='SUBJ']/cda:observation[cda:templateId/@root='2.16.840.1.113883.10.20.1.28']",MatchHelper::DEFAULT_NAMESPACES)
           code = REXML::XPath.first(observation,"cda:code[@codeSystem='2.16.840.1.113883.6.96']",MatchHelper::DEFAULT_NAMESPACES)
           if problem_type

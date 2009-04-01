@@ -85,7 +85,6 @@ roles severity_terms supports telecoms user_roles users vaccines vendors zip_cod
   end
 
   it "should validate identical patients with 3 conditions" do
-    pending "SF ticket 2094022"
     record = patient_data(:joe_smith)
     record.conditions.clear
     3.times do |i|

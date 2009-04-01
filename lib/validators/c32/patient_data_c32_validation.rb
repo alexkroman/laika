@@ -40,8 +40,8 @@
         end
 
       # Conditions
-        self.conditions.each do |condition|
-          errors.concat(condition.validate_c32(clinical_document))
+        self.conditions.each_with_index do |condition, i|
+          errors.concat(condition.validate_c32(clinical_document, i))
         end  
 
       # Information Source
