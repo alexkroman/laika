@@ -1,7 +1,4 @@
-<% @umlsEnabed = true
-   @numXMLValidationErrors = 0
-   @numContentInspectionWarnings = 0 
-   @numUMLSWarnings = 0
+<%
    doc = @vendor_test_plan.clinical_document.as_xml_document
    
      errors = @vendor_test_plan.validate_clinical_document_content
@@ -12,7 +9,7 @@
     <div class="container" >
       <div class="column span-6 append-1">
         <div id="results">
-          <% if @numXMLValidationErrors == 0 && @vendor_test_plan.clinical_document %>
+          <% if errors.empty? && @vendor_test_plan.clinical_document %>
             <div class="pass">PASS</div>
           <% else %>
             <div class="fail">FAIL</div>
@@ -64,11 +61,7 @@
               </tr>
               <tr>
                 <td class="lighttext">UMLS Coded Value Testing</td>
-                <% if @umlsEnabed %>
                   <td>Enabled</td>
-                <% else %>
-                  <td>Disabled</td>
-                <% end %>
               </tr>
             </table>
           </div>
