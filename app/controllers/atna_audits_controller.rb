@@ -5,7 +5,6 @@ class AtnaAuditsController < ApplicationController
   def index
     @atna_audits = AtnaAudit.paginate :page => params[:page], :order => 'timestamp_entry DESC', :per_page => 1
 
-    puts @atna_audits.length
     @values = []
     @element_name =[]
 
@@ -66,7 +65,6 @@ class AtnaAuditsController < ApplicationController
       @element_name  << "Unable to Parse Message"
       @values << "Unable to Parse Message"
     rescue org.xml.sax.SAXParseException => ex
-      puts ex
       @element_name << "Error"
       @values << ex.to_s.sub("org.xml.sax.SAXParseException:","")
     rescue ActiveRecord::ActiveRecordError
