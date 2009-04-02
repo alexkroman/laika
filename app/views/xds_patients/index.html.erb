@@ -28,9 +28,9 @@
           <td class="actions" width=270px>
             <a href="javascript:toggle_div('query_div_<%=patient_data.id%>');">query</a>
             <a href="#"
-               onclick="Modalbox.show('<%= provide_and_register_setup_xds_patient_url(patient_data.id) %>', {height:null,title: 'Create XDS Provide and Register test for <%=h patient_data.user.first_name %> <%=h patient_data.user.last_name %>', width: 600}) ;return false;">assign</a>
+               onclick="Modalbox.show('<%= provide_and_register_setup_xds_patient_url(patient_data.id) %>', {height:null,title: 'Provide and Register C32 based on template for patient <%=h patient_data.name %>', width: 600}) ;return false;">assign</a>
             <a href="#"
-               onclick="Modalbox.show('<%= provide_and_register_xds_patient_url(patient_data.id) %>', {height:null,title: 'Create XDS Provide and Register test for <%=h patient_data.user.first_name %> <%=h patient_data.user.last_name %>', width: 600}) ;return false;">p-n-r</a>
+               onclick="Modalbox.show('<%= provide_and_register_xds_patient_url(patient_data.id) %>', {height:null,title: 'Provide and Register C32 based on template for patient <%=h patient_data.name %>', width: 600}) ;return false;">p-n-r</a>
             <div id="query_div_<%=patient_data.id%>" style="display:none">
               <% if patient_data.patient_identifiers.count > 0 %>
               <form action="#">
