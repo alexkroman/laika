@@ -6,6 +6,8 @@ class Vendor < ActiveRecord::Base
   has_many :vendor_test_plans, :dependent => :destroy
   validates_presence_of :public_id
 
+  has_many :test_users, :through => :vendor_test_plans, :source => :user, :uniq => true
+
   def self.unclaimed
     find :all, :conditions => { :user_id => nil }
   end

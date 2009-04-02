@@ -63,7 +63,7 @@
                           <%= link_to_function 'rename',
                             "$('vendor_#{vendor.id}').hide();$('vendor_edit_#{vendor.id}').show();" %>&nbsp;|&nbsp;<%=
                           link_to 'delete', vendor_url(vendor), :method => 'DELETE',
-                          :confirm => "#{vendor.public_id} has #{pluralize vendor.vendor_test_plans.count, 'test case'} assigned, are you sure you want to delete?" %>
+                          :confirm => "Inspection #{vendor.public_id} has #{pluralize vendor.vendor_test_plans.count, 'test case'} assigned to #{pluralize vendor.test_users.count, 'user'}, are you sure you want to delete it?" %>
                         <% end -%>
                       </span>
                       <span id="vendor_edit_<%= vendor.id %>" style="display:none">
