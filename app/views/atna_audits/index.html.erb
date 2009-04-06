@@ -1,11 +1,11 @@
 <div class="content">
   <div class="container">
     <h3>Listing message logs</h3>
-    <br/>
+
     <% if @notice %>
       <div class="notice"><%= @notice %></div>
     <% end %>
-    <% if @atna_audits %>
+
     <%= will_paginate @atna_audits %>
     <table  id="dashboard">
     <% for message_log in @atna_audits %>
@@ -13,16 +13,13 @@
       <tr><th>Message</th><td colspan="3"><%=h message_log.message.sub("\r", "\n") %></td></tr>
           </table>
     <table  id="dashboard">
-      <% if @values %>
-        <% @element_name.each_with_index do |element_name, idx| %>
-          <% if idx % 2 == 0 %><th><% else %><tr><th><% end %>
-            <%=h element_name %></th><td><%=h @values[idx] %>
-          <% if idx % 2 == 0 %></td></tr><% else %></td><% end %>
-        <% end %>
+      <% @element_name.each_with_index do |element_name, idx| %>
+        <% if idx % 2 == 0 %><th><% else %><tr><th><% end %>
+        <%=h element_name %></th><td><%=h @values[idx] %>
+        <% if idx % 2 == 0 %></td></tr><% else %></td><% end %>
       <% end %>
     <% end %>
     </table>
     <%= will_paginate @atna_audits %>
-    <% end %>
   </div> <!-- .container -->
 </div> <!-- .content -->

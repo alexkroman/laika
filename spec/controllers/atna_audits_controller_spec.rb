@@ -6,14 +6,6 @@ describe AtnaAuditsController do
     controller.stub!(:current_user).and_return(@user)
   end
 
-  describe "with no syslog database" do
-    it "should set @notice" do
-      get :index
-      response.should be_success
-      assigns[:notice].should_not be_nil
-    end
-  end
-
   describe "with an empty syslog database" do
     before do
       AtnaAudit.stub!(:paginate).and_return([])

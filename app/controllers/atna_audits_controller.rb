@@ -69,9 +69,10 @@ class AtnaAuditsController < ApplicationController
     }
 
   rescue REXML::ParseException
+    # XXX the java validation check probably short-circuits this possibility
     @element_name  << "Unable to Parse Message"
     @values << "Unable to Parse Message"
-  rescue RuntimeError => ex # XXX
+  rescue RuntimeError => ex # XXX should be catching the corresponding java exception, not RuntimeError
     @notice = "Could not access the ATNA database. " + ex.to_s.sub("org.postgresql.util.PSQLException: ", "")
   end
 end
