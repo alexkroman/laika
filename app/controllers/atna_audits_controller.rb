@@ -7,21 +7,28 @@ class AtnaAuditsController < ApplicationController
 
     @values = []
     @element_name =[]
+    return if @atna_audits.empty?
 
-    require 'java'
-    schemaLocation = java.io.File.new("public/schemas/atna_audit.xsd")
+    begin
+      # XXX It looks like the original authors included this java validation
+      # portion in order to catch and report an invalid message.
+      require 'java'
+      schemaFile = java.io.File.new(File.join(RAILS_ROOT, "public", "schemas", "atna_audit.xsd"))
 
-    factory = javax.xml.validation.SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema")
-    schema = factory.newSchema(schemaLocation)
-    validator = schema.newValidator()
-    domFactory = javax.xml.parsers.DocumentBuilderFactory.newInstance()
-    domFactory.setNamespaceAware(true)
-    builder = domFactory.newDocumentBuilder()
-    docu = builder.parse(java.io.ByteArrayInputStream.new(@atna_audits[0].message.to_java_bytes))
-    source = javax.xml.transform.dom.DOMSource.new(docu)
-    result = javax.xml.transform.dom.DOMResult.new()
-    validator.validate(source, result)
-    java.lang.System.out.println()
+      factory = javax.xml.validation.SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema")
+      schema = factory.newSchema(schemaFile)
+      validator = schema.newValidator()
+      domFactory = javax.xml.parsers.DocumentBuilderFactory.newInstance()
+      domFactory.setNamespaceAware(true)
+      builder = domFactory.newDocumentBuilder()
+      docu = builder.parse(java.io.ByteArrayInputStream.new(@atna_audits[0].message.to_java_bytes))
+      source = javax.xml.transform.dom.DOMSource.new(docu)
+      result = javax.xml.transform.dom.DOMResult.new()
+      validator.validate(source, result)
+    rescue org.xml.sax.SAXParseException => ex
+      @notice = "Error: ATNA log message is not valid."
+      return
+    end
 
     doc = REXML::Document.new(@atna_audits[0].message)
 
@@ -62,13 +69,9 @@ class AtnaAuditsController < ApplicationController
     }
 
   rescue REXML::ParseException
-      @element_name  << "Unable to Parse Message"
-      @values << "Unable to Parse Message"
-    rescue org.xml.sax.SAXParseException => ex
-      @element_name << "Error"
-      @values << ex.to_s.sub("org.xml.sax.SAXParseException:","")
-    rescue ActiveRecord::ActiveRecordError
-    rescue Exception => ex
-      @notice = "Could not access the ATNA database. " + ex.to_s.sub("org.postgresql.util.PSQLException: ", "")
+    @element_name  << "Unable to Parse Message"
+    @values << "Unable to Parse Message"
+  rescue RuntimeError => ex # XXX
+    @notice = "Could not access the ATNA database. " + ex.to_s.sub("org.postgresql.util.PSQLException: ", "")
   end
 end
