@@ -9,6 +9,8 @@ class RegistrationInformation < ActiveRecord::Base
   belongs_to :gender
   belongs_to :religion
 
+  after_save { |r| r.patient_data.update_attributes(:updated_at => DateTime.now) }
+
   include PersonLike
 
 

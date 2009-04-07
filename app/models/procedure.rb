@@ -3,6 +3,8 @@ class Procedure < ActiveRecord::Base
   strip_attributes!
 
   belongs_to :patient_data
+  after_save { |r| r.patient_data.update_attributes(:updated_at => DateTime.now) }
+
 
   
   def requirements

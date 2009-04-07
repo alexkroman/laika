@@ -11,7 +11,7 @@ class InsuranceProvider < ActiveRecord::Base
   has_one    :insurance_provider_subscriber
   has_one    :insurance_provider_guarantor
 
-  
+  after_save { |r| r.patient_data.update_attributes(:updated_at => DateTime.now) }
 
   def requirements
     {

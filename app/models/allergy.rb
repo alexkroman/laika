@@ -8,7 +8,7 @@ class Allergy < ActiveRecord::Base
   belongs_to :allergy_status_code
   belongs_to :allergy_type_code
 
- 
+  after_save { |r| r.patient_data.update_attributes(:updated_at => DateTime.now) }
 
   def requirements
     {

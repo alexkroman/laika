@@ -19,6 +19,8 @@ class AbstractResult < ActiveRecord::Base
   belongs_to :result_type_code
   belongs_to :act_status_code
 
+  after_save { |r| r.patient_data.update_attributes(:updated_at => DateTime.now) }
+
   include MatchHelper
 
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}

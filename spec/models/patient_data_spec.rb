@@ -6,8 +6,6 @@ describe PatientData do
   before(:each) do
      @patient_data = patient_data(:joe_smith) 
   end
-  
- 
 
   it "should require a name" do
     @patient_data.name = ''
@@ -97,5 +95,14 @@ roles severity_terms supports telecoms user_roles users vaccines vendors zip_cod
     document = REXML::Document.new(record.to_c32)
     record.validate_c32(document).should be_empty
   end
+
+  it "should refresh updated_at when a child record is updated" do
+    record = patient_data(:david_carter)
+    old_updated_at = record.updated_at
+    record.conditions.first.update_attributes!(:free_text_name => 'something else')
+    record.reload
+    record.updated_at.should > old_updated_at
+  end
+
 end
 

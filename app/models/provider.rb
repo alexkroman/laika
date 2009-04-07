@@ -6,6 +6,8 @@ class Provider < ActiveRecord::Base
   belongs_to :provider_type
   belongs_to :provider_role
 
+  after_save { |r| r.patient_data.update_attributes(:updated_at => DateTime.now) }
+
   include PersonLike
  
 

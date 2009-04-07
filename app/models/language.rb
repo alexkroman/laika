@@ -5,7 +5,7 @@ class Language < ActiveRecord::Base
   belongs_to :iso_language
   belongs_to :language_ability_mode
 
-
+  after_save { |r| r.patient_data.update_attributes(:updated_at => DateTime.now) }
 
   def requirements
     {

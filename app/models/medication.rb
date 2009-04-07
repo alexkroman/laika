@@ -6,6 +6,7 @@ class Medication < ActiveRecord::Base
   belongs_to :medication_type
   belongs_to :code_system
   
+  after_save { |r| r.patient_data.update_attributes(:updated_at => DateTime.now) }
 
   def requirements
     {

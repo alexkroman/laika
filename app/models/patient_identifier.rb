@@ -3,6 +3,7 @@ class PatientIdentifier < ActiveRecord::Base
   strip_attributes!
 
   belongs_to :patient_data
+  after_save { |r| r.patient_data.update_attributes(:updated_at => DateTime.now) }
 
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
 
