@@ -41,7 +41,7 @@ module SortOrder
   # to an activerecord finder as :order.
   def sort_order
     case sort_spec
-    when /^\^([\w\.]+)$/
+    when /^\-([\w\.]+)$/
       invalid_sort_spec?($1) ? nil : "#{$1} DESC"
     when /^[\w\.]+$/
       invalid_sort_spec?(sort_spec) ? nil : "#{sort_spec} ASC"
@@ -52,7 +52,7 @@ module SortOrder
 
   # This is the accessor for the current sort specifier. It comes from the params or session.
   # The sort specifier is a string containing the identifier name, optionally preceded with a table (and a dot).
-  # If there is a leading caret ("^") in the string the result sorts descending, otherwise it sorts ascending.
+  # If there is a leading dash ("-") in the string the result sorts descending, otherwise it sorts ascending.
   def sort_spec
     session[session_sort_key] = params[:sort] || session[session_sort_key]
   end
@@ -70,15 +70,15 @@ end
 
 module SortOrderHelper
   def sort_order_class(field_spec)
-    if [ field_spec, "^#{field_spec}" ].include? controller.sort_spec
-      controller.sort_spec.chars.first == '^' ? "selected sorted-descending" : "selected sorted-ascending"
+    if [ field_spec, "-#{field_spec}" ].include? controller.sort_spec
+      controller.sort_spec.chars.first == '-' ? "selected sorted-descending" : "selected sorted-ascending"
     else
       "sortable"
     end
   end
 
   def link_to_sort(field_spec, label)
-    sort_field = controller.sort_spec == field_spec ? "^#{field_spec}" : field_spec
+    sort_field = controller.sort_spec == field_spec ? "-#{field_spec}" : field_spec
     link_to content_tag(:div, label), "?sort=#{sort_field}"
   end
 end
