@@ -1,4 +1,5 @@
 class AllergiesController < PatientDataChildController
+  layout false
   
   # TODO: Need a way to nil out the end_event through the web ui
 
@@ -6,14 +7,11 @@ class AllergiesController < PatientDataChildController
     @allergy = Allergy.new
     @patient_data.update_attribute(:no_known_allergies, false)
     
-    render :partial => 'edit', :locals => {:allergy => @allergy,
-                                           :patient_data => @patient_data}
+    render :action => 'edit'
   end
 
   def edit
     @allergy = @patient_data.allergies.find(params[:id])
-    render :partial => 'edit', :locals => {:allergy => @allergy,
-                                           :patient_data => @patient_data}
   end
   
   def create
@@ -21,8 +19,6 @@ class AllergiesController < PatientDataChildController
     @patient_data.allergies << @allergy
     @patient_data.update_attribute(:no_known_allergies, false)
     
-    render :partial => 'create', :locals => {:allergy => @allergy,
-                                              :patient_data => @patient_data}
   end
   
   def update
@@ -34,8 +30,8 @@ class AllergiesController < PatientDataChildController
   end
   
   def destroy
-    @allergy = @patient_data.allergies.find(params[:id])
-    @allergy.destroy
+    allergy = @patient_data.allergies.find(params[:id])
+    allergy.destroy
     
     if @patient_data.allergies.empty?
       render :partial => "no_known_allergies_link", :locals=>{:patient_data=>@patient_data}

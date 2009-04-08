@@ -9,3 +9,4 @@ public/laika
 tmp/*
 config/deploy_local.rb
 *.sw[pon]
+tags

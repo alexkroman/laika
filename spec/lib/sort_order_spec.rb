@@ -46,7 +46,7 @@ describe SortOrderTestController do
     get :foo, :sort => 'updated_at'
     @controller.sort_order.should == 'updated_at ASC'
 
-    get :foo, :sort => '^updated_at'
+    get :foo, :sort => '-updated_at'
     @controller.sort_order.should == 'updated_at DESC'
   end
 
@@ -54,7 +54,7 @@ describe SortOrderTestController do
     get :foo
     @controller.sort_order.should be_nil
 
-    get :foo, :sort => '^updated_at'
+    get :foo, :sort => '-updated_at'
     @controller.sort_order.should == 'updated_at DESC'
 
     get :foo
