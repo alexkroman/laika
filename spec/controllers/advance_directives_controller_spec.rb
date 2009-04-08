@@ -29,33 +29,29 @@ describe AdvanceDirectivesController do
     assigns[:advance_directive].should == @patient_data.advance_directive
   end
 
-  it "should render show template on post create" do
+  it "should render show partial on post create" do
     post :create, :patient_data_instance_id => @patient_data.id.to_s
-    response.should render_template('advance_directives/show')
+    response.should render_template('advance_directives/_show')
   end
 
-  it "should assign @advance_directive on post create" do
-    old_advance_directive = @patient_data.advance_directive
+  it "should not assign @advance_directive on post create" do
     post :create, :patient_data_instance_id => @patient_data.id.to_s
-    assigns[:advance_directive].should_not be_new_record
-    assigns[:advance_directive].should_not == old_advance_directive
+    assigns[:advance_directive].should be_nil
   end
 
-  it "should render show template on put update" do
+  it "should render show partial on put update" do
     put :update, :patient_data_instance_id => @patient_data.id.to_s
-    response.should render_template('advance_directives/show')
+    response.should render_template('advance_directives/_show')
   end
 
-  it "should assign @advance_directive on put update" do
-    old_advance_directive = @patient_data.advance_directive
+  it "should not assign @advance_directive on put update" do
     put :update, :patient_data_instance_id => @patient_data.id.to_s
-    assigns[:advance_directive].should_not be_new_record
-    assigns[:advance_directive].should == old_advance_directive
+    assigns[:advance_directive].should be_nil
   end
 
-  it "should render show template on delete destroy" do
+  it "should render show partial on delete destroy" do
     delete :destroy, :patient_data_instance_id => @patient_data.id.to_s
-    response.should render_template('advance_directives/show')
+    response.should render_template('advance_directives/_show')
   end
 
   it "should not assign @advance_directive on delete destroy" do
