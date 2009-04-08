@@ -89,6 +89,11 @@
                 <a href="#" onclick="javascript:scroll_to_module_and_highlight('proceduresContainer', 1.0);">Procedure</a>
               </td>
             </tr>
+            <tr class="darkzebra">
+              <td class="lighttext">
+                <a href="#" onclick="javascript:scroll_to_module_and_highlight('medicalEquipmentContainer', 1.0);">Medical Equipment</a>
+              </td>
+            </tr>
             <tr class="lightzebra">
               <td class="lighttext">
                 <a href="#" onclick="javascript:scroll_to_module_and_highlight('identifiersContainer', 1.0);">Patient Identifiers</a>
@@ -401,9 +406,9 @@
           </div>
           <!-- End Procedures Module -->
 
-          <!-- Start Medical Equipments Module -->
-          <div id="medicalEquipmentsContainer">
-          <h5>Medical Equipments</h5>
+          <!-- Start Medical Equipment Module -->
+          <div id="medicalEquipmentContainer">
+          <h5>Medical Equipment</h5>
           <% for medical_equipment in @patient_data.medical_equipments %>
             <div id="medical_equipment<%= medical_equipment.id %>">
               <%= render :partial => '/medical_equipments/show', 
@@ -422,7 +427,7 @@
             </tr>
           </table>
           </div>
-          <!-- End Medical Equipments Module -->
+          <!-- End Medical Equipment Module -->
 
           <!-- Start Patient Identifier Module -->
           <div id="identifiersContainer">
