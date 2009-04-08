@@ -6,6 +6,8 @@ class AdvanceDirective < ActiveRecord::Base
   belongs_to :advance_directive_type
   belongs_to :advance_directive_status_code
 
+  after_save { |r| r.patient_data.update_attributes(:updated_at => DateTime.now) }
+
   include PersonLike
   
 

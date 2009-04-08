@@ -6,6 +6,8 @@ class Support < ActiveRecord::Base
   belongs_to :contact_type
   belongs_to :relationship
 
+  after_save { |r| r.patient_data.update_attributes(:updated_at => DateTime.now) }
+
   include PersonLike
   include MatchHelper
 
