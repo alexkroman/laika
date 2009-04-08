@@ -12,11 +12,6 @@ class SortOrderTestController < ActionController::Base
 end
 
 describe SortOrderTestController do
-  before(:each) do
-    @controller = SortOrderTestController.new
-    @request = ActionController::TestRequest.new
-    @response = ActionController::TestResponse.new
-  end
 
   it "should not respond to sort_order as an action" do
     lambda { get :sort_order }.should raise_error(ActionController::UnknownAction)
