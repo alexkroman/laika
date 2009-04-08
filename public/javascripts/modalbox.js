@@ -34,7 +34,7 @@ Modalbox.Methods = {
 		closeValue: "&times;", // Default string for close link in the header
 		params: {},
 		method: 'get', // Default Ajax request method
-		autoFocusing: true, // Toggles auto-focusing for form elements. Disable for long text pages.
+		autoFocusing: false, // Toggles auto-focusing for form elements. Disable for long text pages.
 		aspnet: false // Should be use then using with ASP.NET costrols. Then true Modalbox window will be injected into the first form element.
 	},
 	_options: new Object,
@@ -385,7 +385,7 @@ Modalbox.Methods = {
 		var node = event.element();
 		switch(event.keyCode) {
 			case Event.KEY_TAB:
-				event.stop();
+				//event.stop();
 				
 				/* Switching currFocused to the element which was focused by mouse instead of TAB-key. Fix for #134 */ 
 				if(node != this.focusableElements[this.currFocused])
