@@ -33,6 +33,21 @@ Installing/using multiple version of Java in Ubuntu
  IcedTea6 1.3.1 (6b12-0ubuntu6) Runtime Environment (build 1.6.0_0-b12)
  OpenJDK Server VM (build 1.6.0_0-b12, mixed mode)
 
+Install jRuby on Ubuntu with Java 1.5
+=====================================
+
+$ wget http://dist.codehaus.org/jruby/1.1.6/jruby-src-1.1.6.tar.gz
+$ tar -zvxf jruby-src-1.1.6.tar.gz
+$ sudo aptitude install ant
+$ cd jruby-1.1.6
+$ ant jar-complete
+
+Add the bin directory to your path
+
+$ jruby -S gem install rspec activerecord-jdbc-adapter activerecord-jdbcmysql-adapter
+
+
+
 Deploying to Amazon EC2
 =======================
 
