@@ -5,8 +5,6 @@ class AllergiesController < PatientDataChildController
 
   def new
     @allergy = Allergy.new
-    @patient_data.update_attribute(:no_known_allergies, false)
-    
     render :action => 'edit'
   end
 
