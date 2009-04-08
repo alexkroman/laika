@@ -70,9 +70,9 @@ Rails::Initializer.run do |config|
   # config.active_record.default_timezone = :utc
 
   # These are dependencies we need to run the application.
-  config.gem 'andand',               :version => '>= 1.2.0'
-  config.gem 'faker',                :version => '>= 0.3.1'
-  config.gem 'calendar_date_select', :version => '>= 1.13'
+  config.gem 'andand',               :version => '1.3.1'
+  config.gem 'faker',                :version => '0.3.1'
+  config.gem 'calendar_date_select', :version => '1.15'
   config.gem 'mislav-will_paginate', :version => '>= 2.3.6', :lib => 'will_paginate', :source => 'http://gems.github.com'
 
   config.gem 'xds-facade'
