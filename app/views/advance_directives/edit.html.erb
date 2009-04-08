@@ -1,7 +1,7 @@
 <!-- Start Advance Directive Module -->
 <% remote_form_for(:advance_directive, 
-                   :url => patient_data_instance_advance_directive_path(patient_data),
-                   :update => 'advanceDirectiveContainer', :method => http_method(advance_directive)) do |f| %>
+                   :url => patient_data_instance_advance_directive_path(@patient_data),
+                   :update => 'advanceDirectiveContainer', :method => http_method(@advance_directive)) do |f| %>
 <h5>Advance Directive</h5>
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
@@ -24,9 +24,9 @@
     <td class="lighttext">End Effective Time <%= print_validation_for @advance_directive, :end_effective_time %></td>
     <td><%= f.calendar_date_select :end_effective_time %></td>
   </tr>
-  <%= render :partial => '/person_names/edit', :locals => {:person_name => advance_directive.person_name}%>
-  <%= render :partial => '/addresses/edit', :locals => {:address => advance_directive.address}%>
-  <%= render :partial => '/telecoms/edit', :locals => {:telecom => advance_directive.telecom}%>
+  <%= render :partial => '/person_names/edit', :locals => {:person_name => @advance_directive.person_name}%>
+  <%= render :partial => '/addresses/edit', :locals => {:address => @advance_directive.address}%>
+  <%= render :partial => '/telecoms/edit', :locals => {:telecom => @advance_directive.telecom}%>
   <tr>  
     <td class="lighttext">Advance Directive Status Code <%= print_validation_for @advance_directive, :advance_directive_status_code_id %></td>
     <td>

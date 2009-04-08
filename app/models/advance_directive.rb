@@ -19,6 +19,12 @@ class AdvanceDirective < ActiveRecord::Base
     }
   end
 
+  def initialize(*args)
+    super
+    self.person_name ||= PersonName.new
+    self.address ||= Address.new
+    self.telecom ||= Telecom.new
+  end
 
   def to_c32(xml)
 
