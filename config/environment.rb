@@ -77,8 +77,8 @@ Rails::Initializer.run do |config|
 
   # These are dependencies for the tests.
   # We just want to make sure they're available without loading them.
-  config.gem 'rspec', :lib => false
-  config.gem 'rspec-rails', :lib => false
+  config.gem 'rspec', :lib => false, :version => '1.2.2'
+  config.gem 'rspec-rails', :lib => false, :version => '1.2.2'
 
   config.gem 'mislav-will_paginate', :version => '~> 2.3.6', :lib => 'will_paginate', :Source => 'http://gems.github.com'
 
