@@ -2,10 +2,6 @@ class RegistrationInformationController < PatientDataChildController
 
   def new
     @registration_information = RegistrationInformation.new
-    @registration_information.person_name = PersonName.new
-    @registration_information.address = Address.new
-    @registration_information.telecom = Telecom.new
-    
     render :partial  => 'edit', :locals => {:registration_information =>  @registration_information,
                                             :patient_data => @patient_data}
   end

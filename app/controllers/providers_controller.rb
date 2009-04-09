@@ -2,10 +2,6 @@ class ProvidersController < PatientDataChildController
   
   def new
     @provider = Provider.new
-    @provider.person_name = PersonName.new
-    @provider.address = Address.new
-    @provider.telecom = Telecom.new
-    
     render :partial  => 'edit', :locals => {:provider =>  @provider,
                                             :patient_data => @patient_data}  
   end

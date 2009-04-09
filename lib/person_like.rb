@@ -8,6 +8,13 @@ module PersonLike
       has_one :address, :as => :addressable
       has_one :telecom, :as => :reachable
 
+      def initialize(*args)
+        super
+        self.person_name ||= PersonName.new
+        self.address ||= Address.new
+        self.telecom ||= Telecom.new
+      end
+
       def copy
         copied_person_like = self.clone
         copied_person_like.save!

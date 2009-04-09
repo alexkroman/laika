@@ -2,11 +2,6 @@ class EncountersController < PatientDataChildController
 
   def new
     @encounter = Encounter.new
-    
-    @encounter.person_name = PersonName.new
-    @encounter.address = Address.new
-    @encounter.telecom = Telecom.new
-    
     render :partial  => 'edit', :locals => {:encounter => @encounter,
                                             :patient_data => @patient_data}
   end

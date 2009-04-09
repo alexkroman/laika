@@ -2,9 +2,6 @@ class InformationSourcesController < PatientDataChildController
 
   def new
     @information_source = InformationSource.new
-    @information_source.person_name = PersonName.new
-    @information_source.address = Address.new
-    @information_source.telecom = Telecom.new
     render :partial  => 'edit', :locals => {:information_source => @information_source,
                                             :patient_data => @patient_data}  
   end
