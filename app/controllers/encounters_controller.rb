@@ -27,9 +27,4 @@ class EncountersController < PatientDataChildController
     render :partial  => 'show', :locals => {:encounter => encounter,
                                             :patient_data => @patient_data}
   end
-
-  def destroy
-    super
-    render :partial  => 'delete.rjs'
-  end
 end
