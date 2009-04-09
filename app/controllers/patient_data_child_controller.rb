@@ -21,12 +21,12 @@ class PatientDataChildController < ApplicationController
   end
   
   def update
-    instance_variable_set(instance_var_name, @patient_data.send(association_name).find(params[:id]))
-    instance_variable_get(instance_var_name).send(:update_attributes, params[param_key])
-    
+    instance = @patient_data.send(association_name).find(params[:id])
+    instance.send(:update_attributes, params[param_key])
+
     render :partial => 'show', :locals => {
       :patient_data => @patient_data,
-      param_key     => instance_variable_get(instance_var_name)
+      param_key     => instance
     }
   end
 

@@ -59,21 +59,17 @@ describe AllergiesController do
     response.should render_template('allergies/_show')
   end
 
-  it "should assign @allergy on put update" do
+  it "should update allergy on put update" do
     existing_allergy = @patient_data.allergies.first
-    put :update, :patient_data_instance_id => @patient_data.id.to_s, :id => existing_allergy.id.to_s
-    assigns[:allergy].should_not be_new_record
-    assigns[:allergy].should == existing_allergy
+    put :update, :patient_data_instance_id => @patient_data.id.to_s, :id => existing_allergy.id.to_s,
+      :allergy => { :free_text_product => 'foobar' }
+    existing_allergy.reload
+    existing_allergy.free_text_product.should == 'foobar'
   end
 
   it "should render no_known_allergies_link partial on delete destroy" do
     delete :destroy, :patient_data_instance_id => @patient_data.id.to_s, :id => @patient_data.allergies.first.id.to_s
     response.should render_template('allergies/_no_known_allergies_link')
-  end
-
-  it "should not assign @allergy on delete destroy" do
-    delete :destroy, :patient_data_instance_id => @patient_data.id.to_s, :id => @patient_data.allergies.first.id.to_s
-    assigns[:allergy].should be_nil
   end
 
   it "should remove from @patient_data.allergies on delete destroy" do

@@ -1,10 +1,6 @@
 class AdvanceDirectivesController < PatientDataChildController
   def edit
     @advance_directive = @patient_data.advance_directive
-    
-    @advance_directive.person_name ||= PersonName.new
-    @advance_directive.address     ||= Address.new
-    @advance_directive.telecom     ||= Telecom.new
   end
 
   def create

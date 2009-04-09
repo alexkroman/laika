@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../../spec_helper'
 
-describe "encounters/_edit.html.erb" do
+describe "encounters/edit.html.erb" do
   fixtures :users
 
   describe "with an existing encounter (encounters/edit)" do
@@ -10,11 +10,12 @@ describe "encounters/_edit.html.erb" do
       @encounter.person_name = PersonName.new
       @encounter.address = Address.new
       @encounter.telecom = Telecom.new
+      assigns[:encounter] = @encounter
+      assigns[:patient_data] = @patient_data
     end
 
     it "should render the edit form with method PUT" do
-      render :partial  => 'encounters/edit', :locals => {:encounter => @encounter,
-                                                         :patient_data => @patient_data}
+      render 'encounters/edit'
       response.should have_tag("form[action=#{patient_data_instance_encounter_path(@patient_data,@encounter)}]") do
         with_tag "input[name=_method][value=put]"
       end
@@ -28,11 +29,12 @@ describe "encounters/_edit.html.erb" do
       @encounter.person_name = PersonName.new
       @encounter.address = Address.new
       @encounter.telecom = Telecom.new
+      assigns[:encounter] = @encounter
+      assigns[:patient_data] = @patient_data
     end
 
     it "should render the edit form with method POST" do
-      render :partial  => 'encounters/edit', :locals => {:encounter => @encounter,
-                                                         :patient_data => @patient_data}
+      render 'encounters/edit'
       response.should have_tag("form[action=#{patient_data_instance_encounters_path(@patient_data)}][method=post]") do
         without_tag "input[name=_method][value=put]"
       end

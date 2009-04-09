@@ -45,16 +45,11 @@ describe ConditionsController do
     response.should render_template('conditions/_show')
   end
 
-  it "should assign @condition on put update" do
+  it "should update condition on put update" do
     existing_condition = @patient_data.conditions.first
-    put :update, :patient_data_instance_id => @patient_data.id.to_s, :id => existing_condition.id.to_s
-    assigns[:condition].should_not be_new_record
-    assigns[:condition].should == existing_condition
-  end
-
-  it "should not assign @condition on delete destroy" do
-    delete :destroy, :patient_data_instance_id => @patient_data.id.to_s, :id => @patient_data.conditions.first.id.to_s
-    assigns[:condition].should be_nil
+    put :update, :patient_data_instance_id => @patient_data.id.to_s, :id => existing_condition.id.to_s, :condition => { :free_text_name => 'foobar'}
+    existing_condition.reload
+    existing_condition.free_text_name.should == 'foobar'
   end
 
   it "should remove from @patient_data.conditions on delete destroy" do
