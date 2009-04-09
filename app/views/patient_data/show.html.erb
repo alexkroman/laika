@@ -1,10 +1,17 @@
   <!-- Start Content -->
   <div class="content">
     <div class="container" >
+      <div class="notice">
+        <% unless @patient_data.vendor_test_plan %>
+        You are editing a patient template record.  These edits to not affect data in patient records assigned to inspections
+        <% else %>
+          Your are editing a patient record for the <%=h @patient_data.vendor_test_plan.kind.test_type %> <%=h @patient_data.vendor_test_plan.kind.name %> test within the <%=h @patient_data.vendor_test_plan.vendor.public_id %> inspection only.  These edits will not affect the original patient template in the library.
+        <% end %>
+      </div>
       <div class="column span-6 append-1">
         <%= render :partial => 'template_info' %>
         <h4></h4><br>
-        <div id="modules" style="position: fixed; width:230px;">
+       <div id="modules" style="position: fixed; width:230px;">
           <table>
             <tr>
               <th><h5>CCD/C32 Modules</h5></th>
