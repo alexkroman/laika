@@ -9,9 +9,18 @@ describe AllergiesController do
     @patient_data = patient_data(:joe_smith)
   end
 
-  it "should render edit template on get new" do
+  it "should not update patient allergy flag on get new" do
+    @patient_data.update_attributes!(:no_known_allergies => true)
     get :new, :patient_data_instance_id => @patient_data.id.to_s
-    response.should render_template('allergies/edit')
+    @patient_data.reload
+    @patient_data.no_known_allergies.should == true
+  end
+
+  it "should update patient allergy flag on post create" do
+    @patient_data.update_attributes!(:no_known_allergies => true)
+    post :create, :patient_data_instance_id => @patient_data.id.to_s
+    @patient_data.reload
+    @patient_data.no_known_allergies.should == false
   end
 
   it "should assign @allergy on get new" do

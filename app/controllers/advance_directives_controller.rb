@@ -1,11 +1,4 @@
 class AdvanceDirectivesController < PatientDataChildController
-  layout false
-
-  def new
-    @advance_directive = AdvanceDirective.new
-    render :action => 'edit'
-  end
-
   def edit
     @advance_directive = @patient_data.advance_directive
     

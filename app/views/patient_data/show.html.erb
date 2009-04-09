@@ -16,6 +16,11 @@
             </tr>
             <tr class="lightzebra">
               <td class="lighttext">
+                <a href="#" onclick="javascript:scroll_to_module_and_highlight('identifiersContainer', 1.0);">Patient Identifiers</a>
+              </td>
+            </tr>
+            <tr class="lightzebra">
+              <td class="lighttext">
                 <a href="#" onclick="javascript:scroll_to_module_and_highlight('languageContainer', 1.0);">Languages Spoken</a>
               </td>
             </tr>
@@ -89,9 +94,9 @@
                 <a href="#" onclick="javascript:scroll_to_module_and_highlight('proceduresContainer', 1.0);">Procedure</a>
               </td>
             </tr>
-            <tr class="lightzebra">
+            <tr class="darkzebra">
               <td class="lighttext">
-                <a href="#" onclick="javascript:scroll_to_module_and_highlight('identifiersContainer', 1.0);">Patient Identifiers</a>
+                <a href="#" onclick="javascript:scroll_to_module_and_highlight('medicalEquipmentContainer', 1.0);">Medical Equipment</a>
               </td>
             </tr>
           </table>
@@ -107,6 +112,32 @@
                                    :patient_data => @patient_data} %>
           </div>
           <!-- End Person Information Module -->
+
+          <!-- Start Patient Identifier Module -->
+          <div id="identifiersContainer">
+          <h5>Patient Identifiers</h5>
+          <% #for patient_identifier in @patient_data.procedures
+          %>
+          <% for patient_identifier in @patient_data.patient_identifiers
+          %>
+            <div id="patient_identifier<%= patient_identifier.id %>">
+              <%= render :partial => '/patient_identifiers/show',
+                         :locals => {:patient_identifier => patient_identifier,
+                                     :patient_data => @patient_data} %>
+        </div>
+          <% end %>
+          <table id="addPatientIdentifier">
+            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+              <td></td>
+              <td><%= link_to_remote 'Add', :url => new_patient_data_instance_patient_identifier_path(@patient_data),
+                                            :method => 'get',
+                                            :update => 'addPatientIdentifier',
+                                            :position => :before %>
+              </td>
+            </tr>
+          </table>
+      </div>
+          <!-- End Patient Identifier Module -->
 
           <!-- Start Languages Module -->
           <div id="languageContainer"><h5>Languages Spoken (Required)</h5>
@@ -279,7 +310,7 @@
           </div>
           <!-- End Information Source Module -->
 
-          <!-- Start Advance Directives Module -->
+          <!-- Start Advance Directive Module -->
           <div id="advanceDirectiveContainer">
             <%= render :partial => '/advance_directives/show', :locals => {:advance_directive => @patient_data.advance_directive,
                                                                            :patient_data => @patient_data} %>
@@ -401,15 +432,13 @@
           </div>
           <!-- End Procedures Module -->
 
-          <!-- Start Medical Equipments Module -->
-          <div id="medicalEquipmentsContainer">
-          <h5>Medical Equipments</h5>
+          <!-- Start Medical Equipment Module -->
+          <div id="medicalEquipmentContainer">
+          <h5>Medical Equipment</h5>
           <% for medical_equipment in @patient_data.medical_equipments %>
-            <div id="medical_equipment<%= medical_equipment.id %>">
               <%= render :partial => '/medical_equipments/show', 
                          :locals => {:medical_equipment => medical_equipment,
                                      :patient_data => @patient_data} %>
-            </div>
           <% end %>
           <table id="addMedicalEquipment">
             <tr class="<%= cycle("darkzebra", "lightzebra")%>">
@@ -422,33 +451,7 @@
             </tr>
           </table>
           </div>
-          <!-- End Medical Equipments Module -->
-
-          <!-- Start Patient Identifier Module -->
-          <div id="identifiersContainer">
-          <h5>Patient Identifiers</h5>
-          <% #for patient_identifier in @patient_data.procedures
-          %>
-          <% for patient_identifier in @patient_data.patient_identifiers
-          %>
-            <div id="patient_identifier<%= patient_identifier.id %>">
-              <%= render :partial => '/patient_identifiers/show',
-                         :locals => {:patient_identifier => patient_identifier,
-                                     :patient_data => @patient_data} %>
-        </div>
-          <% end %>
-          <table id="addPatientIdentifier">
-            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-              <td></td>
-              <td><%= link_to_remote 'Add', :url => new_patient_data_instance_patient_identifier_path(@patient_data),
-                                            :method => 'get',
-                                            :update => 'addPatientIdentifier',
-                                            :position => :before %>
-              </td>
-            </tr>
-          </table>
-      </div>
-          <!-- End Patient Identifier Module -->
+          <!-- End Medical Equipment Module -->
 
     </div>
   </div>
