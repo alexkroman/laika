@@ -1,37 +1,37 @@
-<% if immunization.new_record?
+<% if @immunization.new_record?
   immunization_div = 'immunizationNew' -%>
 <div id="immunizationNew">
 <% else
-     immunization_div = "immunization#{immunization.id}"
+     immunization_div = "immunization#{@immunization.id}"
    end %>
-   <% remote_form_for(:immunization, immunization, :url => patient_data_url_for(patient_data, immunization),
-                      :html => {:method => http_method(immunization)}, :update => immunization_div) do |f| -%>
+   <% remote_form_for(:immunization, @immunization, :url => patient_data_url_for(@patient_data, @immunization),
+                      :html => {:method => http_method(@immunization)}, :update => immunization_div) do |f| -%>
 
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Administration Date <%= print_validation_for immunization, :administration_date %></td>
+    <td class="lighttext">Administration Date <%= print_validation_for @immunization, :administration_date %></td>
     <td>
       <%= f.calendar_date_select :administration_date %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Product <%= print_validation_for immunization, :vaccine_id %></td>
+    <td class="lighttext">Product <%= print_validation_for @immunization, :vaccine_id %></td>
     <td>
       <%= f.select :vaccine_id, Vaccine.select_options, {:include_blank => true} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Lot Number Text <%= print_validation_for immunization, :lot_number_text %></td>
+    <td class="lighttext">Lot Number Text <%= print_validation_for @immunization, :lot_number_text %></td>
     <td><%= f.text_field :lot_number_text %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Patient Refusal <%= print_validation_for immunization, :refusal %></td>
+    <td class="lighttext">Patient Refusal <%= print_validation_for @immunization, :refusal %></td>
     <td>
       <%= f.check_box :refusal %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">No Immunization Reason <%= print_validation_for immunization, :no_immunization_reason_id %></td>
+    <td class="lighttext">No Immunization Reason <%= print_validation_for @immunization, :no_immunization_reason_id %></td>
     <td>
       <%= f.select :no_immunization_reason_id, NoImmunizationReason.select_options, {:include_blank => true} %>
     </td>
