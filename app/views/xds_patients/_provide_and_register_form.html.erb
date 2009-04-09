@@ -1,18 +1,18 @@
 <tr>
   <td>Author Person</td>
-  <td><%= text_field_tag 'metadata[author][person]' %></td>
+  <td><%= text_field_tag 'metadata[author][person]', '', :size => 45 %></td>
 </tr>
 <tr>
   <td>Author Institution</td>
-  <td><%= text_field_tag 'metadata[author][institution]' %></td>
+  <td><%= text_field_tag 'metadata[author][institution]', '', :size => 45 %></td>
 </tr>
 <tr>
   <td>Author Role</td>
-  <td><%= text_field_tag 'metadata[author][role]' %></td>
+  <td><%= text_field_tag 'metadata[author][role]', '', :size => 45 %></td>
 </tr>
 <tr>
   <td>Author Specialty</td>
-  <td><%= text_field_tag 'metadata[author][specialty]' %></td>
+  <td><%= text_field_tag 'metadata[author][specialty]', :size => 45 %></td>
 </tr>
 <% coded_values = [:class_code, :confidentiality_code, :format_code, :healthcare_facility_type_code, :practice_setting_code, :type_code]
    coded_values.each do |cv|
@@ -24,33 +24,33 @@
 <% end -%>
 <tr>
   <td>Patient Id</td>
-  <td><%= text_field_tag 'metadata[patient_id]' %></td>
+  <td><%= text_field_tag 'metadata[patient_id]', '', :size => 45 %></td>
 </tr>
 <tr>
   <td>Source Patient Id</td>
-  <td><%= text_field_tag 'metadata[source_patient_id]' %></td>
+  <td><%= text_field_tag 'metadata[source_patient_id]', '', :size => 45 %></td>
 </tr>
 <tr>
   <td>Source Patient Identifier</td>
-  <td><%= text_field_tag 'metadata[source_patient_info][source_patient_identifier]' %></td>
+  <td><%= text_field_tag 'metadata[source_patient_info][source_patient_identifier]', '', :size => 45 %></td>
 </tr>
 <tr>
   <td>Source Patient Name</td>
-  <td><%= text_field_tag 'metadata[source_patient_info][name]' %></td>
+  <td><%= text_field_tag 'metadata[source_patient_info][name]', '', :size => 45 %></td>
 </tr>
 <tr>
   <td>Source Patient Gender</td>
-  <td><%= text_field_tag 'metadata[source_patient_info][gender]' %></td>
+  <td><%= text_field_tag 'metadata[source_patient_info][gender]', '', :size => 45 %></td>
 </tr>
 <tr>
   <td>Source Patient Date of Birth</td>
-  <td><%= text_field_tag 'metadata[source_patient_info][date_of_birth]' %></td>
+  <td><%= text_field_tag 'metadata[source_patient_info][date_of_birth]', '', :size => 45 %></td>
 </tr>
 <tr>
   <td>Unique Id</td>
-  <td><%= text_field_tag 'metadata[unique_id]' %></td>
+  <td><%= text_field_tag 'metadata[unique_id]', '', :size => 45 %></td>
 </tr>
 <tr>
   <td>Repository Unique Id</td>
-  <td><%= text_field_tag 'metadata[repository_unique_id]' %></td>
+  <td><%= text_field_tag 'metadata[repository_unique_id]', '', :size => 45 %></td>
 </tr>
