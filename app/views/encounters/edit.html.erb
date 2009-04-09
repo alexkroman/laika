@@ -1,36 +1,36 @@
-<% if encounter.new_record?
+<% if @encounter.new_record?
   encounter_div = 'encounterNew' %>
   <div id="encounterNew">
 <% else
-  encounter_div = "encounter#{encounter.id}"
+  encounter_div = "encounter#{@encounter.id}"
 end %>
-<% remote_form_for(:encounter, encounter, :url => patient_data_url_for(patient_data, encounter),
-                   :html => {:method => http_method(encounter)}, :update => encounter_div) do |f| -%>
+<% remote_form_for(:encounter, @encounter, :url => patient_data_url_for(@patient_data, @encounter),
+                   :html => {:method => http_method(@encounter)}, :update => encounter_div) do |f| -%>
 
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Encounter Date <%= print_validation_for encounter, :encounter_date %></td>
+    <td class="lighttext">Encounter Date <%= print_validation_for @encounter, :encounter_date %></td>
     <td>
       <%= f.calendar_date_select :encounter_date %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Encounter ID <%= print_validation_for encounter, :encounter_id %></td>
+    <td class="lighttext">Encounter ID <%= print_validation_for @encounter, :encounter_id %></td>
     <td>
       <%= f.text_field :encounter_id, :onfocus => "Effect.BlindDown('uuid-#{controller.class}');", :onblur => "Effect.BlindUp('uuid-#{controller.class}');" %>
       <em><%= render :partial => '/layouts/uuid_help_text' %></em>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Free Text <%= print_validation_for encounter, :free_text %></td>
+    <td class="lighttext">Free Text <%= print_validation_for @encounter, :free_text %></td>
     <td><%= f.text_field :free_text %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Encounter Name <%= print_validation_for encounter, :name %></td>
+    <td class="lighttext">Encounter Name <%= print_validation_for @encounter, :name %></td>
     <td><%= f.text_field :name %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Encounter Type <%= print_validation_for encounter, :encounter_type_id %></td>
+    <td class="lighttext">Encounter Type <%= print_validation_for @encounter, :encounter_type_id %></td>
     <td>
       <%= f.select :encounter_type_id, EncounterType.select_options, {:include_blank => true} %>
     </td>
@@ -38,15 +38,15 @@ end %>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td colspan="2" class="lighttext">Encounter Provider</td>
   </tr>
-  <%= render :partial => '/person_names/edit', :locals => {:person_name => encounter.person_name}%>
-  <%= render :partial => '/addresses/edit', :locals => {:address => encounter.address}%>
-  <%= render :partial => '/telecoms/edit', :locals => {:telecom => encounter.telecom}%>
+  <%= render :partial => '/person_names/edit', :locals => {:person_name => @encounter.person_name}%>
+  <%= render :partial => '/addresses/edit', :locals => {:address => @encounter.address}%>
+  <%= render :partial => '/telecoms/edit', :locals => {:telecom => @encounter.telecom}%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Location Name <%= print_validation_for encounter, :location_name %></td>
+    <td class="lighttext">Location Name <%= print_validation_for @encounter, :location_name %></td>
     <td><%= f.text_field :location_name %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Location Code <%= print_validation_for encounter, :encounter_location_code_id %></td>
+    <td class="lighttext">Location Code <%= print_validation_for @encounter, :encounter_location_code_id %></td>
     <td>
       <%= f.select :encounter_location_code_id, EncounterLocationCode.select_options, {:include_blank => true} %>
     </td>
