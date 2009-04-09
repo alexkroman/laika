@@ -62,7 +62,6 @@ describe AllergiesController do
   it "should assign @allergy on put update" do
     existing_allergy = @patient_data.allergies.first
     put :update, :patient_data_instance_id => @patient_data.id.to_s, :id => existing_allergy.id.to_s
-    assigns[:allergy].should_not be_new_record
     assigns[:allergy].should == existing_allergy
   end
 

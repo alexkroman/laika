@@ -48,7 +48,6 @@ describe ConditionsController do
   it "should assign @condition on put update" do
     existing_condition = @patient_data.conditions.first
     put :update, :patient_data_instance_id => @patient_data.id.to_s, :id => existing_condition.id.to_s
-    assigns[:condition].should_not be_new_record
     assigns[:condition].should == existing_condition
   end
 
