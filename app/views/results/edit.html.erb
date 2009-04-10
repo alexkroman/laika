@@ -1,16 +1,16 @@
-<% if result.new_record?
+<% if @result.new_record?
      result_div = 'resultNew' 
-     html_options = {:id => 'resultForm', :method => http_method(result)} -%>
+     html_options = {:id => 'resultForm', :method => http_method(@result)} -%>
 <div id="resultNew">
 <% else
-     result_div = "result#{result.id}"
-     html_options = { :method => http_method(result) }
+     result_div = "result#{@result.id}"
+     html_options = { :method => http_method(@result) }
    end %>
-   <% remote_form_for(:result, result, :url => patient_data_url_for(patient_data, result, :is_vital_sign => @is_vital_sign), :html => html_options,
+   <% remote_form_for(:result, @result, :url => patient_data_url_for(@patient_data, @result, :is_vital_sign => @is_vital_sign), :html => html_options,
                    :update => result_div) do |f| -%>
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Result ID <%= print_validation_for result, :result_id %></td>
+    <td class="lighttext">Result ID <%= print_validation_for @result, :result_id %></td>
     <td>
       <%= f.text_field :result_id, :onfocus => "Effect.BlindDown('uuid-#{controller.class}#{@is_vital_sign}');", :onblur => "Effect.BlindUp('uuid-#{controller.class}#{@is_vital_sign}');" %>
       <br />
@@ -20,49 +20,49 @@
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Date <%= print_validation_for result, :result_date %></td>
+    <td class="lighttext">Date <%= print_validation_for @result, :result_date %></td>
     <td>
       <%= f.calendar_date_select :result_date %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Code System <%= print_validation_for result, :code_system_id %></td>
+    <td class="lighttext">Code System <%= print_validation_for @result, :code_system_id %></td>
     <td>
       <%= f.select :code_system_id, CodeSystem.select_options, {:include_blank => true} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Result Code <%= print_validation_for result, :result_code %></td>
+    <td class="lighttext">Result Code <%= print_validation_for @result, :result_code %></td>
     <td><%= f.text_field :result_code %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Result Code Display Name <%= print_validation_for result, :result_code_display_name %></td>
+    <td class="lighttext">Result Code Display Name <%= print_validation_for @result, :result_code_display_name %></td>
     <td><%= f.text_field :result_code_display_name %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Status Code <%= print_validation_for result, :status_code %></td>
+    <td class="lighttext">Status Code <%= print_validation_for @result, :status_code %></td>
     <td><%= f.text_field :status_code %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Value <%= print_validation_for result, :value_scalar %></td>
+    <td class="lighttext">Value <%= print_validation_for @result, :value_scalar %></td>
     <td><%= f.text_field :value_scalar %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Value Units <%= print_validation_for result, :value_unit %></td>
+    <td class="lighttext">Value Units <%= print_validation_for @result, :value_unit %></td>
     <td><%= f.text_field :value_unit %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Organizer ID <%= print_validation_for result, :organizer_id %></td>
+    <td class="lighttext">Organizer ID <%= print_validation_for @result, :organizer_id %></td>
     <td><%= f.text_field :organizer_id %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Organizer Status <%= print_validation_for result, :act_status_code_id %></td>
+    <td class="lighttext">Organizer Status <%= print_validation_for @result, :act_status_code_id %></td>
     <td>
       <%= f.select :act_status_code_id, ActStatusCode.select_options, {:include_blank => true} %>
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-    <td class="lighttext">Organizer Code <%= print_validation_for result, :result_type_code_id %></td>
+    <td class="lighttext">Organizer Code <%= print_validation_for @result, :result_type_code_id %></td>
     <td>
       <%= f.select :result_type_code_id, ResultTypeCode.select_options, {:include_blank => true} %>
     </td>
@@ -73,6 +73,6 @@
   </tr>
 </table>
 <% end -%>
-<% if result.new_record? -%>
+<% if @result.new_record? -%>
 </div>
 <% end -%>
