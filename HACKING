@@ -1,0 +1,56 @@
+Contributing to Laika
+=====================
+
+Development is managed using the Git source control system. A good source of
+information on Git usage is the GitHub guides: http://github.com/guides/home
+
+For GitHub users:
+
+The easiest way to get a patch reviewed and approved quickly is to fork from
+Zack Hobson's Laika fork on GitHub: http://github.com/zenhob/laika
+
+After you make your changes and push, you can send a pull request and your 
+changes will be reviewed and possibly merged.
+
+For everyone else:
+
+ $ git clone git://github.com/zenhob/laika.git
+ $ cd laika
+ $ git checkout -b my_changes
+ $ <hack hack hack>
+ $ git commit -a
+ $ <maybe some more hacking>
+ $ git commit -a
+ $ git pull origin master
+ $ git merge master
+ $ git format-patch --stdout master > my_changes.patch
+
+ Go to SourceForge and submit your patch:
+ https://sourceforge.net/tracker/?func=add&group_id=205665&atid=994556
+
+ Or send it to the developer list: dev@projectlaika.org
+
+Running Individual Specs
+========================
+
+Sometimes it's more convenient to run individual spec files:
+
+ $ jruby -S spec <specfile>
+
+Remember to run the entire suite before pushing any changes:
+
+ $ jruby -S rake spec
+
+RCov Test Coverage
+==================
+
+It's possible to get RCov working in jruby:
+
+ $ git clone git://github.com/spicycode/rcov.git
+ $ cd rcov
+ $ jruby setup.rb config
+ $ jruby setup.rb setup
+ $ jruby setup.rb install
+ $ cd <laika_project_dir>
+ $ jruby -S rake spec:rcov
+
