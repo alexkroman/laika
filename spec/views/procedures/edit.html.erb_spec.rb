@@ -1,17 +1,18 @@
 require File.dirname(__FILE__) + '/../../spec_helper'
 
-describe "procedure/_edit.html.erb" do
+describe "procedure/edit.html.erb" do
   fixtures :users
 
   describe "with an existing procedure (procedures/edit)" do
     before do
       @patient_data = PatientData.create!(:name => 'foo', :user => User.find(:first))
       @procedure = Procedure.create!(:patient_data => @patient_data)
+      assigns[:patient_data] = @patient_data
+      assigns[:procedure] = @procedure
     end
 
     it "should render the edit form with method PUT" do
-      render :partial  => 'procedures/edit', :locals => {:procedure => @procedure,
-                                                         :patient_data => @patient_data}
+      render 'procedures/edit'
       response.should have_tag("form[action=#{patient_data_instance_procedure_path(@patient_data,@procedure)}]") do
         with_tag "input[name=_method][value=put]"
       end
@@ -22,11 +23,12 @@ describe "procedure/_edit.html.erb" do
     before do
       @patient_data = PatientData.create!(:name => 'foo', :user => User.find(:first))
       @procedure = Procedure.new
+      assigns[:patient_data] = @patient_data
+      assigns[:procedure] = @procedure
     end
 
     it "should render the edit form with method POST" do
-      render :partial  => 'procedures/edit', :locals => {:procedure => @procedure,
-                                                         :patient_data => @patient_data}
+      render 'procedures/edit'
       response.should have_tag("form[action=#{patient_data_instance_procedures_path(@patient_data)}][method=post]") do
         without_tag "input[name=_method][value=put]"
       end
