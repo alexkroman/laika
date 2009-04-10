@@ -1,7 +1,7 @@
 <!-- Start Personal Information Module -->
 <% remote_form_for(:support, 
-                   :url => patient_data_instance_support_path(patient_data),
-                   :update => 'supportContainer', :method => http_method(support)) do |f| %>
+                   :url => patient_data_instance_support_path(@patient_data),
+                   :update => 'supportContainer', :method => http_method(@support)) do |f| %>
 <h5>Support (HITSP required)</h5>
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
@@ -14,7 +14,7 @@
     <td class="lighttext">End Support <%= print_validation_for @support, :end_support %></td>
     <td><%= f.calendar_date_select :end_support %></td>
   </tr>
-  <%= render :partial => '/person_names/edit', :locals => {:person_name => support.person_name}%>
+  <%= render :partial => '/person_names/edit', :locals => {:person_name => @support.person_name}%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Contact <%= print_validation_for @support, :contact_type_id %></td>
     <td>
@@ -27,8 +27,8 @@
       <%= f.select :relationship_id, Relationship.select_options, {:include_blank => true} %>
     </td>
   </tr>
-  <%= render :partial => '/addresses/edit', :locals => {:address => support.address}%>
-  <%= render :partial => '/telecoms/edit', :locals => {:telecom => support.telecom}%>
+  <%= render :partial => '/addresses/edit', :locals => {:address => @support.address}%>
+  <%= render :partial => '/telecoms/edit', :locals => {:telecom => @support.telecom}%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td></td>
     <td><%= f.submit "Save" %></td>
