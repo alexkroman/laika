@@ -44,7 +44,13 @@ class ApplicationController < ActionController::Base
   end
 
   def rescue_action_in_public(exception)
-    render :template => "rescues/error"
+    if request.xhr?
+      render :update do |page|
+        page.alert("An internal error occurred, please report this to #{FEEDBACK_EMAIL}.")
+      end
+    else
+      render :template => "rescues/error"
+    end
   end
 
   #def log_error(exception) 
