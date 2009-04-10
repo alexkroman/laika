@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../../spec_helper'
 
-describe "insurance_providers/_edit.html.erb" do
+describe "insurance_providers/edit.html.erb" do
   fixtures :users
 
   describe "with an existing insurance_provider (insurance_providers/edit)" do
@@ -25,11 +25,12 @@ describe "insurance_providers/_edit.html.erb" do
       @insurance_provider.insurance_provider_guarantor.telecom = Telecom.new
       @insurance_provider_guarantor = @insurance_provider.insurance_provider_guarantor
       @insurance_provider.save!
+      assigns[:patient_data] = @patient_data
+      assigns[:insurance_provider] = @insurance_provider
     end
 
     it "should render the edit form with method PUT" do
-      render :partial  => 'insurance_providers/edit', :locals => {:insurance_provider => @insurance_provider,
-                                                         :patient_data => @patient_data}
+      render 'insurance_providers/edit'
       response.should have_tag("form[action=#{patient_data_instance_insurance_provider_path(@patient_data,@insurance_provider)}]") do
         with_tag "input[name=_method][value=put]"
       end
@@ -57,11 +58,12 @@ describe "insurance_providers/_edit.html.erb" do
       @insurance_provider.insurance_provider_guarantor.address = Address.new
       @insurance_provider.insurance_provider_guarantor.telecom = Telecom.new
       @insurance_provider_guarantor = @insurance_provider.insurance_provider_guarantor
+      assigns[:patient_data] = @patient_data
+      assigns[:insurance_provider] = @insurance_provider
     end
 
     it "should render the edit form with method POST" do
-      render :partial  => 'insurance_providers/edit', :locals => {:insurance_provider => @insurance_provider,
-                                                         :patient_data => @patient_data}
+      render 'insurance_providers/edit'
       response.should have_tag("form[action=#{patient_data_instance_insurance_providers_path(@patient_data)}][method=post]") do
         without_tag "input[name=_method][value=put]"
       end

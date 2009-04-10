@@ -22,19 +22,10 @@ class InsuranceProvidersController < PatientDataChildController
     @insurance_provider.insurance_provider_guarantor.telecom = Telecom.new
     @insurance_provider_guarantor = @insurance_provider.insurance_provider_guarantor
 
-    render :partial  => 'edit', :locals => {:insurance_provider => @insurance_provider,
-                                            :patient_data => @patient_data}  
-  end
-
-  def edit
-    @insurance_provider = @patient_data.insurance_providers.find(params[:id])
-
-    render :partial  => 'edit', :locals => {:insurance_provider => @insurance_provider,
-                                            :patient_data => @patient_data}
+    render :action => 'edit'
   end
 
   def create
-
     @insurance_provider = InsuranceProvider.new(params[:insurance_provider])
 
     @insurance_provider.insurance_provider_patient = InsuranceProviderPatient.new(params[:insurance_provider_patient])
@@ -53,26 +44,5 @@ class InsuranceProvidersController < PatientDataChildController
     @insurance_provider.insurance_provider_guarantor.telecom = Telecom.new
 
     @patient_data.insurance_providers << @insurance_provider
-
-    render :partial  => 'show', :locals => {:insurance_provider =>  @insurance_provider,
-                                            :patient_data => @patient_data}
   end
-
-  def update
-
-    @insurance_provider = @patient_data.insurance_providers.find(params[:id])
-    @insurance_provider.update_attributes(params[:insurance_provider])
-
-    render :partial  => 'show', :locals => {:insurance_provider =>  @insurance_provider,
-                                            :patient_data => @patient_data}
-  end
-
-  def destroy
-
-    @insurance_provider = @patient_data.insurance_providers.find(params[:id])
-    @insurance_provider.destroy
-
-    render :partial  => 'delete.rjs'
-  end
-
 end
