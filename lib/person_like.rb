@@ -25,6 +25,9 @@ module PersonLike
       end
 
       def update_person_attributes(params)
+        self.person_name ||= PersonName.new
+        self.address     ||= Address.new
+        self.telecom     ||= Telecom.new
         self.person_name.update_attributes(params[:person_name])
         self.address.update_attributes(params[:address]) 
         self.telecom.update_attributes(params[:telecom])

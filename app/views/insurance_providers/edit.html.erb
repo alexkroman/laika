@@ -1,0 +1,65 @@
+<% if @insurance_provider.new_record?
+     insurance_provider_div = 'insurance_providerNew' -%>
+<div id="insurance_providerNew">
+<% else
+     insurance_provider_div = "insurance_provider#{@insurance_provider.id}"
+   end %>
+<% remote_form_for(:insurance_provider, @insurance_provider,
+                   :url => patient_data_url_for(@patient_data, @insurance_provider),
+                   :html => { :method => http_method(@insurance_provider) },
+                   :update => insurance_provider_div) do |f| -%>
+<table>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Insurance Provider Organization <%= print_validation_for @insurance_provider, :represented_organization %></td>
+    <td>
+      <%= f.text_field :represented_organization %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Insurance Provider Group Number <%= print_validation_for @insurance_provider, :group_number %></td>
+    <td>
+      <%= f.text_field :group_number %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Insurance Type <%= print_validation_for @insurance_provider, :insurance_type_id %></td>
+    <td>
+      <%= f.select :insurance_type_id, InsuranceType.select_options, {:include_blank => true} %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Relationship to Subscriber <%= print_validation_for @insurance_provider, :coverage_role_type_id %></td>
+    <td>
+      <%= f.select :coverage_role_type_id, CoverageRoleType.select_options %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Financial Responsibility Type <%= print_validation_for @insurance_provider, :role_class_relationship_formal_type_id %> </td>
+    <td>
+      <%= f.select :role_class_relationship_formal_type_id, 
+            RoleClassRelationshipFormalType.select_options %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td></td>
+    <td><%= f.submit "Save" %></td>
+  </tr>
+</table>
+<% end %>
+<% unless @insurance_provider.new_record? -%>
+  <div id="insurance_provider_patient<%= @insurance_provider.insurance_provider_patient.id %>">
+    <%= render :partial => '/insurance_provider_patients/show', 
+               :locals => {:insurance_provider_patient => @insurance_provider.insurance_provider_patient,
+                           :patient_data => @patient_data} %>
+  </div>
+  <div id="insurance_provider_subscriber<%= @insurance_provider.insurance_provider_subscriber.id %>">
+    <%= render :partial => '/insurance_provider_subscribers/show', 
+               :locals => {:insurance_provider_subscriber => @insurance_provider.insurance_provider_subscriber,
+                           :patient_data => @patient_data} %>
+  </div>
+  <div id="insurance_provider_guarantor<%= @insurance_provider.insurance_provider_guarantor.id %>">
+    <%= render :partial => '/insurance_provider_guarantors/show', 
+               :locals => {:insurance_provider_guarantor => @insurance_provider.insurance_provider_guarantor,
+                           :patient_data => @patient_data} %>
+  </div>
+<% end -%>

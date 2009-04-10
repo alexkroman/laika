@@ -1,10 +1,18 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 shared_examples_for "vendor all users" do
-  it "allows creation of new vendors" do
+  it "permits creation of new vendors" do
     count = Vendor.count
     post :create, :vendor => { :public_id => 'BARFOO'}
     Vendor.count.should == count + 1
+  end
+
+  it "permits deletion of owned vendors" do
+    @vendor.user = @user
+    @vendor.save!
+    @vendor.editable_by?(@user).should be_true
+    delete :destroy, :id => @vendor.id.to_s
+    lambda { @vendor.reload }.should raise_error(ActiveRecord::RecordNotFound)
   end
 end
 
@@ -27,8 +35,8 @@ describe VendorsController do
     end
 
     it "permits deletion of other users' vendors" do
-      put :update, :id => @vendor.id
-      lambda { @vendor.reload }.should_not raise_error(ActiveRecord::RecordNotFound)
+      delete :destroy, :id => @vendor.id.to_s
+      lambda { @vendor.reload }.should raise_error(ActiveRecord::RecordNotFound)
     end
   end
 
@@ -49,7 +57,7 @@ describe VendorsController do
     end
 
     it "does not permit deletion of other users' vendors" do
-      put :update, :id => @vendor.id
+      delete :destroy, :id => @vendor.id.to_s
       lambda { @vendor.reload }.should_not raise_error(ActiveRecord::RecordNotFound)
     end
 

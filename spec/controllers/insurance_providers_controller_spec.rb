@@ -1,0 +1,58 @@
+require File.dirname(__FILE__) + '/../spec_helper'
+
+describe InsuranceProvidersController do
+  fixtures :patient_data, :insurance_providers
+
+  before do
+    @user = stub(:user)
+    controller.stub!(:current_user).and_return(@user)
+    @patient_data = patient_data(:joe_smith)
+  end
+
+  it "should assign @insurance_provider on get new" do
+    get :new, :patient_data_instance_id => @patient_data.id.to_s
+    assigns[:insurance_provider].should be_new_record
+  end
+
+  it "should render edit template on get edit" do
+    get :edit, :patient_data_instance_id => @patient_data.id.to_s, :id => @patient_data.insurance_providers.first.id.to_s
+    response.should render_template('insurance_providers/edit')
+  end
+
+  it "should assign @insurance_provider on get edit" do
+    get :edit, :patient_data_instance_id => @patient_data.id.to_s, :id => @patient_data.insurance_providers.first.id.to_s
+    assigns[:insurance_provider].should == @patient_data.insurance_providers.first
+  end
+
+  it "should render create template on post create" do
+    post :create, :patient_data_instance_id => @patient_data.id.to_s
+    response.should render_template('insurance_providers/create')
+  end
+
+  it "should add an insurance_provider on post create" do
+    old_insurance_provider_count = @patient_data.insurance_providers.count
+    post :create, :patient_data_instance_id => @patient_data.id.to_s
+    @patient_data.insurance_providers(true).count.should == old_insurance_provider_count + 1
+  end
+
+  it "should render show partial on put update" do
+    put :update, :patient_data_instance_id => @patient_data.id.to_s, :id => @patient_data.insurance_providers.first.id.to_s
+    response.should render_template('insurance_providers/_show')
+  end
+
+  it "should update insurance_provider on put update" do
+    existing_insurance_provider = @patient_data.insurance_providers.first
+    put :update, :patient_data_instance_id => @patient_data.id.to_s, :id => existing_insurance_provider.id.to_s,
+      :insurance_provider => { :represented_organization => 'foobar' }
+    existing_insurance_provider.reload
+    existing_insurance_provider.represented_organization.should == 'foobar'
+  end
+
+  it "should remove from @patient_data.insurance_providers on delete destroy" do
+    existing_insurance_provider = @patient_data.insurance_providers.first
+    delete :destroy, :patient_data_instance_id => @patient_data.id.to_s, :id => existing_insurance_provider.id.to_s
+    @patient_data.insurance_providers(true).should_not include(existing_insurance_provider)
+  end
+
+end
+

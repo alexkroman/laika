@@ -1,5 +1,5 @@
-# This controller handles both Results and VitalSigns. Since VitalSigns are
-# a subclass of Results, this works out pretty cleanly. The only place where
+# This controller handles both Results and VitalSigns. Since VitalSigns and
+# Results are both AbstractResults, this works out pretty cleanly. The only place where
 # things get tricky is in the create method. Other than that, they can both
 # be treated as results and reuse the same views.
 class ResultsController < PatientDataChildController
@@ -7,17 +7,12 @@ class ResultsController < PatientDataChildController
   def new
     @is_vital_sign = params[:is_vital_sign]
     @result = Result.new
-
-    render :partial  => 'edit', :locals => {:result => @result,
-                                            :patient_data => @patient_data}
+    render :action => 'edit'
   end
 
   def edit
     @is_vital_sign = params[:is_vital_sign]
     @result = @patient_data.all_results.find(params[:id])
-
-    render :partial  => 'edit', :locals => {:result => @result,
-                                            :patient_data => @patient_data}
   end
 
   # Create will make a new Result or VitalSign record. They both use the exact
@@ -32,21 +27,18 @@ class ResultsController < PatientDataChildController
     end
 
     @patient_data.all_results << @result
-    render :partial  => 'create', :locals => {:result => @result,
-                                              :patient_data => @patient_data}
   end
 
   def update
-    @result = @patient_data.all_results.find(params[:id])
-    @result.update_attributes(params[:result])
-    render :partial  => 'show', :locals => {:result => @result,
+    result = @patient_data.all_results.find(params[:id])
+    result.update_attributes(params[:result])
+    render :partial  => 'show', :locals => {:result => result,
                                             :patient_data => @patient_data}
   end
 
   def destroy
-    @result = @patient_data.all_results.find(params[:id])
-    @result.destroy
-    render :partial  => 'delete.rjs'
+    result = @patient_data.all_results.find(params[:id])
+    result.destroy
   end
 
 end

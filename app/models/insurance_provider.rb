@@ -7,9 +7,9 @@ class InsuranceProvider < ActiveRecord::Base
   belongs_to :coverage_role_type
   belongs_to :role_class_relationship_formal_type
 
-  has_one    :insurance_provider_patient
-  has_one    :insurance_provider_subscriber
-  has_one    :insurance_provider_guarantor
+  has_one :insurance_provider_patient,    :dependent => :destroy
+  has_one :insurance_provider_subscriber, :dependent => :destroy
+  has_one :insurance_provider_guarantor,  :dependent => :destroy
 
   after_save { |r| r.patient_data.update_attributes(:updated_at => DateTime.now) }
 
