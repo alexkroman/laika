@@ -34,9 +34,10 @@ describe SupportsController do
     response.should render_template('supports/_show')
   end
 
-  it "should not assign @support on post create" do
+  it "should create support on post create" do
+    @patient_data.update_attributes!(:support => nil)
     post :create, :patient_data_instance_id => @patient_data.id.to_s
-    assigns[:support].should be_nil
+    @patient_data.support(true).should_not be_nil
   end
 
   it "should render show partial on put update" do
@@ -44,9 +45,11 @@ describe SupportsController do
     response.should render_template('supports/_show')
   end
 
-  it "should not assign @support on put update" do
-    put :update, :patient_data_instance_id => @patient_data.id.to_s
-    assigns[:support].should be_nil
+  it "should update support on put update" do
+    old_value = @patient_data.support
+    put :update, :patient_data_instance_id => @patient_data.id.to_s,
+        :support => { :name => 'foobar' }
+    @patient_data.support(true).name.should == 'foobar'
   end
 
   it "should render show partial on delete destroy" do
