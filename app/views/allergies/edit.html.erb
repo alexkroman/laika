@@ -22,6 +22,12 @@
     </td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Severity <%= print_validation_for @allergy, :severity_term_id %></td>
+    <td>
+      <%= f.select :severity_term_id, SeverityTerm.select_options %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Alert Type <%= print_validation_for @allergy, :adverse_event_type_id %></td>
     <td>
       <%= f.select :adverse_event_type_id, AdverseEventType.select_options %>
