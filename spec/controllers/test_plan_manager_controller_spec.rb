@@ -19,6 +19,17 @@ describe TestPlanManagerController do
 
       get :assign_patient_data, :pd_id => patient_data, :vendor_test_plan => { :vendor_id => vendor, :kind_id => kind }
     end
+
+    it "should not assign selected user" do
+      other = users(:rob_dingwell)
+      patient_data = patient_data(:joe_smith)
+      vendor = Vendor.find :first
+      kind = Kind.find :first
+
+      User.should_not_receive(:find).with(other)
+
+      get :assign_patient_data, :pd_id => patient_data, :vendor_test_plan => {:user_id => other, :vendor_id => vendor, :kind_id => kind }
+    end
   end
 
   describe "operated by an admin" do
