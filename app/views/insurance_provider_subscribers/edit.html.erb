@@ -1,7 +1,7 @@
-<% remote_form_for(:insurance_provider_subscriber, insurance_provider_subscriber,
-                   :url => patient_data_instance_insurance_provider_subscriber_path(patient_data, insurance_provider_subscriber),
+<% remote_form_for(:insurance_provider_subscriber, @insurance_provider_subscriber,
+                   :url => patient_data_instance_insurance_provider_subscriber_path(@patient_data, @insurance_provider_subscriber),
                    :html => {:method => 'put'},
-                   :update => "insurance_provider_subscriber#{insurance_provider_subscriber.id}") do |f| -%>
+                   :update => "insurance_provider_subscriber#{@insurance_provider_subscriber.id}") do |f| -%>
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td colspan="2" class="lighttext">Subscriber Information</td>
@@ -13,16 +13,16 @@
              name="insurance_provider_subscriber[subscriber_id]" 
              size="30" 
              type="text" 
-             <% if insurance_provider_subscriber.subscriber_id %>value="<%= insurance_provider_subscriber.subscriber_id %>"<% end %> />
+             <% if @insurance_provider_subscriber.subscriber_id %>value="<%= @insurance_provider_subscriber.subscriber_id %>"<% end %> />
     </td>
   </tr>
-  <%= render :partial => '/person_names/edit', :locals => {:person_name => insurance_provider_subscriber.person_name}%>
+  <%= render :partial => '/person_names/edit', :locals => {:person_name => @insurance_provider_subscriber.person_name}%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Subscriber Birth Date</td>
     <td><%= f.calendar_date_select :date_of_birth %></td>
   </tr>
-  <%= render :partial => '/addresses/edit', :locals => {:address => insurance_provider_subscriber.address}%>
-  <%= render :partial => '/telecoms/edit', :locals => {:telecom => insurance_provider_subscriber.telecom}%>
+  <%= render :partial => '/addresses/edit', :locals => {:address => @insurance_provider_subscriber.address}%>
+  <%= render :partial => '/telecoms/edit', :locals => {:telecom => @insurance_provider_subscriber.telecom}%>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td></td>
     <td><%= f.submit "Save" %></td>

@@ -9,9 +9,9 @@ class TestPlanManagerController < ApplicationController
     kind = Kind.find(test_plan[:kind_id])
     user = current_user.administrator? ? User.find(test_plan[:user_id]) : current_user
 
-    # save the vendor/kind selections in the session for next time
-    session[:previous_vendor_id] = test_plan[:vendor_id]
-    session[:previous_kind_id] = test_plan[:kind_id]
+    # save the vendor/kind selections for next time
+    self.last_selected_vendor_id = vendor.id
+    self.last_selected_kind_id   = kind.id
 
     vtp = VendorTestPlan.new(:vendor => vendor, :kind => kind, :user => user)
     if params[:metadata]

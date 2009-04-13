@@ -2,7 +2,7 @@ class InsuranceProviderGuarantor < ActiveRecord::Base
 
   strip_attributes!
 
-  belongs_to :insurance_provider
+  include InsuranceProviderChild
 
   include PersonLike
   
