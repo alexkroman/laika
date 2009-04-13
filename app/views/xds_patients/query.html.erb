@@ -1,0 +1,42 @@
+<div class="content">
+  <div class="container">
+    <h2>XDS Query Results</h2>
+    <table>
+      <tr>
+        <td>Author Name</td>
+        <td>Format</td>
+        <td>Document Id</td>
+        <td>Creation Time</td>
+      </tr>
+      <% @metadata.each do |md| %>
+      <tr>
+        <td><%= md.author.person %></td>
+        <td><%= md.format_code.display_name %></td>
+        <td><%= md.unique_id %></td>
+        <td><%= md.creation_time %></td>
+        <td></td>
+        <td>
+          <a href="javascript:toggle_div('assignment_div_<%= md.unique_id %>');">assign</a>
+          <div id="assignment_div_<%= md.unique_id %>" style="display:none" >
+            <% form_for VendorTestPlan.new( :user_id => current_user.id, :metadata=>metadata),
+              :url => {:controller => 'test_plan_manager', :action => 'assign_patient_data' } do |f| -%>
+              <input type="hidden" name="pd_id" value="<%= patient_identifier.patient_data.id %>"/>
+              <%= text_area_tag :metadata, md.to_yaml, :style=>"display:none" %>
+              <%= f.select :vendor_id, Vendor.select_options(vendors) %><br/>
+              <%= hidden_field_tag 'vendor_test_plan[kind_id]', Kind.find_by_name('Query and Retrieve').id %>
+              Query and Retrieve
+              <% if current_user.administrator? -%>
+                <%= f.select :user_id, User.select_options %>
+              <% end -%>
+              <p/>
+              <input type="submit" value="Assign"/>
+            <% end -%>
+          </div>
+        </td>
+      </tr>
+      <% end -%>
+    </table>
+  </div>
+</div>
+
+

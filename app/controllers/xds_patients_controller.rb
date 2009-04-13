@@ -21,9 +21,9 @@ class XdsPatientsController < ApplicationController
     rsqr = XDS::RegistryStoredQueryRequest.new(XDS_REGISTRY_URLS[:register_stored_query], 
                                                 {"$XDSDocumentEntryPatientId" => "'#{pi.patient_identifier}^^^#{pi.identifier_domain_identifier}'",
                                                  "$XDSDocumentEntryStatus" => "('urn:oasis:names:tc:ebxml-regrep:StatusType:Approved')"})
-    metadata = rsqr.execute
-    
-    render :partial => 'metadata', :locals => {:metadata => metadata,:vendors => current_user.vendors + Vendor.unclaimed,:patient_identifier=>pi}
+    @metadata = rsqr.execute
+    @vendors = current_user.vendors + Vendor.unclaimed
+    @patient_identifier = pi
   end
   
   # Creates the form that collects data for a provide and register test
