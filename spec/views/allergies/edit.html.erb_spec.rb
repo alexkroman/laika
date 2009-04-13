@@ -2,7 +2,6 @@ require File.dirname(__FILE__) + '/../../spec_helper'
 
 describe "all allergy forms", :shared => true do
   it "should include severity information" do
-    pending "SF ticket 2263302"
     render 'allergies/edit'
     response.should have_tag("form") do
       with_tag "select[id=allergy_severity_term_id]"
