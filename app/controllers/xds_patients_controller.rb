@@ -13,9 +13,7 @@ class XdsPatientsController < ApplicationController
       
     @vendors = current_user.vendors + Vendor.unclaimed
 
-    # These session values are set by TestPlanManagerController#assign_patient_data
-    # so that previous selections are retained as a convenience in the UI.
-    @previous_vendor = Vendor.find_by_id(session[:previous_vendor_id]) if session[:previous_vendor_id]
+    @previous_vendor = last_selected_vendor
   end
   
   def query
