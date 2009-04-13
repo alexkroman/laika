@@ -12,5 +12,6 @@ module InsuranceProviderChild
         :conditions => ['insurance_providers.patient_data_id = ?', patient.id]
       }
     }
+    mod.after_save { |r| r.insurance_provider.patient_data.update_attributes(:updated_at => DateTime.now) }
   end
 end
