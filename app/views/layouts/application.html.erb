@@ -59,6 +59,9 @@
             <% if flash[:error] %> 
               <div class="error"><%= flash[:error] %></div>
             <% end %>
+            <% if @page_header %>
+              <h3><%= @page_header %></h3>
+            <% end %>
             <%= yield  %>
           </div>
         </div>
