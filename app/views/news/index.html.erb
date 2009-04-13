@@ -1,9 +1,3 @@
-<div class="content"><div class="container">
-
-<% if flash[:notice] %> 
-  <div class="notice"><%= flash[:notice] %></div>
-<% end %>
-
 <div class="news">
 <h3>News
   <% if current_user.administrator? %>
@@ -17,5 +11,3 @@
 
 <%= @messages.collect { |m| render :partial => 'news/message', :object => m } %>
 </div>
-
-</div></div>

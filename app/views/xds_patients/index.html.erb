@@ -1,54 +1,43 @@
-<div class="content">
-  <div class="container">
+<h3>XDS Registry</h3>
 
-    <% if flash[:notice] %> 
-      <div class="notice"><%= flash[:notice] %></div>
-    <% end %>
+<table id="xds_patients">
+  
+    <tr>
+      <th class="<%= sort_order_class('name') %>"><%= link_to_sort 'name', 'Template' %></th>
+      <!--th><div>Test Type</div></th-->
+      <th><div>Created by</div></th>
+      <th class="<%= sort_order_class('created_at') %>"><%= link_to_sort 'created_at', 'Created on' %></th>
+      <th class="<%= sort_order_class('updated_at') %>"><%= link_to_sort 'updated_at', 'Last modified' %></th>
+      <th><div>Actions</div></th>
+    </tr>
+    
+    <% for patient_data in @patient_data_list -%>
+    <tr>
+      <td><%= link_to h(patient_data.name), patient_data_instance_url(patient_data) %></td>
+      <!--td>CCD/C32</td-->
+      <td><%=h patient_data.user.first_name %> <%=h patient_data.user.last_name %></td>
+      <td><%= patient_data.created_at.strftime("%d.%b.%Y") %></td>
+      <td><%= patient_data.updated_at.strftime("%d.%b.%Y") %></td>
+      <td class="actions" width=270px>
+        <a href="javascript:toggle_div('query_div_<%=patient_data.id%>');">query</a>
+        <%= link_to 'assign', provide_and_register_setup_xds_patient_url(patient_data) %>
+        <%= link_to 'provide and register', provide_and_register_xds_patient_url(patient_data) %>
+        <div id="query_div_<%=patient_data.id%>" style="display:none">
+          <% if patient_data.patient_identifiers.count > 0 %>
+            <% form_tag query_xds_patient_path do |f| %>
+              <%= select_tag "id",
+                             options_for_select(patient_data.patient_identifiers.collect{|pi|["#{pi.patient_identifier}^^^#{pi.identifier_domain_identifier}", pi.id]}) 
+               %>
+               <%= submit_tag 'Query XDS' %>
+             <% end %>
+           <% else %>
+              <p>
+                No identifiers available
+                </p>
+           <% end %>
+        </div>
+      </td>
+    </tr>
+    <% end -%>
+</table>
 
-    <h3>XDS Registry</h3>
-
-    <table id="xds_patients">
-      
-        <tr>
-          <th class="<%= sort_order_class('name') %>"><%= link_to_sort 'name', 'Template' %></th>
-          <!--th><div>Test Type</div></th-->
-          <th><div>Created by</div></th>
-          <th class="<%= sort_order_class('created_at') %>"><%= link_to_sort 'created_at', 'Created on' %></th>
-          <th class="<%= sort_order_class('updated_at') %>"><%= link_to_sort 'updated_at', 'Last modified' %></th>
-          <th><div>Actions</div></th>
-        </tr>
-        
-        <% for patient_data in @patient_data_list -%>
-        <tr>
-          <td><%= link_to h(patient_data.name), patient_data_instance_url(patient_data) %></td>
-          <!--td>CCD/C32</td-->
-          <td><%=h patient_data.user.first_name %> <%=h patient_data.user.last_name %></td>
-          <td><%= patient_data.created_at.strftime("%d.%b.%Y") %></td>
-          <td><%= patient_data.updated_at.strftime("%d.%b.%Y") %></td>
-          <td class="actions" width=270px>
-            <a href="javascript:toggle_div('query_div_<%=patient_data.id%>');">query</a>
-            <%= link_to 'assign', provide_and_register_setup_xds_patient_url(patient_data) %>
-            <%= link_to 'provide and register', provide_and_register_xds_patient_url(patient_data) %>
-            <div id="query_div_<%=patient_data.id%>" style="display:none">
-              <% if patient_data.patient_identifiers.count > 0 %>
-                <% form_tag query_xds_patient_path do |f| %>
-                  <%= select_tag "id",
-                                 options_for_select(patient_data.patient_identifiers.collect{|pi|["#{pi.patient_identifier}^^^#{pi.identifier_domain_identifier}", pi.id]}) 
-                   %>
-                   <%= submit_tag 'Query XDS' %>
-                 <% end %>
-               <% else %>
-                  <p>
-                    No identifiers available
-                    </p>
-               <% end %>
-            </div>
-          </td>
-        </tr>
-        <% end -%>
-      
-      
-    </table>
-
-  </div>
-</div>

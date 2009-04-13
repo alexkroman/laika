@@ -1,46 +1,42 @@
-<div class="content">
-  <div class="container">
-    <span style="float:right; position:relative; right:40px; top:4px">
-      <%= link_to "Export Report", :action => :export, :controller => :test_plan_manager %>
-    </span>
-      <% @vendors.each do |vendor| -%>
-        <h3>Laika Inspection ID: <%= vendor.public_id %></h3>
-        <table id="dashboard">
-          <tr>
-            <th><div>Status</div></th>
-            <th class="<%= sort_order_class('patient_data.name') %>"><%= link_to_sort 'patient_data.name', 'Test Case' %></th>
-            <th class="<%= sort_order_class('updated_at') %>"><%= link_to_sort 'updated_at', 'Last Tested' %></th>
-            <th class="<%= sort_order_class('kinds.name') %>"><%= link_to_sort 'kinds.name', 'Test Type' %></th>
-            <th><div>Errors</div></th>
-            <th><div>Warnings</div></th>
-            <th><div>Actions</div></th>
-          </tr>
-        <% @vendor_test_plans[vendor].each do |vendor_test_plan| -%>
-          <tr id="vendor_test_plan_<%= vendor_test_plan.id %>"><td>
-              <%= vendor_test_plan_status(vendor_test_plan) %>
-            </td>
-            <td>
-            <% if vendor_test_plan.clinical_document%>
-              <%= vendor_test_plan.patient_data.name %>
-            <% else %>
-              <%= link_to h(vendor_test_plan.patient_data.name), patient_data_instance_url(vendor_test_plan.patient_data) %>
-            <% end %>
-          </td>
-          <td><%= vendor_test_plan.updated_at.strftime("%d.%b.%Y %I:%M %p %Z")  %></td>
-          <td><%= vendor_test_plan.kind.display_name %></td>
-          <td>         
-            <%= link_to pluralize(@errors[vendor_test_plan], "Error"), validate_vendor_test_plan_url(vendor_test_plan) %>          
-          </td>
-          <td>         
-              <%= link_to pluralize(@warnings[vendor_test_plan], "Warning"), validate_vendor_test_plan_url(vendor_test_plan) %>
-          </td>
-          <td class="actions">
-            <%= action_area(vendor_test_plan) %>
-          </td>
-          </tr>
-          <%= execution_div(vendor_test_plan) %>
-      <% end %> <!-- vendor_test_plan loop -->
-      </table> <!-- .dashboard -->
-    <% end %> <!-- vendor loop -->
-  </div> <!-- .container -->
-</div> <!-- .content -->
+<span style="float:right; position:relative; right:40px; top:4px">
+  <%= link_to "Export Report", :action => :export, :controller => :test_plan_manager %>
+</span>
+<% @vendors.each do |vendor| -%>
+  <h3>Laika Inspection ID: <%= vendor.public_id %></h3>
+  <table id="dashboard">
+    <tr>
+      <th><div>Status</div></th>
+      <th class="<%= sort_order_class('patient_data.name') %>"><%= link_to_sort 'patient_data.name', 'Test Case' %></th>
+      <th class="<%= sort_order_class('updated_at') %>"><%= link_to_sort 'updated_at', 'Last Tested' %></th>
+      <th class="<%= sort_order_class('kinds.name') %>"><%= link_to_sort 'kinds.name', 'Test Type' %></th>
+      <th><div>Errors</div></th>
+      <th><div>Warnings</div></th>
+      <th><div>Actions</div></th>
+    </tr>
+    <% @vendor_test_plans[vendor].each do |vendor_test_plan| -%>
+      <tr id="vendor_test_plan_<%= vendor_test_plan.id %>"><td>
+          <%= vendor_test_plan_status(vendor_test_plan) %>
+        </td>
+        <td>
+          <% if vendor_test_plan.clinical_document%>
+            <%= vendor_test_plan.patient_data.name %>
+          <% else %>
+            <%= link_to h(vendor_test_plan.patient_data.name), patient_data_instance_url(vendor_test_plan.patient_data) %>
+          <% end %>
+        </td>
+        <td><%= vendor_test_plan.updated_at.strftime("%d.%b.%Y %I:%M %p %Z")  %></td>
+        <td><%= vendor_test_plan.kind.display_name %></td>
+        <td>         
+          <%= link_to pluralize(@errors[vendor_test_plan], "Error"), validate_vendor_test_plan_url(vendor_test_plan) %>          
+        </td>
+        <td>         
+          <%= link_to pluralize(@warnings[vendor_test_plan], "Warning"), validate_vendor_test_plan_url(vendor_test_plan) %>
+        </td>
+        <td class="actions">
+          <%= action_area(vendor_test_plan) %>
+        </td>
+      </tr>
+      <%= execution_div(vendor_test_plan) %>
+    <% end %> <!-- vendor_test_plan loop -->
+  </table> <!-- .dashboard -->
+<% end %> <!-- vendor loop -->
