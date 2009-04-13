@@ -1,9 +1,5 @@
 class InsuranceProviderPatientsController < PatientDataChildController
 
-  def edit
-    @insurance_provider_patient = @patient_data.insurance_provider_patients.find(params[:id])
-  end
-
   def update
     insurance_provider_patient = @patient_data.insurance_provider_patients.find(params[:id])
     insurance_provider_patient.update_attributes(params[:insurance_provider_patient])
