@@ -4,9 +4,9 @@ module PersonLike
 
     base.class_eval do
 
-      has_one :person_name, :as => :nameable
-      has_one :address, :as => :addressable
-      has_one :telecom, :as => :reachable
+      has_one :person_name, :as => :nameable, :dependent => :destroy
+      has_one :address, :as => :addressable, :dependent => :destroy
+      has_one :telecom, :as => :reachable, :dependent => :destroy
 
       def initialize(*args)
         super
