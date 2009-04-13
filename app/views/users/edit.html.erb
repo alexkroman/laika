@@ -1,7 +1,7 @@
 <%= error_messages_for :user %>
 
 <div class="user-box">
-  <h2><%= current_user == @user ? 'Your' : "#{@user.display_name}'s" %> Settings</h2>
+  <h3><%= current_user == @user ? 'Your' : "#{@user.display_name}'s" %> Settings</h3>
   <% form_for(:user, :url => user_path(@user), :html => { :method => :put }) do |form| %>
     <div><label for="user_first_name">First Name</label></div>
     <div><%= form.text_field :first_name %></div>
@@ -18,7 +18,7 @@
 </div>
 
 <div class="user-box">
-  <h2>Update Your Password</h2>
+  <h3>Update Your Password</h3>
   <% form_for(:user, :url => user_path(@user), :html => { :method => :put }) do |form| %>
     <div><label for="user_password">Password</label></div>
     <div><%= form.password_field :password %></div>
