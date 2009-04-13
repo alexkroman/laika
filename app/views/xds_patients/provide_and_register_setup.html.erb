@@ -1,28 +1,24 @@
-<div class="content">
-  <div class="container">
-    <h2>Provide and Register C32 based on template for patient <%=h @patient_data.name %></h2>
-    <% form_for VendorTestPlan.new(:user_id => current_user.id),
-                                   :url => {:controller => 'test_plan_manager', :action => 'assign_patient_data' } do |f| -%>
-    <input type="hidden" name="pd_id" value="<%= @patient_data.id %>"/>
-    <table>
-      <tr>
-        <td>Vendor</td>
-        <td><%= f.select :vendor_id, Vendor.select_options(@vendors) %></td>
-      </tr>
-      <br/>
-      <% if current_user.administrator? -%>
-      <tr>
-        <td>User</td>
-        <td><%= f.select :user_id, User.select_options %></td>
-      </tr>
-      <% end -%>
-      <%= render :partial => 'provide_and_register_form' %>
-      <tr>
-        <td></td>
-        <td><input type="submit" value="Assign"/> or <%=link_to 'Back', xds_patients_path %> </td>
-      </tr>
-    </table>
-      <%= hidden_field_tag 'vendor_test_plan[kind_id]', Kind.find_by_name('Provide and Register').id %>
-    <% end -%>
-  </div>
-</div>
+<h2>Provide and Register C32 based on template for patient <%=h @patient_data.name %></h2>
+<% form_for VendorTestPlan.new(:user_id => current_user.id),
+                               :url => {:controller => 'test_plan_manager', :action => 'assign_patient_data' } do |f| -%>
+<input type="hidden" name="pd_id" value="<%= @patient_data.id %>"/>
+<table>
+  <tr>
+    <td>Vendor</td>
+    <td><%= f.select :vendor_id, Vendor.select_options(@vendors) %></td>
+  </tr>
+  <br/>
+  <% if current_user.administrator? -%>
+  <tr>
+    <td>User</td>
+    <td><%= f.select :user_id, User.select_options %></td>
+  </tr>
+  <% end -%>
+  <%= render :partial => 'provide_and_register_form' %>
+  <tr>
+    <td></td>
+    <td><input type="submit" value="Assign"/> or <%=link_to 'Back', xds_patients_path %> </td>
+  </tr>
+</table>
+  <%= hidden_field_tag 'vendor_test_plan[kind_id]', Kind.find_by_name('Provide and Register').id %>
+<% end -%>

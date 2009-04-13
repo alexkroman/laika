@@ -1,85 +1,72 @@
-        <!-- Start Content -->
-        <div class="content">
-          
-<% if flash[:notice] %>
-  <p style="color: red"><%= flash[:notice] %></p>
+<!-- Start User Block -->
+<h3>People</h3>
+<% num_users = @users.size 
+   user_counter = 0
+   while user_counter < num_users 
+     user = @users[user_counter] 
+     user_counter += 1 %>
+  <div class="column span-6">
+    <div class="personinfo">
+      <strong><%= user.display_name %></strong>
+      <% if user.administrator? %>
+        <span class="small">(Administrator)</span>
+      <% end %>
+      <% if current_user.administrator? %>
+        <%= link_to 'edit', edit_user_url(user) %> |
+        <%= link_to 'delete', user_url(user), :method => 'DELETE',
+            :confirm => "This action cannot be undone. Are you sure you want to delete #{user.display_name}?" %>
+      <% end %>
+      <br/><a href="http://<%= user.company_url %>"><%= user.company %></a>
+      <br/><a href="mailto:<%= user.email %>" ><%= user.email %></a>
+      <br/><small>Created <%= distance_of_time_in_words(Time.now, user.created_at) %> ago</small>
+      <br/><small>Edited <%= distance_of_time_in_words(Time.now, user.created_at) %> ago</small>
+    </div>
+  </div>
+<% end %>  
+<!-- End User Block -->
+</div>
+
+<br/><br/>
+
+<div class="container">
+
+<!-- Start Inspection Block -->
+<h3>Vendor Inspections</h3>
+
+<h3></h3>
+<% form_for(Vendor.new) do |f| %>
+  <br/>
+  <div class="column span-4"><label for="public_id">Vendor Inspection ID:</label></div>
+  <div class="column span-4"><%= f.text_field :public_id %></div>
+  <br/><br/>
+  <div class="column span-4">&nbsp;</div>
+  <div class="column span-4"><%= f.submit "Create" %></div>
+  <br/><br/>
 <% end %>
 
-          <div class="container">
-          
-            <!-- Start User Block -->
-            <h3>People</h3>
-            <% num_users = @users.size 
-               user_counter = 0
-               while user_counter < num_users 
-                 user = @users[user_counter] 
-                 user_counter += 1 %>
-              <div class="column span-6">
-                <div class="personinfo">
-                  <strong><%= user.display_name %></strong>
-                  <% if user.administrator? %>
-                    <span class="small">(Administrator)</span>
-                  <% end %>
-                  <% if current_user.administrator? %>
-                    <%= link_to 'edit', edit_user_url(user) %> |
-                    <%= link_to 'delete', user_url(user), :method => 'DELETE',
-                        :confirm => "This action cannot be undone. Are you sure you want to delete #{user.display_name}?" %>
-                  <% end %>
-                  <br/><a href="http://<%= user.company_url %>"><%= user.company %></a>
-                  <br/><a href="mailto:<%= user.email %>" ><%= user.email %></a>
-                  <br/><small>Created <%= distance_of_time_in_words(Time.now, user.created_at) %> ago</small>
-                  <br/><small>Edited <%= distance_of_time_in_words(Time.now, user.created_at) %> ago</small>
-                </div>
-              </div>
-            <% end %>  
-            <!-- End User Block -->
-          </div>
-
-          <br/><br/>
-
-          <div class="container">
-          
-            <!-- Start Inspection Block -->
-            <h3>Vendor Inspections</h3>
-            
-            <h3></h3>
-            <% form_for(Vendor.new) do |f| %>
-              <br/>
-              <div class="column span-4"><label for="public_id">Vendor Inspection ID:</label></div>
-              <div class="column span-4"><%= f.text_field :public_id %></div>
-              <br/><br/>
-              <div class="column span-4">&nbsp;</div>
-              <div class="column span-4"><%= f.submit "Create" %></div>
-              <br/><br/>
-            <% end %>
-            
-            <% @vendors.each do |vendor| -%>
-              <div class="column span-6">
-                <div class="vendorinfo">
-                  <% form_for vendor do |vendor_form| -%>
-                    <div>Inspection ID:
-                      <span id="vendor_<%= vendor.id %>"><strong><%=h vendor.public_id %></strong>
-                        <% if vendor.editable_by? current_user -%>
-                          <%= link_to_function 'rename',
-                            "$('vendor_#{vendor.id}').hide();$('vendor_edit_#{vendor.id}').show();" %>&nbsp;|&nbsp;<%=
-                          link_to 'delete', vendor_url(vendor), :method => 'DELETE',
-                          :confirm => "Inspection #{vendor.public_id} has #{pluralize vendor.vendor_test_plans.count, 'test case'} assigned to #{pluralize vendor.test_users.count, 'user'}, are you sure you want to delete it?" %>
-                        <% end -%>
-                      </span>
-                      <span id="vendor_edit_<%= vendor.id %>" style="display:none">
-                          <br />
-                          <%= vendor_form.text_field :public_id, :size => 10 %>
-                          <%= vendor_form.submit 'Rename' %>
-                      </span>
-                    </div>
-                    <br clear="all"/><small>Created <%= distance_of_time_in_words(Time.now, vendor.created_at) %> ago</small>
-                    <br/><small>Edited <%= distance_of_time_in_words(Time.now, vendor.updated_at) %> ago</small>
-                  <% end -%>
-                </div>
-              </div>
+<% @vendors.each do |vendor| -%>
+  <div class="column span-6">
+    <div class="vendorinfo">
+      <% form_for vendor do |vendor_form| -%>
+        <div>Inspection ID:
+          <span id="vendor_<%= vendor.id %>"><strong><%=h vendor.public_id %></strong>
+            <% if vendor.editable_by? current_user -%>
+              <%= link_to_function 'rename',
+                "$('vendor_#{vendor.id}').hide();$('vendor_edit_#{vendor.id}').show();" %>&nbsp;|&nbsp;<%=
+              link_to 'delete', vendor_url(vendor), :method => 'DELETE',
+              :confirm => "Inspection #{vendor.public_id} has #{pluralize vendor.vendor_test_plans.count, 'test case'} assigned to #{pluralize vendor.test_users.count, 'user'}, are you sure you want to delete it?" %>
             <% end -%>
-            <!-- End Inspection Block -->
-            
-          </div>
+          </span>
+          <span id="vendor_edit_<%= vendor.id %>" style="display:none">
+              <br />
+              <%= vendor_form.text_field :public_id, :size => 10 %>
+              <%= vendor_form.submit 'Rename' %>
+          </span>
         </div>
-        <!-- End Content -->
+        <br clear="all"/><small>Created <%= distance_of_time_in_words(Time.now, vendor.created_at) %> ago</small>
+        <br/><small>Edited <%= distance_of_time_in_words(Time.now, vendor.updated_at) %> ago</small>
+      <% end -%>
+    </div>
+  </div>
+<% end -%>
+<!-- End Inspection Block -->

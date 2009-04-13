@@ -1,17 +1,11 @@
-  <!-- Start Content -->
- <div class="content">
-  <div class="container" >
-    <h3>Message Logs</h3><br/><hr/>
-    <% if @message_logs %>
-    <% for message_log in @message_logs %>
-            <b><%=h message_log.MESSAGEDATE.strftime("%d.%b.%Y %I:%M %p %Z") %></b> <br/>
-            <%=h message_log.INMESSAGE.sub("<br>","\n").sub("\r","\n") %><br/><br/>
-    <% end %>
+<h3>Message Logs</h3><br/><hr/>
+<% if @message_logs %>
+<% for message_log in @message_logs %>
+        <b><%=h message_log.MESSAGEDATE.strftime("%d.%b.%Y %I:%M %p %Z") %></b> <br/>
+        <%=h message_log.INMESSAGE.sub("<br>","\n").sub("\r","\n") %><br/><br/>
+<% end %>
 
-    <center><%= will_paginate @message_logs %></center>
-    <% end %>
-    <br/>
-    <a href="javascript:window.close()">Close</a>
-  </div>
-</div>
-<!-- End Content -->
+<center><%= will_paginate @message_logs %></center>
+<% end %>
+<br/>
+<a href="javascript:window.close()">Close</a>
