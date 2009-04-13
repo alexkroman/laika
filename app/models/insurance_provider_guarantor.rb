@@ -2,14 +2,7 @@ class InsuranceProviderGuarantor < ActiveRecord::Base
 
   strip_attributes!
 
-  belongs_to :insurance_provider
-
-  named_scope :by_patient, lambda { |patient|
-    {
-      :include => :insurance_provider,
-      :conditions => ['insurance_providers.patient_data_id = ?', patient.id]
-    }
-  }
+  include InsuranceProviderChild
 
   include PersonLike
   

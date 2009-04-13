@@ -23,6 +23,9 @@ class PatientData < ActiveRecord::Base
   def insurance_provider_guarantors
     InsuranceProviderGuarantor.by_patient(self)
   end
+  def insurance_provider_patients
+    InsuranceProviderPatient.by_patient(self)
+  end
 
   belongs_to :vendor_test_plan
   belongs_to :user
