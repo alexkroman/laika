@@ -31,18 +31,17 @@
             <%= link_to 'provide and register', provide_and_register_xds_patient_url(patient_data) %>
             <div id="query_div_<%=patient_data.id%>" style="display:none">
               <% if patient_data.patient_identifiers.count > 0 %>
-              <form action="#">
-              <%= select_tag "patient_#{patient_data.id}",
-                             options_for_select(patient_data.patient_identifiers.collect{|pi|["#{pi.patient_identifier}^^^#{pi.identifier_domain_identifier}",query_xds_patient_url(pi)]}) 
-               %>
-               </form>
-              <a href="#" 
-                 onclick="Modalbox.show(<%=selected_value("patient_#{patient_data.id}")%>, {height:null,title: 'XDS Query for <%=h patient_data.user.first_name %> <%=h patient_data.user.last_name %>', width: 600}) ;return false;">Query XDS</a>
-                 <% else %>
+                <% form_tag query_xds_patient_path do |f| %>
+                  <%= select_tag "id",
+                                 options_for_select(patient_data.patient_identifiers.collect{|pi|["#{pi.patient_identifier}^^^#{pi.identifier_domain_identifier}", pi.id]}) 
+                   %>
+                   <%= submit_tag 'Query XDS' %>
+                 <% end %>
+               <% else %>
                   <p>
                     No identifiers available
                     </p>
-                 <% end %>
+               <% end %>
             </div>
           </td>
         </tr>
