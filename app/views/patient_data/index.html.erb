@@ -1,59 +1,49 @@
-        <!-- Start Content -->
-        <div class="content">
-          <div class="container">
+<% @page_header = 'Create New Patient Template' %>
+<div>
+  <% form_for(PatientData.new) do |f| %>
+    <label for="name">Name:</label>
+    <%= f.text_field :name %>
+    <%= f.submit "Create Named Template" %>
+  <% end %>
+  <%= button_to("Create Random Template", :action => 'autoCreate') %>
+</div>
+<br/>
+<table id="dashboard">
 
-<% if flash[:notice] %> 
-  <div class="notice"><%= flash[:notice] %></div>
-<% end %>
+  <tr>
+    <th class="<%= sort_order_class('name') %>"><%= link_to_sort 'name', 'Template' %></th>
+    <!--th><div>Test Type</div></th-->
+    <th><div>Created by</div></th>
+    <th class="<%= sort_order_class('created_at') %>"><%= link_to_sort 'created_at', 'Created on' %></th>
+    <th class="<%= sort_order_class('updated_at') %>"><%= link_to_sort 'updated_at', 'Last modified' %></th>
+    <th><div>Actions</div></th>
+  </tr>
 
-            <h3>Create New Patient Template</h3>
-            <div>
-              <% form_for(PatientData.new) do |f| %>
-                <label for="name">Name:</label>
-                <%= f.text_field :name %>
-                <%= f.submit "Create Named Template" %>
-              <% end %>
-              <%= button_to("Create Random Template", :action => 'autoCreate') %>
-            </div>
-            <br/>
-            <table id="dashboard">
-            
-              <tr>
-                <th class="<%= sort_order_class('name') %>"><%= link_to_sort 'name', 'Template' %></th>
-                <!--th><div>Test Type</div></th-->
-                <th><div>Created by</div></th>
-                <th class="<%= sort_order_class('created_at') %>"><%= link_to_sort 'created_at', 'Created on' %></th>
-                <th class="<%= sort_order_class('updated_at') %>"><%= link_to_sort 'updated_at', 'Last modified' %></th>
-                <th><div>Actions</div></th>
-              </tr>
-              
-              <% for patient_data in @patient_data_list -%>
-              <tr>
-                <td><%= link_to h(patient_data.name), patient_data_instance_url(patient_data) %></td>
-                <!--td>CCD/C32</td-->
-                <td><%=h patient_data.user.first_name %> <%=h patient_data.user.last_name %></td>
-                <td><%= patient_data.created_at.strftime("%d.%b.%Y") %></td>
-                <td><%= patient_data.updated_at.strftime("%d.%b.%Y") %></td>
-                <td class="actions" width=270px>
-                  <%= link_to 'edit', patient_data_instance_url(patient_data)%> 
-                  <%= link_to 'delete', patient_data_instance_url(patient_data), :confirm => 'Are you sure you want to delete this Laika template?', :method => :delete %>
-                  <a href="javascript:toggle_div('assignment_div_<%=patient_data.id%>');">assign</a>
-                  <div id="assignment_div_<%=patient_data.id%>" style="display:none">
-                    <% form_for VendorTestPlan.new(:kind_id => @previous_kind, :vendor_id => @previous_vendor, :user_id => current_user.id),
-                      :url => {:controller => 'test_plan_manager', :action => 'assign_patient_data' } do |f| -%>
-                      <input type="hidden" name="pd_id" value="<%= patient_data.id %>"/>
-                      <%= f.select :vendor_id, Vendor.select_options(@vendors) %>
-                      <%= f.select :kind_id, Kind.dashboard_options %>
-                      <% if current_user.administrator? -%>
-                        <%= f.select :user_id, User.select_options %>
-                      <% end -%>
-                      <p/>
-                      <input type="submit" value="Assign"/>
-                    <% end -%>
-                  </div>
-                </td>
-              </tr>
+  <% for patient_data in @patient_data_list -%>
+    <tr>
+      <td><%= link_to h(patient_data.name), patient_data_instance_url(patient_data) %></td>
+      <!--td>CCD/C32</td-->
+      <td><%=h patient_data.user.first_name %> <%=h patient_data.user.last_name %></td>
+      <td><%= patient_data.created_at.strftime("%d.%b.%Y") %></td>
+      <td><%= patient_data.updated_at.strftime("%d.%b.%Y") %></td>
+      <td class="actions" width=270px>
+        <%= link_to 'edit', patient_data_instance_url(patient_data)%> 
+        <%= link_to 'delete', patient_data_instance_url(patient_data), :confirm => 'Are you sure you want to delete this Laika template?', :method => :delete %>
+        <a href="javascript:toggle_div('assignment_div_<%=patient_data.id%>');">assign</a>
+        <div id="assignment_div_<%=patient_data.id%>" style="display:none">
+          <% form_for VendorTestPlan.new(:kind_id => @previous_kind, :vendor_id => @previous_vendor, :user_id => current_user.id),
+            :url => {:controller => 'test_plan_manager', :action => 'assign_patient_data' } do |f| -%>
+              <input type="hidden" name="pd_id" value="<%= patient_data.id %>"/>
+              <%= f.select :vendor_id, Vendor.select_options(@vendors) %>
+              <%= f.select :kind_id, Kind.dashboard_options %>
+              <% if current_user.administrator? -%>
+                <%= f.select :user_id, User.select_options %>
               <% end -%>
-            </table>
+              <p/>
+              <input type="submit" value="Assign"/>
+            <% end -%>
           </div>
-        </div>
+        </td>
+      </tr>
+    <% end -%>
+  </table>

@@ -51,7 +51,20 @@
         <%= render :partial => 'layouts/header' %>
         <!-- End Global Header -->
       
-        <%= yield  %>
+        <div class="content">
+          <div class="container">
+            <% if flash[:notice] %> 
+              <div class="notice"><%= flash[:notice] %></div>
+            <% end %>
+            <% if flash[:error] %> 
+              <div class="error"><%= flash[:error] %></div>
+            <% end %>
+            <% if @page_header %>
+              <h3><%= @page_header %></h3>
+            <% end %>
+            <%= yield  %>
+          </div>
+        </div>
         
         <div class="footer"></div>
          

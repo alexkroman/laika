@@ -21,21 +21,20 @@ class XdsPatientsController < ApplicationController
     rsqr = XDS::RegistryStoredQueryRequest.new(XDS_REGISTRY_URLS[:register_stored_query], 
                                                 {"$XDSDocumentEntryPatientId" => "'#{pi.patient_identifier}^^^#{pi.identifier_domain_identifier}'",
                                                  "$XDSDocumentEntryStatus" => "('urn:oasis:names:tc:ebxml-regrep:StatusType:Approved')"})
-    metadata = rsqr.execute
-    
-    render :partial => 'metadata', :locals => {:metadata => metadata,:vendors => current_user.vendors + Vendor.unclaimed,:patient_identifier=>pi}
+    @metadata = rsqr.execute
+    @vendors = current_user.vendors + Vendor.unclaimed
+    @patient_identifier = pi
   end
   
   # Creates the form that collects data for a provide and register test
   def provide_and_register_setup
-    patient_data = PatientData.find(params[:id])
-    render :partial => 'provide_and_register_setup', :locals => {:patient_data => patient_data, :vendors => (current_user.vendors + Vendor.unclaimed)}
+    @patient_data = PatientData.find(params[:id])
+    @vendors = current_user.vendors + Vendor.unclaimed
   end
 
   # Creates the form that collects data to actuall provide and register a document to an XDS Repository
   def provide_and_register
-    patient_data = PatientData.find(params[:id])
-    render :partial => 'provide_and_register', :locals => {:patient_data => patient_data}
+    @patient_data = PatientData.find(params[:id])
   end
   
   def do_provide_and_register

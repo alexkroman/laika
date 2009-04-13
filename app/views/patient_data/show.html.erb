@@ -1,466 +1,462 @@
-  <!-- Start Content -->
-  <div class="content">
-    <div class="container" >
-      <div class="notice">
-        <% unless @patient_data.vendor_test_plan %>
-        You are editing a patient template record.  These edits will not affect data in patient records assigned to inspections
-        <% else %>
-          Your are editing a patient record for the <%=h @patient_data.vendor_test_plan.kind.test_type %> <%=h @patient_data.vendor_test_plan.kind.name %> test within the <%=h @patient_data.vendor_test_plan.vendor.public_id %> inspection only.  These edits will not affect the original patient template in the library.
-        <% end %>
+<!-- Start Content -->
+    <div class="notice">
+      <% unless @patient_data.vendor_test_plan %>
+      You are editing a patient template record.  These edits will not affect data in patient records assigned to inspections
+      <% else %>
+        Your are editing a patient record for the <%=h @patient_data.vendor_test_plan.kind.test_type %> <%=h @patient_data.vendor_test_plan.kind.name %> test within the <%=h @patient_data.vendor_test_plan.vendor.public_id %> inspection only.  These edits will not affect the original patient template in the library.
+      <% end %>
+    </div>
+    <div class="column span-6 append-1">
+      <%= render :partial => 'template_info' %>
+      <h4></h4><br>
+     <div id="modules" style="position: fixed; width:230px;">
+        <table>
+          <tr>
+            <th><h5>CCD/C32 Modules</h5></th>
+          </tr>
+          <tr class="darkzebra">
+            <td class="lighttext">
+              <a href="#" onclick="javascript:scroll_to_module_and_highlight('personInformationContainer', 1.0);">Person Information</a>
+            </td>
+          </tr>
+          <tr class="lightzebra">
+            <td class="lighttext">
+              <a href="#" onclick="javascript:scroll_to_module_and_highlight('identifiersContainer', 1.0);">Patient Identifiers</a>
+            </td>
+          </tr>
+          <tr class="lightzebra">
+            <td class="lighttext">
+              <a href="#" onclick="javascript:scroll_to_module_and_highlight('languageContainer', 1.0);">Languages Spoken</a>
+            </td>
+          </tr>
+          <tr class="darkzebra">
+            <td class="lighttext">
+              <a href="#" onclick="javascript:scroll_to_module_and_highlight('supportContainer', 1.0);">Support</a>
+            </td>
+          </tr>
+          <tr class="lightzebra">
+            <td class="lighttext">
+              <a href="#" onclick="javascript:scroll_to_module_and_highlight('healthCareProviderContainer', 1.0);">Healthcare Provider</a>
+            </td>
+          </tr>
+          <tr class="darkzebra">
+            <td class="lighttext">
+              <a href="#" onclick="javascript:scroll_to_module_and_highlight('insuranceProviderContainer', 1.0);">Insurance Provider</a>
+            </td>
+          </tr>
+          <tr class="lightzebra">
+            <td class="lighttext">
+              <a href="#" onclick="javascript:scroll_to_module_and_highlight('allergiesAndDrugsContainer', 1.0);">Allergy / Drug Sensitivity</a>
+            </td>
+          </tr>
+          <tr class="darkzebra">
+            <td class="lighttext">
+              <a href="#" onclick="javascript:scroll_to_module_and_highlight('conditionsContainer', 1.0);">Conditions</a>
+            </td>
+          </tr>
+          <tr class="lightzebra">
+            <td class="lighttext">
+              <a href="#" onclick="javascript:scroll_to_module_and_highlight('medicationsContainer', 1.0);">Medication</a>
+            </td>
+          </tr>
+          <tr class="darkzebra">
+            <td class="lighttext">
+              <a href="#" onclick="javascript:scroll_to_module_and_highlight('pregnancyContainer', 1.0);">Pregnancy</a>
+            </td>
+          </tr>
+          <tr class="lightzebra">
+            <td class="lighttext">
+              <a href="#" onclick="javascript:scroll_to_module_and_highlight('informationSourceContainer', 1.0);">Information Source</a>
+            </td>
+          </tr>
+          <tr class="darkzebra">
+            <td class="lighttext">
+              <a href="#" onclick="javascript:scroll_to_module_and_highlight('advanceDirectiveContainer', 1.0);">Advance Directive</a>
+            </td>
+          </tr>
+          <tr class="darkzebra">
+            <td class="lighttext">
+              <a href="#" onclick="javascript:scroll_to_module_and_highlight('vitalSignsContainer', 1.0);">Vital Sign</a>
+            </td>
+          </tr>
+          <tr class="lightzebra">
+            <td class="lighttext">
+              <a href="#" onclick="javascript:scroll_to_module_and_highlight('resultsContainer', 1.0);">Result</a>
+            </td>
+          </tr>
+          <tr class="darkzebra">
+            <td class="lighttext">
+              <a href="#" onclick="javascript:scroll_to_module_and_highlight('immunizationsContainer', 1.0);">Immunization</a>
+            </td>
+          </tr>
+          <tr class="lightzebra">
+            <td class="lighttext">
+              <a href="#" onclick="javascript:scroll_to_module_and_highlight('encountersContainer', 1.0);">Encounter<o/a>
+            </td>
+          </tr>
+          <tr class="darkzebra">
+            <td class="lighttext">
+              <a href="#" onclick="javascript:scroll_to_module_and_highlight('proceduresContainer', 1.0);">Procedure</a>
+            </td>
+          </tr>
+          <tr class="darkzebra">
+            <td class="lighttext">
+              <a href="#" onclick="javascript:scroll_to_module_and_highlight('medicalEquipmentContainer', 1.0);">Medical Equipment</a>
+            </td>
+          </tr>
+        </table>
       </div>
-      <div class="column span-6 append-1">
-        <%= render :partial => 'template_info' %>
-        <h4></h4><br>
-       <div id="modules" style="position: fixed; width:230px;">
-          <table>
-            <tr>
-              <th><h5>CCD/C32 Modules</h5></th>
-            </tr>
-            <tr class="darkzebra">
-              <td class="lighttext">
-                <a href="#" onclick="javascript:scroll_to_module_and_highlight('personInformationContainer', 1.0);">Person Information</a>
-              </td>
-            </tr>
-            <tr class="lightzebra">
-              <td class="lighttext">
-                <a href="#" onclick="javascript:scroll_to_module_and_highlight('identifiersContainer', 1.0);">Patient Identifiers</a>
-              </td>
-            </tr>
-            <tr class="lightzebra">
-              <td class="lighttext">
-                <a href="#" onclick="javascript:scroll_to_module_and_highlight('languageContainer', 1.0);">Languages Spoken</a>
-              </td>
-            </tr>
-            <tr class="darkzebra">
-              <td class="lighttext">
-                <a href="#" onclick="javascript:scroll_to_module_and_highlight('supportContainer', 1.0);">Support</a>
-              </td>
-            </tr>
-            <tr class="lightzebra">
-              <td class="lighttext">
-                <a href="#" onclick="javascript:scroll_to_module_and_highlight('healthCareProviderContainer', 1.0);">Healthcare Provider</a>
-              </td>
-            </tr>
-            <tr class="darkzebra">
-              <td class="lighttext">
-                <a href="#" onclick="javascript:scroll_to_module_and_highlight('insuranceProviderContainer', 1.0);">Insurance Provider</a>
-              </td>
-            </tr>
-            <tr class="lightzebra">
-              <td class="lighttext">
-                <a href="#" onclick="javascript:scroll_to_module_and_highlight('allergiesAndDrugsContainer', 1.0);">Allergy / Drug Sensitivity</a>
-              </td>
-            </tr>
-            <tr class="darkzebra">
-              <td class="lighttext">
-                <a href="#" onclick="javascript:scroll_to_module_and_highlight('conditionsContainer', 1.0);">Conditions</a>
-              </td>
-            </tr>
-            <tr class="lightzebra">
-              <td class="lighttext">
-                <a href="#" onclick="javascript:scroll_to_module_and_highlight('medicationsContainer', 1.0);">Medication</a>
-              </td>
-            </tr>
-            <tr class="darkzebra">
-              <td class="lighttext">
-                <a href="#" onclick="javascript:scroll_to_module_and_highlight('pregnancyContainer', 1.0);">Pregnancy</a>
-              </td>
-            </tr>
-            <tr class="lightzebra">
-              <td class="lighttext">
-                <a href="#" onclick="javascript:scroll_to_module_and_highlight('informationSourceContainer', 1.0);">Information Source</a>
-              </td>
-            </tr>
-            <tr class="darkzebra">
-              <td class="lighttext">
-                <a href="#" onclick="javascript:scroll_to_module_and_highlight('advanceDirectiveContainer', 1.0);">Advance Directive</a>
-              </td>
-            </tr>
-            <tr class="darkzebra">
-              <td class="lighttext">
-                <a href="#" onclick="javascript:scroll_to_module_and_highlight('vitalSignsContainer', 1.0);">Vital Sign</a>
-              </td>
-            </tr>
-            <tr class="lightzebra">
-              <td class="lighttext">
-                <a href="#" onclick="javascript:scroll_to_module_and_highlight('resultsContainer', 1.0);">Result</a>
-              </td>
-            </tr>
-            <tr class="darkzebra">
-              <td class="lighttext">
-                <a href="#" onclick="javascript:scroll_to_module_and_highlight('immunizationsContainer', 1.0);">Immunization</a>
-              </td>
-            </tr>
-            <tr class="lightzebra">
-              <td class="lighttext">
-                <a href="#" onclick="javascript:scroll_to_module_and_highlight('encountersContainer', 1.0);">Encounter<o/a>
-              </td>
-            </tr>
-            <tr class="darkzebra">
-              <td class="lighttext">
-                <a href="#" onclick="javascript:scroll_to_module_and_highlight('proceduresContainer', 1.0);">Procedure</a>
-              </td>
-            </tr>
-            <tr class="darkzebra">
-              <td class="lighttext">
-                <a href="#" onclick="javascript:scroll_to_module_and_highlight('medicalEquipmentContainer', 1.0);">Medical Equipment</a>
-              </td>
-            </tr>
-          </table>
-        </div>
-      </div>
-      <div class="column span-13 last">
-        <div id="template">
+    </div>
+    <div class="column span-13 last">
+      <div id="template">
 
-          <!-- Start Person Information Module -->
-          <div id="personInformationContainer">
-            <%= render :partial => '/registration_information/show',
-                       :locals => {:registration_information  => @patient_data.registration_information,
+        <!-- Start Person Information Module -->
+        <div id="personInformationContainer">
+          <%= render :partial => '/registration_information/show',
+                     :locals => {:registration_information  => @patient_data.registration_information,
+                                 :patient_data => @patient_data} %>
+        </div>
+        <!-- End Person Information Module -->
+
+        <!-- Start Patient Identifier Module -->
+        <div id="identifiersContainer">
+        <h5>Patient Identifiers</h5>
+        <% #for patient_identifier in @patient_data.procedures
+        %>
+        <% for patient_identifier in @patient_data.patient_identifiers
+        %>
+          <div id="patient_identifier<%= patient_identifier.id %>">
+            <%= render :partial => '/patient_identifiers/show',
+                       :locals => {:patient_identifier => patient_identifier,
+                                   :patient_data => @patient_data} %>
+      </div>
+        <% end %>
+        <table id="addPatientIdentifier">
+          <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+            <td></td>
+            <td><%= link_to_remote 'Add', :url => new_patient_data_instance_patient_identifier_path(@patient_data),
+                                          :method => 'get',
+                                          :update => 'addPatientIdentifier',
+                                          :position => :before %>
+            </td>
+          </tr>
+        </table>
+    </div>
+        <!-- End Patient Identifier Module -->
+
+        <!-- Start Languages Module -->
+        <div id="languageContainer"><h5>Languages Spoken (Required)</h5>
+        <% for language in @patient_data.languages -%>
+          <div id="language<%= language.id %>">
+            <%= render :partial => '/languages/show', :locals => {:language  => language,
+                                                                  :patient_data => @patient_data} %>
+          </div>
+        <% end -%>
+        <table id="addLanguage">
+          <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+            <td></td>
+            <td>
+              <%= link_to_remote 'Add', :url => new_patient_data_instance_language_path(@patient_data),
+                                        :method => 'get', 
+                                        :update => 'addLanguage', 
+                                        :position => :before %>
+            </td>
+          </tr>
+        </table>
+        </div> 
+        <!-- End Languages Module -->
+
+        <!-- Start Support Module -->
+        <div id="supportContainer">
+          <%= render :partial => '/supports/show', :locals => {:support  => @patient_data.support,
+                                                               :patient_data => @patient_data} %>
+        </div>
+        <!-- End Support Module -->
+
+        <!-- Start Healthcare Provider Module -->
+        <div id="healthCareProviderContainer">
+        <h5>Healthcare Provider</h5>
+        <% for provider in @patient_data.providers -%>
+            <%= render :partial => '/providers/show', :locals => {:provider  => provider,
+                                                                  :patient_data => @patient_data} %>
+        <% end -%>
+        <table id="addProvider">
+          <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+            <td></td>
+            <td>
+              <%= link_to_remote 'Add', :url => new_patient_data_instance_provider_path(@patient_data),
+                                        :method => 'get',
+                                        :update => 'addProvider',
+                                        :position => :before %>
+            </td>
+          </tr>
+        </table>
+        </div>
+        <!-- End Healthcare Provider Module -->
+
+        <!-- Start Insurance Provider Module -->
+        <div id="insuranceProviderContainer">
+        <h5>Insurance Provider</h5>
+        <% for insurance_provider in @patient_data.insurance_providers %>
+          <div id="insurance_provider<%= insurance_provider.id %>">
+            <%= render :partial => '/insurance_providers/show',
+                       :locals => {:insurance_provider  => insurance_provider,
                                    :patient_data => @patient_data} %>
           </div>
-          <!-- End Person Information Module -->
-
-          <!-- Start Patient Identifier Module -->
-          <div id="identifiersContainer">
-          <h5>Patient Identifiers</h5>
-          <% #for patient_identifier in @patient_data.procedures
-          %>
-          <% for patient_identifier in @patient_data.patient_identifiers
-          %>
-            <div id="patient_identifier<%= patient_identifier.id %>">
-              <%= render :partial => '/patient_identifiers/show',
-                         :locals => {:patient_identifier => patient_identifier,
-                                     :patient_data => @patient_data} %>
+        <% end %>  
+        <table id="addInsuranceProvider">
+          <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+            <td></td>
+            <td>
+              <%= link_to_remote 'Add', :url => new_patient_data_instance_insurance_provider_path(@patient_data),
+                                        :method => 'get',
+                                        :update => 'addInsuranceProvider',
+                                        :position => :before %>
+            </td>
+          </tr>
+        </table>
         </div>
-          <% end %>
-          <table id="addPatientIdentifier">
-            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-              <td></td>
-              <td><%= link_to_remote 'Add', :url => new_patient_data_instance_patient_identifier_path(@patient_data),
-                                            :method => 'get',
-                                            :update => 'addPatientIdentifier',
-                                            :position => :before %>
-              </td>
-            </tr>
-          </table>
-      </div>
-          <!-- End Patient Identifier Module -->
+        <!-- End Insurance Provider Module -->
 
-          <!-- Start Languages Module -->
-          <div id="languageContainer"><h5>Languages Spoken (Required)</h5>
-          <% for language in @patient_data.languages -%>
-            <div id="language<%= language.id %>">
-              <%= render :partial => '/languages/show', :locals => {:language  => language,
+        <!-- Start Allergies and Drugs Module -->
+        <div id="allergiesAndDrugsContainer">
+        <h5>Allergy / Drug Sensitivity (Required)</h5>
+        <% if @patient_data.no_known_allergies -%>
+        <table>
+          <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+            <td></td>
+            <td>
+              No known allergies
+            </td>
+          </tr>
+        </table>
+        <% else
+             unless @patient_data.allergies.empty?
+               for allergy in @patient_data.allergies -%>
+          <div id="allergy<%= allergy.id %>">
+            <%= render :partial => '/allergies/show', :locals => {:allergy  => allergy, 
+                                                                  :patient_data => @patient_data} %>
+          </div>
+        <%     end 
+             else -%>
+              <%= render :partial => '/allergies/no_known_allergies_link', :locals => { :patient_data => @patient_data} %>
+        <%   end -%>
+        <% end -%>
+        <table id="addAllergy">
+          <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+            <td></td>
+            <td>
+              <%= link_to_remote 'Add', :url => new_patient_data_instance_allergy_path(@patient_data),
+                                        :method => 'get',
+                                        :update => 'addAllergy',
+                                        :position => :before %>
+            </td>
+          </tr>
+        </table>
+        </div>
+        <!-- End Allergies and Drugs Module -->
+
+        <!-- Start Conditions Module -->
+        <div id="conditionsContainer">
+        <h5>Conditions and Problems</h5>
+        <% for condition in @patient_data.conditions %>
+          <div id="condition<%= condition.id %>">
+            <%= render :partial => '/conditions/show', 
+                       :locals => {:condition  => condition, :patient_data => @patient_data} %>
+          </div>
+        <% end %>
+        <table id="addCondition">
+          <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+            <td></td>
+            <td><%= link_to_remote 'Add', :url => new_patient_data_instance_condition_path(@patient_data),
+                                          :method => 'get',
+                                          :update => 'addCondition',
+                                          :position => :before %>
+            </td>
+          </tr>
+        </table>
+        </div>
+        <!-- End Conditions Module -->
+
+        <!-- Start Medications Module -->
+        <div id="medicationsContainer"> 
+        <h5>Medication</h5>
+        <% for medication in @patient_data.medications -%>
+          <div id="medication<%= medication.id %>">
+            <%= render :partial => '/medications/show', :locals => {:medication  => medication,
                                                                     :patient_data => @patient_data} %>
-            </div>
-          <% end -%>
-          <table id="addLanguage">
-            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-              <td></td>
-              <td>
-                <%= link_to_remote 'Add', :url => new_patient_data_instance_language_path(@patient_data),
+          </div>
+        <% end -%>
+        <table id="addMedication">
+          <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+            <td></td>
+            <td><%= link_to_remote 'Add', :url => new_patient_data_instance_medication_path(@patient_data),
+                                          :method => 'get',
+                                          :update => 'addMedication',
+                                          :position => :before %>
+            </td>
+          </tr>
+        </table>
+        </div>
+        <!-- End Medications Module -->
+
+        <!-- Start Pregnancy Module -->
+        <div id="pregnancyContainer">
+          <div id="pregnancy">
+            <%= render :partial => '/pregnancy/show', :locals => {:patient_data => @patient_data} %>
+          </div>
+        </div> 
+        <!-- End Pregnancy Module -->  
+
+        <!-- Start Information Source Module -->
+        <div id="informationSourceContainer">
+          <%= render :partial => '/information_sources/show', :locals => {:information_source => @patient_data.information_source,
+                                                                          :patient_data => @patient_data} %>
+        </div>
+        <!-- End Information Source Module -->
+
+        <!-- Start Advance Directive Module -->
+        <div id="advanceDirectiveContainer">
+          <%= render :partial => '/advance_directives/show', :locals => {:advance_directive => @patient_data.advance_directive,
+                                                                         :patient_data => @patient_data} %>
+        </div>
+        <!-- End Information Source Module -->
+
+        <!-- Start Vital Signs Module -->
+        <div id="vitalSignsContainer">
+        <h5>Vital Sign</h5>
+        <% for result in @patient_data.vital_signs -%>
+          <div id="result<%= result.id %>">
+            <%= render :partial => '/results/show', :locals => {:result  => result,
+                                                                :is_vital_sign => true,
+                                                                :patient_data => @patient_data} %>
+          </div>
+        <% end -%>
+        <table id="addVital">
+          <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+            <td></td>
+            <!-- Callback at the end to modify the form and let the controller we are creating a vital sign instead of a result -->
+            <td><%= link_to_remote 'Add', :url => new_patient_data_instance_result_path(@patient_data, :is_vital_sign => true),
+                                          :method => 'get',
+                                          :update => 'addVital',
+                                          :position => :before,
+                                          :complete => "Element.insert('resultForm', '<input type=\"hidden\" name=\"type\" value=\"vital\"/>')" %>
+            </td>
+          </tr>
+        </table>
+        </div>
+        <!-- End Vital Signs Module  -->
+
+        <!-- Start Results Module -->
+        <div id="resultsContainer"> 
+        <h5>Result</h5>
+        <% for result in @patient_data.results -%>
+          <div id="result<%= result.id %>">
+            <%= render :partial => '/results/show', :locals => {:result  => result,
+                                                                :is_vital_sign => false,
+                                                                :patient_data => @patient_data} %>
+          </div>
+        <% end -%>
+        <table id="addResult">
+          <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+            <td></td>
+            <td><%= link_to_remote 'Add', :url => new_patient_data_instance_result_path(@patient_data, :is_vital_sign => false),
+                                          :method => 'get',
+                                          :update => 'addResult',
+                                          :position => :before %>
+            </td>
+          </tr>
+        </table>
+        </div>
+        <!-- End Results Module -->
+
+        <!-- Start Immunizations Module -->
+        <div id="immunizationsContainer">
+        <h5>Immunization</h5>
+        <% for immunization in @patient_data.immunizations %>
+          <div id="immunization<%= immunization.id %>">
+            <%= render :partial => '/immunizations/show',
+                       :locals => {:immunization  => immunization,
+                                   :patient_data => @patient_data} %>
+          </div>
+        <% end %>
+        <table id="addImmunization">
+          <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+            <td></td>
+            <td><%= link_to_remote 'Add', :url => new_patient_data_instance_immunization_path(@patient_data),
+                                          :method => 'get',
+                                          :update => 'addImmunization',
+                                          :position => :before %>
+            </td>
+          </tr>
+        </table>
+        </div>
+        <!-- End Immunizations Module -->
+
+        <!-- Start Encounters Module -->
+        <div id="encountersContainer">
+        <h5>Encounter</h5>
+        <% for encounter in @patient_data.encounters %>
+          <div id="encounter<%= encounter.id %>">
+            <%= render :partial => '/encounters/show', 
+                       :locals => {:encounter => encounter, :patient_data => @patient_data} %>
+          </div>
+        <% end %>
+        <table id="addEncounter">
+          <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+            <td></td>
+            <td><%= link_to_remote 'Add', :url => new_patient_data_instance_encounter_path(@patient_data),
+                                          :method => 'get',
+                                          :update => 'addEncounter', 
+                                          :position => :before %>
+            </td>
+          </tr>
+        </table>
+        </div>
+        <!-- End Encounters Module -->
+
+        <!-- Start Procedures Module -->
+        <div id="proceduresContainer">
+        <h5>Procedure</h5>
+        <% for procedure in @patient_data.procedures %>
+          <div id="procedure<%= procedure.id %>">
+            <%= render :partial => '/procedures/show', 
+                       :locals => {:procedure => procedure, :patient_data => @patient_data} %>
+          </div>
+        <% end %>
+        <table id="addProcedure">
+          <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+            <td></td>
+            <td><%= link_to_remote 'Add', :url => new_patient_data_instance_procedure_path(@patient_data),
+                                          :method => 'get',
+                                          :update => 'addProcedure',
+                                          :position => :before %>
+            </td>
+          </tr>
+        </table>
+        </div>
+        <!-- End Procedures Module -->
+
+        <!-- Start Medical Equipment Module -->
+        <div id="medicalEquipmentContainer">
+        <h5>Medical Equipment</h5>
+        <% for medical_equipment in @patient_data.medical_equipments %>
+            <%= render :partial => '/medical_equipments/show', 
+                       :locals => {:medical_equipment => medical_equipment,
+                                   :patient_data => @patient_data} %>
+        <% end %>
+        <table id="addMedicalEquipment">
+          <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+            <td></td>
+            <td><%= link_to_remote 'Add', :url => new_patient_data_instance_medical_equipment_path(@patient_data),
                                           :method => 'get', 
-                                          :update => 'addLanguage', 
+                                          :update => 'addMedicalEquipment', 
                                           :position => :before %>
-              </td>
-            </tr>
-          </table>
-          </div> 
-          <!-- End Languages Module -->
+            </td>
+          </tr>
+        </table>
+        </div>
+        <!-- End Medical Equipment Module -->
 
-          <!-- Start Support Module -->
-          <div id="supportContainer">
-            <%= render :partial => '/supports/show', :locals => {:support  => @patient_data.support,
-                                                                 :patient_data => @patient_data} %>
-          </div>
-          <!-- End Support Module -->
-
-          <!-- Start Healthcare Provider Module -->
-          <div id="healthCareProviderContainer">
-          <h5>Healthcare Provider</h5>
-          <% for provider in @patient_data.providers -%>
-              <%= render :partial => '/providers/show', :locals => {:provider  => provider,
-                                                                    :patient_data => @patient_data} %>
-          <% end -%>
-          <table id="addProvider">
-            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-              <td></td>
-              <td>
-                <%= link_to_remote 'Add', :url => new_patient_data_instance_provider_path(@patient_data),
-                                          :method => 'get',
-                                          :update => 'addProvider',
-                                          :position => :before %>
-              </td>
-            </tr>
-          </table>
-          </div>
-          <!-- End Healthcare Provider Module -->
-
-          <!-- Start Insurance Provider Module -->
-          <div id="insuranceProviderContainer">
-          <h5>Insurance Provider</h5>
-          <% for insurance_provider in @patient_data.insurance_providers %>
-            <div id="insurance_provider<%= insurance_provider.id %>">
-              <%= render :partial => '/insurance_providers/show',
-                         :locals => {:insurance_provider  => insurance_provider,
-                                     :patient_data => @patient_data} %>
-            </div>
-          <% end %>  
-          <table id="addInsuranceProvider">
-            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-              <td></td>
-              <td>
-                <%= link_to_remote 'Add', :url => new_patient_data_instance_insurance_provider_path(@patient_data),
-                                          :method => 'get',
-                                          :update => 'addInsuranceProvider',
-                                          :position => :before %>
-              </td>
-            </tr>
-          </table>
-          </div>
-          <!-- End Insurance Provider Module -->
-
-          <!-- Start Allergies and Drugs Module -->
-          <div id="allergiesAndDrugsContainer">
-          <h5>Allergy / Drug Sensitivity (Required)</h5>
-          <% if @patient_data.no_known_allergies -%>
-          <table>
-            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-              <td></td>
-              <td>
-                No known allergies
-              </td>
-            </tr>
-          </table>
-          <% else
-               unless @patient_data.allergies.empty?
-                 for allergy in @patient_data.allergies -%>
-            <div id="allergy<%= allergy.id %>">
-              <%= render :partial => '/allergies/show', :locals => {:allergy  => allergy, 
-                                                                    :patient_data => @patient_data} %>
-            </div>
-          <%     end 
-               else -%>
-                <%= render :partial => '/allergies/no_known_allergies_link', :locals => { :patient_data => @patient_data} %>
-          <%   end -%>
-          <% end -%>
-          <table id="addAllergy">
-            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-              <td></td>
-              <td>
-                <%= link_to_remote 'Add', :url => new_patient_data_instance_allergy_path(@patient_data),
-                                          :method => 'get',
-                                          :update => 'addAllergy',
-                                          :position => :before %>
-              </td>
-            </tr>
-          </table>
-          </div>
-          <!-- End Allergies and Drugs Module -->
-
-          <!-- Start Conditions Module -->
-          <div id="conditionsContainer">
-          <h5>Conditions and Problems</h5>
-          <% for condition in @patient_data.conditions %>
-            <div id="condition<%= condition.id %>">
-              <%= render :partial => '/conditions/show', 
-                         :locals => {:condition  => condition, :patient_data => @patient_data} %>
-            </div>
-          <% end %>
-          <table id="addCondition">
-            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-              <td></td>
-              <td><%= link_to_remote 'Add', :url => new_patient_data_instance_condition_path(@patient_data),
-                                            :method => 'get',
-                                            :update => 'addCondition',
-                                            :position => :before %>
-              </td>
-            </tr>
-          </table>
-          </div>
-          <!-- End Conditions Module -->
-
-          <!-- Start Medications Module -->
-          <div id="medicationsContainer"> 
-          <h5>Medication</h5>
-          <% for medication in @patient_data.medications -%>
-            <div id="medication<%= medication.id %>">
-              <%= render :partial => '/medications/show', :locals => {:medication  => medication,
-                                                                      :patient_data => @patient_data} %>
-            </div>
-          <% end -%>
-          <table id="addMedication">
-            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-              <td></td>
-              <td><%= link_to_remote 'Add', :url => new_patient_data_instance_medication_path(@patient_data),
-                                            :method => 'get',
-                                            :update => 'addMedication',
-                                            :position => :before %>
-              </td>
-            </tr>
-          </table>
-          </div>
-          <!-- End Medications Module -->
-
-          <!-- Start Pregnancy Module -->
-          <div id="pregnancyContainer">
-            <div id="pregnancy">
-              <%= render :partial => '/pregnancy/show', :locals => {:patient_data => @patient_data} %>
-            </div>
-          </div> 
-          <!-- End Pregnancy Module -->  
-
-          <!-- Start Information Source Module -->
-          <div id="informationSourceContainer">
-            <%= render :partial => '/information_sources/show', :locals => {:information_source => @patient_data.information_source,
-                                                                            :patient_data => @patient_data} %>
-          </div>
-          <!-- End Information Source Module -->
-
-          <!-- Start Advance Directive Module -->
-          <div id="advanceDirectiveContainer">
-            <%= render :partial => '/advance_directives/show', :locals => {:advance_directive => @patient_data.advance_directive,
-                                                                           :patient_data => @patient_data} %>
-          </div>
-          <!-- End Information Source Module -->
-
-          <!-- Start Vital Signs Module -->
-          <div id="vitalSignsContainer">
-          <h5>Vital Sign</h5>
-          <% for result in @patient_data.vital_signs -%>
-            <div id="result<%= result.id %>">
-              <%= render :partial => '/results/show', :locals => {:result  => result,
-                                                                  :is_vital_sign => true,
-                                                                  :patient_data => @patient_data} %>
-            </div>
-          <% end -%>
-          <table id="addVital">
-            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-              <td></td>
-              <!-- Callback at the end to modify the form and let the controller we are creating a vital sign instead of a result -->
-              <td><%= link_to_remote 'Add', :url => new_patient_data_instance_result_path(@patient_data, :is_vital_sign => true),
-                                            :method => 'get',
-                                            :update => 'addVital',
-                                            :position => :before,
-                                            :complete => "Element.insert('resultForm', '<input type=\"hidden\" name=\"type\" value=\"vital\"/>')" %>
-              </td>
-            </tr>
-          </table>
-          </div>
-          <!-- End Vital Signs Module  -->
-
-          <!-- Start Results Module -->
-          <div id="resultsContainer"> 
-          <h5>Result</h5>
-          <% for result in @patient_data.results -%>
-            <div id="result<%= result.id %>">
-              <%= render :partial => '/results/show', :locals => {:result  => result,
-                                                                  :is_vital_sign => false,
-                                                                  :patient_data => @patient_data} %>
-            </div>
-          <% end -%>
-          <table id="addResult">
-            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-              <td></td>
-              <td><%= link_to_remote 'Add', :url => new_patient_data_instance_result_path(@patient_data, :is_vital_sign => false),
-                                            :method => 'get',
-                                            :update => 'addResult',
-                                            :position => :before %>
-              </td>
-            </tr>
-          </table>
-          </div>
-          <!-- End Results Module -->
-
-          <!-- Start Immunizations Module -->
-          <div id="immunizationsContainer">
-          <h5>Immunization</h5>
-          <% for immunization in @patient_data.immunizations %>
-            <div id="immunization<%= immunization.id %>">
-              <%= render :partial => '/immunizations/show',
-                         :locals => {:immunization  => immunization,
-                                     :patient_data => @patient_data} %>
-            </div>
-          <% end %>
-          <table id="addImmunization">
-            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-              <td></td>
-              <td><%= link_to_remote 'Add', :url => new_patient_data_instance_immunization_path(@patient_data),
-                                            :method => 'get',
-                                            :update => 'addImmunization',
-                                            :position => :before %>
-              </td>
-            </tr>
-          </table>
-          </div>
-          <!-- End Immunizations Module -->
-
-          <!-- Start Encounters Module -->
-          <div id="encountersContainer">
-          <h5>Encounter</h5>
-          <% for encounter in @patient_data.encounters %>
-            <div id="encounter<%= encounter.id %>">
-              <%= render :partial => '/encounters/show', 
-                         :locals => {:encounter => encounter, :patient_data => @patient_data} %>
-            </div>
-          <% end %>
-          <table id="addEncounter">
-            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-              <td></td>
-              <td><%= link_to_remote 'Add', :url => new_patient_data_instance_encounter_path(@patient_data),
-                                            :method => 'get',
-                                            :update => 'addEncounter', 
-                                            :position => :before %>
-              </td>
-            </tr>
-          </table>
-          </div>
-          <!-- End Encounters Module -->
-
-          <!-- Start Procedures Module -->
-          <div id="proceduresContainer">
-          <h5>Procedure</h5>
-          <% for procedure in @patient_data.procedures %>
-            <div id="procedure<%= procedure.id %>">
-              <%= render :partial => '/procedures/show', 
-                         :locals => {:procedure => procedure, :patient_data => @patient_data} %>
-            </div>
-          <% end %>
-          <table id="addProcedure">
-            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-              <td></td>
-              <td><%= link_to_remote 'Add', :url => new_patient_data_instance_procedure_path(@patient_data),
-                                            :method => 'get',
-                                            :update => 'addProcedure',
-                                            :position => :before %>
-              </td>
-            </tr>
-          </table>
-          </div>
-          <!-- End Procedures Module -->
-
-          <!-- Start Medical Equipment Module -->
-          <div id="medicalEquipmentContainer">
-          <h5>Medical Equipment</h5>
-          <% for medical_equipment in @patient_data.medical_equipments %>
-              <%= render :partial => '/medical_equipments/show', 
-                         :locals => {:medical_equipment => medical_equipment,
-                                     :patient_data => @patient_data} %>
-          <% end %>
-          <table id="addMedicalEquipment">
-            <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-              <td></td>
-              <td><%= link_to_remote 'Add', :url => new_patient_data_instance_medical_equipment_path(@patient_data),
-                                            :method => 'get', 
-                                            :update => 'addMedicalEquipment', 
-                                            :position => :before %>
-              </td>
-            </tr>
-          </table>
-          </div>
-          <!-- End Medical Equipment Module -->
-
-    </div>
   </div>
-    </div>
-  </div>
+</div>

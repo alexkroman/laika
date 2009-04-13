@@ -8,6 +8,10 @@
     <td><% if allergy.product_code %><%=h allergy.product_code %><% end %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
+    <td class="lighttext">Severity</td>
+    <td><% if allergy.severity_term %><%=h allergy.severity_term.name %><% end %></td>
+  </tr>
+  <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Alert Type</td>
     <td>
       <% if allergy.adverse_event_type %><%=h allergy.adverse_event_type.name %><% end %>
