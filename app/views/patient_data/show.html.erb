@@ -3,7 +3,7 @@
     <div class="container" >
       <div class="notice">
         <% unless @patient_data.vendor_test_plan %>
-        You are editing a patient template record.  These edits to not affect data in patient records assigned to inspections
+        You are editing a patient template record.  These edits will not affect data in patient records assigned to inspections
         <% else %>
           Your are editing a patient record for the <%=h @patient_data.vendor_test_plan.kind.test_type %> <%=h @patient_data.vendor_test_plan.kind.name %> test within the <%=h @patient_data.vendor_test_plan.vendor.public_id %> inspection only.  These edits will not affect the original patient template in the library.
         <% end %>
