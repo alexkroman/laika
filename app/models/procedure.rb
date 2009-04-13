@@ -1,12 +1,8 @@
 class Procedure < ActiveRecord::Base
-
   strip_attributes!
 
-  belongs_to :patient_data
-  after_save { |r| r.patient_data.update_attributes(:updated_at => DateTime.now) }
+  include PatientDataChild
 
-
-  
   def requirements
     {
       :procedure_id => :required,
@@ -14,9 +10,6 @@ class Procedure < ActiveRecord::Base
       :procedure_date => :hitsp_r2_optional,
     }
   end
-
-
- 
 
   def to_c32(xml)
     xml.entry("typeCode" => "DRIV") do

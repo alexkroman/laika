@@ -2,13 +2,12 @@ class Allergy < ActiveRecord::Base
 
   strip_attributes!
 
-  belongs_to :patient_data
   belongs_to :adverse_event_type
   belongs_to :severity_term
   belongs_to :allergy_status_code
   belongs_to :allergy_type_code
 
-  after_save { |r| r.patient_data.update_attributes(:updated_at => DateTime.now) }
+  include PatientDataChild
 
   def requirements
     {

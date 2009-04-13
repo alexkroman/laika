@@ -2,7 +2,6 @@ class InsuranceProvider < ActiveRecord::Base
 
   strip_attributes!
 
-  belongs_to :patient_data
   belongs_to :insurance_type
   belongs_to :coverage_role_type
   belongs_to :role_class_relationship_formal_type
@@ -11,7 +10,7 @@ class InsuranceProvider < ActiveRecord::Base
   has_one :insurance_provider_subscriber, :dependent => :destroy
   has_one :insurance_provider_guarantor,  :dependent => :destroy
 
-  after_save { |r| r.patient_data.update_attributes(:updated_at => DateTime.now) }
+  include PatientDataChild
 
   def requirements
     {

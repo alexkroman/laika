@@ -13,13 +13,12 @@ class AbstractResult < ActiveRecord::Base
 
   strip_attributes!
 
-  belongs_to :patient_data
   belongs_to :code_system
   belongs_to :loinc_lab_code
   belongs_to :result_type_code
   belongs_to :act_status_code
 
-  after_save { |r| r.patient_data.update_attributes(:updated_at => DateTime.now) }
+  include PatientDataChild
 
   include MatchHelper
 

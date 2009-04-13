@@ -2,12 +2,10 @@ class Support < ActiveRecord::Base
 
   strip_attributes!
 
-  belongs_to :patient_data
   belongs_to :contact_type
   belongs_to :relationship
 
-  after_save { |r| r.patient_data.update_attributes(:updated_at => DateTime.now) }
-
+  include PatientDataChild
   include PersonLike
   include MatchHelper
 
