@@ -2,12 +2,10 @@ class AdvanceDirective < ActiveRecord::Base
 
   strip_attributes!
 
-  belongs_to :patient_data  
   belongs_to :advance_directive_type
   belongs_to :advance_directive_status_code
 
-  after_save { |r| r.patient_data.update_attributes(:updated_at => DateTime.now) }
-
+  include PatientDataChild
   include PersonLike
   
 

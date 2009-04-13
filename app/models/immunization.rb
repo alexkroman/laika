@@ -4,9 +4,8 @@ class Immunization < ActiveRecord::Base
 
   belongs_to :vaccine
   belongs_to :no_immunization_reason
-  belongs_to :patient_data
 
-  after_save { |r| r.patient_data.update_attributes(:updated_at => DateTime.now) }
+  include PatientDataChild
 
   def requirements
     {

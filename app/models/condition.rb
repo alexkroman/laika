@@ -2,10 +2,9 @@ class Condition < ActiveRecord::Base
 
   strip_attributes!
 
-  belongs_to :patient_data
   belongs_to :problem_type
 
-  after_save { |r| r.patient_data.update_attributes(:updated_at => DateTime.now) }
+  include PatientDataChild
 
   def requirements
     {

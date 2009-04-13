@@ -2,12 +2,10 @@ class Provider < ActiveRecord::Base
 
   strip_attributes!
 
-  belongs_to :patient_data
   belongs_to :provider_type
   belongs_to :provider_role
 
-  after_save { |r| r.patient_data.update_attributes(:updated_at => DateTime.now) }
-
+  include PatientDataChild
   include PersonLike
  
 

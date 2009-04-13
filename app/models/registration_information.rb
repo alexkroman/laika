@@ -2,17 +2,14 @@ class RegistrationInformation < ActiveRecord::Base
 
   strip_attributes!
 
-  belongs_to :patient_data
   belongs_to :race
   belongs_to :ethnicity
   belongs_to :marital_status
   belongs_to :gender
   belongs_to :religion
 
-  after_save { |r| r.patient_data.update_attributes(:updated_at => DateTime.now) }
-
+  include PatientDataChild
   include PersonLike
-
 
   def requirements
     {
