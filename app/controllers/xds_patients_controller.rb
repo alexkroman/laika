@@ -9,7 +9,7 @@ class XdsPatientsController < ApplicationController
   def index
     @patient_data_list = PatientData.find(:all,
       :conditions => {:vendor_test_plan_id => nil},
-      :order => "name ASC")
+      :order => sort_order || 'name ASC')
       
     @vendors = current_user.vendors + Vendor.unclaimed
 
