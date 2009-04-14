@@ -5,6 +5,9 @@ class PersonName < ActiveRecord::Base
   belongs_to :nameable, :polymorphic => true
 
 
+  def blank?
+    %w[ name_prefix first_name last_name name_suffix ].all? {|a| read_attribute(a).blank? }
+  end
 
   def requirements
     case nameable_type

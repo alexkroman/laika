@@ -11,6 +11,11 @@ class Telecom < ActiveRecord::Base
   # RM: yes... yes I did...
   belongs_to :reachable, :polymorphic => true
 
+  def blank?
+    %w[ home_phone work_phone mobile_phone
+        vacation_home_phone email url ].all? {|a| read_attribute(a).blank? }
+  end
+
   def requirements
     case reachable_type
       when 'Provider', 'Support', 'InsuranceProviderPatient', 'AdvanceDirective', 'Encounter': 

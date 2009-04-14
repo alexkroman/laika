@@ -39,43 +39,9 @@ module PersonLike
         self.telecom = Telecom.new(params[:telecom])
       end
 
-      def has_any_data
-
-        if self.person_name != nil
-          if !self.person_name.name_prefix.blank? ||
-             !self.person_name.first_name.blank? ||
-             !self.person_name.last_name.blank? ||
-             !self.person_name.name_suffix.blank?
-             return true
-          end
-        end
-
-        if self.address!= nil
-          if !self.address.street_address_line_one.blank? ||
-             !self.address.street_address_line_two.blank? ||
-             !self.address.city.blank? ||
-             !self.address.state.blank? ||
-             !self.address.postal_code.blank? ||
-             !self.address.iso_country_id.blank? 
-             return true
-          end
-        end
-  
-        if self.telecom != nil
-          if !self.telecom.home_phone.blank? ||
-             !self.telecom.work_phone.blank? ||
-             !self.telecom.mobile_phone.blank? ||
-             !self.telecom.vacation_home_phone.blank? ||
-             !self.telecom.email.blank? ||
-             !self.telecom.url.blank?
-             return true
-          end
-        end
-
-        return false
-
+      def person_blank?
+        %w[ person_name address telecom ].all? {|a| read_attribute(a).blank? }
       end
-
     end
 
   end

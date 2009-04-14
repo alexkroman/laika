@@ -68,7 +68,7 @@ class InsuranceProvider < ActiveRecord::Base
             end
 
             # guarantor is provided only if there is some non-nil, non-empty data
-            if insurance_provider_guarantor && insurance_provider_guarantor.has_any_data
+            if insurance_provider_guarantor && !insurance_provider_guarantor.person_blank?
               attrs = (represented_organization) ? {} : {"typeCode" => "PRF"}
               xml.performer(attrs) do
                 if !insurance_provider_guarantor.effective_date.blank?
@@ -93,7 +93,7 @@ class InsuranceProvider < ActiveRecord::Base
             end
 
             # patient data is provided only if there is some non-nil, non-empty data
-            if insurance_provider_patient && insurance_provider_patient.has_any_data
+            if insurance_provider_patient && !insurance_provider_patient.person_blank?
               xml.participant("typeCode" => "COV") do
                 xml.participantRole("classCode" => "PAT") do
                   if coverage_role_type

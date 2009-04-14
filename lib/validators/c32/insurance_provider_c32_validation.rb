@@ -33,7 +33,7 @@
           errors << match_value(representedOrganization, "cda:name", "represented_organization_name", self.represented_organization.to_s)
         end
 
-        if self.insurance_provider_guarantor && insurance_provider_guarantor.has_any_data
+        if self.insurance_provider_guarantor && !insurance_provider_guarantor.person_blank?
 
           # insurance provider's represented organization test
           if represented_organization
