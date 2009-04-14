@@ -13,6 +13,15 @@ describe InsuranceProviderGuarantor do
       @parent.reload
       @parent.updated_at.should > old_stamp
     end
+
+    %w[ address person_name telecom ].each do |attr|
+      it "should update timestamp of parent on #{attr} save" do
+        old_stamp = @parent.updated_at
+        @parent.insurance_provider_guarantors.first.send(attr).save
+        @parent.reload
+        @parent.updated_at.should > old_stamp
+      end
+    end
   end
 end
 
