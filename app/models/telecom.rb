@@ -11,6 +11,8 @@ class Telecom < ActiveRecord::Base
   # RM: yes... yes I did...
   belongs_to :reachable, :polymorphic => true
 
+  after_save { |r| r.reachable.andand.patient_data.andand.update_attributes(:updated_at => DateTime.now) }
+
   def blank?
     %w[ home_phone work_phone mobile_phone
         vacation_home_phone email url ].all? {|a| read_attribute(a).blank? }

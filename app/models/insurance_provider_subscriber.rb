@@ -6,7 +6,6 @@ class InsuranceProviderSubscriber < ActiveRecord::Base
 
   include PersonLike
 
-
   def to_c32(xml)
     xml.participant("typeCode" => "HLD") do
       xml.participantRole("classCode" => "IND") do
