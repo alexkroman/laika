@@ -7,7 +7,10 @@ class Address < ActiveRecord::Base
   belongs_to :zip_code
   belongs_to :addressable, :polymorphic => true
 
-
+  def blank?
+    %w[ street_address_line_one street_address_line_two
+        city state postal_code iso_country_id ].all? {|a| read_attribute(a).blank? }
+  end
   
   def requirements
     case addressable_type
