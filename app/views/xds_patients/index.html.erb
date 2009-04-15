@@ -23,7 +23,7 @@
         <div id="query_div_<%=patient_data.id%>" style="display:none">
           <% if patient_data.patient_identifiers.count > 0 %>
             <% form_tag query_xds_patient_path do |f| %>
-              <%= select_tag "id", options_for_select(patient_data.patient_identifiers.collect{|pi|["#{pi.patient_identifier}^^^#{pi.identifier_domain_identifier}", pi.id]}) %>
+              <%= select_tag "id", options_for_select(patient_data.patient_identifiers.collect{|pi|[pi.identifier_and_domain, pi.id]}) %>
               <%= submit_tag 'Query XDS' %>
             <% end %>
           <% else %>

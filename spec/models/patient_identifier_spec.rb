@@ -13,5 +13,10 @@ describe PatientIdentifier do
       @patient_id.patient_identifier.should == '1234567890'
       @patient_id.identifier_domain_identifier.should == 'CCHIT&1.2.3.4.5.6.7.8.9&ISO'
     end
+
+    it "should assemble an identifier string" do
+      @patient_id.identifier_and_domain.should == '1234567890^^^CCHIT&1.2.3.4.5.6.7.8.9&ISO'
+    end
+
   end
 end
