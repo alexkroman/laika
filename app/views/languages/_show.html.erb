@@ -20,13 +20,13 @@
   <td>
   <span>
     <%= link_to_remote 'Edit', :update => "language#{language.id}",
-                               :url => edit_patient_data_instance_language_path(patient_data, language),
+                               :url => edit_patient_datum_language_path(patient_data, language),
                                :method => 'get' %>
     </span> 
     
    <span>
     <%= link_to_remote 'Remove', :update => "language#{language.id}",
-                               :url => patient_data_instance_language_path(patient_data, language),
+                               :url => patient_datum_language_path(patient_data, language),
                                :method => 'delete' %>
     </span> 
   </td>

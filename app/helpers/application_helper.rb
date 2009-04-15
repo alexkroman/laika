@@ -2,9 +2,9 @@
 module ApplicationHelper
    def patient_data_url_for(patient_data, model, *args)
      if model.new_record? 
-       send("patient_data_instance_#{model.class.name.tableize}_path", patient_data, *args) 
+       send("patient_datum_#{model.class.name.tableize}_path", patient_data, *args) 
      else
-       send("patient_data_instance_#{model.class.name.underscore}_path", patient_data, model, *args)
+       send("patient_datum_#{model.class.name.underscore}_path", patient_data, model, *args)
      end
    end
 

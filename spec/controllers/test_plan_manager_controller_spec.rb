@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe TestPlanManagerController do
-  fixtures :patient_data, :vendors, :users, :kinds
+  fixtures :patient_data, :vendors, :users, :kinds, :person_names, :addresses
 
   describe "operated by a non-admin" do
     before do

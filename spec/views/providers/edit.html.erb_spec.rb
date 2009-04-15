@@ -13,7 +13,7 @@ describe "providers/edit.html.erb" do
 
     it "should render the edit form with method PUT" do
       render 'providers/edit'
-      response.should have_tag("form[action=#{patient_data_instance_provider_path(@patient_data,@provider)}]") do
+      response.should have_tag("form[action=#{patient_datum_provider_path(@patient_data,@provider)}]") do
         with_tag "input[name=_method][value=put]"
       end
     end
@@ -29,7 +29,7 @@ describe "providers/edit.html.erb" do
 
     it "should render the edit form with method POST" do
       render 'providers/edit'
-      response.should have_tag("form[action=#{patient_data_instance_providers_path(@patient_data)}][method=post]") do
+      response.should have_tag("form[action=#{patient_datum_providers_path(@patient_data)}][method=post]") do
         without_tag "input[name=_method][value=put]"
       end
     end

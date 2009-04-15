@@ -13,7 +13,7 @@
     
     <% for patient_data in @patient_data_list -%>
     <tr>
-      <td><%= link_to h(patient_data.name), patient_data_instance_url(patient_data) %></td>
+      <td><%= link_to h(patient_data.name), patient_datum_url(patient_data) %></td>
       <!--td>CCD/C32</td-->
       <td><%=h patient_data.user.first_name %> <%=h patient_data.user.last_name %></td>
       <td><%= patient_data.created_at.strftime("%d.%b.%Y") %></td>

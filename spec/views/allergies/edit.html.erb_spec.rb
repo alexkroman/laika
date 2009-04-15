@@ -21,7 +21,7 @@ describe "allergies/edit.html.erb" do
 
     it "should render the edit form with method PUT" do
       render 'allergies/edit'
-      response.should have_tag("form[action=#{patient_data_instance_allergy_path(assigns[:patient_data],assigns[:allergy])}]") do
+      response.should have_tag("form[action=#{patient_datum_allergy_path(assigns[:patient_data],assigns[:allergy])}]") do
         with_tag "input[name=_method][value=put]"
       end
     end
@@ -37,7 +37,7 @@ describe "allergies/edit.html.erb" do
 
     it "should render the edit form with method POST" do
       render 'allergies/edit'
-      response.should have_tag("form[action=#{patient_data_instance_allergies_path(assigns[:patient_data])}][method=post]") do
+      response.should have_tag("form[action=#{patient_datum_allergies_path(assigns[:patient_data])}][method=post]") do
         without_tag "input[name=_method][value=put]"
       end
     end

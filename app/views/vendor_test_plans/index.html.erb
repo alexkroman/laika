@@ -21,7 +21,7 @@
           <% if vendor_test_plan.clinical_document%>
             <%= vendor_test_plan.patient_data.name %>
           <% else %>
-            <%= link_to h(vendor_test_plan.patient_data.name), patient_data_instance_url(vendor_test_plan.patient_data) %>
+            <%= link_to h(vendor_test_plan.patient_data.name), patient_datum_url(vendor_test_plan.patient_data) %>
           <% end %>
         </td>
         <td><%= vendor_test_plan.updated_at.strftime("%d.%b.%Y %I:%M %p %Z")  %></td>

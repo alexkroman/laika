@@ -134,7 +134,7 @@
         <table id="addPatientIdentifier">
           <tr class="<%= cycle("darkzebra", "lightzebra")%>">
             <td></td>
-            <td><%= link_to_remote 'Add', :url => new_patient_data_instance_patient_identifier_path(@patient_data),
+            <td><%= link_to_remote 'Add', :url => new_patient_datum_patient_identifier_path(@patient_data),
                                           :method => 'get',
                                           :update => 'addPatientIdentifier',
                                           :position => :before %>
@@ -156,7 +156,7 @@
           <tr class="<%= cycle("darkzebra", "lightzebra")%>">
             <td></td>
             <td>
-              <%= link_to_remote 'Add', :url => new_patient_data_instance_language_path(@patient_data),
+              <%= link_to_remote 'Add', :url => new_patient_datum_language_path(@patient_data),
                                         :method => 'get', 
                                         :update => 'addLanguage', 
                                         :position => :before %>
@@ -184,7 +184,7 @@
           <tr class="<%= cycle("darkzebra", "lightzebra")%>">
             <td></td>
             <td>
-              <%= link_to_remote 'Add', :url => new_patient_data_instance_provider_path(@patient_data),
+              <%= link_to_remote 'Add', :url => new_patient_datum_provider_path(@patient_data),
                                         :method => 'get',
                                         :update => 'addProvider',
                                         :position => :before %>
@@ -208,7 +208,7 @@
           <tr class="<%= cycle("darkzebra", "lightzebra")%>">
             <td></td>
             <td>
-              <%= link_to_remote 'Add', :url => new_patient_data_instance_insurance_provider_path(@patient_data),
+              <%= link_to_remote 'Add', :url => new_patient_datum_insurance_provider_path(@patient_data),
                                         :method => 'get',
                                         :update => 'addInsuranceProvider',
                                         :position => :before %>
@@ -246,7 +246,7 @@
           <tr class="<%= cycle("darkzebra", "lightzebra")%>">
             <td></td>
             <td>
-              <%= link_to_remote 'Add', :url => new_patient_data_instance_allergy_path(@patient_data),
+              <%= link_to_remote 'Add', :url => new_patient_datum_allergy_path(@patient_data),
                                         :method => 'get',
                                         :update => 'addAllergy',
                                         :position => :before %>
@@ -268,7 +268,7 @@
         <table id="addCondition">
           <tr class="<%= cycle("darkzebra", "lightzebra")%>">
             <td></td>
-            <td><%= link_to_remote 'Add', :url => new_patient_data_instance_condition_path(@patient_data),
+            <td><%= link_to_remote 'Add', :url => new_patient_datum_condition_path(@patient_data),
                                           :method => 'get',
                                           :update => 'addCondition',
                                           :position => :before %>
@@ -290,7 +290,7 @@
         <table id="addMedication">
           <tr class="<%= cycle("darkzebra", "lightzebra")%>">
             <td></td>
-            <td><%= link_to_remote 'Add', :url => new_patient_data_instance_medication_path(@patient_data),
+            <td><%= link_to_remote 'Add', :url => new_patient_datum_medication_path(@patient_data),
                                           :method => 'get',
                                           :update => 'addMedication',
                                           :position => :before %>
@@ -336,7 +336,7 @@
           <tr class="<%= cycle("darkzebra", "lightzebra")%>">
             <td></td>
             <!-- Callback at the end to modify the form and let the controller we are creating a vital sign instead of a result -->
-            <td><%= link_to_remote 'Add', :url => new_patient_data_instance_result_path(@patient_data, :is_vital_sign => true),
+            <td><%= link_to_remote 'Add', :url => new_patient_datum_result_path(@patient_data, :is_vital_sign => true),
                                           :method => 'get',
                                           :update => 'addVital',
                                           :position => :before,
@@ -360,7 +360,7 @@
         <table id="addResult">
           <tr class="<%= cycle("darkzebra", "lightzebra")%>">
             <td></td>
-            <td><%= link_to_remote 'Add', :url => new_patient_data_instance_result_path(@patient_data, :is_vital_sign => false),
+            <td><%= link_to_remote 'Add', :url => new_patient_datum_result_path(@patient_data, :is_vital_sign => false),
                                           :method => 'get',
                                           :update => 'addResult',
                                           :position => :before %>
@@ -383,7 +383,7 @@
         <table id="addImmunization">
           <tr class="<%= cycle("darkzebra", "lightzebra")%>">
             <td></td>
-            <td><%= link_to_remote 'Add', :url => new_patient_data_instance_immunization_path(@patient_data),
+            <td><%= link_to_remote 'Add', :url => new_patient_datum_immunization_path(@patient_data),
                                           :method => 'get',
                                           :update => 'addImmunization',
                                           :position => :before %>
@@ -405,7 +405,7 @@
         <table id="addEncounter">
           <tr class="<%= cycle("darkzebra", "lightzebra")%>">
             <td></td>
-            <td><%= link_to_remote 'Add', :url => new_patient_data_instance_encounter_path(@patient_data),
+            <td><%= link_to_remote 'Add', :url => new_patient_datum_encounter_path(@patient_data),
                                           :method => 'get',
                                           :update => 'addEncounter', 
                                           :position => :before %>
@@ -427,7 +427,7 @@
         <table id="addProcedure">
           <tr class="<%= cycle("darkzebra", "lightzebra")%>">
             <td></td>
-            <td><%= link_to_remote 'Add', :url => new_patient_data_instance_procedure_path(@patient_data),
+            <td><%= link_to_remote 'Add', :url => new_patient_datum_procedure_path(@patient_data),
                                           :method => 'get',
                                           :update => 'addProcedure',
                                           :position => :before %>
@@ -448,7 +448,7 @@
         <table id="addMedicalEquipment">
           <tr class="<%= cycle("darkzebra", "lightzebra")%>">
             <td></td>
-            <td><%= link_to_remote 'Add', :url => new_patient_data_instance_medical_equipment_path(@patient_data),
+            <td><%= link_to_remote 'Add', :url => new_patient_datum_medical_equipment_path(@patient_data),
                                           :method => 'get', 
                                           :update => 'addMedicalEquipment', 
                                           :position => :before %>

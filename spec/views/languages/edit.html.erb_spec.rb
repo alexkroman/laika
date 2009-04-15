@@ -13,7 +13,7 @@ describe "languages/edit.html.erb" do
 
     it "should render the edit form with method PUT" do
       render 'languages/edit'
-      response.should have_tag("form[action=#{patient_data_instance_language_path(@patient_data,@language)}]") do
+      response.should have_tag("form[action=#{patient_datum_language_path(@patient_data,@language)}]") do
         with_tag "input[name=_method][value=put]"
       end
     end
@@ -29,7 +29,7 @@ describe "languages/edit.html.erb" do
 
     it "should render the edit form with method POST" do
       render 'languages/edit'
-      response.should have_tag("form[action=#{patient_data_instance_languages_path(@patient_data)}][method=post]") do
+      response.should have_tag("form[action=#{patient_datum_languages_path(@patient_data)}][method=post]") do
         without_tag "input[name=_method][value=put]"
       end
     end

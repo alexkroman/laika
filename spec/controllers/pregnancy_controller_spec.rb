@@ -9,7 +9,7 @@ describe PregnancyController do
     pd = stub_model PatientData
     PatientData.stub!(:find).and_return(pd)
 
-    get :edit, :patient_data_instance_id => 1
+    get :edit, :patient_datum_id => 1
 
     assigns[:patient_data].should == pd
     response.should render_template("pregnancy/edit")
@@ -23,7 +23,7 @@ describe PregnancyController do
     pd.should_receive(:pregnant=).with(true)
     pd.should_receive(:save!)
 
-    get :update, :patient_data_instance_id => pd.id, :pregnant => 'on'
+    get :update, :patient_datum_id => pd.id, :pregnant => 'on'
 
     assigns[:patient_data].should == pd
   end
@@ -35,7 +35,7 @@ describe PregnancyController do
     pd.should_receive(:pregnant=).with(false)
     pd.should_receive(:save!)
 
-    get :update, :patient_data_instance_id => pd.id
+    get :update, :patient_datum_id => pd.id
 
     assigns[:patient_data].should == pd
   end
@@ -47,7 +47,7 @@ describe PregnancyController do
     pd.should_receive(:pregnant=).with(nil)
     pd.should_receive(:save!)
 
-    get :destroy, :patient_data_instance_id => pd.id
+    get :destroy, :patient_datum_id => pd.id
 
     assigns[:patient_data].should == pd
   end

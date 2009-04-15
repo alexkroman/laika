@@ -16,7 +16,7 @@ describe "encounters/edit.html.erb" do
 
     it "should render the edit form with method PUT" do
       render 'encounters/edit'
-      response.should have_tag("form[action=#{patient_data_instance_encounter_path(@patient_data,@encounter)}]") do
+      response.should have_tag("form[action=#{patient_datum_encounter_path(@patient_data,@encounter)}]") do
         with_tag "input[name=_method][value=put]"
       end
     end
@@ -35,7 +35,7 @@ describe "encounters/edit.html.erb" do
 
     it "should render the edit form with method POST" do
       render 'encounters/edit'
-      response.should have_tag("form[action=#{patient_data_instance_encounters_path(@patient_data)}][method=post]") do
+      response.should have_tag("form[action=#{patient_datum_encounters_path(@patient_data)}][method=post]") do
         without_tag "input[name=_method][value=put]"
       end
     end

@@ -24,12 +24,12 @@
   <td>
     <span>
       <%= link_to_remote 'Edit', :update => patient_data_child_model_div_id,
-	                             :url => edit_patient_data_instance_registration_information_path(patient_data),
+	                             :url => edit_patient_datum_registration_information_path(patient_data),
 	                             :method => 'get' %>
 	</span>
 	<span>
 	  <%= link_to_remote 'Remove', :update => patient_data_child_model_div_id,
-	                               :url => patient_data_instance_registration_information_path(patient_data),
+	                               :url => patient_datum_registration_information_path(patient_data),
 	                               :method => 'delete' %>
 	</span>
   </td>
@@ -44,7 +44,7 @@
      There is no <%= patient_data_child_model_display_name%> data for this test case<br>
      <%= link_to_remote 'Create New ' + patient_data_child_model_display_name, 
            :update => patient_data_child_class.class_name + "Container", 
-           :url => new_patient_data_instance_registration_information_path(patient_data), 
+           :url => new_patient_datum_registration_information_path(patient_data), 
            :method => 'get' %>
   </td>
 </tr>

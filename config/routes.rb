@@ -24,7 +24,7 @@ ActionController::Routing::Routes.draw do |map|
                               :comments, :results, :immunizations, 
                               :encounters, :procedures, :medical_equipments, :patient_identifiers],
                 :member   => {:set_no_known_allergies => :post, :checklist => :get, :edit_template_info => :get},
-                :singular => :patient_data_instance) do |patient_data|
+                :singular => :patient_datum) do |patient_data|
     patient_data.resources :vital_signs, :controller => 'results'
   end
 
