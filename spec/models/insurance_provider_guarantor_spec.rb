@@ -2,7 +2,9 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe InsuranceProviderGuarantor do
   describe "with patient_data parent record" do
-    fixtures :patient_data, :insurance_providers, :insurance_provider_guarantors
+    fixtures :patient_data, :insurance_providers, :insurance_provider_guarantors,
+      :addresses, :person_names, :telecoms
+
     before do
       @parent = patient_data(:joe_smith)
     end
