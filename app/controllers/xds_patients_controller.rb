@@ -9,7 +9,7 @@ class XdsPatientsController < ApplicationController
   def index
     @patient_data_list = PatientData.find(:all,
       :conditions => {:vendor_test_plan_id => nil},
-      :order => "name ASC")
+      :order => sort_order || 'name ASC')
       
     @vendors = current_user.vendors + Vendor.unclaimed
 
@@ -24,12 +24,16 @@ class XdsPatientsController < ApplicationController
     @metadata = rsqr.execute
     @vendors = current_user.vendors + Vendor.unclaimed
     @patient_identifier = pi
+    @vendor_test_plan = VendorTestPlan.new( :user_id => current_user.id, :metadata => @metadata)
+    @query = Kind.find_by_name('Query and Retrieve').id
   end
   
   # Creates the form that collects data for a provide and register test
   def provide_and_register_setup
     @patient_data = PatientData.find(params[:id])
     @vendors = current_user.vendors + Vendor.unclaimed
+    @kind = Kind.find_by_name('Provide and Register').id
+    @vendor_test_plan = VendorTestPlan.new(:user_id => current_user.id)
   end
 
   # Creates the form that collects data to actuall provide and register a document to an XDS Repository

@@ -16,18 +16,17 @@
     <td>
       <a href="javascript:toggle_div('assignment_div_<%= md.unique_id %>');">assign</a>
       <div id="assignment_div_<%= md.unique_id %>" style="display:none" >
-        <% form_for VendorTestPlan.new( :user_id => current_user.id, :metadata=>metadata),
-          :url => {:controller => 'test_plan_manager', :action => 'assign_patient_data' } do |f| -%>
+        <% form_for @vendor_test_plan, :url => {:controller => 'test_plan_manager', :action => 'assign_patient_data' } do |f| -%>
           <input type="hidden" name="pd_id" value="<%= patient_identifier.patient_data.id %>"/>
           <%= text_area_tag :metadata, md.to_yaml, :style=>"display:none" %>
           <%= f.select :vendor_id, Vendor.select_options(vendors) %><br/>
-          <%= hidden_field_tag 'vendor_test_plan[kind_id]', Kind.find_by_name('Query and Retrieve').id %>
+          <%= hidden_field_tag 'vendor_test_plan[kind_id]', @kind %>
           Query and Retrieve
           <% if current_user.administrator? -%>
             <%= f.select :user_id, User.select_options %>
           <% end -%>
           <p/>
-          <input type="submit" value="Assign"/>
+          <%= submit_tag 'Assign' %>
         <% end -%>
       </div>
     </td>
