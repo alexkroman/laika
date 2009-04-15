@@ -1,6 +1,3 @@
-<span style="float:right; position:relative; right:40px; top:4px">
-  <%= link_to "Export Report", :action => :export, :controller => :test_plan_manager %>
-</span>
 <% @vendors.each do |vendor| -%>
   <h3>Laika Inspection ID: <%= vendor.public_id %></h3>
   <table id="dashboard">
@@ -8,9 +5,9 @@
       <th><div>Status</div></th>
       <th class="<%= sort_order_class('kinds.name') %>"><%= link_to_sort 'kinds.name', 'Test Type' %></th>
       <th class="<%= sort_order_class('patient_data.name') %>"><%= link_to_sort 'patient_data.name', 'Patient' %></th>
-      <th class="<%= sort_order_class('updated_at') %>"><%= link_to_sort 'updated_at', 'Last Tested' %></th>
       <th><div>Errors</div></th>
       <th><div>Warnings</div></th>
+      <th class="<%= sort_order_class('updated_at') %>"><%= link_to_sort 'updated_at', 'Last Tested' %></th>
       <th><div>Actions</div></th>
     </tr>
     <% @vendor_test_plans[vendor].each do |vendor_test_plan| -%>
@@ -24,13 +21,13 @@
             <%= link_to h(vendor_test_plan.patient_data.name), patient_datum_url(vendor_test_plan.patient_data) %>
           <% end %>
         </td>
-        <td><%= time_ago_in_words vendor_test_plan.updated_at %> ago</td>
         <td>         
           <%= link_to pluralize(@errors[vendor_test_plan], "Error"), validate_vendor_test_plan_url(vendor_test_plan) %>          
         </td>
         <td>         
           <%= link_to pluralize(@warnings[vendor_test_plan], "Warning"), validate_vendor_test_plan_url(vendor_test_plan) %>
         </td>
+        <td><%= time_ago_in_words vendor_test_plan.updated_at %> ago</td>
         <td class="actions">
           <%= action_area(vendor_test_plan) %>
         </td>
@@ -39,3 +36,6 @@
     <% end %> <!-- vendor_test_plan loop -->
   </table> <!-- .dashboard -->
 <% end %> <!-- vendor loop -->
+<span id="export-report">
+  <%= link_to "Export Report", :action => :export, :controller => :test_plan_manager %>
+</span>
