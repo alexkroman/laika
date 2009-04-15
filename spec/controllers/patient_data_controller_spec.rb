@@ -28,6 +28,16 @@ describe PatientDataController do
     get :show, :id => 1, :format => 'xml'
     response.headers['type'].should == 'application/x-download'
   end
+  
+  it "should return xml content with xml declaration" do
+    pd_mock = mock('pd')
+    pd_mock.should_receive(:to_c32).with(Builder::XmlMarkup.new(:indent => 2).instruct!).and_return("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<ClinicalDocument/>")
+    pd_mock.stub!(:vendor_test_plan_id).and_return(false)
+    pd_mock.stub!(:id).and_return(1)
+    PatientData.stub!(:find).and_return(pd_mock)
+    get :show, :id => 1, :format => 'xml'
+    response.should be_success
+  end
 
   it "should update template name" do
     template = PatientData.create!(:name => 'Me', :user => users(:alex_kroman))

@@ -52,7 +52,9 @@ class PatientDataController < ApplicationController
     respond_to do |format|
       format.html 
       format.xml  do
-        send_data @patient_data.to_c32,
+        xml = Builder::XmlMarkup.new(:indent => 2)
+        xml.instruct!
+        send_data @patient_data.to_c32(xml),
           :filename => "#{@patient_data.id}.xml",
           :type => 'application/x-download'
       end
