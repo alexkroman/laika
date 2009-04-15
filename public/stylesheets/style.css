@@ -133,6 +133,10 @@ table {
 	border-collapse:separate;
 }
 
+#dashboard {
+  font-size: 12px;
+}
+
 table#dashboard a {
 	color:#424242;
 }
