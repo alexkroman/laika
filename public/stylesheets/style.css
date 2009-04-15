@@ -610,3 +610,7 @@ h3 > span {
   background-color:#ddd;
   padding:20px;
 }
+
+h3 {
+  margin-bottom: 15px;
+}
