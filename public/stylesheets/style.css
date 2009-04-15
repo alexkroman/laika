@@ -605,3 +605,8 @@ h3 > span {
   right:40px; 
   top:4px;
 }
+
+.box {
+  background-color:#ddd;
+  padding:20px;
+}
