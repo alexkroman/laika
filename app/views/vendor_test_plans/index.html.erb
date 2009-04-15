@@ -35,7 +35,13 @@
       <%= execution_div(vendor_test_plan) %>
     <% end %> <!-- vendor_test_plan loop -->
   </table> <!-- .dashboard -->
+  <span id="export-report">
+    <%= link_to "Export Report", :action => :export, :controller => :test_plan_manager %>
+  </span>
 <% end %> <!-- vendor loop -->
-<span id="export-report">
-  <%= link_to "Export Report", :action => :export, :controller => :test_plan_manager %>
-</span>
+
+<% if @vendors.size == 0 %>
+  <div id="not-assigned">
+    You have not assigned any tests to yourself.
+  </div>
+<% end %>
