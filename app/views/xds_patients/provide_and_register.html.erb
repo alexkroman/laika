@@ -1,11 +1,11 @@
 <% @page_header = "Provide and Register C32 based on template for patient #{@patient_data.name}" %>
-<% form_tag do_provide_and_register_xds_patient_url() do |f| -%>
-  <input type="hidden" name="pd_id" value="<%= @patient_data.id %>"/>
+<% form_tag do_provide_and_register_xds_patient_url do |f| -%>
+  <%= hidden_field_tag 'pd_id', @patient_data.id %> 
   <table>
     <%= render :partial => 'provide_and_register_form' %>
     <tr>
-      <td></td>
-      <td><input type="submit" value="Provide and Register"/> or <%=link_to 'Back', xds_patients_path %> </td>
+      <td>&nbsp;</td>
+      <td><%= submit_tag 'Provide and Register' %> or <%= link_to 'Back', xds_patients_path %> </td>
     </tr>
   </table>
 <% end -%>
