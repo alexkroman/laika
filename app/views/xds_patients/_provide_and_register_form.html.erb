@@ -12,7 +12,7 @@
 </tr>
 <tr>
   <td>Author Specialty</td>
-  <td><%= text_field_tag 'metadata[author][specialty]', :size => 45 %></td>
+  <td><%= text_field_tag 'metadata[author][specialty]', '', :size => 45 %></td>
 </tr>
 <% coded_values = [:class_code, :confidentiality_code, :format_code, :healthcare_facility_type_code, :practice_setting_code, :type_code]
    coded_values.each do |cv|
