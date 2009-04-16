@@ -31,9 +31,9 @@ class InsuranceProvider < ActiveRecord::Base
 
   def clone
     copy = super
-    copy.insurance_provider_patient = insurance_provider_patient.clone
-    copy.insurance_provider_subscriber = insurance_provider_subscriber.clone
-    copy.insurance_provider_guarantor = insurance_provider_guarantor.clone
+    copy.insurance_provider_patient    = insurance_provider_patient.clone    if insurance_provider_patient
+    copy.insurance_provider_subscriber = insurance_provider_subscriber.clone if insurance_provider_subscriber
+    copy.insurance_provider_guarantor  = insurance_provider_guarantor.clone  if insurance_provider_guarantor
     copy
   end
 
