@@ -11,6 +11,7 @@ class InsuranceProvider < ActiveRecord::Base
   has_one :insurance_provider_guarantor,  :dependent => :destroy
 
   include PatientDataChild
+  include Commentable
 
   def requirements
     {
@@ -28,8 +29,13 @@ class InsuranceProvider < ActiveRecord::Base
     }
   end
 
-
- 
+  def clone
+    copy = super
+    copy.insurance_provider_patient    = insurance_provider_patient.clone    if insurance_provider_patient
+    copy.insurance_provider_subscriber = insurance_provider_subscriber.clone if insurance_provider_subscriber
+    copy.insurance_provider_guarantor  = insurance_provider_guarantor.clone  if insurance_provider_guarantor
+    copy
+  end
 
   def to_c32(xml)
     xml.entry do

@@ -37,98 +37,29 @@ class PatientData < ActiveRecord::Base
 
   has_select_options :conditions => 'vendor_test_plan_id IS NULL'
   
-  def copy
+  # Create a deep copy of the given patient record.
+  def clone
+    copy = super
+    transaction do
+      copy.save!
 
-    copied_patient_data = self.clone
-    copied_patient_data.save!
+      %w[
+        registration_information support information_source advance_directive
+      ].each do |assoc|
+        copy.send("#{assoc}\=", send(assoc).clone) if send(assoc)
+      end
 
-    if self.registration_information
-      copied_patient_data.registration_information = self.registration_information.copy
-      # TODO: Copying the children on registration info should be moved into the RegistrationInformation class
-      copied_patient_data.registration_information.race = self.registration_information.race
-      copied_patient_data.registration_information.ethnicity = self.registration_information.ethnicity
-      copied_patient_data.registration_information.marital_status = self.registration_information.marital_status
-      copied_patient_data.registration_information.gender = self.registration_information.gender
-      copied_patient_data.registration_information.religion = self.registration_information.religion
+      %w[
+        patient_identifiers languages providers medications allergies conditions
+        all_results immunizations encounters procedures medical_equipments insurance_providers
+      ].each do |assoc|
+        send(assoc).each do |item|
+          copy.send(assoc) << item.clone
+        end
+      end
+
     end
-
-    self.patient_identifiers.each do |pid|
-      copied_patient_identifiers = pid.clone
-      copied_patient_identifiers.patient_data = copied_patient_data
-      copied_patient_identifiers.save!
-    end
-
-    self.languages.each do |language|
-      copied_language = language.clone
-      copied_language.patient_data = copied_patient_data
-      copied_language.save!
-    end
-
-    copied_patient_data.support = self.support.copy if self.support
-
-    self.providers.each do |provider|
-      copied_patient_data.providers << provider.copy
-    end
-
-    self.medications.each do |medication|
-      copied_patient_data.medications << medication.clone
-    end
-
-    self.insurance_providers.each do |insurance_provider|
-
-      cloned_insurance_provider = insurance_provider.clone
-
-      cloned_insurance_provider.insurance_provider_patient = insurance_provider.insurance_provider_patient.clone
-      cloned_insurance_provider.insurance_provider_patient.person_name = insurance_provider.insurance_provider_patient.person_name.clone
-      cloned_insurance_provider.insurance_provider_patient.address = insurance_provider.insurance_provider_patient.address.clone
-      cloned_insurance_provider.insurance_provider_patient.telecom = insurance_provider.insurance_provider_patient.telecom.clone
-
-      cloned_insurance_provider.insurance_provider_subscriber = insurance_provider.insurance_provider_subscriber.clone
-      cloned_insurance_provider.insurance_provider_subscriber.person_name  = insurance_provider.insurance_provider_subscriber.person_name.clone
-      cloned_insurance_provider.insurance_provider_subscriber.address = insurance_provider.insurance_provider_subscriber.address.clone
-      cloned_insurance_provider.insurance_provider_subscriber.telecom = insurance_provider.insurance_provider_subscriber.telecom.clone
-
-      cloned_insurance_provider.insurance_provider_guarantor = insurance_provider.insurance_provider_guarantor.clone
-      cloned_insurance_provider.insurance_provider_guarantor.person_name = insurance_provider.insurance_provider_guarantor.person_name.clone
-      cloned_insurance_provider.insurance_provider_guarantor.address = insurance_provider.insurance_provider_guarantor.address.clone
-      cloned_insurance_provider.insurance_provider_guarantor.telecom = insurance_provider.insurance_provider_guarantor.telecom.clone
-
-      copied_patient_data.insurance_providers << cloned_insurance_provider
-    end
-
-    self.allergies.each do |allergy|
-      copied_patient_data.allergies << allergy.clone
-    end
-
-    self.conditions.each do |condition|
-      copied_patient_data.conditions << condition.clone
-    end
-
-    copied_patient_data.information_source = self.information_source.copy if self.information_source
-
-    copied_patient_data.advance_directive = self.advance_directive.copy if self.advance_directive
-
-    self.all_results.each do |result|
-      copied_patient_data.all_results << result.clone
-    end
-
-    self.immunizations.each do |immunization|
-      copied_patient_data.immunizations << immunization.clone
-    end
-
-    self.encounters.each do |encounter|
-      copied_patient_data.encounters << encounter.copy
-    end
-
-    self.procedures.each do |procedure|
-      copied_patient_data.procedures << procedure.clone
-    end
-
-    self.medical_equipments.each do |medical_equipment|
-      copied_patient_data.medical_equipments << medical_equipment.clone
-    end
-
-    copied_patient_data
+    copy
   end
 
   def to_c32(xml = nil)

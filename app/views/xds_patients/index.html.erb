@@ -10,20 +10,20 @@
     <th><div>Actions</div></th>
   </tr>
 
-  <% for patient_data in @patient_data_list -%>
+  <% @patients.each do |patient| -%>
     <tr>
-      <td><%= link_to h(patient_data.name), patient_datum_url(patient_data) %></td>
-      <td><%=h patient_data.user.first_name %> <%=h patient_data.user.last_name %></td>
-      <td><%=h patient_data.created_at.strftime("%d.%b.%Y") %></td>
-      <td><%=h patient_data.updated_at.strftime("%d.%b.%Y") %></td>
+      <td><%= link_to h(patient.name), patient_datum_url(patient) %></td>
+      <td><%=h patient.user.first_name %> <%=h patient.user.last_name %></td>
+      <td><%=h patient.created_at.strftime("%d.%b.%Y") %></td>
+      <td><%=h patient.updated_at.strftime("%d.%b.%Y") %></td>
       <td class="actions" width=270px>
-        <%= link_to 'query', "javascript:toggle_div('query_div_#{patient_data.id}')" %>
-        | <%= link_to 'assign', provide_and_register_setup_xds_patient_url(patient_data) %>
-        | <%= link_to 'provide and register', provide_and_register_xds_patient_url(patient_data) %>
-        <div id="query_div_<%=patient_data.id%>" style="display:none">
-          <% if patient_data.patient_identifiers.count > 0 %>
+        <%= link_to 'query', "javascript:toggle_div('query_div_#{patient.id}')" %>
+        <%= link_to 'assign', provide_and_register_setup_xds_patient_url(patient) %>
+        <%= link_to 'provide and register', provide_and_register_xds_patient_url(patient) %>
+        <div id="query_div_<%=patient.id%>" style="display:none">
+          <% if patient.patient_identifiers.count > 0 %>
             <% form_tag query_xds_patient_path do |f| %>
-              <%= select_tag "id", options_for_select(patient_data.patient_identifiers.collect{|pi|[pi.identifier_and_domain, pi.id]}) %>
+              <%= select_tag "id", options_for_select(patient.patient_identifiers.collect{|pi|[pi.identifier_and_domain, pi.id]}) %>
               <%= submit_tag 'Query XDS' %>
             <% end %>
           <% else %>

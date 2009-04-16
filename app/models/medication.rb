@@ -6,6 +6,7 @@ class Medication < ActiveRecord::Base
   belongs_to :code_system
 
   include PatientDataChild
+  include Commentable
 
   def requirements
     {

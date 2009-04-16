@@ -97,7 +97,7 @@
         <td class="lighttext">Person Identifer Local</td>
         <td></td>
       </tr>
-    <% for patient_identifier in @patient_data.patient_identifiers %>
+    <% @patient_data.patient_identifiers.each do |patient_identifier| %>
       <tr class="<%= cycle("darkzebra", "lightzebra")%>">
         <td class="lighttext"></td>
         <% if @vendor_test_plan.test_result%>

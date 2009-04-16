@@ -8,7 +8,7 @@
     <th>Doc type</th>
   </tr>
 
-<% for document_location in @document_locations %>
+<% @document_locations.each do |document_location| -%>
   <tr>
     <td><%=h document_location.name %></td>
     <td><%=h document_location.xpath_expression %></td>
@@ -19,7 +19,7 @@
     <td><%= link_to 'Edit', edit_document_location_path(document_location) %></td>
     <td><%= link_to 'Destroy', document_location, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
-<% end %>
+<% end -%>
 </table>
 
 <br />

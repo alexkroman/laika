@@ -1,7 +1,7 @@
 class TestPlanManagerController < ApplicationController
-  def assign_patient_data
+  def assign_patient
 
-    copied_patient_data = PatientData.find(params[:pd_id]).copy
+    copied_patient_data = PatientData.find(params[:pd_id]).clone
 
     # find the associated meta-data
     test_plan = params[:vendor_test_plan]
@@ -35,26 +35,6 @@ class TestPlanManagerController < ApplicationController
         vtp.clinical_document = cd   
     end
     
-    redirect_to vendor_test_plans_url
-
-  end
-
-  def reassign_patient_data
-
-    copied_patient_data = PatientData.find(params[:pd_id]).copy
-    vtp_new = VendorTestPlan.find(params[:vtp_id])
-
-    vtp_new.destroy
-    # find the associated meta-data
-    vendor = Vendor.find(params[:v_id])
-    kind = Kind.find(params[:k_id])
-    user = User.find(params[:user_id])   
-    vtp = VendorTestPlan.new(:vendor => vendor, :kind => kind, :user => user)
-    vtp.save!
-
-    copied_patient_data.vendor_test_plan = vtp
-    copied_patient_data.save!
-
     redirect_to vendor_test_plans_url
 
   end
