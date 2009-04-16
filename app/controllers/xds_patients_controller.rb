@@ -7,7 +7,7 @@ class XdsPatientsController < ApplicationController
   self.valid_sort_fields = %w[ name created_at updated_at ]
 
   def index
-    @patient_data_list = PatientData.find(:all,
+    @patients = PatientData.find(:all,
       :conditions => {:vendor_test_plan_id => nil},
       :order => sort_order || 'name ASC')
       
