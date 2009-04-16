@@ -61,9 +61,4 @@ class XdsPatientsController < ApplicationController
     redirect_to :action => :index
   end
 
-  def create
-    flash[:notice] = "This feature is not yet implemented."
-    patient_data = PatientData.find params[:patient_data_id]
-    redirect_to :action => :index
-  end
 end
