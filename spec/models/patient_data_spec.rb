@@ -4,33 +4,33 @@ require "lib/validators/c32_validator"
 describe PatientData do
   fixtures :patient_data, :registration_information, :person_names, :addresses, :telecoms, :genders
   before(:each) do
-     @patient_data = patient_data(:joe_smith) 
+     @patient = patient_data(:joe_smith) 
   end
 
   it "should require a name" do
-    @patient_data.name = ''
-    @patient_data.should_not be_valid
+    @patient.name = ''
+    @patient.should_not be_valid
   end
 
   describe "copied with clone" do
   
     before(:each) do
-       @patient_data_copy = @patient_data.clone
+       @patient_copy = @patient.clone
     end
  
   
     it "should have the same name as its source" do
-      @patient_data_copy.name.should == @patient_data.name
+      @patient_copy.name.should == @patient.name
     end
     
     it "should have the same registration information as its source" do
-      @patient_data_copy.registration_information.should_not be_nil
-      @patient_data_copy.registration_information.gender.code.should ==
-        @patient_data.registration_information.gender.code
-      @patient_data_copy.registration_information.person_name.first_name.should ==
-        @patient_data.registration_information.person_name.first_name
-      @patient_data_copy.registration_information.person_name.last_name.should ==
-        @patient_data.registration_information.person_name.last_name
+      @patient_copy.registration_information.should_not be_nil
+      @patient_copy.registration_information.gender.code.should ==
+        @patient.registration_information.gender.code
+      @patient_copy.registration_information.person_name.first_name.should ==
+        @patient.registration_information.person_name.first_name
+      @patient_copy.registration_information.person_name.last_name.should ==
+        @patient.registration_information.person_name.last_name
     end
   end
 end
