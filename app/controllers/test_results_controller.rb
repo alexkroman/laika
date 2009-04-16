@@ -4,7 +4,7 @@ class TestResultsController < ApplicationController
   def create
     @test_result = TestResult.new(params[:test_result])
 
-    for patient_identifier in @vendor_test_plan.patient_data.patient_identifiers
+    for patient_identifier in @vendor_test_plan.patient.patient_identifiers
       if patient_identifier.patient_identifier == @test_result.patient_identifier && patient_identifier.identifier_domain_identifier == @test_result.assigning_authority
         @test_result.result = 'PASS'
       end

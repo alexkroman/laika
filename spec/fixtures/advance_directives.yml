@@ -3,7 +3,7 @@ joe_smith_advance_directive:
   advance_directive_type: resuscitation
   advance_directive_status_code: current_and_verified
   free_text: Do not resuscitate
-  patient_data: joe_smith
+  patient: joe_smith
 
 emily_jones_advance_directive:
   start_effective_time: 1977-01-21
@@ -11,14 +11,14 @@ emily_jones_advance_directive:
   advance_directive_type: intubation
   advance_directive_status_code: verified_by_medical_record_only
   free_text: Do not intubate under any conditions
-  patient_data: emily_jones
+  patient: emily_jones
 
 will_haynes_advance_directive:
   start_effective_time: 1984-01-21
   advance_directive_type: cpr
   advance_directive_status_code: current_and_verified
   free_text: Do not perform CPR on patient
-  patient_data: will_haynes
+  patient: will_haynes
 
 jennifer_thompson_advance_directive:
   start_effective_time: 1994-01-21
@@ -26,14 +26,14 @@ jennifer_thompson_advance_directive:
   advance_directive_type: life_support
   advance_directive_status_code: supported_by_durable_power_of_attorney
   free_text: Do not put on life support
-  patient_data: jennifer_thompson
+  patient: jennifer_thompson
 
 theodore_smith_advance_directive:
   start_effective_time: 1944-01-21
   advance_directive_type: tube_feedings
   advance_directive_status_code: supported_by_healthcare_will
   free_text: Do not tube feed
-  patient_data: theodore_smith
+  patient: theodore_smith
 
 david_carter_advance_directive:
   start_effective_time: 1984-12-25
@@ -41,4 +41,4 @@ david_carter_advance_directive:
   advance_directive_type: transfusion_of_blood
   advance_directive_status_code: verified_with_family_only
   free_text: Do not perform blood transfusion for religious reasons
-  patient_data: david_carter
+  patient: david_carter

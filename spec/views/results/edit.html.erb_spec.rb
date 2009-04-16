@@ -10,7 +10,7 @@ describe "results/edit.html.erb" do
   describe "with an existing result (results/edit)" do
     before do
       @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
-      @result = Result.create!(:patient_data => @patient)
+      @result = @patient.results.create!
       assigns[:patient] = @patient
       assigns[:result] = @result
     end

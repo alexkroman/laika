@@ -6,7 +6,7 @@ describe "medications/edit.html.erb" do
   describe "with an existing medication (medications/edit)" do
     before do
       @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
-      @medication = Medication.create!(:patient_data => @patient)
+      @medication = @patient.medications.create!
       assigns[:medication] = @medication
       assigns[:patient] = @patient
     end

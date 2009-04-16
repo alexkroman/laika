@@ -6,7 +6,7 @@ describe "providers/edit.html.erb" do
   describe "with an existing provider (providers/edit)" do
     before do
       @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
-      @provider = Provider.create!(:patient_data => @patient)
+      @provider = @patient.providers.create!
       assigns[:patient] = @patient
       assigns[:provider] = @provider
     end

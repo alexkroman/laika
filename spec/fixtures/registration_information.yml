@@ -7,7 +7,7 @@ joe_smith:
   marital_status: never_married
   person_identifier: 1234567890
   document_timestamp: 1972-04-12
-  patient_data: joe_smith
+  patient: joe_smith
 
 joe_smith_test:
   date_of_birth: 1982-03-23
@@ -18,7 +18,7 @@ joe_smith_test:
   marital_status: never_married
   person_identifier: 1234567890
   document_timestamp: 1985-05-23
-  patient_data: joe_smith_vendor_test
+  patient: joe_smith_vendor_test
 
 emily_jones:
   date_of_birth: 2006-11-01
@@ -29,7 +29,7 @@ emily_jones:
   marital_status: married
   person_identifier: 1234567890
   document_timestamp: 2007-03-26
-  patient_data: emily_jones
+  patient: emily_jones
 
 will_haynes:
   date_of_birth: 2006-11-04
@@ -40,7 +40,7 @@ will_haynes:
   marital_status: divorced
   person_identifier: 1234567890
   document_timestamp: 2007-06-08
-  patient_data: will_haynes
+  patient: will_haynes
 
 jennifer_thompson:
   date_of_birth: 1975-04-10
@@ -51,7 +51,7 @@ jennifer_thompson:
   marital_status: polygamous
   person_identifier: 1234567890
   document_timestamp: 1987-06-18
-  patient_data: jennifer_thompson
+  patient: jennifer_thompson
 
 theodore_smith:
   date_of_birth: 1929-11-08
@@ -62,7 +62,7 @@ theodore_smith:
   marital_status: domestic_partner
   person_identifier: 1234567890
   document_timestamp: 1999-02-28
-  patient_data: theodore_smith
+  patient: theodore_smith
 
 david_carter:
   date_of_birth: 2000-03-02
@@ -73,4 +73,4 @@ david_carter:
   marital_status: annulled
   person_identifier: 1234567890
   document_timestamp: 2003-01-06
-  patient_data: david_carter
+  patient: david_carter

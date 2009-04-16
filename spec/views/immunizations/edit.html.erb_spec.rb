@@ -6,7 +6,7 @@ describe "immunizations/edit.html.erb" do
   describe "with an existing immunization (immunizations/edit)" do
     before do
       @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
-      @immunization = Immunization.create!(:patient_data => @patient)
+      @immunization = @patient.immunizations.create!
       assigns[:immunization] = @immunization
       assigns[:patient] = @patient
     end

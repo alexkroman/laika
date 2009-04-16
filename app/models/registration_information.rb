@@ -41,13 +41,13 @@ class RegistrationInformation < ActiveRecord::Base
       ethnicity.andand.to_c32(xml)
 
       # do the gaurdian stuff here non gaurdian is placed elsewhere
-      if patient_data.support &&
-         patient_data.support.contact_type &&
-         patient_data.support.contact_type.code == "GUARD"
-        patient_data.support.to_c32(xml)
+      if patient.support &&
+         patient.support.contact_type &&
+         patient.support.contact_type.code == "GUARD"
+        patient.support.to_c32(xml)
       end  
 
-      patient_data.languages.to_c32(xml)
+      patient.languages.to_c32(xml)
 
     end
 

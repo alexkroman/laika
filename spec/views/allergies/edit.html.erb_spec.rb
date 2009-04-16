@@ -14,8 +14,10 @@ describe "allergies/edit.html.erb" do
 
   describe "with an existing allergy (allergies/edit)" do
     before do
-      assigns[:patient] = PatientData.create!(:name => 'foo', :user => User.find(:first))
-      assigns[:allergy] = Allergy.create!(:patient_data => assigns[:patient])
+      @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
+      @allergy = @patient.allergies.create!
+      assigns[:patient] = @patient
+      assigns[:allergy] = @allergy
     end
     it_should_behave_like "all allergy forms"
 

@@ -4,8 +4,8 @@
 module PatientDataChild
   def self.included(base)
     base.class_eval do
-      belongs_to :patient_data
-      after_save { |r| r.patient_data.update_attributes(:updated_at => DateTime.now) }
+      belongs_to :patient, :foreign_key => :patient_data_id, :class_name => 'PatientData'
+      after_save { |r| r.patient.update_attributes(:updated_at => DateTime.now) }
     end
   end
 end

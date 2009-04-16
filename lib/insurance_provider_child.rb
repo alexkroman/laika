@@ -1,8 +1,8 @@
 #
 # This module is included by models that serve as sub-sections of InsuranceProvider.
 #
-# It adds the insurance_provider relationship and the named scope by_patient(patient_data).
-# It also updates the timestamp of insurance_provider.patient_data on save.
+# It adds the insurance_provider relationship and the named scope by_patient.
+# It also updates the timestamp of insurance_provider.patient on save.
 #
 module InsuranceProviderChild
   def self.included(mod)
@@ -14,11 +14,11 @@ module InsuranceProviderChild
           :conditions => ['insurance_providers.patient_data_id = ?', patient.id]
         }
       }
-      after_save { |r| r.insurance_provider.andand.patient_data.andand.update_attributes(:updated_at => DateTime.now) }
+      after_save { |r| r.insurance_provider.andand.patient.andand.update_attributes(:updated_at => DateTime.now) }
 
       # this is for the address, person_name, telecom after_save
-      def patient_data
-        insurance_provider.patient_data
+      def patient
+        insurance_provider.patient
       end
     end
   end

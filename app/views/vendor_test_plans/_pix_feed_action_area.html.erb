@@ -1,4 +1,4 @@
-<%= link_to 'edit', patient_datum_url(vendor_test_plan.patient_data)%>
+<%= link_to 'edit', patient_datum_url(vendor_test_plan.patient)%>
 <%= link_to 'delete', vendor_test_plan, :confirm => 'Are you sure you want to delete this Laika test?', :method => :delete %>
 <% if vendor_test_plan.test_result %>
   <%= link_to 'inspect', validatepix_vendor_test_plan_url(vendor_test_plan) %>

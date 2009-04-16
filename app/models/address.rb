@@ -7,7 +7,7 @@ class Address < ActiveRecord::Base
   belongs_to :zip_code
   belongs_to :addressable, :polymorphic => true
 
-  after_save { |r| r.addressable.andand.patient_data.andand.update_attributes(:updated_at => DateTime.now) }
+  after_save { |r| r.addressable.andand.patient.andand.update_attributes(:updated_at => DateTime.now) }
 
   def blank?
     %w[ street_address_line_one street_address_line_two

@@ -65,7 +65,7 @@ class TestPlanManagerController < ApplicationController
                 flag2 = 1
               end	
               report << "Patient Name:,"
-              report << vendor_test_plan.patient_data.name + "\n" 	
+              report << vendor_test_plan.patient.name + "\n" 	
               @kinds.each do |kind|
                 if kind.id == vendor_test_plan.kind_id
                   report << "Inspection Type:,"
