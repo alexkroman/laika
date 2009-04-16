@@ -11,6 +11,7 @@ class InsuranceProvider < ActiveRecord::Base
   has_one :insurance_provider_guarantor,  :dependent => :destroy
 
   include PatientDataChild
+  include Commentable
 
   def requirements
     {

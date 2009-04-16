@@ -19,6 +19,7 @@ class AbstractResult < ActiveRecord::Base
   belongs_to :act_status_code
 
   include PatientDataChild
+  include Commentable
 
   include MatchHelper
 

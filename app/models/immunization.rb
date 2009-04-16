@@ -6,6 +6,7 @@ class Immunization < ActiveRecord::Base
   belongs_to :no_immunization_reason
 
   include PatientDataChild
+  include Commentable
 
   def requirements
     {
@@ -15,7 +16,6 @@ class Immunization < ActiveRecord::Base
       :no_immunization_reason_id => :hitsp_r2_optional,
     }
   end
-
   
   def to_c32(xml)    
     xml.entry('typeCode'=>'DRIV') do

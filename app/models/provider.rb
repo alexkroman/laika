@@ -7,7 +7,7 @@ class Provider < ActiveRecord::Base
 
   include PatientDataChild
   include PersonLike
- 
+  include Commentable
 
   def requirements
     {
