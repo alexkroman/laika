@@ -19,21 +19,21 @@
     <th><div>Actions</div></th>
   </tr>
 
-  <% for patient_data in @patient_data_list -%>
+  <% @patients.each do |patient| -%>
     <tr>
-      <td><%= link_to h(patient_data.name), patient_datum_url(patient_data) %></td>
+      <td><%= link_to h(patient.name), patient_datum_url(patient) %></td>
       <!--td>CCD/C32</td-->
-      <td><%=h patient_data.user.first_name %> <%=h patient_data.user.last_name %></td>
-      <td><%= patient_data.created_at.strftime("%d.%b.%Y") %></td>
-      <td><%= patient_data.updated_at.strftime("%d.%b.%Y") %></td>
+      <td><%=h patient.user.first_name %> <%=h patient.user.last_name %></td>
+      <td><%= patient.created_at.strftime("%d.%b.%Y") %></td>
+      <td><%= patient.updated_at.strftime("%d.%b.%Y") %></td>
       <td class="actions" width=270px>
-        <%= link_to 'edit', patient_datum_url(patient_data)%> 
-        <%= link_to 'delete', patient_datum_url(patient_data), :confirm => 'Are you sure you want to delete this Laika template?', :method => :delete %>
-        <a href="javascript:toggle_div('assignment_div_<%=patient_data.id%>');">assign</a>
-        <div id="assignment_div_<%=patient_data.id%>" style="display:none">
+        <%= link_to 'edit', patient_datum_url(patient)%> 
+        <%= link_to 'delete', patient_datum_url(patient), :confirm => 'Are you sure you want to delete this Laika template?', :method => :delete %>
+        <a href="javascript:toggle_div('assignment_div_<%=patient.id%>');">assign</a>
+        <div id="assignment_div_<%=patient.id%>" style="display:none">
           <% form_for VendorTestPlan.new(:kind_id => @previous_kind, :vendor_id => @previous_vendor, :user_id => current_user.id),
             :url => {:controller => 'test_plan_manager', :action => 'assign_patient_data' } do |f| -%>
-              <input type="hidden" name="pd_id" value="<%= patient_data.id %>"/>
+              <input type="hidden" name="pd_id" value="<%= patient.id %>"/>
               <%= f.select :vendor_id, Vendor.select_options(@vendors) %>
               <%= f.select :kind_id, Kind.dashboard_options %>
               <% if current_user.administrator? -%>
