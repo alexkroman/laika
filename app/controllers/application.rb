@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   # Set the last selected vendor by id. The value is saved in the session.
   #
   # This method (along with last_selected_kind_id=) is used by
-  # TestPlanManagerController#assign_patient_data to retain previous selections
+  # TestPlanManagerController#assign_patient to retain previous selections
   # as a convenience in the UI.
   def last_selected_vendor_id=(vendor_id)
     session[:previous_vendor_id] = vendor_id

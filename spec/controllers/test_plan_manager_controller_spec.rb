@@ -17,7 +17,7 @@ describe TestPlanManagerController do
       controller.send( :last_selected_kind_id=,   nil)
       controller.send( :last_selected_vendor_id=, nil)
 
-      get :assign_patient_data, :pd_id => patient_data, :vendor_test_plan => { :vendor_id => vendor, :kind_id => kind }
+      get :assign_patient, :pd_id => patient_data, :vendor_test_plan => { :vendor_id => vendor, :kind_id => kind }
 
       controller.send( :last_selected_vendor ).should == vendor
       controller.send( :last_selected_kind   ).should == kind
@@ -30,7 +30,7 @@ describe TestPlanManagerController do
 
       User.should_not_receive(:find)
 
-      get :assign_patient_data, :pd_id => patient_data, :vendor_test_plan => { :vendor_id => vendor, :kind_id => kind }
+      get :assign_patient, :pd_id => patient_data, :vendor_test_plan => { :vendor_id => vendor, :kind_id => kind }
     end
 
     it "should not assign selected user" do
@@ -41,7 +41,7 @@ describe TestPlanManagerController do
 
       User.should_not_receive(:find).with(other)
 
-      get :assign_patient_data, :pd_id => patient_data, :vendor_test_plan => {:user_id => other, :vendor_id => vendor, :kind_id => kind }
+      get :assign_patient, :pd_id => patient_data, :vendor_test_plan => {:user_id => other, :vendor_id => vendor, :kind_id => kind }
     end
   end
 
@@ -61,7 +61,7 @@ describe TestPlanManagerController do
 
       User.should_receive(:find).with(other)
 
-      get :assign_patient_data, :pd_id => patient_data, :vendor_test_plan => {:user_id => other, :vendor_id => vendor, :kind_id => kind }
+      get :assign_patient, :pd_id => patient_data, :vendor_test_plan => {:user_id => other, :vendor_id => vendor, :kind_id => kind }
     end
   end
 end

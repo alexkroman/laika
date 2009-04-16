@@ -16,7 +16,7 @@
     <td>
       <a href="javascript:toggle_div('assignment_div_<%= md.unique_id %>');">assign</a>
       <div id="assignment_div_<%= md.unique_id %>" style="display:none" >
-        <% form_for @vendor_test_plan, :url => {:controller => 'test_plan_manager', :action => 'assign_patient_data' } do |f| -%>
+        <% form_for @vendor_test_plan, :url => {:controller => 'test_plan_manager', :action => 'assign_patient' } do |f| -%>
           <input type="hidden" name="pd_id" value="<%= patient_identifier.patient_data.id %>"/>
           <%= text_area_tag :metadata, md.to_yaml, :style=>"display:none" %>
           <%= f.select :vendor_id, Vendor.select_options(vendors) %><br/>

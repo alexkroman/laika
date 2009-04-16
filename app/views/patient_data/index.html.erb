@@ -32,7 +32,7 @@
         <a href="javascript:toggle_div('assignment_div_<%=patient.id%>');">assign</a>
         <div id="assignment_div_<%=patient.id%>" style="display:none">
           <% form_for VendorTestPlan.new(:kind_id => @previous_kind, :vendor_id => @previous_vendor, :user_id => current_user.id),
-            :url => {:controller => 'test_plan_manager', :action => 'assign_patient_data' } do |f| -%>
+            :url => {:controller => 'test_plan_manager', :action => 'assign_patient' } do |f| -%>
               <input type="hidden" name="pd_id" value="<%= patient.id %>"/>
               <%= f.select :vendor_id, Vendor.select_options(@vendors) %>
               <%= f.select :kind_id, Kind.dashboard_options %>
