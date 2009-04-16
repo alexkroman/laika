@@ -133,6 +133,10 @@ table {
 	border-collapse:separate;
 }
 
+#dashboard {
+  font-size: 12px;
+}
+
 table#dashboard a {
 	color:#424242;
 }
@@ -593,4 +597,25 @@ h3 > span {
 .required {
   background-color: pink;
   
+}
+
+#export-report {
+  float:right; 
+  position:relative; 
+  right:40px; 
+  top:4px;
+}
+
+.box {
+  background-color:#ddd;
+  padding:20px;
+}
+
+h3 {
+  margin-bottom: 15px;
+}
+
+#not-assigned {
+  font-size: large;
+  text-align: center;
 }
