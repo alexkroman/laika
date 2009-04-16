@@ -4,7 +4,7 @@
 <% else
      immunization_div = "immunization#{@immunization.id}"
    end %>
-   <% remote_form_for(:immunization, @immunization, :url => patient_data_url_for(@patient_data, @immunization),
+   <% remote_form_for(:immunization, @immunization, :url => patient_data_url_for(@patient, @immunization),
                       :html => {:method => http_method(@immunization)}, :update => immunization_div) do |f| -%>
 
 <table>

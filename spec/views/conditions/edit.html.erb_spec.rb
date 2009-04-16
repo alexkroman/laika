@@ -8,7 +8,7 @@ describe "conditions/edit.html.erb" do
       @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
       @condition = Condition.create!(:patient_data => @patient)
       assigns[:condition] = @condition
-      assigns[:patient_data] = @patient
+      assigns[:patient] = @patient
     end
 
     it "should render the edit form with method PUT" do
@@ -24,7 +24,7 @@ describe "conditions/edit.html.erb" do
       @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
       @condition = Condition.new
       assigns[:condition] = @condition
-      assigns[:patient_data] = @patient
+      assigns[:patient] = @patient
     end
 
     it "should render the edit form with method POST" do

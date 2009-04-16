@@ -13,25 +13,25 @@ class PatientDataChildController < ApplicationController
   
   def create
     instance_variable_set(instance_var_name, model_class.new(params[param_key]))
-    @patient_data.send(association_name) << instance_variable_get(instance_var_name)
+    @patient.send(association_name) << instance_variable_get(instance_var_name)
   end
 
   def edit
-    instance_variable_set(instance_var_name, @patient_data.send(association_name).find(params[:id]))
+    instance_variable_set(instance_var_name, @patient.send(association_name).find(params[:id]))
   end
   
   def update
-    instance = @patient_data.send(association_name).find(params[:id])
+    instance = @patient.send(association_name).find(params[:id])
     instance.send(:update_attributes, params[param_key])
 
     render :partial => 'show', :locals => {
-      :patient_data => @patient_data,
+      :patient_data => @patient,
       param_key     => instance
     }
   end
 
   def destroy
-    instance = @patient_data.send(association_name).find(params[:id])
+    instance = @patient.send(association_name).find(params[:id])
     instance.destroy
   end
   
@@ -58,9 +58,9 @@ class PatientDataChildController < ApplicationController
 
   def find_patient_data
     if params[:patient_datum_id]
-      @patient_data = PatientData.find params[:patient_datum_id]
+      @patient = PatientData.find params[:patient_datum_id]
     end
-    redirect_to patient_data_url unless @patient_data
+    redirect_to patient_data_url unless @patient
   end
 
 end

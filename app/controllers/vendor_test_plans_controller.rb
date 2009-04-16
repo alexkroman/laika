@@ -112,7 +112,7 @@ class VendorTestPlansController < ApplicationController
 
   def validatepix
     @vendor_test_plan = VendorTestPlan.find(params[:id])
-    @patient_data = @vendor_test_plan.patient_data
+    @patient = @vendor_test_plan.patient_data
   end
 
   def checklist 

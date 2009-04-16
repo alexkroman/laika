@@ -25,7 +25,7 @@ describe "insurance_providers/edit.html.erb" do
       @insurance_provider.insurance_provider_guarantor.telecom = Telecom.new
       @insurance_provider_guarantor = @insurance_provider.insurance_provider_guarantor
       @insurance_provider.save!
-      assigns[:patient_data] = @patient
+      assigns[:patient] = @patient
       assigns[:insurance_provider] = @insurance_provider
     end
 
@@ -58,7 +58,7 @@ describe "insurance_providers/edit.html.erb" do
       @insurance_provider.insurance_provider_guarantor.address = Address.new
       @insurance_provider.insurance_provider_guarantor.telecom = Telecom.new
       @insurance_provider_guarantor = @insurance_provider.insurance_provider_guarantor
-      assigns[:patient_data] = @patient
+      assigns[:patient] = @patient
       assigns[:insurance_provider] = @insurance_provider
     end
 

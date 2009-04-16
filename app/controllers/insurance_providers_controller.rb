@@ -43,6 +43,6 @@ class InsuranceProvidersController < PatientDataChildController
     @insurance_provider.insurance_provider_guarantor.address = Address.new
     @insurance_provider.insurance_provider_guarantor.telecom = Telecom.new
 
-    @patient_data.insurance_providers << @insurance_provider
+    @patient.insurance_providers << @insurance_provider
   end
 end

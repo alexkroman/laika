@@ -11,7 +11,7 @@ describe "results/edit.html.erb" do
     before do
       @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
       @result = Result.create!(:patient_data => @patient)
-      assigns[:patient_data] = @patient
+      assigns[:patient] = @patient
       assigns[:result] = @result
     end
 
@@ -27,7 +27,7 @@ describe "results/edit.html.erb" do
     before do
       @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
       @result = Result.new
-      assigns[:patient_data] = @patient
+      assigns[:patient] = @patient
       assigns[:result] = @result
     end
 

@@ -4,7 +4,7 @@
 <% else
      patient_identifier_div = "patient_identifier#{@patient_identifier.id}"
    end %>
-   <% remote_form_for(:patient_identifier, @patient_identifier, :url => patient_data_url_for(@patient_data, @patient_identifier),
+   <% remote_form_for(:patient_identifier, @patient_identifier, :url => patient_data_url_for(@patient, @patient_identifier),
                       :html => {:method => http_method(@patient_identifier)}, :update => patient_identifier_div) do |f| -%>
 
 <table>

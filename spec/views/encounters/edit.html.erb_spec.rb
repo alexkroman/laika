@@ -11,7 +11,7 @@ describe "encounters/edit.html.erb" do
       @encounter.address = Address.new
       @encounter.telecom = Telecom.new
       assigns[:encounter] = @encounter
-      assigns[:patient_data] = @patient
+      assigns[:patient] = @patient
     end
 
     it "should render the edit form with method PUT" do
@@ -30,7 +30,7 @@ describe "encounters/edit.html.erb" do
       @encounter.address = Address.new
       @encounter.telecom = Telecom.new
       assigns[:encounter] = @encounter
-      assigns[:patient_data] = @patient
+      assigns[:patient] = @patient
     end
 
     it "should render the edit form with method POST" do

@@ -6,7 +6,7 @@
      result_div = "result#{@result.id}"
      html_options = { :method => http_method(@result) }
    end %>
-   <% remote_form_for(:result, @result, :url => patient_data_url_for(@patient_data, @result, :is_vital_sign => @is_vital_sign), :html => html_options,
+   <% remote_form_for(:result, @result, :url => patient_data_url_for(@patient, @result, :is_vital_sign => @is_vital_sign), :html => html_options,
                    :update => result_div) do |f| -%>
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">

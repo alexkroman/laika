@@ -8,7 +8,7 @@ describe "immunizations/edit.html.erb" do
       @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
       @immunization = Immunization.create!(:patient_data => @patient)
       assigns[:immunization] = @immunization
-      assigns[:patient_data] = @patient
+      assigns[:patient] = @patient
     end
 
     it "should render the edit form with PUT" do
@@ -24,7 +24,7 @@ describe "immunizations/edit.html.erb" do
       @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
       @immunization = Immunization.new
       assigns[:immunization] = @immunization
-      assigns[:patient_data] = @patient
+      assigns[:patient] = @patient
     end
 
     it "should render the edit form with POST" do

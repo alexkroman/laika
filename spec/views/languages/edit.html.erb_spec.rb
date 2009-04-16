@@ -8,7 +8,7 @@ describe "languages/edit.html.erb" do
       @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
       @language = Language.create!(:patient_data => @patient)
       assigns[:language]     = @language
-      assigns[:patient_data] = @patient
+      assigns[:patient] = @patient
     end
 
     it "should render the edit form with method PUT" do
@@ -24,7 +24,7 @@ describe "languages/edit.html.erb" do
       @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
       @language = Language.new
       assigns[:language]     = @language
-      assigns[:patient_data] = @patient
+      assigns[:patient] = @patient
     end
 
     it "should render the edit form with method POST" do

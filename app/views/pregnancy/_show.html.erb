@@ -2,7 +2,7 @@
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Pregnant</td>
-    <td><%= h @patient_data.pregnant %></td>
+    <td><%= h @patient.pregnant %></td>
   </tr>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td></td>
@@ -10,12 +10,12 @@
       <%= link_to_remote 'Edit', :update => 'pregnancyContainer', 
                                  :url =>  {:controller => "pregnancy", 
                                            :action => "edit", 
-                                           :patient_datum_id => @patient_data.id},
+                                           :patient_datum_id => @patient.id},
                                  :method => 'get' %>
       <%= link_to_remote 'Remove', :update => "pregnancyContainer",
                                    :url =>  {:controller => "pregnancy", 
                                              :action => "destroy", 
-                                             :patient_datum_id => @patient_data.id},
+                                             :patient_datum_id => @patient.id},
                                    :method => 'delete' %>
     </td>
   </tr>
