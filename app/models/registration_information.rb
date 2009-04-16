@@ -21,8 +21,6 @@ class RegistrationInformation < ActiveRecord::Base
     }
   end
 
- 
-
   def to_c32(xml = Builder::XmlMarkup.new)
 
     xml.id("extension" => person_identifier)
@@ -53,6 +51,14 @@ class RegistrationInformation < ActiveRecord::Base
 
     end
 
+  end
+
+  def clone
+    copy = super
+    %w[ race ethnicity marital_status gender religion ].each do |attr|
+      copy.send("#{attr}=", send(attr))
+    end
+    copy
   end
 
   def randomize(patient)

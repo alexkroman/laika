@@ -12,10 +12,10 @@ describe PatientData do
     @patient_data.should_not be_valid
   end
 
-  describe "copied with .copy()" do
+  describe "copied with clone" do
   
     before(:each) do
-       @patient_data_copy = @patient_data.copy
+       @patient_data_copy = @patient_data.clone
     end
  
   
@@ -104,5 +104,37 @@ roles severity_terms supports telecoms user_roles users vaccines vendors zip_cod
     record.updated_at.should > old_updated_at
   end
 
+
+  describe "after a deep copy" do
+
+    before do
+      @original = patient_data(:jennifer_thompson)
+      @copy = @original.clone
+    end
+
+    # has many
+    %w[ languages providers medications allergies insurance_providers conditions
+       immunizations encounters procedures medical_equipments patient_identifiers
+       all_results
+    ].each do |assoc|
+      it "should copy #{assoc}" do
+        @original.send(assoc).count.should  == @copy.send(assoc).count
+        # XXX ideally the patient would have at least one of every association
+        if @original.send(assoc).count > 0
+          @original.send(assoc).to_set.should_not == @copy.send(assoc).to_set
+        end
+      end
+    end
+  
+    # has one
+    %w[
+      registration_information support information_source advance_directive
+    ].each do |assoc|
+      it "should copy #{assoc}" do
+        @copy.send(assoc).should_not be_nil
+        @original.send(assoc).should_not == @copy.send(assoc)
+      end
+    end
+  end
 end
 

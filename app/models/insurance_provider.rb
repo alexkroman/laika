@@ -28,8 +28,13 @@ class InsuranceProvider < ActiveRecord::Base
     }
   end
 
-
- 
+  def clone
+    copy = super
+    copy.insurance_provider_patient = insurance_provider_patient.clone
+    copy.insurance_provider_subscriber = insurance_provider_subscriber.clone
+    copy.insurance_provider_guarantor = insurance_provider_guarantor.clone
+    copy
+  end
 
   def to_c32(xml)
     xml.entry do

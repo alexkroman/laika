@@ -1,7 +1,7 @@
 class TestPlanManagerController < ApplicationController
   def assign_patient_data
 
-    copied_patient_data = PatientData.find(params[:pd_id]).copy
+    copied_patient_data = PatientData.find(params[:pd_id]).clone
 
     # find the associated meta-data
     test_plan = params[:vendor_test_plan]
@@ -41,7 +41,7 @@ class TestPlanManagerController < ApplicationController
 
   def reassign_patient_data
 
-    copied_patient_data = PatientData.find(params[:pd_id]).copy
+    copied_patient_data = PatientData.find(params[:pd_id]).clone
     vtp_new = VendorTestPlan.find(params[:vtp_id])
 
     vtp_new.destroy
