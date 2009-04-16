@@ -6,7 +6,7 @@
 
 <%= will_paginate @atna_audits %>
 <table  id="dashboard">
-<% for message_log in @atna_audits %>
+<% @atna_audits.each do |message_log| %>
   <tr><th>Created_at</th><td><%=h message_log.timestamp_entry %></td></tr>
   <tr><th>Message</th><td colspan="3"><%=h message_log.message.sub("\r", "\n") %></td></tr>
       </table>
