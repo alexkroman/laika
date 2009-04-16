@@ -3,7 +3,7 @@
 # patient data sections. Individual actions can be overridden as needed.
 #
 class PatientDataChildController < ApplicationController
-  before_filter :find_patient_data
+  before_filter :find_patient
   layout false
 
   def new
@@ -56,7 +56,7 @@ class PatientDataChildController < ApplicationController
     @instance_var_name ||= "@#{param_key}"
   end
 
-  def find_patient_data
+  def find_patient
     if params[:patient_datum_id]
       @patient = PatientData.find params[:patient_datum_id]
     end

@@ -2,7 +2,7 @@ require_dependency 'sort_order'
 
 class PatientDataController < ApplicationController
   page_title 'Laika Test Library'
-  before_filter :set_patient_data, :except => %w[ index create autoCreate ]
+  before_filter :set_patient, :except => %w[ index create autoCreate ]
 
   include SortOrder
   self.valid_sort_fields = %w[ name created_at updated_at ]
@@ -24,14 +24,14 @@ class PatientDataController < ApplicationController
     @patient.randomize()
     @patient.user = current_user
     @patient.save!
-    redirect_to :controller => 'patient_data', :action => 'show', :id => @patient.id
+    redirect_to patient_datum_url(@patient)
   end
 
   def create
     @patient = PatientData.new(params[:patient_data])
     @patient.user = current_user
     @patient.save!
-    redirect_to :controller => 'patient_data', :action => 'show', :id => @patient.id
+    redirect_to patient_datum_url(@patient)
   rescue ActiveRecord::RecordInvalid => e
     flash[:notice] = e.to_s
     redirect_to patient_data_url
@@ -76,7 +76,7 @@ class PatientDataController < ApplicationController
   
   def destroy
     @patient.destroy
-    redirect_to :controller => 'patient_data', :action => 'index'
+    redirect_to patient_data_url
   end
 
   def edit_template_info
@@ -91,7 +91,7 @@ class PatientDataController < ApplicationController
     end
   end
 
-  def set_patient_data
+  def set_patient
     @patient = PatientData.find(params[:id])
   end
 

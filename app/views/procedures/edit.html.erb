@@ -6,7 +6,7 @@
 <% else
      procedure_div = "procedure#{@procedure.id}"
    end %>
-   <% remote_form_for(:procedure, @procedure, :url => patient_data_url_for(@patient, @procedure),
+   <% remote_form_for(:procedure, @procedure, :url => patient_url_for(@patient, @procedure),
                     :html => {:method => http_method(@procedure)},
                    :update => procedure_div, :name => "procedures_form") do |f| -%>
 <table>
