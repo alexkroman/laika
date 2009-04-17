@@ -10,7 +10,7 @@ class RegistrationInformationController < PatientDataChildController
     registration_information.create_person_attributes(params)
 
     render :partial  => 'show', :locals => {:registration_information => registration_information,
-                                            :patient_data => @patient}
+                                            :patient => @patient}
   end
 
   def update
@@ -18,7 +18,7 @@ class RegistrationInformationController < PatientDataChildController
     registration_information.update_attributes(params[:registration_information])
     registration_information.update_person_attributes(params)
     render :partial  => 'show', :locals => {:registration_information => registration_information,
-                                            :patient_data => @patient}
+                                            :patient => @patient}
   end
 
   def destroy
@@ -26,7 +26,7 @@ class RegistrationInformationController < PatientDataChildController
     registration_information.destroy
     
     render :partial  => 'show', :locals => {:registration_information =>  nil,
-                                               :patient_data => @patient}
+                                               :patient => @patient}
   end
   
 end

@@ -9,7 +9,7 @@ class SupportsController < PatientDataChildController
     @patient.support = support
     support.create_person_attributes(params)
     render :partial  => 'show', :locals => {:support =>  support,
-                                            :patient_data => @patient}
+                                            :patient => @patient}
   end
 
   def update
@@ -19,14 +19,14 @@ class SupportsController < PatientDataChildController
     support.update_person_attributes(params)
 
     render :partial  => 'show', :locals => {:support =>  support,
-                                            :patient_data => @patient}
+                                            :patient => @patient}
   end
 
   def destroy
     support = @patient.support
     support.destroy
     render :partial  => 'show', :locals => {:support =>  nil,
-                                            :patient_data => @patient}
+                                            :patient => @patient}
                                                 
   end
   

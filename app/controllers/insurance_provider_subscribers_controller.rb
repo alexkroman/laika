@@ -7,7 +7,7 @@ class InsuranceProviderSubscribersController < PatientDataChildController
 
     render :partial  => 'show', :locals => {
       :insurance_provider_subscriber => insurance_provider_subscriber,
-      :patient_data                  => @patient
+      :patient                  => @patient
     }
   end
 

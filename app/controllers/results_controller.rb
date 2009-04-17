@@ -33,7 +33,7 @@ class ResultsController < PatientDataChildController
     result = @patient.all_results.find(params[:id])
     result.update_attributes(params[:result])
     render :partial  => 'show', :locals => {:result => result,
-                                            :patient_data => @patient}
+                                            :patient => @patient}
   end
 
   def destroy

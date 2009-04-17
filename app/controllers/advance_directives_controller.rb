@@ -8,7 +8,7 @@ class AdvanceDirectivesController < PatientDataChildController
     @patient.advance_directive = advance_directive
     advance_directive.create_person_attributes(params)
     
-    render :partial  => 'show', :locals => {:advance_directive => advance_directive, :patient_data => @patient}
+    render :partial  => 'show', :locals => {:advance_directive => advance_directive, :patient => @patient}
   end
 
   def update
@@ -16,11 +16,11 @@ class AdvanceDirectivesController < PatientDataChildController
     advance_directive.update_attributes(params[:advance_directive])
     advance_directive.update_person_attributes(params)
     
-    render :partial  => 'show', :locals => {:advance_directive => advance_directive, :patient_data => @patient}
+    render :partial  => 'show', :locals => {:advance_directive => advance_directive, :patient => @patient}
   end
 
   def destroy
     @patient.advance_directive.destroy
-    render :partial  => 'show', :locals => {:advance_directive => nil, :patient_data => @patient}
+    render :partial  => 'show', :locals => {:advance_directive => nil, :patient => @patient}
   end
 end

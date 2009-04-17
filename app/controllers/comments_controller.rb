@@ -5,13 +5,13 @@ class CommentsController < PatientDataChildController
     @comment.address = Address.new
     @comment.telecom = Telecom.new
     render :partial  => 'edit', :locals => {:comment => @comment,
-           :patient_data => @patient}
+           :patient => @patient}
   end
   
   def edit
     @comment = @patient.comments.find(params[:id])
     render :partial  => 'edit', :locals => {:comment => @comment,
-                                            :patient_data => @patient}
+                                            :patient => @patient}
   end
   
   def create
@@ -19,7 +19,7 @@ class CommentsController < PatientDataChildController
     @comment .create_person_attributes(params)
     @patient.comments << @comment
     render :partial  => 'create', :locals => {:comment => @comment,
-                                              :patient_data => @patient}
+                                              :patient => @patient}
   end
   
   def update
@@ -28,7 +28,7 @@ class CommentsController < PatientDataChildController
     @comment.update_attributes(params[:comment])
     
     render :partial  => 'show', :locals => {:comment => @comment,
-                                            :patient_data => @patient}
+                                            :patient => @patient}
   end
   
   def destroy

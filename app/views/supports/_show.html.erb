@@ -25,11 +25,11 @@
     <td>
     <span>
       <%= link_to_remote 'Edit', :update => 'supportContainer', 
-                                 :url => edit_patient_datum_support_path(patient_data),
+                                 :url => edit_patient_datum_support_path(patient),
                                  :method => 'get' %>
     </span>
     <span> <%= link_to_remote 'Remove', :update => 'supportContainer', 
-                                 :url => patient_datum_support_path(patient_data),
+                                 :url => patient_datum_support_path(patient),
                                  :confirm=>"Are you sure you wish to remove this support?",
                                  :method => 'delete' %>
     </span>
@@ -39,7 +39,7 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">There is no support data for this test case</td>
     <td><%= link_to_remote 'Create some', :update => 'supportContainer',
-                                      :url => new_patient_datum_support_path(patient_data), :method => 'get' %>
+                                      :url => new_patient_datum_support_path(patient), :method => 'get' %>
     </td>
   </tr>
 <% end -%>

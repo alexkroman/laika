@@ -9,7 +9,7 @@ class AllergiesController < PatientDataChildController
     super
     
     if @patient.allergies.empty?
-      render :partial => "no_known_allergies_link", :locals=>{:patient_data=>@patient}
+      render :partial => "no_known_allergies_link", :locals=>{:patient=>@patient}
     end
   end
 end
