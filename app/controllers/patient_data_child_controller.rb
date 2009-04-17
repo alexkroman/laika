@@ -25,7 +25,7 @@ class PatientDataChildController < ApplicationController
     instance.send(:update_attributes, params[param_key])
 
     render :partial => 'show', :locals => {
-      :patient_data => @patient,
+      :patient => @patient,
       param_key     => instance
     }
   end

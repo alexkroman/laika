@@ -25,6 +25,6 @@ class EncountersController < PatientDataChildController
     encounter.update_attributes(params[:encounter])
     encounter.update_person_attributes(params)
     render :partial  => 'show', :locals => {:encounter => encounter,
-                                            :patient_data => @patient}
+                                            :patient => @patient}
   end
 end

@@ -1,6 +1,6 @@
 <!-- Start Personal Information Module -->
 <% remote_form_for(:registration_information, 
-                   :url => patient_datum_registration_information_path(patient_data),
+                   :url => patient_datum_registration_information_path(patient),
                    :update => RegistrationInformation.class_name + 'Container',  
                    :method => http_method(registration_information)) do |form| %>
 <h5>Person Information</h5>

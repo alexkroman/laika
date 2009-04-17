@@ -26,12 +26,12 @@
     <td>
     <span>
       <%= link_to_remote 'Edit', :update => "procedure#{procedure.id}",
-                                 :url => edit_patient_datum_procedure_path(patient_data, procedure),
+                                 :url => edit_patient_datum_procedure_path(patient, procedure),
                                  :method => 'get' %>
     </span>
     <span>
       <%= link_to_remote 'Remove', :update => "procedure#{procedure.id}",
-                                 :url => patient_datum_procedure_path(patient_data, procedure),
+                                 :url => patient_datum_procedure_path(patient, procedure),
                                  :confirm=>"Are you sure you wish to remove this procedure?",
                                  :method => 'delete' %>
     </span>    

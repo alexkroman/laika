@@ -11,6 +11,6 @@ class ProvidersController < PatientDataChildController
     @provider.update_attributes(params[:provider])
     @provider.update_person_attributes(params)
     render :partial  => 'show', :locals => {:provider =>  @provider,
-                                            :patient_data => @patient}
+                                            :patient => @patient}
   end
 end

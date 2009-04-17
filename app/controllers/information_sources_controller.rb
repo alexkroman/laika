@@ -19,7 +19,7 @@ class InformationSourcesController < PatientDataChildController
     @patient.information_source = information_source
     information_source.create_person_attributes(params)
     render :partial  => 'show', :locals => {:information_source => information_source,
-                                            :patient_data => @patient}
+                                            :patient => @patient}
   end
 
   def update
@@ -27,13 +27,13 @@ class InformationSourcesController < PatientDataChildController
     information_source.update_attributes(params[:information_source])
     information_source.update_person_attributes(params)
     render :partial  => 'show', :locals => {:information_source => information_source,
-                                            :patient_data => @patient}
+                                            :patient => @patient}
   end
 
   def destroy
     information_source = @patient.information_source
     information_source.destroy
     render :partial  => 'show', :locals => {:information_source => nil,
-                                 :patient_data => @patient}
+                                 :patient => @patient}
   end
 end
