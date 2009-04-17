@@ -1,23 +1,26 @@
 class Patient < ActiveRecord::Base
-  has_c32_component :languages
-  has_c32_component :providers
-  has_c32_component :medications
-  has_c32_component :allergies
-  has_c32_component :insurance_providers
-  has_c32_component :conditions
-  has_c32_component :vital_signs
-  has_c32_component :results
-  has_c32_component :immunizations
-  has_c32_component :encounters
-  has_c32_component :procedures
-  has_c32_component :medical_equipments
-  has_c32_component :patient_identifiers
+  has_many_c32 :languages
+  has_many_c32 :providers
+  has_many_c32 :medications
+  has_many_c32 :allergies
+  has_many_c32 :insurance_providers
+  has_many_c32 :conditions
+  has_many_c32 :vital_signs
+  has_many_c32 :results
+  has_many_c32 :immunizations
+  has_many_c32 :encounters
+  has_many_c32 :procedures
+  has_many_c32 :medical_equipments
+  has_many_c32 :patient_identifiers
 
-  has_one    :registration_information, :foreign_key => 'patient_data_id', :dependent => :destroy
-  has_one    :support, :foreign_key => 'patient_data_id', :dependent => :destroy
-  has_one    :information_source, :foreign_key => 'patient_data_id', :dependent => :destroy
-  has_one    :advance_directive, :foreign_key => 'patient_data_id', :dependent => :destroy
-  has_many   :all_results, :foreign_key => 'patient_data_id', :class_name => 'AbstractResult'
+  has_one_c32 :registration_information
+  has_one_c32 :support
+  has_one_c32 :information_source
+  has_one_c32 :advance_directive
+
+  # This is the aggregate of results and vital_signs, we don't destroy
+  # dependent because results and vital_signs already do that.
+  has_many :all_results, :class_name => 'AbstractResult'
 
   # these are used in the insurance_provider_* controllers
   def insurance_provider_guarantors

@@ -11,7 +11,7 @@ module InsuranceProviderChild
       named_scope :by_patient, lambda { |patient|
         {
           :include => :insurance_provider,
-          :conditions => ['insurance_providers.patient_data_id = ?', patient.id]
+          :conditions => ['insurance_providers.patient_id = ?', patient.id]
         }
       }
       after_save { |r| r.insurance_provider.andand.patient.andand.update_attributes(:updated_at => DateTime.now) }

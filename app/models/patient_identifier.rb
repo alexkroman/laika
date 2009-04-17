@@ -8,7 +8,7 @@ class PatientIdentifier < ActiveRecord::Base
 
   def requirements
     {
-      :patient_data_id => :required,
+      :patient_identifier => :required,
       :identifier_domain_identifier => :required,
     }
   end
