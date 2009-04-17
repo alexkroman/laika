@@ -1,5 +1,5 @@
 require_dependency 'sort_order'
 
-module PatientDataHelper
+module PatientsHelper
   include SortOrderHelper
 end

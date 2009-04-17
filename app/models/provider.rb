@@ -5,7 +5,7 @@ class Provider < ActiveRecord::Base
   belongs_to :provider_type
   belongs_to :provider_role
 
-  include PatientDataChild
+  include PatientChild
   include PersonLike
   include Commentable
 

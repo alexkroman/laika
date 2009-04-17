@@ -1,4 +1,4 @@
-class InsuranceProvidersController < PatientDataChildController
+class InsuranceProvidersController < PatientChildController
 
   def new
 

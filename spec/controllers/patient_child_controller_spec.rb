@@ -1,13 +1,13 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-class TestPatientDataChildrenController < PatientDataChildController
+class TestPatientChildrenController < PatientChildController
   def hiworld
     render :text => 'hiworld'
   end
 end
 
-describe TestPatientDataChildrenController do
-  describe "as a subclass of PatientDataController" do
+describe TestPatientChildrenController do
+  describe "as a subclass of PatientChildController" do
     before(:each) do
       controller.stub!(:current_user).and_return(mock_model(User))
     end
@@ -24,15 +24,15 @@ describe TestPatientDataChildrenController do
     end
 
     it "should determine the association based on controller name" do
-      controller.send(:association_name).should == 'test_patient_data_children'
+      controller.send(:association_name).should == 'test_patient_children'
     end
 
     it "should determine the param key based on controller name" do
-      controller.send(:param_key).should == :test_patient_data_child
+      controller.send(:param_key).should == :test_patient_child
     end
 
     it "should determine the instance var based on controller name" do
-      controller.send(:instance_var_name).should == '@test_patient_data_child'
+      controller.send(:instance_var_name).should == '@test_patient_child'
     end
 
   end

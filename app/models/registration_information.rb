@@ -8,7 +8,7 @@ class RegistrationInformation < ActiveRecord::Base
   belongs_to :gender
   belongs_to :religion
 
-  include PatientDataChild
+  include PatientChild
   include PersonLike
 
   def requirements

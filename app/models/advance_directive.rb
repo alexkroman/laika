@@ -5,7 +5,7 @@ class AdvanceDirective < ActiveRecord::Base
   belongs_to :advance_directive_type
   belongs_to :advance_directive_status_code
 
-  include PatientDataChild
+  include PatientChild
   include PersonLike
   include Commentable
   

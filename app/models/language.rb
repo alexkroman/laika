@@ -4,7 +4,7 @@ class Language < ActiveRecord::Base
   belongs_to :iso_language
   belongs_to :language_ability_mode
 
-  include PatientDataChild
+  include PatientChild
 
   def requirements
     {

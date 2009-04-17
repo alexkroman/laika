@@ -2,7 +2,7 @@ class InformationSource < ActiveRecord::Base
 
   strip_attributes!
 
-  include PatientDataChild
+  include PatientChild
   include PersonLike
   
   def requirements

@@ -2,7 +2,7 @@
 # This controller is an abstract class that provides basic CRUD operations for
 # patient data sections. Individual actions can be overridden as needed.
 #
-class PatientDataChildController < ApplicationController
+class PatientChildController < ApplicationController
   before_filter :find_patient
   layout false
 

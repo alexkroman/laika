@@ -7,7 +7,7 @@ class Allergy < ActiveRecord::Base
   belongs_to :allergy_status_code
   belongs_to :allergy_type_code
 
-  include PatientDataChild
+  include PatientChild
   include Commentable
 
   def requirements

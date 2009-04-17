@@ -1,7 +1,7 @@
 class Procedure < ActiveRecord::Base
   strip_attributes!
 
-  include PatientDataChild
+  include PatientChild
 
   def requirements
     {

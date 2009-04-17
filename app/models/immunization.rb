@@ -5,7 +5,7 @@ class Immunization < ActiveRecord::Base
   belongs_to :vaccine
   belongs_to :no_immunization_reason
 
-  include PatientDataChild
+  include PatientChild
   include Commentable
 
   def requirements

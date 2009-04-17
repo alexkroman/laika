@@ -5,7 +5,7 @@ class Medication < ActiveRecord::Base
   belongs_to :medication_type
   belongs_to :code_system
 
-  include PatientDataChild
+  include PatientChild
   include Commentable
 
   def requirements

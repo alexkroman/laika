@@ -1,7 +1,7 @@
 #
-# This module is included by models that represent a subsection of a patient_data record.
+# This module is included by models that represent a subsection of a patient record.
 #
-module PatientDataChild
+module PatientChild
   def self.included(base)
     base.class_eval do
       belongs_to :patient, :foreign_key => :patient_data_id, :class_name => 'Patient'

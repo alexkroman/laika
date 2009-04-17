@@ -2,7 +2,7 @@ class PatientIdentifier < ActiveRecord::Base
 
   strip_attributes!
 
-  include PatientDataChild
+  include PatientChild
 
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
 

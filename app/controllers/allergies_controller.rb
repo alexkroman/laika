@@ -1,4 +1,4 @@
-class AllergiesController < PatientDataChildController
+class AllergiesController < PatientChildController
 
   def create
     super

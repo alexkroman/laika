@@ -2,7 +2,7 @@
 # Results are both AbstractResults, this works out pretty cleanly. The only place where
 # things get tricky is in the create method. Other than that, they can both
 # be treated as results and reuse the same views.
-class ResultsController < PatientDataChildController
+class ResultsController < PatientChildController
 
   def new
     @is_vital_sign = params[:is_vital_sign]
