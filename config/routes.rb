@@ -40,8 +40,6 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :news
 
-  map.resources :pix_patient_data
-
   map.root :controller => "vendor_test_plans"
   # The priority is based upon order of creation: first created -> highest priority.
 
