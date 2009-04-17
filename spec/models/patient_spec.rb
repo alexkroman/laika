@@ -1,10 +1,10 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 require "lib/validators/c32_validator"
 
-describe PatientData do
-  fixtures :patient_data, :registration_information, :person_names, :addresses, :telecoms, :genders
+describe Patient do
+  fixtures :patients, :registration_information, :person_names, :addresses, :telecoms, :genders
   before(:each) do
-     @patient = patient_data(:joe_smith) 
+     @patient = patients(:joe_smith) 
   end
 
   it "should require a name" do
@@ -35,7 +35,7 @@ describe PatientData do
   end
 end
 
-describe PatientData, "with built-in records" do
+describe Patient, "with built-in records" do
   fixtures %w[
 act_status_codes addresses advance_directive_status_codes advance_directives
 advance_directive_types adverse_event_types allergies allergy_status_codes
@@ -45,7 +45,7 @@ genders immunizations information_sources insurance_provider_guarantors
 insurance_provider_patients insurance_provider_subscribers insurance_providers
 insurance_types iso_countries iso_languages iso_states kinds language_ability_modes
 languages loinc_lab_codes marital_statuses medical_equipments medications
-medication_types no_immunization_reasons patient_data person_names problem_types
+medication_types no_immunization_reasons patients person_names problem_types
 procedures provider_roles providers provider_types races registration_information
 relationships religions abstract_results result_type_codes role_class_relationship_formal_types
 roles severity_terms supports telecoms user_roles users vaccines vendors zip_codes
@@ -53,15 +53,15 @@ roles severity_terms supports telecoms user_roles users vaccines vendors zip_cod
 
   [ :david_carter, :emily_jones, :jennifer_thompson, :theodore_smith, :joe_smith, :will_haynes ].each do |patient|
     it "should round-trip validate #{patient} without errors or warnings" do
-      record = patient_data(patient)
+      record = patients(patient)
       document = REXML::Document.new(record.to_c32)
       record.validate_c32(document).should be_empty
     end
   end
 
   it "should validate different patients with errors" do
-    patient1 = patient_data(:david_carter)
-    patient2 = patient_data(:joe_smith)
+    patient1 = patients(:david_carter)
+    patient2 = patients(:joe_smith)
     document1 = REXML::Document.new(patient1.to_c32)
     document2 = REXML::Document.new(patient2.to_c32)
 
@@ -76,14 +76,14 @@ roles severity_terms supports telecoms user_roles users vaccines vendors zip_cod
 
   it "should fail to validate when medication entries differ" do
     pending "SF ticket 2101046"
-    record = patient_data(:jennifer_thompson)
+    record = patients(:jennifer_thompson)
     document = REXML::Document.new(record.to_c32)
     record.medications.clear
     record.validate_c32(document).should_not be_empty
   end
 
   it "should validate identical patients with 3 conditions" do
-    record = patient_data(:joe_smith)
+    record = patients(:joe_smith)
     record.conditions.clear
     3.times do |i|
       record.conditions << Condition.new(
@@ -97,7 +97,7 @@ roles severity_terms supports telecoms user_roles users vaccines vendors zip_cod
   end
 
   it "should refresh updated_at when a child record is updated" do
-    record = patient_data(:david_carter)
+    record = patients(:david_carter)
     old_updated_at = record.updated_at
     record.conditions.first.update_attributes!(:free_text_name => 'something else')
     record.reload
@@ -108,7 +108,7 @@ roles severity_terms supports telecoms user_roles users vaccines vendors zip_cod
   describe "after a deep copy" do
 
     before do
-      @original = patient_data(:jennifer_thompson)
+      @original = patients(:jennifer_thompson)
       @copy = @original.clone
     end
 

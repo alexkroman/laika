@@ -9,7 +9,7 @@ describe "results/edit.html.erb" do
 
   describe "with an existing result (results/edit)" do
     before do
-      @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
+      @patient = Patient.create!(:name => 'foo', :user => User.find(:first))
       @result = @patient.results.create!
       assigns[:patient] = @patient
       assigns[:result] = @result
@@ -25,7 +25,7 @@ describe "results/edit.html.erb" do
 
   describe "without an existing result (results/new)" do
     before do
-      @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
+      @patient = Patient.create!(:name => 'foo', :user => User.find(:first))
       @result = Result.new
       assigns[:patient] = @patient
       assigns[:result] = @result

@@ -5,7 +5,7 @@ describe "vendor_test_plans/index.html.erb" do
 
   before(:each) do
     @controller.stub!(:sort_spec).and_return(nil)
-    @patient = PatientData.create(:name => 'xfoox',
+    @patient = Patient.create(:name => 'xfoox',
                                   :user => users(:alex_kroman))
     assigns[:errors] = {}
     assigns[:warnings] = {}

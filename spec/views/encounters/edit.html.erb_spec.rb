@@ -5,7 +5,7 @@ describe "encounters/edit.html.erb" do
 
   describe "with an existing encounter (encounters/edit)" do
     before do
-      @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
+      @patient = Patient.create!(:name => 'foo', :user => User.find(:first))
       @encounter = @patient.encounters.create!
       @encounter.person_name = PersonName.new
       @encounter.address = Address.new
@@ -24,7 +24,7 @@ describe "encounters/edit.html.erb" do
 
   describe "without an existing encounter (encounters/new)" do
     before do
-      @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
+      @patient = Patient.create!(:name => 'foo', :user => User.find(:first))
       @encounter = Encounter.new
       @encounter.person_name = PersonName.new
       @encounter.address = Address.new

@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   def destroy
     if not current_user.administrator?
       flash[:notice] = "Only administrators are permitted to perform this action."
-      redirect_to patient_data_url
+      redirect_to patients_url
     elsif current_user == @user
       flash[:notice] = "You cannot delete your own account."
       redirect_to :action => 'index'

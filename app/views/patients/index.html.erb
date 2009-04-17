@@ -42,7 +42,7 @@
 <div class="column span-8 box">
   <h3>Create a new patient</h3>
   <br />
-  <% form_for(PatientData.new) do |f| %>
+  <% form_for(Patient.new) do |f| %>
     <label for="name">Enter the patient's full name</label>
     <br />
     <%= f.text_field :name %>

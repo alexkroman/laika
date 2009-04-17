@@ -1,12 +1,12 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe ConditionsController do
-  fixtures :patient_data, :conditions
+  fixtures :patients, :conditions
 
   before do
     @user = stub(:user)
     controller.stub!(:current_user).and_return(@user)
-    @patient = patient_data(:joe_smith)
+    @patient = patients(:joe_smith)
   end
 
   it "should assign @condition on get new" do

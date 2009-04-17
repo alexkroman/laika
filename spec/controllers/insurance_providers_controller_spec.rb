@@ -1,12 +1,12 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe InsuranceProvidersController do
-  fixtures :patient_data, :insurance_providers
+  fixtures :patients, :insurance_providers
 
   before do
     @user = stub(:user)
     controller.stub!(:current_user).and_return(@user)
-    @patient = patient_data(:joe_smith)
+    @patient = patients(:joe_smith)
   end
 
   it "should assign @insurance_provider on get new" do

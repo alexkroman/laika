@@ -1,12 +1,12 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe ResultsController do
-  fixtures :patient_data, :abstract_results
+  fixtures :patients, :abstract_results
 
   before do
     @user = stub(:user)
     controller.stub!(:current_user).and_return(@user)
-    @patient = patient_data(:jennifer_thompson)
+    @patient = patients(:jennifer_thompson)
   end
 
   it "should assign @result on get new" do

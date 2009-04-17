@@ -7,7 +7,7 @@ describe ClinicalDocumentsController do
   end
 
   it "should not create clinical documents when no file upload data is provided" do
-    PatientData.stub!(:find).and_return(PatientData.new)
+    Patient.stub!(:find).and_return(Patient.new)
     vtp = VendorTestPlan.create
     post :create, :vendor_test_plan_id => vtp.id, :clinical_document => { :uploaded_data => ''}
     vtp.reload

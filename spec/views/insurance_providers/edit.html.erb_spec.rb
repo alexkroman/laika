@@ -5,7 +5,7 @@ describe "insurance_providers/edit.html.erb" do
 
   describe "with an existing insurance_provider (insurance_providers/edit)" do
     before do
-      @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
+      @patient = Patient.create!(:name => 'foo', :user => User.find(:first))
       @insurance_provider = @patient.insurance_providers.create!
       @insurance_provider.insurance_provider_patient = InsuranceProviderPatient.new
       @insurance_provider_patient = @insurance_provider.insurance_provider_patient
@@ -30,7 +30,7 @@ describe "insurance_providers/edit.html.erb" do
 
   describe "without an existing insurance_provider (insurance_providers/new)" do
     before do
-      @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
+      @patient = Patient.create!(:name => 'foo', :user => User.find(:first))
       @insurance_provider = InsuranceProvider.new
       @insurance_provider.insurance_provider_patient = InsuranceProviderPatient.new
       @insurance_provider.insurance_provider_patient.person_name = PersonName.new

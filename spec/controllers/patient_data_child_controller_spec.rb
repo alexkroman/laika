@@ -14,11 +14,11 @@ describe TestPatientDataChildrenController do
 
     it "should redirect when there is no patient_datum_id parameter" do
       get :hiworld
-      response.should redirect_to(patient_data_url)
+      response.should redirect_to(patients_url)
     end
 
     it "should not redirect when there is a patient_datum_id parameter" do
-      PatientData.stub!(:find).and_return(mock_model(PatientData))
+      Patient.stub!(:find).and_return(mock_model(Patient))
       get :hiworld, :patient_datum_id => 1
       response.should be_success
     end

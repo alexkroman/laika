@@ -10,15 +10,15 @@ genders immunizations information_sources insurance_provider_guarantors
 insurance_provider_patients insurance_provider_subscribers insurance_providers
 insurance_types iso_countries iso_languages iso_states kinds language_ability_modes
 languages loinc_lab_codes marital_statuses medical_equipments medications
-medication_types no_immunization_reasons patient_data person_names problem_types
+medication_types no_immunization_reasons patients person_names problem_types
 procedures provider_roles providers provider_types races registration_information
 relationships religions abstract_results result_type_codes role_class_relationship_formal_types
 roles severity_terms supports telecoms user_roles users vaccines vendors zip_codes
   ]
 
   it "should render without errors" do
-    assigns[:patient] = patient_data(:joe_smith)
-    lambda { render "patient_data/show.html.erb" }.should_not raise_error
+    assigns[:patient] = patients(:joe_smith)
+    lambda { render "patients/show.html.erb" }.should_not raise_error
   end
 
 end

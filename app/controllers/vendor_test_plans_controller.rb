@@ -3,7 +3,7 @@ require_dependency 'sort_order'
 class VendorTestPlansController < ApplicationController
   page_title 'Laika Dashboard'
   include SortOrder
-  self.valid_sort_fields = %w[ created_at updated_at patient_data.name kinds.name ]
+  self.valid_sort_fields = %w[ created_at updated_at patients.name kinds.name ]
 
   # GET /vendor_test_plans
   # GET /vendor_test_plans.xml

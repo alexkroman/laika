@@ -19,7 +19,7 @@ describe Validation::Validator, "" do
   insurance_provider_patients insurance_provider_subscribers insurance_providers
   insurance_types iso_countries iso_languages iso_states kinds language_ability_modes
   languages loinc_lab_codes marital_statuses medical_equipments medications
-  medication_types no_immunization_reasons patient_data person_names problem_types
+  medication_types no_immunization_reasons patients person_names problem_types
   procedures provider_roles providers provider_types races registration_information
   relationships religions abstract_results result_type_codes role_class_relationship_formal_types
   roles severity_terms supports telecoms user_roles users vaccines vendors zip_codes vendor_test_plans
@@ -40,7 +40,7 @@ describe Validation::Validator, "" do
   
    [ :david_carter, :emily_jones, :jennifer_thompson, :theodore_smith, :joe_smith, :will_haynes ].each do |patient|
        it "should round-trip validate #{patient} without errors or warnings" do
-         record = patient_data(patient)
+         record = patients(patient)
          document = REXML::Document.new(record.to_c32)
          Validation.register_validator :C32, C32_CONTENT_VALIDAOTR
          Validation.register_validator :C32, C32_SCHEMA_VALIDATOR

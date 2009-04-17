@@ -6,8 +6,8 @@ describe PregnancyController do
   end
 
   it "should display the edit page" do
-    pd = stub_model PatientData
-    PatientData.stub!(:find).and_return(pd)
+    pd = stub_model Patient
+    Patient.stub!(:find).and_return(pd)
 
     get :edit, :patient_datum_id => 1
 
@@ -16,9 +16,9 @@ describe PregnancyController do
     response.layout.should be_nil
   end
 
-  it "should update patient_data with pregnancy on" do
-    pd = mock_model PatientData
-    PatientData.stub!(:find).and_return(pd)
+  it "should update patients with pregnancy on" do
+    pd = mock_model Patient
+    Patient.stub!(:find).and_return(pd)
 
     pd.should_receive(:pregnant=).with(true)
     pd.should_receive(:save!)
@@ -28,9 +28,9 @@ describe PregnancyController do
     assigns[:patient].should == pd
   end
 
-  it "should update patient_data with pregnancy off" do
-    pd = mock_model PatientData
-    PatientData.stub!(:find).and_return(pd)
+  it "should update patients with pregnancy off" do
+    pd = mock_model Patient
+    Patient.stub!(:find).and_return(pd)
 
     pd.should_receive(:pregnant=).with(false)
     pd.should_receive(:save!)
@@ -40,9 +40,9 @@ describe PregnancyController do
     assigns[:patient].should == pd
   end
 
-  it "should update patient_data with pregnancy nil" do
-    pd = mock_model PatientData
-    PatientData.stub!(:find).and_return(pd)
+  it "should update patients with pregnancy nil" do
+    pd = mock_model Patient
+    Patient.stub!(:find).and_return(pd)
 
     pd.should_receive(:pregnant=).with(nil)
     pd.should_receive(:save!)

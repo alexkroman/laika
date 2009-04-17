@@ -32,7 +32,7 @@ module Validators
            Language.send :include,LanguageC32Validation
            MedicalEquipment.send :include,MedicalEquipmentC32Validation
            Medication.send :include,MedicationC32Validation
-           PatientData.send :include,PatientDataC32Validation
+           Patient.send :include,PatientDataC32Validation
            PersonName.send :include,PersonNameC32Validation
            ProblemType.send :include,ProblemTypeC32Validation
            Procedure.send :include,ProcedureC32Validation

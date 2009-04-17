@@ -1,6 +1,6 @@
 class VendorTestPlan < ActiveRecord::Base
 
-  has_one :patient, :foreign_key => :vendor_test_plan_id, :class_name => 'PatientData', :dependent => :destroy
+  has_one :patient, :foreign_key => :vendor_test_plan_id, :class_name => 'Patient', :dependent => :destroy
   belongs_to :vendor
   belongs_to :kind
   belongs_to :user

@@ -5,7 +5,7 @@ describe "conditions/edit.html.erb" do
 
   describe "with an existing condition (conditions/edit)" do
     before do
-      @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
+      @patient = Patient.create!(:name => 'foo', :user => User.find(:first))
       @condition = @patient.conditions.create!
       assigns[:condition] = @condition
       assigns[:patient] = @patient
@@ -21,7 +21,7 @@ describe "conditions/edit.html.erb" do
 
   describe "without an existing condition (conditions/new)" do
     before do
-      @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
+      @patient = Patient.create!(:name => 'foo', :user => User.find(:first))
       @condition = Condition.new
       assigns[:condition] = @condition
       assigns[:patient] = @patient

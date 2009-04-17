@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe PatientDataController do
+describe PatientsController do
   fixtures :users
 
   before(:each) do
@@ -8,15 +8,15 @@ describe PatientDataController do
   end
 
   it "should create a named template" do
-    count = PatientData.count
+    count = Patient.count
     post :create, :patient => {:name => 'my awesome template'}
-    PatientData.count.should == count + 1
+    Patient.count.should == count + 1
   end
 
   it "should not permit creation of a nameless template" do
     post :create, :patient => {:name => ''}
     flash[:notice].should match(/validation failed/i)
-    response.should redirect_to patient_data_url
+    response.should redirect_to patients_url
   end
 
   it "should return xml content as downloadable" do
@@ -24,7 +24,7 @@ describe PatientDataController do
     pd_mock.stub!(:to_c32).and_return('<ClinicalDocument/>')
     pd_mock.stub!(:vendor_test_plan_id).and_return(false)
     pd_mock.stub!(:id).and_return(7)
-    PatientData.stub!(:find).and_return(pd_mock)
+    Patient.stub!(:find).and_return(pd_mock)
     get :show, :id => 1, :format => 'xml'
     response.headers['type'].should == 'application/x-download'
   end
@@ -34,13 +34,13 @@ describe PatientDataController do
     pd_mock.should_receive(:to_c32).with(Builder::XmlMarkup.new(:indent => 2).instruct!).and_return("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<ClinicalDocument/>")
     pd_mock.stub!(:vendor_test_plan_id).and_return(false)
     pd_mock.stub!(:id).and_return(1)
-    PatientData.stub!(:find).and_return(pd_mock)
+    Patient.stub!(:find).and_return(pd_mock)
     get :show, :id => 1, :format => 'xml'
     response.should be_success
   end
 
   it "should update template name" do
-    template = PatientData.create!(:name => 'Me', :user => users(:alex_kroman))
+    template = Patient.create!(:name => 'Me', :user => users(:alex_kroman))
     put :update, :id => template.id, :patient => { :name => 'You' }
     template.reload
     template.name.should == 'You'

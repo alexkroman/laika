@@ -16,7 +16,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :users
 
-  map.resources(:patient_data, 
+  map.resources(:patients,
                 :has_one  => [:registration_information, :support, :information_source, :advance_directive],
                 :has_many => [:languages, :providers, :insurance_providers, 
                               :insurance_provider_patients, :insurance_provider_subscribers, 
@@ -24,8 +24,8 @@ ActionController::Routing::Routes.draw do |map|
                               :comments, :results, :immunizations, 
                               :encounters, :procedures, :medical_equipments, :patient_identifiers],
                 :member   => {:set_no_known_allergies => :post, :checklist => :get, :edit_template_info => :get},
-                :singular => :patient_datum) do |patient_data|
-    patient_data.resources :vital_signs, :controller => 'results'
+                :singular => :patient_datum) do |patients|
+    patients.resources :vital_signs, :controller => 'results'
   end
 
   map.with_options :controller => 'xds_patients' do |xds_patients|

@@ -5,7 +5,7 @@ describe "patient_identifiers/edit.html.erb" do
 
   describe "with an existing patient_identifier (patient_identifiers/edit)" do
     before do
-      @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
+      @patient = Patient.create!(:name => 'foo', :user => User.find(:first))
       @patient_identifier = @patient.patient_identifiers.create!
       assigns[:patient] = @patient
       assigns[:patient_identifier] = @patient_identifier
@@ -22,7 +22,7 @@ describe "patient_identifiers/edit.html.erb" do
 
   describe "without an existing patient_identifier (patient_identifiers/new)" do
     before do
-      @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
+      @patient = Patient.create!(:name => 'foo', :user => User.find(:first))
       @patient_identifier = PatientIdentifier.new
       assigns[:patient] = @patient
       assigns[:patient_identifier] = @patient_identifier

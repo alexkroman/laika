@@ -5,7 +5,7 @@ describe "immunizations/edit.html.erb" do
 
   describe "with an existing immunization (immunizations/edit)" do
     before do
-      @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
+      @patient = Patient.create!(:name => 'foo', :user => User.find(:first))
       @immunization = @patient.immunizations.create!
       assigns[:immunization] = @immunization
       assigns[:patient] = @patient
@@ -21,7 +21,7 @@ describe "immunizations/edit.html.erb" do
 
   describe "without an existing immunization (immunizations/new)" do
     before do
-      @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
+      @patient = Patient.create!(:name => 'foo', :user => User.find(:first))
       @immunization = Immunization.new
       assigns[:immunization] = @immunization
       assigns[:patient] = @patient

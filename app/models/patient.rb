@@ -1,4 +1,4 @@
-class PatientData < ActiveRecord::Base
+class Patient < ActiveRecord::Base
   has_c32_component :languages
   has_c32_component :providers
   has_c32_component :medications
@@ -13,11 +13,11 @@ class PatientData < ActiveRecord::Base
   has_c32_component :medical_equipments
   has_c32_component :patient_identifiers
 
-  has_one    :registration_information, :dependent => :destroy
-  has_one    :support, :dependent => :destroy
-  has_one    :information_source, :dependent => :destroy
-  has_one    :advance_directive, :dependent => :destroy
-  has_many   :all_results, :class_name => 'AbstractResult'
+  has_one    :registration_information, :foreign_key => 'patient_data_id', :dependent => :destroy
+  has_one    :support, :foreign_key => 'patient_data_id', :dependent => :destroy
+  has_one    :information_source, :foreign_key => 'patient_data_id', :dependent => :destroy
+  has_one    :advance_directive, :foreign_key => 'patient_data_id', :dependent => :destroy
+  has_many   :all_results, :foreign_key => 'patient_data_id', :class_name => 'AbstractResult'
 
   # these are used in the insurance_provider_* controllers
   def insurance_provider_guarantors

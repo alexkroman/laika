@@ -1,7 +1,7 @@
 class TestPlanManagerController < ApplicationController
   def assign_patient
 
-    patient = PatientData.find(params[:pd_id]).clone
+    patient = Patient.find(params[:pd_id]).clone
 
     # find the associated meta-data
     test_plan = params[:vendor_test_plan]

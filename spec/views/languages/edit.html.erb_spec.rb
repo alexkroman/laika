@@ -5,7 +5,7 @@ describe "languages/edit.html.erb" do
 
   describe "with an existing language (languages/edit)" do
     before do
-      @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
+      @patient = Patient.create!(:name => 'foo', :user => User.find(:first))
       @language = @patient.languages.create!
       assigns[:language] = @language
       assigns[:patient]  = @patient
@@ -21,7 +21,7 @@ describe "languages/edit.html.erb" do
 
   describe "without an existing language (languages/new)" do
     before do
-      @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
+      @patient = Patient.create!(:name => 'foo', :user => User.find(:first))
       @language = Language.new
       assigns[:language] = @language
       assigns[:patient]  = @patient

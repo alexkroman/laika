@@ -13,9 +13,9 @@ describe Commentable do
   # Since this is an activerecord extension, I'm using an exsting model type.
   # We're only testing commentable functionality here, not immunization.
   describe "with an example immunization" do
-    fixtures :patient_data
+    fixtures :patients
     before do
-      @patient = PatientData.first
+      @patient = Patient.first
       @immunization = @patient.immunizations.create
       @comment = @immunization.create_comment(:text => 'yo dawg.')
     end

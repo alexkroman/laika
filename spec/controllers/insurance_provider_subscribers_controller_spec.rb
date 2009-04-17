@@ -1,12 +1,12 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe InsuranceProviderSubscribersController do
-  fixtures :patient_data, :insurance_providers, :insurance_provider_subscribers
+  fixtures :patients, :insurance_providers, :insurance_provider_subscribers
 
   before do
     @user = stub(:user)
     controller.stub!(:current_user).and_return(@user)
-    @patient = patient_data(:joe_smith)
+    @patient = patients(:joe_smith)
   end
 
   it "should render edit template on get edit" do

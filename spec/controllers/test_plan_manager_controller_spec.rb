@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe TestPlanManagerController do
-  fixtures :patient_data, :vendors, :users, :kinds, :person_names, :addresses
+  fixtures :patients, :vendors, :users, :kinds, :person_names, :addresses
 
   describe "operated by a non-admin" do
     before do
@@ -11,7 +11,7 @@ describe TestPlanManagerController do
     end
 
     it "should retain the previous vendor and kind selection" do
-      patient = patient_data(:joe_smith)
+      patient = patients(:joe_smith)
       vendor = Vendor.find :first
       kind = Kind.find :first
       controller.send( :last_selected_kind_id=,   nil)
@@ -24,7 +24,7 @@ describe TestPlanManagerController do
     end
 
     it "should auto-assign current user" do
-      patient = patient_data(:joe_smith)
+      patient = patients(:joe_smith)
       vendor = Vendor.find :first
       kind = Kind.find :first
 
@@ -35,7 +35,7 @@ describe TestPlanManagerController do
 
     it "should not assign selected user" do
       other = users(:rob_dingwell)
-      patient = patient_data(:joe_smith)
+      patient = patients(:joe_smith)
       vendor = Vendor.find :first
       kind = Kind.find :first
 
@@ -55,7 +55,7 @@ describe TestPlanManagerController do
 
     it "should assign selected user" do
       other = users(:rob_dingwell)
-      patient = patient_data(:joe_smith)
+      patient = patients(:joe_smith)
       vendor = Vendor.find :first
       kind = Kind.find :first
 

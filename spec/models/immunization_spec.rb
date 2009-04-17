@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Immunization, "it can generate a valid C32 representation of itself" do
-  fixtures :immunizations, :no_immunization_reasons, :patient_data
+  fixtures :immunizations, :no_immunization_reasons, :patients
   
   before(:each) do
     @im = immunizations(:emily_jones_immunization)

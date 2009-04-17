@@ -5,7 +5,7 @@ describe "medical_equipment/edit.html.erb" do
 
   describe "with an existing medical_equipment (medical_equipments/edit)" do
     before do
-      @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
+      @patient = Patient.create!(:name => 'foo', :user => User.find(:first))
       @medical_equipment = @patient.medical_equipments.create!
       assigns[:medical_equipment] = @medical_equipment
       assigns[:patient] = @patient
@@ -21,7 +21,7 @@ describe "medical_equipment/edit.html.erb" do
 
   describe "without an existing medical_equipment (medical_equipments/new)" do
     before do
-      @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
+      @patient = Patient.create!(:name => 'foo', :user => User.find(:first))
       @medical_equipment = MedicalEquipment.new
       assigns[:medical_equipment] = @medical_equipment
       assigns[:patient] = @patient
