@@ -9,12 +9,12 @@ describe PatientDataController do
 
   it "should create a named template" do
     count = PatientData.count
-    post :create, :patient_data => {:name => 'my awesome template'}
+    post :create, :patient => {:name => 'my awesome template'}
     PatientData.count.should == count + 1
   end
 
   it "should not permit creation of a nameless template" do
-    post :create, :patient_data => {:name => ''}
+    post :create, :patient => {:name => ''}
     flash[:notice].should match(/validation failed/i)
     response.should redirect_to patient_data_url
   end
@@ -41,7 +41,7 @@ describe PatientDataController do
 
   it "should update template name" do
     template = PatientData.create!(:name => 'Me', :user => users(:alex_kroman))
-    put :update, :id => template.id, :patient_data => { :name => 'You' }
+    put :update, :id => template.id, :patient => { :name => 'You' }
     template.reload
     template.name.should == 'You'
   end

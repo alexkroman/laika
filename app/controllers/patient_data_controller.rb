@@ -28,7 +28,7 @@ class PatientDataController < ApplicationController
   end
 
   def create
-    @patient = PatientData.new(params[:patient_data])
+    @patient = PatientData.new(params[:patient])
     @patient.user = current_user
     @patient.save!
     redirect_to patient_datum_url(@patient)
@@ -84,7 +84,7 @@ class PatientDataController < ApplicationController
   end
 
   def update
-    if @patient.update_attributes(params[:patient_data])
+    if @patient.update_attributes(params[:patient])
       render :partial => 'template_info'
     else
       render :action => 'edit_template_info', :layout => false
