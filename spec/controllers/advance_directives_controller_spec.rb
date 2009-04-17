@@ -10,57 +10,57 @@ describe AdvanceDirectivesController do
   end
 
   it "should render edit template on get new" do
-    get :new, :patient_datum_id => @patient.id.to_s
+    get :new, :patient_id => @patient.id.to_s
     response.should render_template('advance_directives/edit')
   end
 
   it "should assign @advance_directive on get new" do
-    get :new, :patient_datum_id => @patient.id.to_s
+    get :new, :patient_id => @patient.id.to_s
     assigns[:advance_directive].should be_new_record
   end
 
   it "should render edit template on get edit" do
-    get :edit, :patient_datum_id => @patient.id.to_s
+    get :edit, :patient_id => @patient.id.to_s
     response.should render_template('advance_directives/edit')
   end
 
   it "should assign @advance_directive on get edit" do
-    get :edit, :patient_datum_id => @patient.id.to_s
+    get :edit, :patient_id => @patient.id.to_s
     assigns[:advance_directive].should == @patient.advance_directive
   end
 
   it "should render show partial on post create" do
-    post :create, :patient_datum_id => @patient.id.to_s
+    post :create, :patient_id => @patient.id.to_s
     response.should render_template('advance_directives/_show')
   end
 
   it "should not assign @advance_directive on post create" do
-    post :create, :patient_datum_id => @patient.id.to_s
+    post :create, :patient_id => @patient.id.to_s
     assigns[:advance_directive].should be_nil
   end
 
   it "should render show partial on put update" do
-    put :update, :patient_datum_id => @patient.id.to_s
+    put :update, :patient_id => @patient.id.to_s
     response.should render_template('advance_directives/_show')
   end
 
   it "should not assign @advance_directive on put update" do
-    put :update, :patient_datum_id => @patient.id.to_s
+    put :update, :patient_id => @patient.id.to_s
     assigns[:advance_directive].should be_nil
   end
 
   it "should render show partial on delete destroy" do
-    delete :destroy, :patient_datum_id => @patient.id.to_s
+    delete :destroy, :patient_id => @patient.id.to_s
     response.should render_template('advance_directives/_show')
   end
 
   it "should not assign @advance_directive on delete destroy" do
-    delete :destroy, :patient_datum_id => @patient.id.to_s
+    delete :destroy, :patient_id => @patient.id.to_s
     assigns[:advance_directive].should be_nil
   end
 
   it "should unset @patient.advance_directive on delete destroy" do
-    delete :destroy, :patient_datum_id => @patient.id.to_s
+    delete :destroy, :patient_id => @patient.id.to_s
     @patient.reload
     @patient.advance_directive.should be_nil
   end

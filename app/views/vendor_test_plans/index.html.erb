@@ -18,7 +18,7 @@
           <% if vendor_test_plan.clinical_document%>
             <%= vendor_test_plan.patient.name %>
           <% else %>
-            <%= link_to h(vendor_test_plan.patient.name), patient_datum_url(vendor_test_plan.patient) %>
+            <%= link_to h(vendor_test_plan.patient.name), patient_url(vendor_test_plan.patient) %>
           <% end %>
         </td>
         <td>         

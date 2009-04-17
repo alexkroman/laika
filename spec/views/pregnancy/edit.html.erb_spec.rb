@@ -6,7 +6,7 @@ describe "pregnancy/edit.html.erb" do
 
     render "pregnancy/edit.html.erb"
 
-    response.should have_tag("form[action=/pregnancy/update?patient_datum_id=#{pd.id}]") do
+    response.should have_tag("form[action=/pregnancy/update?patient_id=#{pd.id}]") do
       with_tag 'input[type=checkbox][name=pregnant]'
     end
   end
@@ -16,7 +16,7 @@ describe "pregnancy/edit.html.erb" do
 
     render "pregnancy/edit.html.erb"
 
-    response.should have_tag("form[action=/pregnancy/update?patient_datum_id=#{pd.id}]") do
+    response.should have_tag("form[action=/pregnancy/update?patient_id=#{pd.id}]") do
       with_tag 'input[type=checkbox][name=pregnant][checked=true]'
     end
   end

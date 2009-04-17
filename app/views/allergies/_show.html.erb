@@ -40,13 +40,13 @@
     <td>
     <span>
       <%= link_to_remote 'Edit', :update => "allergy#{allergy.id}",
-                                 :url => edit_patient_datum_allergy_path(patient, allergy),
+                                 :url => edit_patient_allergy_path(patient, allergy),
                                  :method => 'get' %>
      </span>  
      
       <span>
       <%= link_to_remote 'Remove', :update => "allergy#{allergy.id}",
-                                 :url => patient_datum_allergy_path(patient, allergy),
+                                 :url => patient_allergy_path(patient, allergy),
                                  :confirm=>"Are you sure you wish to remove this allergy?",
                                  :method => 'delete' %>
      </span>

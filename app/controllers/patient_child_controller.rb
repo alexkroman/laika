@@ -57,8 +57,8 @@ class PatientChildController < ApplicationController
   end
 
   def find_patient
-    if params[:patient_datum_id]
-      @patient = Patient.find params[:patient_datum_id]
+    if params[:patient_id]
+      @patient = Patient.find params[:patient_id]
     end
     redirect_to patients_url unless @patient
   end

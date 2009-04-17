@@ -43,12 +43,12 @@
     <td>
       <span>
         <%= link_to_remote 'Edit', :update => 'personInformationContainer',
-                                   :url => edit_patient_datum_registration_information_path(patient),
+                                   :url => edit_patient_registration_information_path(patient),
                                    :method => 'get' %>
       </span>
       <span>
         <%= link_to_remote 'Remove', :update => 'personInformationContainer',
-                                     :url => patient_datum_registration_information_path(patient),
+                                     :url => patient_registration_information_path(patient),
                                      :method => 'delete' %>
       </span>
     </td>
@@ -57,7 +57,7 @@
   <tr class="darkzebra">
     <td class="lighttext">There is no registration data for this test case</td>
     <td><%= link_to_remote 'Create some', :update => 'personInformationContainer',
-                                          :url => new_patient_datum_registration_information_path(patient), :method => 'get' %>
+                                          :url => new_patient_registration_information_path(patient), :method => 'get' %>
     </td>
   </tr>
 <% end -%>

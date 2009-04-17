@@ -24,14 +24,14 @@ class PatientsController < ApplicationController
     @patient.randomize()
     @patient.user = current_user
     @patient.save!
-    redirect_to patient_datum_url(@patient)
+    redirect_to patient_url(@patient)
   end
 
   def create
     @patient = Patient.new(params[:patient])
     @patient.user = current_user
     @patient.save!
-    redirect_to patient_datum_url(@patient)
+    redirect_to patient_url(@patient)
   rescue ActiveRecord::RecordInvalid => e
     flash[:notice] = e.to_s
     redirect_to patients_url

@@ -44,13 +44,13 @@
   <td>
   <span>
     <%= link_to_remote 'Edit', :update => "result#{result.id}",
-                               :url => edit_patient_datum_result_path(patient, result, :is_vital_sign => @is_vital_sign),
+                               :url => edit_patient_result_path(patient, result, :is_vital_sign => @is_vital_sign),
                                :method => 'get' %>
     </span> 
     
    <span>
     <%= link_to_remote 'Remove', :update => "result#{result.id}",
-                               :url => patient_datum_result_path(patient, result),
+                               :url => patient_result_path(patient, result),
                                :method => 'delete' %>
     </span> 
   </td>

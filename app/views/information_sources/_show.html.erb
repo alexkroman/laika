@@ -19,12 +19,12 @@
     <td>
     <span>
       <%= link_to_remote 'Edit', :update => 'informationSourceContainer', 
-                                 :url => edit_patient_datum_information_source_path(patient),
+                                 :url => edit_patient_information_source_path(patient),
                                  :method => 'get' %>
     </span>
     <span>
       <%= link_to_remote 'Remove', :update => 'informationSourceContainer', 
-                                 :url => patient_datum_information_source_path(patient),
+                                 :url => patient_information_source_path(patient),
                                  :method => 'delete' %>
     </span>
     
@@ -34,7 +34,7 @@
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">There is no information source data for this test case</td>
     <td><%= link_to_remote 'Create some', :update => 'informationSourceContainer',
-                                          :url => new_patient_datum_information_source_path(patient), 
+                                          :url => new_patient_information_source_path(patient), 
                                           :method => 'get' %>
     </td>
   </tr>

@@ -13,7 +13,7 @@ describe "medical_equipment/edit.html.erb" do
 
     it "should render the edit form with method PUT" do
       render 'medical_equipments/edit'
-      response.should have_tag("form[action=#{patient_datum_medical_equipment_path(@patient,@medical_equipment)}]") do
+      response.should have_tag("form[action=#{patient_medical_equipment_path(@patient,@medical_equipment)}]") do
         with_tag "input[name=_method][value=put]"
       end
     end
@@ -29,7 +29,7 @@ describe "medical_equipment/edit.html.erb" do
 
     it "should render the edit form with method POST" do
       render 'medical_equipments/edit'
-      response.should have_tag("form[action=#{patient_datum_medical_equipments_path(@patient)}][method=post]") do
+      response.should have_tag("form[action=#{patient_medical_equipments_path(@patient)}][method=post]") do
         without_tag "input[name=_method][value=put]"
       end
     end

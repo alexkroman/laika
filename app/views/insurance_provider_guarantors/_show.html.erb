@@ -14,7 +14,7 @@
     <td>
     <span>
       <%= link_to_remote('Edit', :update => "insurance_provider_guarantor#{insurance_provider_guarantor.id}",
-                                 :url => edit_patient_datum_insurance_provider_guarantor_path(patient, insurance_provider_guarantor),
+                                 :url => edit_patient_insurance_provider_guarantor_path(patient, insurance_provider_guarantor),
                                  :method => 'get') unless insurance_provider_guarantor.new_record? %>
     </span>
     </td>
