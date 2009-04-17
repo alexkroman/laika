@@ -20,9 +20,9 @@ class AccountController < ApplicationController
       
       # Either direct to the Dashboard or the Library, depending on if the user has vendor test plans
       if current_user.vendor_test_plans.size == 0
-        redirect_to(:controller => '/patient_data', :action => 'index')
+        redirect_to patient_data_url
       else
-        redirect_to(:controller => '/vendor_test_plans', :action => 'index')
+        redirect_to vendor_test_plans_url
       end
       
     else
@@ -41,7 +41,7 @@ class AccountController < ApplicationController
     self.current_user = @user
     
     # user has no test plans on initial signup, go straight to patient data
-    redirect_to(:controller => '/patient_data', :action => 'index')
+    redirect_to patient_data_url
   rescue ActiveRecord::RecordInvalid
     render :action => 'signup'
   end
@@ -51,7 +51,7 @@ class AccountController < ApplicationController
     cookies.delete :auth_token
     reset_session
     flash[:notice] = "You have been logged out."
-    redirect_back_or_default(:controller => '/patient_data', :action => 'index')
+    redirect_back_or_default patient_data_url
   end
   
   def forgot_password

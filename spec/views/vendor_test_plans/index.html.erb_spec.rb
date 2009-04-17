@@ -5,15 +5,14 @@ describe "vendor_test_plans/index.html.erb" do
 
   before(:each) do
     @controller.stub!(:sort_spec).and_return(nil)
+    @patient = PatientData.create(:name => 'xfoox',
+                                  :user => users(:alex_kroman))
     assigns[:errors] = {}
     assigns[:warnings] = {}
   end
 
   it "should list a generate-and-format test plan with no clinical document" do
-    vtp = VendorTestPlan.create(
-      :kind => kinds(:generateAndFormat),
-      :patient_data => PatientData.create(:name => 'xfoox',
-                                          :user => users(:alex_kroman)))
+    vtp = VendorTestPlan.create!(:kind => kinds(:generateAndFormat), :patient => @patient)
     vendor = stub(:vendor, :public_id => 'xxxyyy')
     assigns[:vendors] = [vendor]
     assigns[:vendor_test_plans] = { vendor => [ vtp ] }
@@ -30,10 +29,7 @@ describe "vendor_test_plans/index.html.erb" do
   end
 
   it "should list a generate-and-format test plan with a validated clinical document" do
-    vtp = VendorTestPlan.create(
-      :kind => kinds(:generateAndFormat),
-      :patient_data => PatientData.create(:name => 'xfoox',
-                                          :user => users(:alex_kroman)))
+    vtp = VendorTestPlan.create!(:kind => kinds(:generateAndFormat), :patient => @patient)
     doc = ClinicalDocument.new
     doc.filename = 'xxx'
     doc.size = 1
@@ -58,10 +54,7 @@ describe "vendor_test_plans/index.html.erb" do
   end
 
   it "should list a generate-and-format test plan with an invalid clinical document" do
-    vtp = VendorTestPlan.create(
-      :kind => kinds(:generateAndFormat),
-      :patient_data => PatientData.create(:name => 'xfoox',
-                                          :user => users(:alex_kroman)))
+    vtp = VendorTestPlan.create!(:kind => kinds(:generateAndFormat), :patient => @patient)
     doc = ClinicalDocument.new
     doc.filename = 'xxx'
     doc.size = 1
@@ -88,10 +81,7 @@ describe "vendor_test_plans/index.html.erb" do
 
 
   it "should list a display-and-file test plan" do
-    vtp = VendorTestPlan.create(
-      :kind => kinds(:displayAndFile),
-      :patient_data => PatientData.create(:name => 'xfoox',
-                                          :user => users(:alex_kroman)))
+    vtp = VendorTestPlan.create!(:kind => kinds(:displayAndFile), :patient => @patient)
     vendor = stub(:vendor, :public_id => 'xxxyyy')
     assigns[:vendors] = [vendor]
     assigns[:vendor_test_plans] = { vendor => [ vtp ] }
@@ -109,10 +99,7 @@ describe "vendor_test_plans/index.html.erb" do
   end
 
   it "should list a pix feed test plan before execute" do
-    vtp = VendorTestPlan.create(
-      :kind => kinds(:pixFeed),
-      :patient_data => PatientData.create(:name => 'xfoox',
-                                          :user => users(:alex_kroman)))
+    vtp = VendorTestPlan.create!(:kind => kinds(:pixFeed), :patient => @patient)
     vendor = stub(:vendor, :public_id => 'xxxyyy')
     assigns[:vendors] = [vendor]
     assigns[:vendor_test_plans] = { vendor => [ vtp ] }
@@ -129,10 +116,7 @@ end
   end
 
   it "should list a pix feed test plan after execute" do
-    vtp = VendorTestPlan.create(
-      :kind => kinds(:pixFeed),
-      :patient_data => PatientData.create(:name => 'xfoox',
-                                          :user => users(:alex_kroman)))
+    vtp = VendorTestPlan.create!(:kind => kinds(:pixFeed), :patient => @patient)
     vendor = stub(:vendor, :public_id => 'xxxyyy')
     assigns[:vendors] = [vendor]
     assigns[:vendor_test_plans] = { vendor => [ vtp ] }
@@ -153,10 +137,7 @@ end
   end
 
   it "should list a pix query and pd query test plan" do
-    vtp = VendorTestPlan.create(
-      :kind => kinds(:pixQuery),
-      :patient_data => PatientData.create(:name => 'xfoox',
-                                          :user => users(:alex_kroman)))
+    vtp = VendorTestPlan.create!(:kind => kinds(:pixQuery), :patient => @patient)
     vendor = stub(:vendor, :public_id => 'xxxyyy')
     assigns[:vendors] = [vendor]
     assigns[:vendor_test_plans] = { vendor => [ vtp ] }

@@ -6,7 +6,7 @@
 <% else
      condition_div = "condition#{@condition.id}"
    end %>
-<% remote_form_for(:condition, @condition, :url => patient_data_url_for(@patient_data, @condition),
+<% remote_form_for(:condition, @condition, :url => patient_url_for(@patient, @condition),
                    :html => {:method => http_method(@condition)},
                    :update => condition_div, :name => "conditions_form") do |f| -%>
 <table>

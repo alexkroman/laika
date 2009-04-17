@@ -1,10 +1,10 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
-   def patient_data_url_for(patient_data, model, *args)
+   def patient_url_for(patient, model, *args)
      if model.new_record? 
-       send("patient_datum_#{model.class.name.tableize}_path", patient_data, *args) 
+       send("patient_datum_#{model.class.name.tableize}_path", patient, *args) 
      else
-       send("patient_datum_#{model.class.name.underscore}_path", patient_data, model, *args)
+       send("patient_datum_#{model.class.name.underscore}_path", patient, model, *args)
      end
    end
 

@@ -1,2 +1,2 @@
 xml.instruct!
-return @patient_data.to_c32(xml)
+return @patient.to_c32(xml)

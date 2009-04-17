@@ -6,9 +6,9 @@ describe "languages/edit.html.erb" do
   describe "with an existing language (languages/edit)" do
     before do
       @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
-      @language = Language.create!(:patient_data => @patient)
-      assigns[:language]     = @language
-      assigns[:patient_data] = @patient
+      @language = @patient.languages.create!
+      assigns[:language] = @language
+      assigns[:patient]  = @patient
     end
 
     it "should render the edit form with method PUT" do
@@ -23,8 +23,8 @@ describe "languages/edit.html.erb" do
     before do
       @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
       @language = Language.new
-      assigns[:language]     = @language
-      assigns[:patient_data] = @patient
+      assigns[:language] = @language
+      assigns[:patient]  = @patient
     end
 
     it "should render the edit form with method POST" do

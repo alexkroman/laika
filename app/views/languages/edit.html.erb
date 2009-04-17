@@ -4,7 +4,7 @@
 <% else
      language_div = "language#{@language.id}"
    end %>
-   <% remote_form_for(:language, @language, :url => patient_data_url_for(@patient_data, @language), :html => {:method => http_method(@language)}, :update => language_div) do |f| -%>
+   <% remote_form_for(:language, @language, :url => patient_url_for(@patient, @language), :html => {:method => http_method(@language)}, :update => language_div) do |f| -%>
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Language <%= print_validation_for @language, :iso_language_id %></td>

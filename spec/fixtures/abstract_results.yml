@@ -1,5 +1,5 @@
 jennifer_thompson_result:
-  patient_data: jennifer_thompson
+  patient: jennifer_thompson
   result_id: 57d07056-bd97-4c90-891d-eb716d3170c8
   result_code: 2093-3
   result_code_display_name: Cholesterol
@@ -14,7 +14,7 @@ jennifer_thompson_result:
   result_type_code: chemistry
   
 jennifer_thompson_vital_sign:
-  patient_data: jennifer_thompson
+  patient: jennifer_thompson
   result_id: 33d07056-bd27-4c90-891d-eb716d3170c4
   result_code: 3141-9
   result_code_display_name: Body Weight (Measured)

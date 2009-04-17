@@ -2,7 +2,7 @@ require_dependency 'sort_order'
 
 class PatientDataController < ApplicationController
   page_title 'Laika Test Library'
-  before_filter :set_patient_data, :except => %w[ index create autoCreate ]
+  before_filter :set_patient, :except => %w[ index create autoCreate ]
 
   include SortOrder
   self.valid_sort_fields = %w[ name created_at updated_at ]
@@ -19,19 +19,19 @@ class PatientDataController < ApplicationController
   end
   
   def autoCreate
-    @patient_data = PatientData.new    
-    @patient_data.registration_information = RegistrationInformation.new
-    @patient_data.randomize()
-    @patient_data.user = current_user
-    @patient_data.save!
-    redirect_to :controller => 'patient_data', :action => 'show', :id => @patient_data.id
+    @patient = PatientData.new    
+    @patient.registration_information = RegistrationInformation.new
+    @patient.randomize()
+    @patient.user = current_user
+    @patient.save!
+    redirect_to patient_datum_url(@patient)
   end
 
   def create
-    @patient_data = PatientData.new(params[:patient_data])
-    @patient_data.user = current_user
-    @patient_data.save!
-    redirect_to :controller => 'patient_data', :action => 'show', :id => @patient_data.id
+    @patient = PatientData.new(params[:patient_data])
+    @patient.user = current_user
+    @patient.save!
+    redirect_to patient_datum_url(@patient)
   rescue ActiveRecord::RecordInvalid => e
     flash[:notice] = e.to_s
     redirect_to patient_data_url
@@ -44,7 +44,7 @@ class PatientDataController < ApplicationController
   end
 
   def show
-    if @patient_data.vendor_test_plan_id 
+    if @patient.vendor_test_plan_id 
       @show_dashboard = true
     else
       @show_dashboard = false
@@ -54,29 +54,29 @@ class PatientDataController < ApplicationController
       format.xml  do
         xml = Builder::XmlMarkup.new(:indent => 2)
         xml.instruct!
-        send_data @patient_data.to_c32(xml),
-          :filename => "#{@patient_data.id}.xml",
+        send_data @patient.to_c32(xml),
+          :filename => "#{@patient.id}.xml",
           :type => 'application/x-download'
       end
     end
   end
 
   def set_no_known_allergies
-    @patient_data.update_attribute(:no_known_allergies, true)
+    @patient.update_attribute(:no_known_allergies, true)
     render :partial => '/allergies/no_known_allergies'
   end
   
   def set_pregnant
-    @patient_data.update_attribute(:pregnant, true)
+    @patient.update_attribute(:pregnant, true)
   end
   
   def set_not_pregnant
-    @patient_data.update_attribute(:pregnant, false)
+    @patient.update_attribute(:pregnant, false)
   end
   
   def destroy
-    @patient_data.destroy
-    redirect_to :controller => 'patient_data', :action => 'index'
+    @patient.destroy
+    redirect_to patient_data_url
   end
 
   def edit_template_info
@@ -84,15 +84,15 @@ class PatientDataController < ApplicationController
   end
 
   def update
-    if @patient_data.update_attributes(params[:patient_data])
+    if @patient.update_attributes(params[:patient_data])
       render :partial => 'template_info'
     else
       render :action => 'edit_template_info', :layout => false
     end
   end
 
-  def set_patient_data
-    @patient_data = PatientData.find(params[:id])
+  def set_patient
+    @patient = PatientData.find(params[:id])
   end
 
 end

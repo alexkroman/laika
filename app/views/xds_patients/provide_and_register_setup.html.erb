@@ -1,7 +1,7 @@
-<% @page_header = "Provide and Register C32 based on template for patient #{@patient_data.name}" %>
+<% @page_header = "Provide and Register C32 based on template for patient #{@patient.name}" %>
 <% form_for VendorTestPlan.new(:user_id => current_user.id),
                                :url => {:controller => 'test_plan_manager', :action => 'assign_patient' } do |f| -%>
-<input type="hidden" name="pd_id" value="<%= @patient_data.id %>"/>
+<input type="hidden" name="pd_id" value="<%= @patient.id %>"/>
 <table>
   <tr>
     <td>Vendor</td>

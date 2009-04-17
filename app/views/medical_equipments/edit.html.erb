@@ -4,7 +4,7 @@
 <% else
      medical_equipment_div = "medical_equipment#{@medical_equipment.id}"
    end %>
-<% remote_form_for(:medical_equipment, @medical_equipment, :url => patient_data_url_for(@patient_data, @medical_equipment), 
+<% remote_form_for(:medical_equipment, @medical_equipment, :url => patient_url_for(@patient, @medical_equipment), 
                    :html => {:method => http_method(@medical_equipment)}, :update => medical_equipment_div) do |f| -%>
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">

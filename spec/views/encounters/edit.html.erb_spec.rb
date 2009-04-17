@@ -6,12 +6,12 @@ describe "encounters/edit.html.erb" do
   describe "with an existing encounter (encounters/edit)" do
     before do
       @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
-      @encounter = Encounter.create!(:patient_data => @patient)
+      @encounter = @patient.encounters.create!
       @encounter.person_name = PersonName.new
       @encounter.address = Address.new
       @encounter.telecom = Telecom.new
       assigns[:encounter] = @encounter
-      assigns[:patient_data] = @patient
+      assigns[:patient] = @patient
     end
 
     it "should render the edit form with method PUT" do
@@ -30,7 +30,7 @@ describe "encounters/edit.html.erb" do
       @encounter.address = Address.new
       @encounter.telecom = Telecom.new
       assigns[:encounter] = @encounter
-      assigns[:patient_data] = @patient
+      assigns[:patient] = @patient
     end
 
     it "should render the edit form with method POST" do

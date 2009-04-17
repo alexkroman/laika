@@ -6,8 +6,8 @@ describe "procedure/edit.html.erb" do
   describe "with an existing procedure (procedures/edit)" do
     before do
       @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
-      @procedure = Procedure.create!(:patient_data => @patient)
-      assigns[:patient_data] = @patient
+      @procedure = @patient.procedures.create!
+      assigns[:patient] = @patient
       assigns[:procedure] = @procedure
     end
 
@@ -23,7 +23,7 @@ describe "procedure/edit.html.erb" do
     before do
       @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
       @procedure = Procedure.new
-      assigns[:patient_data] = @patient
+      assigns[:patient] = @patient
       assigns[:procedure] = @procedure
     end
 

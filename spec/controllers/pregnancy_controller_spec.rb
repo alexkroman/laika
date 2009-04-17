@@ -11,7 +11,7 @@ describe PregnancyController do
 
     get :edit, :patient_datum_id => 1
 
-    assigns[:patient_data].should == pd
+    assigns[:patient].should == pd
     response.should render_template("pregnancy/edit")
     response.layout.should be_nil
   end
@@ -25,7 +25,7 @@ describe PregnancyController do
 
     get :update, :patient_datum_id => pd.id, :pregnant => 'on'
 
-    assigns[:patient_data].should == pd
+    assigns[:patient].should == pd
   end
 
   it "should update patient_data with pregnancy off" do
@@ -37,7 +37,7 @@ describe PregnancyController do
 
     get :update, :patient_datum_id => pd.id
 
-    assigns[:patient_data].should == pd
+    assigns[:patient].should == pd
   end
 
   it "should update patient_data with pregnancy nil" do
@@ -49,7 +49,7 @@ describe PregnancyController do
 
     get :destroy, :patient_datum_id => pd.id
 
-    assigns[:patient_data].should == pd
+    assigns[:patient].should == pd
   end
 
 end

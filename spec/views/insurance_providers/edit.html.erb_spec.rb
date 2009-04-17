@@ -6,26 +6,17 @@ describe "insurance_providers/edit.html.erb" do
   describe "with an existing insurance_provider (insurance_providers/edit)" do
     before do
       @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
-      @insurance_provider = InsuranceProvider.create!(:patient_data => @patient)
+      @insurance_provider = @patient.insurance_providers.create!
       @insurance_provider.insurance_provider_patient = InsuranceProviderPatient.new
-      @insurance_provider.insurance_provider_patient.person_name = PersonName.new
-      @insurance_provider.insurance_provider_patient.address = Address.new
-      @insurance_provider.insurance_provider_patient.telecom = Telecom.new
       @insurance_provider_patient = @insurance_provider.insurance_provider_patient
 
       @insurance_provider.insurance_provider_subscriber = InsuranceProviderSubscriber.new
-      @insurance_provider.insurance_provider_subscriber.person_name = PersonName.new
-      @insurance_provider.insurance_provider_subscriber.address = Address.new
-      @insurance_provider.insurance_provider_subscriber.telecom = Telecom.new
       @insurance_provider_subscriber = @insurance_provider.insurance_provider_subscriber
 
       @insurance_provider.insurance_provider_guarantor = InsuranceProviderGuarantor.new
-      @insurance_provider.insurance_provider_guarantor.person_name = PersonName.new
-      @insurance_provider.insurance_provider_guarantor.address = Address.new
-      @insurance_provider.insurance_provider_guarantor.telecom = Telecom.new
       @insurance_provider_guarantor = @insurance_provider.insurance_provider_guarantor
       @insurance_provider.save!
-      assigns[:patient_data] = @patient
+      assigns[:patient] = @patient
       assigns[:insurance_provider] = @insurance_provider
     end
 
@@ -58,7 +49,7 @@ describe "insurance_providers/edit.html.erb" do
       @insurance_provider.insurance_provider_guarantor.address = Address.new
       @insurance_provider.insurance_provider_guarantor.telecom = Telecom.new
       @insurance_provider_guarantor = @insurance_provider.insurance_provider_guarantor
-      assigns[:patient_data] = @patient
+      assigns[:patient] = @patient
       assigns[:insurance_provider] = @insurance_provider
     end
 

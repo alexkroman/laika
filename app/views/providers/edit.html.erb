@@ -4,7 +4,7 @@
 <% else
      provider_div = "provider#{@provider.id}"
    end %>
-   <% remote_form_for(:provider, @provider,  :url => patient_data_url_for(@patient_data, @provider), :html => { :method => http_method(@provider) }, :update => provider_div) do |f| -%>
+   <% remote_form_for(:provider, @provider,  :url => patient_url_for(@patient, @provider), :html => { :method => http_method(@provider) }, :update => provider_div) do |f| -%>
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">
     <td class="lighttext">Start Service <%= print_validation_for @provider, :start_service %></td>

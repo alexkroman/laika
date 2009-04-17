@@ -4,7 +4,7 @@ class PersonName < ActiveRecord::Base
 
   belongs_to :nameable, :polymorphic => true
 
-  after_save { |r| r.nameable.andand.patient_data.andand.update_attributes(:updated_at => DateTime.now) }
+  after_save { |r| r.nameable.andand.patient.andand.update_attributes(:updated_at => DateTime.now) }
 
   def blank?
     %w[ name_prefix first_name last_name name_suffix ].all? {|a| read_attribute(a).blank? }

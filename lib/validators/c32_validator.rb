@@ -53,12 +53,12 @@ module Validators
         
         
 
-          def validate(patient_data,document)
-            unless patient_data.respond_to? "validate_c32"
+          def validate(patient,document)
+            unless patient.respond_to? "validate_c32"
               C32Validation.add_validation_routines
             end
             
-            errors = patient_data.validate_c32(document)
+            errors = patient.validate_c32(document)
             # set the validator field for the errors
              errors.each do |e|
                 e.validator = C32VALIDATOR

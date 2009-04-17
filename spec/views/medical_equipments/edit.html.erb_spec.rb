@@ -6,9 +6,9 @@ describe "medical_equipment/edit.html.erb" do
   describe "with an existing medical_equipment (medical_equipments/edit)" do
     before do
       @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
-      @medical_equipment = MedicalEquipment.create!(:patient_data => @patient)
+      @medical_equipment = @patient.medical_equipments.create!
       assigns[:medical_equipment] = @medical_equipment
-      assigns[:patient_data] = @patient
+      assigns[:patient] = @patient
     end
 
     it "should render the edit form with method PUT" do
@@ -24,7 +24,7 @@ describe "medical_equipment/edit.html.erb" do
       @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
       @medical_equipment = MedicalEquipment.new
       assigns[:medical_equipment] = @medical_equipment
-      assigns[:patient_data] = @patient
+      assigns[:patient] = @patient
     end
 
     it "should render the edit form with method POST" do

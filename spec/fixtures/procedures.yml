@@ -3,32 +3,32 @@ joe_smith_procedure:
   name: Total hip replacement, left
   code: 52734007
   procedure_date: 1976-12-31
-  patient_data: joe_smith
+  patient: joe_smith
 
 emily_jones_procedure:
   procedure_id: e401f340-7be2-11db-9fe1-0800200c9a66
   name: Total hip replacement, left
   code: 52734007
   procedure_date: 2006-10-24
-  patient_data: emily_jones
+  patient: emily_jones
 
 will_haynes_procedure:
   procedure_id: e401f340-7be2-11db-9fe1-0800200c9a66
   name: Total hip replacement, left
   code: 52734007
   procedure_date: 2003-04-30
-  patient_data: will_haynes
+  patient: will_haynes
 
 jennifer_thompson_procedure:
   procedure_id: e401f340-7be2-11db-9fe1-0800200c9a66
   name: Total hip replacement, left
   code: 52734007
   procedure_date: 1999-03-23
-  patient_data: jennifer_thompson
+  patient: jennifer_thompson
 
 theodore_smith_procedure:
   procedure_id: e401f340-7be2-11db-9fe1-0800200c9a66
   name: Total hip replacement, left
   code: 52734007
   procedure_date: 2002-07-15
-  patient_data: theodore_smith
+  patient: theodore_smith

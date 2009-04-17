@@ -8,7 +8,7 @@ joes_allergy:
   severity_term: moderate
   allergy_type_code: allergy
   allergy_status_code: active
-  patient_data: joe_smith
+  patient: joe_smith
 
 emilys_allergy:
   start_event: 2006-02-21
@@ -19,7 +19,7 @@ emilys_allergy:
   severity_term: moderate_to_severe
   allergy_type_code: allergy
   allergy_status_code: prior_history
-  patient_data: emily_jones
+  patient: emily_jones
 
 teds_first_allergy:
   start_event: 2005-02-21
@@ -30,7 +30,7 @@ teds_first_allergy:
   severity_term: severe
   allergy_type_code: allergy
   allergy_status_code: active
-  patient_data: theodore_smith
+  patient: theodore_smith
 
 teds_second_allergy:
   start_event: 2005-02-21
@@ -41,7 +41,7 @@ teds_second_allergy:
   severity_term: fatal
   allergy_type_code: allergy
   allergy_status_code: prior_history
-  patient_data: theodore_smith
+  patient: theodore_smith
 
 wills_allergy:
   start_event: 2005-02-21
@@ -52,7 +52,7 @@ wills_allergy:
   severity_term: mild
   allergy_type_code: adverse_reaction
   allergy_status_code: no_longer_active
-  patient_data: will_haynes
+  patient: will_haynes
 
 davids_allergy:
   start_event: 1974-06-30
@@ -63,4 +63,4 @@ davids_allergy:
   severity_term: mild_to_moderate
   allergy_type_code: adverse_reaction
   allergy_status_code: active
-  patient_data: david_carter
+  patient: david_carter

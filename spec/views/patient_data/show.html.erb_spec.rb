@@ -17,7 +17,7 @@ roles severity_terms supports telecoms user_roles users vaccines vendors zip_cod
   ]
 
   it "should render without errors" do
-    assigns[:patient_data] = patient_data(:joe_smith)
+    assigns[:patient] = patient_data(:joe_smith)
     lambda { render "patient_data/show.html.erb" }.should_not raise_error
   end
 

@@ -4,7 +4,7 @@
 <% else
      allergy_div = "allergy#{@allergy.id}"
    end %>
-   <% remote_form_for(:allergy, @allergy, :url => patient_data_url_for(@patient_data, @allergy),
+   <% remote_form_for(:allergy, @allergy, :url => patient_url_for(@patient, @allergy),
                       :html => {:method => http_method(@allergy)}, :update => allergy_div) do |f| -%>
 <table>
   <tr class="<%= cycle("darkzebra", "lightzebra")%>">

@@ -86,18 +86,18 @@
     <h3>Patient Details In PIX Manager</h3><br />
     <table id="dashboard">
       <tr class="<%= cycle("darkzebra", "lightzebra")%>">
-        <td><h3><%=h @patient_data.name %></h3></td>
+        <td><h3><%=h @patient.name %></h3></td>
         <td><h5>Person Information</h5></td>
       </tr>
       <tr class="<%= cycle("darkzebra", "lightzebra")%>">
         <td class="lighttext">Person Identifer Global</td>
-        <td><%=h @patient_data.registration_information.person_identifier %></td>
+        <td><%=h @patient.registration_information.person_identifier %></td>
       </tr>
       <tr class="<%= cycle("darkzebra", "lightzebra")%>">
         <td class="lighttext">Person Identifer Local</td>
         <td></td>
       </tr>
-    <% @patient_data.patient_identifiers.each do |patient_identifier| %>
+    <% @patient.patient_identifiers.each do |patient_identifier| %>
       <tr class="<%= cycle("darkzebra", "lightzebra")%>">
         <td class="lighttext"></td>
         <% if @vendor_test_plan.test_result%>
@@ -119,43 +119,43 @@
     <% end %>
       <tr class="<%= cycle("darkzebra", "lightzebra")%>">
         <td class="lighttext">Prefix</td>
-        <td><%=h @patient_data.registration_information.person_name.name_prefix %></td>
+        <td><%=h @patient.registration_information.person_name.name_prefix %></td>
       </tr>
       <tr class="<%= cycle("darkzebra", "lightzebra")%>">
         <td class="lighttext">First name</td>
-        <td><%=h @patient_data.registration_information.person_name.first_name %></td>
+        <td><%=h @patient.registration_information.person_name.first_name %></td>
       </tr>
       <tr class="<%= cycle("darkzebra", "lightzebra")%>">
         <td class="lighttext">Last name</td>
-        <td><%=h @patient_data.registration_information.person_name.last_name %></td>
+        <td><%=h @patient.registration_information.person_name.last_name %></td>
       </tr>
       <tr class="<%= cycle("darkzebra", "lightzebra")%>">
         <td class="lighttext">Suffix</td>
-        <td><%=h @patient_data.registration_information.person_name.name_suffix %></td>
+        <td><%=h @patient.registration_information.person_name.name_suffix %></td>
       </tr>
       <tr class="<%= cycle("darkzebra", "lightzebra")%>">
         <td class="lighttext">Date of birth</td>
-        <td><%=h @patient_data.registration_information.date_of_birth %></td>
+        <td><%=h @patient.registration_information.date_of_birth %></td>
       </tr>
       <tr class="<%= cycle("darkzebra", "lightzebra")%>">
         <td class="lighttext">Religion</td>
-        <td><%=h @patient_data.registration_information.religion.name %></td>
+        <td><%=h @patient.registration_information.religion.name %></td>
       </tr>
       <tr class="<%= cycle("darkzebra", "lightzebra")%>">
         <td class="lighttext">Marital status</td>
-        <td><%=h @patient_data.registration_information.marital_status.name %></td>
+        <td><%=h @patient.registration_information.marital_status.name %></td>
       </tr>
       <tr class="<%= cycle("darkzebra", "lightzebra")%>">
         <td class="lighttext">Gender</td>
-        <td><%=h @patient_data.registration_information.gender.name %></td>
+        <td><%=h @patient.registration_information.gender.name %></td>
       </tr>
       <tr class="<%= cycle("darkzebra", "lightzebra")%>">
         <td class="lighttext">Race</td>
-        <td><%=h @patient_data.registration_information.race.name %></td>
+        <td><%=h @patient.registration_information.race.name %></td>
       </tr>
       <tr class="<%= cycle("darkzebra", "lightzebra")%>">
         <td class="lighttext">Ethnicity</td>
-        <td><%=h @patient_data.registration_information.ethnicity.name %></td>
+        <td><%=h @patient.registration_information.ethnicity.name %></td>
       </tr>
     </table>
   </div>

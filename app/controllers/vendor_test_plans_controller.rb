@@ -13,7 +13,7 @@ class VendorTestPlansController < ApplicationController
         @vendor_test_plans = {}
         @errors = {}
         @warnings = {}
-        VendorTestPlan.find(:all, :include => [:kind, :patient_data], :conditions => {
+        VendorTestPlan.find(:all, :include => [:kind, :patient], :conditions => {
           :user_id => current_user
         }, :order => sort_order || 'created_at ASC').each do |vendor_test_plan|
           (@vendor_test_plans[vendor_test_plan.vendor] ||= []) << vendor_test_plan
@@ -112,7 +112,7 @@ class VendorTestPlansController < ApplicationController
 
   def validatepix
     @vendor_test_plan = VendorTestPlan.find(params[:id])
-    @patient_data = @vendor_test_plan.patient_data
+    @patient = @vendor_test_plan.patient
   end
 
   def checklist 

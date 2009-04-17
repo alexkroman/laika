@@ -18,8 +18,8 @@
       <td><%=h patient.updated_at.strftime("%d.%b.%Y") %></td>
       <td class="actions" width=270px>
         <%= link_to 'query', "javascript:toggle_div('query_div_#{patient.id}')" %>
-        <%= link_to 'assign', provide_and_register_setup_xds_patient_url(patient) %>
-        <%= link_to 'provide and register', provide_and_register_xds_patient_url(patient) %>
+        | <%= link_to 'assign', provide_and_register_setup_xds_patient_url(patient) %>
+        | <%= link_to 'provide and register', provide_and_register_xds_patient_url(patient) %>
         <div id="query_div_<%=patient.id%>" style="display:none">
           <% if patient.patient_identifiers.count > 0 %>
             <% form_tag query_xds_patient_path do |f| %>

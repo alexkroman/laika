@@ -1,14 +1,14 @@
 <% if vendor_test_plan.clinical_document %>
     <%= link_to 'delete', vendor_test_plan, :confirm => 'Are you sure you want to delete this Laika test?', :method => :delete %>
     | <%= link_to 'inspect', validate_vendor_test_plan_url(vendor_test_plan) %>
-    | <%= link_to 'checklist', {:controller => 'vendor_test_plans', :action => 'checklist', :id => vendor_test_plan.id} %>
+    | <%= link_to 'checklist', checklist_vendor_test_plan_url(vendor_test_plan) %>
 <% else %>
-   <%= link_to 'edit', patient_datum_url(vendor_test_plan.patient_data)%>
+   <%= link_to 'edit', patient_datum_url(vendor_test_plan.patient)%>
    | <%= link_to 'delete', vendor_test_plan, :confirm => 'Are you sure you want to delete this Laika test?', :method => :delete %>
   <% if vendor_test_plan.kind.name == "Generate and Format" %>
     | <a href="javascript:toggle_div('execution_div_<%=vendor_test_plan.id%>');">execute</a>
   <% else %>
-    | <%= link_to 'xml', patient_datum_url(vendor_test_plan.patient_data, :format => 'xml') %> 
-    | <%= link_to 'checklist', {:controller => 'patient_data', :action => 'checklist', :id => vendor_test_plan.patient_data.id} %>
+    | <%= link_to 'xml', patient_datum_url(vendor_test_plan.patient, :format => 'xml') %> 
+    | <%= link_to 'checklist', checklist_patient_datum_url(vendor_test_plan.patient) %>
   <% end %>
 <% end %>

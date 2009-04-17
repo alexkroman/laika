@@ -4,7 +4,7 @@ class Comment < ActiveRecord::Base
 
   belongs_to :commentable, :polymorphic => true
 
-  after_save {|r| r.commentable.patient_data.update_attributes(:updated_at => DateTime.now) }
+  after_save {|r| r.commentable.patient.update_attributes(:updated_at => DateTime.now) }
 
   def to_c32(xml)
 
