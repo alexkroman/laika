@@ -1,4 +1,4 @@
-class PregnancyController < PatientDataChildController
+class PregnancyController < PatientChildController
 
   def edit
     render :layout => false

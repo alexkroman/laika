@@ -5,7 +5,7 @@ describe "providers/edit.html.erb" do
 
   describe "with an existing provider (providers/edit)" do
     before do
-      @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
+      @patient = Patient.create!(:name => 'foo', :user => User.find(:first))
       @provider = @patient.providers.create!
       assigns[:patient] = @patient
       assigns[:provider] = @provider
@@ -13,7 +13,7 @@ describe "providers/edit.html.erb" do
 
     it "should render the edit form with method PUT" do
       render 'providers/edit'
-      response.should have_tag("form[action=#{patient_datum_provider_path(@patient,@provider)}]") do
+      response.should have_tag("form[action=#{patient_provider_path(@patient,@provider)}]") do
         with_tag "input[name=_method][value=put]"
       end
     end
@@ -21,7 +21,7 @@ describe "providers/edit.html.erb" do
 
   describe "without an existing provider (providers/new)" do
     before do
-      @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
+      @patient = Patient.create!(:name => 'foo', :user => User.find(:first))
       @provider = Provider.new
       assigns[:patient] = @patient
       assigns[:provider] = @provider
@@ -29,7 +29,7 @@ describe "providers/edit.html.erb" do
 
     it "should render the edit form with method POST" do
       render 'providers/edit'
-      response.should have_tag("form[action=#{patient_datum_providers_path(@patient)}][method=post]") do
+      response.should have_tag("form[action=#{patient_providers_path(@patient)}][method=post]") do
         without_tag "input[name=_method][value=put]"
       end
     end

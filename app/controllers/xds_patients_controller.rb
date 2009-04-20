@@ -7,7 +7,7 @@ class XdsPatientsController < ApplicationController
   self.valid_sort_fields = %w[ name created_at updated_at ]
 
   def index
-    @patients = PatientData.find(:all,
+    @patients = Patient.find(:all,
       :conditions => {:vendor_test_plan_id => nil},
       :order => sort_order || 'name ASC')
       
@@ -30,7 +30,7 @@ class XdsPatientsController < ApplicationController
   
   # Creates the form that collects data for a provide and register test
   def provide_and_register_setup
-    @patient = PatientData.find(params[:id])
+    @patient = Patient.find(params[:id])
     @vendors = current_user.vendors + Vendor.unclaimed
     @kind = Kind.find_by_name('Provide and Register').id
     @vendor_test_plan = VendorTestPlan.new(:user_id => current_user.id)
@@ -38,7 +38,7 @@ class XdsPatientsController < ApplicationController
 
   # Creates the form that collects data to actuall provide and register a document to an XDS Repository
   def provide_and_register
-    @patient = PatientData.find(params[:id])
+    @patient = Patient.find(params[:id])
   end
   
   def do_provide_and_register
@@ -49,7 +49,7 @@ class XdsPatientsController < ApplicationController
     md.source_id = "1.3.6.1.4.1.21367.2009.1.2.1"
     md.language_code = 'en-us'
     md.creation_time = Time.now.strftime('%Y%m%d')
-    pd = PatientData.find(params[:pd_id])
+    pd = Patient.find(params[:pd_id])
     prdsr = XDS::ProvideAndRegisterDocumentSetBXop.new(XDS_REGISTRY_URLS[:retrieve_document_set_request],
                                                        md, pd.to_c32)
     response = prdsr.execute

@@ -1,4 +1,4 @@
-class InsuranceProviderSubscribersController < PatientDataChildController
+class InsuranceProviderSubscribersController < PatientChildController
 
   def update
     insurance_provider_subscriber = @patient.insurance_provider_subscribers.find(params[:id])

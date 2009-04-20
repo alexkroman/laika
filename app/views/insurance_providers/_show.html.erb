@@ -31,12 +31,12 @@
     <td>
     <span>
       <%= link_to_remote 'Edit', :update => "insurance_provider#{insurance_provider.id}",
-                                 :url => edit_patient_datum_insurance_provider_path(patient, insurance_provider),
+                                 :url => edit_patient_insurance_provider_path(patient, insurance_provider),
                                  :method => 'get' %>
     </span>
     <span>
       <%= link_to_remote 'Remove', :update => "insurance_provider#{insurance_provider.id}",
-                                 :url => patient_datum_insurance_provider_path(patient, insurance_provider),
+                                 :url => patient_insurance_provider_path(patient, insurance_provider),
                                  :method => 'delete' %>
     </span>    
     </td>

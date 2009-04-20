@@ -1,4 +1,4 @@
-class SupportsController < PatientDataChildController
+class SupportsController < PatientChildController
 
   def edit
     @support = @patient.support

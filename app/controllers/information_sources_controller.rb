@@ -1,4 +1,4 @@
-class InformationSourcesController < PatientDataChildController
+class InformationSourcesController < PatientChildController
 
   def edit
     @information_source = @patient.information_source

@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 require "lib/validators/c32_validator"
 
 describe RegistrationInformation, "can vaildate it's content" do
-  fixtures :patient_data, :registration_information, :person_names, :addresses,
+  fixtures :patients, :registration_information, :person_names, :addresses,
            :telecoms, :genders, :marital_statuses, :ethnicities, :races, :religions
  
   it "should verify a person id matches in a C32 doc" do
@@ -15,7 +15,7 @@ describe RegistrationInformation, "can vaildate it's content" do
 end
 
 describe RegistrationInformation, "can create a C32 representation of itself" do
-  fixtures :patient_data, :registration_information, :person_names, :addresses,
+  fixtures :patients, :registration_information, :person_names, :addresses,
            :telecoms, :genders, :marital_statuses, :ethnicities, :races, :religions
 
    

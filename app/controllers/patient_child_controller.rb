@@ -2,7 +2,7 @@
 # This controller is an abstract class that provides basic CRUD operations for
 # patient data sections. Individual actions can be overridden as needed.
 #
-class PatientDataChildController < ApplicationController
+class PatientChildController < ApplicationController
   before_filter :find_patient
   layout false
 
@@ -57,10 +57,10 @@ class PatientDataChildController < ApplicationController
   end
 
   def find_patient
-    if params[:patient_datum_id]
-      @patient = PatientData.find params[:patient_datum_id]
+    if params[:patient_id]
+      @patient = Patient.find params[:patient_id]
     end
-    redirect_to patient_data_url unless @patient
+    redirect_to patients_url unless @patient
   end
 
 end

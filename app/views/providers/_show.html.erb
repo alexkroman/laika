@@ -59,13 +59,13 @@
     <td>
     <span>
       <%= link_to_remote 'Edit', :update => "provider#{provider.id}",
-                                 :url => edit_patient_datum_provider_path(patient, provider),
+                                 :url => edit_patient_provider_path(patient, provider),
                                  :method => 'get' %>
     </span>
     
     <span>
       <%= link_to_remote 'Remove', :update => "provider#{provider.id}",
-                                 :url => patient_datum_provider_path(patient, provider),
+                                 :url => patient_provider_path(patient, provider),
                                  :method => 'delete' %>
     </span>    
     </td>

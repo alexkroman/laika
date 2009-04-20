@@ -5,7 +5,7 @@ describe "patient_identifiers/edit.html.erb" do
 
   describe "with an existing patient_identifier (patient_identifiers/edit)" do
     before do
-      @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
+      @patient = Patient.create!(:name => 'foo', :user => User.find(:first))
       @patient_identifier = @patient.patient_identifiers.create!
       assigns[:patient] = @patient
       assigns[:patient_identifier] = @patient_identifier
@@ -13,7 +13,7 @@ describe "patient_identifiers/edit.html.erb" do
 
     it "should render the edit form with method PUT" do
       render 'patient_identifiers/edit'
-      response.should have_tag("form[action=#{patient_datum_patient_identifier_path(@patient,@patient_identifier)}]") do
+      response.should have_tag("form[action=#{patient_patient_identifier_path(@patient,@patient_identifier)}]") do
         with_tag "input[name=_method][value=put]"
       end
     end
@@ -22,7 +22,7 @@ describe "patient_identifiers/edit.html.erb" do
 
   describe "without an existing patient_identifier (patient_identifiers/new)" do
     before do
-      @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
+      @patient = Patient.create!(:name => 'foo', :user => User.find(:first))
       @patient_identifier = PatientIdentifier.new
       assigns[:patient] = @patient
       assigns[:patient_identifier] = @patient_identifier
@@ -30,7 +30,7 @@ describe "patient_identifiers/edit.html.erb" do
 
     it "should render the edit form with method POST" do
       render 'patient_identifiers/edit'
-      response.should have_tag("form[action=#{patient_datum_patient_identifiers_path(@patient)}][method=post]") do
+      response.should have_tag("form[action=#{patient_patient_identifiers_path(@patient)}][method=post]") do
         without_tag "input[name=_method][value=put]"
       end
     end

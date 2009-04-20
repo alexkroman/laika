@@ -5,7 +5,7 @@ describe "languages/edit.html.erb" do
 
   describe "with an existing language (languages/edit)" do
     before do
-      @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
+      @patient = Patient.create!(:name => 'foo', :user => User.find(:first))
       @language = @patient.languages.create!
       assigns[:language] = @language
       assigns[:patient]  = @patient
@@ -13,7 +13,7 @@ describe "languages/edit.html.erb" do
 
     it "should render the edit form with method PUT" do
       render 'languages/edit'
-      response.should have_tag("form[action=#{patient_datum_language_path(@patient,@language)}]") do
+      response.should have_tag("form[action=#{patient_language_path(@patient,@language)}]") do
         with_tag "input[name=_method][value=put]"
       end
     end
@@ -21,7 +21,7 @@ describe "languages/edit.html.erb" do
 
   describe "without an existing language (languages/new)" do
     before do
-      @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
+      @patient = Patient.create!(:name => 'foo', :user => User.find(:first))
       @language = Language.new
       assigns[:language] = @language
       assigns[:patient]  = @patient
@@ -29,7 +29,7 @@ describe "languages/edit.html.erb" do
 
     it "should render the edit form with method POST" do
       render 'languages/edit'
-      response.should have_tag("form[action=#{patient_datum_languages_path(@patient)}][method=post]") do
+      response.should have_tag("form[action=#{patient_languages_path(@patient)}][method=post]") do
         without_tag "input[name=_method][value=put]"
       end
     end

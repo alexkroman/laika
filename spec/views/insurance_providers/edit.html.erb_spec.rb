@@ -5,7 +5,7 @@ describe "insurance_providers/edit.html.erb" do
 
   describe "with an existing insurance_provider (insurance_providers/edit)" do
     before do
-      @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
+      @patient = Patient.create!(:name => 'foo', :user => User.find(:first))
       @insurance_provider = @patient.insurance_providers.create!
       @insurance_provider.insurance_provider_patient = InsuranceProviderPatient.new
       @insurance_provider_patient = @insurance_provider.insurance_provider_patient
@@ -22,7 +22,7 @@ describe "insurance_providers/edit.html.erb" do
 
     it "should render the edit form with method PUT" do
       render 'insurance_providers/edit'
-      response.should have_tag("form[action=#{patient_datum_insurance_provider_path(@patient,@insurance_provider)}]") do
+      response.should have_tag("form[action=#{patient_insurance_provider_path(@patient,@insurance_provider)}]") do
         with_tag "input[name=_method][value=put]"
       end
     end
@@ -30,7 +30,7 @@ describe "insurance_providers/edit.html.erb" do
 
   describe "without an existing insurance_provider (insurance_providers/new)" do
     before do
-      @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
+      @patient = Patient.create!(:name => 'foo', :user => User.find(:first))
       @insurance_provider = InsuranceProvider.new
       @insurance_provider.insurance_provider_patient = InsuranceProviderPatient.new
       @insurance_provider.insurance_provider_patient.person_name = PersonName.new
@@ -55,7 +55,7 @@ describe "insurance_providers/edit.html.erb" do
 
     it "should render the edit form with method POST" do
       render 'insurance_providers/edit'
-      response.should have_tag("form[action=#{patient_datum_insurance_providers_path(@patient)}][method=post]") do
+      response.should have_tag("form[action=#{patient_insurance_providers_path(@patient)}][method=post]") do
         without_tag "input[name=_method][value=put]"
       end
     end

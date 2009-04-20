@@ -1,4 +1,4 @@
-class ProvidersController < PatientDataChildController
+class ProvidersController < PatientChildController
   def create
     @provider = Provider.new(params[:provider])
     @patient.providers << @provider

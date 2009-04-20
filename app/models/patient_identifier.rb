@@ -2,13 +2,13 @@ class PatientIdentifier < ActiveRecord::Base
 
   strip_attributes!
 
-  include PatientDataChild
+  include PatientChild
 
   @@default_namespaces = {"cda"=>"urn:hl7-org:v3"}
 
   def requirements
     {
-      :patient_data_id => :required,
+      :patient_identifier => :required,
       :identifier_domain_identifier => :required,
     }
   end

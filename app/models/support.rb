@@ -5,7 +5,7 @@ class Support < ActiveRecord::Base
   belongs_to :contact_type
   belongs_to :relationship
 
-  include PatientDataChild
+  include PatientChild
   include PersonLike
   include MatchHelper
 

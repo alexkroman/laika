@@ -1,10 +1,10 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe InsuranceProviderPatient do
-  describe "with patient_data parent record" do
-    fixtures :patient_data, :insurance_providers, :insurance_provider_patients
+  describe "with patients parent record" do
+    fixtures :patients, :insurance_providers, :insurance_provider_patients
     before do
-      @parent = patient_data(:joe_smith)
+      @parent = patients(:joe_smith)
     end
 
     it "should update timestamp of parent on save" do

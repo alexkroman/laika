@@ -5,7 +5,7 @@ class Encounter < ActiveRecord::Base
   belongs_to :encounter_type
   belongs_to :encounter_location_code
 
-  include PatientDataChild
+  include PatientChild
   include Commentable
 
   include PersonLike

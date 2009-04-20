@@ -1,2 +1,2 @@
-class MedicationsController < PatientDataChildController
+class MedicationsController < PatientChildController
 end

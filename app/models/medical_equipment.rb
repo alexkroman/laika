@@ -1,7 +1,7 @@
 class MedicalEquipment < ActiveRecord::Base
   strip_attributes!
 
-  include PatientDataChild
+  include PatientChild
 
   def to_c32(xml)
 

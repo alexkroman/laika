@@ -4,7 +4,7 @@ class Condition < ActiveRecord::Base
 
   belongs_to :problem_type
 
-  include PatientDataChild
+  include PatientChild
   include Commentable
 
   def requirements

@@ -38,12 +38,12 @@
     <td>
     <span>
     <%= link_to_remote 'Edit', :update => "encounter#{encounter.id}",
-                               :url => edit_patient_datum_encounter_path(patient, encounter),
+                               :url => edit_patient_encounter_path(patient, encounter),
                                :method => 'get' %>
     </span>
     <span>
      <%= link_to_remote 'Remove', :update => "encounter#{encounter.id}",
-                               :url => patient_datum_encounter_path(patient, encounter),
+                               :url => patient_encounter_path(patient, encounter),
                                :confirm=>"Are you sure you wish to remove this encounter?",
                                :method => 'delete' %>
     </span>                           

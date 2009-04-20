@@ -1,7 +1,7 @@
 class TestPlanManagerController < ApplicationController
   def assign_patient
 
-    copied_patient_data = PatientData.find(params[:pd_id]).clone
+    patient = Patient.find(params[:pd_id]).clone
 
     # find the associated meta-data
     test_plan = params[:vendor_test_plan]
@@ -26,8 +26,8 @@ class TestPlanManagerController < ApplicationController
     end
     vtp.save!
 
-    copied_patient_data.vendor_test_plan = vtp
-    copied_patient_data.save!
+    patient.vendor_test_plan = vtp
+    patient.save!
 
     if vtp.metadata 
         doc = XDSUtils.retrieve_document(vtp.metadata)

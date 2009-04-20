@@ -14,7 +14,7 @@ describe "allergies/edit.html.erb" do
 
   describe "with an existing allergy (allergies/edit)" do
     before do
-      @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
+      @patient = Patient.create!(:name => 'foo', :user => User.find(:first))
       @allergy = @patient.allergies.create!
       assigns[:patient] = @patient
       assigns[:allergy] = @allergy
@@ -23,7 +23,7 @@ describe "allergies/edit.html.erb" do
 
     it "should render the edit form with method PUT" do
       render 'allergies/edit'
-      response.should have_tag("form[action=#{patient_datum_allergy_path(assigns[:patient],assigns[:allergy])}]") do
+      response.should have_tag("form[action=#{patient_allergy_path(assigns[:patient],assigns[:allergy])}]") do
         with_tag "input[name=_method][value=put]"
       end
     end
@@ -32,14 +32,14 @@ describe "allergies/edit.html.erb" do
 
   describe "without an existing allergy (allergies/new)" do
     before do
-      assigns[:patient] = PatientData.create!(:name => 'foo', :user => User.find(:first))
+      assigns[:patient] = Patient.create!(:name => 'foo', :user => User.find(:first))
       assigns[:allergy] = Allergy.new
     end
     it_should_behave_like "all allergy forms"
 
     it "should render the edit form with method POST" do
       render 'allergies/edit'
-      response.should have_tag("form[action=#{patient_datum_allergies_path(assigns[:patient])}][method=post]") do
+      response.should have_tag("form[action=#{patient_allergies_path(assigns[:patient])}][method=post]") do
         without_tag "input[name=_method][value=put]"
       end
     end

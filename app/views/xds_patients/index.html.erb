@@ -12,7 +12,7 @@
 
   <% @patients.each do |patient| -%>
     <tr>
-      <td><%= link_to h(patient.name), patient_datum_url(patient) %></td>
+      <td><%= link_to h(patient.name), patient_url(patient) %></td>
       <td><%=h patient.user.first_name %> <%=h patient.user.last_name %></td>
       <td><%=h patient.created_at.strftime("%d.%b.%Y") %></td>
       <td><%=h patient.updated_at.strftime("%d.%b.%Y") %></td>

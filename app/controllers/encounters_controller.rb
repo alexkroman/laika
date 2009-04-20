@@ -1,4 +1,4 @@
-class EncountersController < PatientDataChildController
+class EncountersController < PatientChildController
 
   def edit
     @encounter = @patient.encounters.find(params[:id])

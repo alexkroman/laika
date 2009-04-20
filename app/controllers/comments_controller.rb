@@ -1,4 +1,4 @@
-class CommentsController < PatientDataChildController
+class CommentsController < PatientChildController
   def new
     @comment = Comment.new
     @comment.person_name = PersonName.new

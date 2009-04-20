@@ -1,6 +1,6 @@
 class VendorTestPlan < ActiveRecord::Base
 
-  has_one :patient, :foreign_key => :vendor_test_plan_id, :class_name => 'PatientData', :dependent => :destroy
+  has_one :patient, :foreign_key => :vendor_test_plan_id, :class_name => 'Patient', :dependent => :destroy
   belongs_to :vendor
   belongs_to :kind
   belongs_to :user
@@ -18,13 +18,16 @@ class VendorTestPlan < ActiveRecord::Base
   end
   
   def validate_clinical_document_content
-    content_errors.clear
     document = clinical_document.as_xml_document
-    logger.debug(Validation.get_validator(clinical_document.doc_type).inspect)
-    errors =  Validation.get_validator(clinical_document.doc_type).validate(patient_data, document)
+    validator = Validation.get_validator(clinical_document.doc_type)
+
+    logger.debug(validator.inspect)
+    errors = validator.validate(patient, document)
     logger.debug(errors.inspect)
-    logger.debug("PD #{patient_data}  doc #{document}")
-    content_errors.concat  Validation.get_validator(clinical_document.doc_type).validate(patient_data, document)
+    logger.debug("PD #{patient}  doc #{document}")
+
+    content_errors.clear
+    content_errors.concat errors
     content_errors
   end
 

@@ -5,7 +5,7 @@ describe "procedure/edit.html.erb" do
 
   describe "with an existing procedure (procedures/edit)" do
     before do
-      @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
+      @patient = Patient.create!(:name => 'foo', :user => User.find(:first))
       @procedure = @patient.procedures.create!
       assigns[:patient] = @patient
       assigns[:procedure] = @procedure
@@ -13,7 +13,7 @@ describe "procedure/edit.html.erb" do
 
     it "should render the edit form with method PUT" do
       render 'procedures/edit'
-      response.should have_tag("form[action=#{patient_datum_procedure_path(@patient,@procedure)}]") do
+      response.should have_tag("form[action=#{patient_procedure_path(@patient,@procedure)}]") do
         with_tag "input[name=_method][value=put]"
       end
     end
@@ -21,7 +21,7 @@ describe "procedure/edit.html.erb" do
 
   describe "without an existing procedure (procedures/new)" do
     before do
-      @patient = PatientData.create!(:name => 'foo', :user => User.find(:first))
+      @patient = Patient.create!(:name => 'foo', :user => User.find(:first))
       @procedure = Procedure.new
       assigns[:patient] = @patient
       assigns[:procedure] = @procedure
@@ -29,7 +29,7 @@ describe "procedure/edit.html.erb" do
 
     it "should render the edit form with method POST" do
       render 'procedures/edit'
-      response.should have_tag("form[action=#{patient_datum_procedures_path(@patient)}][method=post]") do
+      response.should have_tag("form[action=#{patient_procedures_path(@patient)}][method=post]") do
         without_tag "input[name=_method][value=put]"
       end
     end

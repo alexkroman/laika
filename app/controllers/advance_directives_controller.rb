@@ -1,4 +1,4 @@
-class AdvanceDirectivesController < PatientDataChildController
+class AdvanceDirectivesController < PatientChildController
   def edit
     @advance_directive = @patient.advance_directive
   end

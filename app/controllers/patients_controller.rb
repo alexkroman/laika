@@ -1,6 +1,6 @@
 require_dependency 'sort_order'
 
-class PatientDataController < ApplicationController
+class PatientsController < ApplicationController
   page_title 'Laika Test Library'
   before_filter :set_patient, :except => %w[ index create autoCreate ]
 
@@ -8,7 +8,7 @@ class PatientDataController < ApplicationController
   self.valid_sort_fields = %w[ name created_at updated_at ]
 
   def index
-    @patients = PatientData.find(:all,
+    @patients = Patient.find(:all,
       :conditions => {:vendor_test_plan_id => nil},
       :order => sort_order || "name ASC")
 
@@ -19,22 +19,22 @@ class PatientDataController < ApplicationController
   end
   
   def autoCreate
-    @patient = PatientData.new    
+    @patient = Patient.new    
     @patient.registration_information = RegistrationInformation.new
     @patient.randomize()
     @patient.user = current_user
     @patient.save!
-    redirect_to patient_datum_url(@patient)
+    redirect_to patient_url(@patient)
   end
 
   def create
-    @patient = PatientData.new(params[:patient_data])
+    @patient = Patient.new(params[:patient])
     @patient.user = current_user
     @patient.save!
-    redirect_to patient_datum_url(@patient)
+    redirect_to patient_url(@patient)
   rescue ActiveRecord::RecordInvalid => e
     flash[:notice] = e.to_s
-    redirect_to patient_data_url
+    redirect_to patients_url
   end
   
   def checklist
@@ -76,7 +76,7 @@ class PatientDataController < ApplicationController
   
   def destroy
     @patient.destroy
-    redirect_to patient_data_url
+    redirect_to patients_url
   end
 
   def edit_template_info
@@ -84,7 +84,7 @@ class PatientDataController < ApplicationController
   end
 
   def update
-    if @patient.update_attributes(params[:patient_data])
+    if @patient.update_attributes(params[:patient])
       render :partial => 'template_info'
     else
       render :action => 'edit_template_info', :layout => false
@@ -92,7 +92,7 @@ class PatientDataController < ApplicationController
   end
 
   def set_patient
-    @patient = PatientData.find(params[:id])
+    @patient = Patient.find(params[:id])
   end
 
 end

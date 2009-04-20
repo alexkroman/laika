@@ -18,10 +18,10 @@ describe AccountController do
       response.should redirect_to('/account/login')
     end
 
-    it "should redirect to patient_data after successful login (no test plans)" do
+    it "should redirect to patients after successful login (no test plans)" do
       controller.stub!(:current_user).and_return mock_model(User, :vendor_test_plans => [])
       post :login, { :email => 'foo@bar.com', :password => 'barfoo' }
-      response.should redirect_to(patient_data_url)
+      response.should redirect_to(patients_url)
     end
 
     it "should redirect to vendor_test_plans after successful login (with test plans)" do
@@ -35,7 +35,7 @@ describe AccountController do
       response.should be_success
     end
 
-    it "should redirect to patient_data after successful signup" do
+    it "should redirect to patients after successful signup" do
       post :signup, {
         :user => {
           :first_name => 'bar',
@@ -45,7 +45,7 @@ describe AccountController do
           :password_confirmation => 'barfoo',
         }
       }
-      response.should redirect_to(patient_data_url)
+      response.should redirect_to(patients_url)
     end
 
     it "should re-render after unsuccessful signup" do
